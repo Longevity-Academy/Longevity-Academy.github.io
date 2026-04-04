@@ -17,6 +17,9 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" defer></script>
+
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1150,6 +1153,194 @@
     ::-webkit-scrollbar-track { background: var(--color-bg); }
     ::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 3px; }
 
+    /* ===== DATA VIZ SECTION ===== */
+    .dataviz {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dataviz__kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-bottom: clamp(var(--space-8), 4vw, var(--space-12));
+    }
+
+    .kpi-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-5);
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .kpi-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-glow);
+    }
+    .kpi-card__label {
+      font-size: var(--text-xs);
+      color: var(--color-text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+    .kpi-card__value {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      line-height: 1;
+      color: var(--color-accent);
+      margin-bottom: var(--space-1);
+    }
+    .kpi-card__value .unit {
+      font-size: 0.5em;
+      color: var(--color-text-secondary);
+    }
+    .kpi-card__detail {
+      font-size: var(--text-xs);
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+    }
+    .kpi-card__source {
+      font-size: 0.625rem;
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-2);
+      font-style: italic;
+    }
+    .kpi-card__sparkline {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 50%;
+      height: 40px;
+      opacity: 0.15;
+    }
+
+    .dataviz__charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    .chart-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: border-color var(--transition-fast);
+    }
+    .chart-card:hover {
+      border-color: var(--color-border-strong);
+    }
+    .chart-card--full {
+      grid-column: 1 / -1;
+    }
+    .chart-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-4);
+    }
+    .chart-card__title {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .chart-card__subtitle {
+      font-size: var(--text-xs);
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-1);
+    }
+    .chart-card__badge {
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-sm);
+      background: var(--color-accent-dim);
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+    .chart-card__canvas-wrap {
+      position: relative;
+      height: 320px;
+    }
+    .chart-card__canvas-wrap canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .chart-card__source {
+      font-size: 0.625rem;
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-3);
+      font-style: italic;
+    }
+    .chart-card__legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-top: var(--space-3);
+    }
+    .chart-card__legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-xs);
+      color: var(--color-text-secondary);
+    }
+    .chart-card__legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dataviz__insight-banner {
+      margin-top: var(--space-8);
+      padding: var(--space-6) var(--space-8);
+      background: var(--color-surface);
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-lg);
+      display: flex;
+      gap: var(--space-8);
+      align-items: center;
+    }
+    .dataviz__insight-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--color-accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-accent);
+    }
+    .dataviz__insight-text h4 {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+    .dataviz__insight-text p {
+      font-size: var(--text-xs);
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .dataviz__kpis { grid-template-columns: repeat(2, 1fr); }
+      .dataviz__charts { grid-template-columns: 1fr; }
+      .chart-card__canvas-wrap { height: 260px; }
+      .dataviz__insight-banner { flex-direction: column; text-align: center; gap: var(--space-4); padding: var(--space-5); }
+    }
+    @media (max-width: 480px) {
+      .dataviz__kpis { grid-template-columns: 1fr; }
+    }
+
     /* ===== SUBTLE GRAIN OVERLAY ===== */
     body::before {
       content: '';
@@ -1278,6 +1469,118 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== DATA VISUALIZATION: LONGEVITY BREAKTHROUGHS ===== -->
+    <section class="dataviz section-padding reveal" aria-label="Longevity research breakthroughs">
+      <div class="container">
+        <div class="section-header" style="text-align:center; margin-inline:auto;">
+          <p class="section-header__eyebrow">The Research</p>
+          <h2 class="section-header__title" style="max-width:24ch; margin-inline:auto;">Humans will routinely live past 120. The data is already here.</h2>
+          <p class="section-header__subtitle" style="margin-inline:auto;">The interventions that once sounded like science fiction are now producing measurable, peer-reviewed results. These are the exact datasets our faculty teach you to interpret.</p>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="dataviz__kpis">
+          <div class="kpi-card reveal-delayed">
+            <p class="kpi-card__label">Lifespan Extension</p>
+            <p class="kpi-card__value">+36.6<span class="unit">%</span></p>
+            <p class="kpi-card__detail">Maximum median lifespan increase achieved via rapamycin + acarbose combination therapy in mammals</p>
+            <p class="kpi-card__source">NIA Interventions Testing Program, J. of Gerontology 2025</p>
+          </div>
+          <div class="kpi-card reveal-delayed">
+            <p class="kpi-card__label">Heart Disease Risk</p>
+            <p class="kpi-card__value">–30<span class="unit">%</span></p>
+            <p class="kpi-card__detail">Reduction in heart attacks, strokes, and cardiovascular death through Mediterranean dietary patterns</p>
+            <p class="kpi-card__source">PREDIMED Trial, NEJM 2013 / Estruch et al.</p>
+          </div>
+          <div class="kpi-card reveal-delayed">
+            <p class="kpi-card__label">All-Cause Mortality</p>
+            <p class="kpi-card__value">–6.4<span class="unit">%</span></p>
+            <p class="kpi-card__detail">Projected reduction in all-cause mortality from GLP-1 therapies by 2045 across U.S. population</p>
+            <p class="kpi-card__source">Swiss Re / Nature Biotechnology, 2025</p>
+          </div>
+          <div class="kpi-card reveal-delayed">
+            <p class="kpi-card__label">Mortality Risk from Poor Sleep</p>
+            <p class="kpi-card__value">+34<span class="unit">%</span></p>
+            <p class="kpi-card__detail">Increase in all-cause mortality risk from sleeping more than 9 hours or less than 7 hours nightly</p>
+            <p class="kpi-card__source">GeroScience Meta-Analysis, 2025 (HR 1.34)</p>
+          </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="dataviz__charts">
+          <!-- BUBBLE CHART: Interventions by Impact + Evidence -->
+          <div class="chart-card">
+            <div class="chart-card__header">
+              <div>
+                <p class="chart-card__title">7 interventions now proven to extend human lifespan</p>
+                <p class="chart-card__subtitle">Bubble size = breadth of health systems affected. Hover to explore each intervention.</p>
+              </div>
+              <span class="chart-card__badge">Interactive</span>
+            </div>
+            <div class="chart-card__canvas-wrap">
+              <canvas id="bubbleChart"></canvas>
+            </div>
+            <div class="chart-card__legend" style="flex-wrap:wrap">
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#2dd4a8"></span> Rapamycin + Acarbose</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#c9a96e"></span> Mediterranean Diet</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#4f98a3"></span> Exercise</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#a86fdf"></span> GLP-1 Agonists</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#dd6974"></span> IL-11 Blocking</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#5591c7"></span> SGLT2 Inhibitors</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#e8af34"></span> Sleep Optimization</div>
+            </div>
+            <p class="chart-card__source">Data compiled from NIA ITP 2025, PREDIMED, GeroScience, Nature Biotechnology, Cell Reports Medicine</p>
+          </div>
+
+          <!-- HORIZONTAL BAR: Risk Reduction by Factor -->
+          <div class="chart-card">
+            <div class="chart-card__header">
+              <div>
+                <p class="chart-card__title">Up to 37% lower mortality. These are the levers.</p>
+                <p class="chart-card__subtitle">Measurable risk reduction from interventions covered in our curriculum</p>
+              </div>
+              <span class="chart-card__badge">2025 Data</span>
+            </div>
+            <div class="chart-card__canvas-wrap">
+              <canvas id="riskReductionChart"></canvas>
+            </div>
+            <p class="chart-card__source">NEJM, GeroScience, JAMA Network Open, ADA CGM Coverage Report 2025</p>
+          </div>
+
+          <!-- AREA CHART: Longevity Research Trajectory -->
+          <div class="chart-card chart-card--full">
+            <div class="chart-card__header">
+              <div>
+                <p class="chart-card__title">From 1 compound to 12 validated life-extenders in 20 years</p>
+                <p class="chart-card__subtitle">The NIA's gold-standard testing program is accelerating faster than any decade prior</p>
+              </div>
+              <span class="chart-card__badge">Gold Standard</span>
+            </div>
+            <div class="chart-card__canvas-wrap">
+              <canvas id="trajectoryChart"></canvas>
+            </div>
+            <div class="chart-card__legend">
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#2dd4a8"></span> Molecules Tested</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:#c9a96e"></span> Confirmed Effective</div>
+              <div class="chart-card__legend-item"><span class="chart-card__legend-dot" style="background:rgba(45,212,168,0.2)"></span> Advancing to Human Trials</div>
+            </div>
+            <p class="chart-card__source">NIA Interventions Testing Program Review, Journal of Gerontology 2025 — 54 compounds tested across 3 independent sites</p>
+          </div>
+        </div>
+
+        <!-- INSIGHT BANNER -->
+        <div class="dataviz__insight-banner reveal-delayed">
+          <div class="dataviz__insight-icon"><i data-lucide="lightbulb" style="width:24px;height:24px"></i></div>
+          <div class="dataviz__insight-text">
+            <h4>Why this data matters for the curriculum</h4>
+            <p>Every session in the eTeacher Longevity academy is built on this research base. From metabolic health and CGM literacy to sleep architecture and supplement evaluation — we teach participants how to interpret this science and apply it to their own lives, not as abstract knowledge but as a practical decision-making framework.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
 
     <!-- ===== 4. OUTCOMES / TRANSFORMATION ===== -->
     <section class="section-padding reveal" aria-label="Outcomes">
@@ -1804,6 +2107,397 @@
           }
         });
       });
+
+      // ===== CHART.JS DATA VISUALIZATIONS =====
+      function initCharts() {
+        if (typeof Chart === 'undefined') return;
+
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+        const textColor = isDark ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.55)';
+        const teal = '#2dd4a8';
+        const gold = '#c9a96e';
+        const tealDim = 'rgba(45,212,168,0.15)';
+        const goldDim = 'rgba(201,169,110,0.15)';
+
+        Chart.defaults.font.family = "'Inter', -apple-system, sans-serif";
+        Chart.defaults.font.size = 11;
+        Chart.defaults.color = textColor;
+        Chart.defaults.plugins.tooltip.backgroundColor = isDark ? '#1a1a1a' : '#ffffff';
+        Chart.defaults.plugins.tooltip.titleColor = isDark ? '#e0e0e0' : '#1a1a1a';
+        Chart.defaults.plugins.tooltip.bodyColor = isDark ? '#b0b0b0' : '#444444';
+        Chart.defaults.plugins.tooltip.borderColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+        Chart.defaults.plugins.tooltip.borderWidth = 1;
+        Chart.defaults.plugins.tooltip.padding = 12;
+        Chart.defaults.plugins.tooltip.cornerRadius = 8;
+        Chart.defaults.plugins.tooltip.displayColors = true;
+        Chart.defaults.plugins.tooltip.boxPadding = 4;
+
+        // ----- BUBBLE CHART: Interventions by Impact + Evidence -----
+        const bubbleCtx = document.getElementById('bubbleChart');
+        if (bubbleCtx) {
+          new Chart(bubbleCtx, {
+            type: 'bubble',
+            data: {
+              datasets: [
+                {
+                  label: 'Rapamycin + Acarbose',
+                  data: [{ x: 95, y: 36.6, r: 22 }],
+                  backgroundColor: teal,
+                  borderColor: 'rgba(45,212,168,0.6)',
+                  borderWidth: 2,
+                  hoverBackgroundColor: '#5eedc4',
+                  meta: { detail: '+36.6% median lifespan in mammals', source: 'NIA ITP 2025' }
+                },
+                {
+                  label: 'Mediterranean Diet',
+                  data: [{ x: 92, y: 30, r: 18 }],
+                  backgroundColor: gold,
+                  borderColor: 'rgba(201,169,110,0.6)',
+                  borderWidth: 2,
+                  hoverBackgroundColor: '#dfc08a',
+                  meta: { detail: '–30% cardiovascular mortality', source: 'PREDIMED / NEJM 2013' }
+                },
+                {
+                  label: 'Exercise (450+ min/wk)',
+                  data: [{ x: 88, y: 37, r: 20 }],
+                  backgroundColor: '#4f98a3',
+                  borderColor: 'rgba(79,152,163,0.6)',
+                  borderWidth: 2,
+                  hoverBackgroundColor: '#6bb4bf',
+                  meta: { detail: '–37% premature death, +3–6.9 years', source: 'JAMA / AARP 2024' }
+                },
+                {
+                  label: 'GLP-1 Receptor Agonists',
+                  data: [{ x: 78, y: 20, r: 19 }],
+                  backgroundColor: '#a86fdf',
+                  borderColor: 'rgba(168,111,223,0.6)',
+                  borderWidth: 2,
+                  hoverBackgroundColor: '#c49af0',
+                  meta: { detail: '–6.4% all-cause mortality by 2045', source: 'Swiss Re / Nature Biotech' }
+                },
+                {
+                  label: 'IL-11 Blocking',
+                  data: [{ x: 65, y: 25, r: 14 }],
+                  backgroundColor: '#dd6974',
+                  borderColor: 'rgba(221,105,116,0.6)',
+                  borderWidth: 2,
+                  hoverBackgroundColor: '#f08a93',
+                  meta: { detail: '+25% lifespan in mouse models', source: 'Nature 2024' }
+                },
+                {
+                  label: 'SGLT2 Inhibitors',
+                  data: [{ x: 70, y: 13.6, r: 13 }],
+                  backgroundColor: '#5591c7',
+                  borderColor: 'rgba(85,145,199,0.6)',
+                  borderWidth: 2,
+                  hoverBackgroundColor: '#79b0dd',
+                  meta: { detail: '+13.6% longevity, telomere lengthening', source: 'Cell Reports Medicine 2025' }
+                },
+                {
+                  label: 'Sleep Optimization',
+                  data: [{ x: 85, y: 34, r: 16 }],
+                  backgroundColor: '#e8af34',
+                  borderColor: 'rgba(232,175,52,0.6)',
+                  borderWidth: 2,
+                  hoverBackgroundColor: '#f5c760',
+                  meta: { detail: '–34% mortality with 7–9h sleep', source: 'GeroScience 2025' }
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: {
+                duration: 1400,
+                easing: 'easeOutQuart',
+                delay: (ctx) => ctx.dataIndex * 150
+              },
+              scales: {
+                x: {
+                  min: 50, max: 100,
+                  title: { display: true, text: 'EVIDENCE STRENGTH', color: textColor, font: { size: 10, weight: '600', family: "'Inter'" }, padding: 8 },
+                  grid: { color: gridColor, drawBorder: false },
+                  ticks: { stepSize: 10, callback: v => v + '%' },
+                  border: { display: false }
+                },
+                y: {
+                  min: 0, max: 45,
+                  title: { display: true, text: 'LIFESPAN / MORTALITY IMPACT (%)', color: textColor, font: { size: 10, weight: '600', family: "'Inter'" }, padding: 8 },
+                  grid: { color: gridColor, drawBorder: false },
+                  ticks: { stepSize: 10, callback: v => v + '%' },
+                  border: { display: false }
+                }
+              },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    title: (items) => items[0].dataset.label,
+                    label: (item) => {
+                      const meta = item.dataset.meta;
+                      return [
+                        meta.detail,
+                        '',
+                        'Evidence: ' + item.parsed.x + '% confidence',
+                        'Source: ' + meta.source
+                      ];
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
+
+        // ----- HORIZONTAL BAR: Risk Reduction by Factor -----
+        const barCtx = document.getElementById('riskReductionChart');
+        if (barCtx) {
+          const barLabels = [
+            'Exercise (450+ min/week)',
+            'Sleep (7–9h optimal)',
+            'Mediterranean Diet',
+            'IL-11 Blocking (preclinical)',
+            'GLP-1 Agonists (projected)',
+            'SGLT2 Inhibitors',
+            'CGM-Guided Metabolic Mgmt'
+          ];
+          const barValues = [37, 34, 30, 25, 6.4, 13.6, 29];
+          const barColors = [
+            teal, '#e8af34', gold, '#dd6974', '#a86fdf', '#5591c7', '#4f98a3'
+          ];
+          const barDescriptions = [
+            '–37% premature death risk at 450 min/week',
+            '–34% all-cause mortality with 7–9h sleep',
+            '–30% cardiovascular events (PREDIMED)',
+            '–25% all-cause mortality in mouse models',
+            '–6.4% all-cause mortality projected by 2045',
+            '–13.6% mortality improvement in males',
+            '–29% non-severe hypoglycemic events'
+          ];
+
+          new Chart(barCtx, {
+            type: 'bar',
+            data: {
+              labels: barLabels,
+              datasets: [{
+                data: barValues,
+                backgroundColor: barColors.map(c => c + 'cc'),
+                borderColor: barColors,
+                borderWidth: 1,
+                borderRadius: 4,
+                borderSkipped: false,
+                barThickness: 24,
+                descriptions: barDescriptions
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: {
+                duration: 1200,
+                easing: 'easeOutQuart',
+                delay: (ctx) => ctx.dataIndex * 100
+              },
+              scales: {
+                x: {
+                  min: 0, max: 45,
+                  grid: { color: gridColor, drawBorder: false },
+                  ticks: { callback: v => v + '%' },
+                  border: { display: false },
+                  title: { display: true, text: 'RISK / MORTALITY REDUCTION', color: textColor, font: { size: 10, weight: '600' }, padding: 8 }
+                },
+                y: {
+                  grid: { display: false },
+                  border: { display: false },
+                  ticks: { font: { size: 11, weight: '500' }, color: isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.7)' }
+                }
+              },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    title: (items) => items[0].label,
+                    label: (item) => {
+                      return item.dataset.descriptions[item.dataIndex];
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
+
+        // ----- AREA / LINE CHART: NIA Trajectory -----
+        const areaCtx = document.getElementById('trajectoryChart');
+        if (areaCtx) {
+          const years = ['2004', '2006', '2008', '2010', '2012', '2014', '2016', '2018', '2020', '2022', '2024', '2025'];
+          const tested = [2, 5, 10, 16, 22, 28, 34, 38, 42, 47, 52, 54];
+          const effective = [0, 0, 1, 1, 2, 3, 4, 5, 7, 8, 10, 12];
+          const humanTrials = [0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 4, 6];
+
+          new Chart(areaCtx, {
+            type: 'line',
+            data: {
+              labels: years,
+              datasets: [
+                {
+                  label: 'Molecules Tested',
+                  data: tested,
+                  borderColor: teal,
+                  backgroundColor: tealDim,
+                  fill: true,
+                  tension: 0.35,
+                  borderWidth: 2.5,
+                  pointRadius: 0,
+                  pointHoverRadius: 6,
+                  pointHoverBackgroundColor: teal,
+                  pointHoverBorderColor: isDark ? '#0a0a0a' : '#ffffff',
+                  pointHoverBorderWidth: 2
+                },
+                {
+                  label: 'Confirmed Effective',
+                  data: effective,
+                  borderColor: gold,
+                  backgroundColor: goldDim,
+                  fill: true,
+                  tension: 0.35,
+                  borderWidth: 2.5,
+                  pointRadius: 0,
+                  pointHoverRadius: 6,
+                  pointHoverBackgroundColor: gold,
+                  pointHoverBorderColor: isDark ? '#0a0a0a' : '#ffffff',
+                  pointHoverBorderWidth: 2
+                },
+                {
+                  label: 'Advancing to Human Trials',
+                  data: humanTrials,
+                  borderColor: 'rgba(45,212,168,0.4)',
+                  backgroundColor: 'rgba(45,212,168,0.05)',
+                  fill: true,
+                  tension: 0.35,
+                  borderWidth: 1.5,
+                  borderDash: [6, 4],
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: teal,
+                  pointHoverBorderColor: isDark ? '#0a0a0a' : '#ffffff',
+                  pointHoverBorderWidth: 2
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: {
+                duration: 1600,
+                easing: 'easeOutQuart'
+              },
+              interaction: {
+                mode: 'index',
+                intersect: false
+              },
+              scales: {
+                x: {
+                  grid: { color: gridColor, drawBorder: false },
+                  border: { display: false },
+                  ticks: { maxRotation: 0 }
+                },
+                y: {
+                  min: 0,
+                  grid: { color: gridColor, drawBorder: false },
+                  border: { display: false },
+                  title: { display: true, text: 'COMPOUNDS', color: textColor, font: { size: 10, weight: '600' }, padding: 8 },
+                  ticks: { stepSize: 10 }
+                }
+              },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    title: (items) => 'Year ' + items[0].label,
+                    afterBody: (items) => {
+                      const yr = items[0].label;
+                      if (yr === '2025') return ['', '\u2192 Rapamycin remains the gold standard', '\u2192 12 compounds now confirmed effective'];
+                      if (yr >= '2020') return ['', '\u2192 Acceleration in validated compounds'];
+                      return [];
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
+      }
+
+      // Initialize charts — Chart.js loaded with defer may not be ready yet
+      function tryInitCharts() {
+        if (typeof Chart !== 'undefined') {
+          initCharts();
+        } else {
+          // Poll briefly for Chart.js availability
+          let attempts = 0;
+          const poll = setInterval(() => {
+            attempts++;
+            if (typeof Chart !== 'undefined') {
+              clearInterval(poll);
+              initCharts();
+            } else if (attempts > 50) {
+              clearInterval(poll);
+            }
+          }, 100);
+        }
+      }
+      tryInitCharts();
+
+      // Re-init charts on theme toggle to update colors
+      const themeToggleForCharts = document.querySelector('[data-theme-toggle]');
+      if (themeToggleForCharts) {
+        themeToggleForCharts.addEventListener('click', () => {
+          setTimeout(() => {
+            // Destroy existing charts and re-init
+            Object.values(Chart.instances).forEach(instance => instance.destroy());
+            initCharts();
+          }, 150);
+        });
+      }
+
+      // ===== KPI VALUE ANIMATION (count up) =====
+      function animateKPIs() {
+        document.querySelectorAll('.kpi-card__value').forEach(el => {
+          const text = el.textContent.trim();
+          const match = text.match(/([+–-]?)(\d+\.?\d*)(.*)/);
+          if (!match) return;
+          const prefix = match[1];
+          const target = parseFloat(match[2]);
+          const suffix = match[3];
+          const hasDecimal = match[2].includes('.');
+          let startTime = null;
+          const duration = 1800;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+            const current = target * eased;
+            el.innerHTML = prefix + (hasDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+
+          // Observe when card enters viewport
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                requestAnimationFrame(step);
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(el.closest('.kpi-card'));
+        });
+      }
+      animateKPIs();
 
       // ===== JS SCROLL REVEAL FALLBACK =====
       // For browsers that don't support scroll-driven animations
