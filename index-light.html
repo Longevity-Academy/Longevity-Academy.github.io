@@ -604,13 +604,13 @@ ul, ol { list-style: none; }
   aspect-ratio: 16/10;
   cursor: pointer;
   transition: all var(--transition-base);
-  box-shadow: var(--glass-shadow);
-  border: var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.25);
 }
 .highlight-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--glass-shadow-hover);
-  border: var(--glass-border-hover);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.35);
 }
 .highlight-card:first-child {
   grid-column: 1/-1;
@@ -623,7 +623,7 @@ ul, ol { list-style: none; }
 .highlight-card:hover img { transform: scale(1.05); }
 .highlight-card-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 20%, rgba(10,15,13,0.5) 50%, rgba(10,15,13,0.92) 100%);
+  background: linear-gradient(180deg, transparent 10%, rgba(10,15,13,0.55) 45%, rgba(10,15,13,0.92) 100%);
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 36px;
 }
@@ -634,10 +634,10 @@ ul, ol { list-style: none; }
 }
 .highlight-card h3 {
   font-family: var(--font-display); font-weight: 800; font-size: 28px;
-  color: var(--text-primary); margin-bottom: 8px; line-height: 1.2;
+  color: #FFFFFF; margin-bottom: 8px; line-height: 1.2;
 }
 .highlight-card p {
-  font-size: 15px; line-height: 1.6; color: var(--text-secondary); max-width: 500px;
+  font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.85); max-width: 500px;
 }
 
 @media (max-width: 1024px) {
