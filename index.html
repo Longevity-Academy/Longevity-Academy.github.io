@@ -559,6 +559,93 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
+   6b. COURSE HIGHLIGHTS (Image cards)
+   ============================================ */
+.highlights {
+  padding: 100px 0;
+  background: var(--dark-base);
+  position: relative;
+  overflow: hidden;
+}
+.highlights::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: 30%;
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(11,61,46,0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.highlights-header { text-align: center; margin-bottom: 64px; position: relative; z-index: 1; }
+.highlights-bridge {
+  font-size: 16px; color: var(--text-muted); font-style: italic;
+  margin-bottom: 12px;
+}
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+.highlight-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--glass-shadow);
+  border: var(--glass-border);
+}
+.highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow-hover);
+  border: var(--glass-border-hover);
+}
+.highlight-card:first-child {
+  grid-column: 1/-1;
+  aspect-ratio: 21/9;
+}
+.highlight-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.highlight-card:hover img { transform: scale(1.05); }
+.highlight-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 20%, rgba(10,15,13,0.5) 50%, rgba(10,15,13,0.92) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 36px;
+}
+.highlight-card-tag {
+  font-family: var(--font-body); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 3px; color: var(--gold);
+  margin-bottom: 8px;
+}
+.highlight-card h3 {
+  font-family: var(--font-display); font-weight: 800; font-size: 28px;
+  color: var(--text-primary); margin-bottom: 8px; line-height: 1.2;
+}
+.highlight-card p {
+  font-size: 15px; line-height: 1.6; color: var(--text-secondary); max-width: 500px;
+}
+
+@media (max-width: 1024px) {
+  .highlights-grid { grid-template-columns: 1fr; }
+  .highlight-card:first-child { aspect-ratio: 16/9; }
+}
+@media (max-width: 768px) {
+  .highlights { padding: 80px 0; }
+  .highlight-card { aspect-ratio: 4/3; }
+  .highlight-card:first-child { aspect-ratio: 4/3; }
+  .highlight-card h3 { font-size: 22px; }
+  .highlight-card-overlay { padding: 24px; }
+}
+
+/* ============================================
    7. FULL CURRICULUM ACCORDION
    ============================================ */
 .curriculum {
@@ -1353,6 +1440,61 @@ ul, ol { list-style: none; }
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     6b. COURSE HIGHLIGHTS (Image cards)
+     ============================================ -->
+<section class="highlights" id="highlights">
+  <div class="container-wide">
+    <div class="highlights-header reveal">
+      <p class="highlights-bridge">A visual preview of what's ahead</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">Inside the Course</p>
+      <h2 class="section-title">The Science You'll<br><span class="gold">Experience Firsthand</span></h2>
+    </div>
+    <div class="highlights-grid">
+      <div class="highlight-card reveal">
+        <img src="assets/img-metabolic.jpg" alt="Metabolic health visualization" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 2 &amp; 3</span>
+          <h3>Metabolic Health &amp; Nutrition</h3>
+          <p>Understand glucose as a signal. See how metabolic dysfunction develops silently — and learn to design meals based on your body's responses, not generic rules.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-1">
+        <img src="assets/img-cgm.jpg" alt="Continuous glucose monitor sensor" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 4 &amp; 5</span>
+          <h3>Continuous Glucose Monitoring</h3>
+          <p>Wear a CGM sensor, interpret real data, and see the invisible patterns driving your energy, cravings, and aging.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-2">
+        <img src="assets/img-movement.jpg" alt="Movement and exercise for longevity" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Session 6</span>
+          <h3>Movement as a Glucose Tool</h3>
+          <p>Muscle as a glucose sink. Post-meal walking. Resistance training for insulin sensitivity. Build your age-appropriate movement plan.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-1">
+        <img src="assets/img-sleep.jpg" alt="Sleep and circadian rhythm" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 7 &amp; 8</span>
+          <h3>Sleep, Stress &amp; Recovery</h3>
+          <p>Circadian rhythm, cortisol loops, emotional glucose spikes. Design your sleep and stress regulation systems for long-term health.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-2">
+        <img src="assets/img-supplements.jpg" alt="Supplements and health tech" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 9 &amp; 10</span>
+          <h3>Health Tech &amp; Social Longevity</h3>
+          <p>Avoid biohacking traps. Learn decision filters for supplements and wearables. Understand why social connection is as powerful as diet for your healthspan.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
