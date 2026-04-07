@@ -1,2063 +1,2910 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>eTeacher Longevity — The Course That Changes How You Age</title>
-  <meta name="description" content="A 12-session live online course where you'll learn to read your body's signals, interpret longevity research, and build a personal healthspan blueprint.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master the Science of Living Longer | eTeacher Longevity Course</title>
+<meta name="description" content="A 12-session live online academy where you'll read your body's signals, interpret longevity research, and build a personal healthspan blueprint — guided by world-class experts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  <style>
-    /* ========================================
-       CSS RESET & BASE
-       ======================================== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
-    :root {
-      --bg: #0d0d0d;
-      --surface: #141414;
-      --surface-2: #1a1a1a;
-      --surface-3: #1f1f1f;
-      --border: rgba(255,255,255,0.08);
-      --border-light: rgba(255,255,255,0.12);
-      --text: #f5f5f0;
-      --text-muted: rgba(245,245,240,0.6);
-      --text-dim: rgba(245,245,240,0.4);
-      --teal: #2dd4a8;
-      --teal-glow: rgba(45,212,168,0.15);
-      --coral: #E8786F;
-      --coral-glow: rgba(232,120,111,0.15);
-      --amber: #E8A849;
-      --amber-glow: rgba(232,168,73,0.15);
-      --violet: #9B8EC4;
-      --violet-glow: rgba(155,142,196,0.15);
-      --green: #5CB97A;
-      --green-glow: rgba(92,185,122,0.15);
-      --blue: #4A9ED6;
-      --blue-glow: rgba(74,158,214,0.15);
-      --font-display: 'Instrument Serif', Georgia, serif;
-      --font-body: 'Inter', -apple-system, system-ui, sans-serif;
-      --hero-size: 88px;
-      --section-size: 56px;
-      --stat-size: 72px;
-      --body-size: 19px;
-      --max-width: 1280px;
-      --section-padding: 140px;
-    }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0A0F0D;
+  color: #F5F5F0;
+  line-height: 1.6;
+  font-size: 18px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    @media (max-width: 768px) {
-      :root {
-        --hero-size: 44px;
-        --section-size: 34px;
-        --stat-size: 48px;
-        --body-size: 17px;
-        --section-padding: 80px;
-      }
-    }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: var(--body-size);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+button, input {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+ul, ol {
+  list-style: none;
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+:root {
+  --green-deep: #0B3D2E;
+  --green-mid: #1A5C3A;
+  --green-light: #2D7A4F;
+  --green-accent: #3A9D6A;
+  --gold: #D4A843;
+  --gold-hover: #E0BA5A;
+  --gold-dark: #B8913A;
+  --dark-base: #0A0F0D;
+  --surface-dark: #111916;
+  --surface-card: #0F1A14;
+  --surface-elevated: #152A1F;
+  --text-primary: #F5F5F0;
+  --text-secondary: #A8B5A0;
+  --text-muted: #6B7A64;
+  --border-subtle: rgba(168, 181, 160, 0.12);
+  --border-medium: rgba(168, 181, 160, 0.2);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.4);
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    /* ========================================
-       SCROLL REVEAL
-       ======================================== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-    /* ========================================
-       UTILITY
-       ======================================== */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-    @media (max-width: 768px) {
-      .container { padding: 0 20px; }
-    }
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-    .section-eyebrow {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
 
-    .section-title {
-      font-family: var(--font-display);
-      font-size: var(--section-size);
-      line-height: 1.15;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
 
-    .section-subtitle {
-      font-size: var(--body-size);
-      color: var(--text-muted);
-      line-height: 1.65;
-      max-width: 680px;
-    }
+.section-subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 680px;
+}
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 18px 40px;
-      background: linear-gradient(135deg, var(--teal), #22b893);
-      color: #0d0d0d;
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 600;
-      border: none;
-      border-radius: 60px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(45,212,168,0.3);
-    }
+.gold-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+  color: #0A0F0D;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 16px 32px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.3);
+}
 
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 18px 40px;
-      background: transparent;
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 500;
-      border: 1.5px solid var(--border-light);
-      border-radius: 60px;
-      cursor: pointer;
-      transition: border-color 0.3s ease, background 0.3s ease;
-      text-decoration: none;
-    }
-    .btn-outline:hover {
-      border-color: var(--teal);
-      background: rgba(45,212,168,0.05);
-    }
+.gold-btn:hover {
+  background: linear-gradient(135deg, var(--gold-hover), #ECC86A);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 168, 67, 0.45);
+}
 
-    /* ========================================
-       1. NAVIGATION
-       ======================================== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      padding: 0 40px;
-      transition: background 0.3s ease, backdrop-filter 0.3s ease;
-    }
-    .nav.scrolled {
-      background: rgba(13,13,13,0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-muted);
-      transition: color 0.2s ease;
-      letter-spacing: 0.01em;
-    }
-    .nav-links a:hover {
-      color: var(--text);
-    }
-    .nav-cta {
-      padding: 10px 24px !important;
-      font-size: 14px !important;
-      background: linear-gradient(135deg, var(--teal), #22b893) !important;
-      color: #0d0d0d !important;
-      border-radius: 60px;
-      font-weight: 600 !important;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .nav-cta:hover {
-      color: #0d0d0d !important;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(45,212,168,0.25);
-    }
-    .nav-mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-    .nav-mobile-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      margin: 5px 0;
-      transition: 0.3s;
-    }
-    @media (max-width: 900px) {
-      .nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        background: rgba(13,13,13,0.97);
-        backdrop-filter: blur(20px);
-        padding: 20px 0 30px;
-        gap: 0;
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-links.open li {
-        padding: 14px 30px;
-      }
-      .nav-links.open a {
-        font-size: 16px;
-      }
-      .nav-mobile-toggle { display: block; }
-    }
+.gold-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-base);
+}
 
-    /* ========================================
-       2. HERO
-       ======================================== */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-    .hero-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 30%;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(13,13,13,0.3) 0%,
-        rgba(13,13,13,0.5) 30%,
-        rgba(13,13,13,0.75) 60%,
-        rgba(13,13,13,0.95) 85%,
-        #0d0d0d 100%
-      );
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 160px 40px 80px;
-      width: 100%;
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 32px;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--teal);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: var(--hero-size);
-      line-height: 1.05;
-      color: var(--text);
-      max-width: 900px;
-      margin-bottom: 28px;
-    }
-    .hero-subtitle {
-      font-size: 20px;
-      line-height: 1.65;
-      color: var(--text-muted);
-      max-width: 640px;
-      margin-bottom: 44px;
-    }
-    @media (max-width: 768px) {
-      .hero-subtitle { font-size: 17px; }
-    }
-    .hero-ctas {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 0;
-    }
-    .hero-trust-row {
-      display: flex;
-      gap: 0;
-      flex-wrap: wrap;
-      margin-top: 0;
-      padding-top: 50px;
-    }
-    .hero-trust-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 28px;
-      border-right: 1px solid var(--border);
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-    .hero-trust-item:last-child { border-right: none; }
-    .hero-trust-item:first-child { padding-left: 0; }
-    .trust-icon {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      flex-shrink: 0;
-    }
-    @media (max-width: 768px) {
-      .hero-content {
-        padding: 140px 20px 60px;
-      }
-      .hero-trust-row {
-        gap: 0;
-        flex-direction: column;
-      }
-      .hero-trust-item {
-        padding: 10px 0;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        font-size: 13px;
-      }
-      .hero-trust-item:last-child { border-bottom: none; }
-    }
+.gold-btn:hover svg {
+  transform: translateX(3px);
+}
 
-    /* ========================================
-       3. COURSE OVERVIEW
-       ======================================== */
-    .course-overview {
-      padding: var(--section-padding) 0;
-      background: var(--bg);
-    }
-    .overview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 60px;
-    }
-    .overview-info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-    .overview-info-item {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .overview-info-item:nth-child(odd) {
-      padding-right: 24px;
-      border-right: 1px solid var(--border);
-    }
-    .overview-info-item:nth-child(even) {
-      padding-left: 24px;
-    }
-    .overview-info-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 8px;
-    }
-    .overview-info-value {
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--text);
-      line-height: 1.5;
-    }
-    .overview-image {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .overview-image img {
-      width: 100%;
-      border-radius: 16px;
-    }
-    .overview-image::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      pointer-events: none;
-    }
-    @media (max-width: 768px) {
-      .overview-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .overview-info-grid {
-        grid-template-columns: 1fr;
-      }
-      .overview-info-item:nth-child(odd) {
-        padding-right: 0;
-        border-right: none;
-      }
-      .overview-info-item:nth-child(even) {
-        padding-left: 0;
-      }
-    }
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    /* ========================================
-       4. WHAT YOU'LL LEARN
-       ======================================== */
-    .outcomes {
-      padding: var(--section-padding) 0;
-      background: var(--surface);
-      position: relative;
-      overflow: hidden;
-    }
-    .outcomes-bg-image {
-      position: absolute;
-      right: -10%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 45%;
-      opacity: 0.12;
-      pointer-events: none;
-      mask-image: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
-    }
-    .outcomes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-      position: relative;
-      z-index: 1;
-    }
-    .outcome-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 32px;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .outcome-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--border-light);
-    }
-    .outcome-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-    .outcome-icon.teal { background: var(--teal-glow); color: var(--teal); }
-    .outcome-icon.coral { background: var(--coral-glow); color: var(--coral); }
-    .outcome-icon.green { background: var(--green-glow); color: var(--green); }
-    .outcome-icon.violet { background: var(--violet-glow); color: var(--violet); }
-    .outcome-icon.amber { background: var(--amber-glow); color: var(--amber); }
-    .outcome-icon.blue { background: var(--blue-glow); color: var(--blue); }
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .outcome-card h3 {
-      font-family: var(--font-body);
-      font-size: 19px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.35;
-    }
-    .outcome-card p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    @media (max-width: 768px) {
-      .outcomes-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-    }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
 
-    /* ========================================
-       5. CURRICULUM
-       ======================================== */
-    .curriculum {
-      padding: var(--section-padding) 0;
-      background: var(--bg);
-    }
-    .curriculum-phases {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
-    .phase-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 36px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-    .phase-card:hover { transform: translateY(-3px); }
-    .phase-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-    }
-    .phase-card.teal::before { background: linear-gradient(90deg, var(--teal), rgba(45,212,168,0.3)); }
-    .phase-card.coral::before { background: linear-gradient(90deg, var(--coral), rgba(232,120,111,0.3)); }
-    .phase-card.violet::before { background: linear-gradient(90deg, var(--violet), rgba(155,142,196,0.3)); }
-    .phase-card.amber::before { background: linear-gradient(90deg, var(--amber), rgba(232,168,73,0.3)); }
+/* ============================================
+   1. FIXED NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 24px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-base);
+  background: transparent;
+}
 
-    .phase-number {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .phase-card.teal .phase-number { color: var(--teal); }
-    .phase-card.coral .phase-number { color: var(--coral); }
-    .phase-card.violet .phase-number { color: var(--violet); }
-    .phase-card.amber .phase-number { color: var(--amber); }
+.nav.scrolled {
+  background: rgba(10, 15, 13, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
 
-    .phase-name {
-      font-family: var(--font-display);
-      font-size: 36px;
-      color: var(--text);
-      margin-bottom: 6px;
-      line-height: 1.2;
-    }
-    .phase-sessions-label {
-      font-size: 14px;
-      color: var(--text-dim);
-      margin-bottom: 24px;
-    }
-    .phase-session {
-      padding: 16px 0;
-      border-top: 1px solid var(--border);
-    }
-    .phase-session-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .phase-session-goals {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-    .curriculum-image-accent {
-      margin-top: 40px;
-      border-radius: 16px;
-      overflow: hidden;
-      max-height: 360px;
-    }
-    .curriculum-image-accent img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    @media (max-width: 768px) {
-      .curriculum-phases {
-        grid-template-columns: 1fr;
-      }
-      .phase-card {
-        padding: 28px 24px;
-      }
-      .phase-name {
-        font-size: 28px;
-      }
-    }
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    /* ========================================
-       6. SESSION STRUCTURE
-       ======================================== */
-    .session-structure {
-      padding: var(--section-padding) 0;
-      background: var(--surface);
-      position: relative;
-      overflow: hidden;
-    }
-    .session-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 60px;
-    }
-    .session-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .timeline-segment {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 24px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .timeline-segment:last-child { border-bottom: none; }
-    .timeline-time {
-      font-size: 14px;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      padding-top: 2px;
-    }
-    .timeline-segment:nth-child(1) .timeline-time { color: var(--teal); }
-    .timeline-segment:nth-child(2) .timeline-time { color: var(--coral); }
-    .timeline-segment:nth-child(3) .timeline-time { color: var(--violet); }
-    .timeline-segment:nth-child(4) .timeline-time { color: var(--amber); }
-    .timeline-segment:nth-child(5) .timeline-time { color: var(--green); }
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--text-primary);
+}
 
-    .timeline-content h4 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .timeline-content p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-    .timeline-bar {
-      position: absolute;
-      left: 88px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      opacity: 0.15;
-    }
-    .timeline-segment:nth-child(1) .timeline-bar { background: var(--teal); }
-    .timeline-segment:nth-child(2) .timeline-bar { background: var(--coral); }
-    .timeline-segment:nth-child(3) .timeline-bar { background: var(--violet); }
-    .timeline-segment:nth-child(4) .timeline-bar { background: var(--amber); }
-    .timeline-segment:nth-child(5) .timeline-bar { background: var(--green); }
+.nav-logo svg {
+  width: 36px;
+  height: 36px;
+}
 
-    .session-image {
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .session-image img {
-      width: 100%;
-      border-radius: 16px;
-    }
-    @media (max-width: 768px) {
-      .session-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .timeline-segment {
-        grid-template-columns: 60px 1fr;
-        gap: 16px;
-        padding: 20px 0;
-      }
-    }
+.nav-logo span.logo-accent {
+  color: var(--gold);
+}
 
-    /* ========================================
-       7. RESEARCH / STATS
-       ======================================== */
-    .research {
-      padding: var(--section-padding) 0;
-      background: var(--bg);
-    }
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
-    .kpi-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 44px 36px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .kpi-card:hover { transform: translateY(-3px); }
-    .kpi-card__value {
-      font-family: var(--font-display);
-      font-size: var(--stat-size);
-      line-height: 1;
-      margin-bottom: 12px;
-      font-variant-numeric: tabular-nums;
-    }
-    .kpi-card__value.teal { color: var(--teal); }
-    .kpi-card__value.coral { color: var(--coral); }
-    .kpi-card__value.amber { color: var(--amber); }
-    .kpi-card__label {
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .kpi-card__source {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.45;
-    }
-    .chart-container {
-      margin-top: 60px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-    }
-    .chart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 32px;
-    }
-    .chart-title {
-      font-family: var(--font-display);
-      font-size: 28px;
-      color: var(--text);
-    }
-    .chart-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .chart-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .chart-legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .chart-wrapper {
-      position: relative;
-      height: 400px;
-    }
-    .chart-note {
-      margin-top: 16px;
-      font-size: 12px;
-      color: var(--text-dim);
-      text-align: center;
-    }
-    @media (max-width: 768px) {
-      .stats-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .kpi-card {
-        padding: 32px 24px;
-      }
-      .chart-container {
-        padding: 24px 16px;
-      }
-      .chart-wrapper {
-        height: 300px;
-      }
-      .chart-header {
-        flex-direction: column;
-        gap: 16px;
-      }
-    }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
 
-    /* ========================================
-       8. INSTRUCTORS
-       ======================================== */
-    .instructors {
-      padding: var(--section-padding) 0;
-      background: var(--surface);
-    }
-    .instructors-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
-    .instructor-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 32px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-    .instructor-card:hover { transform: translateY(-3px); }
-    .instructor-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-    }
-    .instructor-card:nth-child(1)::before { background: var(--teal); }
-    .instructor-card:nth-child(2)::before { background: var(--coral); }
-    .instructor-card:nth-child(3)::before { background: var(--violet); }
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-base);
+  letter-spacing: 0.3px;
+}
 
-    .instructor-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-family: var(--font-display);
-      margin-bottom: 24px;
-    }
-    .instructor-card:nth-child(1) .instructor-avatar {
-      background: var(--teal-glow);
-      color: var(--teal);
-      border: 2px solid rgba(45,212,168,0.3);
-    }
-    .instructor-card:nth-child(2) .instructor-avatar {
-      background: var(--coral-glow);
-      color: var(--coral);
-      border: 2px solid rgba(232,120,111,0.3);
-    }
-    .instructor-card:nth-child(3) .instructor-avatar {
-      background: var(--violet-glow);
-      color: var(--violet);
-      border: 2px solid rgba(155,142,196,0.3);
-    }
-    .instructor-name {
-      font-family: var(--font-display);
-      font-size: 26px;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .instructor-role {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 18px;
-    }
-    .instructor-card:nth-child(1) .instructor-role { color: var(--teal); }
-    .instructor-card:nth-child(2) .instructor-role { color: var(--coral); }
-    .instructor-card:nth-child(3) .instructor-role { color: var(--violet); }
-    .instructor-bio {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    @media (max-width: 768px) {
-      .instructors-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-    }
+.nav-links a:hover {
+  color: var(--text-primary);
+}
 
-    /* ========================================
-       9. WHO THIS IS FOR / NOT FOR
-       ======================================== */
-    .who-section {
-      padding: var(--section-padding) 0;
-      background: var(--bg);
-    }
-    .who-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 60px;
-    }
-    .who-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 44px 40px;
-    }
-    .who-card-title {
-      font-family: var(--font-display);
-      font-size: 30px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .who-card.for-card .who-card-title { color: var(--green); }
-    .who-card.not-card .who-card-title { color: var(--coral); }
-    .who-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .who-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--text-muted);
-    }
-    .who-list .check-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--green-glow);
-      color: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      margin-top: 2px;
-    }
-    .who-list .x-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--coral-glow);
-      color: var(--coral);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      margin-top: 2px;
-    }
-    @media (max-width: 768px) {
-      .who-grid {
-        grid-template-columns: 1fr;
-      }
-      .who-card {
-        padding: 28px 24px;
-      }
-    }
+.nav-cta {
+  background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+  color: #0A0F0D !important;
+  font-weight: 700 !important;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 14px !important;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 12px rgba(212, 168, 67, 0.25);
+}
 
-    /* ========================================
-       10. FAQ
-       ======================================== */
-    .faq {
-      padding: var(--section-padding) 0;
-      background: var(--surface);
-    }
-    .faq-list {
-      max-width: 800px;
-      margin: 60px auto 0;
-    }
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-    }
-    .faq-question {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 28px 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: var(--font-body);
-      font-size: 19px;
-      font-weight: 500;
-      color: var(--text);
-      text-align: left;
-      gap: 20px;
-      transition: color 0.2s ease;
-    }
-    .faq-question:hover { color: var(--teal); }
-    .faq-icon {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid var(--border-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .faq-icon svg {
-      width: 14px;
-      height: 14px;
-      stroke: var(--text-muted);
-      transition: stroke 0.2s ease;
-    }
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-      border-color: var(--teal);
-    }
-    .faq-item.open .faq-icon svg { stroke: var(--teal); }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
-    }
-    .faq-item.open .faq-answer {
-      max-height: 300px;
-      padding-bottom: 28px;
-    }
-    .faq-answer p {
-      font-size: 16px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      padding-right: 52px;
-    }
-    @media (max-width: 768px) {
-      .faq-question { font-size: 17px; padding: 22px 0; }
-      .faq-answer p { padding-right: 0; }
-    }
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
+}
 
-    /* ========================================
-       11. FINAL CTA
-       ======================================== */
-    .final-cta {
-      position: relative;
-      padding: var(--section-padding) 0;
-      overflow: hidden;
-    }
-    .final-cta-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-    .final-cta-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .final-cta-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(13,13,13,0.85) 0%,
-        rgba(13,13,13,0.75) 50%,
-        rgba(13,13,13,0.9) 100%
-      );
-      z-index: 1;
-    }
-    .final-cta-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    .final-cta-title {
-      font-family: var(--font-display);
-      font-size: var(--section-size);
-      color: var(--text);
-      margin-bottom: 20px;
-      line-height: 1.15;
-    }
-    .final-cta-sub {
-      font-size: var(--body-size);
-      color: var(--text-muted);
-      margin-bottom: 44px;
-      line-height: 1.65;
-    }
-    .final-cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+}
 
-    /* ========================================
-       12. FOOTER
-       ======================================== */
-    .footer {
-      padding: 48px 0;
-      border-top: 1px solid var(--border);
-      background: var(--bg);
-    }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-copy {
-      font-size: 14px;
-      color: var(--text-dim);
-    }
-    .footer-links {
-      display: flex;
-      gap: 28px;
-    }
-    .footer-links a {
-      font-size: 14px;
-      color: var(--text-muted);
-      transition: color 0.2s ease;
-    }
-    .footer-links a:hover { color: var(--text); }
-    @media (max-width: 768px) {
-      .footer-inner {
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-      }
-    }
+.nav-mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: all var(--transition-base);
+  border-radius: 2px;
+}
 
-    /* ========================================
-       ADDITIONAL POLISH
-       ======================================== */
-    ::selection {
-      background: rgba(45,212,168,0.25);
-      color: var(--text);
-    }
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 15, 13, 0.98);
+  backdrop-filter: blur(20px);
+  padding: 24px;
+  flex-direction: column;
+  gap: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      * { animation-duration: 0.01ms !important; }
-    }
-  </style>
+.nav-mobile-menu.active {
+  display: flex;
+}
+
+.nav-mobile-menu a {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 8px 0;
+  transition: color var(--transition-base);
+}
+
+.nav-mobile-menu a:hover {
+  color: var(--text-primary);
+}
+
+/* ============================================
+   2. HERO SECTION
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 120px 24px 80px;
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 15, 13, 0.6) 0%,
+    rgba(11, 61, 46, 0.75) 40%,
+    rgba(10, 15, 13, 0.9) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-eyebrow .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 80px;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.hero-headline em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 740px;
+  margin: 0 auto 40px;
+}
+
+.hero-form {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 520px;
+  margin: 0 auto 48px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 6px;
+  backdrop-filter: blur(10px);
+  transition: border-color var(--transition-base);
+}
+
+.hero-form:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+}
+
+.hero-form input[type="email"] {
+  flex: 1;
+  background: transparent;
+  color: var(--text-primary);
+  padding: 14px 24px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  min-width: 0;
+}
+
+.hero-form input[type="email"]::placeholder {
+  color: var(--text-muted);
+}
+
+.hero-form button {
+  background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+  color: #0A0F0D;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-base);
+  border: none;
+  box-shadow: 0 2px 12px rgba(212, 168, 67, 0.25);
+}
+
+.hero-form button:hover {
+  background: linear-gradient(135deg, var(--gold-hover), #ECC86A);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
+}
+
+.hero-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hero-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.hero-trust-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.hero-trust-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  display: none;
+}
+
+/* ============================================
+   3. WHAT MAKES THIS DIFFERENT
+   ============================================ */
+.different {
+  position: relative;
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--dark-base) 0%, var(--green-deep) 50%, var(--dark-base) 100%);
+  overflow: hidden;
+}
+
+.different::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.different-header {
+  text-align: center;
+  margin-bottom: 72px;
+  position: relative;
+  z-index: 1;
+}
+
+.different-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.different-card {
+  background: rgba(17, 25, 22, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 40px 28px;
+  text-align: center;
+  transition: all var(--transition-base);
+  backdrop-filter: blur(10px);
+}
+
+.different-card:hover {
+  border-color: rgba(212, 168, 67, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.different-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  border: 1px solid rgba(45, 122, 79, 0.3);
+}
+
+.different-card-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--gold);
+}
+
+.different-card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.different-card p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   4. COURSE HIGHLIGHTS
+   ============================================ */
+.highlights {
+  padding: 120px 0;
+  background: var(--dark-base);
+}
+
+.highlights-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.highlight-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.highlight-card:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 21 / 9;
+}
+
+.highlight-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.highlight-card:hover img {
+  transform: scale(1.05);
+}
+
+.highlight-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba(10, 15, 13, 0.6) 60%,
+    rgba(10, 15, 13, 0.92) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px;
+}
+
+.highlight-card-number {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.highlight-card h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.highlight-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 500px;
+}
+
+/* ============================================
+   5. FULL CURRICULUM ACCORDION
+   ============================================ */
+.curriculum {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--dark-base) 0%, var(--surface-dark) 50%, var(--dark-base) 100%);
+}
+
+.curriculum-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.curriculum-list {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.curriculum-item {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: rgba(17, 25, 22, 0.5);
+  transition: all var(--transition-base);
+}
+
+.curriculum-item:hover {
+  border-color: var(--border-medium);
+}
+
+.curriculum-item.active {
+  border-color: rgba(212, 168, 67, 0.3);
+  background: rgba(17, 25, 22, 0.8);
+}
+
+.curriculum-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition-base);
+}
+
+.curriculum-trigger:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.curriculum-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--gold);
+  min-width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 168, 67, 0.1);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(212, 168, 67, 0.2);
+  flex-shrink: 0;
+}
+
+.curriculum-trigger-text {
+  flex: 1;
+}
+
+.curriculum-trigger-text h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.curriculum-trigger-text span {
+  font-size: 14px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.curriculum-chevron {
+  width: 24px;
+  height: 24px;
+  color: var(--text-muted);
+  transition: transform var(--transition-base);
+  flex-shrink: 0;
+}
+
+.curriculum-item.active .curriculum-chevron {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+
+.curriculum-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.curriculum-body-inner {
+  padding: 0 24px 24px 88px;
+}
+
+.curriculum-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 10px;
+  margin-top: 16px;
+}
+
+.curriculum-section-label:first-child {
+  margin-top: 0;
+}
+
+.curriculum-goals {
+  margin-bottom: 8px;
+}
+
+.curriculum-goals li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.curriculum-goals li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-light);
+}
+
+.curriculum-flow {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.curriculum-work {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  padding: 12px 16px;
+  background: rgba(212, 168, 67, 0.06);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* ============================================
+   6. WHO THIS IS FOR
+   ============================================ */
+.who {
+  position: relative;
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.who-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.who-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+}
+
+.who-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--dark-base) 0%, rgba(11, 61, 46, 0.6) 50%, var(--dark-base) 100%);
+}
+
+.who-content {
+  position: relative;
+  z-index: 1;
+}
+
+.who-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.who-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.who-col {
+  background: rgba(17, 25, 22, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.who-col-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.who-col-title svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.who-col.perfect .who-col-title {
+  color: var(--green-accent);
+}
+
+.who-col.not-for .who-col-title {
+  color: #C74B4B;
+}
+
+.who-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.who-item:last-child {
+  margin-bottom: 0;
+}
+
+.who-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.who-col.perfect .who-item svg {
+  color: var(--green-accent);
+}
+
+.who-col.not-for .who-item svg {
+  color: #C74B4B;
+}
+
+.who-item p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   7. MEET THE TEACHERS
+   ============================================ */
+.teachers {
+  padding: 120px 0;
+  background: var(--dark-base);
+}
+
+.teachers-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.teachers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.teacher-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 48px 32px;
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.teacher-card:hover {
+  border-color: rgba(212, 168, 67, 0.3);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.teacher-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--gold);
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  border: 2px solid rgba(212, 168, 67, 0.3);
+}
+
+.teacher-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.teacher-role {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.teacher-bio {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   8. TRUST & CREDIBILITY
+   ============================================ */
+.trust {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--dark-base) 0%, var(--green-deep) 50%, var(--dark-base) 100%);
+  overflow: hidden;
+}
+
+.trust-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.trust-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.trust-stat {
+  text-align: center;
+  padding: 32px 16px;
+  background: rgba(17, 25, 22, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+}
+
+.trust-stat:hover {
+  border-color: rgba(212, 168, 67, 0.3);
+  transform: translateY(-2px);
+}
+
+.trust-stat-number {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.trust-stat-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.trust-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.trust-stars svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gold);
+  fill: var(--gold);
+}
+
+/* Testimonials */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.testimonial-card {
+  background: rgba(17, 25, 22, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: all var(--transition-base);
+}
+
+.testimonial-card:hover {
+  border-color: var(--border-medium);
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+.testimonial-stars svg {
+  width: 14px;
+  height: 14px;
+  color: var(--gold);
+  fill: var(--gold);
+}
+
+.testimonial-text {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gold);
+}
+
+.testimonial-author-info strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.testimonial-author-info span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Badges */
+.trust-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.trust-badge svg {
+  width: 20px;
+  height: 20px;
+  color: var(--gold);
+}
+
+/* ============================================
+   9. FAQ ACCORDION
+   ============================================ */
+.faq {
+  padding: 120px 0;
+  background: var(--dark-base);
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+
+.faq-trigger h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-primary);
+  line-height: 1.4;
+  transition: color var(--transition-base);
+}
+
+.faq-trigger:hover h3 {
+  color: var(--gold);
+}
+
+.faq-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-muted);
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+  color: var(--gold);
+}
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-body-inner {
+  padding-bottom: 24px;
+}
+
+.faq-body-inner p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   10. FINAL CTA
+   ============================================ */
+.final-cta {
+  position: relative;
+  padding: 120px 0;
+  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 40%, var(--green-light) 100%);
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.final-cta::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(45, 122, 79, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.final-cta-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.final-cta .section-title {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.final-cta-sub {
+  font-size: 20px;
+  line-height: 1.7;
+  color: rgba(245, 245, 240, 0.8);
+  margin-bottom: 40px;
+}
+
+.final-cta-form {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 520px;
+  margin: 0 auto 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 6px;
+}
+
+.final-cta-form:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+}
+
+.final-cta-form input[type="email"] {
+  flex: 1;
+  background: transparent;
+  color: var(--text-primary);
+  padding: 14px 24px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  min-width: 0;
+}
+
+.final-cta-form input[type="email"]::placeholder {
+  color: rgba(245, 245, 240, 0.4);
+}
+
+.final-cta-form button {
+  background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+  color: #0A0F0D;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-base);
+  border: none;
+  box-shadow: 0 2px 12px rgba(212, 168, 67, 0.3);
+}
+
+.final-cta-form button:hover {
+  background: linear-gradient(135deg, var(--gold-hover), #ECC86A);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
+}
+
+.final-cta-note {
+  font-size: 14px;
+  color: rgba(245, 245, 240, 0.5);
+}
+
+/* ============================================
+   11. FOOTER
+   ============================================ */
+.footer {
+  padding: 48px 0;
+  background: #060A08;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.footer-logo .logo-accent {
+  color: var(--gold);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: var(--text-muted);
+  transition: color var(--transition-base);
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.footer-social a:hover {
+  background: rgba(212, 168, 67, 0.1);
+  border-color: rgba(212, 168, 67, 0.3);
+}
+
+.footer-social svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .section-title {
+    font-size: 42px;
+  }
+
+  .hero-headline {
+    font-size: 56px;
+  }
+
+  .different-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlight-card:first-child {
+    aspect-ratio: 16 / 9;
+  }
+
+  .trust-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .trust-stat-number {
+    font-size: 40px;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .teachers-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .final-cta .section-title {
+    font-size: 42px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container, .container-wide {
+    padding: 0 16px;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .section-subtitle {
+    font-size: 17px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  /* Nav mobile */
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-toggle {
+    display: flex;
+  }
+
+  /* Hero mobile */
+  .hero {
+    min-height: auto;
+    padding: 130px 16px 60px;
+  }
+
+  .hero-headline {
+    font-size: 42px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+  }
+
+  .hero-form {
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    padding: 8px;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-form input[type="email"] {
+    width: 100%;
+    text-align: center;
+    padding: 14px 16px;
+  }
+
+  .hero-form button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-trust {
+    gap: 6px;
+  }
+
+  .hero-trust-item {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  /* Different mobile */
+  .different {
+    padding: 80px 0;
+  }
+
+  .different-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .different-card {
+    padding: 28px 20px;
+  }
+
+  /* Highlights mobile */
+  .highlights {
+    padding: 80px 0;
+  }
+
+  .highlight-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .highlight-card:first-child {
+    aspect-ratio: 4 / 3;
+  }
+
+  .highlight-card h3 {
+    font-size: 22px;
+  }
+
+  .highlight-card-overlay {
+    padding: 24px;
+  }
+
+  /* Curriculum mobile */
+  .curriculum {
+    padding: 80px 0;
+  }
+
+  .curriculum-trigger {
+    padding: 16px;
+  }
+
+  .curriculum-body-inner {
+    padding: 0 16px 20px 16px;
+  }
+
+  .curriculum-num {
+    min-width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .curriculum-trigger-text h3 {
+    font-size: 16px;
+  }
+
+  /* Who mobile */
+  .who {
+    padding: 80px 0;
+  }
+
+  .who-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .who-col {
+    padding: 28px;
+  }
+
+  /* Teachers mobile */
+  .teachers {
+    padding: 80px 0;
+  }
+
+  .teachers-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  /* Trust mobile */
+  .trust {
+    padding: 80px 0;
+  }
+
+  .trust-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .trust-stat-number {
+    font-size: 36px;
+  }
+
+  .trust-stat {
+    padding: 20px 12px;
+  }
+
+  .trust-badges {
+    gap: 12px;
+  }
+
+  .trust-badge {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+
+  /* FAQ mobile */
+  .faq {
+    padding: 80px 0;
+  }
+
+  .faq-trigger h3 {
+    font-size: 16px;
+  }
+
+  /* Final CTA mobile */
+  .final-cta {
+    padding: 80px 0;
+  }
+
+  .final-cta .section-title {
+    font-size: 32px;
+  }
+
+  .final-cta-sub {
+    font-size: 17px;
+  }
+
+  .final-cta-form {
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .final-cta-form input[type="email"] {
+    width: 100%;
+    text-align: center;
+    padding: 14px 16px;
+  }
+
+  .final-cta-form button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Footer mobile */
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .hero-headline {
+    font-size: 34px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .trust-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-stat-number {
+    font-size: 32px;
+  }
+
+  .final-cta .section-title {
+    font-size: 28px;
+  }
+}
+</style>
 </head>
-
 <body>
 
-  <!-- ============================================================
-       1. NAVIGATION
-       ============================================================ -->
-  <nav class="nav" id="mainNav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo" aria-label="eTeacher Home">
-        <!-- Custom SVG Logo -->
-        <svg width="130" height="28" viewBox="0 0 130 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="eTeacher">
-          <circle cx="10" cy="14" r="9" stroke="#2dd4a8" stroke-width="2.2" fill="none"/>
-          <line x1="4" y1="14" x2="19" y2="14" stroke="#2dd4a8" stroke-width="2.2" stroke-linecap="round"/>
-          <text x="24" y="20.5" font-family="'Instrument Serif', Georgia, serif" font-size="22" fill="#f5f5f0" letter-spacing="-0.5">eTeacher</text>
-        </svg>
-      </a>
-      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#overview">Course Overview</a></li>
-        <li><a href="#curriculum">Curriculum</a></li>
-        <li><a href="#instructors">Instructors</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#apply" class="nav-cta">Apply Now</a></li>
-      </ul>
+<!-- ============================================
+     1. FIXED NAVIGATION
+     ============================================ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="16" stroke="#D4A843" stroke-width="2"/>
+        <path d="M12 10 C12 10, 18 8, 24 12 C24 12, 20 16, 18 18 C16 20, 12 24, 12 26" stroke="#D4A843" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M24 10 C24 10, 18 14, 18 18 C18 22, 24 24, 24 26" stroke="#2D7A4F" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="18" cy="18" r="3" fill="#D4A843"/>
+      </svg>
+      <span>e<span class="logo-accent">Teacher</span> Longevity</span>
+    </a>
+    <div class="nav-links">
+      <a href="#highlights">Curriculum</a>
+      <a href="#teachers">Instructors</a>
+      <a href="#faq">FAQ</a>
+      <a href="#trust">Testimonials</a>
+      <a href="#final-cta" class="nav-cta">Enroll Now</a>
     </div>
-  </nav>
+    <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#highlights" onclick="closeMobileMenu()">Curriculum</a>
+  <a href="#teachers" onclick="closeMobileMenu()">Instructors</a>
+  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="#trust" onclick="closeMobileMenu()">Testimonials</a>
+  <a href="#final-cta" class="nav-cta" onclick="closeMobileMenu()" style="text-align:center; display:block; margin-top: 8px;">Enroll Now</a>
+</div>
 
-  <!-- ============================================================
-       2. HERO
-       ============================================================ -->
-  <section class="hero" id="hero">
-    <div class="hero-bg">
-      <img src="assets/hero-v3-vibrant.png" alt="Woman standing on an ocean cliff at sunset, embodying vitality and the promise of longevity" loading="eager">
+<!-- ============================================
+     2. HERO SECTION
+     ============================================ -->
+<section class="hero" id="hero">
+  <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/img-metabolic.png">
+    <source src="assets/hero-bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      LIVE ONLINE COURSE <span class="dot"></span> 12 WEEKS <span class="dot"></span> NEXT COHORT ENROLLING
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow reveal">LIVE ONLINE COURSE &middot; NEXT COHORT ENROLLING</div>
-      <h1 class="hero-title reveal reveal-delay-1">The Longevity Course That Changes How You Age</h1>
-      <p class="hero-subtitle reveal reveal-delay-2">A 12-session live online academy where you'll learn to read your body's signals, interpret longevity research, and build a personal healthspan blueprint — guided by experts, in a small group, grounded in science.</p>
-      <div class="hero-ctas reveal reveal-delay-3">
-        <a href="#apply" class="btn-primary">
-          Apply for Next Cohort
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h1 class="hero-headline">Master the Science of <em>Living Longer</em></h1>
+    <p class="hero-sub">A 12-session live online academy where you'll read your body's signals, interpret longevity research, and build a personal healthspan blueprint — guided by world-class experts, in a small group, grounded in science.</p>
+    <form class="hero-form" onsubmit="handleFormSubmit(event, this)">
+      <input type="email" placeholder="Enter your email address" required aria-label="Email address">
+      <button type="submit">Reserve Your Spot →</button>
+    </form>
+    <div class="hero-trust">
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+        12 Sessions
+      </div>
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        90 Min Each
+      </div>
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        8–15 Participants
+      </div>
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+        Expert-Led
+      </div>
+      <div class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        Certificate
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     3. WHAT MAKES THIS DIFFERENT
+     ============================================ -->
+<section class="different" id="different">
+  <div class="container-wide">
+    <div class="different-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Why This Course Stands Apart</p>
+      <h2 class="section-title">Not Another Lecture Series</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">This isn't passive education. It's a structured, interactive experience built for real transformation — not content consumption.</p>
+    </div>
+    <div class="different-grid">
+      <div class="different-card reveal reveal-delay-1">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3>Live Expert Instruction</h3>
+        <p>Every session led by physicians, PhDs, and certified longevity coaches via live video. Ask questions in real time. Not pre-recorded, not AI-generated — real experts, live.</p>
+      </div>
+      <div class="different-card reveal reveal-delay-2">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3>Small Group Learning</h3>
+        <p>8–15 participants per cohort. Breakout rooms, peer coaching, and real discussion — not a webinar with 500 silent viewers. You'll know everyone by name.</p>
+      </div>
+      <div class="different-card reveal reveal-delay-3">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+        </div>
+        <h3>Fully Online, Globally Accessible</h3>
+        <p>Join from anywhere in the world. All you need is a webcam and internet connection. Sessions are designed for deep engagement across time zones.</p>
+      </div>
+      <div class="different-card reveal reveal-delay-4">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+          </svg>
+        </div>
+        <h3>Science-Based Certification</h3>
+        <p>Complete 12 sessions plus between-session assignments to earn your Longevity Health Reset certificate. A credential backed by real coursework, not just attendance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     4. COURSE HIGHLIGHTS
+     ============================================ -->
+<section class="highlights" id="highlights">
+  <div class="container-wide">
+    <div class="highlights-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Course Highlights</p>
+      <h2 class="section-title">What You'll Master</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Five transformative domains — each grounded in peer-reviewed science, each made practical through hands-on experiments and real data.</p>
+    </div>
+    <div class="highlights-grid">
+      <!-- Card 1: Metabolic Health (full width) -->
+      <div class="highlight-card reveal">
+        <img src="assets/img-metabolic.png" alt="Metabolic health visualization showing mitochondria cells" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-number">Module 01</span>
+          <h3>Metabolic Health &amp; Blood Sugar</h3>
+          <p>Understand glucose as a signal. See how metabolic dysfunction develops silently — and learn to read your body's data before symptoms appear.</p>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="highlight-card reveal reveal-delay-1">
+        <img src="assets/img-nutrition.png" alt="Superfood spread for longevity nutrition" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-number">Module 02</span>
+          <h3>Nutrition That Actually Works</h3>
+          <p>Stop thinking in rules. Start thinking in responses. Design meals based on YOUR glucose data, not generic advice.</p>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="highlight-card reveal reveal-delay-2">
+        <img src="assets/img-cgm.png" alt="Continuous glucose monitor sensor with phone data display" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-number">Module 03</span>
+          <h3>Continuous Glucose Monitoring</h3>
+          <p>Wear a CGM sensor, interpret real data, and see the invisible patterns driving your energy, sleep, and aging.</p>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="highlight-card reveal reveal-delay-1">
+        <img src="assets/img-movement.png" alt="Kettlebell training for longevity and movement as medicine" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-number">Module 04</span>
+          <h3>Movement as Medicine</h3>
+          <p>Muscle as a glucose sink. Post-meal walking. Resistance training for insulin sensitivity. Build your age-appropriate plan.</p>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="highlight-card reveal reveal-delay-2">
+        <img src="assets/img-sleep.png" alt="Sleep and brain hologram visualization for circadian rhythm" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-number">Module 05</span>
+          <h3>Sleep, Stress &amp; Recovery</h3>
+          <p>Circadian rhythm, cortisol, emotional glucose spikes. Design your sleep and stress regulation systems for long-term health.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     5. FULL CURRICULUM — 12-SESSION ACCORDION
+     ============================================ -->
+<section class="curriculum" id="curriculum">
+  <div class="container">
+    <div class="curriculum-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Full Syllabus</p>
+      <h2 class="section-title">The Complete 12-Session Curriculum</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Each 90-minute session builds on the last. Live instruction, group discussion, hands-on experiments, and between-session assignments that make the science stick.</p>
+    </div>
+    <div class="curriculum-list">
+
+      <!-- Session 1 -->
+      <div class="curriculum-item reveal" data-session="1">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">01</span>
+          <div class="curriculum-trigger-text">
+            <h3>Reframing Aging: From Disease Avoidance to Healthspan Design</h3>
+            <span>Session 1 · Foundation</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Understand aging as a modifiable trajectory, not a fixed decline</li>
+              <li>Articulate your personal healthspan goals with clarity and specificity</li>
+              <li>Shift mindset from fixing problems to designing resilient systems</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Welcome + framing → Mini-lecture on the biology of aging → Guided personal reflection → Breakout group introductions → Group synthesis and discussion → Introduction to the "Longevity Lens" framework</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Complete a 3-day lifestyle awareness log tracking energy, meals, sleep, movement, and mood patterns.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 2 -->
+      <div class="curriculum-item reveal" data-session="2">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">02</span>
+          <div class="curriculum-trigger-text">
+            <h3>Metabolic Health: Why Blood Sugar Is the Central Signal</h3>
+            <span>Session 2 · Core Science</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Understand glucose as a signal, not a villain — and why it matters for aging</li>
+              <li>See how metabolic dysfunction develops silently over years</li>
+              <li>Understand why weight alone is a poor marker of metabolic health</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Review lifestyle logs → Visual walkthrough of glucose curves → Case comparisons (healthy vs. dysregulated) → Myth dismantling session → CGM preview and introduction</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Complete a detailed food recall and energy crash mapping exercise — identify when you crash, what you ate, and how you felt.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 3 -->
+      <div class="curriculum-item reveal" data-session="3">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">03</span>
+          <div class="curriculum-trigger-text">
+            <h3>Nutrition for Longevity: Inputs vs. Responses</h3>
+            <span>Session 3 · Nutrition Science</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Stop thinking in dietary rules; start thinking in metabolic responses</li>
+              <li>Understand how protein, fiber, and fat processing affects glucose</li>
+              <li>Design a default meal framework personalized to your biology</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Interactive lecture on nutrient responses → Meal deconstruction exercise → Group comparison of individual responses → Design your default meal framework</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Try 1–2 meal adjustments based on your framework and document the results in your learning journal.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 4 -->
+      <div class="curriculum-item reveal" data-session="4">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">04</span>
+          <div class="curriculum-trigger-text">
+            <h3>Continuous Glucose Monitoring: Seeing the Invisible</h3>
+            <span>Session 4 · Technology & Data</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Understand how CGM technology works and what it measures</li>
+              <li>Learn what the data actually means — spikes, variability, baselines</li>
+              <li>Reduce anxiety around numbers and develop a healthy data relationship</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">CGM fundamentals lecture → Walk through real anonymized datasets → Group interpretation exercises → CGM setup guidance for those using devices</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Begin your CGM experiment or review provided anonymized datasets. Record observations about your own patterns.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 5 -->
+      <div class="curriculum-item reveal" data-session="5">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">05</span>
+          <div class="curriculum-trigger-text">
+            <h3>Food Order, Composition &amp; Glucose Curves</h3>
+            <span>Session 5 · Applied Nutrition</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Learn how eating sequence (food order) materially impacts glucose response</li>
+              <li>Understand carbohydrate context — why the same carb acts differently in different meals</li>
+              <li>Reduce glucose spikes without restriction or deprivation</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Share CGM observations from the week → Facilitator-guided curve comparison → Design safe food experiments → Expectation-setting for realistic progress</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Run individual food experiments — try different meal orders, compositions, and timings. Document results with CGM data or subjective energy tracking.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 6 -->
+      <div class="curriculum-item reveal" data-session="6">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">06</span>
+          <div class="curriculum-trigger-text">
+            <h3>Movement as a Glucose Tool</h3>
+            <span>Session 6 · Exercise Science</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Understand muscle as the body's primary glucose sink</li>
+              <li>Learn the minimum effective dose of movement for metabolic benefit</li>
+              <li>Design a sustainable, age-appropriate movement plan</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">CGM examples with and without post-meal movement → Movement planning workshop → Peer review of individual plans → Commitment check-in</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Run movement experiments with CGM tracking — compare glucose curves on days with and without post-meal walks or resistance training.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 7 -->
+      <div class="curriculum-item reveal" data-session="7">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">07</span>
+          <div class="curriculum-trigger-text">
+            <h3>Sleep, Circadian Rhythm &amp; Overnight Glucose</h3>
+            <span>Session 7 · Recovery Science</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>See sleep as a metabolic regulation system, not just rest</li>
+              <li>Understand the effects of late eating, blue light, and irregular schedules on glucose</li>
+              <li>Design one targeted sleep experiment based on your data</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Overnight CGM data review → Sleep habit audit → Troubleshooting workshop for common sleep disruptors → Design your personal sleep experiment</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Run your sleep experiment for one week — track bedtime, wake time, late eating, screen exposure, and overnight glucose patterns.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 8 -->
+      <div class="curriculum-item reveal" data-session="8">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">08</span>
+          <div class="curriculum-trigger-text">
+            <h3>Stress, Emotions &amp; Non-Food Glucose Spikes</h3>
+            <span>Session 8 · Psychophysiology</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Recognize that emotions and stress cause measurable glucose spikes — without any food</li>
+              <li>Learn evidence-based nervous system regulation tools</li>
+              <li>Map your personal stress triggers and build a regulation plan</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">CGM stress spike examples → Guided nervous system regulation exercise → Personal trigger mapping → Design your regulation toolkit</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Practice your chosen stress regulation technique daily. Note any glucose changes during stressful events vs. calm periods.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 9 -->
+      <div class="curriculum-item reveal" data-session="9">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">09</span>
+          <div class="curriculum-trigger-text">
+            <h3>Supplements, Tests &amp; Health Tech Literacy</h3>
+            <span>Session 9 · Critical Thinking</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Avoid biohacking traps and expensive interventions with no evidence</li>
+              <li>Learn decision filters for evaluating supplements, tests, and wearable data</li>
+              <li>Develop critical thinking about health marketing claims</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Supplement label teardown exercise → Wearable data obsession discussion → Practice applying the decision framework to real products → Group debate</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Conduct a personal supplement audit — evaluate everything you currently take against the decision framework. Cut what doesn't pass.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 10 -->
+      <div class="curriculum-item reveal" data-session="10">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">10</span>
+          <div class="curriculum-trigger-text">
+            <h3>Social Health, Purpose &amp; Longevity</h3>
+            <span>Session 10 · Psychosocial Science</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Understand the psychosocial predictors of healthy aging — loneliness, purpose, community</li>
+              <li>Recognize that social connection is as impactful as diet and exercise</li>
+              <li>Design intentional social habits that support your healthspan</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Research review on social health and longevity → Values reflection exercise → Social habit design workshop → Accountability pairing</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Complete a social connection inventory — map your relationships, identify gaps, and initiate one new or renewed connection this week.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 11 -->
+      <div class="curriculum-item reveal" data-session="11">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">11</span>
+          <div class="curriculum-trigger-text">
+            <h3>Personal Longevity Blueprint</h3>
+            <span>Session 11 · Integration</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Integrate all 10 sessions into a coherent, sustainable personal plan</li>
+              <li>Build a realistic blueprint without overwhelm or overcommitment</li>
+              <li>Design your own failure recovery systems and habit stacks</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Blueprint construction workshop → Peer coaching sessions (paired review) → Failure planning and obstacle pre-emption → Draft sharing and feedback</p>
+            <div class="curriculum-section-label">Between-Session Work</div>
+            <p class="curriculum-work">Complete your Personal Longevity Blueprint — a comprehensive document covering nutrition, movement, sleep, stress, social health, and monitoring systems.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Session 12 -->
+      <div class="curriculum-item reveal" data-session="12">
+        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+          <span class="curriculum-num">12</span>
+          <div class="curriculum-trigger-text">
+            <h3>Reflection, Integration &amp; Your Next 90 Days</h3>
+            <span>Session 12 · Graduation</span>
+          </div>
+          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="curriculum-body">
+          <div class="curriculum-body-inner">
+            <div class="curriculum-section-label">Learning Goals</div>
+            <ul class="curriculum-goals">
+              <li>Reflect on your transformation from session 1 to session 12</li>
+              <li>Synthesize your CGM insights and behavioral experiments into lasting habits</li>
+              <li>Build a concrete 90-day action plan for continued progress</li>
+            </ul>
+            <div class="curriculum-section-label">90-Minute Flow</div>
+            <p class="curriculum-flow">Before/after reflections → CGM insights synthesis → Commitment statements → 90-day action plan construction → Graduation and celebration</p>
+            <div class="curriculum-section-label">Final Output</div>
+            <p class="curriculum-work">Your completed Personal Longevity Blueprint + 90-Day Action Plan — two living documents that guide your healthspan journey beyond the course.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     6. WHO THIS IS FOR
+     ============================================ -->
+<section class="who" id="who">
+  <div class="who-bg">
+    <img src="assets/img-stress.png" alt="" loading="lazy" aria-hidden="true">
+    <div class="who-bg-overlay"></div>
+  </div>
+  <div class="container who-content">
+    <div class="who-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Is This For You?</p>
+      <h2 class="section-title">Who This Course Is Designed For</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-col perfect reveal reveal-delay-1">
+        <div class="who-col-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+          Perfect For
+        </div>
+        <div class="who-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <p>Adults 35–65 who are curious about aging well — not just avoiding disease, but actively designing their healthspan.</p>
+        </div>
+        <div class="who-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <p>People tired of generic health advice who want personalized, data-driven guidance grounded in real science.</p>
+        </div>
+        <div class="who-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <p>Those willing to invest 90 minutes per week plus between-session experiments to create lasting change.</p>
+        </div>
+        <div class="who-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <p>People who value live discussion and peer learning over passive video content and pre-recorded lectures.</p>
+        </div>
+      </div>
+      <div class="who-col not-for reveal reveal-delay-2">
+        <div class="who-col-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Not The Right Fit If
+        </div>
+        <div class="who-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <p>You're seeking medical diagnosis or treatment — this is education and coaching, not clinical care.</p>
+        </div>
+        <div class="who-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <p>You want a quick fix or a 30-day transformation promise. This is a 12-week deep dive, not a shortcut.</p>
+        </div>
+        <div class="who-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <p>You prefer pre-recorded, self-paced content only. Every session here is live, interactive, and built on group dynamics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     7. MEET THE TEACHERS
+     ============================================ -->
+<section class="teachers" id="teachers">
+  <div class="container">
+    <div class="teachers-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Expert Faculty</p>
+      <h2 class="section-title">Your Instructors</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Physicians, researchers, and certified longevity coaches who combine academic rigor with practical, real-world experience.</p>
+    </div>
+    <div class="teachers-grid">
+      <div class="teacher-card reveal reveal-delay-1">
+        <div class="teacher-avatar">ME</div>
+        <h3 class="teacher-name">Maya Elhalal</h3>
+        <p class="teacher-role">Lead Instructor &amp; Longevity Educator</p>
+        <p class="teacher-bio">Founder of Longevity Science. Experienced in aging science workshops, glucose management, and lifestyle optimization. Leads longevity strategy programs and retreats across three continents.</p>
+      </div>
+      <div class="teacher-card reveal reveal-delay-2">
+        <div class="teacher-avatar">DB</div>
+        <h3 class="teacher-name">David Barzilai, MD, PhD</h3>
+        <p class="teacher-role">Healthspan Coach</p>
+        <p class="teacher-bio">Physician and healthspan coaching specialist. Focuses on metabolic health, stress, sleep, and daily habits — grounded in longevity science, not expensive clinical interventions.</p>
+      </div>
+      <div class="teacher-card reveal reveal-delay-3">
+        <div class="teacher-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="teacher-name">Guest Faculty</h3>
+        <p class="teacher-role">xLongevity Certified Coaches</p>
+        <p class="teacher-bio">Certified longevity coaches trained in age-related biology, lifestyle optimization, and behavior change. Specialists in translating complex science into daily practice you can sustain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     8. TRUST & CREDIBILITY
+     ============================================ -->
+<section class="trust" id="trust">
+  <div class="container-wide">
+    <div class="trust-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Proven Track Record</p>
+      <h2 class="section-title">Trusted by Over 400,000 Learners Worldwide</h2>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="trust-stats reveal">
+      <div class="trust-stat">
+        <div class="trust-stat-number">400K+</div>
+        <div class="trust-stat-label">Students Enrolled</div>
+      </div>
+      <div class="trust-stat">
+        <div class="trust-stat-number">20+</div>
+        <div class="trust-stat-label">Years Teaching Online</div>
+      </div>
+      <div class="trust-stat">
+        <div class="trust-stat-number">4.6/5</div>
+        <div class="trust-stat-label">Trustpilot Rating</div>
+        <div class="trust-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" style="opacity:0.7"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+      </div>
+      <div class="trust-stat">
+        <div class="trust-stat-number">600+</div>
+        <div class="trust-stat-label">Expert Teachers</div>
+      </div>
+      <div class="trust-stat">
+        <div class="trust-stat-number">5</div>
+        <div class="trust-stat-label">Online Schools</div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials-grid reveal">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">"I've taken dozens of online courses, but this was the first time I felt like I was in a real classroom. The live interaction, the small group size, and the expert instructors made all the difference. I actually changed my habits — not just learned about them."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-author-avatar">SK</div>
+          <div class="testimonial-author-info">
+            <strong>Sarah K.</strong>
+            <span>San Francisco, CA</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">"The CGM module was eye-opening. Seeing my glucose data in real time completely changed how I think about food. The instructors explained everything without jargon and the peer group kept me accountable. Worth every minute."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-author-avatar">MR</div>
+          <div class="testimonial-author-info">
+            <strong>Michael R.</strong>
+            <span>London, UK</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">"I was skeptical about live online courses, but the platform and teaching quality exceeded my expectations. Having real-time Q&A with a physician about my metabolic data? You can't get that from a YouTube video. Highly recommend."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-author-avatar">AL</div>
+          <div class="testimonial-author-info">
+            <strong>Anika L.</strong>
+            <span>Berlin, Germany</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="trust-badges reveal">
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Trustpilot Verified
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        SSL Secure Enrollment
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        Certified Online Education
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Money-Back Guarantee
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     9. FAQ ACCORDION
+     ============================================ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Got Questions?</p>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>What do I need to participate? Any prerequisites?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>No medical or scientific background required. You need a computer with a webcam, a stable internet connection, and genuine curiosity about your health. The course is designed for educated adults who want to understand the science, not for healthcare professionals (though they're welcome too). All technical concepts are explained from the ground up.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>Do I need a Continuous Glucose Monitor (CGM)?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>A CGM is recommended but not required. If you choose to use one, we'll guide you through setup and interpretation. If you prefer not to wear a sensor, we provide anonymized datasets for all exercises so you can still fully participate and learn the skills. Many participants find the CGM experience transformative, but the course is designed to work both ways.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>How much time should I commit each week?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>Plan for approximately 3 hours per week: 90 minutes for the live session, plus 60–90 minutes for between-session work (experiments, journaling, and reflection). The between-session work is designed to fit into your daily life — you're adjusting real meals, walks, and sleep habits, not writing essays. Most participants find it integrates naturally once they start.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>Is this medical advice?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>No. This is a health education course, not medical care. Our instructors include physicians and PhDs, but they're teaching you to understand your body — not diagnosing or treating conditions. The course is designed to complement your existing healthcare, not replace it. If you have specific medical concerns, we always recommend consulting your physician.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>What if I miss a live session?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>All sessions are recorded and made available within 24 hours. While we strongly encourage live attendance (the interactive elements are where the magic happens), we understand life gets in the way. You can watch the recording and still complete the between-session work. If you miss more than 2 sessions, we'll work with you on a catch-up plan to ensure you can still earn your certificate.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>How big are the groups?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>Each cohort has 8–15 participants. This isn't arbitrary — it's the optimal range for meaningful discussion, personalized attention, and peer accountability. Small enough that your instructor knows your name and your specific goals, large enough for diverse perspectives during breakout sessions. When a cohort fills up, the next one opens.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>When is the next cohort and what does it cost?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>New cohorts launch regularly based on demand. Enter your email above to get notified when the next enrollment window opens — you'll receive the full pricing, schedule, and early-bird details before the public announcement. Early registrants receive priority placement and may be eligible for a founding member discount.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <h3>Do I get a certificate?</h3>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">
+            <p>Yes. Upon completing all 12 sessions and the between-session assignments, you'll receive the Longevity Health Reset Certificate. This isn't a participation trophy — it represents genuine mastery of the material, completion of hands-on experiments, and delivery of your Personal Longevity Blueprint. It's a credential you earned through real work.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     10. FINAL CTA
+     ============================================ -->
+<section class="final-cta" id="final-cta">
+  <div class="container final-cta-content reveal">
+    <p class="eyebrow" style="margin-bottom: 20px;">Start Your Journey</p>
+    <h2 class="section-title">Your Healthspan Transformation Starts Here</h2>
+    <p class="final-cta-sub">Join the next cohort. 12 sessions. Small group. Expert-led. The most structured, science-grounded longevity education you'll find.</p>
+    <form class="final-cta-form" onsubmit="handleFormSubmit(event, this)">
+      <input type="email" placeholder="Enter your email address" required aria-label="Email address">
+      <button type="submit">Apply for Next Cohort →</button>
+    </form>
+    <p class="final-cta-note">Limited to 15 participants per cohort. Early registration recommended.</p>
+  </div>
+</section>
+
+<!-- ============================================
+     11. FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        e<span class="logo-accent">Teacher</span> Longevity
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter/X">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l11.733 16h4.267l-11.733-16z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
         </a>
-        <a href="#curriculum" class="btn-outline">See Full Curriculum</a>
-      </div>
-      <div class="hero-trust-row reveal reveal-delay-4">
-        <div class="hero-trust-item">
-          <span class="trust-icon" style="background:var(--teal-glow); color:var(--teal);">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><rect x="3.5" y="3.5" width="5" height="5" rx="1" fill="currentColor"/></svg>
-          </span>
-          12 Sessions
-        </div>
-        <div class="hero-trust-item">
-          <span class="trust-icon" style="background:var(--coral-glow); color:var(--coral);">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M6 3v3.5l2.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </span>
-          90 Min Each
-        </div>
-        <div class="hero-trust-item">
-          <span class="trust-icon" style="background:var(--violet-glow); color:var(--violet);">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="4.5" cy="4" r="2" stroke="currentColor" stroke-width="1.2"/><circle cx="7.5" cy="4" r="2" stroke="currentColor" stroke-width="1.2"/><path d="M1 11c0-2.2 1.8-4 4-4h2c2.2 0 4 1.8 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-          </span>
-          Small Group
-        </div>
-        <div class="hero-trust-item">
-          <span class="trust-icon" style="background:var(--amber-glow); color:var(--amber);">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1.5 3H11L8.5 6.5l1 3.5L6 8 2.5 10l1-3.5L1 4h3.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
-          </span>
-          Expert-Led
-        </div>
-        <div class="hero-trust-item">
-          <span class="trust-icon" style="background:var(--green-glow); color:var(--green);">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          Practical Assignments
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       3. COURSE OVERVIEW
-       ============================================================ -->
-  <section class="course-overview" id="overview">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--teal);">What This Is</div>
-      <h2 class="section-title reveal" style="max-width: 780px;">A 12-week live course built around one idea: you can design how you age.</h2>
-      <div class="overview-grid">
-        <div class="reveal">
-          <div class="overview-info-grid">
-            <div class="overview-info-item">
-              <div class="overview-info-label">Format</div>
-              <div class="overview-info-value">Live online, 90&nbsp;min/session</div>
-            </div>
-            <div class="overview-info-item">
-              <div class="overview-info-label">Group Size</div>
-              <div class="overview-info-value">8–15 participants</div>
-            </div>
-            <div class="overview-info-item">
-              <div class="overview-info-label">Pace</div>
-              <div class="overview-info-value">1 session/week, 12 weeks</div>
-            </div>
-            <div class="overview-info-item">
-              <div class="overview-info-label">Includes</div>
-              <div class="overview-info-value">CGM data review, breakout discussions, personal blueprint</div>
-            </div>
-            <div class="overview-info-item">
-              <div class="overview-info-label">Output</div>
-              <div class="overview-info-value">Personal Longevity Blueprint + 90-Day Action Plan</div>
-            </div>
-            <div class="overview-info-item">
-              <div class="overview-info-label">Level</div>
-              <div class="overview-info-value">No prerequisites. Designed for adults 35–65.</div>
-            </div>
-          </div>
-        </div>
-        <div class="overview-image reveal reveal-delay-2">
-          <img src="assets/section-tech-v3.png" alt="Smartwatch and CGM device displaying health metrics on a modern desk" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       4. WHAT YOU'LL LEARN
-       ============================================================ -->
-  <section class="outcomes" id="outcomes">
-    <img src="assets/section-nutrition-v3.png" alt="" class="outcomes-bg-image" loading="lazy" aria-hidden="true">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--green);">Learning Outcomes</div>
-      <h2 class="section-title reveal">By session 12, you will:</h2>
-      <div class="outcomes-grid">
-        <!-- Card 1 — Teal -->
-        <div class="outcome-card reveal">
-          <div class="outcome-icon teal">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Read your metabolic signals intelligently</h3>
-          <p>Understand glucose as a signal — not a villain. See how metabolic dysfunction develops silently and what your body is actually telling you.</p>
-        </div>
-        <!-- Card 2 — Coral -->
-        <div class="outcome-card reveal reveal-delay-1">
-          <div class="outcome-icon coral">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M7 12h10M12 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Interpret CGM data with clinical literacy</h3>
-          <p>Go beyond the numbers. Distinguish normal variability from real signals, and learn what to notice versus what to ignore in your glucose data.</p>
-        </div>
-        <!-- Card 3 — Green -->
-        <div class="outcome-card reveal reveal-delay-2">
-          <div class="outcome-icon green">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M15 2.5c2 2 3.5 5 3.5 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M2 12h20" stroke="currentColor" stroke-width="2"/></svg>
-          </div>
-          <h3>Design meals based on YOUR glucose responses</h3>
-          <p>Stop thinking in rules. Learn how food order, composition, and context shape your personal response — then build a default meal framework that works for you.</p>
-        </div>
-        <!-- Card 4 — Violet -->
-        <div class="outcome-card reveal reveal-delay-3">
-          <div class="outcome-icon violet">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Optimize sleep, stress, and recovery deliberately</h3>
-          <p>See sleep as metabolic regulation. Recognize emotional glucose spikes. Design circadian rhythm habits and personal stress-regulation strategies.</p>
-        </div>
-        <!-- Card 5 — Amber -->
-        <div class="outcome-card reveal reveal-delay-4">
-          <div class="outcome-icon amber">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0H5a2 2 0 0 1-2-2v-4m6 6h10a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Evaluate supplements and health tech critically</h3>
-          <p>Learn the evidence hierarchy. Distinguish supplements that matter from noise. Build a personal decision framework for health technology and testing.</p>
-        </div>
-        <!-- Card 6 — Blue -->
-        <div class="outcome-card reveal reveal-delay-5">
-          <div class="outcome-icon blue">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Build a personalized 90-day longevity plan</h3>
-          <p>Integrate everything into a Personal Longevity Blueprint with concrete actions for nutrition, movement, sleep, stress, and social health — plus a failure plan.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       5. CURRICULUM
-       ============================================================ -->
-  <section class="curriculum" id="curriculum">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--coral);">The Curriculum</div>
-      <h2 class="section-title reveal">12 sessions. 4 phases. One complete transformation.</h2>
-      <p class="section-subtitle reveal">Each session builds on the last. By the end, you won't just know more — you'll think differently about how you age.</p>
-
-      <div class="curriculum-phases">
-        <!-- PHASE 1 — TEAL -->
-        <div class="phase-card teal reveal">
-          <div class="phase-number">Phase 1</div>
-          <div class="phase-name">Reframe</div>
-          <div class="phase-sessions-label">Sessions 1–3</div>
-
-          <div class="phase-session">
-            <div class="phase-session-title">Session 1 — Reframing Aging</div>
-            <div class="phase-session-goals">Understand aging as a modifiable trajectory. Articulate personal healthspan goals. Shift from fixing problems to designing systems.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 2 — Metabolic Health</div>
-            <div class="phase-session-goals">Understand glucose as a signal. See how metabolic dysfunction develops silently. Learn why weight alone is a poor health marker.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 3 — Nutrition for Longevity</div>
-            <div class="phase-session-goals">Stop thinking in rules, start thinking in responses. Understand protein, fiber, and processing. Design a default meal framework.</div>
-          </div>
-        </div>
-
-        <!-- PHASE 2 — CORAL -->
-        <div class="phase-card coral reveal reveal-delay-1">
-          <div class="phase-number">Phase 2</div>
-          <div class="phase-name">Measure</div>
-          <div class="phase-sessions-label">Sessions 4–6</div>
-
-          <div class="phase-session">
-            <div class="phase-session-title">Session 4 — CGM: Seeing the Invisible</div>
-            <div class="phase-session-goals">How CGM works, what data means and doesn't. Reduce anxiety around numbers. Learn to observe with curiosity, not judgment.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 5 — Food Order &amp; Glucose Curves</div>
-            <div class="phase-session-goals">How sequence matters. Understand carb context. Reduce spikes without restriction through safe personal experiments.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 6 — Movement as a Glucose Tool</div>
-            <div class="phase-session-goals">Muscle as glucose sink. Post-meal walking and resistance training. Build a realistic, age-appropriate movement plan.</div>
-          </div>
-        </div>
-
-        <!-- PHASE 3 — VIOLET -->
-        <div class="phase-card violet reveal reveal-delay-2">
-          <div class="phase-number">Phase 3</div>
-          <div class="phase-name">Interpret</div>
-          <div class="phase-sessions-label">Sessions 7–9</div>
-
-          <div class="phase-session">
-            <div class="phase-session-title">Session 7 — Sleep &amp; Circadian Rhythm</div>
-            <div class="phase-session-goals">Sleep as metabolic regulation. Late eating effects and circadian misalignment. Cortisol, insulin resistance, and sleep debt.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 8 — Stress &amp; Emotional Spikes</div>
-            <div class="phase-session-goals">Recognize non-food glucose spikes. The cortisol-glucose loop. Build a personal stress regulation plan.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 9 — Supplements &amp; Health Tech</div>
-            <div class="phase-session-goals">Avoid biohacking traps. Evidence hierarchy and decision filters. Supplements that matter vs noise.</div>
-          </div>
-        </div>
-
-        <!-- PHASE 4 — AMBER -->
-        <div class="phase-card amber reveal reveal-delay-3">
-          <div class="phase-number">Phase 4</div>
-          <div class="phase-name">Build</div>
-          <div class="phase-sessions-label">Sessions 10–12</div>
-
-          <div class="phase-session">
-            <div class="phase-session-title">Session 10 — Social Health &amp; Purpose</div>
-            <div class="phase-session-goals">Psychosocial predictors of aging. Isolation vs mortality. Purpose as a stress buffer. Design social health habits.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 11 — Personal Longevity Blueprint</div>
-            <div class="phase-session-goals">Integrate everything without overload. Blueprint construction with peer coaching and failure planning.</div>
-          </div>
-          <div class="phase-session">
-            <div class="phase-session-title">Session 12 — Reflection &amp; Next 90 Days</div>
-            <div class="phase-session-goals">Before/after reflections. CGM insights synthesis. Commitment statements and 90-day action plan.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="curriculum-image-accent reveal">
-        <img src="assets/section-supplements-v3.png" alt="Supplement bottles and natural ingredients arranged in a premium lifestyle setting" loading="lazy">
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       6. HOW EACH SESSION WORKS
-       ============================================================ -->
-  <section class="session-structure" id="session-structure">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--violet);">Session Format</div>
-      <h2 class="section-title reveal" style="max-width: 720px;">Every session follows the same rigorous structure.</h2>
-      <p class="section-subtitle reveal">This isn't a passive webinar. Every 90 minutes is designed for active learning, real data, and peer discussion.</p>
-
-      <div class="session-grid">
-        <div class="session-timeline">
-          <div class="timeline-segment reveal">
-            <div class="timeline-bar"></div>
-            <div class="timeline-time">0–15 min</div>
-            <div class="timeline-content">
-              <h4>Review &amp; Discussion</h4>
-              <p>Share insights from between-session work. Surface questions, breakthroughs, and challenges from the previous week.</p>
-            </div>
-          </div>
-          <div class="timeline-segment reveal reveal-delay-1">
-            <div class="timeline-bar"></div>
-            <div class="timeline-time">15–40 min</div>
-            <div class="timeline-content">
-              <h4>Expert-Led Teaching</h4>
-              <p>Visual walkthroughs, real data, case studies, and myth-dismantling. The core science and frameworks for this session's topic.</p>
-            </div>
-          </div>
-          <div class="timeline-segment reveal reveal-delay-2">
-            <div class="timeline-bar"></div>
-            <div class="timeline-time">40–65 min</div>
-            <div class="timeline-content">
-              <h4>Interactive Workshop</h4>
-              <p>Breakout groups, meal deconstruction, CGM data review. Apply what you just learned to your own life and data.</p>
-            </div>
-          </div>
-          <div class="timeline-segment reveal reveal-delay-3">
-            <div class="timeline-bar"></div>
-            <div class="timeline-time">65–85 min</div>
-            <div class="timeline-content">
-              <h4>Group Practice</h4>
-              <p>Peer coaching, personal experiments, troubleshooting. Refine your approach with real-time feedback from the group.</p>
-            </div>
-          </div>
-          <div class="timeline-segment reveal reveal-delay-4">
-            <div class="timeline-bar"></div>
-            <div class="timeline-time">85–90 min</div>
-            <div class="timeline-content">
-              <h4>Assignment Preview</h4>
-              <p>Between-session work: lifestyle logs, food experiments, CGM observation, sleep audits, and blueprint-building.</p>
-            </div>
-          </div>
-        </div>
-        <div class="session-image reveal reveal-delay-2">
-          <img src="assets/section-movement-v3.png" alt="Person practicing yoga at sunset, representing the movement and wellness component of the course" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       7. THE RESEARCH
-       ============================================================ -->
-  <section class="research" id="research">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--blue);">The Research</div>
-      <h2 class="section-title reveal">This course is built on research, not trends.</h2>
-
-      <div class="stats-row">
-        <div class="kpi-card reveal">
-          <div class="kpi-card__value teal">+36.6%</div>
-          <div class="kpi-card__label">Lifespan extension in mammals</div>
-          <div class="kpi-card__source">Rapamycin + acarbose combination therapy<br>NIA Interventions Testing Program, 2025</div>
-        </div>
-        <div class="kpi-card reveal reveal-delay-1">
-          <div class="kpi-card__value coral">–30%</div>
-          <div class="kpi-card__label">Heart disease risk reduction</div>
-          <div class="kpi-card__source">Mediterranean diet adherence<br>PREDIMED trial, New England Journal of Medicine</div>
-        </div>
-        <div class="kpi-card reveal reveal-delay-2">
-          <div class="kpi-card__value amber">–37%</div>
-          <div class="kpi-card__label">Premature death reduction</div>
-          <div class="kpi-card__source">Exercise at 450+ minutes per week<br>JAMA Internal Medicine / AARP Study 2024</div>
-        </div>
-      </div>
-
-      <!-- Bubble Chart -->
-      <div class="chart-container reveal">
-        <div class="chart-header">
-          <div class="chart-title">Longevity Interventions by Impact &amp; Evidence</div>
-          <div class="chart-legend">
-            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#2dd4a8"></span>Rapamycin+Acarbose</div>
-            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#E8A849"></span>Sleep</div>
-            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#4f98a3"></span>Exercise</div>
-            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#c9a96e"></span>Mediterranean Diet</div>
-            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#a86fdf"></span>GLP-1 Agonists</div>
-            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#dd6974"></span>IL-11 Blocking</div>
-            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:#5591c7"></span>SGLT2 Inhibitors</div>
-          </div>
-        </div>
-        <div class="chart-wrapper">
-          <canvas id="bubbleChart"></canvas>
-        </div>
-        <div class="chart-note">Bubble size represents relative study scale. Hover for details. Sources: NIA ITP 2025, PREDIMED/NEJM, JAMA, Nature 2024, Swiss Re, GeroScience 2025.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       8. INSTRUCTORS
-       ============================================================ -->
-  <section class="instructors" id="instructors">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--amber);">Meet the Team</div>
-      <h2 class="section-title reveal">Your instructors</h2>
-      <p class="section-subtitle reveal">A team of scientists, physicians, and longevity coaches who bridge research and real life.</p>
-
-      <div class="instructors-grid">
-        <div class="instructor-card reveal">
-          <div class="instructor-avatar">ME</div>
-          <div class="instructor-name">Maya Elhalal</div>
-          <div class="instructor-role">Founder, Longevity Science</div>
-          <p class="instructor-bio">Long-time longevity educator with deep expertise in aging science, glucose management, and lifestyle optimization. Leads workshops, retreats, and longevity strategy programs. Course creator and lead facilitator.</p>
-        </div>
-        <div class="instructor-card reveal reveal-delay-1">
-          <div class="instructor-avatar">DB</div>
-          <div class="instructor-name">David Barzilai, MD, PhD</div>
-          <div class="instructor-role">Healthspan Coach</div>
-          <p class="instructor-bio">Physician and healthspan coaching specialist who helps individuals optimize lifestyle through metabolic health, stress management, sleep quality, and daily habit design — grounded in longevity science, not expensive clinical interventions.</p>
-        </div>
-        <div class="instructor-card reveal reveal-delay-2">
-          <div class="instructor-avatar">GF</div>
-          <div class="instructor-name">Guest Faculty</div>
-          <div class="instructor-role">xLongevity Certified Coaches</div>
-          <p class="instructor-bio">Trained in age-related biology, lifestyle optimization, and behavior change through xLongevity's certification program. Specialists in applying longevity science to real-world coaching and group facilitation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       9. WHO THIS IS FOR / NOT FOR
-       ============================================================ -->
-  <section class="who-section" id="who">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--green);">Is This For You?</div>
-      <h2 class="section-title reveal">Designed for a specific kind of learner.</h2>
-
-      <div class="who-grid">
-        <div class="who-card for-card reveal">
-          <div class="who-card-title">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            This course is for you if&hellip;
-          </div>
-          <ul class="who-list">
-            <li><span class="check-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>You want to understand what's actually happening inside your body — not just follow generic health advice</li>
-            <li><span class="check-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>You're an adult (35–65) ready to invest time in building evidence-based longevity habits</li>
-            <li><span class="check-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>You value live discussion and peer learning over passive video content</li>
-            <li><span class="check-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>You're curious about CGM, metabolic health, and longevity science — but want expert guidance interpreting the data</li>
-            <li><span class="check-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>You want a structured, cohort-based experience with accountability — not another self-paced course you'll never finish</li>
-          </ul>
-        </div>
-        <div class="who-card not-card reveal reveal-delay-1">
-          <div class="who-card-title">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            This course is NOT for you if&hellip;
-          </div>
-          <ul class="who-list">
-            <li><span class="x-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>You're looking for a medical diagnosis or treatment plan — this is education, not clinical care</li>
-            <li><span class="x-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>You want a quick fix or a 30-day transformation promise — real change takes structured effort</li>
-            <li><span class="x-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>You prefer passive, pre-recorded video content you can watch on your own schedule</li>
-            <li><span class="x-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>You're not willing to participate in group discussion, breakout sessions, and between-session work</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       10. FAQ
-       ============================================================ -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <div class="section-eyebrow reveal" style="color: var(--violet); text-align: center;">Common Questions</div>
-      <h2 class="section-title reveal" style="text-align: center;">Frequently asked questions</h2>
-
-      <div class="faq-list">
-        <div class="faq-item reveal">
-          <button class="faq-question" aria-expanded="false">
-            What do I need to participate? Any prerequisites?
-            <span class="faq-icon"><svg viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </button>
-          <div class="faq-answer">
-            <p>No prerequisites at all. The course is designed for curious adults (35–65) who want to understand their body better. You'll need a computer with a webcam for live sessions, a stable internet connection, and a willingness to participate actively. No prior science or health background required.</p>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-question" aria-expanded="false">
-            Do I need a Continuous Glucose Monitor (CGM)?
-            <span class="faq-icon"><svg viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </button>
-          <div class="faq-answer">
-            <p>A CGM is recommended but not required. Several sessions include CGM data analysis — if you wear one, you'll work with your own data. If not, we provide anonymized datasets so you can fully participate in every exercise. We'll share guidance on CGM options during onboarding.</p>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-question" aria-expanded="false">
-            How much time should I expect to commit each week?
-            <span class="faq-icon"><svg viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </button>
-          <div class="faq-answer">
-            <p>Plan for approximately 3 hours per week: 90 minutes for the live session plus 60–90 minutes for between-session work (lifestyle logs, food experiments, CGM observation, or blueprint building). The between-session work is designed to integrate into your daily life, not add to it.</p>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-question" aria-expanded="false">
-            Is this medical advice?
-            <span class="faq-icon"><svg viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </button>
-          <div class="faq-answer">
-            <p>No. This is a science-based educational program, not a medical service. We teach you to understand longevity research, interpret your own data, and build healthy habits. We don't diagnose conditions, prescribe treatments, or replace your doctor. Always consult a healthcare professional for medical decisions.</p>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-question" aria-expanded="false">
-            What if I miss a live session?
-            <span class="faq-icon"><svg viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </button>
-          <div class="faq-answer">
-            <p>We understand life happens. All live sessions are recorded and made available within 24 hours. However, the course is designed for synchronous participation — breakout groups, peer coaching, and group discussions are core to the experience. We recommend attending at least 10 of 12 sessions live.</p>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-question" aria-expanded="false">
-            How big are the groups?
-            <span class="faq-icon"><svg viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </button>
-          <div class="faq-answer">
-            <p>Each cohort is limited to 8–15 participants. This is intentional: small enough for everyone to be seen and heard, large enough for rich discussion and diverse perspectives. Breakout sessions use groups of 2–3 people for deeper personal work.</p>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-question" aria-expanded="false">
-            When is the next cohort and what does it cost?
-            <span class="faq-icon"><svg viewBox="0 0 14 14" fill="none"><line x1="7" y1="1" x2="7" y2="13" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </button>
-          <div class="faq-answer">
-            <p>Cohort dates and pricing are shared during the application process. Apply below and we'll send you all the details, including scheduling options, pricing tiers, and what's included. Spots are limited due to the small group format.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       11. FINAL CTA
-       ============================================================ -->
-  <section class="final-cta" id="apply">
-    <div class="final-cta-bg">
-      <img src="assets/hero-longevity.png" alt="" aria-hidden="true" loading="lazy">
-    </div>
-    <div class="final-cta-overlay"></div>
-    <div class="final-cta-content container">
-      <div class="section-eyebrow reveal" style="color: var(--teal); text-align: center;">Start Here</div>
-      <h2 class="final-cta-title reveal">The next cohort starts soon.</h2>
-      <p class="final-cta-sub reveal">12 sessions. Small group. Expert-led. The most structured, science-grounded longevity education you'll find. Apply for the next cohort and we'll send you everything you need to know.</p>
-      <div class="final-cta-buttons reveal reveal-delay-1">
-        <a href="#" class="btn-primary">
-          Apply Now
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="mailto:longevity@eteacher.com" class="btn-outline">Ask a Question</a>
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+        </a>
       </div>
     </div>
-  </section>
-
-  <!-- ============================================================
-       12. FOOTER
-       ============================================================ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-copy">&copy; 2026 eTeacher Longevity. All rights reserved.</div>
-        <div class="footer-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Contact</a>
-        </div>
-      </div>
+    <div class="footer-bottom">
+      &copy; 2026 eTeacher Longevity. All rights reserved.
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <!-- ============================================================
-       SCRIPTS
-       ============================================================ -->
-  <script>
-    // ===== NAV SCROLL =====
-    const nav = document.getElementById('mainNav');
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y > 60) {
-        nav.classList.add('scrolled');
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+/* ============================================
+   Navigation Scroll Effect
+   ============================================ */
+const nav = document.getElementById('mainNav');
+let lastScrollY = 0;
+
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+  if (currentScrollY > 60) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+  lastScrollY = currentScrollY;
+}, { passive: true });
+
+/* ============================================
+   Mobile Menu Toggle
+   ============================================ */
+const mobileToggle = document.getElementById('mobileToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+
+mobileToggle.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('active', menuOpen);
+  const spans = mobileToggle.querySelectorAll('span');
+  if (menuOpen) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+  } else {
+    spans[0].style.transform = 'none';
+    spans[1].style.opacity = '1';
+    spans[2].style.transform = 'none';
+  }
+});
+
+function closeMobileMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('active');
+  const spans = mobileToggle.querySelectorAll('span');
+  spans[0].style.transform = 'none';
+  spans[1].style.opacity = '1';
+  spans[2].style.transform = 'none';
+}
+
+/* ============================================
+   Smooth Scroll for Anchor Links
+   ============================================ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ============================================
+   Intersection Observer — Scroll Reveals
+   ============================================ */
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -60px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ============================================
+   Curriculum Accordion
+   ============================================ */
+function toggleCurriculum(trigger) {
+  const item = trigger.closest('.curriculum-item');
+  const body = item.querySelector('.curriculum-body');
+  const inner = body.querySelector('.curriculum-body-inner');
+  const isActive = item.classList.contains('active');
+
+  // Close all other items
+  document.querySelectorAll('.curriculum-item.active').forEach(openItem => {
+    if (openItem !== item) {
+      openItem.classList.remove('active');
+      openItem.querySelector('.curriculum-body').style.maxHeight = '0';
+    }
+  });
+
+  if (isActive) {
+    item.classList.remove('active');
+    body.style.maxHeight = '0';
+  } else {
+    item.classList.add('active');
+    body.style.maxHeight = inner.scrollHeight + 'px';
+  }
+}
+
+/* ============================================
+   FAQ Accordion
+   ============================================ */
+function toggleFaq(trigger) {
+  const item = trigger.closest('.faq-item');
+  const body = item.querySelector('.faq-body');
+  const inner = body.querySelector('.faq-body-inner');
+  const isActive = item.classList.contains('active');
+
+  // Close all other items
+  document.querySelectorAll('.faq-item.active').forEach(openItem => {
+    if (openItem !== item) {
+      openItem.classList.remove('active');
+      openItem.querySelector('.faq-body').style.maxHeight = '0';
+    }
+  });
+
+  if (isActive) {
+    item.classList.remove('active');
+    body.style.maxHeight = '0';
+  } else {
+    item.classList.add('active');
+    body.style.maxHeight = inner.scrollHeight + 'px';
+  }
+}
+
+/* ============================================
+   Form Submission Handler
+   ============================================ */
+function handleFormSubmit(e, form) {
+  e.preventDefault();
+  const email = form.querySelector('input[type="email"]').value;
+  if (email) {
+    const btn = form.querySelector('button');
+    const originalText = btn.textContent;
+    btn.textContent = 'Thank you! We\'ll be in touch.';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.8';
+    form.querySelector('input[type="email"]').value = '';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+    }, 4000);
+  }
+}
+
+/* ============================================
+   Animated Stat Counter
+   ============================================ */
+function animateCounters() {
+  const stats = document.querySelectorAll('.trust-stat-number');
+  stats.forEach(stat => {
+    if (stat.dataset.animated) return;
+    const text = stat.textContent;
+    const hasPlus = text.includes('+');
+    const hasSlash = text.includes('/');
+    const hasK = text.includes('K');
+
+    if (hasSlash) {
+      // e.g., "4.6/5" — don't animate
+      stat.dataset.animated = 'true';
+      return;
+    }
+
+    let target;
+    let suffix = '';
+
+    if (hasK) {
+      target = parseFloat(text.replace(/[^0-9.]/g, ''));
+      suffix = 'K' + (hasPlus ? '+' : '');
+    } else {
+      target = parseInt(text.replace(/[^0-9]/g, ''));
+      suffix = hasPlus ? '+' : '';
+    }
+
+    const duration = 2000;
+    const startTime = performance.now();
+    const startVal = 0;
+
+    function easeOutExpo(t) {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutExpo(progress);
+
+      if (hasK) {
+        const current = startVal + (target - startVal) * easedProgress;
+        stat.textContent = Math.round(current) + suffix;
       } else {
-        nav.classList.remove('scrolled');
+        const current = Math.round(startVal + (target - startVal) * easedProgress);
+        stat.textContent = current + suffix;
       }
-      lastScroll = y;
-    }, { passive: true });
 
-    // ===== MOBILE NAV TOGGLE =====
-    const mobileToggle = document.getElementById('mobileToggle');
-    const navLinks = document.getElementById('navLinks');
-    mobileToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-    // Close mobile nav on link click
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-      });
-    });
-
-    // ===== SCROLL REVEAL =====
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
-    });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    // ===== FAQ ACCORDION =====
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-
-        // Close all
-        document.querySelectorAll('.faq-item.open').forEach(openItem => {
-          openItem.classList.remove('open');
-          openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-        });
-
-        // Open clicked (if wasn't open)
-        if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-
-    // ===== CHART.JS — BUBBLE CHART ONLY =====
-    function initCharts() {
-      if (typeof Chart === 'undefined') return;
-
-      const gridColor = 'rgba(255,255,255,0.06)';
-      const textColor = 'rgba(255,255,255,0.55)';
-      const teal = '#2dd4a8';
-      const gold = '#c9a96e';
-
-      Chart.defaults.font.family = "'Inter', -apple-system, sans-serif";
-      Chart.defaults.font.size = 11;
-      Chart.defaults.color = textColor;
-      Chart.defaults.plugins.tooltip.backgroundColor = '#1a1a1a';
-      Chart.defaults.plugins.tooltip.titleColor = '#e0e0e0';
-      Chart.defaults.plugins.tooltip.bodyColor = '#b0b0b0';
-      Chart.defaults.plugins.tooltip.borderColor = 'rgba(255,255,255,0.1)';
-      Chart.defaults.plugins.tooltip.borderWidth = 1;
-      Chart.defaults.plugins.tooltip.padding = 12;
-      Chart.defaults.plugins.tooltip.cornerRadius = 8;
-      Chart.defaults.plugins.tooltip.displayColors = true;
-      Chart.defaults.plugins.tooltip.boxPadding = 4;
-
-      const bubbleCtx = document.getElementById('bubbleChart');
-      if (bubbleCtx) {
-        new Chart(bubbleCtx, {
-          type: 'bubble',
-          data: {
-            datasets: [
-              {
-                label: 'Rapamycin + Acarbose',
-                data: [{ x: 95, y: 36.6, r: 22 }],
-                backgroundColor: teal,
-                borderColor: 'rgba(45,212,168,0.6)',
-                borderWidth: 2,
-                hoverBackgroundColor: '#5eedc4',
-                meta: { detail: '+36.6% median lifespan in mammals', source: 'NIA ITP 2025' }
-              },
-              {
-                label: 'Mediterranean Diet',
-                data: [{ x: 92, y: 30, r: 18 }],
-                backgroundColor: gold,
-                borderColor: 'rgba(201,169,110,0.6)',
-                borderWidth: 2,
-                hoverBackgroundColor: '#dfc08a',
-                meta: { detail: '–30% cardiovascular mortality', source: 'PREDIMED / NEJM 2013' }
-              },
-              {
-                label: 'Exercise (450+ min/wk)',
-                data: [{ x: 88, y: 37, r: 20 }],
-                backgroundColor: '#4f98a3',
-                borderColor: 'rgba(79,152,163,0.6)',
-                borderWidth: 2,
-                hoverBackgroundColor: '#6bb4bf',
-                meta: { detail: '–37% premature death, +3–6.9 years', source: 'JAMA / AARP 2024' }
-              },
-              {
-                label: 'GLP-1 Receptor Agonists',
-                data: [{ x: 78, y: 20, r: 19 }],
-                backgroundColor: '#a86fdf',
-                borderColor: 'rgba(168,111,223,0.6)',
-                borderWidth: 2,
-                hoverBackgroundColor: '#c49af0',
-                meta: { detail: '–6.4% all-cause mortality by 2045', source: 'Swiss Re / Nature Biotech' }
-              },
-              {
-                label: 'IL-11 Blocking',
-                data: [{ x: 65, y: 25, r: 14 }],
-                backgroundColor: '#dd6974',
-                borderColor: 'rgba(221,105,116,0.6)',
-                borderWidth: 2,
-                hoverBackgroundColor: '#f08a93',
-                meta: { detail: '+25% lifespan in mouse models', source: 'Nature 2024' }
-              },
-              {
-                label: 'SGLT2 Inhibitors',
-                data: [{ x: 70, y: 13.6, r: 13 }],
-                backgroundColor: '#5591c7',
-                borderColor: 'rgba(85,145,199,0.6)',
-                borderWidth: 2,
-                hoverBackgroundColor: '#79b0dd',
-                meta: { detail: '+13.6% longevity, telomere lengthening', source: 'Cell Reports Medicine 2025' }
-              },
-              {
-                label: 'Sleep Optimization',
-                data: [{ x: 85, y: 34, r: 16 }],
-                backgroundColor: '#e8af34',
-                borderColor: 'rgba(232,175,52,0.6)',
-                borderWidth: 2,
-                hoverBackgroundColor: '#f5c760',
-                meta: { detail: '–34% mortality with 7–9h sleep', source: 'GeroScience 2025' }
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {
-              duration: 1400,
-              easing: 'easeOutQuart',
-              delay: (ctx) => ctx.dataIndex * 150
-            },
-            scales: {
-              x: {
-                min: 50, max: 100,
-                title: { display: true, text: 'EVIDENCE STRENGTH', color: textColor, font: { size: 10, weight: '600', family: "'Inter'" }, padding: 8 },
-                grid: { color: gridColor, drawBorder: false },
-                ticks: { stepSize: 10, callback: v => v + '%' },
-                border: { display: false }
-              },
-              y: {
-                min: 0, max: 45,
-                title: { display: true, text: 'LIFESPAN / MORTALITY IMPACT (%)', color: textColor, font: { size: 10, weight: '600', family: "'Inter'" }, padding: 8 },
-                grid: { color: gridColor, drawBorder: false },
-                ticks: { stepSize: 10, callback: v => v + '%' },
-                border: { display: false }
-              }
-            },
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  title: (items) => items[0].dataset.label,
-                  label: (item) => {
-                    const meta = item.dataset.meta;
-                    return [
-                      meta.detail,
-                      '',
-                      'Evidence: ' + item.parsed.x + '% confidence',
-                      'Source: ' + meta.source
-                    ];
-                  }
-                }
-              }
-            }
-          }
-        });
+      if (progress < 1) {
+        requestAnimationFrame(update);
       }
     }
 
-    // Initialize charts
-    function tryInitCharts() {
-      if (typeof Chart !== 'undefined') {
-        initCharts();
-      } else {
-        let attempts = 0;
-        const poll = setInterval(() => {
-          attempts++;
-          if (typeof Chart !== 'undefined') {
-            clearInterval(poll);
-            initCharts();
-          } else if (attempts > 50) {
-            clearInterval(poll);
-          }
-        }, 100);
+    stat.dataset.animated = 'true';
+    requestAnimationFrame(update);
+  });
+}
+
+// Observe the trust section to trigger counter animation
+const trustSection = document.querySelector('.trust-stats');
+if (trustSection) {
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        counterObserver.unobserve(entry.target);
       }
-    }
-    tryInitCharts();
-
-    // ===== KPI VALUE ANIMATION (count up) =====
-    function animateKPIs() {
-      document.querySelectorAll('.kpi-card__value').forEach(el => {
-        const text = el.textContent.trim();
-        const match = text.match(/([+–-]?)([\d]+\.?[\d]*)(.*)$/);
-        if (!match) return;
-        const prefix = match[1];
-        const target = parseFloat(match[2]);
-        const suffix = match[3];
-        const hasDecimal = match[2].includes('.');
-        let startTime = null;
-        const duration = 1800;
-
-        function step(timestamp) {
-          if (!startTime) startTime = timestamp;
-          const progress = Math.min((timestamp - startTime) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = target * eased;
-          el.textContent = prefix + (hasDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
-          if (progress < 1) requestAnimationFrame(step);
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              requestAnimationFrame(step);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.5 });
-        observer.observe(el.closest('.kpi-card'));
-      });
-    }
-    animateKPIs();
-
-    // ===== SMOOTH SCROLL FOR NAV LINKS =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          const offset = 80;
-          const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      });
     });
-  </script>
+  }, { threshold: 0.3 });
+  counterObserver.observe(trustSection);
+}
+
+/* ============================================
+   Prefers Reduced Motion
+   ============================================ */
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.classList.add('visible');
+    el.style.transition = 'none';
+  });
+}
+</script>
 
 </body>
 </html>
