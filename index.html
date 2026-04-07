@@ -240,18 +240,24 @@ ul, ol { list-style: none; }
 
 /* Trustpilot badge */
 .hero-trustpilot {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  margin-bottom: 28px; flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  margin-bottom: 32px; flex-wrap: wrap;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px; padding: 12px 28px;
+  backdrop-filter: blur(8px);
 }
-.tp-stars { display: flex; gap: 3px; }
+.tp-logo-text { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+.tp-logo-text svg { height: 24px; width: 24px; flex-shrink: 0; }
+.tp-logo-word { font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+.tp-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.2); }
+.tp-stars { display: flex; gap: 4px; }
 .tp-star {
-  width: 20px; height: 20px; background: #00B67A; border-radius: 2px;
+  width: 28px; height: 28px; background: #00B67A; border-radius: 3px;
   display: flex; align-items: center; justify-content: center;
 }
-.tp-star svg { width: 12px; height: 12px; fill: #fff; }
-.tp-rating { font-size: 15px; font-weight: 600; color: var(--text-secondary); }
-.tp-logo { font-size: 14px; font-weight: 700; color: var(--text-secondary); letter-spacing: -0.3px; }
-.tp-logo svg { height: 18px; width: auto; display: inline-block; vertical-align: middle; margin-right: 4px; }
+.tp-star svg { width: 16px; height: 16px; fill: #fff; }
+.tp-rating { font-size: 17px; font-weight: 600; color: #F5F5F0; }
+.tp-rating strong { color: #fff; font-weight: 800; }
 
 .hero-sub {
   font-size: 20px; line-height: 1.7; color: var(--text-secondary);
@@ -929,14 +935,19 @@ ul, ol { list-style: none; }
 
     <!-- Trustpilot Badge -->
     <div class="hero-trustpilot">
+      <span class="tp-logo-text">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" fill="#00B67A"/></svg>
+        <span class="tp-logo-word">Trustpilot</span>
+      </span>
+      <span class="tp-divider"></span>
       <div class="tp-stars">
         <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
         <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
         <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
         <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
-        <span class="tp-star"><svg viewBox="0 0 24 24" style="opacity:0.6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
+        <span class="tp-star" style="opacity:0.5"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
       </div>
-      <span class="tp-rating">4.6/5 · Based on 600+ reviews</span>
+      <span class="tp-rating"><strong>4.6/5</strong> · Based on 600+ reviews</span>
     </div>
 
     <p class="hero-sub">A 12-session live online academy where you'll read your body's signals, interpret longevity research, and build a personal healthspan blueprint — guided by world-class experts, in a small group, grounded in science.</p>
