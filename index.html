@@ -59,6 +59,17 @@ ul, ol { list-style: none; }
   --radius-xl: 20px;
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
   --shadow-elevated: 0 8px 40px rgba(0, 0, 0, 0.4);
+  /* Neumorphism tokens */
+  --neu-bg: #111916;
+  --neu-shadow-dark: 6px 6px 16px rgba(0, 0, 0, 0.55);
+  --neu-shadow-light: -6px -6px 16px rgba(35, 55, 40, 0.25);
+  --neu-shadow: var(--neu-shadow-dark), var(--neu-shadow-light);
+  --neu-shadow-hover: 8px 8px 24px rgba(0, 0, 0, 0.65), -8px -8px 24px rgba(35, 55, 40, 0.35);
+  --neu-inset: inset 2px 2px 6px rgba(0,0,0,0.35), inset -2px -2px 6px rgba(35,55,40,0.15);
+  /* Neumorphism on light bg */
+  --neu-light-bg: #EDE9E0;
+  --neu-light-shadow: 6px 6px 16px rgba(0,0,0,0.12), -6px -6px 16px rgba(255,255,255,0.7);
+  --neu-light-shadow-hover: 8px 8px 20px rgba(0,0,0,0.16), -8px -8px 20px rgba(255,255,255,0.8);
   --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -158,12 +169,17 @@ ul, ol { list-style: none; }
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 6px;
   font-family: var(--font-display); font-weight: 800; font-size: 22px;
   color: var(--text-primary);
 }
-.nav-logo svg { width: 36px; height: 36px; }
-.nav-logo .logo-accent { color: var(--gold); }
+.nav-logo-img {
+  height: 40px; width: auto;
+}
+.nav-logo-suffix {
+  font-family: var(--font-display); font-weight: 300; font-size: 20px;
+  color: var(--text-secondary); letter-spacing: 0.5px;
+}
 .nav-links { display: flex; align-items: center; gap: 32px; }
 .nav-links a {
   font-size: 14px; font-weight: 500; color: var(--text-secondary);
@@ -245,9 +261,9 @@ ul, ol { list-style: none; }
 .hero-trustpilot {
   display: flex; align-items: center; justify-content: center; gap: 14px;
   margin-bottom: 32px; flex-wrap: wrap;
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  background: var(--neu-bg); border: none;
   border-radius: 50px; padding: 12px 28px;
-  backdrop-filter: blur(8px);
+  box-shadow: 5px 5px 14px rgba(0,0,0,0.5), -5px -5px 14px rgba(35,55,40,0.22);
 }
 .tp-logo-text { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
 .tp-logo-text svg { height: 24px; width: 24px; flex-shrink: 0; }
@@ -294,8 +310,9 @@ ul, ol { list-style: none; }
 }
 .hero-pill {
   display: flex; align-items: center; gap: 8px; padding: 10px 18px;
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  background: var(--neu-bg); border: none;
   border-radius: 50px; font-size: 14px; font-weight: 500; color: var(--text-secondary);
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.4), -4px -4px 10px rgba(35,55,40,0.18);
 }
 .hero-pill svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
 
@@ -340,19 +357,21 @@ ul, ol { list-style: none; }
   position: relative; z-index: 1;
 }
 .different-card {
-  background: rgba(17,25,22,0.7); border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg); padding: 40px 28px; text-align: center;
-  transition: all var(--transition-base); backdrop-filter: blur(10px);
+  background: var(--neu-bg); border: none;
+  border-radius: var(--radius-xl); padding: 40px 28px; text-align: center;
+  transition: all var(--transition-base);
+  box-shadow: var(--neu-shadow);
 }
 .different-card:hover {
-  border-color: rgba(212,168,67,0.3); transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  transform: translateY(-4px);
+  box-shadow: var(--neu-shadow-hover);
 }
 .different-card-icon {
   width: 64px; height: 64px; border-radius: 16px;
-  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  background: var(--neu-bg);
+  box-shadow: var(--neu-inset);
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 24px; border: 1px solid rgba(45,122,79,0.3);
+  margin: 0 auto 24px; border: none;
 }
 .different-card-icon svg { width: 28px; height: 28px; color: var(--gold); }
 .different-card h3 {
@@ -375,10 +394,11 @@ ul, ol { list-style: none; }
 .who-for-card {
   display: flex; align-items: flex-start; gap: 16px;
   padding: 24px 28px;
-  background: rgba(17,25,22,0.5); border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md); transition: all var(--transition-base);
+  background: var(--neu-bg); border: none;
+  border-radius: var(--radius-lg); transition: all var(--transition-base);
+  box-shadow: var(--neu-shadow);
 }
-.who-for-card:hover { border-color: rgba(212,168,67,0.2); }
+.who-for-card:hover { transform: translateY(-3px); box-shadow: var(--neu-shadow-hover); }
 .who-for-card svg {
   width: 24px; height: 24px; color: var(--green-accent); flex-shrink: 0; margin-top: 2px;
 }
@@ -404,7 +424,7 @@ ul, ol { list-style: none; }
   position: relative; max-width: 900px; margin: 0 auto;
   border-radius: var(--radius-xl); overflow: hidden;
   aspect-ratio: 16/9; cursor: pointer;
-  box-shadow: 0 16px 60px rgba(0,0,0,0.15);
+  box-shadow: var(--neu-light-shadow);
 }
 .preview-video img { width: 100%; height: 100%; object-fit: cover; }
 .preview-video-overlay {
@@ -434,10 +454,11 @@ ul, ol { list-style: none; }
 .highlights-header { text-align: center; margin-bottom: 72px; }
 .highlights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 .highlight-card {
-  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  position: relative; border-radius: var(--radius-xl); overflow: hidden;
   aspect-ratio: 16/10; cursor: pointer; transition: all var(--transition-base);
+  box-shadow: var(--neu-shadow);
 }
-.highlight-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-elevated); }
+.highlight-card:hover { transform: translateY(-4px); box-shadow: var(--neu-shadow-hover); }
 .highlight-card:first-child { grid-column: 1/-1; aspect-ratio: 21/9; }
 .highlight-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .highlight-card:hover img { transform: scale(1.05); }
@@ -466,12 +487,13 @@ ul, ol { list-style: none; }
 .curriculum-header { text-align: center; margin-bottom: 72px; }
 .curriculum-list { max-width: 900px; margin: 0 auto; }
 .curriculum-item {
-  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
-  margin-bottom: 12px; overflow: hidden;
-  background: rgba(17,25,22,0.5); transition: all var(--transition-base);
+  border: none; border-radius: var(--radius-lg);
+  margin-bottom: 16px; overflow: hidden;
+  background: var(--neu-bg); transition: all var(--transition-base);
+  box-shadow: var(--neu-shadow);
 }
-.curriculum-item:hover { border-color: var(--border-medium); }
-.curriculum-item.active { border-color: rgba(212,168,67,0.3); background: rgba(17,25,22,0.8); }
+.curriculum-item:hover { box-shadow: var(--neu-shadow-hover); }
+.curriculum-item.active { box-shadow: var(--neu-inset); background: var(--neu-bg); }
 .curriculum-trigger {
   width: 100%; display: flex; align-items: center; gap: 16px;
   padding: 20px 24px; background: none; border: none;
@@ -482,8 +504,9 @@ ul, ol { list-style: none; }
   font-family: var(--font-display); font-weight: 800; font-size: 18px;
   color: var(--gold); min-width: 48px; height: 48px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(212,168,67,0.1); border-radius: var(--radius-sm);
-  border: 1px solid rgba(212,168,67,0.2); flex-shrink: 0;
+  background: var(--neu-bg); border-radius: var(--radius-sm);
+  border: none; flex-shrink: 0;
+  box-shadow: var(--neu-inset);
 }
 .curriculum-trigger-text { flex: 1; }
 .curriculum-trigger-text h3 {
@@ -532,20 +555,22 @@ ul, ol { list-style: none; }
   max-width: 1000px; margin: 0 auto;
 }
 .teacher-card {
-  background: var(--surface-card); border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg); padding: 48px 32px; text-align: center;
+  background: var(--neu-bg); border: none;
+  border-radius: var(--radius-xl); padding: 48px 32px; text-align: center;
   transition: all var(--transition-base);
+  box-shadow: var(--neu-shadow);
 }
 .teacher-card:hover {
-  border-color: rgba(212,168,67,0.3); transform: translateY(-4px);
-  box-shadow: var(--shadow-elevated);
+  transform: translateY(-4px);
+  box-shadow: var(--neu-shadow-hover);
 }
 .teacher-avatar {
   width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 24px;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--gold);
-  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
-  border: 2px solid rgba(212,168,67,0.3);
+  background: var(--neu-bg);
+  border: none;
+  box-shadow: var(--neu-inset);
 }
 .teacher-name {
   font-family: var(--font-display); font-weight: 700; font-size: 22px;
@@ -572,11 +597,12 @@ ul, ol { list-style: none; }
   max-width: 1200px; margin: 0 auto 56px;
 }
 .lfa-card {
-  background: rgba(10,15,13,0.4); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius-md); padding: 48px 24px; text-align: center;
+  background: #0E3226; border: none;
+  border-radius: var(--radius-xl); padding: 48px 24px; text-align: center;
   transition: all var(--transition-base);
+  box-shadow: 6px 6px 16px rgba(0,0,0,0.45), -6px -6px 16px rgba(30,80,55,0.2);
 }
-.lfa-card:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-4px); }
+.lfa-card:hover { transform: translateY(-4px); box-shadow: 8px 8px 24px rgba(0,0,0,0.55), -8px -8px 24px rgba(30,80,55,0.3); }
 .lfa-card-icon { margin-bottom: 24px; }
 .lfa-card-icon svg { width: 48px; height: 48px; color: #fff; margin: 0 auto; }
 .lfa-card-sub {
@@ -617,7 +643,13 @@ ul, ol { list-style: none; }
 .platform-logo { margin-bottom: 40px; }
 .platform-logo svg { height: 36px; width: auto; }
 .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 56px; }
-.platform-card { text-align: left; }
+.platform-card {
+  text-align: left; background: #F5F2EB;
+  border-radius: var(--radius-xl); padding: 32px;
+  box-shadow: var(--neu-light-shadow);
+  transition: all var(--transition-base);
+}
+.platform-card:hover { transform: translateY(-3px); box-shadow: var(--neu-light-shadow-hover); }
 .platform-card-icon { width: 56px; height: 56px; margin-bottom: 18px; color: #1A1A2E; }
 .platform-card-icon svg {
   width: 100%; height: 100%; stroke: #1A1A2E; fill: none;
@@ -648,10 +680,11 @@ ul, ol { list-style: none; }
   max-width: 1100px; margin: 0 auto;
 }
 .testimonial-card {
-  background: rgba(17,25,22,0.6); border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg); padding: 36px; transition: all var(--transition-base);
+  background: var(--neu-bg); border: none;
+  border-radius: var(--radius-xl); padding: 36px; transition: all var(--transition-base);
+  box-shadow: var(--neu-shadow);
 }
-.testimonial-card:hover { border-color: var(--border-medium); }
+.testimonial-card:hover { transform: translateY(-3px); box-shadow: var(--neu-shadow-hover); }
 .testimonial-quote-icon { margin-bottom: 16px; }
 .testimonial-quote-icon svg { width: 36px; height: 36px; color: var(--gold); opacity: 0.4; }
 .testimonial-stars { display: flex; gap: 3px; margin-bottom: 16px; }
@@ -679,10 +712,15 @@ ul, ol { list-style: none; }
 }
 .faq-header { text-align: center; margin-bottom: 72px; }
 .faq-list { max-width: 800px; margin: 0 auto; }
-.faq-item { border-bottom: 1px solid var(--border-subtle); }
+.faq-item {
+  border: none; background: var(--neu-bg); border-radius: var(--radius-lg);
+  margin-bottom: 14px; box-shadow: var(--neu-shadow);
+  transition: all var(--transition-base); overflow: hidden;
+}
+.faq-item:hover { box-shadow: var(--neu-shadow-hover); }
 .faq-trigger {
   width: 100%; display: flex; align-items: center; justify-content: space-between;
-  padding: 24px 0; background: none; border: none;
+  padding: 24px 28px; background: none; border: none;
   cursor: pointer; text-align: left; gap: 16px;
 }
 .faq-trigger h3 {
@@ -696,7 +734,7 @@ ul, ol { list-style: none; }
 }
 .faq-item.active .faq-icon { transform: rotate(45deg); color: var(--gold); }
 .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
-.faq-body-inner { padding-bottom: 24px; }
+.faq-body-inner { padding: 0 28px 24px; }
 .faq-body-inner p { font-size: 16px; line-height: 1.7; color: var(--text-secondary); }
 
 /* ============================================
@@ -894,13 +932,8 @@ ul, ol { list-style: none; }
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="18" cy="18" r="16" stroke="#D4A843" stroke-width="2"/>
-        <path d="M12 10 C12 10, 18 8, 24 12 C24 12, 20 16, 18 18 C16 20, 12 24, 12 26" stroke="#D4A843" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M24 10 C24 10, 18 14, 18 18 C18 22, 24 24, 24 26" stroke="#2D7A4F" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="18" cy="18" r="3" fill="#D4A843"/>
-      </svg>
-      <span>e<span class="logo-accent">Teacher</span> Longevity</span>
+      <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="nav-logo-img">
+      <span class="nav-logo-suffix">Longevity</span>
     </a>
     <div class="nav-links">
       <a href="#highlights">Curriculum</a>
@@ -1595,9 +1628,7 @@ ul, ol { list-style: none; }
       <p class="platform-desc">Our proprietary learning management system is a comprehensive, advanced, "all in one" platform — empowering learners with frictionless access to interactive virtual classrooms, courses, and academic resources, all in one place.</p>
     </div>
     <div class="platform-logo reveal">
-      <svg viewBox="0 0 240 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="eTeacher Group">
-        <text x="0" y="28" font-family="Inter, sans-serif" font-size="26" fill="#1A1A2E"><tspan font-weight="300">e</tspan><tspan font-weight="700">Teacher</tspan><tspan font-weight="300" fill="#7A7A8A"> Group</tspan></text>
-      </svg>
+      <img src="assets/e-teacher-logo-dark.png" alt="eTeacher Group" style="height: 38px; width: auto;">
     </div>
     <div class="platform-grid reveal" id="platformSlider">
       <div class="platform-card">
@@ -1815,7 +1846,7 @@ ul, ol { list-style: none; }
 <footer class="footer">
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-logo">e<span class="logo-accent">Teacher</span> Longevity</div>
+      <div class="footer-logo"><img src="assets/e-teacher-logo.png" alt="eTeacher Group" style="height: 24px; width: auto;"> <span style="font-weight:300; color: var(--text-secondary);">Longevity</span></div>
       <div class="footer-links">
         <a href="#highlights">Curriculum</a>
         <a href="#teachers">Instructors</a>
