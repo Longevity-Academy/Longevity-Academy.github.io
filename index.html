@@ -437,9 +437,14 @@ ul, ol { list-style: none; }
   margin-bottom: 12px; letter-spacing: 0.2px;
 }
 .who-for-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px; max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 20px; max-width: 800px; margin: 0 auto;
   position: relative; z-index: 1;
+}
+.who-for-grid .who-for-card:last-child {
+  grid-column: 1 / -1;
+  max-width: calc(50% - 10px);
+  justify-self: center;
 }
 .who-for-card {
   display: flex; align-items: flex-start; gap: 16px;
