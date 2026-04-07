@@ -12,17 +12,8 @@
 /* ============================================
    RESET & BASE
    ============================================ */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: #0A0F0D;
@@ -33,27 +24,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button, input {
-  font-family: inherit;
-  border: none;
-  outline: none;
-}
-
-ul, ol {
-  list-style: none;
-}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button, input { font-family: inherit; border: none; outline: none; }
+ul, ol { list-style: none; }
 
 /* ============================================
    CSS VARIABLES
@@ -75,6 +49,7 @@ ul, ol {
   --text-muted: #6B7A64;
   --border-subtle: rgba(168, 181, 160, 0.12);
   --border-medium: rgba(168, 181, 160, 0.2);
+  --blue-tp: #006EFF;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', -apple-system, sans-serif;
   --radius-sm: 8px;
@@ -90,17 +65,8 @@ ul, ol {
 /* ============================================
    UTILITY CLASSES
    ============================================ */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.container-wide {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
 
 .eyebrow {
   font-family: var(--font-body);
@@ -114,10 +80,17 @@ ul, ol {
 .section-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 52px;
-  line-height: 1.15;
+  font-size: 64px;
+  line-height: 1.1;
   color: var(--text-primary);
   margin-bottom: 24px;
+}
+
+.section-title .gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-hover));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-subtitle {
@@ -140,25 +113,13 @@ ul, ol {
   cursor: pointer;
   transition: all var(--transition-base);
   border: none;
-  text-transform: none;
   letter-spacing: 0.3px;
   box-shadow: 0 4px 20px rgba(212, 168, 67, 0.3);
 }
-
 .gold-btn:hover {
   background: linear-gradient(135deg, var(--gold-hover), #ECC86A);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(212, 168, 67, 0.45);
-}
-
-.gold-btn svg {
-  width: 18px;
-  height: 18px;
-  transition: transform var(--transition-base);
-}
-
-.gold-btn:hover svg {
-  transform: translateX(3px);
 }
 
 /* Reveal animations */
@@ -167,12 +128,7 @@ ul, ol {
   transform: translateY(40px);
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+.reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
@@ -182,19 +138,12 @@ ul, ol {
    1. FIXED NAVIGATION
    ============================================ */
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 0 24px;
-  height: 72px;
-  display: flex;
-  align-items: center;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 24px; height: 72px;
+  display: flex; align-items: center;
   transition: all var(--transition-base);
   background: transparent;
 }
-
 .nav.scrolled {
   background: rgba(10, 15, 13, 0.92);
   backdrop-filter: blur(20px);
@@ -202,1742 +151,729 @@ ul, ol {
   border-bottom: 1px solid var(--border-subtle);
   box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
-
 .nav-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  max-width: 1400px; margin: 0 auto; width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
 }
-
 .nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 22px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 800; font-size: 22px;
   color: var(--text-primary);
 }
-
-.nav-logo svg {
-  width: 36px;
-  height: 36px;
-}
-
-.nav-logo span.logo-accent {
-  color: var(--gold);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
+.nav-logo svg { width: 36px; height: 36px; }
+.nav-logo .logo-accent { color: var(--gold); }
+.nav-links { display: flex; align-items: center; gap: 32px; }
 .nav-links a {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  transition: color var(--transition-base);
-  letter-spacing: 0.3px;
+  font-size: 14px; font-weight: 500; color: var(--text-secondary);
+  transition: color var(--transition-base); letter-spacing: 0.3px;
 }
-
-.nav-links a:hover {
-  color: var(--text-primary);
-}
-
+.nav-links a:hover { color: var(--text-primary); }
 .nav-cta {
   background: linear-gradient(135deg, var(--gold), var(--gold-hover));
-  color: #0A0F0D !important;
-  font-weight: 700 !important;
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-size: 14px !important;
+  color: #0A0F0D !important; font-weight: 700 !important;
+  padding: 10px 24px; border-radius: 50px; font-size: 14px !important;
   transition: all var(--transition-base);
   box-shadow: 0 2px 12px rgba(212, 168, 67, 0.25);
 }
-
-.nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
-}
-
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4); }
 .nav-mobile-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 8px;
-  background: none;
-  border: none;
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 8px; background: none; border: none;
 }
-
 .nav-mobile-toggle span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--text-primary);
-  transition: all var(--transition-base);
-  border-radius: 2px;
+  display: block; width: 24px; height: 2px; background: var(--text-primary);
+  transition: all var(--transition-base); border-radius: 2px;
 }
-
 .nav-mobile-menu {
-  display: none;
-  position: fixed;
-  top: 72px;
-  left: 0;
-  right: 0;
-  background: rgba(10, 15, 13, 0.98);
-  backdrop-filter: blur(20px);
-  padding: 24px;
-  flex-direction: column;
-  gap: 20px;
+  display: none; position: fixed; top: 72px; left: 0; right: 0;
+  background: rgba(10, 15, 13, 0.98); backdrop-filter: blur(20px);
+  padding: 24px; flex-direction: column; gap: 20px;
   border-bottom: 1px solid var(--border-subtle);
 }
-
-.nav-mobile-menu.active {
-  display: flex;
-}
-
+.nav-mobile-menu.active { display: flex; }
 .nav-mobile-menu a {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  padding: 8px 0;
-  transition: color var(--transition-base);
+  font-size: 16px; font-weight: 500; color: var(--text-secondary);
+  padding: 8px 0; transition: color var(--transition-base);
 }
-
-.nav-mobile-menu a:hover {
-  color: var(--text-primary);
-}
+.nav-mobile-menu a:hover { color: var(--text-primary); }
 
 /* ============================================
    2. HERO SECTION
    ============================================ */
 .hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 120px 24px 80px;
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 140px 24px 100px;
 }
-
 .hero-video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.4;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0; opacity: 0.2;
 }
-
 .hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 15, 13, 0.6) 0%,
-    rgba(11, 61, 46, 0.75) 40%,
-    rgba(10, 15, 13, 0.9) 100%
-  );
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(10,15,13,0.7) 0%, rgba(11,61,46,0.6) 40%, rgba(10,15,13,0.95) 100%);
   z-index: 1;
 }
-
 .hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
+  position: relative; z-index: 2; text-align: center; max-width: 960px; margin: 0 auto;
 }
-
 .hero-eyebrow {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: var(--gold);
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 4px; color: var(--gold);
+  margin-bottom: 32px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
 }
-
 .hero-eyebrow .dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--gold);
-  opacity: 0.6;
+  width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.6;
 }
-
 .hero-headline {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 80px;
-  line-height: 1.05;
-  color: var(--text-primary);
-  margin-bottom: 24px;
-  letter-spacing: -1px;
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 96px; line-height: 1.02; color: var(--text-primary);
+  margin-bottom: 28px; letter-spacing: -2px;
 }
-
 .hero-headline em {
   font-style: normal;
   background: linear-gradient(135deg, var(--gold), var(--gold-hover));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.hero-sub {
-  font-size: 20px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  max-width: 740px;
-  margin: 0 auto 40px;
+/* Trustpilot badge */
+.hero-trustpilot {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 28px; flex-wrap: wrap;
 }
+.tp-stars { display: flex; gap: 3px; }
+.tp-star {
+  width: 20px; height: 20px; background: #00B67A; border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+}
+.tp-star svg { width: 12px; height: 12px; fill: #fff; }
+.tp-rating { font-size: 15px; font-weight: 600; color: var(--text-secondary); }
+.tp-logo { font-size: 14px; font-weight: 700; color: var(--text-secondary); letter-spacing: -0.3px; }
+.tp-logo svg { height: 18px; width: auto; display: inline-block; vertical-align: middle; margin-right: 4px; }
 
+.hero-sub {
+  font-size: 20px; line-height: 1.7; color: var(--text-secondary);
+  max-width: 740px; margin: 0 auto 40px;
+}
 .hero-form {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  max-width: 520px;
-  margin: 0 auto 48px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50px;
-  padding: 6px;
-  backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: 0; max-width: 520px; margin: 0 auto 48px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px; padding: 6px; backdrop-filter: blur(10px);
   transition: border-color var(--transition-base);
 }
-
-.hero-form:focus-within {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
-}
-
+.hero-form:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,168,67,0.15); }
 .hero-form input[type="email"] {
-  flex: 1;
-  background: transparent;
-  color: var(--text-primary);
-  padding: 14px 24px;
-  font-size: 16px;
-  border: none;
-  outline: none;
-  min-width: 0;
+  flex: 1; background: transparent; color: var(--text-primary);
+  padding: 14px 24px; font-size: 16px; border: none; outline: none; min-width: 0;
 }
-
-.hero-form input[type="email"]::placeholder {
-  color: var(--text-muted);
-}
-
+.hero-form input[type="email"]::placeholder { color: var(--text-muted); }
 .hero-form button {
   background: linear-gradient(135deg, var(--gold), var(--gold-hover));
-  color: #0A0F0D;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 14px 28px;
-  border-radius: 50px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--transition-base);
-  border: none;
-  box-shadow: 0 2px 12px rgba(212, 168, 67, 0.25);
+  color: #0A0F0D; font-weight: 700; font-size: 15px; padding: 14px 28px;
+  border-radius: 50px; cursor: pointer; white-space: nowrap;
+  transition: all var(--transition-base); border: none;
+  box-shadow: 0 2px 12px rgba(212,168,67,0.25);
 }
-
 .hero-form button:hover {
   background: linear-gradient(135deg, var(--gold-hover), #ECC86A);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
+  transform: translateY(-1px); box-shadow: 0 4px 20px rgba(212,168,67,0.4);
 }
+.hero-pills {
+  display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+}
+.hero-pill {
+  display: flex; align-items: center; gap: 8px; padding: 10px 18px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 50px; font-size: 14px; font-weight: 500; color: var(--text-secondary);
+}
+.hero-pill svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
 
-.hero-trust {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+/* ============================================
+   3. TRUST BAR
+   ============================================ */
+.trust-bar {
+  padding: 48px 0;
+  background: #0D1410;
+  border-top: 1px solid rgba(168,181,160,0.08);
+  border-bottom: 1px solid rgba(168,181,160,0.08);
+}
+.trust-bar-inner {
+  display: flex; align-items: center; justify-content: center; gap: 64px;
   flex-wrap: wrap;
 }
-
-.hero-trust-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
+.trust-bar-stat { text-align: center; }
+.trust-bar-num {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 52px; color: var(--gold); line-height: 1; margin-bottom: 6px;
 }
-
-.hero-trust-item svg {
-  width: 16px;
-  height: 16px;
-  color: var(--gold);
-  flex-shrink: 0;
-}
-
-.hero-trust-divider {
-  width: 1px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.12);
-  display: none;
+.trust-bar-label {
+  font-size: 14px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px;
 }
 
 /* ============================================
-   3. WHAT MAKES THIS DIFFERENT
+   4. WHAT MAKES THIS DIFFERENT
    ============================================ */
 .different {
-  position: relative;
-  padding: 120px 0;
+  position: relative; padding: 120px 0;
   background: linear-gradient(180deg, var(--dark-base) 0%, var(--green-deep) 50%, var(--dark-base) 100%);
   overflow: hidden;
 }
-
 .different::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px; pointer-events: none;
 }
-
-.different-header {
-  text-align: center;
-  margin-bottom: 72px;
-  position: relative;
-  z-index: 1;
-}
-
+.different-header { text-align: center; margin-bottom: 72px; position: relative; z-index: 1; }
 .different-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  position: relative;
-  z-index: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  position: relative; z-index: 1;
 }
-
 .different-card {
-  background: rgba(17, 25, 22, 0.7);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 40px 28px;
-  text-align: center;
-  transition: all var(--transition-base);
-  backdrop-filter: blur(10px);
+  background: rgba(17,25,22,0.7); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); padding: 40px 28px; text-align: center;
+  transition: all var(--transition-base); backdrop-filter: blur(10px);
 }
-
 .different-card:hover {
-  border-color: rgba(212, 168, 67, 0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(212,168,67,0.3); transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
 }
-
 .different-card-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
+  width: 64px; height: 64px; border-radius: 16px;
   background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-  border: 1px solid rgba(45, 122, 79, 0.3);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; border: 1px solid rgba(45,122,79,0.3);
 }
-
-.different-card-icon svg {
-  width: 28px;
-  height: 28px;
-  color: var(--gold);
-}
-
+.different-card-icon svg { width: 28px; height: 28px; color: var(--gold); }
 .different-card h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 22px;
-  margin-bottom: 12px;
-  color: var(--text-primary);
+  font-family: var(--font-display); font-weight: 700; font-size: 22px;
+  margin-bottom: 12px; color: var(--text-primary);
 }
-
-.different-card p {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text-secondary);
-}
+.different-card p { font-size: 15px; line-height: 1.65; color: var(--text-secondary); }
 
 /* ============================================
-   3B. PLATFORM EXPERIENCE (LFA-style slider)
+   5. WHO IS THIS FOR
    ============================================ */
-.platform {
-  padding: 100px 0 110px;
-  background: #F5F2EB;
-  color: #1A1A2E;
-  position: relative;
-  overflow: hidden;
+.who-for {
+  padding: 120px 0; background: var(--dark-base);
 }
-
-.platform-header {
-  max-width: 720px;
-  margin-bottom: 56px;
+.who-for-header { text-align: center; margin-bottom: 64px; }
+.who-for-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; max-width: 900px; margin: 0 auto;
 }
-
-.platform-header h2 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 44px;
-  line-height: 1.15;
-  color: #1A1A2E;
-  margin-bottom: 4px;
+.who-for-card {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 24px 28px;
+  background: rgba(17,25,22,0.5); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); transition: all var(--transition-base);
 }
-
-.platform-header .platform-tagline {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 28px;
-  color: #4A4A5A;
-  line-height: 1.3;
-  margin-bottom: 20px;
+.who-for-card:hover { border-color: rgba(212,168,67,0.2); }
+.who-for-card svg {
+  width: 24px; height: 24px; color: var(--green-accent); flex-shrink: 0; margin-top: 2px;
 }
-
-.platform-header p.platform-desc {
-  font-size: 17px;
-  line-height: 1.7;
-  color: #5A5A6A;
-  max-width: 680px;
-}
-
-.platform-logo {
-  margin-bottom: 40px;
-}
-
-.platform-logo img {
-  height: 36px;
-  width: auto;
-}
-
-.platform-logo svg {
-  height: 36px;
-  width: auto;
-}
-
-.platform-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 48px 56px;
-}
-
-.platform-card {
-  text-align: left;
-}
-
-.platform-card-icon {
-  width: 56px;
-  height: 56px;
-  margin-bottom: 18px;
-  color: #1A1A2E;
-}
-
-.platform-card-icon svg {
-  width: 100%;
-  height: 100%;
-  stroke: #1A1A2E;
-  fill: none;
-  stroke-width: 1.3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.platform-card h3 {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 20px;
-  color: #1A1A2E;
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-
-.platform-card p {
-  font-size: 16px;
-  line-height: 1.65;
-  color: #5A5A6A;
-}
-
-/* Mobile slider dots */
-.platform-dots {
-  display: none;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 36px;
-}
-
-.platform-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #C8C4BC;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.platform-dot.active {
-  background: #1A1A2E;
-}
-
-@media (max-width: 1024px) {
-  .platform-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px 48px;
-  }
-  .platform-header h2 {
-    font-size: 36px;
-  }
-  .platform-header .platform-tagline {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 768px) {
-  .platform {
-    padding: 72px 0 80px;
-  }
-  .platform-header {
-    margin-bottom: 40px;
-  }
-  .platform-header h2 {
-    font-size: 30px;
-  }
-  .platform-header .platform-tagline {
-    font-size: 20px;
-  }
-  .platform-header p.platform-desc {
-    font-size: 16px;
-  }
-  .platform-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 0;
-    margin: 0 -24px;
-    padding: 0 24px;
-    scrollbar-width: none;
-  }
-  .platform-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .platform-card {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    padding-right: 24px;
-    box-sizing: border-box;
-  }
-  .platform-dots {
-    display: flex;
-  }
-}
+.who-for-card p { font-size: 16px; line-height: 1.6; color: var(--text-secondary); }
 
 /* ============================================
-   4. COURSE HIGHLIGHTS
+   6. COURSE PREVIEW
    ============================================ */
-.highlights {
-  padding: 120px 0;
-  background: var(--dark-base);
+.preview {
+  padding: 100px 0; background: #F5F2EB; color: #1A1A2E;
 }
-
-.highlights-header {
-  text-align: center;
-  margin-bottom: 72px;
+.preview-header { text-align: center; margin-bottom: 48px; }
+.preview-header h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 64px; line-height: 1.1; color: #1A1A2E; margin-bottom: 16px;
 }
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+.preview-header h2 .gold {
+  background: linear-gradient(135deg, #B8913A, #D4A843);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-
-.highlight-card {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
-  cursor: pointer;
+.preview-header p { font-size: 18px; color: #5A5A6A; max-width: 560px; margin: 0 auto; }
+.preview-video {
+  position: relative; max-width: 900px; margin: 0 auto;
+  border-radius: var(--radius-xl); overflow: hidden;
+  aspect-ratio: 16/9; cursor: pointer;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.15);
+}
+.preview-video img { width: 100%; height: 100%; object-fit: cover; }
+.preview-video-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,15,13,0.4);
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition-base);
+}
+.preview-video:hover .preview-video-overlay { background: rgba(10,15,13,0.3); }
+.play-btn {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(255,255,255,0.95); display: flex;
+  align-items: center; justify-content: center;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.2);
   transition: all var(--transition-base);
 }
-
-.highlight-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-elevated);
-}
-
-.highlight-card:first-child {
-  grid-column: 1 / -1;
-  aspect-ratio: 21 / 9;
-}
-
-.highlight-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.highlight-card:hover img {
-  transform: scale(1.05);
-}
-
-.highlight-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 30%,
-    rgba(10, 15, 13, 0.6) 60%,
-    rgba(10, 15, 13, 0.92) 100%
-  );
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 36px;
-}
-
-.highlight-card-number {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-
-.highlight-card h3 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 28px;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-  line-height: 1.2;
-}
-
-.highlight-card p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 500px;
+.preview-video:hover .play-btn { transform: scale(1.08); }
+.play-btn svg { width: 28px; height: 28px; fill: #0A0F0D; margin-left: 4px; }
+.preview-caption {
+  text-align: center; margin-top: 20px; font-size: 15px; color: #7A7A8A;
 }
 
 /* ============================================
-   5. FULL CURRICULUM ACCORDION
+   7. COURSE HIGHLIGHTS
+   ============================================ */
+.highlights { padding: 120px 0; background: var(--dark-base); }
+.highlights-header { text-align: center; margin-bottom: 72px; }
+.highlights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.highlight-card {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  aspect-ratio: 16/10; cursor: pointer; transition: all var(--transition-base);
+}
+.highlight-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-elevated); }
+.highlight-card:first-child { grid-column: 1/-1; aspect-ratio: 21/9; }
+.highlight-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.highlight-card:hover img { transform: scale(1.05); }
+.highlight-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 25%, rgba(10,15,13,0.6) 55%, rgba(10,15,13,0.92) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 36px;
+}
+.highlight-card-number {
+  font-family: var(--font-body); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 3px; color: var(--gold); margin-bottom: 8px;
+}
+.highlight-card h3 {
+  font-family: var(--font-display); font-weight: 800; font-size: 28px;
+  color: var(--text-primary); margin-bottom: 8px; line-height: 1.2;
+}
+.highlight-card p { font-size: 15px; line-height: 1.6; color: var(--text-secondary); max-width: 500px; }
+
+/* ============================================
+   8. FULL CURRICULUM ACCORDION
    ============================================ */
 .curriculum {
   padding: 120px 0;
   background: linear-gradient(180deg, var(--dark-base) 0%, var(--surface-dark) 50%, var(--dark-base) 100%);
 }
-
-.curriculum-header {
-  text-align: center;
-  margin-bottom: 72px;
-}
-
-.curriculum-list {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
+.curriculum-header { text-align: center; margin-bottom: 72px; }
+.curriculum-list { max-width: 900px; margin: 0 auto; }
 .curriculum-item {
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  margin-bottom: 12px;
-  overflow: hidden;
-  background: rgba(17, 25, 22, 0.5);
-  transition: all var(--transition-base);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  margin-bottom: 12px; overflow: hidden;
+  background: rgba(17,25,22,0.5); transition: all var(--transition-base);
 }
-
-.curriculum-item:hover {
-  border-color: var(--border-medium);
-}
-
-.curriculum-item.active {
-  border-color: rgba(212, 168, 67, 0.3);
-  background: rgba(17, 25, 22, 0.8);
-}
-
+.curriculum-item:hover { border-color: var(--border-medium); }
+.curriculum-item.active { border-color: rgba(212,168,67,0.3); background: rgba(17,25,22,0.8); }
 .curriculum-trigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 20px 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  transition: background var(--transition-base);
+  width: 100%; display: flex; align-items: center; gap: 16px;
+  padding: 20px 24px; background: none; border: none;
+  cursor: pointer; text-align: left; transition: background var(--transition-base);
 }
-
-.curriculum-trigger:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-
+.curriculum-trigger:hover { background: rgba(255,255,255,0.03); }
 .curriculum-num {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 18px;
-  color: var(--gold);
-  min-width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(212, 168, 67, 0.1);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(212, 168, 67, 0.2);
-  flex-shrink: 0;
+  font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  color: var(--gold); min-width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(212,168,67,0.1); border-radius: var(--radius-sm);
+  border: 1px solid rgba(212,168,67,0.2); flex-shrink: 0;
 }
-
-.curriculum-trigger-text {
-  flex: 1;
-}
-
+.curriculum-trigger-text { flex: 1; }
 .curriculum-trigger-text h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--text-primary);
-  line-height: 1.3;
+  font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  color: var(--text-primary); line-height: 1.3;
 }
-
-.curriculum-trigger-text span {
-  font-size: 14px;
-  color: var(--text-muted);
-  display: block;
-  margin-top: 2px;
-}
-
+.curriculum-trigger-text span { font-size: 14px; color: var(--text-muted); display: block; margin-top: 2px; }
 .curriculum-chevron {
-  width: 24px;
-  height: 24px;
-  color: var(--text-muted);
-  transition: transform var(--transition-base);
-  flex-shrink: 0;
+  width: 24px; height: 24px; color: var(--text-muted);
+  transition: transform var(--transition-base); flex-shrink: 0;
 }
-
-.curriculum-item.active .curriculum-chevron {
-  transform: rotate(180deg);
-  color: var(--gold);
-}
-
-.curriculum-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.curriculum-body-inner {
-  padding: 0 24px 24px 88px;
-}
-
+.curriculum-item.active .curriculum-chevron { transform: rotate(180deg); color: var(--gold); }
+.curriculum-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.curriculum-body-inner { padding: 0 24px 24px 88px; }
 .curriculum-section-label {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--gold);
-  margin-bottom: 10px;
-  margin-top: 16px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; margin-top: 16px;
 }
-
-.curriculum-section-label:first-child {
-  margin-top: 0;
-}
-
-.curriculum-goals {
-  margin-bottom: 8px;
-}
-
+.curriculum-section-label:first-child { margin-top: 0; }
+.curriculum-goals { margin-bottom: 8px; }
 .curriculum-goals li {
-  position: relative;
-  padding-left: 20px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
+  position: relative; padding-left: 20px; font-size: 15px;
+  line-height: 1.6; color: var(--text-secondary); margin-bottom: 4px;
 }
-
 .curriculum-goals li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green-light);
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green-light);
 }
-
-.curriculum-flow {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
-
+.curriculum-flow { font-size: 15px; line-height: 1.65; color: var(--text-secondary); margin-bottom: 8px; }
 .curriculum-work {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  padding: 12px 16px;
-  background: rgba(212, 168, 67, 0.06);
-  border-left: 3px solid var(--gold);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 15px; line-height: 1.65; color: var(--text-secondary);
+  padding: 12px 16px; background: rgba(212,168,67,0.06);
+  border-left: 3px solid var(--gold); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 /* ============================================
-   6. WHO THIS IS FOR
-   ============================================ */
-.who {
-  position: relative;
-  padding: 120px 0;
-  overflow: hidden;
-}
-
-.who-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.who-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.15;
-}
-
-.who-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, var(--dark-base) 0%, rgba(11, 61, 46, 0.6) 50%, var(--dark-base) 100%);
-}
-
-.who-content {
-  position: relative;
-  z-index: 1;
-}
-
-.who-header {
-  text-align: center;
-  margin-bottom: 64px;
-}
-
-.who-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.who-col {
-  background: rgba(17, 25, 22, 0.7);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  backdrop-filter: blur(10px);
-}
-
-.who-col-title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 24px;
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.who-col-title svg {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-}
-
-.who-col.perfect .who-col-title {
-  color: var(--green-accent);
-}
-
-.who-col.not-for .who-col-title {
-  color: #C74B4B;
-}
-
-.who-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.who-item:last-child {
-  margin-bottom: 0;
-}
-
-.who-item svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-
-.who-col.perfect .who-item svg {
-  color: var(--green-accent);
-}
-
-.who-col.not-for .who-item svg {
-  color: #C74B4B;
-}
-
-.who-item p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-/* ============================================
-   7. MEET THE TEACHERS
+   9. INSTRUCTORS
    ============================================ */
 .teachers {
   padding: 120px 0;
-  background: var(--dark-base);
+  background: linear-gradient(180deg, var(--dark-base) 0%, rgba(11,61,46,0.3) 50%, var(--dark-base) 100%);
 }
-
-.teachers-header {
-  text-align: center;
-  margin-bottom: 72px;
-}
-
+.teachers-header { text-align: center; margin-bottom: 72px; }
 .teachers-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1000px;
-  margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  max-width: 1000px; margin: 0 auto;
 }
-
 .teacher-card {
-  background: var(--surface-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 48px 32px;
-  text-align: center;
+  background: var(--surface-card); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); padding: 48px 32px; text-align: center;
   transition: all var(--transition-base);
 }
-
 .teacher-card:hover {
-  border-color: rgba(212, 168, 67, 0.3);
-  transform: translateY(-4px);
+  border-color: rgba(212,168,67,0.3); transform: translateY(-4px);
   box-shadow: var(--shadow-elevated);
 }
-
 .teacher-avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  margin: 0 auto 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 32px;
-  color: var(--gold);
+  width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--gold);
   background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
-  border: 2px solid rgba(212, 168, 67, 0.3);
+  border: 2px solid rgba(212,168,67,0.3);
 }
-
 .teacher-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--text-primary);
-  margin-bottom: 6px;
+  font-family: var(--font-display); font-weight: 700; font-size: 22px;
+  color: var(--text-primary); margin-bottom: 6px;
 }
-
 .teacher-role {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 16px;
+  font-size: 14px; font-weight: 600; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
 }
-
-.teacher-bio {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text-secondary);
-}
+.teacher-bio { font-size: 15px; line-height: 1.65; color: var(--text-secondary); }
 
 /* ============================================
-   8. TRUST & CREDIBILITY
+   10. LFA EXPERIENCE FOLD
    ============================================ */
-.trust {
-  padding: 120px 0;
-  background: linear-gradient(180deg, var(--dark-base) 0%, var(--green-deep) 50%, var(--dark-base) 100%);
-  overflow: hidden;
+.lfa-fold { padding: 120px 0; background: #0B3D2E; }
+.lfa-fold-title {
+  text-align: center; margin-bottom: 72px;
+  font-family: var(--font-body); font-weight: 800;
+  font-size: 76px; line-height: 1; color: #fff;
+  text-transform: uppercase; letter-spacing: 8px;
 }
-
-.trust-header {
-  text-align: center;
-  margin-bottom: 72px;
+.lfa-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  max-width: 1200px; margin: 0 auto 56px;
 }
-
-.trust-stats {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-  margin-bottom: 80px;
-}
-
-.trust-stat {
-  text-align: center;
-  padding: 32px 16px;
-  background: rgba(17, 25, 22, 0.5);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  backdrop-filter: blur(10px);
+.lfa-card {
+  background: rgba(10,15,13,0.4); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-md); padding: 48px 24px; text-align: center;
   transition: all var(--transition-base);
 }
-
-.trust-stat:hover {
-  border-color: rgba(212, 168, 67, 0.3);
-  transform: translateY(-2px);
-}
-
-.trust-stat-number {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 48px;
-  color: var(--gold);
-  line-height: 1;
+.lfa-card:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-4px); }
+.lfa-card-icon { margin-bottom: 24px; }
+.lfa-card-icon svg { width: 48px; height: 48px; color: #fff; margin: 0 auto; }
+.lfa-card-sub {
+  font-family: var(--font-body); font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 2.5px; color: rgba(255,255,255,0.6);
   margin-bottom: 8px;
 }
-
-.trust-stat-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  line-height: 1.4;
+.lfa-card-title {
+  font-family: var(--font-body); font-weight: 800;
+  font-size: 30px; line-height: 1.15; color: #fff;
+  text-transform: uppercase; letter-spacing: 1px;
 }
-
-.trust-stars {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.trust-stars svg {
-  width: 16px;
-  height: 16px;
-  color: var(--gold);
-  fill: var(--gold);
-}
-
-/* Testimonials */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 64px;
-}
-
-.testimonial-card {
-  background: rgba(17, 25, 22, 0.6);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 32px;
+.lfa-cta { text-align: center; }
+.lfa-cta a {
+  display: inline-block; padding: 14px 40px; border: 2px solid #fff;
+  border-radius: 50px; color: #fff; font-weight: 700; font-size: 14px;
+  text-transform: uppercase; letter-spacing: 2px;
   transition: all var(--transition-base);
 }
-
-.testimonial-card:hover {
-  border-color: var(--border-medium);
-}
-
-.testimonial-stars {
-  display: flex;
-  gap: 3px;
-  margin-bottom: 16px;
-}
-
-.testimonial-stars svg {
-  width: 14px;
-  height: 14px;
-  color: var(--gold);
-  fill: var(--gold);
-}
-
-.testimonial-text {
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-  font-style: italic;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.testimonial-author-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--gold);
-}
-
-.testimonial-author-info strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.testimonial-author-info span {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* Badges */
-.trust-badges {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.trust-badge {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.trust-badge svg {
-  width: 20px;
-  height: 20px;
-  color: var(--gold);
-}
+.lfa-cta a:hover { background: #fff; color: #0B3D2E; }
 
 /* ============================================
-   9. FAQ ACCORDION
+   11. PLATFORM
+   ============================================ */
+.platform { padding: 100px 0 110px; background: #F5F2EB; color: #1A1A2E; overflow: hidden; }
+.platform-header { max-width: 720px; margin-bottom: 56px; }
+.platform-header h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 56px; line-height: 1.1; color: #1A1A2E; margin-bottom: 4px;
+}
+.platform-header .platform-tagline {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 28px; color: #4A4A5A; line-height: 1.3; margin-bottom: 20px;
+}
+.platform-header p.platform-desc {
+  font-size: 17px; line-height: 1.7; color: #5A5A6A; max-width: 680px;
+}
+.platform-logo { margin-bottom: 40px; }
+.platform-logo svg { height: 36px; width: auto; }
+.platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 56px; }
+.platform-card { text-align: left; }
+.platform-card-icon { width: 56px; height: 56px; margin-bottom: 18px; color: #1A1A2E; }
+.platform-card-icon svg {
+  width: 100%; height: 100%; stroke: #1A1A2E; fill: none;
+  stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round;
+}
+.platform-card h3 {
+  font-family: var(--font-body); font-weight: 700; font-size: 20px;
+  color: #1A1A2E; margin-bottom: 10px; line-height: 1.3;
+}
+.platform-card p { font-size: 16px; line-height: 1.65; color: #5A5A6A; }
+.platform-dots { display: none; justify-content: center; gap: 10px; margin-top: 36px; }
+.platform-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: #C8C4BC;
+  border: none; padding: 0; cursor: pointer; transition: background 0.3s;
+}
+.platform-dot.active { background: #1A1A2E; }
+
+/* ============================================
+   12. TESTIMONIALS
+   ============================================ */
+.testimonials {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--dark-base) 0%, var(--green-deep) 50%, var(--dark-base) 100%);
+}
+.testimonials-header { text-align: center; margin-bottom: 72px; }
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 1100px; margin: 0 auto;
+}
+.testimonial-card {
+  background: rgba(17,25,22,0.6); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg); padding: 36px; transition: all var(--transition-base);
+}
+.testimonial-card:hover { border-color: var(--border-medium); }
+.testimonial-quote-icon { margin-bottom: 16px; }
+.testimonial-quote-icon svg { width: 36px; height: 36px; color: var(--gold); opacity: 0.4; }
+.testimonial-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+.testimonial-stars svg { width: 14px; height: 14px; color: var(--gold); fill: var(--gold); }
+.testimonial-text {
+  font-size: 17px; line-height: 1.7; color: var(--text-secondary);
+  margin-bottom: 24px; font-style: italic;
+}
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.testimonial-author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: var(--gold);
+}
+.testimonial-author-info strong { display: block; font-size: 15px; font-weight: 600; color: var(--text-primary); }
+.testimonial-author-info span { font-size: 13px; color: var(--text-muted); }
+
+/* ============================================
+   13. FAQ
    ============================================ */
 .faq {
   padding: 120px 0;
-  background: var(--dark-base);
+  background: linear-gradient(180deg, var(--dark-base) 0%, rgba(11,61,46,0.15) 50%, var(--dark-base) 100%);
 }
-
-.faq-header {
-  text-align: center;
-  margin-bottom: 72px;
-}
-
-.faq-list {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.faq-item {
-  border-bottom: 1px solid var(--border-subtle);
-}
-
+.faq-header { text-align: center; margin-bottom: 72px; }
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border-subtle); }
 .faq-trigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  gap: 16px;
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0; background: none; border: none;
+  cursor: pointer; text-align: left; gap: 16px;
 }
-
 .faq-trigger h3 {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 18px;
-  color: var(--text-primary);
-  line-height: 1.4;
-  transition: color var(--transition-base);
+  font-family: var(--font-body); font-weight: 600; font-size: 18px;
+  color: var(--text-primary); line-height: 1.4; transition: color var(--transition-base);
 }
-
-.faq-trigger:hover h3 {
-  color: var(--gold);
-}
-
+.faq-trigger:hover h3 { color: var(--gold); }
 .faq-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--text-muted);
-  transition: all var(--transition-base);
-  flex-shrink: 0;
+  width: 24px; height: 24px; color: var(--text-muted);
+  transition: all var(--transition-base); flex-shrink: 0;
 }
-
-.faq-item.active .faq-icon {
-  transform: rotate(45deg);
-  color: var(--gold);
-}
-
-.faq-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.faq-body-inner {
-  padding-bottom: 24px;
-}
-
-.faq-body-inner p {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
+.faq-item.active .faq-icon { transform: rotate(45deg); color: var(--gold); }
+.faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.faq-body-inner { padding-bottom: 24px; }
+.faq-body-inner p { font-size: 16px; line-height: 1.7; color: var(--text-secondary); }
 
 /* ============================================
-   10. FINAL CTA
+   14. FINAL CTA
    ============================================ */
 .final-cta {
-  position: relative;
-  padding: 120px 0;
+  position: relative; padding: 120px 0;
   background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 40%, var(--green-light) 100%);
   overflow: hidden;
 }
-
 .final-cta::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -30%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(212, 168, 67, 0.1) 0%, transparent 70%);
+  content: ''; position: absolute; top: -50%; right: -30%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(212,168,67,0.1) 0%, transparent 70%);
   pointer-events: none;
 }
-
-.final-cta::after {
-  content: '';
-  position: absolute;
-  bottom: -40%;
-  left: -20%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(45, 122, 79, 0.2) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.final-cta-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.final-cta .section-title {
-  font-size: 56px;
-  margin-bottom: 20px;
-}
-
-.final-cta-sub {
-  font-size: 20px;
-  line-height: 1.7;
-  color: rgba(245, 245, 240, 0.8);
-  margin-bottom: 40px;
-}
-
+.final-cta-content { position: relative; z-index: 1; text-align: center; max-width: 720px; margin: 0 auto; }
+.final-cta .section-title { font-size: 64px; margin-bottom: 20px; }
+.final-cta-sub { font-size: 20px; line-height: 1.7; color: rgba(245,245,240,0.8); margin-bottom: 40px; }
 .final-cta-form {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  max-width: 520px;
-  margin: 0 auto 24px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
-  padding: 6px;
+  display: flex; align-items: center; gap: 0; max-width: 520px; margin: 0 auto 24px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px; padding: 6px;
 }
-
-.final-cta-form:focus-within {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
-}
-
+.final-cta-form:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,168,67,0.15); }
 .final-cta-form input[type="email"] {
-  flex: 1;
-  background: transparent;
-  color: var(--text-primary);
-  padding: 14px 24px;
-  font-size: 16px;
-  border: none;
-  outline: none;
-  min-width: 0;
+  flex: 1; background: transparent; color: var(--text-primary);
+  padding: 14px 24px; font-size: 16px; border: none; outline: none; min-width: 0;
 }
-
-.final-cta-form input[type="email"]::placeholder {
-  color: rgba(245, 245, 240, 0.4);
-}
-
+.final-cta-form input[type="email"]::placeholder { color: rgba(245,245,240,0.4); }
 .final-cta-form button {
   background: linear-gradient(135deg, var(--gold), var(--gold-hover));
-  color: #0A0F0D;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 14px 28px;
-  border-radius: 50px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--transition-base);
-  border: none;
-  box-shadow: 0 2px 12px rgba(212, 168, 67, 0.3);
+  color: #0A0F0D; font-weight: 700; font-size: 15px; padding: 14px 28px;
+  border-radius: 50px; cursor: pointer; white-space: nowrap;
+  transition: all var(--transition-base); border: none;
+  box-shadow: 0 2px 12px rgba(212,168,67,0.3);
 }
-
 .final-cta-form button:hover {
   background: linear-gradient(135deg, var(--gold-hover), #ECC86A);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
+  transform: translateY(-1px); box-shadow: 0 4px 20px rgba(212,168,67,0.4);
 }
-
-.final-cta-note {
-  font-size: 14px;
-  color: rgba(245, 245, 240, 0.5);
-}
+.final-cta-note { font-size: 14px; color: rgba(245,245,240,0.5); }
 
 /* ============================================
-   11. FOOTER
+   15. FOOTER
    ============================================ */
-.footer {
-  padding: 48px 0;
-  background: #060A08;
-  border-top: 1px solid var(--border-subtle);
-}
-
+.footer { padding: 48px 0; background: #060A08; border-top: 1px solid var(--border-subtle); }
 .footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px;
 }
-
 .footer-logo {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 18px;
-  color: var(--text-primary);
+  font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--text-primary);
 }
-
-.footer-logo .logo-accent {
-  color: var(--gold);
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-links a {
-  font-size: 14px;
-  color: var(--text-muted);
-  transition: color var(--transition-base);
-}
-
-.footer-links a:hover {
-  color: var(--text-primary);
-}
-
-.footer-social {
-  display: flex;
-  gap: 16px;
-}
-
+.footer-logo .logo-accent { color: var(--gold); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 14px; color: var(--text-muted); transition: color var(--transition-base); }
+.footer-links a:hover { color: var(--text-primary); }
+.footer-social { display: flex; gap: 16px; }
 .footer-social a {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle);
+  display: flex; align-items: center; justify-content: center;
   transition: all var(--transition-base);
 }
-
-.footer-social a:hover {
-  background: rgba(212, 168, 67, 0.1);
-  border-color: rgba(212, 168, 67, 0.3);
-}
-
-.footer-social svg {
-  width: 16px;
-  height: 16px;
-  color: var(--text-muted);
-}
-
+.footer-social a:hover { background: rgba(212,168,67,0.1); border-color: rgba(212,168,67,0.3); }
+.footer-social svg { width: 16px; height: 16px; color: var(--text-muted); }
 .footer-bottom {
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-subtle);
-  text-align: center;
-  font-size: 13px;
-  color: var(--text-muted);
+  margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle);
+  text-align: center; font-size: 13px; color: var(--text-muted);
 }
 
 /* ============================================
    RESPONSIVE BREAKPOINTS
    ============================================ */
-
-/* Tablet */
 @media (max-width: 1024px) {
-  .section-title {
-    font-size: 42px;
-  }
-
-  .hero-headline {
-    font-size: 56px;
-  }
-
-  .different-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .highlights-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .highlight-card:first-child {
-    aspect-ratio: 16 / 9;
-  }
-
-  .trust-stats {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .trust-stat-number {
-    font-size: 40px;
-  }
-
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .teachers-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .final-cta .section-title {
-    font-size: 42px;
-  }
+  .section-title { font-size: 48px; }
+  .hero-headline { font-size: 64px; }
+  .different-grid { grid-template-columns: repeat(2, 1fr); }
+  .highlights-grid { grid-template-columns: 1fr; }
+  .highlight-card:first-child { aspect-ratio: 16/9; }
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .teachers-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .lfa-fold-title { font-size: 52px; letter-spacing: 4px; }
+  .lfa-grid { grid-template-columns: repeat(2, 1fr); }
+  .lfa-card-title { font-size: 24px; }
+  .final-cta .section-title { font-size: 48px; }
+  .trust-bar-inner { gap: 40px; }
+  .trust-bar-num { font-size: 44px; }
+  .preview-header h2 { font-size: 48px; }
+  .platform-header h2 { font-size: 44px; }
+  .platform-header .platform-tagline { font-size: 24px; }
+  .platform-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 48px; }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  body {
-    font-size: 16px;
-  }
-
-  .container, .container-wide {
-    padding: 0 16px;
-  }
-
-  .section-title {
-    font-size: 32px;
-  }
-
-  .section-subtitle {
-    font-size: 17px;
-  }
-
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
-
-  /* Nav mobile */
-  .nav-links {
-    display: none;
-  }
-
-  .nav-mobile-toggle {
-    display: flex;
-  }
-
-  /* Hero mobile */
-  .hero {
-    min-height: auto;
-    padding: 130px 16px 60px;
-  }
-
-  .hero-headline {
-    font-size: 42px;
-    letter-spacing: -0.5px;
-  }
-
-  .hero-sub {
-    font-size: 17px;
-  }
-
+  body { font-size: 16px; }
+  .container, .container-wide { padding: 0 16px; }
+  .section-title { font-size: 38px; }
+  .section-subtitle { font-size: 17px; }
+  .eyebrow { font-size: 11px; letter-spacing: 2px; }
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: flex; }
+  .hero { min-height: auto; padding: 130px 16px 60px; }
+  .hero-headline { font-size: 48px; letter-spacing: -0.5px; }
+  .hero-sub { font-size: 17px; }
   .hero-form {
-    flex-direction: column;
-    border-radius: var(--radius-md);
-    padding: 8px;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.06);
+    flex-direction: column; border-radius: var(--radius-md);
+    padding: 8px; gap: 8px; background: rgba(255,255,255,0.06);
   }
-
-  .hero-form input[type="email"] {
-    width: 100%;
-    text-align: center;
-    padding: 14px 16px;
+  .hero-form input[type="email"] { width: 100%; text-align: center; padding: 14px 16px; }
+  .hero-form button { width: 100%; text-align: center; justify-content: center; }
+  .hero-pills { gap: 6px; }
+  .hero-pill { font-size: 12px; padding: 8px 12px; }
+  .hero-trustpilot { margin-bottom: 20px; }
+  .different { padding: 80px 0; }
+  .different-grid { grid-template-columns: 1fr; gap: 16px; }
+  .different-card { padding: 28px 20px; }
+  .who-for { padding: 80px 0; }
+  .who-for-grid { grid-template-columns: 1fr; }
+  .preview { padding: 80px 0; }
+  .preview-header h2 { font-size: 38px; }
+  .highlights { padding: 80px 0; }
+  .highlight-card { aspect-ratio: 4/3; }
+  .highlight-card:first-child { aspect-ratio: 4/3; }
+  .highlight-card h3 { font-size: 22px; }
+  .highlight-card-overlay { padding: 24px; }
+  .curriculum { padding: 80px 0; }
+  .curriculum-trigger { padding: 16px; }
+  .curriculum-body-inner { padding: 0 16px 20px 16px; }
+  .curriculum-num { min-width: 40px; height: 40px; font-size: 15px; }
+  .curriculum-trigger-text h3 { font-size: 16px; }
+  .teachers { padding: 80px 0; }
+  .teachers-grid { grid-template-columns: 1fr; max-width: 100%; }
+  .lfa-fold { padding: 80px 0; }
+  .lfa-fold-title { font-size: 36px; letter-spacing: 3px; margin-bottom: 48px; }
+  .lfa-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .lfa-card { padding: 32px 16px; }
+  .lfa-card-title { font-size: 20px; }
+  .lfa-card-sub { font-size: 11px; }
+  .platform { padding: 72px 0 80px; }
+  .platform-header h2 { font-size: 34px; }
+  .platform-header .platform-tagline { font-size: 20px; }
+  .platform-header p.platform-desc { font-size: 16px; }
+  .platform-grid {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; gap: 0; margin: 0 -16px; padding: 0 16px;
+    scrollbar-width: none;
   }
-
-  .hero-form button {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
-
-  .hero-trust {
-    gap: 6px;
-  }
-
-  .hero-trust-item {
-    font-size: 12px;
-    padding: 8px 12px;
-  }
-
-  /* Different mobile */
-  .different {
-    padding: 80px 0;
-  }
-
-  .different-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .different-card {
-    padding: 28px 20px;
-  }
-
-  /* Highlights mobile */
-  .highlights {
-    padding: 80px 0;
-  }
-
-  .highlight-card {
-    aspect-ratio: 4 / 3;
-  }
-
-  .highlight-card:first-child {
-    aspect-ratio: 4 / 3;
-  }
-
-  .highlight-card h3 {
-    font-size: 22px;
-  }
-
-  .highlight-card-overlay {
-    padding: 24px;
-  }
-
-  /* Curriculum mobile */
-  .curriculum {
-    padding: 80px 0;
-  }
-
-  .curriculum-trigger {
-    padding: 16px;
-  }
-
-  .curriculum-body-inner {
-    padding: 0 16px 20px 16px;
-  }
-
-  .curriculum-num {
-    min-width: 40px;
-    height: 40px;
-    font-size: 15px;
-  }
-
-  .curriculum-trigger-text h3 {
-    font-size: 16px;
-  }
-
-  /* Who mobile */
-  .who {
-    padding: 80px 0;
-  }
-
-  .who-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .who-col {
-    padding: 28px;
-  }
-
-  /* Teachers mobile */
-  .teachers {
-    padding: 80px 0;
-  }
-
-  .teachers-grid {
-    grid-template-columns: 1fr;
-    max-width: 100%;
-  }
-
-  /* Trust mobile */
-  .trust {
-    padding: 80px 0;
-  }
-
-  .trust-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .trust-stat-number {
-    font-size: 36px;
-  }
-
-  .trust-stat {
-    padding: 20px 12px;
-  }
-
-  .trust-badges {
-    gap: 12px;
-  }
-
-  .trust-badge {
-    font-size: 13px;
-    padding: 10px 16px;
-  }
-
-  /* FAQ mobile */
-  .faq {
-    padding: 80px 0;
-  }
-
-  .faq-trigger h3 {
-    font-size: 16px;
-  }
-
-  /* Final CTA mobile */
-  .final-cta {
-    padding: 80px 0;
-  }
-
-  .final-cta .section-title {
-    font-size: 32px;
-  }
-
-  .final-cta-sub {
-    font-size: 17px;
-  }
-
+  .platform-grid::-webkit-scrollbar { display: none; }
+  .platform-card { flex: 0 0 100%; scroll-snap-align: start; padding-right: 24px; }
+  .platform-dots { display: flex; }
+  .testimonials { padding: 80px 0; }
+  .faq { padding: 80px 0; }
+  .faq-trigger h3 { font-size: 16px; }
+  .final-cta { padding: 80px 0; }
+  .final-cta .section-title { font-size: 38px; }
+  .final-cta-sub { font-size: 17px; }
   .final-cta-form {
-    flex-direction: column;
-    border-radius: var(--radius-md);
-    padding: 8px;
-    gap: 8px;
+    flex-direction: column; border-radius: var(--radius-md); padding: 8px; gap: 8px;
   }
-
-  .final-cta-form input[type="email"] {
-    width: 100%;
-    text-align: center;
-    padding: 14px 16px;
-  }
-
-  .final-cta-form button {
-    width: 100%;
-    text-align: center;
-  }
-
-  /* Footer mobile */
-  .footer-inner {
-    flex-direction: column;
-    text-align: center;
-  }
+  .final-cta-form input[type="email"] { width: 100%; text-align: center; padding: 14px 16px; }
+  .final-cta-form button { width: 100%; text-align: center; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .trust-bar-inner { gap: 24px; }
+  .trust-bar-num { font-size: 38px; }
+  .trust-bar { padding: 36px 0; }
 }
 
-/* Small mobile */
 @media (max-width: 480px) {
-  .hero-headline {
-    font-size: 34px;
-  }
+  .hero-headline { font-size: 38px; }
+  .section-title { font-size: 32px; }
+  .trust-bar-inner { gap: 16px; }
+  .trust-bar-num { font-size: 32px; }
+  .trust-bar-stat { min-width: 120px; }
+  .final-cta .section-title { font-size: 32px; }
+  .lfa-fold-title { font-size: 28px; letter-spacing: 2px; }
+  .lfa-card-title { font-size: 18px; }
+  .preview-header h2 { font-size: 32px; }
+  .platform-header h2 { font-size: 28px; }
+}
 
-  .section-title {
-    font-size: 28px;
-  }
-
-  .trust-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .trust-stat-number {
-    font-size: 32px;
-  }
-
-  .final-cta .section-title {
-    font-size: 28px;
-  }
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 </style>
 </head>
@@ -1961,13 +897,11 @@ ul, ol {
       <a href="#highlights">Curriculum</a>
       <a href="#teachers">Instructors</a>
       <a href="#faq">FAQ</a>
-      <a href="#trust">Testimonials</a>
+      <a href="#testimonials">Testimonials</a>
       <a href="#final-cta" class="nav-cta">Enroll Now</a>
     </div>
     <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
@@ -1975,7 +909,7 @@ ul, ol {
   <a href="#highlights" onclick="closeMobileMenu()">Curriculum</a>
   <a href="#teachers" onclick="closeMobileMenu()">Instructors</a>
   <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-  <a href="#trust" onclick="closeMobileMenu()">Testimonials</a>
+  <a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a>
   <a href="#final-cta" class="nav-cta" onclick="closeMobileMenu()" style="text-align:center; display:block; margin-top: 8px;">Enroll Now</a>
 </div>
 
@@ -1992,29 +926,42 @@ ul, ol {
       LIVE ONLINE COURSE <span class="dot"></span> 12 WEEKS <span class="dot"></span> NEXT COHORT ENROLLING
     </div>
     <h1 class="hero-headline">Master the Science of <em>Living Longer</em></h1>
+
+    <!-- Trustpilot Badge -->
+    <div class="hero-trustpilot">
+      <div class="tp-stars">
+        <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
+        <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
+        <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
+        <span class="tp-star"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
+        <span class="tp-star"><svg viewBox="0 0 24 24" style="opacity:0.6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span>
+      </div>
+      <span class="tp-rating">4.6/5 · Based on 600+ reviews</span>
+    </div>
+
     <p class="hero-sub">A 12-session live online academy where you'll read your body's signals, interpret longevity research, and build a personal healthspan blueprint — guided by world-class experts, in a small group, grounded in science.</p>
     <form class="hero-form" onsubmit="handleFormSubmit(event, this)">
       <input type="email" placeholder="Enter your email address" required aria-label="Email address">
       <button type="submit">Reserve Your Spot →</button>
     </form>
-    <div class="hero-trust">
-      <div class="hero-trust-item">
+    <div class="hero-pills">
+      <div class="hero-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
         12 Sessions
       </div>
-      <div class="hero-trust-item">
+      <div class="hero-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         90 Min Each
       </div>
-      <div class="hero-trust-item">
+      <div class="hero-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         8–15 Participants
       </div>
-      <div class="hero-trust-item">
+      <div class="hero-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
         Expert-Led
       </div>
-      <div class="hero-trust-item">
+      <div class="hero-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
         Certificate
       </div>
@@ -2023,13 +970,39 @@ ul, ol {
 </section>
 
 <!-- ============================================
-     3. WHAT MAKES THIS DIFFERENT
+     3. TRUST BAR
+     ============================================ -->
+<section class="trust-bar">
+  <div class="container-wide">
+    <div class="trust-bar-inner">
+      <div class="trust-bar-stat">
+        <div class="trust-bar-num" data-target="400" data-suffix="K+">0</div>
+        <div class="trust-bar-label">Students Worldwide</div>
+      </div>
+      <div class="trust-bar-stat">
+        <div class="trust-bar-num" data-target="20" data-suffix="+">0</div>
+        <div class="trust-bar-label">Years of Excellence</div>
+      </div>
+      <div class="trust-bar-stat">
+        <div class="trust-bar-num" data-target="4.6" data-suffix="/5" data-decimal="true">0</div>
+        <div class="trust-bar-label">Trustpilot Rating</div>
+      </div>
+      <div class="trust-bar-stat">
+        <div class="trust-bar-num" data-target="600" data-suffix="+">0</div>
+        <div class="trust-bar-label">Expert Teachers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     4. WHAT MAKES THIS DIFFERENT
      ============================================ -->
 <section class="different" id="different">
   <div class="container-wide">
     <div class="different-header reveal">
       <p class="eyebrow" style="margin-bottom: 16px;">Why This Course Stands Apart</p>
-      <h2 class="section-title">Not Another Lecture Series</h2>
+      <h2 class="section-title">Built for <span class="gold">Transformation</span>,<br>Not Consumption</h2>
       <p class="section-subtitle" style="margin: 0 auto;">This isn't passive education. It's a structured, interactive experience built for real transformation — not content consumption.</p>
     </div>
     <div class="different-grid">
@@ -2076,86 +1049,72 @@ ul, ol {
 </section>
 
 <!-- ============================================
-     3B. PLATFORM EXPERIENCE
+     5. WHO IS THIS FOR
      ============================================ -->
-<section class="platform" id="platform">
+<section class="who-for" id="who-for">
   <div class="container">
-    <div class="platform-header reveal">
-      <h2>Powered by eTeacher's award-winning learning platform</h2>
-      <div class="platform-tagline">Tailored for adult, lifelong learners</div>
-      <p class="platform-desc">Our proprietary learning management system is a comprehensive, advanced, "all in one" platform — empowering learners with frictionless access to interactive virtual classrooms, courses, and academic resources, all in one place.</p>
+    <div class="who-for-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Is This For You?</p>
+      <h2 class="section-title">Designed for People Who Take<br>Their <span class="gold">Health</span> Seriously</h2>
     </div>
-    <div class="platform-logo reveal">
-      <svg viewBox="0 0 240 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="eTeacher Group">
-        <text x="0" y="28" font-family="Inter, sans-serif" font-size="26" fill="#1A1A2E"><tspan font-weight="300">e</tspan><tspan font-weight="700">Teacher</tspan><tspan font-weight="300" fill="#7A7A8A"> Group</tspan></text>
-      </svg>
-    </div>
-    <div class="platform-grid reveal" id="platformSlider">
-      <!-- Card 1 -->
-      <div class="platform-card">
-        <div class="platform-card-icon">
-          <svg viewBox="0 0 56 56"><rect x="6" y="8" width="30" height="38" rx="3"/><path d="M14 18h14M14 26h14M14 34h8"/><path d="M40 16v28a3 3 0 01-3 3H13" /><circle cx="44" cy="12" r="7"/><path d="M42 12l2 2 4-4" /></svg>
-        </div>
-        <h3>Course &amp; Content Library</h3>
-        <p>Browse your curriculum of interactive modules, videos, reading assignments, worksheets, and quizzes — all organized by session and topic.</p>
+    <div class="who-for-grid">
+      <div class="who-for-card reveal reveal-delay-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <p>Adults 35+ who want to understand their body's aging signals and take proactive control of their healthspan.</p>
       </div>
-      <!-- Card 2 -->
-      <div class="platform-card">
-        <div class="platform-card-icon">
-          <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="20"/><polygon points="23,18 23,38 40,28" /></svg>
-        </div>
-        <h3>Lesson Recordings</h3>
-        <p>All live sessions are recorded and archived, providing lifetime access to every lecture, discussion, and expert walkthrough in your curriculum.</p>
+      <div class="who-for-card reveal reveal-delay-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <p>Health-conscious individuals tired of conflicting advice who want science-backed, data-driven guidance.</p>
       </div>
-      <!-- Card 3 -->
-      <div class="platform-card">
-        <div class="platform-card-icon">
-          <svg viewBox="0 0 56 56"><rect x="8" y="6" width="40" height="30" rx="3"/><path d="M8 30h40"/><path d="M24 36h8v6h-8z"/><path d="M20 42h16"/><circle cx="28" cy="18" r="6"/><path d="M20 28a10 10 0 0116 0"/></svg>
-        </div>
-        <h3>Live Sessions for Q&amp;A</h3>
-        <p>Weekly scheduled open sessions — drop in to ask questions, discuss assignments, or troubleshoot your CGM data with teachers and classmates.</p>
+      <div class="who-for-card reveal reveal-delay-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <p>Professionals who want science-backed lifestyle optimization — not fads, not supplements, not biohacking hype.</p>
       </div>
-      <!-- Card 4 -->
-      <div class="platform-card">
-        <div class="platform-card-icon">
-          <svg viewBox="0 0 56 56"><circle cx="18" cy="20" r="7"/><circle cx="38" cy="20" r="7"/><circle cx="28" cy="38" r="7"/><path d="M24 17h8M20 27l6 6M36 27l-6 6"/></svg>
-        </div>
-        <h3>Discussion Groups</h3>
-        <p>Collaborate with your cohort through forum-based discussions, share CGM insights, meal experiments, and breakthroughs — with ongoing teacher support.</p>
+      <div class="who-for-card reveal reveal-delay-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <p>Anyone curious about CGM, metabolic health, and longevity science — and ready to experiment with their own data.</p>
       </div>
-      <!-- Card 5 -->
-      <div class="platform-card">
-        <div class="platform-card-icon">
-          <svg viewBox="0 0 56 56"><rect x="10" y="6" width="26" height="38" rx="3"/><path d="M18 16h10M18 24h10M18 32h6"/><polyline points="40,14 40,44 10,44"/><path d="M42 20l-6 6-4-3" /></svg>
-        </div>
-        <h3>Progress Tracking</h3>
-        <p>Real-time visibility into your journey — logging completed quizzes, class attendance, homework submissions, and personal experiment results.</p>
-      </div>
-      <!-- Card 6 -->
-      <div class="platform-card">
-        <div class="platform-card-icon">
-          <svg viewBox="0 0 56 56"><circle cx="28" cy="16" r="8"/><circle cx="12" cy="30" r="6"/><circle cx="44" cy="30" r="6"/><path d="M28 24v6M18 34l6 4M38 34l-6 4"/><circle cx="28" cy="42" r="5"/></svg>
-        </div>
-        <h3>24/7 Learners Community</h3>
-        <p>Connect and engage in real time with fellow longevity learners through our vibrant community — share wins, ask questions, and stay accountable.</p>
+      <div class="who-for-card reveal reveal-delay-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <p>People ready to invest 90 minutes per week in their healthspan — with expert guidance and peer accountability.</p>
       </div>
     </div>
-    <div class="platform-dots" id="platformDots"></div>
   </div>
 </section>
 
 <!-- ============================================
-     4. COURSE HIGHLIGHTS
+     6. COURSE PREVIEW
+     ============================================ -->
+<section class="preview" id="preview">
+  <div class="container">
+    <div class="preview-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px; color: #7A7A8A;">Sneak Peek</p>
+      <h2>See What a <span class="gold">Session</span> Looks Like</h2>
+      <p>Watch a 2-minute preview of our live classroom experience</p>
+    </div>
+    <div class="preview-video reveal">
+      <img src="assets/hero-longevity.jpg" alt="Course preview — luminous body pathways visualization" loading="lazy">
+      <div class="preview-video-overlay">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="preview-caption reveal">Preview coming soon — a real session walkthrough with our lead instructor</p>
+  </div>
+</section>
+
+<!-- ============================================
+     7. COURSE HIGHLIGHTS
      ============================================ -->
 <section class="highlights" id="highlights">
   <div class="container-wide">
     <div class="highlights-header reveal">
       <p class="eyebrow" style="margin-bottom: 16px;">Course Highlights</p>
-      <h2 class="section-title">What You'll Master</h2>
+      <h2 class="section-title">Five Pillars of<br><span class="gold">Longevity Science</span></h2>
       <p class="section-subtitle" style="margin: 0 auto;">Five transformative domains — each grounded in peer-reviewed science, each made practical through hands-on experiments and real data.</p>
     </div>
     <div class="highlights-grid">
-      <!-- Card 1: Metabolic Health (full width) -->
       <div class="highlight-card reveal">
         <img src="assets/img-metabolic.jpg" alt="Metabolic health visualization showing mitochondria cells" loading="lazy">
         <div class="highlight-card-overlay">
@@ -2164,7 +1123,6 @@ ul, ol {
           <p>Understand glucose as a signal. See how metabolic dysfunction develops silently — and learn to read your body's data before symptoms appear.</p>
         </div>
       </div>
-      <!-- Card 2 -->
       <div class="highlight-card reveal reveal-delay-1">
         <img src="assets/img-nutrition.jpg" alt="Superfood spread for longevity nutrition" loading="lazy">
         <div class="highlight-card-overlay">
@@ -2173,7 +1131,6 @@ ul, ol {
           <p>Stop thinking in rules. Start thinking in responses. Design meals based on YOUR glucose data, not generic advice.</p>
         </div>
       </div>
-      <!-- Card 3 -->
       <div class="highlight-card reveal reveal-delay-2">
         <img src="assets/img-cgm.jpg" alt="Continuous glucose monitor sensor with phone data display" loading="lazy">
         <div class="highlight-card-overlay">
@@ -2182,7 +1139,6 @@ ul, ol {
           <p>Wear a CGM sensor, interpret real data, and see the invisible patterns driving your energy, sleep, and aging.</p>
         </div>
       </div>
-      <!-- Card 4 -->
       <div class="highlight-card reveal reveal-delay-1">
         <img src="assets/img-movement.jpg" alt="Kettlebell training for longevity and movement as medicine" loading="lazy">
         <div class="highlight-card-overlay">
@@ -2191,9 +1147,8 @@ ul, ol {
           <p>Muscle as a glucose sink. Post-meal walking. Resistance training for insulin sensitivity. Build your age-appropriate plan.</p>
         </div>
       </div>
-      <!-- Card 5 -->
       <div class="highlight-card reveal reveal-delay-2">
-        <img src="assets/img-sleep.jpg" alt="Sleep and brain hologram visualization for circadian rhythm" loading="lazy">
+        <img src="assets/img-sleep.jpg" alt="Sleep and brain hologram visualization" loading="lazy">
         <div class="highlight-card-overlay">
           <span class="highlight-card-number">Module 05</span>
           <h3>Sleep, Stress &amp; Recovery</h3>
@@ -2205,18 +1160,17 @@ ul, ol {
 </section>
 
 <!-- ============================================
-     5. FULL CURRICULUM — 12-SESSION ACCORDION
+     8. FULL CURRICULUM — 12-SESSION ACCORDION
      ============================================ -->
 <section class="curriculum" id="curriculum">
   <div class="container">
     <div class="curriculum-header reveal">
       <p class="eyebrow" style="margin-bottom: 16px;">Full Syllabus</p>
-      <h2 class="section-title">The Complete 12-Session Curriculum</h2>
+      <h2 class="section-title">12 Sessions. 12 Weeks.<br>One Complete <span class="gold">Transformation</span>.</h2>
       <p class="section-subtitle" style="margin: 0 auto;">Each 90-minute session builds on the last. Live instruction, group discussion, hands-on experiments, and between-session assignments that make the science stick.</p>
     </div>
     <div class="curriculum-list">
 
-      <!-- Session 1 -->
       <div class="curriculum-item reveal" data-session="1">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">01</span>
@@ -2242,7 +1196,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 2 -->
       <div class="curriculum-item reveal" data-session="2">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">02</span>
@@ -2268,7 +1221,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 3 -->
       <div class="curriculum-item reveal" data-session="3">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">03</span>
@@ -2294,13 +1246,12 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 4 -->
       <div class="curriculum-item reveal" data-session="4">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">04</span>
           <div class="curriculum-trigger-text">
             <h3>Continuous Glucose Monitoring: Seeing the Invisible</h3>
-            <span>Session 4 · Technology & Data</span>
+            <span>Session 4 · Technology &amp; Data</span>
           </div>
           <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -2320,7 +1271,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 5 -->
       <div class="curriculum-item reveal" data-session="5">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">05</span>
@@ -2346,7 +1296,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 6 -->
       <div class="curriculum-item reveal" data-session="6">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">06</span>
@@ -2372,7 +1321,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 7 -->
       <div class="curriculum-item reveal" data-session="7">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">07</span>
@@ -2398,7 +1346,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 8 -->
       <div class="curriculum-item reveal" data-session="8">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">08</span>
@@ -2424,7 +1371,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 9 -->
       <div class="curriculum-item reveal" data-session="9">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">09</span>
@@ -2450,7 +1396,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 10 -->
       <div class="curriculum-item reveal" data-session="10">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">10</span>
@@ -2476,7 +1421,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 11 -->
       <div class="curriculum-item reveal" data-session="11">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">11</span>
@@ -2502,7 +1446,6 @@ ul, ol {
         </div>
       </div>
 
-      <!-- Session 12 -->
       <div class="curriculum-item reveal" data-session="12">
         <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
           <span class="curriculum-num">12</span>
@@ -2533,71 +1476,13 @@ ul, ol {
 </section>
 
 <!-- ============================================
-     6. WHO THIS IS FOR
-     ============================================ -->
-<section class="who" id="who">
-  <div class="who-bg">
-    <img src="assets/img-stress.jpg" alt="" loading="lazy" aria-hidden="true">
-    <div class="who-bg-overlay"></div>
-  </div>
-  <div class="container who-content">
-    <div class="who-header reveal">
-      <p class="eyebrow" style="margin-bottom: 16px;">Is This For You?</p>
-      <h2 class="section-title">Who This Course Is Designed For</h2>
-    </div>
-    <div class="who-grid">
-      <div class="who-col perfect reveal reveal-delay-1">
-        <div class="who-col-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
-          Perfect For
-        </div>
-        <div class="who-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <p>Adults 35–65 who are curious about aging well — not just avoiding disease, but actively designing their healthspan.</p>
-        </div>
-        <div class="who-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <p>People tired of generic health advice who want personalized, data-driven guidance grounded in real science.</p>
-        </div>
-        <div class="who-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <p>Those willing to invest 90 minutes per week plus between-session experiments to create lasting change.</p>
-        </div>
-        <div class="who-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <p>People who value live discussion and peer learning over passive video content and pre-recorded lectures.</p>
-        </div>
-      </div>
-      <div class="who-col not-for reveal reveal-delay-2">
-        <div class="who-col-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-          Not The Right Fit If
-        </div>
-        <div class="who-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          <p>You're seeking medical diagnosis or treatment — this is education and coaching, not clinical care.</p>
-        </div>
-        <div class="who-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          <p>You want a quick fix or a 30-day transformation promise. This is a 12-week deep dive, not a shortcut.</p>
-        </div>
-        <div class="who-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          <p>You prefer pre-recorded, self-paced content only. Every session here is live, interactive, and built on group dynamics.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     7. MEET THE TEACHERS
+     9. INSTRUCTORS
      ============================================ -->
 <section class="teachers" id="teachers">
   <div class="container">
     <div class="teachers-header reveal">
       <p class="eyebrow" style="margin-bottom: 16px;">Expert Faculty</p>
-      <h2 class="section-title">Your Instructors</h2>
+      <h2 class="section-title">Learn from <span class="gold">Scientists</span> Who<br>Practice What They Teach</h2>
       <p class="section-subtitle" style="margin: 0 auto;">Physicians, researchers, and certified longevity coaches who combine academic rigor with practical, real-world experience.</p>
     </div>
     <div class="teachers-grid">
@@ -2626,49 +1511,142 @@ ul, ol {
 </section>
 
 <!-- ============================================
-     8. TRUST & CREDIBILITY
+     10. LFA EXPERIENCE FOLD
      ============================================ -->
-<section class="trust" id="trust">
+<section class="lfa-fold" id="experience">
   <div class="container-wide">
-    <div class="trust-header reveal">
-      <p class="eyebrow" style="margin-bottom: 16px;">Proven Track Record</p>
-      <h2 class="section-title">Trusted by Over 400,000 Learners Worldwide</h2>
-    </div>
-
-    <!-- Stats Row -->
-    <div class="trust-stats reveal">
-      <div class="trust-stat">
-        <div class="trust-stat-number">400K+</div>
-        <div class="trust-stat-label">Students Enrolled</div>
-      </div>
-      <div class="trust-stat">
-        <div class="trust-stat-number">20+</div>
-        <div class="trust-stat-label">Years Teaching Online</div>
-      </div>
-      <div class="trust-stat">
-        <div class="trust-stat-number">4.6/5</div>
-        <div class="trust-stat-label">Trustpilot Rating</div>
-        <div class="trust-stars">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" style="opacity:0.7"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <h2 class="lfa-fold-title reveal">WHAT SETS US APART</h2>
+    <div class="lfa-grid">
+      <div class="lfa-card reveal reveal-delay-1">
+        <div class="lfa-card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="14" r="8"/>
+            <path d="M12 38v-2c0-5.523 5.373-10 12-10s12 4.477 12 10v2"/>
+            <path d="M24 6v-2M18 8l-1.5-1.5M30 8l1.5-1.5"/>
+          </svg>
         </div>
+        <div class="lfa-card-sub">THE WORLD'S LEADING</div>
+        <div class="lfa-card-title">LONGEVITY EXPERTS</div>
       </div>
-      <div class="trust-stat">
-        <div class="trust-stat-number">600+</div>
-        <div class="trust-stat-label">Expert Teachers</div>
+      <div class="lfa-card reveal reveal-delay-2">
+        <div class="lfa-card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="8" width="36" height="28" rx="3"/>
+            <circle cx="18" cy="22" r="4"/>
+            <circle cx="30" cy="22" r="4"/>
+            <path d="M14 32h20"/>
+          </svg>
+        </div>
+        <div class="lfa-card-sub">LIVE ONLINE COURSES</div>
+        <div class="lfa-card-title">IN SMALL GROUPS</div>
       </div>
-      <div class="trust-stat">
-        <div class="trust-stat-number">5</div>
-        <div class="trust-stat-label">Online Schools</div>
+      <div class="lfa-card reveal reveal-delay-3">
+        <div class="lfa-card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 4C13 4 8 14 8 24s5 20 16 20 16-10 16-20S35 4 24 4z"/>
+            <path d="M20 18c0-2 2-4 4-4s4 2 4 4-2 4-4 4"/>
+            <circle cx="24" cy="30" r="1.5"/>
+          </svg>
+        </div>
+        <div class="lfa-card-sub">SCIENCE-BACKED</div>
+        <div class="lfa-card-title">LEARNING EXPERIENCE</div>
+      </div>
+      <div class="lfa-card reveal reveal-delay-4">
+        <div class="lfa-card-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="8" width="36" height="24" rx="3"/>
+            <path d="M18 36h12"/>
+            <path d="M24 32v4"/>
+            <polyline points="16 20 22 26 32 16"/>
+          </svg>
+        </div>
+        <div class="lfa-card-sub">A PREMIUM</div>
+        <div class="lfa-card-title">LEARNING PLATFORM</div>
       </div>
     </div>
+    <div class="lfa-cta reveal">
+      <a href="#final-cta">LEARN MORE</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Testimonials -->
-    <div class="testimonials-grid reveal">
-      <div class="testimonial-card">
+<!-- ============================================
+     11. PLATFORM
+     ============================================ -->
+<section class="platform" id="platform">
+  <div class="container">
+    <div class="platform-header reveal">
+      <h2>Powered by eTeacher's Award-Winning Learning Platform</h2>
+      <div class="platform-tagline">Tailored for adult, lifelong learners</div>
+      <p class="platform-desc">Our proprietary learning management system is a comprehensive, advanced, "all in one" platform — empowering learners with frictionless access to interactive virtual classrooms, courses, and academic resources, all in one place.</p>
+    </div>
+    <div class="platform-logo reveal">
+      <svg viewBox="0 0 240 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="eTeacher Group">
+        <text x="0" y="28" font-family="Inter, sans-serif" font-size="26" fill="#1A1A2E"><tspan font-weight="300">e</tspan><tspan font-weight="700">Teacher</tspan><tspan font-weight="300" fill="#7A7A8A"> Group</tspan></text>
+      </svg>
+    </div>
+    <div class="platform-grid reveal" id="platformSlider">
+      <div class="platform-card">
+        <div class="platform-card-icon">
+          <svg viewBox="0 0 56 56"><rect x="6" y="8" width="30" height="38" rx="3"/><path d="M14 18h14M14 26h14M14 34h8"/><path d="M40 16v28a3 3 0 01-3 3H13"/><circle cx="44" cy="12" r="7"/><path d="M42 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Course &amp; Content Library</h3>
+        <p>Browse your curriculum of interactive modules, videos, reading assignments, worksheets, and quizzes — all organized by session and topic.</p>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-icon">
+          <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="20"/><polygon points="23,18 23,38 40,28"/></svg>
+        </div>
+        <h3>Lesson Recordings</h3>
+        <p>All live sessions are recorded and archived, providing lifetime access to every lecture, discussion, and expert walkthrough in your curriculum.</p>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-icon">
+          <svg viewBox="0 0 56 56"><rect x="8" y="6" width="40" height="30" rx="3"/><path d="M8 30h40"/><path d="M24 36h8v6h-8z"/><path d="M20 42h16"/><circle cx="28" cy="18" r="6"/><path d="M20 28a10 10 0 0116 0"/></svg>
+        </div>
+        <h3>Live Sessions for Q&amp;A</h3>
+        <p>Weekly scheduled open sessions — drop in to ask questions, discuss assignments, or troubleshoot your CGM data with teachers and classmates.</p>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-icon">
+          <svg viewBox="0 0 56 56"><circle cx="18" cy="20" r="7"/><circle cx="38" cy="20" r="7"/><circle cx="28" cy="38" r="7"/><path d="M24 17h8M20 27l6 6M36 27l-6 6"/></svg>
+        </div>
+        <h3>Discussion Groups</h3>
+        <p>Collaborate with your cohort through forum-based discussions, share CGM insights, meal experiments, and breakthroughs — with ongoing teacher support.</p>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-icon">
+          <svg viewBox="0 0 56 56"><rect x="10" y="6" width="26" height="38" rx="3"/><path d="M18 16h10M18 24h10M18 32h6"/><polyline points="40,14 40,44 10,44"/><path d="M42 20l-6 6-4-3"/></svg>
+        </div>
+        <h3>Progress Tracking</h3>
+        <p>Real-time visibility into your journey — logging completed quizzes, class attendance, homework submissions, and personal experiment results.</p>
+      </div>
+      <div class="platform-card">
+        <div class="platform-card-icon">
+          <svg viewBox="0 0 56 56"><circle cx="28" cy="16" r="8"/><circle cx="12" cy="30" r="6"/><circle cx="44" cy="30" r="6"/><path d="M28 24v6M18 34l6 4M38 34l-6 4"/><circle cx="28" cy="42" r="5"/></svg>
+        </div>
+        <h3>24/7 Learners Community</h3>
+        <p>Connect and engage in real time with fellow longevity learners through our vibrant community — share wins, ask questions, and stay accountable.</p>
+      </div>
+    </div>
+    <div class="platform-dots" id="platformDots"></div>
+  </div>
+</section>
+
+<!-- ============================================
+     12. TESTIMONIALS
+     ============================================ -->
+<section class="testimonials" id="testimonials">
+  <div class="container-wide">
+    <div class="testimonials-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Student Stories</p>
+      <h2 class="section-title">What Our <span class="gold">Students</span><br>Are Saying</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-quote-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/></svg>
+        </div>
         <div class="testimonial-stars">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -2681,11 +1659,14 @@ ul, ol {
           <div class="testimonial-author-avatar">SK</div>
           <div class="testimonial-author-info">
             <strong>Sarah K.</strong>
-            <span>San Francisco, CA</span>
+            <span>San Francisco, USA</span>
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-quote-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/></svg>
+        </div>
         <div class="testimonial-stars">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -2693,7 +1674,7 @@ ul, ol {
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <p class="testimonial-text">"The CGM module was eye-opening. Seeing my glucose data in real time completely changed how I think about food. The instructors explained everything without jargon and the peer group kept me accountable. Worth every minute."</p>
+        <p class="testimonial-text">"The CGM module was a revelation. Seeing my own glucose data in real-time, then discussing it with my cohort and instructors — that combination of personal data and expert interpretation is something you can't get from a book or podcast."</p>
         <div class="testimonial-author">
           <div class="testimonial-author-avatar">MR</div>
           <div class="testimonial-author-info">
@@ -2702,7 +1683,10 @@ ul, ol {
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="testimonial-quote-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/></svg>
+        </div>
         <div class="testimonial-stars">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -2710,96 +1694,52 @@ ul, ol {
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <p class="testimonial-text">"I was skeptical about live online courses, but the platform and teaching quality exceeded my expectations. Having real-time Q&A with a physician about my metabolic data? You can't get that from a YouTube video. Highly recommend."</p>
+        <p class="testimonial-text">"As a 52-year-old executive, I thought I knew about health. This course showed me I was missing the most important layer — understanding my own metabolic signals. The sleep module alone was worth the entire investment."</p>
         <div class="testimonial-author">
-          <div class="testimonial-author-avatar">AL</div>
+          <div class="testimonial-author-avatar">AT</div>
           <div class="testimonial-author-info">
-            <strong>Anika L.</strong>
+            <strong>Anika T.</strong>
             <span>Berlin, Germany</span>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Badges -->
-    <div class="trust-badges reveal">
-      <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        Trustpilot Verified
-      </div>
-      <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        SSL Secure Enrollment
-      </div>
-      <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-        Certified Online Education
-      </div>
-      <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Money-Back Guarantee
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================
-     9. FAQ ACCORDION
+     13. FAQ
      ============================================ -->
 <section class="faq" id="faq">
   <div class="container">
     <div class="faq-header reveal">
-      <p class="eyebrow" style="margin-bottom: 16px;">Got Questions?</p>
-      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="eyebrow" style="margin-bottom: 16px;">Common Questions</p>
+      <h2 class="section-title"><span class="gold">Everything</span> You<br>Need to Know</h2>
     </div>
     <div class="faq-list">
 
       <div class="faq-item reveal">
         <button class="faq-trigger" onclick="toggleFaq(this)">
-          <h3>What do I need to participate? Any prerequisites?</h3>
+          <h3>What's the time commitment?</h3>
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>No medical or scientific background required. You need a computer with a webcam, a stable internet connection, and genuine curiosity about your health. The course is designed for educated adults who want to understand the science, not for healthcare professionals (though they're welcome too). All technical concepts are explained from the ground up.</p>
-          </div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner"><p>Each live session is 90 minutes, once per week, for 12 weeks. Between sessions, expect 30–60 minutes of self-guided experiments and journaling. Total commitment: about 2.5 hours per week, plus the personal experiments that naturally fold into your daily life (like a post-meal walk or sleep adjustment).</p></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-trigger" onclick="toggleFaq(this)">
-          <h3>Do I need a Continuous Glucose Monitor (CGM)?</h3>
+          <h3>Do I need a CGM device?</h3>
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>A CGM is recommended but not required. If you choose to use one, we'll guide you through setup and interpretation. If you prefer not to wear a sensor, we provide anonymized datasets for all exercises so you can still fully participate and learn the skills. Many participants find the CGM experience transformative, but the course is designed to work both ways.</p>
-          </div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner"><p>A CGM is recommended but not required. If you choose to use one, we'll guide you through setup and interpretation. If not, we provide anonymized real datasets you can learn from. Many participants find the course valuable either way — the principles of metabolic health apply whether or not you're wearing a sensor.</p></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-trigger" onclick="toggleFaq(this)">
-          <h3>How much time should I commit each week?</h3>
+          <h3>Is this a medical program?</h3>
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>Plan for approximately 3 hours per week: 90 minutes for the live session, plus 60–90 minutes for between-session work (experiments, journaling, and reflection). The between-session work is designed to fit into your daily life — you're adjusting real meals, walks, and sleep habits, not writing essays. Most participants find it integrates naturally once they start.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item reveal">
-        <button class="faq-trigger" onclick="toggleFaq(this)">
-          <h3>Is this medical advice?</h3>
-          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>No. This is a health education course, not medical care. Our instructors include physicians and PhDs, but they're teaching you to understand your body — not diagnosing or treating conditions. The course is designed to complement your existing healthcare, not replace it. If you have specific medical concerns, we always recommend consulting your physician.</p>
-          </div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner"><p>No. This is an educational and coaching program, not clinical care. We don't diagnose, treat, or prescribe. Our instructors are credentialed scientists and coaches, but the course is designed for healthy adults who want to optimize — not patients who need treatment. If you have specific medical concerns, we encourage you to work with your physician alongside this course.</p></div></div>
       </div>
 
       <div class="faq-item reveal">
@@ -2807,47 +1747,31 @@ ul, ol {
           <h3>What if I miss a live session?</h3>
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>All sessions are recorded and made available within 24 hours. While we strongly encourage live attendance (the interactive elements are where the magic happens), we understand life gets in the way. You can watch the recording and still complete the between-session work. If you miss more than 2 sessions, we'll work with you on a catch-up plan to ensure you can still earn your certificate.</p>
-          </div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner"><p>All sessions are recorded and available within 24 hours on our platform. While live attendance is strongly encouraged for the interactive elements (breakout rooms, real-time Q&A), you can catch up with recordings and still complete all assignments. We recommend attending at least 10 of 12 sessions live for the best experience.</p></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-trigger" onclick="toggleFaq(this)">
-          <h3>How big are the groups?</h3>
+          <h3>Who are the instructors?</h3>
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>Each cohort has 8–15 participants. This isn't arbitrary — it's the optimal range for meaningful discussion, personalized attention, and peer accountability. Small enough that your instructor knows your name and your specific goals, large enough for diverse perspectives during breakout sessions. When a cohort fills up, the next one opens.</p>
-          </div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner"><p>Our faculty includes Maya Elhalal (Founder, Longevity Science), David Barzilai MD/PhD (Healthspan Coach), and guest faculty from the xLongevity certified coach network. Each brings a unique blend of research credentials and practical coaching experience. No celebrity doctors — just credible, dedicated experts who work directly with you.</p></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-trigger" onclick="toggleFaq(this)">
-          <h3>When is the next cohort and what does it cost?</h3>
+          <h3>What's the course schedule and pricing?</h3>
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>New cohorts launch regularly based on demand. Enter your email above to get notified when the next enrollment window opens — you'll receive the full pricing, schedule, and early-bird details before the public announcement. Early registrants receive priority placement and may be eligible for a founding member discount.</p>
-          </div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner"><p>New cohorts begin regularly. Enter your email above and we'll send you the next available start date, session times, and full pricing details. Early enrollment discounts are available for each cohort.</p></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-trigger" onclick="toggleFaq(this)">
-          <h3>Do I get a certificate?</h3>
+          <h3>What do I get at the end?</h3>
           <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <div class="faq-body">
-          <div class="faq-body-inner">
-            <p>Yes. Upon completing all 12 sessions and the between-session assignments, you'll receive the Longevity Health Reset Certificate. This isn't a participation trophy — it represents genuine mastery of the material, completion of hands-on experiments, and delivery of your Personal Longevity Blueprint. It's a credential you earned through real work.</p>
-          </div>
-        </div>
+        <div class="faq-body"><div class="faq-body-inner"><p>You'll graduate with: (1) a Personal Longevity Blueprint covering nutrition, movement, sleep, stress, and monitoring; (2) a 90-Day Action Plan; (3) lifetime access to all session recordings; (4) a Longevity Health Reset certificate; and (5) ongoing access to the learner community.</p></div></div>
       </div>
 
     </div>
@@ -2855,52 +1779,44 @@ ul, ol {
 </section>
 
 <!-- ============================================
-     10. FINAL CTA
+     14. FINAL CTA
      ============================================ -->
 <section class="final-cta" id="final-cta">
-  <div class="container final-cta-content reveal">
-    <p class="eyebrow" style="margin-bottom: 20px;">Start Your Journey</p>
-    <h2 class="section-title">Your Healthspan Transformation Starts Here</h2>
-    <p class="final-cta-sub">Join the next cohort. 12 sessions. Small group. Expert-led. The most structured, science-grounded longevity education you'll find.</p>
-    <form class="final-cta-form" onsubmit="handleFormSubmit(event, this)">
-      <input type="email" placeholder="Enter your email address" required aria-label="Email address">
-      <button type="submit">Apply for Next Cohort →</button>
-    </form>
-    <p class="final-cta-note">Limited to 15 participants per cohort. Early registration recommended.</p>
+  <div class="container">
+    <div class="final-cta-content reveal">
+      <h2 class="section-title">Your Healthspan <span class="gold">Transformation</span><br>Starts Here</h2>
+      <p class="final-cta-sub">Join 400K+ students worldwide who've trusted eTeacher to deliver world-class online education. Your next chapter in longevity science begins with a single step.</p>
+      <form class="final-cta-form" onsubmit="handleFormSubmit(event, this)">
+        <input type="email" placeholder="Enter your email address" required aria-label="Email address">
+        <button type="submit">Reserve Your Spot →</button>
+      </form>
+      <p class="final-cta-note">No commitment required · We'll send you cohort details and pricing</p>
+    </div>
   </div>
 </section>
 
 <!-- ============================================
-     11. FOOTER
+     15. FOOTER
      ============================================ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-logo">
-        e<span class="logo-accent">Teacher</span> Longevity
-      </div>
+      <div class="footer-logo">e<span class="logo-accent">Teacher</span> Longevity</div>
       <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Contact</a>
+        <a href="#highlights">Curriculum</a>
+        <a href="#teachers">Instructors</a>
+        <a href="#faq">FAQ</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
       </div>
       <div class="footer-social">
-        <a href="#" aria-label="Twitter/X">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l11.733 16h4.267l-11.733-16z"/><path d="M4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
-        </a>
-        <a href="#" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="#" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="#" aria-label="YouTube">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-        </a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 eTeacher Longevity. All rights reserved.
+      &copy; 2026 eTeacher Group. All rights reserved. eTeacher Longevity is part of the eTeacher Group family of online schools.
     </div>
   </div>
 </footer>
@@ -2909,280 +1825,168 @@ ul, ol {
      JAVASCRIPT
      ============================================ -->
 <script>
-/* ============================================
-   Navigation Scroll Effect
-   ============================================ */
+/* Navigation scroll effect */
 const nav = document.getElementById('mainNav');
-let lastScrollY = 0;
-
+let lastScroll = 0;
 window.addEventListener('scroll', () => {
-  const currentScrollY = window.scrollY;
-  if (currentScrollY > 60) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-  lastScrollY = currentScrollY;
+  nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
-/* ============================================
-   Mobile Menu Toggle
-   ============================================ */
+/* Mobile menu */
 const mobileToggle = document.getElementById('mobileToggle');
 const mobileMenu = document.getElementById('mobileMenu');
-let menuOpen = false;
-
 mobileToggle.addEventListener('click', () => {
-  menuOpen = !menuOpen;
-  mobileMenu.classList.toggle('active', menuOpen);
-  const spans = mobileToggle.querySelectorAll('span');
-  if (menuOpen) {
-    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-    spans[1].style.opacity = '0';
-    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-  } else {
-    spans[0].style.transform = 'none';
-    spans[1].style.opacity = '1';
-    spans[2].style.transform = 'none';
-  }
+  mobileMenu.classList.toggle('active');
 });
-
 function closeMobileMenu() {
-  menuOpen = false;
   mobileMenu.classList.remove('active');
-  const spans = mobileToggle.querySelectorAll('span');
-  spans[0].style.transform = 'none';
-  spans[1].style.opacity = '1';
-  spans[2].style.transform = 'none';
 }
 
-/* ============================================
-   Smooth Scroll for Anchor Links
-   ============================================ */
+/* Smooth scroll for anchor links */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
       const offset = 80;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
   });
 });
 
-/* ============================================
-   Intersection Observer — Scroll Reveals
-   ============================================ */
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -60px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
+/* IntersectionObserver for reveal animations */
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+      revealObserver.unobserve(entry.target);
     }
   });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+/* Trust bar animated counters */
+let countersAnimated = false;
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !countersAnimated) {
+      countersAnimated = true;
+      document.querySelectorAll('.trust-bar-num').forEach(counter => {
+        const target = parseFloat(counter.dataset.target);
+        const suffix = counter.dataset.suffix || '';
+        const isDecimal = counter.dataset.decimal === 'true';
+        const duration = 2000;
+        const start = performance.now();
+        function animate(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = isDecimal ? (target * eased).toFixed(1) : Math.floor(target * eased);
+          counter.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+const trustBar = document.querySelector('.trust-bar');
+if (trustBar) counterObserver.observe(trustBar);
 
-/* ============================================
-   Curriculum Accordion
-   ============================================ */
+/* Curriculum accordion */
 function toggleCurriculum(trigger) {
   const item = trigger.closest('.curriculum-item');
   const body = item.querySelector('.curriculum-body');
-  const inner = body.querySelector('.curriculum-body-inner');
   const isActive = item.classList.contains('active');
 
-  // Close all other items
-  document.querySelectorAll('.curriculum-item.active').forEach(openItem => {
-    if (openItem !== item) {
-      openItem.classList.remove('active');
-      openItem.querySelector('.curriculum-body').style.maxHeight = '0';
-    }
+  // Close all
+  document.querySelectorAll('.curriculum-item.active').forEach(i => {
+    i.classList.remove('active');
+    i.querySelector('.curriculum-body').style.maxHeight = '0';
   });
 
-  if (isActive) {
-    item.classList.remove('active');
-    body.style.maxHeight = '0';
-  } else {
+  // Open clicked (if not already active)
+  if (!isActive) {
     item.classList.add('active');
-    body.style.maxHeight = inner.scrollHeight + 'px';
+    body.style.maxHeight = body.scrollHeight + 'px';
   }
 }
 
-/* ============================================
-   FAQ Accordion
-   ============================================ */
+/* FAQ accordion */
 function toggleFaq(trigger) {
   const item = trigger.closest('.faq-item');
   const body = item.querySelector('.faq-body');
-  const inner = body.querySelector('.faq-body-inner');
   const isActive = item.classList.contains('active');
 
-  // Close all other items
-  document.querySelectorAll('.faq-item.active').forEach(openItem => {
-    if (openItem !== item) {
-      openItem.classList.remove('active');
-      openItem.querySelector('.faq-body').style.maxHeight = '0';
-    }
+  document.querySelectorAll('.faq-item.active').forEach(i => {
+    i.classList.remove('active');
+    i.querySelector('.faq-body').style.maxHeight = '0';
   });
 
-  if (isActive) {
-    item.classList.remove('active');
-    body.style.maxHeight = '0';
-  } else {
+  if (!isActive) {
     item.classList.add('active');
-    body.style.maxHeight = inner.scrollHeight + 'px';
+    body.style.maxHeight = body.scrollHeight + 'px';
   }
 }
 
-/* ============================================
-   Form Submission Handler
-   ============================================ */
+/* Form submission */
 function handleFormSubmit(e, form) {
   e.preventDefault();
   const email = form.querySelector('input[type="email"]').value;
-  if (email) {
-    const btn = form.querySelector('button');
-    const originalText = btn.textContent;
-    btn.textContent = 'Thank you! We\'ll be in touch.';
-    btn.style.pointerEvents = 'none';
-    btn.style.opacity = '0.8';
-    form.querySelector('input[type="email"]').value = '';
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.pointerEvents = '';
-      btn.style.opacity = '';
-    }, 4000);
-  }
+  const btn = form.querySelector('button');
+  const originalText = btn.textContent;
+  btn.textContent = 'Thank you! ✓';
+  btn.style.background = 'linear-gradient(135deg, #2D7A4F, #3A9D6A)';
+  btn.style.color = '#fff';
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.style.background = '';
+    btn.style.color = '';
+    form.reset();
+  }, 3000);
 }
 
-/* ============================================
-   Animated Stat Counter
-   ============================================ */
-function animateCounters() {
-  const stats = document.querySelectorAll('.trust-stat-number');
-  stats.forEach(stat => {
-    if (stat.dataset.animated) return;
-    const text = stat.textContent;
-    const hasPlus = text.includes('+');
-    const hasSlash = text.includes('/');
-    const hasK = text.includes('K');
-
-    if (hasSlash) {
-      // e.g., "4.6/5" — don't animate
-      stat.dataset.animated = 'true';
-      return;
-    }
-
-    let target;
-    let suffix = '';
-
-    if (hasK) {
-      target = parseFloat(text.replace(/[^0-9.]/g, ''));
-      suffix = 'K' + (hasPlus ? '+' : '');
-    } else {
-      target = parseInt(text.replace(/[^0-9]/g, ''));
-      suffix = hasPlus ? '+' : '';
-    }
-
-    const duration = 2000;
-    const startTime = performance.now();
-    const startVal = 0;
-
-    function easeOutExpo(t) {
-      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-    }
-
-    function update(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easeOutExpo(progress);
-
-      if (hasK) {
-        const current = startVal + (target - startVal) * easedProgress;
-        stat.textContent = Math.round(current) + suffix;
-      } else {
-        const current = Math.round(startVal + (target - startVal) * easedProgress);
-        stat.textContent = current + suffix;
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      }
-    }
-
-    stat.dataset.animated = 'true';
-    requestAnimationFrame(update);
-  });
-}
-
-// Observe the trust section to trigger counter animation
-const trustSection = document.querySelector('.trust-stats');
-if (trustSection) {
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounters();
-        counterObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  counterObserver.observe(trustSection);
-}
-
-/* ============================================
-   Platform Mobile Slider Dots
-   ============================================ */
+/* Platform mobile slider dots */
 (function() {
   const slider = document.getElementById('platformSlider');
   const dotsContainer = document.getElementById('platformDots');
   if (!slider || !dotsContainer) return;
 
-  const cards = slider.querySelectorAll('.platform-card');
-  const totalCards = cards.length;
-  if (totalCards === 0) return;
-
-  // Create dot buttons
-  for (let i = 0; i < totalCards; i++) {
-    const dot = document.createElement('button');
-    dot.className = 'platform-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-    dot.addEventListener('click', () => {
-      cards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  function initDots() {
+    if (window.innerWidth > 768) { dotsContainer.innerHTML = ''; return; }
+    const cards = slider.querySelectorAll('.platform-card');
+    dotsContainer.innerHTML = '';
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'platform-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to card ' + (i + 1));
+      dot.addEventListener('click', () => {
+        cards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+      dotsContainer.appendChild(dot);
     });
-    dotsContainer.appendChild(dot);
   }
 
-  const dots = dotsContainer.querySelectorAll('.platform-dot');
+  function syncDots() {
+    if (window.innerWidth > 768) return;
+    const cards = slider.querySelectorAll('.platform-card');
+    const scrollLeft = slider.scrollLeft;
+    const cardWidth = cards[0]?.offsetWidth || 1;
+    const activeIndex = Math.round(scrollLeft / cardWidth);
+    dotsContainer.querySelectorAll('.platform-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeIndex);
+    });
+  }
 
-  // Sync active dot on scroll
-  let scrollTimeout;
-  slider.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      const sliderLeft = slider.scrollLeft;
-      const cardWidth = cards[0].offsetWidth;
-      const activeIndex = Math.round(sliderLeft / cardWidth);
-      dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
-    }, 50);
-  }, { passive: true });
+  initDots();
+  window.addEventListener('resize', initDots);
+  slider.addEventListener('scroll', syncDots, { passive: true });
 })();
 
-/* ============================================
-   Prefers Reduced Motion
-   ============================================ */
+/* Prefers reduced motion */
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('.reveal').forEach(el => {
-    el.classList.add('visible');
-    el.style.transition = 'none';
-  });
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 }
 </script>
 
