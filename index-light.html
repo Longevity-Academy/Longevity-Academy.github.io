@@ -790,11 +790,15 @@ ul, ol { list-style: none; }
   transform: translateY(-4px);
 }
 .teacher-avatar {
-  width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 24px;
+  width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 24px;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--accent);
   background: rgba(0,0,0,0.02);
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 2px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.teacher-avatar img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
 }
 .teacher-name {
   font-family: var(--font-display); font-weight: 700; font-size: 22px;
@@ -2120,13 +2124,13 @@ ul, ol { list-style: none; }
     </div>
     <div class="teachers-grid">
       <div class="teacher-card reveal reveal-delay-1">
-        <div class="teacher-avatar">ME</div>
+        <div class="teacher-avatar"><img src="assets/maya-elhalal.jpg" alt="Maya Elhalal"></div>
         <h3 class="teacher-name">Maya Elhalal</h3>
         <p class="teacher-role">Lead Instructor &amp; Longevity Educator</p>
         <p class="teacher-bio">Founder of Longevity Science. Experienced in aging science workshops, glucose management, and lifestyle optimization. Leads longevity strategy programs and retreats across three continents.</p>
       </div>
       <div class="teacher-card reveal reveal-delay-2">
-        <div class="teacher-avatar">DB</div>
+        <div class="teacher-avatar"><img src="assets/david-barzilai.jpg" alt="David Barzilai, MD, PhD"></div>
         <h3 class="teacher-name">David Barzilai, MD, PhD</h3>
         <p class="teacher-role">Healthspan Coach</p>
         <p class="teacher-bio">Physician and healthspan coaching specialist. Focuses on metabolic health, stress, sleep, and daily habits — grounded in longevity science, not expensive clinical interventions.</p>
