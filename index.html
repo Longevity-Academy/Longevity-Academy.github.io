@@ -1144,6 +1144,170 @@ ul, ol { list-style: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* ============================================
+   OUTCOMES SECTION
+   ============================================ */
+.outcomes { padding: 120px 0; }
+.outcomes-header { text-align: center; margin-bottom: 64px; }
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.outcomes-card {
+  padding: 36px 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.outcomes-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+.outcomes-card-num {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  letter-spacing: 0.1em;
+}
+.outcomes-card h3 {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.outcomes-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+@media (max-width: 900px) {
+  .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .outcomes-grid { grid-template-columns: 1fr; }
+  .outcomes { padding: 80px 0; }
+}
+
+/* ============================================
+   METHOD SECTION
+   ============================================ */
+.method { padding: 120px 0; }
+.method-header { text-align: center; margin-bottom: 64px; }
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.method-card {
+  text-align: center;
+  padding: 40px 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.method-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+.method-card-icon {
+  width: 56px; height: 56px;
+  margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 14px;
+  background: rgba(0,110,255,0.08);
+  color: var(--accent);
+}
+.method-card-icon svg { width: 28px; height: 28px; }
+.method-card h3 {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.method-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+@media (max-width: 900px) {
+  .method-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .method-grid { grid-template-columns: 1fr; }
+  .method { padding: 80px 0; }
+}
+
+/* ============================================
+   HOW IT WORKS SECTION
+   ============================================ */
+.how-it-works { padding: 120px 0; }
+.how-it-works-header { text-align: center; margin-bottom: 64px; }
+.how-it-works-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.how-step {
+  flex: 1;
+  text-align: center;
+  padding: 0 24px;
+}
+.how-step-num {
+  width: 56px; height: 56px;
+  margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+}
+.how-step h3 {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.how-step p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.how-step-line {
+  width: 60px;
+  height: 2px;
+  background: rgba(255,255,255,0.12);
+  margin-top: 28px;
+  flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .how-it-works-steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .how-step { padding: 0; max-width: 400px; }
+  .how-step-line {
+    width: 2px; height: 40px;
+  }
+  .how-it-works { padding: 80px 0; }
+}
+
 </style>
 </head>
 <body>
@@ -1265,89 +1429,97 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ============================================
-     4. WHAT MAKES THIS DIFFERENT
+     3b. OUTCOMES — BY THE END OF THIS COURSE
      ============================================ -->
-<section class="different" id="different">
-  <div class="container-wide">
-    <div class="different-header reveal">
-      <p class="different-bridge">You've read Outlive. You've followed The Drive. Now what?</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">Why This Is Different</p>
-      <h2 class="section-title">Built for People Who've Already<br>Done the <span class="gold">Prerequisites</span></h2>
-      <p class="section-subtitle" style="margin: 0 auto;">If you know the difference between ApoB and LDL-C, you're in the right place. This is where podcast listening becomes clinical-grade understanding.</p>
+<section class="outcomes" id="outcomes">
+  <div class="container">
+    <div class="outcomes-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">What You Will Gain</p>
+      <h2 class="section-title">By the End of This Course,<br>You Will Be Able To</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">12 sessions. 12 weeks. These are the specific skills and capabilities you walk away with.</p>
     </div>
-    <div class="different-grid">
-      <div class="different-card reveal reveal-delay-1">
-        <div class="different-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-        </div>
-        <h3>Medicine 3.0 Faculty</h3>
-        <p>Taught by clinicians and researchers who practice Medicine 3.0, not Medicine 2.0. The gap between your GP and a longevity physician is enormous. This bridges it.</p>
+    <div class="outcomes-grid">
+      <div class="outcomes-card reveal reveal-delay-1">
+        <div class="outcomes-card-num">01</div>
+        <h3>Read Your Own Bloodwork Like a Longevity Clinician</h3>
+        <p>Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel your GP reviews in 90 seconds.</p>
       </div>
-      <div class="different-card reveal reveal-delay-2">
-        <div class="different-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-          </svg>
-        </div>
-        <h3>8–15 Per Cohort</h3>
-        <p>You're not an audience — you're a cohort. Ask the questions your GP doesn't know how to answer. Real discussion, not pre-recorded platitudes.</p>
+      <div class="outcomes-card reveal reveal-delay-2">
+        <div class="outcomes-card-num">02</div>
+        <h3>Build a Personalized Longevity Protocol</h3>
+        <p>Leave with a written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology, not a generic template.</p>
       </div>
-      <div class="different-card reveal reveal-delay-3">
-        <div class="different-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-          </svg>
-        </div>
-        <h3>Where the Research Actually Is</h3>
-        <p>Not last year's consensus — what the frontier labs are publishing now. Live sessions that go where the science is, not where the textbooks stopped.</p>
+      <div class="outcomes-card reveal reveal-delay-3">
+        <div class="outcomes-card-num">03</div>
+        <h3>Interpret CGM Data and Glucose Responses</h3>
+        <p>Understand what your continuous glucose monitor is actually telling you — food order effects, overnight patterns, and the metabolic signals that matter for long-term health.</p>
       </div>
-      <div class="different-card reveal reveal-delay-4">
-        <div class="different-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-          </svg>
-        </div>
-        <h3>Protocol, Not Philosophy</h3>
-        <p>Every session ends with something you can implement this week. A credential backed by real protocols and applied science — not just attendance.</p>
+      <div class="outcomes-card reveal reveal-delay-4">
+        <div class="outcomes-card-num">04</div>
+        <h3>Design Your Training for the Centenarian Olympics</h3>
+        <p>Program Zone 2 cardio, VO2 max work, resistance training, and stability protocols — reverse-engineered from the physical capacity you want at 80.</p>
+      </div>
+      <div class="outcomes-card reveal reveal-delay-1">
+        <div class="outcomes-card-num">05</div>
+        <h3>Evaluate Supplements and Health Tech Critically</h3>
+        <p>Separate signal from noise on NMN, omega-3s, creatine, rapamycin, metformin, and wearables — know what the evidence supports and what is marketing.</p>
+      </div>
+      <div class="outcomes-card reveal reveal-delay-2">
+        <div class="outcomes-card-num">06</div>
+        <h3>Optimize Sleep Architecture and Stress Response</h3>
+        <p>Apply circadian entrainment protocols, HRV-guided recovery, and cortisol timing strategies — the highest-leverage interventions in longevity medicine.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================
-     5. WHO IS THIS FOR
+     4. OUR SCIENCE-BACKED TEACHING METHOD
      ============================================ -->
-<section class="who-for" id="who-for">
-  <div class="container">
-    <div class="who-for-header reveal">
-      <p class="who-for-bridge">This isn't for everyone. It's for you.</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">Who This Is For</p>
-      <h2 class="section-title">You've Outgrown Most of What the<br>Internet Offers on <span class="gold">Longevity</span></h2>
+<section class="method" id="method">
+  <div class="container-wide">
+    <div class="method-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">How We Teach</p>
+      <h2 class="section-title">Our Science-Backed<br><span class="gold">Teaching Method</span></h2>
+      <p class="section-subtitle" style="margin: 0 auto;">This is not a pre-recorded video library. Every session is a live, interactive classroom built on the same teaching infrastructure used by 400,000+ students across the eTeacher Group.</p>
     </div>
-    <div class="who-for-grid">
-      <div class="who-for-card reveal reveal-delay-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <p>You've had a GP tell you your labs are "normal" — when you know that normal isn't the same as optimal.</p>
+    <div class="method-grid">
+      <div class="method-card reveal reveal-delay-1">
+        <div class="method-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3>Live Instruction, Small Cohorts</h3>
+        <p>8–15 students per cohort. Live video sessions with real-time Q&A — not webinars. You ask questions, get answers, and discuss with your cohort and instructors in real time.</p>
       </div>
-      <div class="who-for-card reveal reveal-delay-2">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <p>You've read Outlive, watched Sinclair's lectures, followed Huberman's protocols. Now you want a structured framework — not more content.</p>
+      <div class="method-card reveal reveal-delay-2">
+        <div class="method-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+          </svg>
+        </div>
+        <h3>Science-Based Curriculum</h3>
+        <p>Every session is grounded in peer-reviewed research and clinical practice. Developed with longevity clinicians and researchers, not content marketers.</p>
       </div>
-      <div class="who-for-card reveal reveal-delay-3">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <p>You think of your body as a system to be engineered, not a problem to be managed. You want protocols, not tips.</p>
+      <div class="method-card reveal reveal-delay-3">
+        <div class="method-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3>Protocol-First Learning</h3>
+        <p>Every session ends with a specific, implementable protocol. Between sessions, you apply what you learned to your own data — glucose, bloodwork, training metrics — and bring questions back to the group.</p>
       </div>
-      <div class="who-for-card reveal reveal-delay-4">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <p>You're tracking HRV, fasting glucose, and resting heart rate — but you're not sure you're interpreting the data correctly.</p>
-      </div>
-      <div class="who-for-card reveal reveal-delay-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <p>You're the person who sends longevity studies in the group chat — and nobody else understands why it matters.</p>
+      <div class="method-card reveal reveal-delay-4">
+        <div class="method-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3>20+ Years of Live Online Education</h3>
+        <p>Powered by the eTeacher Group platform — the same technology and pedagogy trusted by 400,000+ students, 600+ instructors, and 5 online schools worldwide since 2000.</p>
       </div>
     </div>
   </div>
@@ -1442,61 +1614,6 @@ ul, ol { list-style: none; }
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     6b. COURSE HIGHLIGHTS (Image cards)
-     ============================================ -->
-<section class="highlights" id="highlights">
-  <div class="container-wide">
-    <div class="highlights-header reveal">
-      <p class="highlights-bridge">The science most longevity podcasts only scratch the surface of</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">Inside the Protocol</p>
-      <h2 class="section-title">Five Deep Dives Your<br><span class="gold">Doctor Won't Give You</span></h2>
-    </div>
-    <div class="highlights-grid">
-      <div class="highlight-card reveal">
-        <img src="assets/img-metabolic.jpg" alt="Metabolic health visualization" loading="lazy">
-        <div class="highlight-card-overlay">
-          <span class="highlight-card-tag">Sessions 2 &amp; 3</span>
-          <h3>The Glucose Problem Most Doctors Miss</h3>
-          <p>Why insulin resistance begins decades before diagnosis — and the metabolic biomarkers that predict it before your fasting glucose does.</p>
-        </div>
-      </div>
-      <div class="highlight-card reveal reveal-delay-1">
-        <img src="assets/img-cgm.jpg" alt="Continuous glucose monitor sensor" loading="lazy">
-        <div class="highlight-card-overlay">
-          <span class="highlight-card-tag">Sessions 4 &amp; 5</span>
-          <h3>Beyond the Standard Lipid Panel</h3>
-          <p>ApoB, Lp(a), hs-CRP, omega-3 index, epigenetic clocks — the biomarkers your annual physical misses and how to interpret them for your 10-year trajectory.</p>
-        </div>
-      </div>
-      <div class="highlight-card reveal reveal-delay-2">
-        <img src="assets/img-movement.jpg" alt="Movement and exercise for longevity" loading="lazy">
-        <div class="highlight-card-overlay">
-          <span class="highlight-card-tag">Session 6</span>
-          <h3>Training for the Centenarian Olympics</h3>
-          <p>Reverse-engineer your fitness from where you want to be at 80. VO2 max, muscle mass, stability — the specific protocols that preserve them.</p>
-        </div>
-      </div>
-      <div class="highlight-card reveal reveal-delay-1">
-        <img src="assets/img-sleep.jpg" alt="Sleep and circadian rhythm" loading="lazy">
-        <div class="highlight-card-overlay">
-          <span class="highlight-card-tag">Sessions 7 &amp; 8</span>
-          <h3>The Sleep Architecture Clinic</h3>
-          <p>Deep sleep, REM, circadian entrainment, HRV, cortisol timing — why optimizing sleep may be the single highest-leverage longevity intervention.</p>
-        </div>
-      </div>
-      <div class="highlight-card reveal reveal-delay-2">
-        <img src="assets/img-supplements.jpg" alt="Supplements and health tech" loading="lazy">
-        <div class="highlight-card-overlay">
-          <span class="highlight-card-tag">Sessions 9 &amp; 10</span>
-          <h3>The Evidence-Based Stack</h3>
-          <p>NMN, omega-3s, metformin, rapamycin, creatine — what the evidence actually supports, what's hype, and what's next. Signal vs. noise.</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1814,6 +1931,152 @@ ul, ol { list-style: none; }
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     7. WHAT MAKES THIS DIFFERENT
+     ============================================ -->
+<section class="different" id="different">
+  <div class="container-wide">
+    <div class="different-header reveal">
+      <p class="different-bridge">Not another asynchronous course you'll half-finish</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">Why This Is Different</p>
+      <h2 class="section-title">What You Won't Find<br><span class="gold">Anywhere Else</span></h2>
+      <p class="section-subtitle" style="margin: 0 auto;">There are podcasts, books, and self-paced courses on longevity. Here is what none of them offer.</p>
+    </div>
+    <div class="different-grid">
+      <div class="different-card reveal reveal-delay-1">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3>Live, Not Recorded</h3>
+        <p>90-minute live sessions with real-time Q&A. You interact directly with instructors and your cohort — no pre-recorded lectures, no comment boxes.</p>
+      </div>
+      <div class="different-card reveal reveal-delay-2">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <h3>Cohort, Not Audience</h3>
+        <p>8–15 people per group. Small enough for real discussion and personalized feedback. You learn with a peer group as invested as you are.</p>
+      </div>
+      <div class="different-card reveal reveal-delay-3">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3>Protocols, Not Just Information</h3>
+        <p>Every session delivers a specific, implementable protocol. You don't just learn what the science says — you leave each week with a concrete action plan tied to your own data.</p>
+      </div>
+      <div class="different-card reveal reveal-delay-4">
+        <div class="different-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+          </svg>
+        </div>
+        <h3>Backed by 400,000+ Students</h3>
+        <p>Built on the eTeacher Group's 20+ year track record of live online education. 4.6/5 on Trustpilot. Over 600 instructors. Five schools. This is the infrastructure, applied to longevity science.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     6b. COURSE HIGHLIGHTS (Image cards)
+     ============================================ -->
+<section class="highlights" id="highlights">
+  <div class="container-wide">
+    <div class="highlights-header reveal">
+      <p class="highlights-bridge">The science most longevity podcasts only scratch the surface of</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">Inside the Protocol</p>
+      <h2 class="section-title">Five Deep Dives Your<br><span class="gold">Doctor Won't Give You</span></h2>
+    </div>
+    <div class="highlights-grid">
+      <div class="highlight-card reveal">
+        <img src="assets/img-metabolic.jpg" alt="Metabolic health visualization" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 2 &amp; 3</span>
+          <h3>The Glucose Problem Most Doctors Miss</h3>
+          <p>Why insulin resistance begins decades before diagnosis — and the metabolic biomarkers that predict it before your fasting glucose does.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-1">
+        <img src="assets/img-cgm.jpg" alt="Continuous glucose monitor sensor" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 4 &amp; 5</span>
+          <h3>Beyond the Standard Lipid Panel</h3>
+          <p>ApoB, Lp(a), hs-CRP, omega-3 index, epigenetic clocks — the biomarkers your annual physical misses and how to interpret them for your 10-year trajectory.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-2">
+        <img src="assets/img-movement.jpg" alt="Movement and exercise for longevity" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Session 6</span>
+          <h3>Training for the Centenarian Olympics</h3>
+          <p>Reverse-engineer your fitness from where you want to be at 80. VO2 max, muscle mass, stability — the specific protocols that preserve them.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-1">
+        <img src="assets/img-sleep.jpg" alt="Sleep and circadian rhythm" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 7 &amp; 8</span>
+          <h3>The Sleep Architecture Clinic</h3>
+          <p>Deep sleep, REM, circadian entrainment, HRV, cortisol timing — why optimizing sleep may be the single highest-leverage longevity intervention.</p>
+        </div>
+      </div>
+      <div class="highlight-card reveal reveal-delay-2">
+        <img src="assets/img-supplements.jpg" alt="Supplements and health tech" loading="lazy">
+        <div class="highlight-card-overlay">
+          <span class="highlight-card-tag">Sessions 9 &amp; 10</span>
+          <h3>The Evidence-Based Stack</h3>
+          <p>NMN, omega-3s, metformin, rapamycin, creatine — what the evidence actually supports, what's hype, and what's next. Signal vs. noise.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     9. HOW IT WORKS
+     ============================================ -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="how-it-works-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">Getting Started</p>
+      <h2 class="section-title">How It <span class="gold">Works</span></h2>
+      <p class="section-subtitle" style="margin: 0 auto;">From application to your personal longevity blueprint — here is the path.</p>
+    </div>
+    <div class="how-it-works-steps">
+      <div class="how-step reveal reveal-delay-1">
+        <div class="how-step-num">1</div>
+        <h3>Apply</h3>
+        <p>Submit your application. We review every applicant to ensure the cohort is the right fit — serious, motivated, and ready for advanced material.</p>
+      </div>
+      <div class="how-step-line reveal"></div>
+      <div class="how-step reveal reveal-delay-2">
+        <div class="how-step-num">2</div>
+        <h3>Get Matched to a Cohort</h3>
+        <p>Once accepted, you are placed into a cohort of 8–15 peers. Choose a schedule that works for you — sessions run weekly for 12 weeks.</p>
+      </div>
+      <div class="how-step-line reveal"></div>
+      <div class="how-step reveal reveal-delay-3">
+        <div class="how-step-num">3</div>
+        <h3>Learn Live, Apply Weekly</h3>
+        <p>Attend 90-minute live sessions. Each week covers a new topic with hands-on protocols. Between sessions, apply what you learn to your own data and bring questions to the next class.</p>
+      </div>
+      <div class="how-step-line reveal"></div>
+      <div class="how-step reveal reveal-delay-4">
+        <div class="how-step-num">4</div>
+        <h3>Graduate with Your Blueprint</h3>
+        <p>Complete the course with a personalized longevity protocol, a certificate of completion, and access to the alumni community and course recordings.</p>
+      </div>
     </div>
   </div>
 </section>
