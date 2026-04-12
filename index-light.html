@@ -343,6 +343,21 @@ ul, ol { list-style: none; }
   border-radius: 16px;
 }
 
+/* Section Display Element (between sections) */
+.section-display-element {
+  position: relative;
+  width: 320px; max-width: 80vw;
+  margin: 0 auto;
+  padding: 40px 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.section-display-video {
+  display: block; width: 100%; height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
 
 /* ============================================
    3. TRUST BAR
@@ -1577,6 +1592,13 @@ ul, ol { list-style: none; }
     </div>
   </div>
 </section>
+
+<!-- Animated Display Element 2 -->
+<div class="section-display-element reveal">
+  <video class="section-display-video" autoplay muted loop playsinline>
+    <source src="assets/fl-display2.mp4" type="video/mp4">
+  </video>
+</div>
 
 <!-- ============================================
      6. YOUR 12-WEEK JOURNEY
