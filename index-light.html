@@ -159,11 +159,14 @@ ul, ol { list-style: none; }
   padding: 0 24px; height: 72px;
   display: flex; align-items: center;
   transition: all var(--transition-base);
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.04);
+  background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 100%);
+  border-bottom: none;
 }
+.nav .nav-logo, .nav .nav-link, .nav .nav-mobile-toggle span { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+.nav.scrolled .nav-logo, .nav.scrolled .nav-link { text-shadow: none; }
+.nav .nav-logo-img { filter: brightness(0) invert(1); transition: filter 0.3s; }
+.nav.scrolled .nav-logo, .nav.scrolled .nav-link, .nav.scrolled .nav-mobile-toggle span { color: var(--text-primary); }
+.nav.scrolled .nav-logo-img { filter: none; }
 .nav.scrolled {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(20px);
@@ -226,19 +229,19 @@ ul, ol { list-style: none; }
    2. HERO SECTION
    ============================================ */
 .hero {
-  position: relative; min-height: 100vh;
+  position: relative; height: 70vh; min-height: 500px;
   display: flex; align-items: center; justify-content: center;
-  overflow: hidden; padding: 140px 24px 100px;
-  background: linear-gradient(180deg, #F0F7F4 0%, #F5F7FA 50%, #FFFFFF 100%);
+  overflow: hidden; padding: 0;
+  background: #000;
 }
 .hero-video-bg {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover; z-index: 0; opacity: 0.18;
+  object-fit: cover; z-index: 0; opacity: 1;
   pointer-events: none;
 }
 .hero-overlay {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(180deg, rgba(240,247,244,0.55) 0%, rgba(245,247,250,0.5) 50%, rgba(255,255,255,0.75) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(255,255,255,0.95) 100%);
   z-index: 1;
 }
 .hero-content {
@@ -1085,7 +1088,7 @@ ul, ol { list-style: none; }
   .eyebrow { font-size: 11px; letter-spacing: 2px; }
   .nav-links { display: none; }
   .nav-mobile-toggle { display: flex; }
-  .hero { min-height: auto; padding: 130px 16px 60px; }
+  .hero { min-height: 40vh; padding: 70px 0 0; }
   .hero-headline { font-size: 48px; letter-spacing: -0.5px; }
   .hero-sub { font-size: 17px; }
   .hero-form {
@@ -1379,11 +1382,7 @@ ul, ol { list-style: none; }
     <source src="assets/hero-light-bg.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      LIVE ONLINE COURSE <span class="dot"></span> 12 WEEKS <span class="dot"></span> NEXT COHORT ENROLLING
-    </div>
-    <h1 class="hero-headline">The Science of Aging Has <em>Outpaced Your Doctor</em></h1>
+  <div class="hero-content" style="display:none;">
 
     <!-- Trustpilot Badge -->
     <div class="hero-trustpilot">
