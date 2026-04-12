@@ -330,6 +330,28 @@ ul, ol { list-style: none; }
 }
 .hero-pill svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 
+/* Hero Animated Display */
+.hero-display-element {
+  position: relative;
+  width: 320px; max-width: 80vw;
+  margin: 48px auto 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.hero-display-video {
+  display: block; width: 100%; height: auto;
+  border-radius: 16px;
+}
+.hero-display-text-mask {
+  position: absolute;
+  top: 28%; left: 19%; width: 58%; height: 52%;
+  background: rgba(25, 65, 100, 0.65);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
 /* ============================================
    3. TRUST BAR
    ============================================ */
@@ -1429,6 +1451,15 @@ ul, ol { list-style: none; }
         Certificate
       </div>
     </div>
+
+    <!-- Animated Display Element -->
+    <div class="hero-display-element">
+      <video class="hero-display-video" autoplay muted loop playsinline>
+        <source src="assets/fl-display.mp4" type="video/mp4">
+      </video>
+      <div class="hero-display-text-mask"></div>
+    </div>
+
   </div>
 </section>
 
