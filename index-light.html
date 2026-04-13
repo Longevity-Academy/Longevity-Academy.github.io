@@ -1162,61 +1162,100 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   OUTCOMES SECTION — MOTION SLIDERS
+   OUTCOMES SECTION — HORIZONTAL SLIDER
    ============================================ */
 .outcomes { padding: 120px 0; overflow: hidden; }
 .outcomes-header { text-align: center; margin-bottom: 64px; }
 
-/* Slider row — 3 cards centered */
-.outcomes-slider-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+/* Slider container */
+.outcomes-slider-wrapper {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 24px;
+  padding: 0 60px;
 }
+
+/* Slider track — horizontal scroll */
+.outcomes-slider-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 4px 24px;
+  scrollbar-width: none;
+}
+.outcomes-slider-track::-webkit-scrollbar { display: none; }
 
 /* Slider cards */
 .outcomes-slide {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 280px;
   border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: #fff;
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
   aspect-ratio: 9 / 12;
+  scroll-snap-align: start;
+  cursor: grab;
 }
+.outcomes-slide:active { cursor: grabbing; }
 .outcomes-slide:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
 }
 
-/* Media slot */
-.outcomes-slide-media {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #0a1e3d 0%, #0d2847 100%);
+/* Navigation arrows */
+.outcomes-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  position: relative;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  color: #1a1a1a;
+  font-size: 18px;
 }
-.outcomes-slide-media video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.outcomes-nav:hover {
+  background: var(--accent, #006EFF);
+  color: #fff;
+  border-color: var(--accent, #006EFF);
+  box-shadow: 0 6px 24px rgba(0,110,255,0.25);
 }
-.outcomes-slide-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.outcomes-nav--prev { left: 8px; }
+.outcomes-nav--next { right: 8px; }
+.outcomes-nav.hidden { opacity: 0; pointer-events: none; }
+
+/* Dot indicators */
+.outcomes-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
 }
-.outcomes-slide-media .media-placeholder {
-  font-family: 'Codec Pro', sans-serif;
-  font-size: 48px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.08);
+.outcomes-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+.outcomes-dot.active {
+  background: var(--accent, #006EFF);
+  width: 24px;
+  border-radius: 4px;
 }
 
 /* === IMAGE-BG OUTCOME CARDS (01-03) === */
@@ -1337,23 +1376,20 @@ ul, ol { list-style: none; }
   color: var(--text-secondary);
 }
 
-/* Row spacing */
-.outcomes-slider-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
+/* Responsive */
 @media (max-width: 900px) {
-  .outcomes-slider-row { grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 12px 16px; }
+  .outcomes-slider-wrapper { padding: 0 40px; }
+  .outcomes-slide { flex: 0 0 calc((100% - 24px) / 2); min-width: 240px; }
 }
 @media (max-width: 600px) {
   .outcomes { padding: 80px 0; }
-  .outcomes-slider-row { grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 8px 12px; }
-  .outcomes-slide-media { height: 160px; }
-  .outcomes-slide--imgbg { min-height: 260px; }
-  .outcomes-slide--imgbg .outcomes-card-title { font-size: 16px; }
-  .outcomes-slide--imgbg .outcomes-card-body { font-size: 12px; }
+  .outcomes-slider-wrapper { padding: 0 16px; }
+  .outcomes-slide { flex: 0 0 85%; min-width: 260px; }
+  .outcomes-nav { width: 36px; height: 36px; font-size: 14px; }
+  .outcomes-nav--prev { left: 2px; }
+  .outcomes-nav--next { right: 2px; }
+  .outcomes-slide--imgbg .outcomes-card-title { font-size: 17px; }
+  .outcomes-slide--imgbg .outcomes-card-body { font-size: 12.5px; }
 }
 
 /* ============================================
@@ -1602,9 +1638,13 @@ ul, ol { list-style: none; }
       <p class="section-subtitle" style="margin: 0 auto;">12 sessions. 12 weeks. These are the specific skills and capabilities you walk away with.</p>
     </div>
     <div class="outcomes-slider-wrapper">
-      <!-- Row 1: 01-03 -->
-      <div class="outcomes-slider-row">
-        <div class="outcomes-slide outcomes-slide--imgbg reveal reveal-delay-1">
+      <!-- Navigation arrows -->
+      <button class="outcomes-nav outcomes-nav--prev" id="outcomes-prev" aria-label="Previous">‹</button>
+      <button class="outcomes-nav outcomes-nav--next" id="outcomes-next" aria-label="Next">›</button>
+
+      <!-- Single horizontal track -->
+      <div class="outcomes-slider-track" id="outcomes-track">
+        <div class="outcomes-slide outcomes-slide--imgbg">
           <div class="outcomes-card-bg"><img src="assets/outcome-bg-01.jpg" alt="Bloodwork analysis" loading="lazy"></div>
           <div class="outcomes-card-overlay"></div>
           <div class="outcomes-card-text">
@@ -1613,7 +1653,7 @@ ul, ol { list-style: none; }
             <div class="outcomes-card-body">Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel.</div>
           </div>
         </div>
-        <div class="outcomes-slide outcomes-slide--imgbg reveal reveal-delay-2">
+        <div class="outcomes-slide outcomes-slide--imgbg">
           <div class="outcomes-card-bg"><img src="assets/outcome-bg-02.jpg" alt="Longevity protocol" loading="lazy"></div>
           <div class="outcomes-card-overlay"></div>
           <div class="outcomes-card-text">
@@ -1622,7 +1662,7 @@ ul, ol { list-style: none; }
             <div class="outcomes-card-body">A written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology.</div>
           </div>
         </div>
-        <div class="outcomes-slide outcomes-slide--imgbg reveal reveal-delay-3">
+        <div class="outcomes-slide outcomes-slide--imgbg">
           <div class="outcomes-card-bg"><img src="assets/outcome-bg-03.jpg" alt="CGM glucose data" loading="lazy"></div>
           <div class="outcomes-card-overlay"></div>
           <div class="outcomes-card-text">
@@ -1631,11 +1671,7 @@ ul, ol { list-style: none; }
             <div class="outcomes-card-body">Understand glucose variability, post-meal spikes, and dawn effect — and what to actually do about them.</div>
           </div>
         </div>
-      </div>
-
-      <!-- Row 2: 04-06 -->
-      <div class="outcomes-slider-row">
-        <div class="outcomes-slide outcomes-slide--imgbg reveal reveal-delay-1">
+        <div class="outcomes-slide outcomes-slide--imgbg">
           <div class="outcomes-card-bg"><img src="assets/outcome-bg-04.jpg" alt="Longevity training" loading="lazy"></div>
           <div class="outcomes-card-overlay"></div>
           <div class="outcomes-card-text">
@@ -1644,7 +1680,7 @@ ul, ol { list-style: none; }
             <div class="outcomes-card-body">Program Zone 2 cardio, VO2 max, resistance training, and stability — reverse-engineered from the capacity you want at 80.</div>
           </div>
         </div>
-        <div class="outcomes-slide outcomes-slide--imgbg reveal reveal-delay-2">
+        <div class="outcomes-slide outcomes-slide--imgbg">
           <div class="outcomes-card-bg"><img src="assets/outcome-bg-05.jpg" alt="Supplements and health tech" loading="lazy"></div>
           <div class="outcomes-card-overlay"></div>
           <div class="outcomes-card-text">
@@ -1653,7 +1689,7 @@ ul, ol { list-style: none; }
             <div class="outcomes-card-body">Separate signal from noise on NMN, omega-3s, creatine, rapamycin, metformin, and wearables — evidence vs. marketing.</div>
           </div>
         </div>
-        <div class="outcomes-slide outcomes-slide--imgbg reveal reveal-delay-3">
+        <div class="outcomes-slide outcomes-slide--imgbg">
           <div class="outcomes-card-bg"><img src="assets/outcome-bg-06.jpg" alt="Sleep and stress optimization" loading="lazy"></div>
           <div class="outcomes-card-overlay"></div>
           <div class="outcomes-card-text">
@@ -1663,6 +1699,9 @@ ul, ol { list-style: none; }
           </div>
         </div>
       </div>
+
+      <!-- Dot indicators -->
+      <div class="outcomes-dots" id="outcomes-dots"></div>
     </div>
   </div>
 </section>
@@ -2624,6 +2663,92 @@ const imgbgObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 document.querySelectorAll('.outcomes-slide--imgbg').forEach(el => imgbgObserver.observe(el));
+
+/* ===== Outcomes Horizontal Slider ===== */
+(function() {
+  const track = document.getElementById('outcomes-track');
+  const prevBtn = document.getElementById('outcomes-prev');
+  const nextBtn = document.getElementById('outcomes-next');
+  const dotsContainer = document.getElementById('outcomes-dots');
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const slides = track.querySelectorAll('.outcomes-slide');
+  const totalSlides = slides.length;
+
+  /* Create dots */
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'outcomes-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => scrollToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = dotsContainer.querySelectorAll('.outcomes-dot');
+
+  function getCardWidth() {
+    return slides[0].offsetWidth + 24; /* card width + gap */
+  }
+
+  function scrollToSlide(index) {
+    track.scrollTo({ left: index * getCardWidth(), behavior: 'smooth' });
+  }
+
+  /* Arrow navigation */
+  prevBtn.addEventListener('click', () => {
+    track.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+  });
+  nextBtn.addEventListener('click', () => {
+    track.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+  });
+
+  /* Update dots + arrow visibility on scroll */
+  function updateControls() {
+    const scrollLeft = track.scrollLeft;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const cardW = getCardWidth();
+    const activeIndex = Math.round(scrollLeft / cardW);
+
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
+    prevBtn.classList.toggle('hidden', scrollLeft <= 5);
+    nextBtn.classList.toggle('hidden', scrollLeft >= maxScroll - 5);
+  }
+  track.addEventListener('scroll', updateControls, { passive: true });
+  updateControls();
+
+  /* Drag-to-scroll */
+  let isDragging = false, startX, scrollStart;
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX;
+    scrollStart = track.scrollLeft;
+    track.style.scrollBehavior = 'auto';
+    track.style.cursor = 'grabbing';
+  });
+  track.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    track.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+  function stopDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.scrollBehavior = 'smooth';
+    track.style.cursor = '';
+    /* Snap to nearest card */
+    const cardW = getCardWidth();
+    const nearest = Math.round(track.scrollLeft / cardW);
+    scrollToSlide(nearest);
+  }
+  track.addEventListener('mouseup', stopDrag);
+  track.addEventListener('mouseleave', stopDrag);
+
+  /* Keyboard nav */
+  track.setAttribute('tabindex', '0');
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { nextBtn.click(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft') { prevBtn.click(); e.preventDefault(); }
+  });
+})();
 
 /* Trust bar animated counters */
 let countersAnimated = false;
