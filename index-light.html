@@ -474,102 +474,6 @@ ul, ol { list-style: none; }
 .who-for-card p { font-size: 16px; line-height: 1.6; color: var(--text-secondary); }
 
 /* ============================================
-   6. YOUR 12-WEEK JOURNEY (Phase overview)
-   ============================================ */
-.journey {
-  position: relative; padding: 120px 0; background: var(--dark-base); overflow: hidden;
-}
-/* Gradient orbs for glass visibility */
-.journey::before {
-  content: '';
-  position: absolute;
-  top: 10%;
-  right: 10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0,110,255,0.04) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-.journey::after {
-  content: '';
-  position: absolute;
-  bottom: 10%;
-  left: 5%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(58,157,106,0.06) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-.journey-header { text-align: center; margin-bottom: 72px; position: relative; z-index: 1; }
-.journey-bridge {
-  font-size: 14px; font-style: italic; color: var(--text-muted);
-  margin-bottom: 12px; letter-spacing: 0.2px;
-}
-.journey-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
-  max-width: 1100px; margin: 0 auto;
-  position: relative; z-index: 1;
-}
-.phase-card {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
-  border-radius: var(--radius-xl);
-  padding: 40px 36px;
-  transition: all var(--transition-base);
-  box-shadow: var(--glass-shadow);
-  position: relative;
-  overflow: hidden;
-}
-.phase-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-  opacity: 0.7;
-}
-.phase-card:hover {
-  background: var(--glass-bg-hover);
-  border: var(--glass-border-hover);
-  box-shadow: var(--glass-shadow-hover);
-  transform: translateY(-4px);
-}
-.phase-number {
-  font-family: var(--font-body); font-size: 11px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 3px; color: var(--accent);
-  margin-bottom: 8px;
-}
-.phase-sessions {
-  font-size: 13px; font-weight: 500; color: var(--text-muted);
-  margin-bottom: 6px; letter-spacing: 0.3px;
-}
-.phase-name {
-  font-family: var(--font-display); font-weight: 800; font-size: 26px;
-  color: var(--text-primary); line-height: 1.2; margin-bottom: 24px;
-}
-.phase-sessions-list {
-  display: flex; flex-direction: column; gap: 10px;
-}
-.phase-session-item {
-  display: flex; align-items: flex-start; gap: 12px;
-}
-.phase-session-num {
-  font-family: var(--font-display); font-size: 13px; font-weight: 700;
-  color: var(--accent); min-width: 28px;
-  background: rgba(0,0,0,0.02);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 6px; padding: 3px 6px;
-  text-align: center; line-height: 1.4; flex-shrink: 0;
-}
-.phase-session-title {
-  font-size: 15px; line-height: 1.5; color: var(--text-secondary);
-}
-
-/* ============================================
    6b. COURSE HIGHLIGHTS (Image cards)
    ============================================ */
 .highlights {
@@ -657,34 +561,54 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   7. FULL CURRICULUM ACCORDION
+   6. UNIFIED CURRICULUM — Phases + Syllabus Dropdowns
    ============================================ */
 .curriculum {
   position: relative; padding: 120px 0; overflow: hidden;
   background: linear-gradient(180deg, var(--dark-base) 0%, var(--surface-dark) 50%, var(--dark-base) 100%);
 }
-/* Gradient orb for glass visibility */
 .curriculum::after {
   content: '';
   position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 600px;
+  top: 20%; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px;
   background: radial-gradient(circle, rgba(0,110,255,0.04) 0%, rgba(58,157,106,0.03) 50%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  pointer-events: none; z-index: 0;
 }
 .curriculum-header { text-align: center; margin-bottom: 72px; position: relative; z-index: 1; }
 .curriculum-bridge {
   font-size: 14px; font-style: italic; color: var(--text-muted);
   margin-bottom: 12px; letter-spacing: 0.2px;
 }
-.curriculum-list { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+.curriculum-phases {
+  max-width: 960px; margin: 0 auto; position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: 48px;
+}
+
+/* Phase block */
+.phase-block {}
+.phase-block-header {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 20px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.phase-block-label {
+  font-family: var(--font-body); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 3px; color: var(--accent);
+  white-space: nowrap;
+}
+.phase-block-name {
+  font-family: var(--font-display); font-weight: 800; font-size: 24px;
+  color: var(--text-primary); line-height: 1.2;
+}
+.phase-block-sessions {
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+/* Session accordion item inside phase */
 .curriculum-item {
   border: var(--glass-border); border-radius: var(--radius-lg);
-  margin-bottom: 16px; overflow: hidden;
+  overflow: hidden;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
@@ -697,54 +621,57 @@ ul, ol { list-style: none; }
   box-shadow: var(--glass-shadow-hover);
 }
 .curriculum-item.active {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.82);
   border: var(--glass-border-hover);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
 }
 .curriculum-trigger {
   width: 100%; display: flex; align-items: center; gap: 16px;
-  padding: 20px 24px; background: none; border: none;
+  padding: 18px 24px; background: none; border: none;
   cursor: pointer; text-align: left; transition: background var(--transition-base);
 }
 .curriculum-trigger:hover { background: rgba(0,0,0,0.02); }
 .curriculum-num {
-  font-family: var(--font-display); font-weight: 800; font-size: 18px;
-  color: var(--accent); min-width: 48px; height: 48px;
+  font-family: var(--font-display); font-weight: 800; font-size: 16px;
+  color: var(--accent); min-width: 44px; height: 44px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.02);
-  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(0,110,255,0.06);
+  border: 1px solid rgba(0,110,255,0.12);
   border-radius: var(--radius-sm); flex-shrink: 0;
 }
 .curriculum-trigger-text { flex: 1; }
 .curriculum-trigger-text h3 {
-  font-family: var(--font-display); font-weight: 700; font-size: 18px;
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
   color: var(--text-primary); line-height: 1.3;
 }
-.curriculum-trigger-text span { font-size: 14px; color: var(--text-muted); display: block; margin-top: 2px; }
+.curriculum-trigger-text span {
+  font-size: 13px; color: var(--text-muted); display: block; margin-top: 2px;
+}
 .curriculum-chevron {
-  width: 24px; height: 24px; color: var(--text-muted);
+  width: 22px; height: 22px; color: var(--text-muted);
   transition: transform var(--transition-base); flex-shrink: 0;
 }
 .curriculum-item.active .curriculum-chevron { transform: rotate(180deg); color: var(--accent); }
 .curriculum-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
-.curriculum-body-inner { padding: 0 24px 24px 88px; }
+.curriculum-body-inner { padding: 0 24px 24px 84px; }
 .curriculum-section-label {
-  font-size: 12px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; margin-top: 16px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--accent); margin-bottom: 8px; margin-top: 16px;
 }
 .curriculum-section-label:first-child { margin-top: 0; }
 .curriculum-goals { margin-bottom: 8px; }
 .curriculum-goals li {
-  position: relative; padding-left: 20px; font-size: 15px;
+  position: relative; padding-left: 20px; font-size: 14.5px;
   line-height: 1.6; color: var(--text-secondary); margin-bottom: 4px;
 }
 .curriculum-goals li::before {
   content: ''; position: absolute; left: 0; top: 10px;
   width: 6px; height: 6px; border-radius: 50%; background: var(--green-light);
 }
-.curriculum-flow { font-size: 15px; line-height: 1.65; color: var(--text-secondary); margin-bottom: 8px; }
+.curriculum-flow { font-size: 14.5px; line-height: 1.65; color: var(--text-secondary); margin-bottom: 8px; }
 .curriculum-work {
-  font-size: 15px; line-height: 1.65; color: var(--text-secondary);
-  padding: 12px 16px; background: rgba(0,110,255,0.06);
+  font-size: 14.5px; line-height: 1.65; color: var(--text-secondary);
+  padding: 12px 16px; background: rgba(0,110,255,0.05);
   border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
@@ -1069,7 +996,7 @@ ul, ol { list-style: none; }
   .section-title { font-size: 48px; }
   .hero-headline { font-size: 64px; }
   .different-grid { grid-template-columns: repeat(2, 1fr); }
-  .journey-grid { grid-template-columns: 1fr; max-width: 640px; margin-left: auto; margin-right: auto; }
+
   .testimonials-grid { grid-template-columns: 1fr; max-width: 600px; margin-left: auto; margin-right: auto; }
   .teachers-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
   .final-cta .section-title { font-size: 48px; }
@@ -1105,15 +1032,13 @@ ul, ol { list-style: none; }
   .different-card { padding: 28px 20px; }
   .who-for { padding: 80px 0; }
   .who-for-grid { grid-template-columns: 1fr; }
-  .journey { padding: 80px 0; }
-  .journey-grid { grid-template-columns: 1fr; }
-  .phase-card { padding: 28px 24px; }
-  .phase-name { font-size: 22px; }
   .curriculum { padding: 80px 0; }
+  .phase-block-header { flex-direction: column; gap: 6px; }
+  .phase-block-name { font-size: 20px; }
   .curriculum-trigger { padding: 16px; }
   .curriculum-body-inner { padding: 0 16px 20px 16px; }
-  .curriculum-num { min-width: 40px; height: 40px; font-size: 15px; }
-  .curriculum-trigger-text h3 { font-size: 16px; }
+  .curriculum-num { min-width: 38px; height: 38px; font-size: 14px; }
+  .curriculum-trigger-text h3 { font-size: 15px; }
   .teachers { padding: 80px 0; }
   .teachers-grid { grid-template-columns: 1fr; max-width: 100%; }
   .platform { padding: 72px 0 80px; }
@@ -1162,16 +1087,13 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   OUTCOMES SECTION — 2-ROW HORIZONTAL MARQUEE
+   OUTCOMES SECTION — SINGLE-ROW HORIZONTAL MARQUEE
    ============================================ */
 .outcomes { padding: 120px 0; overflow: hidden; }
 .outcomes-header { text-align: center; margin-bottom: 64px; }
 
-/* Marquee wrapper — stacks two rows */
+/* Marquee wrapper — single row */
 .outcomes-marquee {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -1195,7 +1117,7 @@ ul, ol { list-style: none; }
   background: linear-gradient(to left, #fff 0%, transparent 100%);
 }
 
-/* Each row scrolls horizontally */
+/* Single row scrolls horizontally to the left */
 .outcomes-row {
   overflow: hidden;
   width: 100%;
@@ -1204,14 +1126,7 @@ ul, ol { list-style: none; }
   display: flex;
   gap: 24px;
   width: max-content;
-}
-/* Row 1: scroll LEFT */
-.outcomes-row--left .outcomes-row-inner {
-  animation: marqueeLeft 35s linear infinite;
-}
-/* Row 2: scroll RIGHT */
-.outcomes-row--right .outcomes-row-inner {
-  animation: marqueeRight 35s linear infinite;
+  animation: marqueeLeft 45s linear infinite;
 }
 /* Pause on hover */
 .outcomes-marquee:hover .outcomes-row-inner {
@@ -1221,10 +1136,6 @@ ul, ol { list-style: none; }
 @keyframes marqueeLeft {
   0%   { transform: translateX(0); }
   100% { transform: translateX(calc(-50% - 12px)); }
-}
-@keyframes marqueeRight {
-  0%   { transform: translateX(calc(-50% - 12px)); }
-  100% { transform: translateX(0); }
 }
 
 /* Outcome cards */
@@ -1307,8 +1218,6 @@ ul, ol { list-style: none; }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .outcomes-marquee { gap: 16px; }
-  .outcomes-row-inner { gap: 16px; }
   .outcomes-slide { width: 300px; height: 270px; }
   .outcomes-card-glass { padding: 16px 18px; bottom: 14px; left: 14px; right: 14px; }
   .outcomes-card-title { font-size: 16px; }
@@ -1571,8 +1480,8 @@ ul, ol { list-style: none; }
       <p class="section-subtitle" style="margin: 0 auto;">12 sessions. 12 weeks. These are the specific skills and capabilities you walk away with.</p>
     </div>
     <div class="outcomes-marquee">
-      <!-- Row 1: scrolls LEFT (01, 02, 03 × 2) -->
-      <div class="outcomes-row outcomes-row--left">
+      <!-- Single row: all 6 cards scroll LEFT (× 2 for seamless loop) -->
+      <div class="outcomes-row">
         <div class="outcomes-row-inner">
           <div class="outcomes-slide">
             <div class="outcomes-card-bg"><img src="assets/outcome-bg-01.jpg" alt="Bloodwork analysis"></div>
@@ -1601,40 +1510,6 @@ ul, ol { list-style: none; }
               <div class="outcomes-card-body">Understand glucose variability, post-meal spikes, and dawn effect — and what to actually do about them.</div>
             </div>
           </div>
-          <!-- Duplicate for seamless loop -->
-          <div class="outcomes-slide" aria-hidden="true">
-            <div class="outcomes-card-bg"><img src="assets/outcome-bg-01.jpg" alt=""></div>
-            <div class="outcomes-card-overlay"></div>
-            <div class="outcomes-card-glass">
-              <div class="outcomes-card-num">01</div>
-              <div class="outcomes-card-title">Read Your Own Bloodwork</div>
-              <div class="outcomes-card-body">Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel.</div>
-            </div>
-          </div>
-          <div class="outcomes-slide" aria-hidden="true">
-            <div class="outcomes-card-bg"><img src="assets/outcome-bg-02.jpg" alt=""></div>
-            <div class="outcomes-card-overlay"></div>
-            <div class="outcomes-card-glass">
-              <div class="outcomes-card-num">02</div>
-              <div class="outcomes-card-title">Build a Personalized Longevity Protocol</div>
-              <div class="outcomes-card-body">A written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology.</div>
-            </div>
-          </div>
-          <div class="outcomes-slide" aria-hidden="true">
-            <div class="outcomes-card-bg"><img src="assets/outcome-bg-03.jpg" alt=""></div>
-            <div class="outcomes-card-overlay"></div>
-            <div class="outcomes-card-glass">
-              <div class="outcomes-card-num">03</div>
-              <div class="outcomes-card-title">Interpret CGM Data &amp; Glucose Patterns</div>
-              <div class="outcomes-card-body">Understand glucose variability, post-meal spikes, and dawn effect — and what to actually do about them.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2: scrolls RIGHT (04, 05, 06 × 2) -->
-      <div class="outcomes-row outcomes-row--right">
-        <div class="outcomes-row-inner">
           <div class="outcomes-slide">
             <div class="outcomes-card-bg"><img src="assets/outcome-bg-04.jpg" alt="Longevity training"></div>
             <div class="outcomes-card-overlay"></div>
@@ -1662,7 +1537,34 @@ ul, ol { list-style: none; }
               <div class="outcomes-card-body">Circadian entrainment protocols, HRV-guided recovery, and cortisol timing — the highest-leverage longevity interventions.</div>
             </div>
           </div>
-          <!-- Duplicate for seamless loop -->
+          <!-- Duplicate all 6 for seamless loop -->
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-01.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">01</div>
+              <div class="outcomes-card-title">Read Your Own Bloodwork</div>
+              <div class="outcomes-card-body">Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-02.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">02</div>
+              <div class="outcomes-card-title">Build a Personalized Longevity Protocol</div>
+              <div class="outcomes-card-body">A written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-03.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">03</div>
+              <div class="outcomes-card-title">Interpret CGM Data &amp; Glucose Patterns</div>
+              <div class="outcomes-card-body">Understand glucose variability, post-meal spikes, and dawn effect — and what to actually do about them.</div>
+            </div>
+          </div>
           <div class="outcomes-slide" aria-hidden="true">
             <div class="outcomes-card-bg"><img src="assets/outcome-bg-04.jpg" alt=""></div>
             <div class="outcomes-card-overlay"></div>
@@ -1784,408 +1686,332 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-<!-- ============================================
-     6. YOUR 12-WEEK JOURNEY
-     ============================================ -->
-<section class="journey" id="journey">
-  <div class="container-wide">
-    <div class="journey-header reveal">
-      <p class="journey-bridge">From metabolic foundations to your personal longevity protocol</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">The Protocol Map</p>
-      <h2 class="section-title">Your <span class="gold">12-Week</span> Protocol</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">Four phases that build on each other — from understanding the biology your doctor missed, to reading your own biomarker data, to building a personalized system that compounds.</p>
-    </div>
-    <div class="journey-grid">
-
-      <div class="phase-card reveal reveal-delay-1">
-        <div class="phase-number">Phase 1 · Sessions 1–3</div>
-        <div class="phase-name">Foundation</div>
-        <div class="phase-sessions-list">
-          <div class="phase-session-item">
-            <span class="phase-session-num">01</span>
-            <span class="phase-session-title">Reframing Aging: From Disease Avoidance to Healthspan Design</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">02</span>
-            <span class="phase-session-title">Metabolic Health: Why Blood Sugar Is the Central Signal</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">03</span>
-            <span class="phase-session-title">Nutrition for Longevity: Inputs vs. Responses</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-card reveal reveal-delay-2">
-        <div class="phase-number">Phase 2 · Sessions 4–5</div>
-        <div class="phase-name">Data &amp; Discovery</div>
-        <div class="phase-sessions-list">
-          <div class="phase-session-item">
-            <span class="phase-session-num">04</span>
-            <span class="phase-session-title">Beyond the Standard Lipid Panel: Seeing the Invisible</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">05</span>
-            <span class="phase-session-title">Food Order, Composition &amp; Glucose Curves</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-card reveal reveal-delay-3">
-        <div class="phase-number">Phase 3 · Sessions 6–8</div>
-        <div class="phase-name">Lifestyle Systems</div>
-        <div class="phase-sessions-list">
-          <div class="phase-session-item">
-            <span class="phase-session-num">06</span>
-            <span class="phase-session-title">Training for the Centenarian Olympics</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">07</span>
-            <span class="phase-session-title">Sleep, Circadian Rhythm &amp; Overnight Glucose</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">08</span>
-            <span class="phase-session-title">Stress, Emotions &amp; Non-Food Glucose Spikes</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-card reveal reveal-delay-4">
-        <div class="phase-number">Phase 4 · Sessions 9–12</div>
-        <div class="phase-name">Integration</div>
-        <div class="phase-sessions-list">
-          <div class="phase-session-item">
-            <span class="phase-session-num">09</span>
-            <span class="phase-session-title">Supplements, Tests &amp; Health Tech Literacy</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">10</span>
-            <span class="phase-session-title">Social Health, Purpose &amp; Longevity</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">11</span>
-            <span class="phase-session-title">Personal Longevity Blueprint</span>
-          </div>
-          <div class="phase-session-item">
-            <span class="phase-session-num">12</span>
-            <span class="phase-session-title">Reflection, Integration &amp; Your Next 90 Days</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ============================================
-     7. FULL CURRICULUM — 12-SESSION ACCORDION
+     6. CURRICULUM — 4 Phases + Session Dropdowns
      ============================================ -->
-<section class="curriculum" id="curriculum">
+<section class="curriculum" id="journey">
   <div class="container">
     <div class="curriculum-header reveal">
-      <p class="curriculum-bridge">The complete protocol, session by session</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">Full Protocol</p>
+      <p class="curriculum-bridge">From metabolic foundations to your personal longevity protocol</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">The Complete Protocol</p>
       <h2 class="section-title">12 Sessions. 12 Weeks.<br>One Complete <span class="gold">Operating System</span>.</h2>
       <p class="section-subtitle" style="margin: 0 auto;">Each 90-minute session builds on the last. Live instruction, cohort discussion, hands-on protocols, and between-session experiments designed to make the science stick in your biology — not just your notes.</p>
     </div>
-    <div class="curriculum-list">
+    <div class="curriculum-phases">
 
-      <div class="curriculum-item reveal" data-session="1">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">01</span>
-          <div class="curriculum-trigger-text">
-            <h3>Reframing Aging: From Disease Avoidance to Healthspan Design</h3>
-            <span>Session 1 · Foundation</span>
+      <!-- PHASE 1: Foundation -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 1 · Sessions 1–3</span>
+          <span class="phase-block-name">Foundation</span>
+        </div>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="1">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">01</span>
+              <div class="curriculum-trigger-text">
+                <h3>Reframing Aging: From Disease Avoidance to Healthspan Design</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand aging as a modifiable trajectory, not a fixed decline</li>
+                  <li>Articulate your personal healthspan goals with clarity and specificity</li>
+                  <li>Shift mindset from fixing problems to designing resilient systems</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Welcome + framing → Mini-lecture on the biology of aging → Guided personal reflection → Breakout group introductions → Group synthesis and discussion → Introduction to the "Longevity Lens" framework</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete a 3-day lifestyle awareness log tracking energy, meals, sleep, movement, and mood patterns.</p>
+              </div>
+            </div>
           </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Understand aging as a modifiable trajectory, not a fixed decline</li>
-              <li>Articulate your personal healthspan goals with clarity and specificity</li>
-              <li>Shift mindset from fixing problems to designing resilient systems</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Welcome + framing → Mini-lecture on the biology of aging → Guided personal reflection → Breakout group introductions → Group synthesis and discussion → Introduction to the "Longevity Lens" framework</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Complete a 3-day lifestyle awareness log tracking energy, meals, sleep, movement, and mood patterns.</p>
+          <div class="curriculum-item" data-session="2">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">02</span>
+              <div class="curriculum-trigger-text">
+                <h3>Metabolic Health: Why Blood Sugar Is the Central Signal</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand glucose as a signal, not a villain — and why it matters for aging</li>
+                  <li>See how metabolic dysfunction develops silently over years</li>
+                  <li>Understand why weight alone is a poor marker of metabolic health</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Review lifestyle logs → Visual walkthrough of glucose curves → Case comparisons (healthy vs. dysregulated) → Myth dismantling session → CGM preview and introduction</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete a detailed food recall and energy crash mapping exercise — identify when you crash, what you ate, and how you felt.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="3">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">03</span>
+              <div class="curriculum-trigger-text">
+                <h3>Nutrition for Longevity: Inputs vs. Responses</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Stop thinking in dietary rules; start thinking in metabolic responses</li>
+                  <li>Understand how protein, fiber, and fat processing affects glucose</li>
+                  <li>Design a default meal framework personalized to your biology</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Interactive lecture on nutrient responses → Meal deconstruction exercise → Group comparison of individual responses → Design your default meal framework</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Try 1–2 meal adjustments based on your framework and document the results in your learning journal.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="curriculum-item reveal" data-session="2">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">02</span>
-          <div class="curriculum-trigger-text">
-            <h3>Metabolic Health: Why Blood Sugar Is the Central Signal</h3>
-            <span>Session 2 · Core Science</span>
+      <!-- PHASE 2: Data & Discovery -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 2 · Sessions 4–5</span>
+          <span class="phase-block-name">Data &amp; Discovery</span>
+        </div>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="4">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">04</span>
+              <div class="curriculum-trigger-text">
+                <h3>Beyond the Standard Lipid Panel: Seeing the Invisible</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand how CGM technology works and what it measures</li>
+                  <li>Learn what the data actually means — spikes, variability, baselines</li>
+                  <li>Reduce anxiety around numbers and develop a healthy data relationship</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">CGM fundamentals lecture → Walk through real anonymized datasets → Group interpretation exercises → CGM setup guidance for those using devices</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Begin your CGM experiment or review provided anonymized datasets. Record observations about your own patterns.</p>
+              </div>
+            </div>
           </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Understand glucose as a signal, not a villain — and why it matters for aging</li>
-              <li>See how metabolic dysfunction develops silently over years</li>
-              <li>Understand why weight alone is a poor marker of metabolic health</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Review lifestyle logs → Visual walkthrough of glucose curves → Case comparisons (healthy vs. dysregulated) → Myth dismantling session → CGM preview and introduction</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Complete a detailed food recall and energy crash mapping exercise — identify when you crash, what you ate, and how you felt.</p>
+          <div class="curriculum-item" data-session="5">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">05</span>
+              <div class="curriculum-trigger-text">
+                <h3>Food Order, Composition &amp; Glucose Curves</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Learn how eating sequence (food order) materially impacts glucose response</li>
+                  <li>Understand carbohydrate context — why the same carb acts differently in different meals</li>
+                  <li>Reduce glucose spikes without restriction or deprivation</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Share CGM observations from the week → Facilitator-guided curve comparison → Design safe food experiments → Expectation-setting for realistic progress</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Run individual food experiments — try different meal orders, compositions, and timings. Document results with CGM data or subjective energy tracking.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="curriculum-item reveal" data-session="3">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">03</span>
-          <div class="curriculum-trigger-text">
-            <h3>Nutrition for Longevity: Inputs vs. Responses</h3>
-            <span>Session 3 · Nutrition Science</span>
+      <!-- PHASE 3: Lifestyle Systems -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 3 · Sessions 6–8</span>
+          <span class="phase-block-name">Lifestyle Systems</span>
+        </div>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="6">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">06</span>
+              <div class="curriculum-trigger-text">
+                <h3>Training for the Centenarian Olympics</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand muscle as the body's primary glucose sink</li>
+                  <li>Learn the minimum effective dose of movement for metabolic benefit</li>
+                  <li>Design a sustainable, age-appropriate movement plan</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">CGM examples with and without post-meal movement → Movement planning workshop → Peer review of individual plans → Commitment check-in</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Run movement experiments with CGM tracking — compare glucose curves on days with and without post-meal walks or resistance training.</p>
+              </div>
+            </div>
           </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Stop thinking in dietary rules; start thinking in metabolic responses</li>
-              <li>Understand how protein, fiber, and fat processing affects glucose</li>
-              <li>Design a default meal framework personalized to your biology</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Interactive lecture on nutrient responses → Meal deconstruction exercise → Group comparison of individual responses → Design your default meal framework</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Try 1–2 meal adjustments based on your framework and document the results in your learning journal.</p>
+          <div class="curriculum-item" data-session="7">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">07</span>
+              <div class="curriculum-trigger-text">
+                <h3>Sleep, Circadian Rhythm &amp; Overnight Glucose</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>See sleep as a metabolic regulation system, not just rest</li>
+                  <li>Understand the effects of late eating, blue light, and irregular schedules on glucose</li>
+                  <li>Design one targeted sleep experiment based on your data</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Overnight CGM data review → Sleep habit audit → Troubleshooting workshop for common sleep disruptors → Design your personal sleep experiment</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Run your sleep experiment for one week — track bedtime, wake time, late eating, screen exposure, and overnight glucose patterns.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="8">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">08</span>
+              <div class="curriculum-trigger-text">
+                <h3>Stress, Emotions &amp; Non-Food Glucose Spikes</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Recognize that emotions and stress cause measurable glucose spikes — without any food</li>
+                  <li>Learn evidence-based nervous system regulation tools</li>
+                  <li>Map your personal stress triggers and build a regulation plan</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">CGM stress spike examples → Guided nervous system regulation exercise → Personal trigger mapping → Design your regulation toolkit</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Practice your chosen stress regulation technique daily. Note any glucose changes during stressful events vs. calm periods.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="curriculum-item reveal" data-session="4">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">04</span>
-          <div class="curriculum-trigger-text">
-            <h3>Beyond the Standard Lipid Panel: Seeing the Invisible</h3>
-            <span>Session 4 · Technology &amp; Data</span>
-          </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Understand how CGM technology works and what it measures</li>
-              <li>Learn what the data actually means — spikes, variability, baselines</li>
-              <li>Reduce anxiety around numbers and develop a healthy data relationship</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">CGM fundamentals lecture → Walk through real anonymized datasets → Group interpretation exercises → CGM setup guidance for those using devices</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Begin your CGM experiment or review provided anonymized datasets. Record observations about your own patterns.</p>
-          </div>
+      <!-- PHASE 4: Integration -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 4 · Sessions 9–12</span>
+          <span class="phase-block-name">Integration</span>
         </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="5">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">05</span>
-          <div class="curriculum-trigger-text">
-            <h3>Food Order, Composition &amp; Glucose Curves</h3>
-            <span>Session 5 · Applied Nutrition</span>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="9">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">09</span>
+              <div class="curriculum-trigger-text">
+                <h3>Supplements, Tests &amp; Health Tech Literacy</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Avoid biohacking traps and expensive interventions with no evidence</li>
+                  <li>Learn decision filters for evaluating supplements, tests, and wearable data</li>
+                  <li>Develop critical thinking about health marketing claims</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Supplement label teardown exercise → Wearable data obsession discussion → Practice applying the decision framework to real products → Group debate</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Conduct a personal supplement audit — evaluate everything you currently take against the decision framework. Cut what doesn't pass.</p>
+              </div>
+            </div>
           </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Learn how eating sequence (food order) materially impacts glucose response</li>
-              <li>Understand carbohydrate context — why the same carb acts differently in different meals</li>
-              <li>Reduce glucose spikes without restriction or deprivation</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Share CGM observations from the week → Facilitator-guided curve comparison → Design safe food experiments → Expectation-setting for realistic progress</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Run individual food experiments — try different meal orders, compositions, and timings. Document results with CGM data or subjective energy tracking.</p>
+          <div class="curriculum-item" data-session="10">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">10</span>
+              <div class="curriculum-trigger-text">
+                <h3>Social Health, Purpose &amp; Longevity</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand the psychosocial predictors of healthy aging — loneliness, purpose, community</li>
+                  <li>Recognize that social connection is as impactful as diet and exercise</li>
+                  <li>Design intentional social habits that support your healthspan</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Research review on social health and longevity → Values reflection exercise → Social habit design workshop → Accountability pairing</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete a social connection inventory — map your relationships, identify gaps, and initiate one new or renewed connection this week.</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="6">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">06</span>
-          <div class="curriculum-trigger-text">
-            <h3>Training for the Centenarian Olympics</h3>
-            <span>Session 6 · Exercise Science</span>
+          <div class="curriculum-item" data-session="11">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">11</span>
+              <div class="curriculum-trigger-text">
+                <h3>Personal Longevity Blueprint</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Integrate all 10 sessions into a coherent, sustainable personal plan</li>
+                  <li>Build a realistic blueprint without overwhelm or overcommitment</li>
+                  <li>Design your own failure recovery systems and habit stacks</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Blueprint construction workshop → Peer coaching sessions (paired review) → Failure planning and obstacle pre-emption → Draft sharing and feedback</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete your Personal Longevity Blueprint — a comprehensive document covering nutrition, movement, sleep, stress, social health, and monitoring systems.</p>
+              </div>
+            </div>
           </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Understand muscle as the body's primary glucose sink</li>
-              <li>Learn the minimum effective dose of movement for metabolic benefit</li>
-              <li>Design a sustainable, age-appropriate movement plan</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">CGM examples with and without post-meal movement → Movement planning workshop → Peer review of individual plans → Commitment check-in</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Run movement experiments with CGM tracking — compare glucose curves on days with and without post-meal walks or resistance training.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="7">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">07</span>
-          <div class="curriculum-trigger-text">
-            <h3>Sleep, Circadian Rhythm &amp; Overnight Glucose</h3>
-            <span>Session 7 · Recovery Science</span>
-          </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>See sleep as a metabolic regulation system, not just rest</li>
-              <li>Understand the effects of late eating, blue light, and irregular schedules on glucose</li>
-              <li>Design one targeted sleep experiment based on your data</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Overnight CGM data review → Sleep habit audit → Troubleshooting workshop for common sleep disruptors → Design your personal sleep experiment</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Run your sleep experiment for one week — track bedtime, wake time, late eating, screen exposure, and overnight glucose patterns.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="8">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">08</span>
-          <div class="curriculum-trigger-text">
-            <h3>Stress, Emotions &amp; Non-Food Glucose Spikes</h3>
-            <span>Session 8 · Psychophysiology</span>
-          </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Recognize that emotions and stress cause measurable glucose spikes — without any food</li>
-              <li>Learn evidence-based nervous system regulation tools</li>
-              <li>Map your personal stress triggers and build a regulation plan</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">CGM stress spike examples → Guided nervous system regulation exercise → Personal trigger mapping → Design your regulation toolkit</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Practice your chosen stress regulation technique daily. Note any glucose changes during stressful events vs. calm periods.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="9">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">09</span>
-          <div class="curriculum-trigger-text">
-            <h3>Supplements, Tests &amp; Health Tech Literacy</h3>
-            <span>Session 9 · Critical Thinking</span>
-          </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Avoid biohacking traps and expensive interventions with no evidence</li>
-              <li>Learn decision filters for evaluating supplements, tests, and wearable data</li>
-              <li>Develop critical thinking about health marketing claims</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Supplement label teardown exercise → Wearable data obsession discussion → Practice applying the decision framework to real products → Group debate</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Conduct a personal supplement audit — evaluate everything you currently take against the decision framework. Cut what doesn't pass.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="10">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">10</span>
-          <div class="curriculum-trigger-text">
-            <h3>Social Health, Purpose &amp; Longevity</h3>
-            <span>Session 10 · Psychosocial Science</span>
-          </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Understand the psychosocial predictors of healthy aging — loneliness, purpose, community</li>
-              <li>Recognize that social connection is as impactful as diet and exercise</li>
-              <li>Design intentional social habits that support your healthspan</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Research review on social health and longevity → Values reflection exercise → Social habit design workshop → Accountability pairing</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Complete a social connection inventory — map your relationships, identify gaps, and initiate one new or renewed connection this week.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="11">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">11</span>
-          <div class="curriculum-trigger-text">
-            <h3>Personal Longevity Blueprint</h3>
-            <span>Session 11 · Integration</span>
-          </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Integrate all 10 sessions into a coherent, sustainable personal plan</li>
-              <li>Build a realistic blueprint without overwhelm or overcommitment</li>
-              <li>Design your own failure recovery systems and habit stacks</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Blueprint construction workshop → Peer coaching sessions (paired review) → Failure planning and obstacle pre-emption → Draft sharing and feedback</p>
-            <div class="curriculum-section-label">Between-Session Work</div>
-            <p class="curriculum-work">Complete your Personal Longevity Blueprint — a comprehensive document covering nutrition, movement, sleep, stress, social health, and monitoring systems.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="curriculum-item reveal" data-session="12">
-        <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-          <span class="curriculum-num">12</span>
-          <div class="curriculum-trigger-text">
-            <h3>Reflection, Integration &amp; Your Next 90 Days</h3>
-            <span>Session 12 · Graduation</span>
-          </div>
-          <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="curriculum-body">
-          <div class="curriculum-body-inner">
-            <div class="curriculum-section-label">Learning Goals</div>
-            <ul class="curriculum-goals">
-              <li>Reflect on your transformation from session 1 to session 12</li>
-              <li>Synthesize your CGM insights and behavioral experiments into lasting habits</li>
-              <li>Build a concrete 90-day action plan for continued progress</li>
-            </ul>
-            <div class="curriculum-section-label">90-Minute Flow</div>
-            <p class="curriculum-flow">Before/after reflections → CGM insights synthesis → Commitment statements → 90-day action plan construction → Graduation and celebration</p>
-            <div class="curriculum-section-label">Final Output</div>
-            <p class="curriculum-work">Your completed Personal Longevity Blueprint + 90-Day Action Plan — two living documents that guide your healthspan journey beyond the course.</p>
+          <div class="curriculum-item" data-session="12">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">12</span>
+              <div class="curriculum-trigger-text">
+                <h3>Reflection, Integration &amp; Your Next 90 Days</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Reflect on your transformation from session 1 to session 12</li>
+                  <li>Synthesize your CGM insights and behavioral experiments into lasting habits</li>
+                  <li>Build a concrete 90-day action plan for continued progress</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Before/after reflections → CGM insights synthesis → Commitment statements → 90-day action plan construction → Graduation and celebration</p>
+                <div class="curriculum-section-label">Final Output</div>
+                <p class="curriculum-work">Your completed Personal Longevity Blueprint + 90-Day Action Plan — two living documents that guide your healthspan journey beyond the course.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2193,6 +2019,7 @@ ul, ol { list-style: none; }
     </div>
   </div>
 </section>
+
 
 <!-- ============================================
      7. WHAT MAKES THIS DIFFERENT
