@@ -917,6 +917,73 @@ ul, ol { list-style: none; }
 .faq-body-inner p { font-size: 16px; line-height: 1.7; color: var(--text-secondary); }
 
 /* ============================================
+   BIOLOGICAL AGE ASSESSMENT
+   ============================================ */
+.bio-assess { padding: 120px 0; background: linear-gradient(180deg, #fff 0%, #F5F7FA 38%, #EEF4FB 100%); overflow: hidden; }
+.bio-assess .ba-wrap { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+.bio-assess .ba-center { text-align: center; }
+.ba-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.bio-assess h2 { font-family: var(--font-display); font-size: clamp(34px, 5vw, 56px); line-height: .98; letter-spacing: -1.4px; max-width: 13ch; margin: 14px auto 0; }
+.ba-sub { font-size: 21px; color: var(--text-secondary); max-width: 34ch; margin: 22px auto 0; }
+.ba-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 28px; border-radius: 999px; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; font-weight: 700; font-family: var(--font-body); font-size: 16px; text-decoration: none; box-shadow: 0 8px 30px rgba(0,110,255,.22); margin-top: 28px; border: none; cursor: pointer; }
+.ba-hero-grid { display: grid; grid-template-columns: 1fr 1.05fr 1fr; gap: 18px; align-items: stretch; margin-top: 34px; }
+.ba-glass, .ba-panel, .ba-card, .ba-result-box { background: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.6); box-shadow: 0 16px 50px rgba(12,24,44,.10); backdrop-filter: blur(18px); border-radius: 28px; overflow: hidden; }
+.ba-image-card { background: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.6); box-shadow: 0 16px 50px rgba(12,24,44,.10); backdrop-filter: blur(18px); border-radius: 28px; overflow: hidden; }
+.ba-image-card img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; display: block; }
+.ba-panel { padding: 28px; }
+.ba-panel p { color: var(--text-secondary); max-width: 34ch; margin: 0 auto; }
+.ba-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+.ba-stat { padding: 16px; border-radius: 18px; background: rgba(255,255,255,.88); border: 1px solid rgba(0,0,0,.06); text-align: center; }
+.ba-stat strong { display: block; font-family: var(--font-display); font-size: 24px; }
+.ba-stat span { font-size: 13px; color: var(--text-secondary); }
+.ba-assessment { display: grid; grid-template-columns: .78fr 1.22fr; gap: 22px; align-items: start; }
+.ba-card { padding: 28px; }
+.ba-sticky { position: sticky; top: 24px; text-align: left; }
+.ba-score { font-family: var(--font-display); font-size: clamp(64px, 8vw, 92px); line-height: .9; margin: 18px 0 6px; color: var(--text-primary); }
+.ba-muted { color: var(--text-secondary); }
+.ba-progress { height: 12px; border-radius: 999px; background: rgba(0,0,0,.06); overflow: hidden; margin-top: 20px; }
+.ba-progress > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #2D7A4F, var(--accent)); transition: width 0.4s ease; }
+.ba-mini { display: grid; gap: 12px; margin-top: 18px; }
+.ba-mini div { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,.08); font-size: 14px; }
+.ba-mini span { color: var(--text-secondary); }
+.ba-headcopy { text-align: center; margin-bottom: 26px; }
+.ba-headcopy p { color: var(--text-secondary); max-width: 48ch; margin: 12px auto 0; }
+.ba-group + .ba-group { margin-top: 30px; }
+.ba-group h3 { font-family: var(--font-display); font-size: 26px; text-align: center; letter-spacing: -0.5px; }
+.ba-group > p { color: var(--text-secondary); text-align: center; font-size: 15px; margin: 8px 0 18px; }
+.ba-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ba-card label { display: block; font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+.ba-card input[type="number"], .ba-card select { width: 100%; min-height: 52px; border-radius: 16px; border: 1px solid rgba(0,0,0,.08); background: #fff; text-align: center; padding: 0 14px; font-family: var(--font-body); font-size: 16px; }
+.ba-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ba-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.ba-opt { position: relative; }
+.ba-opt label { display: grid; gap: 8px; align-content: center; min-height: 132px; padding: 18px; border-radius: 20px; border: 1px solid rgba(0,0,0,.08); background: rgba(255,255,255,.88); cursor: pointer; margin: 0; }
+.ba-opt label strong { display: block; font-size: 16px; }
+.ba-opt label span { display: block; font-size: 14px; color: var(--text-secondary); font-weight: 400; }
+.ba-opt input:checked + label { border-color: rgba(0,110,255,.46); box-shadow: 0 12px 30px rgba(0,110,255,.10); }
+.ba-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
+.ba-btn-secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border-radius: 999px; border: 1px solid rgba(0,0,0,.08); background: #fff; font-weight: 700; font-family: var(--font-body); font-size: 16px; cursor: pointer; }
+.ba-result { display: none; margin-top: 24px; text-align: center; }
+.ba-result.ba-visible { display: block; }
+.ba-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0; }
+.ba-result-box { padding: 18px; text-align: center; }
+.ba-result-box strong { display: block; font-size: 22px; }
+.ba-result-box span { font-size: 14px; color: var(--text-secondary); }
+.ba-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+.ba-feature { padding: 24px; text-align: left; }
+.ba-feature h3 { text-align: left; }
+.ba-feature p { color: var(--text-secondary); margin-top: 10px; }
+@media (max-width: 1000px) {
+  .ba-hero-grid, .ba-assessment, .ba-pillars, .ba-result-grid { grid-template-columns: 1fr; }
+  .ba-sticky { position: static; }
+  .ba-stats { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .ba-row, .ba-options { grid-template-columns: 1fr; }
+  .ba-sub { font-size: 18px; }
+}
+
+/* ============================================
    12. FINAL CTA
    ============================================ */
 .final-cta {
@@ -2377,6 +2444,137 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ============================================
+     BIOLOGICAL AGE ASSESSMENT
+     ============================================ -->
+<section class="bio-assess" id="bio-age">
+  <div class="ba-wrap ba-center">
+    <span class="ba-eyebrow">Personal longevity snapshot</span>
+    <h2>Find the age your body may be living at.</h2>
+    <p class="ba-sub">A quick, science-backed self-assessment that estimates your biological age based on lifestyle, recovery, and metabolic patterns.</p>
+    <a class="ba-btn" href="#ba-assessment">Start the assessment</a>
+
+    <div class="ba-hero-grid">
+      <figure class="ba-image-card"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" alt="Healthy woman stretching outdoors" width="900" height="1125" loading="lazy"></figure>
+      <div class="ba-panel ba-glass">
+        <span class="ba-eyebrow">What you receive</span>
+        <h3 style="font-family:var(--font-display);font-size:30px;margin:14px 0;letter-spacing:-0.5px">A clear, elegant snapshot of your current longevity patterns.</h3>
+        <p>See how your daily habits — sleep, nutrition, movement, stress — may be influencing the way your body ages.</p>
+        <div class="ba-stats">
+          <div class="ba-stat"><strong>3 min</strong><span>To complete</span></div>
+          <div class="ba-stat"><strong>1 result</strong><span>Personalized snapshot</span></div>
+          <div class="ba-stat"><strong>Clear next step</strong><span>Supportive direction</span></div>
+        </div>
+      </div>
+      <figure class="ba-image-card"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80" alt="Nutritious colorful meal" width="900" height="1125" loading="lazy"></figure>
+    </div>
+  </div>
+
+  <div class="ba-wrap ba-assessment" id="ba-assessment" style="margin-top:72px">
+    <aside class="ba-card ba-glass ba-sticky" aria-live="polite">
+      <span class="ba-eyebrow">Your live snapshot</span>
+      <div class="ba-score" id="baLiveAge">--</div>
+      <p class="ba-muted" id="baLiveSummary">Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.</p>
+      <div class="ba-progress"><span id="baProgressFill"></span></div>
+      <div class="ba-mini">
+        <div><span>Estimated result</span><strong id="baMiniTrack">Pending</strong></div>
+        <div><span>Assessment progress</span><strong id="baMiniProgress">0%</strong></div>
+        <div><span>Style of feedback</span><strong>Supportive</strong></div>
+      </div>
+    </aside>
+
+    <div>
+      <form class="ba-card ba-glass" id="bioAgeForm">
+        <div class="ba-headcopy">
+          <span class="ba-eyebrow">Biological age questionnaire</span>
+          <h2 style="max-width:none">Begin with a few simple answers.</h2>
+          <p>Your responses help create a clear, supportive snapshot of how your current habits may be influencing the way your body ages.</p>
+        </div>
+
+        <div class="ba-group">
+          <h3>About you</h3>
+          <p>A few quick answers create the baseline for the assessment.</p>
+          <div class="ba-row">
+            <div>
+              <label for="baChronologicalAge">What is your age?</label>
+              <input id="baChronologicalAge" name="chronologicalAge" type="number" min="18" max="100" required>
+            </div>
+            <div>
+              <label for="baSleepHours">How many hours do you usually sleep?</label>
+              <select id="baSleepHours" name="sleepHours" required>
+                <option value="">Select</option>
+                <option value="3">Less than 6 hours</option>
+                <option value="1">6 to 7 hours</option>
+                <option value="-2">7 to 8.5 hours</option>
+                <option value="0">More than 8.5 hours</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="ba-group">
+          <h3>Energy and nourishment</h3>
+          <p>These answers help estimate how well the body is being fueled and supported day to day.</p>
+          <div class="ba-options">
+            <div class="ba-opt"><input type="radio" id="baEnergyStable" name="energy" value="-2" required><label for="baEnergyStable"><strong>Energy feels steady</strong><span>Most days feel balanced, without strong crashes or swings.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baEnergyCrash" name="energy" value="2" required><label for="baEnergyCrash"><strong>Energy rises and dips</strong><span>Afternoons feel sluggish, or meals tend to cause noticeable highs and lows.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baNutritionStrong" name="nutrition" value="-2" required><label for="baNutritionStrong"><strong>Meals feel supportive</strong><span>Most meals include quality food, protein, and a sense of consistency.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baNutritionWeak" name="nutrition" value="2" required><label for="baNutritionWeak"><strong>Meals feel irregular</strong><span>Food choices often feel rushed, processed, or inconsistent.</span></label></div>
+          </div>
+        </div>
+
+        <div class="ba-group">
+          <h3>Movement and recovery</h3>
+          <p>Aging well is closely connected to strength, stamina, and the ability to bounce back.</p>
+          <div class="ba-options">
+            <div class="ba-opt"><input type="radio" id="baTrainingStrong" name="training" value="-3" required><label for="baTrainingStrong"><strong>Movement is part of the week</strong><span>Strength, cardio, walking, or intentional exercise happens regularly.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baTrainingLow" name="training" value="3" required><label for="baTrainingLow"><strong>Movement is limited</strong><span>Most days are sedentary, with little structured exercise or walking.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baRecoveryGood" name="recovery" value="-1" required><label for="baRecoveryGood"><strong>Recovery feels good</strong><span>Energy usually returns well after effort, and stress feels manageable.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baRecoveryPoor" name="recovery" value="2" required><label for="baRecoveryPoor"><strong>Recovery feels slow</strong><span>The body often feels depleted, sore, or under pressure.</span></label></div>
+          </div>
+        </div>
+
+        <div class="ba-group">
+          <h3>Awareness and signals</h3>
+          <p>Tracking patterns can make healthy changes easier and more precise.</p>
+          <div class="ba-options">
+            <div class="ba-opt"><input type="radio" id="baMarkerTracked" name="markers" value="-2" required><label for="baMarkerTracked"><strong>Health signals are tracked</strong><span>Labs, blood pressure, body composition, wearables, or similar trends are reviewed regularly.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baMarkerUnknown" name="markers" value="2" required><label for="baMarkerUnknown"><strong>There is little visibility</strong><span>Health trends are mostly unknown or only checked occasionally.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baStressLow" name="stress" value="-1" required><label for="baStressLow"><strong>Stress feels manageable</strong><span>There is room for rest, recovery, and emotional regulation most weeks.</span></label></div>
+            <div class="ba-opt"><input type="radio" id="baStressHigh" name="stress" value="3" required><label for="baStressHigh"><strong>Stress feels constant</strong><span>The nervous system often feels overworked, reactive, or stretched.</span></label></div>
+          </div>
+        </div>
+
+        <div class="ba-actions">
+          <button class="ba-btn" type="submit">See my result</button>
+          <button class="ba-btn-secondary" type="reset">Start over</button>
+        </div>
+      </form>
+
+      <section class="ba-card ba-glass ba-result" id="baResultCard" aria-live="polite">
+        <h3 style="font-family:var(--font-display);font-size:36px;letter-spacing:-1px">Your biological age snapshot</h3>
+        <p class="ba-muted" id="baResultNarrative">Complete the assessment to unlock a personalized age estimate and a gentle recommendation for where to focus first.</p>
+        <div class="ba-result-grid">
+          <div class="ba-result-box ba-glass"><strong id="baAgeGap">--</strong><span>Age comparison</span></div>
+          <div class="ba-result-box ba-glass"><strong id="baFocusTrack">--</strong><span>Suggested focus</span></div>
+          <div class="ba-result-box ba-glass"><strong id="baReadiness">--</strong><span>Next step style</span></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="ba-wrap ba-center" style="margin-top:72px">
+    <span class="ba-eyebrow">Assessment pillars</span>
+    <h2>The key patterns that shape healthy aging.</h2>
+    <p class="ba-sub" style="max-width:42ch">Each pillar highlights an area that can meaningfully influence how the body feels, functions, and adapts over time.</p>
+    <div class="ba-pillars">
+      <div class="ba-card ba-glass ba-feature"><h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:-0.5px">Daily rhythm</h3><p>Sleep quality, stress balance, and the patterns that support resilience.</p></div>
+      <div class="ba-card ba-glass ba-feature"><h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:-0.5px">Metabolic balance</h3><p>Energy stability, food quality, and the signals that reflect how the body is fueled.</p></div>
+      <div class="ba-card ba-glass ba-feature"><h3 style="font-family:var(--font-display);font-size:26px;letter-spacing:-0.5px">Movement capacity</h3><p>Strength, cardio, and recovery habits that help preserve vitality.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
      12. FINAL CTA
      ============================================ -->
 <section class="final-cta" id="final-cta">
@@ -2594,6 +2792,32 @@ function handleFormSubmit(e, form) {
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 }
+
+/* ============================================
+   BIOLOGICAL AGE ASSESSMENT — JS
+   ============================================ */
+(function(){
+  const baForm = document.getElementById('bioAgeForm');
+  if (!baForm) return;
+  const baLiveAge = document.getElementById('baLiveAge');
+  const baLiveSummary = document.getElementById('baLiveSummary');
+  const baProgressFill = document.getElementById('baProgressFill');
+  const baMiniTrack = document.getElementById('baMiniTrack');
+  const baMiniProgress = document.getElementById('baMiniProgress');
+  const baResultCard = document.getElementById('baResultCard');
+  const baAgeGap = document.getElementById('baAgeGap');
+  const baFocusTrack = document.getElementById('baFocusTrack');
+  const baReadiness = document.getElementById('baReadiness');
+  const baResultNarrative = document.getElementById('baResultNarrative');
+  const baFieldNames = ['chronologicalAge','sleepHours','energy','nutrition','training','recovery','markers','stress'];
+  function baGetData(){const fd=new FormData(baForm);const data={};baFieldNames.forEach(n=>data[n]=fd.get(n));return data}
+  function baFilledCount(data){return baFieldNames.filter(n=>data[n]!==null&&data[n]!=='').length}
+  function baCompute(data){const age=Number(data.chronologicalAge||0);if(!age)return null;const mods=['sleepHours','energy','nutrition','training','recovery','markers','stress'].map(k=>Number(data[k]||0)).reduce((s,v)=>s+v,0);const bioAge=Math.max(18,Math.round(age+mods));const gap=bioAge-age;let track='Balanced foundation';let note='Your biological age appears closely aligned with your chronological age. This suggests a stable foundation, with the strongest gains likely to come from a few more intentional choices around sleep, energy, and consistency.';let readinessLabel='Ready for a next step';if((Number(data.stress)+Number(data.sleepHours))>=4){track='Restore the basics';note='Your result suggests that recovery, sleep quality, and stress balance may deserve a little more attention right now.';readinessLabel='Best with a gentle reset'}else if((Number(data.energy)+Number(data.nutrition)+Number(data.markers))>=3){track='Metabolic balance';note='Your result suggests that better energy stability, nourishment, and visibility into key health signals could make a meaningful difference.';readinessLabel='Best with practical structure'}else if((Number(data.training)+Number(data.recovery))<=-3){track='Performance longevity';note='Your result suggests a strong foundation in movement, recovery, and daily rhythm, with room to keep refining what already works well.';readinessLabel='Ready for advanced guidance'}return{age,bioAge,gap,track,note,readinessLabel}}
+  function baUpdateLive(){const data=baGetData();const count=baFilledCount(data);const pct=Math.round((count/baFieldNames.length)*100);baProgressFill.style.width=pct+'%';baMiniProgress.textContent=pct+'%';const result=baCompute(data);if(!result){baLiveAge.textContent='--';baMiniTrack.textContent='Pending';baLiveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';return}baLiveAge.textContent=result.bioAge;baMiniTrack.textContent=result.track;baLiveSummary.textContent=result.gap<=0?'Current estimate: '+Math.abs(result.gap)+' year'+(Math.abs(result.gap)===1?'':'s')+' younger than chronological age.':'Current estimate: '+result.gap+' year'+(result.gap===1?'':'s')+' older than chronological age.'}
+  baForm.addEventListener('input',baUpdateLive);baForm.addEventListener('change',baUpdateLive);
+  baForm.addEventListener('submit',function(e){e.preventDefault();const result=baCompute(baGetData());if(!result)return;baResultCard.classList.add('ba-visible');baAgeGap.textContent=result.gap===0?'Aligned with age':(result.gap>0?'+'+result.gap+' years':result.gap+' years');baFocusTrack.textContent=result.track;baReadiness.textContent=result.readinessLabel;baResultNarrative.textContent='Estimated biological age: '+result.bioAge+'. '+result.note;baResultCard.scrollIntoView({behavior:'smooth',block:'nearest'})});
+  baForm.addEventListener('reset',function(){setTimeout(function(){baProgressFill.style.width='0%';baMiniProgress.textContent='0%';baMiniTrack.textContent='Pending';baLiveAge.textContent='--';baLiveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';baResultCard.classList.remove('ba-visible')},0)});
+})();
 </script>
 
 </body>
