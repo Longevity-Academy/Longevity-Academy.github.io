@@ -1162,55 +1162,112 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   OUTCOMES SECTION
+   OUTCOMES SECTION — MOTION SLIDERS
    ============================================ */
-.outcomes { padding: 120px 0; }
+.outcomes { padding: 120px 0; overflow: hidden; }
 .outcomes-header { text-align: center; margin-bottom: 64px; }
-.outcomes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
+
+/* Slider track */
+.outcomes-slider-row {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  padding: 12px 0;
 }
-.outcomes-card {
-  padding: 36px 32px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.02);
-  transition: transform 0.3s, border-color 0.3s;
+.outcomes-slider-row.scroll-left {
+  animation: slideLeft 30s linear infinite;
 }
-.outcomes-card:hover {
+.outcomes-slider-row.scroll-right {
+  animation: slideRight 30s linear infinite;
+}
+.outcomes-slider-row:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes slideRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Slider cards */
+.outcomes-slide {
+  flex-shrink: 0;
+  width: 380px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.outcomes-slide:hover {
   transform: translateY(-4px);
-  border-color: var(--accent);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.1);
 }
-.outcomes-card-num {
+
+/* Media slot (placeholder for video/image) */
+.outcomes-slide-media {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #E8F1FC 0%, #d4e6f9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.outcomes-slide-media video,
+.outcomes-slide-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.outcomes-slide-media .media-placeholder {
+  font-family: 'Codec Pro', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: rgba(0,110,255,0.12);
+}
+
+/* Card text content */
+.outcomes-slide-body {
+  padding: 28px 28px 32px;
+}
+.outcomes-slide-num {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   letter-spacing: 0.1em;
 }
-.outcomes-card h3 {
+.outcomes-slide h3 {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 12px;
+  font-size: 19px;
+  margin-bottom: 10px;
   line-height: 1.3;
+  color: var(--text-primary);
 }
-.outcomes-card p {
-  font-size: 16px;
+.outcomes-slide p {
+  font-size: 15px;
   line-height: 1.6;
   color: var(--text-secondary);
 }
-@media (max-width: 900px) {
-  .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+
+/* Row spacing */
+.outcomes-slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
+
 @media (max-width: 600px) {
-  .outcomes-grid { grid-template-columns: 1fr; }
   .outcomes { padding: 80px 0; }
+  .outcomes-slide { width: 300px; }
+  .outcomes-slide-media { height: 160px; }
 }
 
 /* ============================================
@@ -1325,12 +1382,6 @@ ul, ol { list-style: none; }
 }
 
 /* Light overrides for new sections */
-.outcomes-card {
-  border-color: rgba(0,0,0,0.08);
-  background: rgba(0,0,0,0.02);
-}
-.outcomes-card:hover { border-color: var(--accent); }
-.outcomes-card h3 { color: var(--text-primary); }
 .method-card {
   border-color: rgba(0,0,0,0.08);
   background: rgba(0,0,0,0.02);
@@ -1464,36 +1515,113 @@ ul, ol { list-style: none; }
       <h2 class="section-title">By the End of This Course,<br>You Will Be Able To</h2>
       <p class="section-subtitle" style="margin: 0 auto;">12 sessions. 12 weeks. These are the specific skills and capabilities you walk away with.</p>
     </div>
-    <div class="outcomes-grid">
-      <div class="outcomes-card reveal reveal-delay-1">
-        <div class="outcomes-card-num">01</div>
-        <h3>Read Your Own Bloodwork Like a Longevity Clinician</h3>
-        <p>Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel your GP reviews in 90 seconds.</p>
+    <div class="outcomes-slider-wrapper">
+      <!-- Row 1: scrolls left -->
+      <div class="outcomes-slider-row scroll-left">
+        <!-- Original 3 cards -->
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">01</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">01</div>
+            <h3>Read Your Own Bloodwork Like a Longevity Clinician</h3>
+            <p>Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel your GP reviews in 90 seconds.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">02</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">02</div>
+            <h3>Build a Personalized Longevity Protocol</h3>
+            <p>Leave with a written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology, not a generic template.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">03</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">03</div>
+            <h3>Interpret CGM Data and Glucose Responses</h3>
+            <p>Understand what your continuous glucose monitor is actually telling you — food order effects, overnight patterns, and the metabolic signals that matter for long-term health.</p>
+          </div>
+        </div>
+        <!-- Duplicates for seamless loop -->
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">01</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">01</div>
+            <h3>Read Your Own Bloodwork Like a Longevity Clinician</h3>
+            <p>Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel your GP reviews in 90 seconds.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">02</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">02</div>
+            <h3>Build a Personalized Longevity Protocol</h3>
+            <p>Leave with a written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology, not a generic template.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">03</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">03</div>
+            <h3>Interpret CGM Data and Glucose Responses</h3>
+            <p>Understand what your continuous glucose monitor is actually telling you — food order effects, overnight patterns, and the metabolic signals that matter for long-term health.</p>
+          </div>
+        </div>
       </div>
-      <div class="outcomes-card reveal reveal-delay-2">
-        <div class="outcomes-card-num">02</div>
-        <h3>Build a Personalized Longevity Protocol</h3>
-        <p>Leave with a written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology, not a generic template.</p>
-      </div>
-      <div class="outcomes-card reveal reveal-delay-3">
-        <div class="outcomes-card-num">03</div>
-        <h3>Interpret CGM Data and Glucose Responses</h3>
-        <p>Understand what your continuous glucose monitor is actually telling you — food order effects, overnight patterns, and the metabolic signals that matter for long-term health.</p>
-      </div>
-      <div class="outcomes-card reveal reveal-delay-4">
-        <div class="outcomes-card-num">04</div>
-        <h3>Design Your Training for the Centenarian Olympics</h3>
-        <p>Program Zone 2 cardio, VO2 max work, resistance training, and stability protocols — reverse-engineered from the physical capacity you want at 80.</p>
-      </div>
-      <div class="outcomes-card reveal reveal-delay-1">
-        <div class="outcomes-card-num">05</div>
-        <h3>Evaluate Supplements and Health Tech Critically</h3>
-        <p>Separate signal from noise on NMN, omega-3s, creatine, rapamycin, metformin, and wearables — know what the evidence supports and what is marketing.</p>
-      </div>
-      <div class="outcomes-card reveal reveal-delay-2">
-        <div class="outcomes-card-num">06</div>
-        <h3>Optimize Sleep Architecture and Stress Response</h3>
-        <p>Apply circadian entrainment protocols, HRV-guided recovery, and cortisol timing strategies — the highest-leverage interventions in longevity medicine.</p>
+
+      <!-- Row 2: scrolls right -->
+      <div class="outcomes-slider-row scroll-right">
+        <!-- Original 3 cards -->
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">04</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">04</div>
+            <h3>Design Your Training for the Centenarian Olympics</h3>
+            <p>Program Zone 2 cardio, VO2 max work, resistance training, and stability protocols — reverse-engineered from the physical capacity you want at 80.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">05</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">05</div>
+            <h3>Evaluate Supplements and Health Tech Critically</h3>
+            <p>Separate signal from noise on NMN, omega-3s, creatine, rapamycin, metformin, and wearables — know what the evidence supports and what is marketing.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">06</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">06</div>
+            <h3>Optimize Sleep Architecture and Stress Response</h3>
+            <p>Apply circadian entrainment protocols, HRV-guided recovery, and cortisol timing strategies — the highest-leverage interventions in longevity medicine.</p>
+          </div>
+        </div>
+        <!-- Duplicates for seamless loop -->
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">04</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">04</div>
+            <h3>Design Your Training for the Centenarian Olympics</h3>
+            <p>Program Zone 2 cardio, VO2 max work, resistance training, and stability protocols — reverse-engineered from the physical capacity you want at 80.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">05</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">05</div>
+            <h3>Evaluate Supplements and Health Tech Critically</h3>
+            <p>Separate signal from noise on NMN, omega-3s, creatine, rapamycin, metformin, and wearables — know what the evidence supports and what is marketing.</p>
+          </div>
+        </div>
+        <div class="outcomes-slide">
+          <div class="outcomes-slide-media"><span class="media-placeholder">06</span></div>
+          <div class="outcomes-slide-body">
+            <div class="outcomes-slide-num">06</div>
+            <h3>Optimize Sleep Architecture and Stress Response</h3>
+            <p>Apply circadian entrainment protocols, HRV-guided recovery, and cortisol timing strategies — the highest-leverage interventions in longevity medicine.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
