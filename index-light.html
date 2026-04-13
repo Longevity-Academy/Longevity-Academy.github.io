@@ -1162,73 +1162,69 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   OUTCOMES SECTION — 2-COLUMN VERTICAL MARQUEE
+   OUTCOMES SECTION — 2-ROW HORIZONTAL MARQUEE
    ============================================ */
 .outcomes { padding: 120px 0; overflow: hidden; }
 .outcomes-header { text-align: center; margin-bottom: 64px; }
 
-/* 2-column marquee container */
+/* Marquee wrapper — stacks two rows */
 .outcomes-marquee {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
-  max-width: 960px;
-  margin: 0 auto;
-  height: 620px;
-  overflow: hidden;
   position: relative;
-  padding: 0 24px;
+  width: 100%;
+  overflow: hidden;
 }
-/* Fade masks top and bottom */
+/* Fade masks left and right */
 .outcomes-marquee::before,
 .outcomes-marquee::after {
   content: '';
   position: absolute;
-  left: 0; right: 0;
-  height: 80px;
+  top: 0; bottom: 0;
+  width: 100px;
   z-index: 5;
   pointer-events: none;
 }
 .outcomes-marquee::before {
-  top: 0;
-  background: linear-gradient(to bottom, #fff 0%, transparent 100%);
+  left: 0;
+  background: linear-gradient(to right, #fff 0%, transparent 100%);
 }
 .outcomes-marquee::after {
-  bottom: 0;
-  background: linear-gradient(to top, #fff 0%, transparent 100%);
+  right: 0;
+  background: linear-gradient(to left, #fff 0%, transparent 100%);
 }
 
-/* Each column scrolls vertically */
-.outcomes-col {
+/* Each row scrolls horizontally */
+.outcomes-row {
+  overflow: hidden;
+  width: 100%;
+}
+.outcomes-row-inner {
   display: flex;
-  flex-direction: column;
   gap: 24px;
+  width: max-content;
 }
-/* Column 1: scroll UP */
-.outcomes-col--up .outcomes-col-inner {
-  animation: marqueeUp 30s linear infinite;
+/* Row 1: scroll LEFT */
+.outcomes-row--left .outcomes-row-inner {
+  animation: marqueeLeft 35s linear infinite;
 }
-/* Column 2: scroll DOWN */
-.outcomes-col--down .outcomes-col-inner {
-  animation: marqueeDown 30s linear infinite;
-}
-.outcomes-col-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+/* Row 2: scroll RIGHT */
+.outcomes-row--right .outcomes-row-inner {
+  animation: marqueeRight 35s linear infinite;
 }
 /* Pause on hover */
-.outcomes-marquee:hover .outcomes-col-inner {
+.outcomes-marquee:hover .outcomes-row-inner {
   animation-play-state: paused;
 }
 
-@keyframes marqueeUp {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(calc(-50% - 12px)); }
+@keyframes marqueeLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 12px)); }
 }
-@keyframes marqueeDown {
-  0%   { transform: translateY(calc(-50% - 12px)); }
-  100% { transform: translateY(0); }
+@keyframes marqueeRight {
+  0%   { transform: translateX(calc(-50% - 12px)); }
+  100% { transform: translateX(0); }
 }
 
 /* Outcome cards */
@@ -1236,12 +1232,14 @@ ul, ol { list-style: none; }
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  width: 380px;
+  height: 320px;
   background: #000;
   flex-shrink: 0;
+  transition: box-shadow 0.3s;
 }
 .outcomes-slide:hover {
-  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
 }
 
 /* Card background image */
@@ -1264,8 +1262,8 @@ ul, ol { list-style: none; }
   background: linear-gradient(
     to bottom,
     rgba(0,0,0,0.05) 0%,
-    rgba(0,0,0,0.2) 50%,
-    rgba(0,0,0,0.5) 100%
+    rgba(0,0,0,0.15) 40%,
+    rgba(0,0,0,0.55) 100%
   );
 }
 
@@ -1281,7 +1279,7 @@ ul, ol { list-style: none; }
   -webkit-backdrop-filter: blur(16px);
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.18);
-  padding: 24px;
+  padding: 22px 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
 .outcomes-card-num {
@@ -1289,42 +1287,42 @@ ul, ol { list-style: none; }
   font-weight: 700;
   font-size: 13px;
   color: #3B82F6;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   letter-spacing: 0.1em;
 }
 .outcomes-card-title {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1.25;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .outcomes-card-body {
   font-family: 'Inter', sans-serif;
-  font-size: 13.5px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.5;
   color: rgba(255,255,255,0.82);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .outcomes-marquee {
-    max-width: 100%;
-    height: 500px;
-    gap: 16px;
-    padding: 0 16px;
-  }
-  .outcomes-col-inner { gap: 16px; }
-  .outcomes-card-glass { padding: 18px; bottom: 14px; left: 14px; right: 14px; }
-  .outcomes-card-title { font-size: 17px; }
-  .outcomes-card-body { font-size: 12.5px; }
+  .outcomes-marquee { gap: 16px; }
+  .outcomes-row-inner { gap: 16px; }
+  .outcomes-slide { width: 300px; height: 270px; }
+  .outcomes-card-glass { padding: 16px 18px; bottom: 14px; left: 14px; right: 14px; }
+  .outcomes-card-title { font-size: 16px; }
+  .outcomes-card-body { font-size: 12px; }
+  .outcomes-marquee::before,
+  .outcomes-marquee::after { width: 50px; }
 }
 @media (max-width: 480px) {
-  .outcomes-marquee { height: 420px; }
+  .outcomes-slide { width: 260px; height: 240px; }
   .outcomes-card-glass { padding: 14px; border-radius: 12px; }
   .outcomes-card-title { font-size: 15px; }
   .outcomes-card-body { font-size: 11.5px; }
+  .outcomes-marquee::before,
+  .outcomes-marquee::after { width: 30px; }
 }
 
 /* ============================================
@@ -1573,10 +1571,9 @@ ul, ol { list-style: none; }
       <p class="section-subtitle" style="margin: 0 auto;">12 sessions. 12 weeks. These are the specific skills and capabilities you walk away with.</p>
     </div>
     <div class="outcomes-marquee">
-      <!-- Column 1: scrolls UP (01, 02, 03) -->
-      <div class="outcomes-col outcomes-col--up">
-        <div class="outcomes-col-inner">
-          <!-- Original set -->
+      <!-- Row 1: scrolls LEFT (01, 02, 03 × 2) -->
+      <div class="outcomes-row outcomes-row--left">
+        <div class="outcomes-row-inner">
           <div class="outcomes-slide">
             <div class="outcomes-card-bg"><img src="assets/outcome-bg-01.jpg" alt="Bloodwork analysis"></div>
             <div class="outcomes-card-overlay"></div>
@@ -1635,10 +1632,9 @@ ul, ol { list-style: none; }
         </div>
       </div>
 
-      <!-- Column 2: scrolls DOWN (04, 05, 06) -->
-      <div class="outcomes-col outcomes-col--down">
-        <div class="outcomes-col-inner">
-          <!-- Original set -->
+      <!-- Row 2: scrolls RIGHT (04, 05, 06 × 2) -->
+      <div class="outcomes-row outcomes-row--right">
+        <div class="outcomes-row-inner">
           <div class="outcomes-slide">
             <div class="outcomes-card-bg"><img src="assets/outcome-bg-04.jpg" alt="Longevity training"></div>
             <div class="outcomes-card-overlay"></div>
