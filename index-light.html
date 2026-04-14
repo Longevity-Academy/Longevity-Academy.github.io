@@ -1141,47 +1141,86 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   WHAT YOU'LL LEARN — SIMPLIFIED
+   WHAT YOU'LL LEARN — VIDEO CARDS
    ============================================ */
 .learn-section { padding: 120px 0; background: #FFFFFF; }
 .learn-header { text-align: center; margin-bottom: 72px; }
 .learn-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
-  max-width: 1200px; margin: 0 auto;
-  border-top: 1px solid var(--border-subtle);
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
 }
 .learn-item {
-  padding: 48px 28px; text-align: center;
-  border-bottom: 1px solid var(--border-subtle);
-  border-right: 1px solid var(--border-subtle);
-  transition: background var(--transition-base);
+  position: relative; overflow: hidden; border-radius: 16px;
+  min-height: 340px; display: flex; flex-direction: column;
+  justify-content: flex-end; cursor: pointer;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.45s ease;
 }
-.learn-item:last-child { border-right: none; }
-.learn-item:hover { background: var(--surface-dark); }
+.learn-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+/* Video background */
+.learn-item video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.learn-item:hover video { transform: scale(1.08); }
+/* Dark gradient overlay for text readability */
+.learn-item-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
+  transition: background 0.45s ease;
+}
+.learn-item:hover .learn-item-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.25) 100%);
+}
+/* Glass text box */
+.learn-item-content {
+  position: relative; z-index: 2;
+  padding: 28px 24px;
+  margin: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  transition: background 0.45s ease, border-color 0.45s ease;
+}
+.learn-item:hover .learn-item-content {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
 .learn-num {
   font-family: var(--font-display); font-weight: 800;
-  font-size: 14px; color: var(--accent);
-  letter-spacing: 2px; margin-bottom: 20px;
+  font-size: 13px; color: var(--accent);
+  letter-spacing: 2px; margin-bottom: 14px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 .learn-title {
   font-family: var(--font-display); font-weight: 800;
-  font-size: 22px; line-height: 1.25; color: var(--text-primary);
-  margin-bottom: 12px; letter-spacing: -0.3px;
+  font-size: 21px; line-height: 1.25; color: #FFFFFF;
+  margin-bottom: 10px; letter-spacing: -0.3px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .learn-hook {
-  font-family: var(--font-body); font-size: 15px;
-  line-height: 1.55; color: var(--text-secondary);
+  font-family: var(--font-body); font-size: 14px;
+  line-height: 1.55; color: rgba(255,255,255,0.78);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 @media (max-width: 1024px) {
-  .learn-grid { grid-template-columns: repeat(3, 1fr); }
-  .learn-item:nth-child(3) { border-right: none; }
-  .learn-item:nth-child(5) { border-right: 1px solid var(--border-subtle); }
+  .learn-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
 }
 @media (max-width: 768px) {
   .learn-section { padding: 80px 0; }
-  .learn-grid { grid-template-columns: 1fr; }
-  .learn-item { border-right: none; padding: 36px 20px; }
-  .learn-title { font-size: 20px; }
+  .learn-grid { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
+  .learn-item { min-height: 280px; }
+  .learn-item-content { padding: 22px 18px; margin: 8px; }
+  .learn-title { font-size: 18px; }
+  .learn-hook { font-size: 13px; }
+}
+@media (max-width: 480px) {
+  .learn-grid { grid-template-columns: 1fr; gap: 12px; }
+  .learn-item { min-height: 260px; }
 }
 
 /* ============================================
@@ -1449,29 +1488,49 @@ ul, ol { list-style: none; }
     </div>
     <div class="learn-grid">
       <div class="learn-item reveal">
-        <div class="learn-num">01</div>
-        <div class="learn-title">Read Your Own Blood</div>
-        <div class="learn-hook">The markers your doctor skips — and what they're telling you right now.</div>
+        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-blood.mp4" type="video/mp4"></video>
+        <div class="learn-item-overlay"></div>
+        <div class="learn-item-content">
+          <div class="learn-num">01</div>
+          <div class="learn-title">Read Your Own Blood</div>
+          <div class="learn-hook">The markers your doctor skips — and what they're telling you right now.</div>
+        </div>
       </div>
       <div class="learn-item reveal reveal-delay-1">
-        <div class="learn-num">02</div>
-        <div class="learn-title">Build Your Protocol</div>
-        <div class="learn-hook">A personalized longevity plan based on your biology, not someone else's.</div>
+        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-protocol.mp4" type="video/mp4"></video>
+        <div class="learn-item-overlay"></div>
+        <div class="learn-item-content">
+          <div class="learn-num">02</div>
+          <div class="learn-title">Build Your Protocol</div>
+          <div class="learn-hook">A personalized longevity plan based on your biology, not someone else's.</div>
+        </div>
       </div>
       <div class="learn-item reveal reveal-delay-2">
-        <div class="learn-num">03</div>
-        <div class="learn-title">Train for the Long Game</div>
-        <div class="learn-hook">The exact exercise strategy designed for how you want to feel at 80.</div>
-      </div>
-      <div class="learn-item reveal">
-        <div class="learn-num">04</div>
-        <div class="learn-title">Cut Through the Noise</div>
-        <div class="learn-hook">Supplements, wearables, fads — learn what actually works and what's marketing.</div>
+        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-train.mp4" type="video/mp4"></video>
+        <div class="learn-item-overlay"></div>
+        <div class="learn-item-content">
+          <div class="learn-num">03</div>
+          <div class="learn-title">Train for the Long Game</div>
+          <div class="learn-hook">The exact exercise strategy designed for how you want to feel at 80.</div>
+        </div>
       </div>
       <div class="learn-item reveal reveal-delay-1">
-        <div class="learn-num">05</div>
-        <div class="learn-title">Master Sleep and Stress</div>
-        <div class="learn-hook">The two highest-leverage interventions most people get wrong.</div>
+        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-noise.mp4" type="video/mp4"></video>
+        <div class="learn-item-overlay"></div>
+        <div class="learn-item-content">
+          <div class="learn-num">04</div>
+          <div class="learn-title">Cut Through the Noise</div>
+          <div class="learn-hook">Supplements, wearables, fads — learn what actually works and what's marketing.</div>
+        </div>
+      </div>
+      <div class="learn-item reveal reveal-delay-2">
+        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-sleep.mp4" type="video/mp4"></video>
+        <div class="learn-item-overlay"></div>
+        <div class="learn-item-content">
+          <div class="learn-num">05</div>
+          <div class="learn-title">Master Sleep and Stress</div>
+          <div class="learn-hook">The two highest-leverage interventions most people get wrong.</div>
+        </div>
       </div>
     </div>
   </div>
