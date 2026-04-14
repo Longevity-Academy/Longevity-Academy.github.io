@@ -343,10 +343,49 @@ ul, ol { list-style: none; }
 }
 .hero-pill svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 
-
-
-
-
+/* ============================================
+   2b. WHY eTEACHER LONGEVITY
+   ============================================ */
+.why-section {
+  padding: 100px 24px;
+  background: #FFFFFF;
+  text-align: center;
+}
+.why-section .why-eyebrow {
+  font-family: var(--font-body); font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 3px;
+  color: var(--accent); margin-bottom: 24px;
+}
+.why-section h2 {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.05;
+  color: var(--text-primary); margin-bottom: 64px;
+  letter-spacing: -1px;
+}
+.why-list {
+  list-style: none; max-width: 700px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 28px;
+}
+.why-list li {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 24px); line-height: 1.4;
+  color: var(--text-primary); letter-spacing: -0.3px;
+  display: flex; align-items: flex-start; gap: 16px;
+  text-align: left;
+}
+.why-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 8px; height: 8px;
+  margin-top: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+@media (max-width: 768px) {
+  .why-section { padding: 72px 16px; }
+  .why-section h2 { margin-bottom: 48px; }
+  .why-list { gap: 22px; }
+}
 
 /* ============================================
    3. TRUST BAR
@@ -1467,6 +1506,22 @@ ul, ol { list-style: none; }
 
 
   </div>
+</section>
+
+<!-- ============================================
+     2b. WHY eTEACHER LONGEVITY
+     ============================================ -->
+<section class="why-section reveal">
+  <div class="why-eyebrow">Why Learn Here</div>
+  <h2>This Isn't Another Wellness Course</h2>
+  <ul class="why-list">
+    <li>World-class scientists and clinicians as your teachers</li>
+    <li>Rooted in peer-reviewed research, not trends</li>
+    <li>Small live groups — 8 to 15 people, real conversation</li>
+    <li>Not wellness. Not motivation. Actual biology.</li>
+    <li>The only course that treats aging as a problem to solve</li>
+    <li>Built on 20 years of teaching 400,000+ students worldwide</li>
+  </ul>
 </section>
 
 <!-- ============================================
