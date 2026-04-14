@@ -34,10 +34,7 @@ ul, ol { list-style: none; }
    CSS VARIABLES
    ============================================ */
 :root {
-  --green-deep: #0B3D2E;
-  --green-mid: #1A5C3A;
-  --green-light: #2D7A4F;
-  --green-accent: #3A9D6A;
+  /* Green palette removed — using blue/navy exclusively */
   --accent: #006EFF;
   --accent-hover: #338BFF;
   --accent-dark: #0055CC;
@@ -338,9 +335,9 @@ ul, ol { list-style: none; }
    ============================================ */
 .trust-bar {
   padding: 40px 0;
-  background: #0D1410;
-  border-top: 1px solid rgba(168,181,160,0.08);
-  border-bottom: 1px solid rgba(168,181,160,0.08);
+  background: #0A1628;
+  border-top: 1px solid rgba(0,110,255,0.08);
+  border-bottom: 1px solid rgba(0,110,255,0.08);
 }
 .trust-bar-inner {
   display: flex; align-items: center; justify-content: center; gap: 64px;
@@ -712,6 +709,7 @@ ul, ol { list-style: none; }
   border-radius: var(--radius-xl); padding: 48px 32px; text-align: center;
   transition: all var(--transition-base);
   box-shadow: var(--glass-shadow);
+  display: flex; flex-direction: column; align-items: center;
 }
 .teacher-card:hover {
   background: var(--glass-bg-hover);
@@ -738,13 +736,14 @@ ul, ol { list-style: none; }
   font-size: 14px; font-weight: 600; color: var(--accent);
   text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
 }
-.teacher-bio { font-size: 15px; line-height: 1.65; color: var(--text-secondary); }
+.teacher-bio { font-size: 15px; line-height: 1.65; color: var(--text-secondary); flex-grow: 1; }
 
 /* Credential Badges */
 .teacher-credentials {
   display: flex; flex-direction: column; gap: 10px;
-  margin-top: 20px; padding-top: 20px;
+  margin-top: auto; padding-top: 20px;
   border-top: 1px solid rgba(0, 110, 255, 0.12);
+  width: 100%;
 }
 .credential-badge {
   display: flex; align-items: center; gap: 10px;
@@ -1066,7 +1065,7 @@ ul, ol { list-style: none; }
 /* ============================================
    13. FOOTER
    ============================================ */
-.footer { padding: 48px 0; background: #060A08; border-top: 1px solid rgba(255,255,255,0.1); color: #F5F5F0; }
+.footer { padding: 48px 0; background: #080E1C; border-top: 1px solid rgba(0,110,255,0.08); color: #F5F5F0; }
 .footer-inner {
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 24px;
@@ -2623,7 +2622,7 @@ function handleFormSubmit(e, form) {
   const btn = form.querySelector('button');
   const originalText = btn.textContent;
   btn.textContent = 'Thank you! ✓';
-  btn.style.background = 'linear-gradient(135deg, #2D7A4F, #3A9D6A)';
+  btn.style.background = 'linear-gradient(135deg, #0055CC, #006EFF)';
   btn.style.color = '#fff';
   setTimeout(() => {
     btn.textContent = originalText;
