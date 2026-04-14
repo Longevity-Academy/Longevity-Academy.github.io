@@ -34,10 +34,10 @@ ul, ol { list-style: none; }
    CSS VARIABLES
    ============================================ */
 :root {
-  --green-deep: #0A1628;
-  --green-mid: #0D2240;
-  --green-light: var(--accent);
-  --green-accent: var(--accent-hover);
+  --green-deep: #0B3D2E;
+  --green-mid: #1A5C3A;
+  --green-light: #2D7A4F;
+  --green-accent: #3A9D6A;
   --accent: #006EFF;
   --accent-hover: #338BFF;
   --accent-dark: #0055CC;
@@ -228,37 +228,26 @@ ul, ol { list-style: none; }
 .hero {
   position: relative; min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
-  overflow: hidden; padding: 140px 24px 80px;
-  background: #0a0a0a;
+  overflow: hidden; padding: 140px 24px 100px;
+  background: linear-gradient(180deg, #E8F1FC 0%, #EEF4FB 50%, #FFFFFF 100%);
 }
-/* Video background */
 .hero-video-bg {
-  position: absolute; inset: 0; z-index: 0;
-  overflow: hidden;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0; opacity: 0.18;
+  pointer-events: none;
 }
-.hero-video-bg video {
-  width: 100%; height: 100%; object-fit: cover;
-  display: block;
-}
-/* Dark gradient overlay for text readability */
-.hero-video-bg::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,0.55) 0%,
-    rgba(0,0,0,0.40) 40%,
-    rgba(0,0,0,0.50) 70%,
-    rgba(0,0,0,0.65) 100%
-  );
+.hero-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(232,241,252,0.55) 0%, rgba(238,244,251,0.5) 50%, rgba(255,255,255,0.75) 100%);
   z-index: 1;
 }
 .hero-content {
-  position: relative; z-index: 2; text-align: center; max-width: 1100px; margin: 0 auto;
+  position: relative; z-index: 2; text-align: center; max-width: 960px; margin: 0 auto;
 }
 .hero-eyebrow {
-  font-family: var(--font-body); font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 5px; color: var(--accent);
-  margin-bottom: 36px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 4px; color: var(--accent);
+  margin-bottom: 32px;
   display: flex; align-items: center; justify-content: center; gap: 12px;
 }
 .hero-eyebrow .dot {
@@ -266,126 +255,83 @@ ul, ol { list-style: none; }
 }
 .hero-headline {
   font-family: var(--font-display); font-weight: 900;
-  font-size: clamp(52px, 7.5vw, 96px); line-height: 0.95; color: #FFFFFF;
-  margin-bottom: 32px; letter-spacing: -2px;
+  font-size: 80px; line-height: 1.0; color: #111111;
+  margin-bottom: 28px; letter-spacing: -1.5px;
   text-transform: uppercase;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 .hero-headline em {
   font-style: normal;
   color: var(--accent);
 }
 
-/* Trustpilot badge — dark variant */
+/* Trustpilot badge */
 .hero-trustpilot {
   display: inline-flex; align-items: center; justify-content: center; gap: 14px;
   margin-bottom: 32px; flex-wrap: wrap;
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 50px; padding: 12px 28px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.20);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
-.tp-logo-text { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+.tp-logo-text { font-size: 19px; font-weight: 700; color: #111; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
 .tp-logo-text svg { height: 24px; width: 24px; flex-shrink: 0; }
-.tp-logo-word { font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
-.tp-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.18); }
+.tp-logo-word { font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 700; color: #111; letter-spacing: -0.3px; }
+.tp-divider { width: 1px; height: 24px; background: rgba(0,0,0,0.12); }
 .tp-stars { display: flex; gap: 4px; }
 .tp-star {
   width: 28px; height: 28px; background: #00B67A; border-radius: 3px;
   display: flex; align-items: center; justify-content: center;
 }
 .tp-star svg { width: 16px; height: 16px; fill: #fff; }
-.tp-rating { font-size: 17px; font-weight: 600; color: rgba(255,255,255,0.85); }
-.tp-rating strong { color: #fff; font-weight: 800; }
+.tp-rating { font-size: 17px; font-weight: 600; color: #111111; }
+.tp-rating strong { color: #111; font-weight: 800; }
 
 .hero-sub {
-  font-size: 19px; line-height: 1.7; color: rgba(255,255,255,0.75);
-  max-width: 680px; margin: 0 auto 40px;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  font-size: 20px; line-height: 1.7; color: var(--text-secondary);
+  max-width: 740px; margin: 0 auto 40px;
 }
 .hero-form {
   display: flex; align-items: center; gap: 0; max-width: 520px; margin: 0 auto 48px;
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 50px; padding: 6px; backdrop-filter: blur(12px);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+  background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 50px; padding: 6px; backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   transition: border-color var(--transition-base);
 }
-.hero-form:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,110,255,0.25); }
+.hero-form:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,110,255,0.2); }
 .hero-form input[type="email"] {
-  flex: 1; background: transparent; color: #fff;
+  flex: 1; background: transparent; color: #111111;
   padding: 14px 24px; font-size: 16px; border: none; outline: none; min-width: 0;
 }
-.hero-form input[type="email"]::placeholder { color: rgba(255,255,255,0.35); }
+.hero-form input[type="email"]::placeholder { color: var(--text-muted); }
 .hero-form button {
   background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   color: #fff; font-weight: 700; font-size: 15px; padding: 14px 28px;
   border-radius: 50px; cursor: pointer; white-space: nowrap;
   transition: all var(--transition-base); border: none;
-  box-shadow: 0 2px 16px var(--accent-glow);
+  box-shadow: 0 2px 12px var(--accent-glow);
 }
 .hero-form button:hover {
   background: linear-gradient(135deg, var(--accent-hover), #5AA3FF);
-  transform: translateY(-1px); box-shadow: 0 4px 24px var(--accent-glow-strong);
+  transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow-strong);
 }
 .hero-pills {
   display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
-  margin-bottom: 0;
 }
 .hero-pill {
   display: flex; align-items: center; gap: 8px; padding: 10px 18px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 50px; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.55);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 50px; font-size: 14px; font-weight: 500; color: var(--text-secondary);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
 }
 .hero-pill svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 
-/* ============================================
-   2b. WHY eTEACHER LONGEVITY
-   ============================================ */
-.why-section {
-  padding: 100px 24px;
-  background: #FFFFFF;
-  text-align: center;
-}
-.why-section .why-eyebrow {
-  font-family: var(--font-body); font-size: 13px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 3px;
-  color: var(--accent); margin-bottom: 24px;
-}
-.why-section h2 {
-  font-family: var(--font-display); font-weight: 900;
-  font-size: clamp(36px, 5vw, 56px); line-height: 1.05;
-  color: var(--text-primary); margin-bottom: 64px;
-  letter-spacing: -1px;
-}
-.why-list {
-  list-style: none; max-width: 700px; margin: 0 auto;
-  display: flex; flex-direction: column; gap: 28px;
-}
-.why-list li {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(18px, 2.2vw, 24px); line-height: 1.4;
-  color: var(--text-primary); letter-spacing: -0.3px;
-  display: flex; align-items: flex-start; gap: 16px;
-  text-align: left;
-}
-.why-list li::before {
-  content: '';
-  flex-shrink: 0;
-  width: 8px; height: 8px;
-  margin-top: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-@media (max-width: 768px) {
-  .why-section { padding: 72px 16px; }
-  .why-section h2 { margin-bottom: 48px; }
-  .why-list { gap: 22px; }
-}
+
+
 
 /* ============================================
    3. TRUST BAR
@@ -414,7 +360,7 @@ ul, ol { list-style: none; }
    ============================================ */
 .different {
   position: relative; padding: 120px 0;
-  background: linear-gradient(180deg, var(--dark-base) 0%, #0A1628 50%, var(--dark-base) 100%);
+  background: linear-gradient(180deg, var(--dark-base) 0%, var(--green-deep) 50%, var(--dark-base) 100%);
   overflow: hidden;
 }
 .different::before {
@@ -523,7 +469,7 @@ ul, ol { list-style: none; }
   transform: translateY(-3px);
 }
 .who-for-card svg {
-  width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; margin-top: 2px;
+  width: 24px; height: 24px; color: var(--green-accent); flex-shrink: 0; margin-top: 2px;
 }
 .who-for-card p { font-size: 16px; line-height: 1.6; color: var(--text-secondary); }
 
@@ -720,7 +666,7 @@ ul, ol { list-style: none; }
 }
 .curriculum-goals li::before {
   content: ''; position: absolute; left: 0; top: 10px;
-  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green-light);
 }
 .curriculum-flow { font-size: 14.5px; line-height: 1.65; color: var(--text-secondary); margin-bottom: 8px; }
 .curriculum-work {
@@ -903,7 +849,7 @@ ul, ol { list-style: none; }
 .testimonial-author { display: flex; align-items: center; gap: 12px; }
 .testimonial-author-avatar {
   width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, #0A1628, #0D2240);
+  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
   display: flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 14px; color: var(--accent);
 }
@@ -975,7 +921,7 @@ ul, ol { list-style: none; }
    ============================================ */
 .final-cta {
   position: relative; padding: 120px 0;
-  background: linear-gradient(135deg, #0A1628 0%, #0D2240 40%, var(--accent) 100%);
+  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 40%, var(--green-light) 100%);
   overflow: hidden;
 }
 .final-cta::before {
@@ -1070,11 +1016,11 @@ ul, ol { list-style: none; }
   .nav-links { display: none; }
   .nav-mobile-toggle { display: flex; }
   .hero { min-height: auto; padding: 130px 16px 60px; }
-  .hero-headline { font-size: 42px; letter-spacing: -0.5px; }
-  .hero-sub { font-size: 16px; }
+  .hero-headline { font-size: 48px; letter-spacing: -0.5px; }
+  .hero-sub { font-size: 17px; }
   .hero-form {
     flex-direction: column; border-radius: var(--radius-md);
-    padding: 8px; gap: 8px; background: rgba(255,255,255,0.07);
+    padding: 8px; gap: 8px; background: rgba(255,255,255,0.92);
   }
   .hero-form input[type="email"] { width: 100%; text-align: center; padding: 14px 16px; }
   .hero-form button { width: 100%; text-align: center; justify-content: center; }
@@ -1447,16 +1393,15 @@ ul, ol { list-style: none; }
      2. HERO SECTION
      ============================================ -->
 <section class="hero" id="hero">
-  <div class="hero-video-bg">
-    <video autoplay muted loop playsinline preload="auto">
-      <source src="assets/hero-video.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video class="hero-video-bg" autoplay muted loop playsinline poster="assets/img-metabolic.jpg">
+    <source src="assets/hero-light-bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">
       LIVE ONLINE COURSE <span class="dot"></span> 12 WEEKS <span class="dot"></span> NEXT COHORT ENROLLING
     </div>
-    <h1 class="hero-headline">Your Healthiest <em>Years Ahead</em></h1>
+    <h1 class="hero-headline">The Science of Aging Has <em>Outpaced Your Doctor</em></h1>
 
     <!-- Trustpilot Badge -->
     <div class="hero-trustpilot">
@@ -1503,25 +1448,7 @@ ul, ol { list-style: none; }
       </div>
     </div>
 
-
-
   </div>
-</section>
-
-<!-- ============================================
-     2b. WHY eTEACHER LONGEVITY
-     ============================================ -->
-<section class="why-section reveal">
-  <div class="why-eyebrow">Why Learn Here</div>
-  <h2>This Isn't Another Wellness Course</h2>
-  <ul class="why-list">
-    <li>World-class scientists and clinicians as your teachers</li>
-    <li>Rooted in peer-reviewed research, not trends</li>
-    <li>Small live groups — 8 to 15 people, real conversation</li>
-    <li>Not wellness. Not motivation. Actual biology.</li>
-    <li>The only course that treats aging as a problem to solve</li>
-    <li>Built on 20 years of teaching 400,000+ students worldwide</li>
-  </ul>
 </section>
 
 <!-- ============================================
@@ -2628,7 +2555,7 @@ function handleFormSubmit(e, form) {
   const btn = form.querySelector('button');
   const originalText = btn.textContent;
   btn.textContent = 'Thank you! ✓';
-  btn.style.background = 'linear-gradient(135deg, #006EFF, #338BFF)';
+  btn.style.background = 'linear-gradient(135deg, #2D7A4F, #3A9D6A)';
   btn.style.color = '#fff';
   setTimeout(() => {
     btn.textContent = originalText;
