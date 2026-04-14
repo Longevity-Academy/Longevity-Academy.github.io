@@ -360,7 +360,7 @@ ul, ol { list-style: none; }
    ============================================ */
 .different {
   position: relative; padding: 120px 0;
-  background: linear-gradient(180deg, var(--dark-base) 0%, var(--green-deep) 50%, var(--dark-base) 100%);
+  background: linear-gradient(180deg, var(--dark-base) 0%, #0D2847 50%, var(--dark-base) 100%);
   overflow: hidden;
 }
 .different::before {
@@ -469,7 +469,7 @@ ul, ol { list-style: none; }
   transform: translateY(-3px);
 }
 .who-for-card svg {
-  width: 24px; height: 24px; color: var(--green-accent); flex-shrink: 0; margin-top: 2px;
+  width: 24px; height: 24px; color: var(--accent); flex-shrink: 0; margin-top: 2px;
 }
 .who-for-card p { font-size: 16px; line-height: 1.6; color: var(--text-secondary); }
 
@@ -666,7 +666,7 @@ ul, ol { list-style: none; }
 }
 .curriculum-goals li::before {
   content: ''; position: absolute; left: 0; top: 10px;
-  width: 6px; height: 6px; border-radius: 50%; background: var(--green-light);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
 }
 .curriculum-flow { font-size: 14.5px; line-height: 1.65; color: var(--text-secondary); margin-bottom: 8px; }
 .curriculum-work {
@@ -889,7 +889,7 @@ ul, ol { list-style: none; }
 .testimonial-author { display: flex; align-items: center; gap: 12px; }
 .testimonial-author-avatar {
   width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+  background: linear-gradient(135deg, #0A1628, #0D2847);
   display: flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 14px; color: var(--accent);
 }
@@ -961,7 +961,7 @@ ul, ol { list-style: none; }
    ============================================ */
 .final-cta {
   position: relative; padding: 120px 0;
-  background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 40%, var(--green-light) 100%);
+  background: linear-gradient(135deg, #0A1628 0%, #0D2847 40%, #143A6B 100%);
   overflow: hidden;
 }
 .final-cta::before {
@@ -999,6 +999,69 @@ ul, ol { list-style: none; }
 .final-cta .section-subtitle { color: rgba(245,245,240,0.7); }
 .final-cta .gold { color: #fff !important; }
 .final-cta .eyebrow { color: rgba(245,245,240,0.7); }
+
+/* Lead Generation Form */
+.lead-gen {
+  position: relative; padding: 100px 0;
+  background: #FAFBFD;
+  overflow: hidden;
+}
+.lead-gen::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,110,255,0.15), transparent);
+}
+.lead-gen-inner {
+  max-width: 580px; margin: 0 auto; text-align: center;
+  position: relative; z-index: 1;
+}
+.lead-gen-headline {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(28px, 4vw, 42px); line-height: 1.15;
+  color: var(--text-primary); margin-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+.lead-gen-headline span {
+  color: var(--accent);
+}
+.lead-gen-form {
+  display: flex; flex-direction: column; gap: 14px;
+  max-width: 440px; margin: 0 auto 20px;
+}
+.lead-gen-row {
+  display: flex; gap: 14px;
+}
+.lead-gen-form input {
+  flex: 1; padding: 16px 20px; font-size: 16px; font-family: var(--font-body);
+  border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px;
+  background: #fff; color: var(--text-primary);
+  outline: none; transition: all 0.25s ease;
+}
+.lead-gen-form input:focus {
+  border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,110,255,0.1);
+}
+.lead-gen-form input::placeholder {
+  color: #A0AEC0;
+}
+.lead-gen-form button {
+  width: 100%; padding: 18px 32px; font-size: 17px; font-weight: 700;
+  font-family: var(--font-display); letter-spacing: 0.3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #fff; border: none; border-radius: 12px; cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0,110,255,0.25);
+}
+.lead-gen-form button:hover {
+  background: linear-gradient(135deg, var(--accent-hover), #5AA3FF);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,110,255,0.35);
+}
+.lead-gen-trust {
+  font-size: 14px; color: var(--text-muted); margin-top: 6px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.lead-gen-trust svg {
+  width: 16px; height: 16px; color: var(--accent); flex-shrink: 0;
+}
 
 /* ============================================
    13. FOOTER
@@ -1104,6 +1167,11 @@ ul, ol { list-style: none; }
   }
   .final-cta-form input[type="email"] { width: 100%; text-align: center; padding: 14px 16px; }
   .final-cta-form button { width: 100%; text-align: center; }
+  .lead-gen { padding: 72px 0; }
+  .lead-gen-headline { font-size: 28px; margin-bottom: 32px; }
+  .lead-gen-row { flex-direction: column; }
+  .lead-gen-form { max-width: 100%; }
+  .lead-gen-trust { font-size: 13px; }
   .footer-inner { flex-direction: column; text-align: center; }
   .trust-bar-inner { gap: 24px; }
   .trust-bar-num { font-size: 30px; }
@@ -2379,6 +2447,28 @@ ul, ol { list-style: none; }
         <button type="submit">Apply to Join →</button>
       </form>
       <p class="final-cta-note">Limited to 15 per cohort · We'll send you the next start date and pricing</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     LEAD GENERATION FORM
+     ============================================ -->
+<section class="lead-gen" id="lead-gen">
+  <div class="container">
+    <div class="lead-gen-inner reveal">
+      <h2 class="lead-gen-headline">The Next Cohort Fills Fast — <span>Reserve Your Seat</span></h2>
+      <form class="lead-gen-form" onsubmit="handleFormSubmit(event, this)">
+        <div class="lead-gen-row">
+          <input type="text" placeholder="First name" required aria-label="First name">
+          <input type="email" placeholder="Email address" required aria-label="Email address">
+        </div>
+        <button type="submit">Get Early Access to the Next Cohort →</button>
+      </form>
+      <p class="lead-gen-trust">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Join 400,000+ students already learning with eTeacher — trusted since 2000
+      </p>
     </div>
   </div>
 </section>
