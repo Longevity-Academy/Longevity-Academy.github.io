@@ -1141,86 +1141,151 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   WHAT YOU'LL LEARN — VIDEO CARDS
+   OUTCOMES SECTION — SINGLE-ROW HORIZONTAL MARQUEE
    ============================================ */
-.learn-section { padding: 120px 0; background: #FFFFFF; }
-.learn-header { text-align: center; margin-bottom: 72px; }
-.learn-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
-  max-width: 1280px; margin: 0 auto; padding: 0 24px;
+.outcomes { padding: 120px 0; overflow: hidden; }
+.outcomes-header { text-align: center; margin-bottom: 64px; }
+
+/* Marquee wrapper — single row */
+.outcomes-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
-.learn-item {
-  position: relative; overflow: hidden; border-radius: 16px;
-  min-height: 340px; display: flex; flex-direction: column;
-  justify-content: flex-end; cursor: pointer;
-  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.45s ease;
+/* Fade masks left and right */
+.outcomes-marquee::before,
+.outcomes-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 100px;
+  z-index: 5;
+  pointer-events: none;
 }
-.learn-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+.outcomes-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #fff 0%, transparent 100%);
 }
-/* Video background */
-.learn-item video {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; z-index: 0;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.outcomes-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #fff 0%, transparent 100%);
 }
-.learn-item:hover video { transform: scale(1.08); }
-/* Dark gradient overlay for text readability */
-.learn-item-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
-  transition: background 0.45s ease;
+
+/* Single row scrolls horizontally to the left */
+.outcomes-row {
+  overflow: hidden;
+  width: 100%;
 }
-.learn-item:hover .learn-item-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.25) 100%);
+.outcomes-row-inner {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: marqueeLeft 45s linear infinite;
 }
-/* Glass text box */
-.learn-item-content {
-  position: relative; z-index: 2;
-  padding: 28px 24px;
-  margin: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  transition: background 0.45s ease, border-color 0.45s ease;
+/* Pause on hover */
+.outcomes-marquee:hover .outcomes-row-inner {
+  animation-play-state: paused;
 }
-.learn-item:hover .learn-item-content {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+
+@keyframes marqueeLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 12px)); }
 }
-.learn-num {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 13px; color: var(--accent);
-  letter-spacing: 2px; margin-bottom: 14px;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+
+/* Outcome cards */
+.outcomes-slide {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 380px;
+  height: 320px;
+  background: #000;
+  flex-shrink: 0;
+  transition: box-shadow 0.3s;
 }
-.learn-title {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 21px; line-height: 1.25; color: #FFFFFF;
-  margin-bottom: 10px; letter-spacing: -0.3px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+.outcomes-slide:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
 }
-.learn-hook {
-  font-family: var(--font-body); font-size: 14px;
-  line-height: 1.55; color: rgba(255,255,255,0.78);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+
+/* Card background image */
+.outcomes-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
-@media (max-width: 1024px) {
-  .learn-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.outcomes-card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
+/* Subtle dark overlay for depth */
+.outcomes-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.05) 0%,
+    rgba(0,0,0,0.15) 40%,
+    rgba(0,0,0,0.55) 100%
+  );
+}
+
+/* === GLASSMORPHISM TEXT BOX === */
+.outcomes-card-glass {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 3;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 22px 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.outcomes-card-num {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #3B82F6;
+  margin-bottom: 6px;
+  letter-spacing: 0.1em;
+}
+.outcomes-card-title {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.outcomes-card-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.82);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .learn-section { padding: 80px 0; }
-  .learn-grid { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
-  .learn-item { min-height: 280px; }
-  .learn-item-content { padding: 22px 18px; margin: 8px; }
-  .learn-title { font-size: 18px; }
-  .learn-hook { font-size: 13px; }
+  .outcomes-slide { width: 300px; height: 270px; }
+  .outcomes-card-glass { padding: 16px 18px; bottom: 14px; left: 14px; right: 14px; }
+  .outcomes-card-title { font-size: 16px; }
+  .outcomes-card-body { font-size: 12px; }
+  .outcomes-marquee::before,
+  .outcomes-marquee::after { width: 50px; }
 }
 @media (max-width: 480px) {
-  .learn-grid { grid-template-columns: 1fr; gap: 12px; }
-  .learn-item { min-height: 260px; }
+  .outcomes-slide { width: 260px; height: 240px; }
+  .outcomes-card-glass { padding: 14px; border-radius: 12px; }
+  .outcomes-card-title { font-size: 15px; }
+  .outcomes-card-body { font-size: 11.5px; }
+  .outcomes-marquee::before,
+  .outcomes-marquee::after { width: 30px; }
 }
 
 /* ============================================
@@ -1478,58 +1543,128 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ============================================
-     3b. WHAT YOU'LL LEARN
+     3b. OUTCOMES — BY THE END OF THIS COURSE
      ============================================ -->
-<section class="learn-section" id="outcomes">
+<section class="outcomes" id="outcomes">
   <div class="container">
-    <div class="learn-header reveal">
-      <p class="eyebrow" style="margin-bottom: 16px;">What You'll Learn</p>
-      <h2 class="section-title">Five Skills That<br>Change How You Age</h2>
+    <div class="outcomes-header reveal">
+      <p class="eyebrow" style="margin-bottom: 16px;">What You Will Gain</p>
+      <h2 class="section-title">By the End of This Course,<br>You Will Be Able To</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">12 sessions. 12 weeks. These are the specific skills and capabilities you walk away with.</p>
     </div>
-    <div class="learn-grid">
-      <div class="learn-item reveal">
-        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-blood.mp4" type="video/mp4"></video>
-        <div class="learn-item-overlay"></div>
-        <div class="learn-item-content">
-          <div class="learn-num">01</div>
-          <div class="learn-title">Read Your Own Blood</div>
-          <div class="learn-hook">The markers your doctor skips — and what they're telling you right now.</div>
-        </div>
-      </div>
-      <div class="learn-item reveal reveal-delay-1">
-        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-protocol.mp4" type="video/mp4"></video>
-        <div class="learn-item-overlay"></div>
-        <div class="learn-item-content">
-          <div class="learn-num">02</div>
-          <div class="learn-title">Build Your Protocol</div>
-          <div class="learn-hook">A personalized longevity plan based on your biology, not someone else's.</div>
-        </div>
-      </div>
-      <div class="learn-item reveal reveal-delay-2">
-        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-train.mp4" type="video/mp4"></video>
-        <div class="learn-item-overlay"></div>
-        <div class="learn-item-content">
-          <div class="learn-num">03</div>
-          <div class="learn-title">Train for the Long Game</div>
-          <div class="learn-hook">The exact exercise strategy designed for how you want to feel at 80.</div>
-        </div>
-      </div>
-      <div class="learn-item reveal reveal-delay-1">
-        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-noise.mp4" type="video/mp4"></video>
-        <div class="learn-item-overlay"></div>
-        <div class="learn-item-content">
-          <div class="learn-num">04</div>
-          <div class="learn-title">Cut Through the Noise</div>
-          <div class="learn-hook">Supplements, wearables, fads — learn what actually works and what's marketing.</div>
-        </div>
-      </div>
-      <div class="learn-item reveal reveal-delay-2">
-        <video autoplay muted loop playsinline preload="metadata"><source src="assets/learn-sleep.mp4" type="video/mp4"></video>
-        <div class="learn-item-overlay"></div>
-        <div class="learn-item-content">
-          <div class="learn-num">05</div>
-          <div class="learn-title">Master Sleep and Stress</div>
-          <div class="learn-hook">The two highest-leverage interventions most people get wrong.</div>
+    <div class="outcomes-marquee">
+      <!-- Single row: all 6 cards scroll LEFT (× 2 for seamless loop) -->
+      <div class="outcomes-row">
+        <div class="outcomes-row-inner">
+          <div class="outcomes-slide">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-01.jpg" alt="Bloodwork analysis"></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">01</div>
+              <div class="outcomes-card-title">Read Your Own Bloodwork</div>
+              <div class="outcomes-card-body">Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-02.jpg" alt="Longevity protocol"></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">02</div>
+              <div class="outcomes-card-title">Build a Personalized Longevity Protocol</div>
+              <div class="outcomes-card-body">A written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-03.jpg" alt="CGM glucose data"></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">03</div>
+              <div class="outcomes-card-title">Interpret CGM Data &amp; Glucose Patterns</div>
+              <div class="outcomes-card-body">Understand glucose variability, post-meal spikes, and dawn effect — and what to actually do about them.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-04.jpg" alt="Longevity training"></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">04</div>
+              <div class="outcomes-card-title">Design Training for Longevity</div>
+              <div class="outcomes-card-body">Program Zone 2 cardio, VO2 max, resistance training, and stability — reverse-engineered from the capacity you want at 80.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-05.jpg" alt="Supplements and health tech"></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">05</div>
+              <div class="outcomes-card-title">Evaluate Supplements &amp; Health Tech</div>
+              <div class="outcomes-card-body">Separate signal from noise on NMN, omega-3s, creatine, rapamycin, metformin, and wearables — evidence vs. marketing.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-06.jpg" alt="Sleep and stress optimization"></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">06</div>
+              <div class="outcomes-card-title">Optimize Sleep &amp; Stress Response</div>
+              <div class="outcomes-card-body">Circadian entrainment protocols, HRV-guided recovery, and cortisol timing — the highest-leverage longevity interventions.</div>
+            </div>
+          </div>
+          <!-- Duplicate all 6 for seamless loop -->
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-01.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">01</div>
+              <div class="outcomes-card-title">Read Your Own Bloodwork</div>
+              <div class="outcomes-card-body">Interpret ApoB, Lp(a), hs-CRP, fasting insulin, HOMA-IR, and epigenetic age markers — not just the standard panel.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-02.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">02</div>
+              <div class="outcomes-card-title">Build a Personalized Longevity Protocol</div>
+              <div class="outcomes-card-body">A written, evidence-based protocol covering nutrition, exercise, sleep, and supplementation — designed for your biology.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-03.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">03</div>
+              <div class="outcomes-card-title">Interpret CGM Data &amp; Glucose Patterns</div>
+              <div class="outcomes-card-body">Understand glucose variability, post-meal spikes, and dawn effect — and what to actually do about them.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-04.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">04</div>
+              <div class="outcomes-card-title">Design Training for Longevity</div>
+              <div class="outcomes-card-body">Program Zone 2 cardio, VO2 max, resistance training, and stability — reverse-engineered from the capacity you want at 80.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-05.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">05</div>
+              <div class="outcomes-card-title">Evaluate Supplements &amp; Health Tech</div>
+              <div class="outcomes-card-body">Separate signal from noise on NMN, omega-3s, creatine, rapamycin, metformin, and wearables — evidence vs. marketing.</div>
+            </div>
+          </div>
+          <div class="outcomes-slide" aria-hidden="true">
+            <div class="outcomes-card-bg"><img src="assets/outcome-bg-06.jpg" alt=""></div>
+            <div class="outcomes-card-overlay"></div>
+            <div class="outcomes-card-glass">
+              <div class="outcomes-card-num">06</div>
+              <div class="outcomes-card-title">Optimize Sleep &amp; Stress Response</div>
+              <div class="outcomes-card-body">Circadian entrainment protocols, HRV-guided recovery, and cortisol timing — the highest-leverage longevity interventions.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2420,7 +2555,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-/* What You'll Learn — static grid, no JS needed */
+/* Outcomes marquee — no additional JS needed, pure CSS animation */
 
 /* Trust bar animated counters */
 let countersAnimated = false;
