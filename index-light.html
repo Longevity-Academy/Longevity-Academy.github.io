@@ -331,27 +331,7 @@ ul, ol { list-style: none; }
 
 
 
-/* ============================================
-   3. TRUST BAR
-   ============================================ */
-.trust-bar {
-  padding: 40px 0;
-  background: #0A1628;
-  border-top: 1px solid rgba(0,110,255,0.08);
-  border-bottom: 1px solid rgba(0,110,255,0.08);
-}
-.trust-bar-inner {
-  display: flex; align-items: center; justify-content: center; gap: 64px;
-  flex-wrap: wrap;
-}
-.trust-bar-stat { text-align: center; }
-.trust-bar-num {
-  font-family: var(--font-display); font-weight: 900;
-  font-size: 38px; color: var(--accent); line-height: 1; margin-bottom: 4px;
-}
-.trust-bar-label {
-  font-size: 13px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px;
-}
+
 
 /* ============================================
    4. WHAT MAKES THIS DIFFERENT
@@ -1103,8 +1083,7 @@ ul, ol { list-style: none; }
   .testimonials-grid { grid-template-columns: 1fr; max-width: 600px; margin-left: auto; margin-right: auto; }
   .teachers-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
   .final-cta .section-title { font-size: 48px; }
-  .trust-bar-inner { gap: 40px; }
-  .trust-bar-num { font-size: 34px; }
+
   .platform-header h2 { font-size: 44px; }
   .platform-header .platform-tagline { font-size: 24px; }
   .platform-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 48px; }
@@ -1173,17 +1152,13 @@ ul, ol { list-style: none; }
   .lead-gen-form { max-width: 100%; }
   .lead-gen-trust { font-size: 13px; }
   .footer-inner { flex-direction: column; text-align: center; }
-  .trust-bar-inner { gap: 24px; }
-  .trust-bar-num { font-size: 30px; }
-  .trust-bar { padding: 32px 0; }
+
 }
 
 @media (max-width: 480px) {
   .hero-headline { font-size: 38px; }
   .section-title { font-size: 32px; }
-  .trust-bar-inner { gap: 16px; }
-  .trust-bar-num { font-size: 26px; }
-  .trust-bar-stat { min-width: 110px; }
+
   .final-cta .section-title { font-size: 32px; }
   .platform-header h2 { font-size: 28px; }
 }
@@ -1518,23 +1493,7 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-<!-- ============================================
-     3. TRUST BAR
-     ============================================ -->
-<section class="trust-bar">
-  <div class="container-wide">
-    <div class="trust-bar-inner">
-      <div class="trust-bar-stat">
-        <div class="trust-bar-num" data-target="20" data-suffix="+">0</div>
-        <div class="trust-bar-label">Years of Excellence</div>
-      </div>
-      <div class="trust-bar-stat">
-        <div class="trust-bar-num" data-target="4.6" data-suffix="/5" data-decimal="true">0</div>
-        <div class="trust-bar-label">Trustpilot Rating</div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ============================================
      3b. WHAT YOU’LL LEARN
@@ -2560,33 +2519,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 /* What You'll Learn — static grid, no JS needed */
 
-/* Trust bar animated counters */
-let countersAnimated = false;
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !countersAnimated) {
-      countersAnimated = true;
-      document.querySelectorAll('.trust-bar-num').forEach(counter => {
-        const target = parseFloat(counter.dataset.target);
-        const suffix = counter.dataset.suffix || '';
-        const isDecimal = counter.dataset.decimal === 'true';
-        const duration = 2000;
-        const start = performance.now();
-        function animate(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = isDecimal ? (target * eased).toFixed(1) : Math.floor(target * eased);
-          counter.textContent = current + suffix;
-          if (progress < 1) requestAnimationFrame(animate);
-        }
-        requestAnimationFrame(animate);
-      });
-    }
-  });
-}, { threshold: 0.3 });
-const trustBar = document.querySelector('.trust-bar');
-if (trustBar) counterObserver.observe(trustBar);
+
 
 /* Curriculum accordion */
 function toggleCurriculum(trigger) {
