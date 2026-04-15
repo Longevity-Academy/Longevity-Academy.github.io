@@ -1656,66 +1656,133 @@ ul, ol { list-style: none; }
 /* ============================================
    HOW IT WORKS SECTION
    ============================================ */
-.how-it-works { padding: 120px 0; }
-.how-it-works-header { text-align: center; margin-bottom: 64px; }
+.how-it-works {
+  padding: 120px 0;
+  background: linear-gradient(180deg, #FFFFFF 0%, #0A1628 8%, #0D1B2E 50%, #0A1628 92%, #FFFFFF 100%);
+  position: relative;
+  overflow: hidden;
+}
+.how-it-works::before {
+  content: '';
+  position: absolute;
+  top: 15%; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background: radial-gradient(circle, rgba(0,110,255,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.how-it-works-header { text-align: center; margin-bottom: 72px; position: relative; z-index: 1; }
+.how-it-works-header .section-title { color: #FFFFFF; }
+.how-it-works-header .section-subtitle { color: rgba(255,255,255,0.72); }
+.how-it-works-header .eyebrow { color: #338BFF; }
+
 .how-it-works-steps {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
   gap: 0;
-  max-width: 1100px;
+  max-width: 1140px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
+
+/* Glass card for each step */
 .how-step {
   flex: 1;
   text-align: center;
-  padding: 0 24px;
+  padding: 40px 28px 36px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
 }
+.how-step::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(0,110,255,0.06) 0%, rgba(79,70,229,0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.how-step:hover {
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(0,110,255,0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,110,255,0.15), 0 0 0 1px rgba(0,110,255,0.1);
+}
+.how-step:hover::before { opacity: 1; }
+
+/* Step number badge */
 .how-step-num {
-  width: 56px; height: 56px;
-  margin: 0 auto 20px;
+  width: 60px; height: 60px;
+  margin: 0 auto 22px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-  background: var(--accent);
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--step-color, #006EFF), color-mix(in srgb, var(--step-color, #006EFF) 70%, #4F46E5));
   color: #fff;
   font-family: 'Codec Pro', sans-serif;
   font-weight: 800;
   font-size: 22px;
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--step-color, #006EFF) 35%, transparent);
+  position: relative;
+  z-index: 1;
 }
+
+/* Step title — colored per step */
 .how-step h3 {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 12px;
+  font-size: 21px;
+  color: var(--step-color, #FFFFFF);
+  margin-bottom: 14px;
+  position: relative; z-index: 1;
+  text-shadow: 0 0 20px color-mix(in srgb, var(--step-color, #006EFF) 30%, transparent);
 }
+
+/* Step description — brighter for readability */
 .how-step p {
   font-size: 15px;
-  line-height: 1.6;
-  color: var(--text-secondary);
+  line-height: 1.65;
+  color: rgba(255,255,255,0.72);
+  position: relative; z-index: 1;
 }
+
+/* Connector arrows between steps */
 .how-step-line {
-  width: 60px;
-  height: 2px;
-  background: rgba(255,255,255,0.12);
-  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  width: 48px;
+  margin-top: 0;
+  align-self: center;
 }
+.how-step-line svg {
+  width: 28px; height: 28px;
+  stroke: rgba(59,158,255,0.55);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(0,110,255,0.3));
+}
+
 @media (max-width: 768px) {
+  .how-it-works { padding: 80px 0; }
   .how-it-works-steps {
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 16px;
   }
-  .how-step { padding: 0; max-width: 400px; }
+  .how-step { padding: 32px 24px 28px; max-width: 420px; width: 100%; }
   .how-step-line {
-    width: 2px; height: 40px;
+    width: auto; height: auto;
+    transform: rotate(90deg);
   }
-  .how-it-works { padding: 80px 0; }
 }
-
-/* Light overrides for new sections */
-.how-step h3 { color: var(--text-primary); }
-.how-step-line { background: rgba(0,0,0,0.12); }
 
 </style>
 </head>
@@ -2455,28 +2522,28 @@ ul, ol { list-style: none; }
       <p class="section-subtitle" style="margin: 0 auto;">From application to your personal longevity blueprint — here is the path.</p>
     </div>
     <div class="how-it-works-steps">
-      <div class="how-step reveal reveal-delay-1">
+      <div class="how-step reveal reveal-delay-1" style="--step-color:#3B9EFF">
         <div class="how-step-num">1</div>
         <h3>Apply</h3>
         <p>Submit your application. We review every applicant to ensure the cohort is the right fit — serious, motivated, and ready for advanced material.</p>
       </div>
-      <div class="how-step-line reveal"></div>
-      <div class="how-step reveal reveal-delay-2">
+      <div class="how-step-line reveal"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></div>
+      <div class="how-step reveal reveal-delay-2" style="--step-color:#6E8EFF">
         <div class="how-step-num">2</div>
         <h3>Get Matched to a Cohort</h3>
-        <p>Once accepted, you are placed into a cohort of 8–15 peers. Choose a schedule that works for you — sessions run weekly for 12 weeks.</p>
+        <p>Once accepted, you’re placed into a cohort of 8–15 peers. Choose a schedule that works — sessions run weekly for 12 weeks.</p>
       </div>
-      <div class="how-step-line reveal"></div>
-      <div class="how-step reveal reveal-delay-3">
+      <div class="how-step-line reveal"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></div>
+      <div class="how-step reveal reveal-delay-3" style="--step-color:#22C1E3">
         <div class="how-step-num">3</div>
         <h3>Learn Live, Apply Weekly</h3>
-        <p>Attend 90-minute live sessions. Each week covers a new topic with hands-on protocols. Between sessions, apply what you learn to your own data and bring questions to the next class.</p>
+        <p>Attend 90-minute live sessions. Each week covers a new topic with hands-on protocols you apply to your own data.</p>
       </div>
-      <div class="how-step-line reveal"></div>
-      <div class="how-step reveal reveal-delay-4">
+      <div class="how-step-line reveal"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></div>
+      <div class="how-step reveal reveal-delay-4" style="--step-color:#5B8AFF">
         <div class="how-step-num">4</div>
         <h3>Graduate with Your Blueprint</h3>
-        <p>Complete the course with a personalized longevity protocol, a certificate of completion, and access to the alumni community and course recordings.</p>
+        <p>Complete the course with a personalized longevity protocol, a certificate, and lifetime access to recordings and the alumni community.</p>
       </div>
     </div>
   </div>
