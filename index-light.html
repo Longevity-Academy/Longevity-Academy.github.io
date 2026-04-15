@@ -1277,182 +1277,230 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   METHOD SECTION — Carousel
+   METHOD SECTION — Framework Diagram
    ============================================ */
 .method { padding: 120px 0; }
-.method-header { text-align: center; margin-bottom: 64px; }
+.method-header { text-align: center; margin-bottom: 72px; }
 
-/* Carousel wrapper */
-.method-carousel-wrap {
+/* Framework layout: diagram left, detail right */
+.method-framework {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- SVG Diagram --- */
+.method-diagram {
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 560px;
+  margin: 0 auto;
 }
-.method-carousel-track {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+.method-diagram svg { width: 100%; height: 100%; }
+
+/* Orbital rings */
+.fw-ring {
+  fill: none;
+  stroke: rgba(0,110,255,0.07);
+  stroke-width: 1;
 }
-.method-card {
-  flex: 0 0 calc(33.333% - 20px);
-  margin: 0 10px;
-  text-align: left;
-  padding: 44px 32px 40px;
-  border-radius: 24px;
-  border: 1px solid rgba(0,110,255,0.12);
-  background: linear-gradient(160deg, var(--card-bg-start, rgba(0,110,255,0.04)) 0%, #FFFFFF 100%);
-  transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
-  position: relative;
-  overflow: hidden;
+.fw-ring-outer { stroke-dasharray: 6 4; }
+
+/* Connection lines from pillars to center */
+.fw-connector {
+  stroke: rgba(0,110,255,0.10);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+  transition: stroke 0.3s, stroke-width 0.3s;
 }
-.method-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--card-accent, #006EFF), var(--card-accent-light, #338BFF));
-  border-radius: 24px 24px 0 0;
-  opacity: 0;
-  transition: opacity 0.3s;
+
+/* Center hub */
+.fw-center-glow {
+  fill: url(#centerGlow);
 }
-.method-card:hover::before { opacity: 1; }
-.method-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 24px 64px var(--card-shadow, rgba(0,110,255,0.14));
-  border-color: var(--card-accent, #006EFF);
+.fw-center-bg {
+  fill: #006EFF;
+  filter: drop-shadow(0 4px 24px rgba(0,110,255,0.35));
 }
-.method-card-icon {
-  width: 64px; height: 64px;
-  margin-bottom: 24px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 18px;
-  background: var(--card-icon-bg, rgba(0,110,255,0.08));
-  color: var(--card-accent, #006EFF);
-  box-shadow: 0 4px 16px var(--card-icon-shadow, rgba(0,110,255,0.10));
-}
-.method-card-icon svg { width: 28px; height: 28px; }
-.method-card .method-card-num {
-  font-family: 'Codec Pro', sans-serif;
-  font-weight: 800;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--card-accent, #006EFF);
-  margin-bottom: 12px;
-}
-.method-card h3 {
+.fw-center-text {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 700;
-  font-size: 21px;
-  margin-bottom: 14px;
-  color: var(--card-accent, #006EFF);
-  line-height: 1.3;
+  fill: white;
+  text-anchor: middle;
+  dominant-baseline: central;
 }
-.method-card p {
+.fw-center-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  fill: rgba(255,255,255,0.8);
+}
+.fw-center-title {
   font-size: 15px;
-  line-height: 1.7;
-  color: #3A4A5C;
 }
 
-/* Card color accents — 6 variations within blue brand */
-.method-card[data-accent="blue"] {
-  --card-accent: #006EFF; --card-accent-light: #5CA0FF;
-  --card-icon-bg: rgba(0,110,255,0.12); --card-icon-shadow: rgba(0,110,255,0.15);
-  --card-bg-start: rgba(0,110,255,0.05); --card-shadow: rgba(0,110,255,0.14);
-}
-.method-card[data-accent="indigo"] {
-  --card-accent: #4F46E5; --card-accent-light: #818CF8;
-  --card-icon-bg: rgba(79,70,229,0.12); --card-icon-shadow: rgba(79,70,229,0.15);
-  --card-bg-start: rgba(79,70,229,0.04); --card-shadow: rgba(79,70,229,0.14);
-}
-.method-card[data-accent="cyan"] {
-  --card-accent: #0891B2; --card-accent-light: #22D3EE;
-  --card-icon-bg: rgba(8,145,178,0.12); --card-icon-shadow: rgba(8,145,178,0.15);
-  --card-bg-start: rgba(8,145,178,0.04); --card-shadow: rgba(8,145,178,0.14);
-}
-.method-card[data-accent="sky"] {
-  --card-accent: #0284C7; --card-accent-light: #38BDF8;
-  --card-icon-bg: rgba(2,132,199,0.12); --card-icon-shadow: rgba(2,132,199,0.15);
-  --card-bg-start: rgba(2,132,199,0.04); --card-shadow: rgba(2,132,199,0.14);
-}
-.method-card[data-accent="steel"] {
-  --card-accent: #2563EB; --card-accent-light: #60A5FA;
-  --card-icon-bg: rgba(37,99,235,0.12); --card-icon-shadow: rgba(37,99,235,0.15);
-  --card-bg-start: rgba(37,99,235,0.04); --card-shadow: rgba(37,99,235,0.14);
-}
-.method-card[data-accent="navy"] {
-  --card-accent: #1E3A5F; --card-accent-light: #3B6BA5;
-  --card-icon-bg: rgba(30,58,95,0.12); --card-icon-shadow: rgba(30,58,95,0.15);
-  --card-bg-start: rgba(30,58,95,0.04); --card-shadow: rgba(30,58,95,0.14);
-}
-
-/* Carousel nav arrows */
-.method-carousel-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-top: 48px;
-}
-.method-carousel-btn {
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,110,255,0.15);
-  background: white;
-  display: flex; align-items: center; justify-content: center;
+/* Pillar nodes */
+.fw-pillar {
   cursor: pointer;
-  transition: all 0.25s;
-  color: #006EFF;
+  transition: transform 0.3s;
 }
-.method-carousel-btn:hover {
-  background: #006EFF;
-  color: white;
-  border-color: #006EFF;
-  transform: scale(1.05);
+.fw-pillar:hover { transform: scale(1.08); }
+.fw-pillar-bg {
+  fill: white;
+  stroke: rgba(0,110,255,0.12);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 3px 12px rgba(0,110,255,0.10));
+  transition: stroke 0.3s, filter 0.3s;
 }
-.method-carousel-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-  transform: none;
+.fw-pillar:hover .fw-pillar-bg,
+.fw-pillar.active .fw-pillar-bg {
+  stroke: var(--p-color, #006EFF);
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 24px rgba(0,110,255,0.20));
 }
-.method-carousel-btn:disabled:hover {
-  background: white;
-  color: #006EFF;
-  border-color: rgba(0,110,255,0.15);
+.fw-pillar-icon {
+  fill: none;
+  stroke: var(--p-color, #006EFF);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.method-carousel-btn svg { width: 22px; height: 22px; }
+.fw-pillar-num {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 10px;
+  fill: var(--p-color, #006EFF);
+  text-anchor: middle;
+  letter-spacing: 1px;
+}
+.fw-pillar-label {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  fill: #0A1628;
+  text-anchor: middle;
+}
 
-/* Dot indicators */
-.method-carousel-dots {
-  display: flex;
-  gap: 8px;
+/* Active connector highlight */
+.fw-pillar.active ~ .fw-connectors .fw-connector,
+.fw-connector.active {
+  stroke: var(--p-color, #006EFF);
+  stroke-width: 2;
+  stroke-dasharray: none;
 }
-.method-carousel-dot {
+
+/* Rotating subtle animation on outer ring */
+@keyframes fwSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.fw-ring-spin {
+  animation: fwSpin 90s linear infinite;
+  transform-origin: center;
+}
+
+/* --- Detail panel (right side) --- */
+.method-detail {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.method-detail-inner {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.method-detail-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.method-detail-num {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--detail-color, #006EFF);
+  margin-bottom: 12px;
+}
+.method-detail-title {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--detail-color, #006EFF);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.method-detail-desc {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #3A4A5C;
+  margin-bottom: 28px;
+}
+.method-detail-bar {
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--detail-color, #006EFF);
+  margin-bottom: 24px;
+}
+/* Pillar indicator dots */
+.method-pager {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.method-pager-dot {
   width: 10px; height: 10px;
   border-radius: 50%;
-  background: rgba(0,110,255,0.15);
-  border: none;
+  border: 2px solid rgba(0,110,255,0.2);
+  background: transparent;
   cursor: pointer;
-  transition: all 0.3s;
   padding: 0;
+  transition: all 0.3s;
 }
-.method-carousel-dot.active {
-  background: #006EFF;
-  width: 28px;
-  border-radius: 5px;
+.method-pager-dot.active {
+  background: var(--detail-color, #006EFF);
+  border-color: var(--detail-color, #006EFF);
+  transform: scale(1.2);
 }
 
+/* Default prompt when nothing selected */
+.method-detail-prompt {
+  text-align: center;
+  color: #8899AA;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 40px 0;
+}
+.method-detail-prompt svg {
+  display: block;
+  margin: 0 auto 20px;
+  width: 48px; height: 48px;
+  color: rgba(0,110,255,0.25);
+}
+
+/* Mobile: stack vertically */
 @media (max-width: 900px) {
-  .method-card {
-    flex: 0 0 calc(50% - 16px);
-    margin: 0 8px;
+  .method-framework {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
+  .method-diagram { max-width: 420px; }
+  .method-detail { min-height: auto; }
+  .method-detail-title { font-size: 26px; }
 }
 @media (max-width: 600px) {
-  .method-card {
-    flex: 0 0 calc(100% - 16px);
-    margin: 0 8px;
-  }
   .method { padding: 80px 0; }
-  .method-carousel-btn { width: 44px; height: 44px; }
+  .method-diagram { max-width: 340px; }
+  .method-detail-title { font-size: 22px; }
+  .method-detail-desc { font-size: 15px; }
+  .fw-pillar-label { font-size: 9px; }
 }
 
 /* ============================================
@@ -1682,96 +1730,106 @@ ul, ol { list-style: none; }
   <div class="container-wide">
     <div class="method-header reveal">
       <p class="eyebrow" style="margin-bottom: 16px;">How We Teach</p>
-      <h2 class="section-title">Our Science-Backed<br><span class="gold">Teaching Method</span></h2>
-      <p class="section-subtitle" style="margin: 0 auto;">Not a pre-recorded video library. Every session is a live, interactive classroom built on the same infrastructure trusted by 400,000+ students.</p>
+      <h2 class="section-title">The Longevity Life Academy<br><span class="gold">Learning Framework</span></h2>
+      <p class="section-subtitle" style="margin: 0 auto;">A structured, six-pillar methodology refined over 20+ years of live online education — applied to the science of human longevity.</p>
     </div>
-    <div class="method-carousel-wrap">
-      <div class="method-carousel-track" id="methodTrack">
 
-        <!-- Card 1 -->
-        <div class="method-card" data-accent="blue">
-          <div class="method-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-            </svg>
-          </div>
-          <div class="method-card-num">01</div>
-          <h3>Live Sessions, Small Cohorts</h3>
-          <p>8–15 students per group. Real-time video with live Q&A — not a webinar. You engage directly with instructors and peers every single session.</p>
-        </div>
+    <div class="method-framework">
+      <!-- LEFT: Interactive SVG Diagram -->
+      <div class="method-diagram reveal" id="fwDiagram">
+        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(0,110,255,0.08)"/>
+              <stop offset="100%" stop-color="rgba(0,110,255,0)"/>
+            </radialGradient>
+          </defs>
 
-        <!-- Card 2 -->
-        <div class="method-card" data-accent="indigo">
-          <div class="method-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
-            </svg>
-          </div>
-          <div class="method-card-num">02</div>
-          <h3>Clinician-Designed Curriculum</h3>
-          <p>Every session is grounded in peer-reviewed research and real clinical practice. Built with longevity physicians and scientists — not content marketers.</p>
-        </div>
+          <!-- Orbital rings -->
+          <circle class="fw-ring fw-ring-outer fw-ring-spin" cx="250" cy="250" r="230"/>
+          <circle class="fw-ring" cx="250" cy="250" r="185"/>
+          <circle class="fw-ring" cx="250" cy="250" r="140"/>
 
-        <!-- Card 3 -->
-        <div class="method-card" data-accent="cyan">
-          <div class="method-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
-          </div>
-          <div class="method-card-num">03</div>
-          <h3>Protocol-First Learning</h3>
-          <p>Leave each session with a specific, implementable protocol. Apply it to your own glucose data, bloodwork, and training metrics before the next class.</p>
-        </div>
+          <!-- Center glow -->
+          <circle class="fw-center-glow" cx="250" cy="250" r="120"/>
 
-        <!-- Card 4 -->
-        <div class="method-card" data-accent="sky">
-          <div class="method-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <div class="method-card-num">04</div>
-          <h3>Between-Session Experiments</h3>
-          <p>Real learning happens between classes. Track your biomarkers, test protocols on yourself, and bring your results back to the group for guided analysis.</p>
-        </div>
+          <!-- Connector lines (pillar to center) -->
+          <g class="fw-connectors">
+            <line class="fw-connector" data-pillar="0" x1="250" y1="55" x2="250" y2="195"/>
+            <line class="fw-connector" data-pillar="1" x1="419" y1="152" x2="305" y2="215"/>
+            <line class="fw-connector" data-pillar="2" x1="419" y1="348" x2="305" y2="285"/>
+            <line class="fw-connector" data-pillar="3" x1="250" y1="445" x2="250" y2="305"/>
+            <line class="fw-connector" data-pillar="4" x1="81" y1="348" x2="195" y2="285"/>
+            <line class="fw-connector" data-pillar="5" x1="81" y1="152" x2="195" y2="215"/>
+          </g>
 
-        <!-- Card 5 -->
-        <div class="method-card" data-accent="steel">
-          <div class="method-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <div class="method-card-num">05</div>
-          <h3>20+ Years of Proven Pedagogy</h3>
-          <p>Powered by the same live-learning technology trusted by 400,000+ students, 600+ instructors, and 5 online schools worldwide since 2000.</p>
-        </div>
+          <!-- Center hub -->
+          <circle class="fw-center-bg" cx="250" cy="250" r="56"/>
+          <text class="fw-center-text fw-center-label" x="250" y="240">YOUR</text>
+          <text class="fw-center-text fw-center-title" x="250" y="258">Longevity</text>
+          <text class="fw-center-text fw-center-label" x="250" y="273">PROTOCOL</text>
 
-        <!-- Card 6 -->
-        <div class="method-card" data-accent="navy">
-          <div class="method-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
-            </svg>
-          </div>
-          <div class="method-card-num">06</div>
-          <h3>Certificate of Completion</h3>
-          <p>Graduate with a verified certificate from Longevity Life Academy. A credential that reflects 12 weeks of immersive, evidence-based training in longevity science.</p>
-        </div>
+          <!-- 6 Pillars arranged hexagonally -->
+          <!-- Pillar 1: Top -->
+          <g class="fw-pillar" data-index="0" style="--p-color:#006EFF" transform="translate(250,55)">
+            <circle class="fw-pillar-bg" r="38"/>
+            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></g>
+            <text class="fw-pillar-num" y="20">01</text>
+            <text class="fw-pillar-label" y="-48">Live Cohorts</text>
+          </g>
 
+          <!-- Pillar 2: Top-right -->
+          <g class="fw-pillar" data-index="1" style="--p-color:#4F46E5" transform="translate(419,152)">
+            <circle class="fw-pillar-bg" r="38"/>
+            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></g>
+            <text class="fw-pillar-num" y="20">02</text>
+            <text class="fw-pillar-label" y="-48">Clinical Science</text>
+          </g>
+
+          <!-- Pillar 3: Bottom-right -->
+          <g class="fw-pillar" data-index="2" style="--p-color:#0891B2" transform="translate(419,348)">
+            <circle class="fw-pillar-bg" r="38"/>
+            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></g>
+            <text class="fw-pillar-num" y="20">03</text>
+            <text class="fw-pillar-label" y="56">Protocols</text>
+          </g>
+
+          <!-- Pillar 4: Bottom -->
+          <g class="fw-pillar" data-index="3" style="--p-color:#0284C7" transform="translate(250,445)">
+            <circle class="fw-pillar-bg" r="38"/>
+            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></g>
+            <text class="fw-pillar-num" y="20">04</text>
+            <text class="fw-pillar-label" y="56">Experiments</text>
+          </g>
+
+          <!-- Pillar 5: Bottom-left -->
+          <g class="fw-pillar" data-index="4" style="--p-color:#2563EB" transform="translate(81,348)">
+            <circle class="fw-pillar-bg" r="38"/>
+            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></g>
+            <text class="fw-pillar-num" y="20">05</text>
+            <text class="fw-pillar-label" y="56">Proven Platform</text>
+          </g>
+
+          <!-- Pillar 6: Top-left -->
+          <g class="fw-pillar" data-index="5" style="--p-color:#1E40AF" transform="translate(81,152)">
+            <circle class="fw-pillar-bg" r="38"/>
+            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></g>
+            <text class="fw-pillar-num" y="20">06</text>
+            <text class="fw-pillar-label" y="-48">Certification</text>
+          </g>
+        </svg>
       </div>
-    </div>
-    <!-- Carousel navigation -->
-    <div class="method-carousel-nav">
-      <button class="method-carousel-btn" id="methodPrev" aria-label="Previous">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <div class="method-carousel-dots" id="methodDots"></div>
-      <button class="method-carousel-btn" id="methodNext" aria-label="Next">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-      </button>
+
+      <!-- RIGHT: Detail panel -->
+      <div class="method-detail" id="fwDetail">
+        <div class="method-detail-inner visible" id="fwDetailInner">
+          <div class="method-detail-bar"></div>
+          <div class="method-detail-num" id="fwNum">PILLAR 01</div>
+          <div class="method-detail-title" id="fwTitle">Live Sessions, Small Cohorts</div>
+          <p class="method-detail-desc" id="fwDesc">8–15 students per group. Real-time video with live Q&A — not a webinar. You engage directly with instructors and peers every single session.</p>
+          <div class="method-pager" id="fwPager"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2689,85 +2747,99 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 /* What You'll Learn — static grid, no JS needed */
 
-/* ---- Method Carousel ---- */
+/* ---- Method Framework Diagram ---- */
 (function() {
-  const track = document.getElementById('methodTrack');
-  const prevBtn = document.getElementById('methodPrev');
-  const nextBtn = document.getElementById('methodNext');
-  const dotsWrap = document.getElementById('methodDots');
-  if (!track) return;
+  const pillars = document.querySelectorAll('.fw-pillar');
+  const connectors = document.querySelectorAll('.fw-connector');
+  const detailInner = document.getElementById('fwDetailInner');
+  const fwNum = document.getElementById('fwNum');
+  const fwTitle = document.getElementById('fwTitle');
+  const fwDesc = document.getElementById('fwDesc');
+  const fwPager = document.getElementById('fwPager');
+  if (!pillars.length) return;
 
-  const cards = track.querySelectorAll('.method-card');
-  const totalCards = cards.length;
-  let currentPage = 0;
-  let cardsPerView = 3;
-  let totalPages = Math.ceil(totalCards / cardsPerView);
+  const data = [
+    { num: '01', title: 'Live Sessions, Small Cohorts', desc: '8\u201315 students per group. Real-time video with live Q&A \u2014 not a webinar. You engage directly with instructors and peers every single session. This is how 400,000+ students learned across 5 schools.', color: '#006EFF' },
+    { num: '02', title: 'Clinician-Designed Curriculum', desc: 'Every session is grounded in peer-reviewed research and real clinical practice. Built with longevity physicians and scientists \u2014 not content marketers or influencers.', color: '#4F46E5' },
+    { num: '03', title: 'Protocol-First Learning', desc: 'Leave each session with a specific, implementable protocol. Apply it to your own glucose data, bloodwork, and training metrics before the next class.', color: '#0891B2' },
+    { num: '04', title: 'Between-Session Experiments', desc: 'Real learning happens between classes. Track your biomarkers, test protocols on yourself, and bring your results back to the group for guided analysis.', color: '#0284C7' },
+    { num: '05', title: '20+ Years of Proven Pedagogy', desc: 'Powered by the same live-learning technology trusted by 400,000+ students, 600+ instructors, and 5 online schools worldwide since 2000.', color: '#2563EB' },
+    { num: '06', title: 'Certificate of Completion', desc: 'Graduate with a verified certificate from Longevity Life Academy. A credential that reflects 12 weeks of immersive, evidence-based training in longevity science.', color: '#1E40AF' }
+  ];
 
-  function getCardsPerView() {
-    const w = window.innerWidth;
-    if (w <= 600) return 1;
-    if (w <= 900) return 2;
-    return 3;
-  }
+  let activeIdx = 0;
 
-  function buildDots() {
-    dotsWrap.innerHTML = '';
-    for (let i = 0; i < totalPages; i++) {
-      const dot = document.createElement('button');
-      dot.className = 'method-carousel-dot' + (i === currentPage ? ' active' : '');
-      dot.setAttribute('aria-label', 'Page ' + (i + 1));
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    }
-  }
+  // Build pager dots
+  data.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'method-pager-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => selectPillar(i));
+    fwPager.appendChild(dot);
+  });
 
-  function updateButtons() {
-    prevBtn.disabled = currentPage === 0;
-    nextBtn.disabled = currentPage >= totalPages - 1;
-    dotsWrap.querySelectorAll('.method-carousel-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === currentPage);
+  function selectPillar(idx) {
+    activeIdx = idx;
+    const d = data[idx];
+
+    // Update pillar active states
+    pillars.forEach(p => p.classList.remove('active'));
+    pillars[idx].classList.add('active');
+
+    // Update connector highlights
+    connectors.forEach(c => {
+      c.classList.toggle('active', parseInt(c.dataset.pillar) === idx);
+      if (parseInt(c.dataset.pillar) === idx) {
+        c.style.stroke = d.color;
+      } else {
+        c.style.stroke = '';
+      }
     });
+
+    // Animate detail panel
+    detailInner.classList.remove('visible');
+    setTimeout(() => {
+      fwNum.textContent = 'PILLAR ' + d.num;
+      fwTitle.textContent = d.title;
+      fwDesc.textContent = d.desc;
+      detailInner.style.setProperty('--detail-color', d.color);
+      detailInner.querySelector('.method-detail-bar').style.background = d.color;
+      fwNum.style.color = d.color;
+      fwTitle.style.color = d.color;
+
+      // Update pager dots
+      fwPager.querySelectorAll('.method-pager-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === idx);
+        if (i === idx) {
+          dot.style.background = d.color;
+          dot.style.borderColor = d.color;
+        } else {
+          dot.style.background = '';
+          dot.style.borderColor = '';
+        }
+      });
+
+      detailInner.classList.add('visible');
+    }, 180);
   }
 
-  function slideTo(page) {
-    const cardWidth = cards[0].offsetWidth + 20; // card + margins
-    const offset = page * cardsPerView * cardWidth;
-    track.style.transform = 'translateX(-' + offset + 'px)';
-  }
+  // Click handlers on pillars
+  pillars.forEach(p => {
+    p.addEventListener('click', () => selectPillar(parseInt(p.dataset.index)));
+  });
 
-  function goTo(page) {
-    currentPage = Math.max(0, Math.min(page, totalPages - 1));
-    slideTo(currentPage);
-    updateButtons();
-  }
+  // Auto-rotate every 5s
+  let autoTimer = setInterval(() => {
+    selectPillar((activeIdx + 1) % 6);
+  }, 5000);
 
-  function recalc() {
-    cardsPerView = getCardsPerView();
-    totalPages = Math.ceil(totalCards / cardsPerView);
-    if (currentPage >= totalPages) currentPage = totalPages - 1;
-    buildDots();
-    slideTo(currentPage);
-    updateButtons();
-  }
+  // Pause auto-rotate on interaction
+  document.getElementById('fwDiagram').addEventListener('click', () => {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => selectPillar((activeIdx + 1) % 6), 8000);
+  });
 
-  prevBtn.addEventListener('click', () => goTo(currentPage - 1));
-  nextBtn.addEventListener('click', () => goTo(currentPage + 1));
-
-  // Touch/swipe support
-  let touchStartX = 0;
-  let touchEndX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) goTo(currentPage + 1);
-      else goTo(currentPage - 1);
-    }
-  }, { passive: true });
-
-  window.addEventListener('resize', recalc);
-  recalc();
+  // Initialize first pillar
+  selectPillar(0);
 })();
 
 /* Curriculum accordion */
