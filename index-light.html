@@ -1277,7 +1277,7 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================
-   METHOD SECTION — Framework Diagram
+   METHOD SECTION — Pillar Cards
    ============================================ */
 .method {
   padding: 120px 0;
@@ -1285,253 +1285,184 @@ ul, ol { list-style: none; }
 }
 .method-header { text-align: center; margin-bottom: 72px; }
 
-/* Framework layout: diagram left, detail right */
-.method-framework {
+/* --- 3x2 Pillar Grid --- */
+.fw-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-  max-width: 1200px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-/* --- SVG Diagram --- */
-.method-diagram {
+/* Individual pillar card */
+.fw-card {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1;
-  max-width: 560px;
-  margin: 0 auto;
-}
-.method-diagram svg { width: 100%; height: 100%; }
-
-/* Orbital rings — bold gradient strokes */
-.fw-ring {
-  fill: none;
-  stroke-width: 2;
-}
-.fw-ring-1 { stroke: url(#ringGrad1); stroke-width: 3.5; filter: drop-shadow(0 0 6px rgba(0,110,255,0.18)); }
-.fw-ring-2 { stroke: url(#ringGrad2); stroke-width: 2; stroke-dasharray: 8 5; }
-.fw-ring-3 { stroke: url(#ringGrad3); stroke-width: 2.5; filter: drop-shadow(0 0 4px rgba(0,110,255,0.12)); }
-.fw-ring-outer { stroke-dasharray: 6 4; }
-
-/* Connection lines — thicker, gradient-colored */
-.fw-connector {
-  stroke: rgba(0,110,255,0.32);
-  stroke-width: 2.5;
-  stroke-dasharray: 6 4;
-  transition: stroke 0.35s, stroke-width 0.35s, stroke-dasharray 0.35s;
-}
-.fw-connector.active {
-  stroke: rgba(0,110,255,0.7);
-  stroke-width: 3.5;
-  stroke-dasharray: none;
-  filter: drop-shadow(0 0 10px rgba(0,110,255,0.45));
-}
-
-/* Center hub — vivid gradient + glow */
-.fw-center-glow {
-  fill: url(#centerGlow);
-}
-.fw-center-bg {
-  fill: url(#centerBgGrad);
-  filter: drop-shadow(0 6px 40px rgba(0,110,255,0.55)) drop-shadow(0 0 20px rgba(0,110,255,0.3));
-}
-.fw-center-ring {
-  fill: none;
-  stroke: rgba(255,255,255,0.4);
-  stroke-width: 1.5;
-}
-.fw-center-text {
-  font-family: 'Codec Pro', sans-serif;
-  font-weight: 700;
-  fill: white;
-  text-anchor: middle;
-}
-.fw-center-label {
-  font-size: 11px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  fill: rgba(255,255,255,0.85);
-}
-.fw-center-title {
-  font-size: 17px;
-  font-weight: 800;
-}
-
-/* Pillar nodes — glassmorphism */
-.fw-pillar {
+  background: rgba(255,255,255,0.70);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(0,110,255,0.12);
+  border-radius: 20px;
+  padding: 36px 28px 32px;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
 }
-.fw-pillar:hover { transform: scale(1.08); }
-.fw-pillar-glass {
-  fill: rgba(230,240,255,0.80);
-  stroke: rgba(0,110,255,0.40);
-  stroke-width: 2.5;
-  filter: drop-shadow(0 4px 16px rgba(0,110,255,0.22));
-  transition: all 0.35s;
+.fw-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(0,110,255,0.04) 0%, rgba(79,70,229,0.02) 100%);
+  transition: opacity 0.4s;
+  opacity: 1;
 }
-.fw-pillar:hover .fw-pillar-glass,
-.fw-pillar.active .fw-pillar-glass {
-  fill: rgba(215,232,255,0.95);
-  stroke: var(--p-color, #006EFF);
-  stroke-width: 3;
-  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--p-color, #006EFF) 40%, transparent));
+.fw-card:hover {
+  border-color: rgba(0,110,255,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,110,255,0.10), 0 4px 12px rgba(0,0,0,0.04);
 }
-/* Colored accent ring behind glass node */
-.fw-pillar-accent {
+.fw-card.active {
+  border-color: var(--card-color, #006EFF);
+  box-shadow:
+    0 0 0 1px var(--card-color, #006EFF),
+    0 16px 48px rgba(0,110,255,0.18),
+    0 4px 12px rgba(0,0,0,0.06);
+  transform: translateY(-6px);
+}
+.fw-card.active::before {
+  background: linear-gradient(135deg, rgba(0,110,255,0.08) 0%, rgba(79,70,229,0.04) 100%);
+}
+
+/* Card number badge */
+.fw-card-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--card-color, #006EFF), color-mix(in srgb, var(--card-color, #006EFF) 70%, #4F46E5));
+  color: white;
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--card-color, #006EFF) 30%, transparent);
+}
+
+/* Card icon */
+.fw-card-icon {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card-color, #006EFF) 8%, white);
+  color: var(--card-color, #006EFF);
+  transition: all 0.4s;
+}
+.fw-card-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
   fill: none;
-  stroke: var(--p-color, #006EFF);
   stroke-width: 2;
-  opacity: 0.12;
-  transition: all 0.35s;
-}
-.fw-pillar.active .fw-pillar-accent {
-  stroke-width: 4.5;
-  opacity: 0.5;
-  filter: url(#activeGlow);
-}
-.fw-pillar-icon {
-  fill: none;
-  stroke: var(--p-color, #006EFF);
-  stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.fw-pillar-num {
-  font-family: 'Codec Pro', sans-serif;
-  font-weight: 800;
-  font-size: 11px;
-  fill: var(--p-color, #006EFF);
-  text-anchor: middle;
-  letter-spacing: 1px;
+.fw-card.active .fw-card-icon {
+  background: var(--card-color, #006EFF);
+  color: white;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--card-color, #006EFF) 35%, transparent);
 }
-.fw-pillar-label {
+
+/* Card title */
+.fw-card-title {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 700;
-  font-size: 12px;
-  fill: #0A1628;
-  text-anchor: middle;
-}
-
-/* Rotating animation on outer ring */
-@keyframes fwSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.fw-ring-spin {
-  animation: fwSpin 90s linear infinite;
-  transform-origin: 290px 290px;
-}
-/* Pulsing glow on center */
-@keyframes fwPulse {
-  0%, 100% { opacity: 0.4; r: 82; }
-  50% { opacity: 0.7; r: 95; }
-}
-.fw-center-pulse {
-  fill: rgba(0,110,255,0.12);
-  animation: fwPulse 4s ease-in-out infinite;
-}
-
-/* --- Detail panel (right side) --- */
-.method-detail {
-  min-height: 420px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.method-detail-inner {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.35s, transform 0.35s;
-}
-.method-detail-inner.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.method-detail-num {
-  font-family: 'Codec Pro', sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--detail-color, #006EFF);
+  font-size: 18px;
+  color: #0A1628;
+  line-height: 1.3;
   margin-bottom: 12px;
+  transition: color 0.4s;
+  padding-right: 48px;
 }
-.method-detail-title {
-  font-family: 'Codec Pro', sans-serif;
-  font-weight: 800;
-  font-size: 32px;
-  color: var(--detail-color, #006EFF);
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-.method-detail-desc {
-  font-size: 17px;
-  line-height: 1.8;
-  color: #3A4A5C;
-  margin-bottom: 28px;
-}
-.method-detail-bar {
-  width: 48px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--detail-color, #006EFF);
-  margin-bottom: 24px;
-}
-/* Pillar indicator dots */
-.method-pager {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-}
-.method-pager-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,110,255,0.2);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.3s;
-}
-.method-pager-dot.active {
-  background: var(--detail-color, #006EFF);
-  border-color: var(--detail-color, #006EFF);
-  transform: scale(1.2);
+.fw-card.active .fw-card-title {
+  color: var(--card-color, #006EFF);
 }
 
-/* Default prompt when nothing selected */
-.method-detail-prompt {
-  text-align: center;
-  color: #8899AA;
-  font-size: 16px;
+/* Card description — hidden by default, revealed on active */
+.fw-card-desc {
+  font-size: 15px;
   line-height: 1.7;
-  padding: 40px 0;
+  color: #5A6A7C;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s;
 }
-.method-detail-prompt svg {
-  display: block;
-  margin: 0 auto 20px;
-  width: 48px; height: 48px;
-  color: rgba(0,110,255,0.25);
+.fw-card.active .fw-card-desc {
+  max-height: 200px;
+  opacity: 1;
 }
 
-/* Mobile: stack vertically */
+/* Active indicator line */
+.fw-card-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-color, #006EFF);
+  border-radius: 20px 20px 0 0;
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: left;
+}
+.fw-card.active .fw-card-bar {
+  transform: scaleX(1);
+}
+
+/* Progress timer on active card */
+.fw-card-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--card-color, #006EFF);
+  opacity: 0.3;
+  border-radius: 0 0 20px 20px;
+  width: 0;
+  transition: none;
+}
+.fw-card.active .fw-card-progress {
+  animation: fwProgress 5s linear forwards;
+}
+@keyframes fwProgress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Mobile responsive */
 @media (max-width: 900px) {
-  .method-framework {
-    grid-template-columns: 1fr;
-    gap: 48px;
+  .fw-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
-  .method-diagram { max-width: 420px; }
-  .method-detail { min-height: auto; }
-  .method-detail-title { font-size: 26px; }
 }
 @media (max-width: 600px) {
   .method { padding: 80px 0; }
-  .method-diagram { max-width: 340px; }
-  .method-detail-title { font-size: 22px; }
-  .method-detail-desc { font-size: 15px; }
-  .fw-pillar-label { font-size: 9px; }
+  .fw-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .fw-card { padding: 28px 24px 24px; }
+  .fw-card-title { font-size: 16px; }
 }
 
 /* ============================================
@@ -1765,135 +1696,65 @@ ul, ol { list-style: none; }
       <p class="section-subtitle" style="margin: 0 auto;">A structured, six-pillar methodology refined over 20+ years of live online education — applied to the science of human longevity.</p>
     </div>
 
-    <div class="method-framework">
-      <!-- LEFT: Interactive SVG Diagram -->
-      <div class="method-diagram reveal" id="fwDiagram">
-        <svg viewBox="0 0 580 580" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <!-- Ring gradients -->
-            <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#006EFF" stop-opacity="0.50"/>
-              <stop offset="50%" stop-color="#4F46E5" stop-opacity="0.30"/>
-              <stop offset="100%" stop-color="#0891B2" stop-opacity="0.50"/>
-            </linearGradient>
-            <linearGradient id="ringGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#0284C7" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#4F46E5" stop-opacity="0.25"/>
-            </linearGradient>
-            <linearGradient id="ringGrad3" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#006EFF" stop-opacity="0.25"/>
-              <stop offset="100%" stop-color="#2563EB" stop-opacity="0.20"/>
-            </linearGradient>
-            <!-- Center radial glow -->
-            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#006EFF" stop-opacity="0.20"/>
-              <stop offset="60%" stop-color="#006EFF" stop-opacity="0.08"/>
-              <stop offset="100%" stop-color="#006EFF" stop-opacity="0"/>
-            </radialGradient>
-            <!-- Center hub gradient -->
-            <linearGradient id="centerBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#006EFF"/>
-              <stop offset="100%" stop-color="#2545D1"/>
-            </linearGradient>
-            <!-- Glow filter for active pillar -->
-            <filter id="activeGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-
-          <!-- Orbital rings — perfectly centered at 290,290 -->
-          <circle class="fw-ring fw-ring-1 fw-ring-spin" cx="290" cy="290" r="225"/>
-          <circle class="fw-ring fw-ring-2" cx="290" cy="290" r="180"/>
-          <circle class="fw-ring fw-ring-3" cx="290" cy="290" r="145"/>
-
-          <!-- Center glow layers -->
-          <circle class="fw-center-glow" cx="290" cy="290" r="130"/>
-          <circle class="fw-center-pulse" cx="290" cy="290" r="90"/>
-
-          <!-- Connector lines — from pillar edge to center hub edge -->
-          <g class="fw-connectors">
-            <line class="fw-connector" data-pillar="0" x1="290" y1="120" x2="290" y2="220"/>
-            <line class="fw-connector" data-pillar="1" x1="437" y1="185" x2="351" y2="255"/>
-            <line class="fw-connector" data-pillar="2" x1="437" y1="395" x2="351" y2="325"/>
-            <line class="fw-connector" data-pillar="3" x1="290" y1="460" x2="290" y2="360"/>
-            <line class="fw-connector" data-pillar="4" x1="143" y1="395" x2="229" y2="325"/>
-            <line class="fw-connector" data-pillar="5" x1="143" y1="185" x2="229" y2="255"/>
-          </g>
-
-          <!-- Center hub -->
-          <circle class="fw-center-bg" cx="290" cy="290" r="65"/>
-          <circle class="fw-center-ring" cx="290" cy="290" r="60"/>
-          <text class="fw-center-text fw-center-label" x="290" y="275" dominant-baseline="auto">YOUR</text>
-          <text class="fw-center-text fw-center-title" x="290" y="295" dominant-baseline="auto">Longevity</text>
-          <text class="fw-center-text fw-center-label" x="290" y="312" dominant-baseline="auto">PROTOCOL</text>
-
-          <!-- 6 Pillars — perfect hexagon on r=210 circle -->
-          <!-- Pillar 1: Top (0°) -->
-          <g class="fw-pillar" data-index="0" style="--p-color:#006EFF" transform="translate(290,80)">
-            <circle class="fw-pillar-accent" r="46"/>
-            <circle class="fw-pillar-glass" r="38"/>
-            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></g>
-            <text class="fw-pillar-num" y="22">01</text>
-            <text class="fw-pillar-label" y="-52">Live Cohorts</text>
-          </g>
-
-          <!-- Pillar 2: Top-right (60°) -->
-          <g class="fw-pillar" data-index="1" style="--p-color:#4F46E5" transform="translate(471.9,185)">
-            <circle class="fw-pillar-accent" r="46"/>
-            <circle class="fw-pillar-glass" r="38"/>
-            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></g>
-            <text class="fw-pillar-num" y="22">02</text>
-            <text class="fw-pillar-label" x="55" y="5" text-anchor="start">Clinical Science</text>
-          </g>
-
-          <!-- Pillar 3: Bottom-right (120°) -->
-          <g class="fw-pillar" data-index="2" style="--p-color:#0891B2" transform="translate(471.9,395)">
-            <circle class="fw-pillar-accent" r="46"/>
-            <circle class="fw-pillar-glass" r="38"/>
-            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></g>
-            <text class="fw-pillar-num" y="22">03</text>
-            <text class="fw-pillar-label" x="55" y="5" text-anchor="start">Protocols</text>
-          </g>
-
-          <!-- Pillar 4: Bottom (180°) -->
-          <g class="fw-pillar" data-index="3" style="--p-color:#0284C7" transform="translate(290,500)">
-            <circle class="fw-pillar-accent" r="46"/>
-            <circle class="fw-pillar-glass" r="38"/>
-            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></g>
-            <text class="fw-pillar-num" y="22">04</text>
-            <text class="fw-pillar-label" y="58">Experiments</text>
-          </g>
-
-          <!-- Pillar 5: Bottom-left (240°) -->
-          <g class="fw-pillar" data-index="4" style="--p-color:#2563EB" transform="translate(108.1,395)">
-            <circle class="fw-pillar-accent" r="46"/>
-            <circle class="fw-pillar-glass" r="38"/>
-            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></g>
-            <text class="fw-pillar-num" y="22">05</text>
-            <text class="fw-pillar-label" x="-55" y="5" text-anchor="end">Proven Platform</text>
-          </g>
-
-          <!-- Pillar 6: Top-left (300°) -->
-          <g class="fw-pillar" data-index="5" style="--p-color:#1E40AF" transform="translate(108.1,185)">
-            <circle class="fw-pillar-accent" r="46"/>
-            <circle class="fw-pillar-glass" r="38"/>
-            <g class="fw-pillar-icon" transform="translate(-10,-12) scale(0.85)"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></g>
-            <text class="fw-pillar-num" y="22">06</text>
-            <text class="fw-pillar-label" x="-55" y="5" text-anchor="end">Certification</text>
-          </g>
-        </svg>
+    <div class="fw-grid reveal" id="fwGrid">
+      <!-- Card 1 -->
+      <div class="fw-card active" data-index="0" style="--card-color:#006EFF">
+        <div class="fw-card-bar"></div>
+        <div class="fw-card-progress"></div>
+        <div class="fw-card-num">01</div>
+        <div class="fw-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="fw-card-title">Live Sessions, Small Cohorts</div>
+        <p class="fw-card-desc">8–15 students per group. Real-time video with live Q&A — not a webinar. You engage directly with instructors and peers every single session. This is how 400,000+ students learned across 5 schools.</p>
       </div>
 
-      <!-- RIGHT: Detail panel -->
-      <div class="method-detail" id="fwDetail">
-        <div class="method-detail-inner visible" id="fwDetailInner">
-          <div class="method-detail-bar"></div>
-          <div class="method-detail-num" id="fwNum">PILLAR 01</div>
-          <div class="method-detail-title" id="fwTitle">Live Sessions, Small Cohorts</div>
-          <p class="method-detail-desc" id="fwDesc">8–15 students per group. Real-time video with live Q&A — not a webinar. You engage directly with instructors and peers every single session.</p>
-          <div class="method-pager" id="fwPager"></div>
-        </div>
+      <!-- Card 2 -->
+      <div class="fw-card" data-index="1" style="--card-color:#4F46E5">
+        <div class="fw-card-bar"></div>
+        <div class="fw-card-progress"></div>
+        <div class="fw-card-num">02</div>
+        <div class="fw-card-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+        <div class="fw-card-title">Clinician-Designed Curriculum</div>
+        <p class="fw-card-desc">Every session is grounded in peer-reviewed research and real clinical practice. Built with longevity physicians and scientists — not content marketers or influencers.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="fw-card" data-index="2" style="--card-color:#0891B2">
+        <div class="fw-card-bar"></div>
+        <div class="fw-card-progress"></div>
+        <div class="fw-card-num">03</div>
+        <div class="fw-card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="fw-card-title">Protocol-First Learning</div>
+        <p class="fw-card-desc">Leave each session with a specific, implementable protocol. Apply it to your own glucose data, bloodwork, and training metrics before the next class.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="fw-card" data-index="3" style="--card-color:#0284C7">
+        <div class="fw-card-bar"></div>
+        <div class="fw-card-progress"></div>
+        <div class="fw-card-num">04</div>
+        <div class="fw-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="fw-card-title">Between-Session Experiments</div>
+        <p class="fw-card-desc">Real learning happens between classes. Track your biomarkers, test protocols on yourself, and bring your results back to the group for guided analysis.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="fw-card" data-index="4" style="--card-color:#2563EB">
+        <div class="fw-card-bar"></div>
+        <div class="fw-card-progress"></div>
+        <div class="fw-card-num">05</div>
+        <div class="fw-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="fw-card-title">20+ Years of Proven Pedagogy</div>
+        <p class="fw-card-desc">Powered by the same live-learning technology trusted by 400,000+ students, 600+ instructors, and 5 online schools worldwide since 2000.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="fw-card" data-index="5" style="--card-color:#1E40AF">
+        <div class="fw-card-bar"></div>
+        <div class="fw-card-progress"></div>
+        <div class="fw-card-num">06</div>
+        <div class="fw-card-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
+        <div class="fw-card-title">Certificate of Completion</div>
+        <p class="fw-card-desc">Graduate with a verified certificate from Longevity Life Academy. A credential that reflects 12 weeks of immersive, evidence-based training in longevity science.</p>
       </div>
     </div>
   </div>
@@ -2812,99 +2673,50 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 /* What You'll Learn — static grid, no JS needed */
 
-/* ---- Method Framework Diagram ---- */
+/* ---- Method Framework Cards ---- */
 (function() {
-  const pillars = document.querySelectorAll('.fw-pillar');
-  const connectors = document.querySelectorAll('.fw-connector');
-  const detailInner = document.getElementById('fwDetailInner');
-  const fwNum = document.getElementById('fwNum');
-  const fwTitle = document.getElementById('fwTitle');
-  const fwDesc = document.getElementById('fwDesc');
-  const fwPager = document.getElementById('fwPager');
-  if (!pillars.length) return;
-
-  const data = [
-    { num: '01', title: 'Live Sessions, Small Cohorts', desc: '8\u201315 students per group. Real-time video with live Q&A \u2014 not a webinar. You engage directly with instructors and peers every single session. This is how 400,000+ students learned across 5 schools.', color: '#006EFF' },
-    { num: '02', title: 'Clinician-Designed Curriculum', desc: 'Every session is grounded in peer-reviewed research and real clinical practice. Built with longevity physicians and scientists \u2014 not content marketers or influencers.', color: '#4F46E5' },
-    { num: '03', title: 'Protocol-First Learning', desc: 'Leave each session with a specific, implementable protocol. Apply it to your own glucose data, bloodwork, and training metrics before the next class.', color: '#0891B2' },
-    { num: '04', title: 'Between-Session Experiments', desc: 'Real learning happens between classes. Track your biomarkers, test protocols on yourself, and bring your results back to the group for guided analysis.', color: '#0284C7' },
-    { num: '05', title: '20+ Years of Proven Pedagogy', desc: 'Powered by the same live-learning technology trusted by 400,000+ students, 600+ instructors, and 5 online schools worldwide since 2000.', color: '#2563EB' },
-    { num: '06', title: 'Certificate of Completion', desc: 'Graduate with a verified certificate from Longevity Life Academy. A credential that reflects 12 weeks of immersive, evidence-based training in longevity science.', color: '#1E40AF' }
-  ];
+  const cards = document.querySelectorAll('.fw-card');
+  if (!cards.length) return;
 
   let activeIdx = 0;
 
-  // Build pager dots
-  data.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'method-pager-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => selectPillar(i));
-    fwPager.appendChild(dot);
-  });
-
-  function selectPillar(idx) {
+  function selectCard(idx) {
     activeIdx = idx;
-    const d = data[idx];
-
-    // Update pillar active states
-    pillars.forEach(p => p.classList.remove('active'));
-    pillars[idx].classList.add('active');
-
-    // Update connector highlights
-    connectors.forEach(c => {
-      c.classList.toggle('active', parseInt(c.dataset.pillar) === idx);
-      if (parseInt(c.dataset.pillar) === idx) {
-        c.style.stroke = d.color;
+    cards.forEach((c, i) => {
+      if (i === idx) {
+        c.classList.add('active');
       } else {
-        c.style.stroke = '';
+        c.classList.remove('active');
+        // Reset progress animation
+        const prog = c.querySelector('.fw-card-progress');
+        if (prog) { prog.style.animation = 'none'; prog.offsetHeight; prog.style.animation = ''; }
       }
     });
-
-    // Animate detail panel
-    detailInner.classList.remove('visible');
-    setTimeout(() => {
-      fwNum.textContent = 'PILLAR ' + d.num;
-      fwTitle.textContent = d.title;
-      fwDesc.textContent = d.desc;
-      detailInner.style.setProperty('--detail-color', d.color);
-      detailInner.querySelector('.method-detail-bar').style.background = d.color;
-      fwNum.style.color = d.color;
-      fwTitle.style.color = d.color;
-
-      // Update pager dots
-      fwPager.querySelectorAll('.method-pager-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === idx);
-        if (i === idx) {
-          dot.style.background = d.color;
-          dot.style.borderColor = d.color;
-        } else {
-          dot.style.background = '';
-          dot.style.borderColor = '';
-        }
-      });
-
-      detailInner.classList.add('visible');
-    }, 180);
+    // Restart progress animation on active card
+    const activeProgress = cards[idx].querySelector('.fw-card-progress');
+    if (activeProgress) {
+      activeProgress.style.animation = 'none';
+      activeProgress.offsetHeight;
+      activeProgress.style.animation = '';
+    }
   }
 
-  // Click handlers on pillars
-  pillars.forEach(p => {
-    p.addEventListener('click', () => selectPillar(parseInt(p.dataset.index)));
+  // Click handlers
+  cards.forEach(c => {
+    c.addEventListener('click', () => {
+      selectCard(parseInt(c.dataset.index));
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => selectCard((activeIdx + 1) % 6), 5000);
+    });
   });
 
   // Auto-rotate every 5s
   let autoTimer = setInterval(() => {
-    selectPillar((activeIdx + 1) % 6);
+    selectCard((activeIdx + 1) % 6);
   }, 5000);
 
-  // Pause auto-rotate on interaction
-  document.getElementById('fwDiagram').addEventListener('click', () => {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => selectPillar((activeIdx + 1) % 6), 8000);
-  });
-
-  // Initialize first pillar
-  selectPillar(0);
+  // Initialize
+  selectCard(0);
 })();
 
 /* Curriculum accordion */
