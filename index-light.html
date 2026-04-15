@@ -679,15 +679,15 @@ ul, ol { list-style: none; }
   margin-bottom: 12px; letter-spacing: 0.2px;
 }
 .teachers-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-  max-width: 1000px; margin: 0 auto; position: relative; z-index: 1;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  max-width: 960px; margin: 0 auto; position: relative; z-index: 1;
 }
 .teacher-card {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
-  border-radius: var(--radius-xl); padding: 48px 32px; text-align: center;
+  border-radius: var(--radius-xl); padding: 32px 24px 28px; text-align: center;
   transition: all var(--transition-base);
   box-shadow: var(--glass-shadow);
   display: flex; flex-direction: column; align-items: center;
@@ -699,9 +699,9 @@ ul, ol { list-style: none; }
   transform: translateY(-4px);
 }
 .teacher-avatar {
-  width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 24px;
+  width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 16px;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--accent);
+  font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--accent);
   background: rgba(0,0,0,0.02);
   border: 2px solid rgba(0,0,0,0.08);
   overflow: hidden;
@@ -710,54 +710,47 @@ ul, ol { list-style: none; }
   width: 100%; height: 100%; object-fit: cover; object-position: center top;
 }
 .teacher-name {
-  font-family: var(--font-display); font-weight: 700; font-size: 22px;
-  color: var(--text-primary); margin-bottom: 6px;
+  font-family: var(--font-display); font-weight: 700; font-size: 19px;
+  color: var(--text-primary); margin-bottom: 4px;
 }
 .teacher-role {
-  font-size: 14px; font-weight: 600; color: var(--accent);
-  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px;
 }
-.teacher-bio { font-size: 15px; line-height: 1.65; color: var(--text-secondary); flex-grow: 1; }
+.teacher-bio { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
 
-/* Credential Badges */
-.teacher-credentials {
-  display: flex; flex-direction: column; gap: 10px;
-  margin-top: auto; padding-top: 20px;
-  border-top: 1px solid rgba(0, 110, 255, 0.12);
-  width: 100%;
+/* Credential Logo Strip */
+.credential-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  max-width: 800px;
+  margin: 56px auto 0;
+  padding: 28px 40px;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(0,110,255,0.08);
 }
-.credential-badge {
-  display: flex; align-items: center; gap: 10px;
-  padding: 8px 14px; border-radius: 10px;
-  background: rgba(0, 110, 255, 0.04);
-  border: 1px solid rgba(0, 110, 255, 0.1);
-  transition: all 0.3s ease;
-}
-.credential-badge:hover {
-  background: rgba(0, 110, 255, 0.08);
-  border-color: rgba(0, 110, 255, 0.2);
-}
-.credential-icon {
-  flex-shrink: 0;
-  width: 32px; height: 32px;
+.credential-strip-logo {
+  width: 52px; height: 52px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-  box-shadow: 0 2px 8px rgba(0, 110, 255, 0.2);
+  border-radius: 14px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0,110,255,0.12);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04), 0 1px 4px rgba(0,110,255,0.06);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
-.credential-icon svg {
-  width: 16px; height: 16px; color: #fff;
+.credential-strip-logo:hover {
+  border-color: rgba(0,110,255,0.30);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,110,255,0.14), 0 2px 6px rgba(0,0,0,0.04);
 }
-.credential-text {
-  text-align: left;
-}
-.credential-label {
-  font-family: var(--font-display); font-weight: 700; font-size: 11px;
-  text-transform: uppercase; letter-spacing: 1.2px;
-  color: var(--accent); line-height: 1.2; margin-bottom: 2px;
-}
-.credential-detail {
-  font-size: 12.5px; color: var(--text-secondary); line-height: 1.35;
+.credential-strip-logo svg {
+  width: 24px; height: 24px;
+  stroke: #006EFF; fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
 }
 
 /* ============================================
@@ -1082,6 +1075,8 @@ ul, ol { list-style: none; }
 
   .testimonials-grid { grid-template-columns: 1fr; max-width: 600px; margin-left: auto; margin-right: auto; }
   .teachers-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .credential-strip { gap: 24px; padding: 24px 20px; }
+  .credential-strip-logo { width: 42px; height: 42px; }
   .final-cta .section-title { font-size: 48px; }
 
   .platform-header h2 { font-size: 44px; }
@@ -1123,6 +1118,9 @@ ul, ol { list-style: none; }
   .curriculum-trigger-text h3 { font-size: 15px; }
   .teachers { padding: 80px 0; }
   .teachers-grid { grid-template-columns: 1fr; max-width: 100%; }
+  .credential-strip { gap: 16px; padding: 20px 12px; flex-wrap: wrap; }
+  .credential-strip-logo { width: 40px; height: 40px; border-radius: 10px; }
+  .credential-strip-logo svg { width: 20px; height: 20px; }
   .platform { padding: 72px 0 80px; }
   .platform-header h2 { font-size: 34px; }
   .platform-header .platform-tagline { font-size: 20px; }
@@ -2498,91 +2496,50 @@ ul, ol { list-style: none; }
       <div class="teacher-card reveal reveal-delay-1">
         <div class="teacher-avatar"><img src="assets/maya-elhalal.jpg" alt="Maya Elhalal"></div>
         <h3 class="teacher-name">Maya Elhalal</h3>
-        <p class="teacher-role">Lead Instructor &amp; Longevity Educator</p>
-        <p class="teacher-bio">Founder of Longevity Science. Experienced in aging science workshops, glucose management, and lifestyle optimization. Leads longevity strategy programs and retreats across three continents.</p>
-        <div class="teacher-credentials">
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Certified</div>
-              <div class="credential-detail">Longevity Science Educator</div>
-            </div>
-          </div>
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Research</div>
-              <div class="credential-detail">Published Aging &amp; Glucose Research</div>
-            </div>
-          </div>
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Expertise</div>
-              <div class="credential-detail">Metabolic Health &amp; Healthspan Optimization</div>
-            </div>
-          </div>
-        </div>
+        <p class="teacher-role">Lead Instructor</p>
+        <p class="teacher-bio">Longevity science educator specializing in aging research, glucose management, and healthspan optimization across three continents.</p>
       </div>
       <div class="teacher-card reveal reveal-delay-2">
         <div class="teacher-avatar"><img src="assets/david-barzilai.jpg" alt="David Barzilai, MD, PhD"></div>
         <h3 class="teacher-name">David Barzilai, MD, PhD</h3>
         <p class="teacher-role">Healthspan Coach</p>
-        <p class="teacher-bio">Physician and healthspan coaching specialist. Focuses on metabolic health, stress, sleep, and daily habits — grounded in longevity science, not expensive clinical interventions.</p>
-        <div class="teacher-credentials">
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Board Certified</div>
-              <div class="credential-detail">Longevity &amp; Regenerative Medicine</div>
-            </div>
-          </div>
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">MD, PhD</div>
-              <div class="credential-detail">Doctor of Medicine &amp; Clinical Research</div>
-            </div>
-          </div>
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Published</div>
-              <div class="credential-detail">Peer-Reviewed Metabolic Research</div>
-            </div>
-          </div>
-        </div>
+        <p class="teacher-bio">Physician focused on metabolic health, stress, sleep, and daily longevity habits — grounded in clinical science, not trends.</p>
       </div>
       <div class="teacher-card reveal reveal-delay-3">
         <div class="teacher-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:36px;height:36px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
         <h3 class="teacher-name">Guest Faculty</h3>
-        <p class="teacher-role">Longevity Life Academy Certified Coaches</p>
-        <p class="teacher-bio">Certified longevity coaches trained in age-related biology, lifestyle optimization, and behavior change. Specialists in translating complex science into daily practice you can sustain.</p>
-        <div class="teacher-credentials">
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Certified</div>
-              <div class="credential-detail">Functional Medicine (IFM/FMCP)</div>
-            </div>
-          </div>
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Vetted</div>
-              <div class="credential-detail">Clinical Practice in Longevity Medicine</div>
-            </div>
-          </div>
-          <div class="credential-badge">
-            <div class="credential-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-            <div class="credential-text">
-              <div class="credential-label">Network</div>
-              <div class="credential-detail">Rotating Experts &amp; Researchers</div>
-            </div>
-          </div>
-        </div>
+        <p class="teacher-role">Certified Coaches</p>
+        <p class="teacher-bio">Rotating longevity coaches trained in age-related biology, lifestyle optimization, and translating science into daily practice.</p>
+      </div>
+    </div>
+
+    <!-- Credential Logo Strip -->
+    <div class="credential-strip reveal">
+      <!-- Board Certified -->
+      <div class="credential-strip-logo">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/></svg>
+      </div>
+      <!-- MD / PhD -->
+      <div class="credential-strip-logo">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+      </div>
+      <!-- Published Research -->
+      <div class="credential-strip-logo">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+      </div>
+      <!-- Functional Medicine -->
+      <div class="credential-strip-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <!-- Clinical Practice -->
+      <div class="credential-strip-logo">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+      </div>
+      <!-- Peer-Reviewed -->
+      <div class="credential-strip-logo">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
     </div>
   </div>
