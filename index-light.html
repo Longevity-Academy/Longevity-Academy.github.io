@@ -1200,12 +1200,12 @@ ul, ol { list-style: none; }
 .outcomes { padding: 120px 0; overflow: hidden; }
 .outcomes-header { text-align: center; margin-bottom: 72px; }
 
-/* 5-card grid */
+/* 5-card grid — compact with hover-reveal descriptions */
 .outcomes-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  max-width: 1280px;
+  max-width: 1340px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -1213,62 +1213,72 @@ ul, ol { list-style: none; }
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  min-height: 380px;
+  min-height: 260px;
   background: #000;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   cursor: pointer;
-  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.5s ease, min-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 .outcomes-card:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 20px 48px rgba(0,0,0,0.22);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.28);
+  min-height: 380px;
 }
 .outcomes-card-bg {
   position: absolute; inset: 0; z-index: 0;
 }
 .outcomes-card-bg img {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
 }
 .outcomes-card:hover .outcomes-card-bg img {
-  transform: scale(1.06);
+  transform: scale(1.08);
+  filter: brightness(0.85);
 }
 .outcomes-card-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.12) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.08) 100%);
   transition: background 0.5s ease;
 }
 .outcomes-card:hover .outcomes-card-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.15) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.2) 100%);
 }
 /* Glass text box */
 .outcomes-card-glass {
   position: relative; z-index: 3;
-  margin: 14px;
-  padding: 24px 22px;
-  background: rgba(255,255,255,0.07);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  margin: 12px;
+  padding: 20px 18px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.12);
   transition: background 0.5s ease, border-color 0.5s ease;
 }
 .outcomes-card:hover .outcomes-card-glass {
-  background: rgba(255,255,255,0.11);
-  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.22);
 }
 .outcomes-card-num {
   font-family: 'Codec Pro', sans-serif; font-weight: 800;
-  font-size: 13px; color: var(--accent);
-  letter-spacing: 2px; margin-bottom: 10px;
+  font-size: 12px; color: var(--accent);
+  letter-spacing: 2px; margin-bottom: 8px;
   text-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 .outcomes-card-title {
   font-family: 'Codec Pro', sans-serif; font-weight: 800;
-  font-size: 22px; line-height: 1.2; color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
-  letter-spacing: -0.3px;
+  font-size: 18px; line-height: 1.25; color: #fff;
+  text-transform: uppercase; letter-spacing: 0.3px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.outcomes-card-desc {
+  font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.75);
+  margin-top: 0; max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.4s ease, margin-top 0.4s ease;
+}
+.outcomes-card:hover .outcomes-card-desc {
+  max-height: 200px; opacity: 1; margin-top: 10px;
 }
 /* Responsive */
 @media (max-width: 1024px) {
@@ -1277,13 +1287,18 @@ ul, ol { list-style: none; }
 @media (max-width: 768px) {
   .outcomes { padding: 80px 0; }
   .outcomes-grid { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
-  .outcomes-card { min-height: 300px; }
-  .outcomes-card-glass { padding: 20px 18px; margin: 10px; }
-  .outcomes-card-title { font-size: 19px; }
+  .outcomes-card { min-height: 240px; }
+  .outcomes-card:hover { min-height: 240px; }
+  .outcomes-card-glass { padding: 16px 14px; margin: 10px; }
+  .outcomes-card-title { font-size: 16px; }
+  .outcomes-card-desc { max-height: 120px; opacity: 1; margin-top: 8px; font-size: 12px; }
 }
 @media (max-width: 480px) {
   .outcomes-grid { grid-template-columns: 1fr; }
-  .outcomes-card { min-height: 280px; }
+  .outcomes-card { min-height: 220px; }
+  .outcomes-card:hover { min-height: 220px; }
+  .outcomes-card-title { font-size: 17px; }
+  .outcomes-card-desc { font-size: 13px; }
 }
 
 /* ============================================
@@ -1537,6 +1552,7 @@ ul, ol { list-style: none; }
         <div class="outcomes-card-glass">
           <div class="outcomes-card-num">01</div>
           <div class="outcomes-card-title">Read Your Own Blood</div>
+          <p class="outcomes-card-desc">Most people wait for their doctor to tell them something is wrong. Learn how to interpret your own glucose data, metabolic markers, and health signals before they become problems.</p>
         </div>
       </div>
       <div class="outcomes-card reveal reveal-delay-1">
@@ -1545,6 +1561,7 @@ ul, ol { list-style: none; }
         <div class="outcomes-card-glass">
           <div class="outcomes-card-num">02</div>
           <div class="outcomes-card-title">Build Your Protocol</div>
+          <p class="outcomes-card-desc">There is no one-size-fits-all approach to longevity. You will leave this course with a personalized plan built around your body, your lifestyle, and your specific goals.</p>
         </div>
       </div>
       <div class="outcomes-card reveal reveal-delay-2">
@@ -1552,7 +1569,8 @@ ul, ol { list-style: none; }
         <div class="outcomes-card-overlay"></div>
         <div class="outcomes-card-glass">
           <div class="outcomes-card-num">03</div>
-          <div class="outcomes-card-title">Train for the Long Game</div>
+          <div class="outcomes-card-title">Move With Purpose</div>
+          <p class="outcomes-card-desc">Exercise is not about burning calories — it is about preserving muscle, protecting your brain, and keeping your metabolism sharp. Learn the minimum effective dose that actually moves the needle.</p>
         </div>
       </div>
       <div class="outcomes-card reveal reveal-delay-1">
@@ -1560,15 +1578,17 @@ ul, ol { list-style: none; }
         <div class="outcomes-card-overlay"></div>
         <div class="outcomes-card-glass">
           <div class="outcomes-card-num">04</div>
-          <div class="outcomes-card-title">Cut Through the Noise</div>
+          <div class="outcomes-card-title">Know What Is Worth Your Attention</div>
+          <p class="outcomes-card-desc">The longevity space is full of noise — supplements, wearables, biohacks, and contradictory advice. You will learn a clear decision filter for what actually works and what is just marketing.</p>
         </div>
       </div>
       <div class="outcomes-card reveal reveal-delay-2">
-        <div class="outcomes-card-bg"><img src="assets/outcome-bg-06.jpg" alt="Neural pathways brain"></div>
+        <div class="outcomes-card-bg"><img src="assets/outcome-bg-06-sleep.jpg" alt="Man sleeping peacefully"></div>
         <div class="outcomes-card-overlay"></div>
         <div class="outcomes-card-glass">
           <div class="outcomes-card-num">05</div>
-          <div class="outcomes-card-title">Master Sleep &amp; Stress</div>
+          <div class="outcomes-card-title">Master Sleep and Stress</div>
+          <p class="outcomes-card-desc">Poor sleep and chronic stress are two of the fastest ways to accelerate aging. Understand the science behind both and get practical tools you can use starting tonight.</p>
         </div>
       </div>
     </div>
