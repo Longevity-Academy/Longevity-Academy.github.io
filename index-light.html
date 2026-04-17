@@ -1278,16 +1278,120 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 8 — CREDENTIALS
+   FOLD 8 — INSTRUCTORS & CREDENTIALS
    ================================================== */
+.instructors {
+  padding: 120px 0 60px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.instructors::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 110, 255, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.instructors-header {
+  text-align: center;
+  margin-bottom: 72px;
+  position: relative;
+  z-index: 1;
+}
+.instructors-bridge {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+  letter-spacing: 0.2px;
+}
+.teachers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.teacher-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 110, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 48px 32px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+.teacher-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 110, 255, 0.25);
+  box-shadow: 0 20px 48px rgba(0, 110, 255, 0.1);
+  transform: translateY(-6px);
+}
+.teacher-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--blue);
+  background: rgba(0, 110, 255, 0.05);
+  border: 2px solid rgba(0, 110, 255, 0.12);
+  overflow: hidden;
+}
+.teacher-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.teacher-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.teacher-role {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+.teacher-bio {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+@media (max-width: 900px) {
+  .teachers-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+}
+
+/* Cert badges below teacher cards */
 .certs {
-  padding: 120px 0;
+  padding: 60px 0 120px;
   background: var(--bg);
 }
 .certs-header {
   text-align: center;
   max-width: 860px;
-  margin: 0 auto 72px;
+  margin: 0 auto 48px;
 }
 .certs-strip {
   display: grid;
@@ -2284,13 +2388,46 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 8 — CREDENTIALS
+     FOLD 8 — INSTRUCTORS & CREDENTIALS
      ============================================== -->
+<section class="instructors" id="teachers">
+  <div class="container">
+    <div class="instructors-header reveal">
+      <p class="instructors-bridge">The teachers and clinicians behind your longevity education</p>
+      <span class="eyebrow" style="margin-bottom: 16px; display: block;">Your Instructors</span>
+      <h2 class="section-title">Teachers and Clinicians<br>at the Frontier of Longevity.</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Not celebrity doctors — credible, dedicated instructors who practice what the research says, work directly with you, and answer the questions your GP can’t.</p>
+    </div>
+    <div class="teachers-grid">
+      <div class="teacher-card reveal reveal-delay-1">
+        <div class="teacher-avatar"><img src="assets/maya-elhalal.jpg" alt="Maya Elhalal"></div>
+        <h3 class="teacher-name">Maya Elhalal</h3>
+        <p class="teacher-role">Lead Instructor &amp; Longevity Educator</p>
+        <p class="teacher-bio">Founder of Longevity Science. Experienced in aging science workshops, glucose management, and lifestyle optimization. Leads longevity strategy programs and retreats across three continents.</p>
+      </div>
+      <div class="teacher-card reveal reveal-delay-2">
+        <div class="teacher-avatar"><img src="assets/david-barzilai.jpg" alt="David Barzilai, MD, PhD"></div>
+        <h3 class="teacher-name">David Barzilai, MD, PhD</h3>
+        <p class="teacher-role">Healthspan Coach</p>
+        <p class="teacher-bio">Physician and healthspan coaching specialist. Focuses on metabolic health, stress, sleep, and daily habits — grounded in longevity science, not expensive clinical interventions.</p>
+      </div>
+      <div class="teacher-card reveal reveal-delay-3">
+        <div class="teacher-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="teacher-name">Guest Faculty</h3>
+        <p class="teacher-role">xLongevity Certified Coaches</p>
+        <p class="teacher-bio">Certified longevity coaches trained in age-related biology, lifestyle optimization, and behavior change. Specialists in translating complex science into daily practice you can sustain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="certs">
   <div class="container">
     <div class="certs-header reveal">
-      <span class="eyebrow">Instructors</span>
-      <h2 class="section-title">Learn from certified<br>longevity instructors.</h2>
+      <span class="eyebrow">Certifications</span>
+      <h2 class="section-title">Backed by leading<br>health credentials.</h2>
     </div>
     <div class="certs-strip reveal">
       <div class="cert-badge">
