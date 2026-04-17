@@ -350,7 +350,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 2 — EXPLORE LONGEVITY TOPICS
+   FOLD 11 — EXPLORE LONGEVITY TOPICS (placed after hero)
    ================================================== */
 .topics {
   padding: 120px 0 100px;
@@ -426,153 +426,290 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 3 — SIX LONGEVITY SKILLS (blog-driven cards)
+   FOLD 2 — FIVE SKILLS
    ================================================== */
 .skills {
-  padding: 130px 0;
+  padding: 120px 0;
   background: var(--surface);
 }
 .skills-header {
   text-align: left;
-  margin-bottom: 64px;
+  margin-bottom: 72px;
   max-width: 900px;
 }
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .skill-card {
   position: relative;
-  display: block;
-  height: 340px;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 0;
+  background: #fff;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  color: #fff;
-  isolation: isolate;
+  min-height: 280px;
+  transition: all var(--transition);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 .skill-card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 26px 60px rgba(0, 30, 90, 0.18),
-    0 0 0 2px rgba(0, 110, 255, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
 }
-.skill-bg {
+.skill-card:nth-child(even) { grid-template-columns: 1.3fr 1fr; }
+.skill-card:nth-child(even) .skill-media { order: 2; }
+.skill-media {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+}
+.skill-media img {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.8s var(--ease);
 }
-.skill-card:hover .skill-bg { transform: scale(1.04); }
-.skill-bg.brain { background: linear-gradient(135deg, #0A1B45 0%, #16347E 55%, #1F4BB8 100%); }
-.skill-bg.mindset { background: linear-gradient(135deg, #2E2417 0%, #3A3950 55%, #4F5A7A 100%); }
-.skill-bg.skin { background: linear-gradient(135deg, #8C5A52 0%, #C69385 55%, #F2D9C5 100%); }
-.skill-bg.supplements { background: linear-gradient(135deg, #0E5C5A 0%, #137A78 55%, #1FA8A4 100%); }
-.skill-bg.arteries { background: linear-gradient(135deg, #2A0B14 0%, #5F1226 55%, #8C2F3F 100%); }
-.skill-bg.eyes { background: linear-gradient(135deg, #3E2A0B 0%, #8B5A1A 55%, #D9A24A 100%); }
-/* Subtle scientific pattern overlay per card (SVG data URIs) */
-.skill-bg::after {
+.skill-card:hover .skill-media img {
+  transform: scale(1.06);
+}
+.skill-media::after {
   content: '';
   position: absolute;
   inset: 0;
-  opacity: 0.22;
-  mix-blend-mode: soft-light;
-  pointer-events: none;
-}
-.skill-bg.brain::after {
-  background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 0, transparent 2px), radial-gradient(circle at 70% 20%, rgba(255,255,255,0.5) 0, transparent 2px), radial-gradient(circle at 40% 70%, rgba(255,255,255,0.5) 0, transparent 2px), radial-gradient(circle at 85% 65%, rgba(255,255,255,0.5) 0, transparent 2px), radial-gradient(circle at 55% 45%, rgba(255,255,255,0.5) 0, transparent 2px);
-  background-size: 220px 220px;
-}
-.skill-bg.mindset::after {
-  background-image: repeating-linear-gradient(42deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 14px), repeating-linear-gradient(-42deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px);
-}
-.skill-bg.skin::after {
-  background-image: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.4) 0, transparent 30px), radial-gradient(circle at 70% 60%, rgba(255,255,255,0.35) 0, transparent 28px), radial-gradient(circle at 55% 25%, rgba(255,255,255,0.3) 0, transparent 24px);
-  background-size: 180px 180px;
-}
-.skill-bg.supplements::after {
-  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 22px), repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 22px);
-}
-.skill-bg.arteries::after {
-  background-image: radial-gradient(ellipse 60px 6px at 30% 40%, rgba(255,255,255,0.35) 0, transparent 100%), radial-gradient(ellipse 80px 4px at 60% 65%, rgba(255,255,255,0.3) 0, transparent 100%), radial-gradient(ellipse 50px 5px at 80% 30%, rgba(255,255,255,0.3) 0, transparent 100%);
-  background-size: 260px 200px;
-}
-.skill-bg.eyes::after {
-  background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.35) 0, rgba(255,255,255,0.1) 60px, transparent 120px);
-  background-size: 260px 260px;
-}
-.skill-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 85%, rgba(0,0,0,0.75) 100%);
-  z-index: 1;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent 40%);
 }
 .skill-content {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  padding: 30px;
+  padding: 52px 56px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
 }
-.skill-eyebrow {
-  font-family: var(--font-body);
-  font-size: 11px;
+.skill-number {
+  font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: 2.2px;
-  text-transform: uppercase;
-  color: #A8C7FF;
-  margin-bottom: 12px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--blue);
+  margin-bottom: 14px;
 }
 .skill-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 26px;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin-bottom: 10px;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 18px;
 }
-.skill-sub {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.88);
-  max-width: 320px;
+.skill-desc {
+  font-size: 17px;
+  color: var(--ink-3);
+  line-height: 1.6;
+  max-width: 520px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease), opacity 0.5s var(--ease);
 }
-.skill-arrow {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  z-index: 2;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.25);
-  display: flex;
+.skill-card:hover .skill-desc {
+  max-height: 200px;
+  opacity: 1;
+}
+.skill-card.always-show .skill-desc { max-height: 200px; opacity: 1; }
+.skill-hint {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  margin-top: 18px;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 900px) {
+  .skill-card, .skill-card:nth-child(even) { grid-template-columns: 1fr; }
+  .skill-card:nth-child(even) .skill-media { order: 0; }
+  .skill-content { padding: 32px 28px; }
+  .skill-desc { max-height: 200px; opacity: 1; }
+}
+
+/* ==================================================
+   FOLD 3 — METHODOLOGY MODEL
+   ================================================== */
+.method {
+  padding: 140px 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(0, 110, 255, 0.08), transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(0, 110, 255, 0.06), transparent 60%),
+    var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.method-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.method-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 680px;
+}
+.method-pillar {
+  position: relative;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 20px 50px rgba(0, 60, 180, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  cursor: pointer;
   transition: all var(--transition);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.skill-card:hover .skill-arrow {
-  background: #fff;
-  color: #006EFF;
-  transform: translate(4px, -4px);
+.method-pillar:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 30px 70px rgba(0, 60, 180, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(0, 110, 255, 0.3);
 }
-.skill-arrow svg { width: 16px; height: 16px; stroke: currentColor; }
+.method-pillar.active {
+  border-color: var(--blue);
+  background: rgba(255, 255, 255, 0.8);
+}
+.method-pillar-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--blue);
+  opacity: 0.4;
+}
+.method-pillar-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 20px;
+  margin-bottom: 14px;
+}
+.method-pillar-hint {
+  font-size: 14px;
+  color: var(--ink-3);
+  line-height: 1.5;
+  margin-top: auto;
+}
+
+/* Central glass card */
+.method-center {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  background: linear-gradient(145deg, var(--blue) 0%, var(--blue-strong) 100%);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: 44px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow:
+    0 40px 80px rgba(0, 110, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  min-height: 500px;
+}
+.method-center::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -20%;
+  width: 140%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.35), transparent 60%);
+  pointer-events: none;
+}
+.method-center::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  right: -20%;
+  width: 100%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(0, 30, 80, 0.4), transparent 70%);
+  pointer-events: none;
+}
+.method-center-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 1;
+}
+.method-center-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 20px 0;
+  position: relative;
+  z-index: 1;
+}
+.method-center-body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  position: relative;
+  z-index: 1;
+}
+.method-center-detail {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  position: relative;
+  z-index: 1;
+  min-height: 60px;
+  transition: opacity 0.3s var(--ease);
+}
+
+/* Pillar positioning */
+.method-pillar[data-pos="1"] { grid-column: 1; grid-row: 1; }
+.method-pillar[data-pos="2"] { grid-column: 3; grid-row: 1; }
+.method-pillar[data-pos="3"] { grid-column: 1; grid-row: 2; }
+.method-pillar[data-pos="4"] { grid-column: 3; grid-row: 2; }
+.method-pillar[data-pos="5"] {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: 0;
+}
+
 @media (max-width: 1000px) {
-  .skills-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px) {
-  .skills-grid { grid-template-columns: 1fr; }
-  .skill-card { height: 300px; }
+  .method-stage { grid-template-columns: 1fr; }
+  .method-center, .method-pillar {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+  .method-center { min-height: auto; order: -1; }
 }
 
 /* ==================================================
@@ -722,7 +859,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 5 — DEEP DIVE INTO CLASSES
+   FOLD 5 — DEEP DIVE
    ================================================== */
 .deepdive {
   padding: 140px 0;
@@ -837,7 +974,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 6 — BIO AGE QUIZ
+   BIO AGE QUIZ EMBED
    ================================================== */
 .bioquiz {
   padding: 80px 0 100px;
@@ -987,7 +1124,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 7 — HOW IT WORKS
+   FOLD 6 — HOW IT WORKS (Rosen-style)
    ================================================== */
 .how {
   padding: 140px 0;
@@ -1105,7 +1242,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 8 — CREDENTIALS
+   FOLD 7 — CERTIFICATIONS
    ================================================== */
 .certs {
   padding: 120px 0;
@@ -1166,7 +1303,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 9 — WHAT MAKES THIS DIFFERENT
+   FOLD 8 — VALUE SLIDER
    ================================================== */
 .value {
   padding: 120px 0;
@@ -1266,7 +1403,7 @@ ul, ol { list-style: none; }
 @media (max-width: 720px) { .value-card { flex: 0 0 100%; } }
 
 /* ==================================================
-   FOLD 10 — TESTIMONIALS
+   FOLD 9 — TESTIMONIALS
    ================================================== */
 .testimonials {
   padding: 140px 0;
@@ -1341,7 +1478,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 11 — FAQs
+   FOLD 10 — FAQs
    ================================================== */
 .faq {
   padding: 120px 0;
@@ -1476,7 +1613,7 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 12 — FINAL CTA STRIP
+   FINAL CTA STRIP
    ================================================== */
 .final-cta {
   padding: 120px 0;
@@ -1522,25 +1659,6 @@ ul, ol { list-style: none; }
   line-height: 1.55;
 }
 .final-cta .btn-primary { position: relative; }
-
-/* ==================================================
-   FOLD 13 — LEAD GEN FORM
-   ================================================== */
-.lead-gen { position: relative; padding: 100px 0; background: #FAFBFD; overflow: hidden; }
-.lead-gen::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,110,255,0.15), transparent); }
-.lead-gen-inner { max-width: 580px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-.lead-gen-headline { font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; color: #111; margin-bottom: 40px; letter-spacing: -0.5px; }
-.lead-gen-headline span { color: #006EFF; }
-.lead-gen-form { display: flex; flex-direction: column; gap: 14px; max-width: 440px; margin: 0 auto 20px; }
-.lead-gen-row { display: flex; gap: 14px; }
-.lead-gen-form input { flex: 1; padding: 16px 20px; font-size: 16px; font-family: 'Inter', sans-serif; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px; background: #fff; color: #111; outline: none; transition: all 0.25s ease; }
-.lead-gen-form input:focus { border-color: #006EFF; box-shadow: 0 0 0 3px rgba(0,110,255,0.1); }
-.lead-gen-form input::placeholder { color: #A0AEC0; }
-.lead-gen-form button { width: 100%; padding: 18px 32px; font-size: 17px; font-weight: 700; font-family: 'Codec Pro', sans-serif; letter-spacing: 0.3px; background: linear-gradient(135deg, #006EFF, #338BFF); color: #fff; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(0,110,255,0.25); }
-.lead-gen-form button:hover { background: linear-gradient(135deg, #338BFF, #5AA3FF); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,110,255,0.35); }
-.lead-gen-trust { font-size: 14px; color: #718096; margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.lead-gen-trust svg { width: 16px; height: 16px; color: #006EFF; flex-shrink: 0; }
-@media (max-width: 600px) { .lead-gen-row { flex-direction: column; } }
 </style>
 </head>
 <body>
@@ -1559,6 +1677,7 @@ ul, ol { list-style: none; }
     </a>
     <div class="nav-links">
       <a href="#skills">Skills</a>
+      <a href="#method">Method</a>
       <a href="#syllabus">Syllabus</a>
       <a href="#faq">FAQ</a>
       <a href="#apply" class="nav-cta">Apply Now</a>
@@ -1614,7 +1733,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 2 — EXPLORE LONGEVITY TOPICS
+     FOLD 11 — EXPLORE LONGEVITY TOPICS
      ============================================== -->
 <section class="topics">
   <div class="container">
@@ -1698,88 +1817,143 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 3 — SIX LONGEVITY SKILLS
+     FOLD 2 — FIVE SKILLS
      ============================================== -->
 <section class="skills" id="skills">
-  <div class="container">
+  <div class="container-wide">
     <div class="skills-header reveal">
-      <span class="eyebrow">Six Longevity Skills</span>
-      <h2 class="section-title">Six areas of longevity<br>you can act on today.</h2>
-      <p class="section-subtitle">Each one is backed by research, covered in our course, and explored in depth on our blog.</p>
+      <span class="eyebrow">The Five Skills</span>
+      <h2 class="section-title">Five skills for a longer, better life.</h2>
+      <p class="section-subtitle">Together they form the practice of longevity — measurable, personal, and sustainable.</p>
     </div>
-    <div class="skills-grid">
-      <a class="skill-card reveal" href="/topics/mental-emotional-health.html" aria-label="Turn Back the Clock — brain aging and cognition">
-        <div class="skill-bg brain"></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
-        <div class="skill-content">
-          <div class="skill-eyebrow">Brain &amp; Cognition</div>
-          <h3 class="skill-title">Turn Back the Clock</h3>
-          <p class="skill-sub">Why your brain feels older than the calendar.</p>
+    <div class="skills-list">
+      <div class="skill-card reveal">
+        <div class="skill-media">
+          <img src="assets/outcome-bg-01.jpg" alt="Blood biomarkers report">
         </div>
-      </a>
-      <a class="skill-card reveal" href="/topics/mental-emotional-health.html" aria-label="Rewrite Your Mental OS — mindset and beliefs about aging">
-        <div class="skill-bg mindset"></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Mindset &amp; Beliefs</div>
-          <h3 class="skill-title">Rewrite Your Mental OS</h3>
-          <p class="skill-sub">How beliefs become biology.</p>
+          <div class="skill-number">Skill 01</div>
+          <h3 class="skill-title">Read your own blood.</h3>
+          <p class="skill-desc">Learn to interpret the biomarkers that predict your healthspan — glucose variability, lipids, inflammation, HbA1c — and translate numbers into daily choices.</p>
+          <span class="skill-hint">Hover for details
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
         </div>
-      </a>
-      <a class="skill-card reveal" href="/topics/protocols-habits.html" aria-label="Your Skin Tells a Story — skin as a longevity organ">
-        <div class="skill-bg skin"></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-media">
+          <img src="assets/img-cgm.jpg" alt="Continuous glucose monitor">
+        </div>
         <div class="skill-content">
-          <div class="skill-eyebrow">Skin &amp; Barrier</div>
-          <h3 class="skill-title">Your Skin Tells a Story</h3>
-          <p class="skill-sub">The frontline organ of longevity.</p>
+          <div class="skill-number">Skill 02</div>
+          <h3 class="skill-title">Build your protocol.</h3>
+          <p class="skill-desc">Your protocol is a personalized, written blueprint — the food, movement, sleep, and recovery choices that work for your biology. You leave the course with one that fits your life.</p>
+          <span class="skill-hint">Hover for details
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
         </div>
-      </a>
-      <a class="skill-card reveal" href="/topics/supplements-health-tech.html" aria-label="Supplements That Actually Matter — evidence-based supplements">
-        <div class="skill-bg supplements"></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-media">
+          <img src="assets/img-movement.jpg" alt="Strength training">
+        </div>
         <div class="skill-content">
-          <div class="skill-eyebrow">Supplements</div>
-          <h3 class="skill-title">Supplements That Actually Matter</h3>
-          <p class="skill-sub">Five non-trendy supplements that quietly work.</p>
+          <div class="skill-number">Skill 03</div>
+          <h3 class="skill-title">Train for strength and mobility.</h3>
+          <p class="skill-desc">Muscle is your metabolic savings account. Learn resistance patterns, post-meal movement, and the training that protects independence for the next forty years.</p>
+          <span class="skill-hint">Hover for details
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
         </div>
-      </a>
-      <a class="skill-card reveal" href="/topics/biomarkers-testing.html" aria-label="The Silent Threat in Your Arteries — cardiovascular health">
-        <div class="skill-bg arteries"></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-media">
+          <img src="assets/outcome-bg-06-sleep.jpg" alt="Sleep and circadian rhythm">
+        </div>
         <div class="skill-content">
-          <div class="skill-eyebrow">Cardiovascular</div>
-          <h3 class="skill-title">The Silent Threat in Your Arteries</h3>
-          <p class="skill-sub">What you can't feel can still change your future.</p>
+          <div class="skill-number">Skill 04</div>
+          <h3 class="skill-title">Master sleep and stress.</h3>
+          <p class="skill-desc">Circadian rhythm, cortisol, and recovery shape almost everything else. Learn the small adjustments that stabilize your nervous system and your nights.</p>
+          <span class="skill-hint">Hover for details
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
         </div>
-      </a>
-      <a class="skill-card reveal" href="/topics/nutrition-longevity.html" aria-label="Eat for Your Eyes — nutrition for lifelong vision">
-        <div class="skill-bg eyes"></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-media">
+          <img src="assets/img-supplements.jpg" alt="Nutrition and supplements">
+        </div>
         <div class="skill-content">
-          <div class="skill-eyebrow">Vision &amp; Nutrition</div>
-          <h3 class="skill-title">Eat for Your Eyes</h3>
-          <p class="skill-sub">Nutrition for lifelong vision.</p>
+          <div class="skill-number">Skill 05</div>
+          <h3 class="skill-title">Optimize your nutrition.</h3>
+          <p class="skill-desc">Food order, protein timing, fiber, and the handful of supplements that actually have evidence behind them. Clear principles, no dogma.</p>
+          <span class="skill-hint">Hover for details
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
         </div>
-      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     FOLD 3 — METHODOLOGY MODEL
+     ============================================== -->
+<section class="method" id="method">
+  <div class="container">
+    <div class="method-header reveal">
+      <span class="eyebrow">The Method</span>
+      <h2 class="section-title">A learning system,<br>not just a course.</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Five practices orbit one central idea — your personal longevity protocol. Hover any pillar to see how it works.</p>
+    </div>
+    <div class="method-stage">
+      <div class="method-pillar reveal" data-pos="1" data-pillar="1">
+        <span class="method-pillar-num">01</span>
+        <div>
+          <h3 class="method-pillar-title">Live expert-led sessions</h3>
+          <p class="method-pillar-hint">90-minute weekly classes with certified instructors.</p>
+        </div>
+      </div>
+      <div class="method-pillar reveal" data-pos="2" data-pillar="2">
+        <span class="method-pillar-num">02</span>
+        <div>
+          <h3 class="method-pillar-title">Real-time data integration</h3>
+          <p class="method-pillar-hint">CGM monitoring and biomarker tracking built into the curriculum.</p>
+        </div>
+      </div>
+
+      <div class="method-center reveal">
+        <div class="method-center-label">At the center</div>
+        <div>
+          <h3 class="method-center-title">Your Longevity Protocol.</h3>
+          <p class="method-center-body">The one deliverable that matters — a written plan, built over twelve weeks, tested against your own body's data.</p>
+        </div>
+        <div class="method-center-detail" id="methodDetail">
+          Hover a pillar to see how it feeds your protocol.
+        </div>
+      </div>
+
+      <div class="method-pillar reveal" data-pos="3" data-pillar="3">
+        <span class="method-pillar-num">03</span>
+        <div>
+          <h3 class="method-pillar-title">Peer cohort learning</h3>
+          <p class="method-pillar-hint">Small groups of 8 to 15 for accountability and discussion.</p>
+        </div>
+      </div>
+      <div class="method-pillar reveal" data-pos="4" data-pillar="4">
+        <span class="method-pillar-num">04</span>
+        <div>
+          <h3 class="method-pillar-title">Between-session practice</h3>
+          <p class="method-pillar-hint">Lifestyle logs, food experiments, sleep tracking, and movement planning.</p>
+        </div>
+      </div>
+      <div class="method-pillar reveal" data-pos="5" data-pillar="5">
+        <span class="method-pillar-num">05</span>
+        <div>
+          <h3 class="method-pillar-title">Personal protocol building</h3>
+          <p class="method-pillar-hint">Your customized longevity blueprint, refined every week.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1952,7 +2126,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 5 — DEEP DIVE INTO CLASSES
+     FOLD 5 — DEEP DIVE
      ============================================== -->
 <!--
   Section headline options:
@@ -2040,7 +2214,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 6 — BIO AGE QUIZ
+     BIO AGE QUIZ EMBED
      ============================================== -->
 <section class="bioquiz">
   <div class="container">
@@ -2065,7 +2239,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 7 — HOW IT WORKS
+     FOLD 6 — HOW IT WORKS (Rosen-style)
      ============================================== -->
 <section class="how">
   <div class="container how-inner">
@@ -2128,7 +2302,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 8 — CREDENTIALS
+     FOLD 7 — CERTIFICATIONS
      ============================================== -->
 <section class="certs">
   <div class="container">
@@ -2192,7 +2366,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 9 — WHAT MAKES THIS DIFFERENT
+     FOLD 8 — VALUE SLIDER
      ============================================== -->
 <section class="value">
   <div class="container">
@@ -2260,7 +2434,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 10 — TESTIMONIALS
+     FOLD 9 — TESTIMONIALS
      ============================================== -->
 <section class="testimonials">
   <div class="container">
@@ -2310,7 +2484,7 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 11 — FAQs
+     FOLD 10 — FAQs
      ============================================== -->
 <section class="faq" id="faq">
   <div class="container faq-inner">
@@ -2388,41 +2562,19 @@ ul, ol { list-style: none; }
 </section>
 
 <!-- ==============================================
-     FOLD 12 — FINAL CTA
+     FINAL CTA
      ============================================== -->
 <section class="final-cta" id="apply">
   <div class="container">
     <div class="final-cta-card reveal">
       <h2 class="final-cta-title">Design the life<br>ahead of you.</h2>
-      <p class="final-cta-sub">Applications are open for the next cohort. A written protocol. The rest of your life.</p>
-      <a href="#lead-gen" class="btn-primary">
+      <p class="final-cta-sub">Applications are open for the next cohort. Twelve weeks. One protocol. The rest of your life.</p>
+      <a href="#" class="btn-primary">
         Apply Now
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M13 5l7 7-7 7"/>
         </svg>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================================
-     FOLD 13 — LEAD GEN FORM
-     ============================================== -->
-<section class="lead-gen" id="lead-gen">
-  <div class="container">
-    <div class="lead-gen-inner reveal">
-      <h2 class="lead-gen-headline">Ready to Start? <span>Reserve Your Seat</span></h2>
-      <form class="lead-gen-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You\'re on the list ✓'; this.querySelector('button').style.background='#10B981';">
-        <div class="lead-gen-row">
-          <input type="text" placeholder="First name" required aria-label="First name">
-          <input type="email" placeholder="Email address" required aria-label="Email address">
-        </div>
-        <button type="submit">Get Early Access to the Next Cohort →</button>
-      </form>
-      <p class="lead-gen-trust">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Join 400,000+ students learning with us — trusted since 2000
-      </p>
     </div>
   </div>
 </section>
@@ -2447,9 +2599,9 @@ ul, ol { list-style: none; }
         <h4>Course</h4>
         <ul>
           <li><a href="#skills">Skills</a></li>
+          <li><a href="#method">Method</a></li>
           <li><a href="#syllabus">Syllabus</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#lead-gen">Apply</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2497,6 +2649,48 @@ ul, ol { list-style: none; }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   els.forEach(e => io.observe(e));
+})();
+
+/* ==================================================
+   Method pillar hover detail
+   ================================================== */
+(function() {
+  const detail = document.getElementById('methodDetail');
+  if (!detail) return;
+  const pillars = document.querySelectorAll('.method-pillar');
+  const copy = {
+    '1': "Every week you'll join your cohort live with a certified instructor — questions, real datasets, and discussion grounded in your own week.",
+    '2': "You'll wear a CGM during Phase Two and bring real data to class. Your own glucose curves become the classroom material.",
+    '3': "Your cohort is eight to fifteen people. You'll know names. Peer coaching in the final weeks keeps the work alive after graduation.",
+    '4': "Between sessions you log lifestyle signals, run food experiments, plan movement, and sleep intentionally. The work is the classroom.",
+    '5': "Each session adds to your protocol. By week twelve, you have a written blueprint tested against your own body — not a generic plan."
+  };
+  const defaultMsg = detail.textContent;
+  let pinned = null;
+
+  pillars.forEach(p => {
+    p.addEventListener('mouseenter', () => {
+      if (pinned) return;
+      const k = p.dataset.pillar;
+      detail.textContent = copy[k] || defaultMsg;
+    });
+    p.addEventListener('mouseleave', () => {
+      if (pinned) return;
+      detail.textContent = defaultMsg;
+    });
+    p.addEventListener('click', () => {
+      const k = p.dataset.pillar;
+      pillars.forEach(q => q.classList.remove('active'));
+      if (pinned === k) {
+        pinned = null;
+        detail.textContent = defaultMsg;
+      } else {
+        pinned = k;
+        p.classList.add('active');
+        detail.textContent = copy[k] || defaultMsg;
+      }
+    });
+  });
 })();
 
 /* ==================================================
