@@ -366,13 +366,9 @@ ul, ol { list-style: none; }
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
-@keyframes topic-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
 @keyframes topic-glow-pulse {
-  0%, 100% { box-shadow: 0 4px 30px rgba(0,110,255,0.08), inset 0 1px 0 rgba(255,255,255,0.6); }
-  50% { box-shadow: 0 8px 40px rgba(0,110,255,0.18), inset 0 1px 0 rgba(255,255,255,0.8); }
+  0%, 100% { box-shadow: 0 8px 40px rgba(0,110,255,0.06), inset 0 1px 0 rgba(255,255,255,0.7); }
+  50% { box-shadow: 0 12px 50px rgba(0,110,255,0.14), inset 0 1px 0 rgba(255,255,255,0.9); }
 }
 @keyframes topics-bg-drift {
   0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
@@ -383,8 +379,16 @@ ul, ol { list-style: none; }
   50% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
 }
 @keyframes topic-number-pulse {
-  0%, 100% { opacity: 0.06; }
-  50% { opacity: 0.12; }
+  0%, 100% { opacity: 0.07; }
+  50% { opacity: 0.14; }
+}
+@keyframes topic-border-travel {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 200%; }
+}
+@keyframes topic-shine-sweep {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(200%) rotate(25deg); }
 }
 .topics {
   padding: 140px 0 120px;
@@ -441,25 +445,28 @@ ul, ol { list-style: none; }
   .topics-grid { grid-template-columns: repeat(2, 1fr); }
   .topics-header .section-title { font-size: clamp(38px, 8vw, 56px); }
 }
+/* 3D Tilt wrapper — perspective container */
 .topic-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   padding: 36px 30px;
-  min-height: 220px;
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border: 1.5px solid rgba(0, 110, 255, 0.1);
+  min-height: 240px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  border: 1.5px solid rgba(0, 110, 255, 0.12);
   border-radius: 24px;
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, background 0.4s ease;
   position: relative;
   overflow: hidden;
-  animation: topic-glow-pulse 4s ease-in-out infinite;
   text-decoration: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: topic-glow-pulse 5s ease-in-out infinite;
 }
-/* Stagger float for organic feel */
+/* Stagger glow pulse */
 .topic-card:nth-child(1) { animation-delay: 0s; }
 .topic-card:nth-child(2) { animation-delay: 0.5s; }
 .topic-card:nth-child(3) { animation-delay: 1s; }
@@ -468,19 +475,21 @@ ul, ol { list-style: none; }
 .topic-card:nth-child(6) { animation-delay: 0.75s; }
 .topic-card:nth-child(7) { animation-delay: 1.25s; }
 .topic-card:nth-child(8) { animation-delay: 1.75s; }
-/* Big watermark number in corner */
+/* Big watermark number */
 .topic-number {
   position: absolute;
   top: -10px; right: 6px;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 110px;
+  font-size: 120px;
   line-height: 1;
-  color: rgba(0,110,255,0.06);
+  color: rgba(0,110,255,0.07);
   pointer-events: none;
   z-index: 0;
   animation: topic-number-pulse 5s ease-in-out infinite;
   user-select: none;
+  transform: translateZ(20px);
+  transition: color 0.4s ease, transform 0.4s ease;
 }
 .topic-card:nth-child(2) .topic-number { animation-delay: 0.6s; }
 .topic-card:nth-child(3) .topic-number { animation-delay: 1.2s; }
@@ -494,9 +503,9 @@ ul, ol { list-style: none; }
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.4) 50%, transparent 75%);
+  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.35) 50%, transparent 75%);
   background-size: 200% 100%;
-  animation: topic-shimmer 5s ease-in-out infinite;
+  animation: topic-shimmer 6s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -519,11 +528,24 @@ ul, ol { list-style: none; }
   transform: scaleX(0);
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* 3D Shine overlay — moves with tilt */
+.topic-card .topic-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.35) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 24px;
+}
+.topic-card:hover .topic-shine { opacity: 1; }
+/* Hover state — enhanced for 3D */
 .topic-card:hover {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.85);
   border-color: rgba(0, 110, 255, 0.3);
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 30px 70px rgba(0, 110, 255, 0.2), 0 0 0 1px rgba(0,110,255,0.15);
+  box-shadow: 0 30px 70px rgba(0, 110, 255, 0.18), 0 0 0 1px rgba(0,110,255,0.12), 0 0 80px -20px rgba(0,110,255,0.15);
 }
 .topic-card:hover::after {
   opacity: 1;
@@ -531,65 +553,71 @@ ul, ol { list-style: none; }
   left: 0; right: 0;
 }
 .topic-card:hover .topic-number {
-  color: rgba(0,110,255,0.1);
+  color: rgba(0,110,255,0.12);
+  transform: translateZ(40px);
 }
 .topic-icon {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(0,110,255,0.12), rgba(51,139,255,0.18));
+  background: linear-gradient(135deg, rgba(0,110,255,0.1), rgba(51,139,255,0.16));
   color: var(--blue);
   margin-bottom: 22px;
   position: relative;
-  z-index: 1;
+  z-index: 3;
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 4px 16px rgba(0,110,255,0.1), inset 0 1px 0 rgba(255,255,255,0.5);
+  transform: translateZ(30px);
 }
 .topic-card:hover .topic-icon {
   background: linear-gradient(135deg, #006EFF, #338BFF);
   color: #fff;
-  box-shadow: 0 10px 30px rgba(0,110,255,0.35);
-  transform: scale(1.12) rotate(-3deg);
+  box-shadow: 0 14px 36px rgba(0,110,255,0.35);
+  transform: translateZ(50px) scale(1.1) rotate(-3deg);
 }
 .topic-label {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 22px;
+  font-size: 24px;
   letter-spacing: -0.02em;
   color: var(--ink);
   position: relative;
-  z-index: 1;
+  z-index: 3;
   margin-bottom: 8px;
+  transform: translateZ(20px);
+  transition: transform 0.4s ease;
 }
+.topic-card:hover .topic-label { transform: translateZ(35px); }
 .topic-desc {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.55;
   color: var(--ink-2);
   position: relative;
-  z-index: 1;
-  opacity: 0.75;
-  transition: opacity 0.3s ease;
+  z-index: 3;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  transform: translateZ(15px);
 }
-.topic-card:hover .topic-desc { opacity: 1; }
+.topic-card:hover .topic-desc { opacity: 1; transform: translateZ(25px); }
 /* Arrow indicator */
 .topic-arrow {
   position: absolute;
   top: 30px; right: 26px;
-  width: 32px; height: 32px;
+  width: 34px; height: 34px;
   border-radius: 50%;
   background: rgba(0,110,255,0.06);
   display: flex; align-items: center; justify-content: center;
   opacity: 0;
-  transform: translateX(-10px) scale(0.8);
+  transform: translateX(-10px) scale(0.8) translateZ(30px);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 1;
+  z-index: 3;
 }
 .topic-card:hover .topic-arrow {
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: translateX(0) scale(1) translateZ(40px);
   background: rgba(0,110,255,0.12);
 }
 
@@ -1788,79 +1816,159 @@ ul, ol { list-style: none; }
 /* ==================================================
    FOLD 11 — FAQs
    ================================================== */
+@keyframes faq-slide-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes faq-border-glow {
+  0%, 100% { border-color: rgba(0,110,255,0.15); }
+  50% { border-color: rgba(0,110,255,0.3); }
+}
 .faq {
-  padding: 120px 0;
-  background: var(--surface);
+  padding: 140px 0 120px;
+  background: linear-gradient(180deg, var(--surface) 0%, #f0f4ff 50%, var(--surface) 100%);
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle background orb */
+.faq::before {
+  content: '';
+  position: absolute;
+  top: 40%; left: 50%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,110,255,0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 .faq-inner {
-  max-width: 920px;
+  max-width: 960px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 .faq-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 72px;
+}
+.faq-header .section-title {
+  font-size: clamp(42px, 5vw, 64px);
+  letter-spacing: -0.03em;
 }
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 .faq-item {
-  background: #fff;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-radius: 20px;
+  border: 1.5px solid rgba(0, 110, 255, 0.08);
   overflow: hidden;
-  transition: box-shadow var(--transition);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
 }
-.faq-item:hover { box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05); }
-.faq-item.open { border-color: rgba(0, 110, 255, 0.2); box-shadow: 0 16px 40px rgba(0, 110, 255, 0.08); }
+.faq-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0,110,255,0.02), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  border-radius: 20px;
+}
+.faq-item:hover::before { opacity: 1; }
+.faq-item:hover {
+  border-color: rgba(0,110,255,0.15);
+  box-shadow: 0 16px 50px rgba(0, 110, 255, 0.08), 0 0 0 1px rgba(0,110,255,0.05);
+  transform: translateY(-2px);
+}
+.faq-item.open {
+  border-color: rgba(0, 110, 255, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 110, 255, 0.12), 0 0 0 1px rgba(0,110,255,0.1);
+  background: rgba(255,255,255,0.95);
+}
 .faq-q {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 32px;
+  padding: 32px 36px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1.3;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--ink);
   width: 100%;
   background: transparent;
   text-align: left;
   cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
+.faq-item:hover .faq-q { color: #006EFF; }
+.faq-item.open .faq-q { color: var(--ink); }
+/* FAQ number indicator */
+.faq-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--blue);
+  opacity: 0.5;
+  margin-right: 18px;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+.faq-item:hover .faq-num,
+.faq-item.open .faq-num { opacity: 1; }
 .faq-icon {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--surface);
+  background: linear-gradient(135deg, rgba(0,110,255,0.08), rgba(0,110,255,0.04));
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 24px;
-  transition: all var(--transition);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 1;
 }
-.faq-icon svg { transition: transform var(--transition); }
-.faq-item.open .faq-icon { background: var(--blue); color: #fff; }
+.faq-icon svg { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.faq-item.open .faq-icon {
+  background: linear-gradient(135deg, #006EFF, #338BFF);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0,110,255,0.3);
+  transform: scale(1.05);
+}
 .faq-item.open .faq-icon svg { transform: rotate(45deg); }
 .faq-a {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s var(--ease);
+  transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .faq-item.open .faq-a { max-height: 600px; }
 .faq-a-inner {
-  padding: 0 32px 28px;
-  font-size: 16px;
-  color: var(--ink-3);
-  line-height: 1.65;
+  padding: 0 36px 32px;
+  padding-left: 72px;
+  font-size: 18px;
+  color: var(--ink-2);
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 540px) {
-  .faq-q { padding: 22px; font-size: 18px; }
-  .faq-a-inner { padding: 0 22px 22px; }
+  .faq-q { padding: 24px; font-size: 20px; }
+  .faq-a-inner { padding: 0 24px 24px; padding-left: 24px; }
+  .faq-num { display: none; }
+  .faq-header .section-title { font-size: clamp(32px, 8vw, 48px); }
 }
 
 /* ==================================================
@@ -2080,6 +2188,7 @@ ul, ol { list-style: none; }
     </div>
     <div class="topics-grid">
       <a href="/topics/nutrition.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">01</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2094,6 +2203,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="/topics/sleep.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">02</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2107,6 +2217,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="/topics/supplements.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">03</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2121,6 +2232,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="/topics/exercise.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">04</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2134,6 +2246,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="/topics/mental-health.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">05</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2148,6 +2261,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="/topics/metabolic.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">06</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2161,6 +2275,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="/topics/biomarkers.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">07</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2175,6 +2290,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="/topics/protocols.html" class="topic-card reveal">
+        <div class="topic-shine"></div>
         <span class="topic-number">08</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
@@ -2831,64 +2947,64 @@ ul, ol { list-style: none; }
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>Who is this course for?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">01</span>Who is this course for?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           Adults who want to take longevity seriously — practical people who'd rather understand their own biology than chase the latest headline. No medical background needed. If you're willing to read your own data and try small experiments, you'll thrive here.
         </div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>Do I need any medical background?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">02</span>Do I need any medical background?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           No. The course is built for a general audience. We teach you to read the few biomarkers and signals that actually matter for healthspan, starting from first principles. Every concept is grounded in your own lifestyle logs and CGM observations.
         </div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>What happens in a typical session?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">03</span>What happens in a typical session?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           A 90-minute live class with your cohort and a certified instructor. Expect a mix of teaching, real data walkthroughs (including CGM examples), and small-group discussion. Each session ends with a between-session practice — a food experiment, a movement plan, a sleep log — so the next week starts with your own data.
         </div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>Is this medical advice?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">04</span>Is this medical advice?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           No. This is education, not clinical care. We don't diagnose or treat. Our teachers help you understand research, interpret your own signals, and design lifestyle practices. For anything clinical, keep working with your physician.
         </div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>What do I get when I complete the course?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">05</span>What do I get when I complete the course?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           Your Personal Longevity Blueprint — a written protocol covering nutrition, movement, sleep, stress, supplements, and the signals you'll keep watching. You also finish with a CGM synthesis, a set of food and sleep experiments you can re-run, and commitment statements for the next ninety days.
         </div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>How much time commitment is required?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">06</span>How much time commitment is required?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           Plan on the weekly 90-minute session plus two to three hours of between-session practice — lifestyle logs, food experiments, CGM observation, sleep tracking. Most students find the between-session work fits into daily life rather than sitting on top of it.
         </div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>What technology or equipment do I need?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">07</span>What technology or equipment do I need?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           A laptop or tablet for live sessions and a smartphone for lifestyle logs. A continuous glucose monitor (CGM) is part of Phase Two — we'll guide you through access. Anything else you might want (sleep tracker, scale, cuff) is optional and covered in the Health Tech session.
         </div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" data-faq>Can I catch up if I miss a session?
-          <span class="faq-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <button class="faq-q" data-faq><span class="faq-num">08</span>Can I catch up if I miss a session?
+          <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           Yes. Every session is recorded and materials are posted for on-your-own-time review. We still encourage live attendance — the cohort discussion is where a lot of the best learning happens — but life gets in the way, and the recording is there when it does.
@@ -3223,6 +3339,81 @@ ul, ol { list-style: none; }
 
   // Show first node by default after a short delay
   setTimeout(() => showDetail(0), 1200);
+})();
+
+/* ==================================================
+   3D Tilt Effect for Topic Cards
+   ================================================== */
+(function() {
+  const cards = document.querySelectorAll('.topic-card');
+  if (!cards.length) return;
+
+  // Perspective wrapper on the grid
+  const grid = document.querySelector('.topics-grid');
+  if (grid) grid.style.perspective = '1200px';
+
+  const MAX_TILT = 12; // degrees
+  const TRANSITION_OUT = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease';
+
+  cards.forEach(card => {
+    const shine = card.querySelector('.topic-shine');
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Normalized -1 to 1
+      const rotateY = ((x - centerX) / centerX) * MAX_TILT;
+      const rotateX = ((centerY - y) / centerY) * MAX_TILT;
+
+      card.style.transition = 'none';
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px) scale(1.02)`;
+
+      // Move shine highlight
+      if (shine) {
+        const pctX = (x / rect.width) * 100;
+        const pctY = (y / rect.height) * 100;
+        shine.style.setProperty('--shine-x', pctX + '%');
+        shine.style.setProperty('--shine-y', pctY + '%');
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = TRANSITION_OUT;
+      card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
+    });
+  });
+})();
+
+/* ==================================================
+   FAQ Stagger Animation
+   ================================================== */
+(function() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  if (!faqItems.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const item = entry.target;
+        const idx = Array.from(faqItems).indexOf(item);
+        item.style.animationDelay = (idx * 0.08) + 's';
+        item.style.animation = 'faq-slide-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+        item.style.opacity = '0';
+        // Force reflow to apply animation
+        void item.offsetHeight;
+        observer.unobserve(item);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  faqItems.forEach(item => {
+    item.style.opacity = '0';
+    observer.observe(item);
+  });
 })();
 </script>
 </body>
