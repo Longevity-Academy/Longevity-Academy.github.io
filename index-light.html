@@ -317,6 +317,16 @@ ul, ol { list-style: none; }
   transition: transform var(--transition);
 }
 .btn-primary:hover svg { transform: translateX(4px); }
+.btn-primary--lg {
+  padding: 24px 52px;
+  font-size: 19px;
+  box-shadow: 0 12px 44px rgba(0, 110, 255, 0.3);
+  background: linear-gradient(135deg, #006EFF, #338BFF);
+  color: #fff;
+}
+.btn-primary--lg:hover {
+  box-shadow: 0 18px 56px rgba(0, 110, 255, 0.45);
+}
 
 .trustpilot {
   display: inline-flex;
@@ -352,6 +362,22 @@ ul, ol { list-style: none; }
 /* ==================================================
    FOLD 2 — EXPLORE LONGEVITY TOPICS
    ================================================== */
+@keyframes topic-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes topic-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes topic-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,110,255,0.08), inset 0 0 20px rgba(0,110,255,0.03); }
+  50% { box-shadow: 0 0 30px rgba(0,110,255,0.15), inset 0 0 30px rgba(0,110,255,0.06); }
+}
+@keyframes topic-icon-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .topics {
   padding: 120px 0 100px;
   background: var(--bg);
@@ -364,7 +390,7 @@ ul, ol { list-style: none; }
 .topics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 22px;
 }
 @media (max-width: 900px) {
   .topics-grid { grid-template-columns: repeat(2, 1fr); }
@@ -374,46 +400,89 @@ ul, ol { list-style: none; }
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 28px;
-  min-height: 160px;
-  background: var(--surface);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: var(--radius-md);
-  transition: all var(--transition);
+  padding: 32px 28px;
+  min-height: 190px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(0, 110, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
   overflow: hidden;
+  animation: topic-glow-pulse 4s ease-in-out infinite;
+  text-decoration: none;
 }
+/* Stagger the glow animation per card */
+.topic-card:nth-child(2) { animation-delay: 0.5s; }
+.topic-card:nth-child(3) { animation-delay: 1s; }
+.topic-card:nth-child(4) { animation-delay: 1.5s; }
+.topic-card:nth-child(5) { animation-delay: 2s; }
+.topic-card:nth-child(6) { animation-delay: 2.5s; }
+.topic-card:nth-child(7) { animation-delay: 3s; }
+.topic-card:nth-child(8) { animation-delay: 3.5s; }
+/* Shimmer overlay */
 .topic-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(0, 110, 255, 0.05), rgba(0, 110, 255, 0));
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(0,110,255,0.06) 45%, rgba(255,255,255,0.25) 50%, rgba(0,110,255,0.06) 55%, transparent 70%);
+  background-size: 200% 100%;
+  animation: topic-shimmer 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.topic-card:nth-child(2)::before { animation-delay: 0.8s; }
+.topic-card:nth-child(3)::before { animation-delay: 1.6s; }
+.topic-card:nth-child(4)::before { animation-delay: 2.4s; }
+.topic-card:nth-child(5)::before { animation-delay: 0.4s; }
+.topic-card:nth-child(6)::before { animation-delay: 1.2s; }
+.topic-card:nth-child(7)::before { animation-delay: 2s; }
+.topic-card:nth-child(8)::before { animation-delay: 2.8s; }
+/* Animated border glow line at bottom */
+.topic-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 20%; right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,110,255,0.5), rgba(51,139,255,0.7), rgba(0,110,255,0.5), transparent);
+  border-radius: 2px;
   opacity: 0;
-  transition: opacity var(--transition);
+  transform: scaleX(0);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .topic-card:hover {
-  background: #fff;
-  border-color: var(--blue);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(0, 110, 255, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 110, 255, 0.35);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 60px rgba(0, 110, 255, 0.2), 0 0 40px rgba(0, 110, 255, 0.08);
+  animation: topic-float 3s ease-in-out infinite;
 }
-.topic-card:hover::before { opacity: 1; }
+.topic-card:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+  left: 5%; right: 5%;
+}
 .topic-icon {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  background: rgba(0, 110, 255, 0.1);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0,110,255,0.1), rgba(51,139,255,0.15));
   color: var(--blue);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   position: relative;
   z-index: 1;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 12px rgba(0,110,255,0.08);
 }
 .topic-card:hover .topic-icon {
-  background: var(--blue);
+  background: linear-gradient(135deg, #006EFF, #338BFF);
   color: #fff;
+  box-shadow: 0 8px 24px rgba(0,110,255,0.3);
+  transform: scale(1.1);
 }
 .topic-label {
   font-family: var(--font-display);
@@ -423,6 +492,34 @@ ul, ol { list-style: none; }
   color: var(--ink);
   position: relative;
   z-index: 1;
+  margin-bottom: 6px;
+}
+.topic-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  position: relative;
+  z-index: 1;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+.topic-card:hover .topic-desc { opacity: 1; }
+/* Arrow indicator that appears on hover */
+.topic-arrow {
+  position: absolute;
+  top: 28px; right: 24px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(0,110,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+.topic-card:hover .topic-arrow {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* ==================================================
@@ -1760,28 +1857,35 @@ ul, ol { list-style: none; }
   background: var(--bg);
 }
 .final-cta-card {
-  padding: 80px 56px;
+  padding: 100px 56px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, #001F4D 0%, #003A99 55%, var(--blue) 100%);
+  background: #0a1628;
   color: #fff;
   text-align: center;
   position: relative;
   overflow: hidden;
   box-shadow: 0 40px 100px rgba(0, 110, 255, 0.35);
 }
-.final-cta-card::before {
-  content: '';
+.final-cta-video {
   position: absolute;
-  top: -40%;
-  left: 50%;
-  width: 140%;
-  height: 140%;
-  transform: translateX(-50%);
-  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.18), transparent 60%);
+  top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.6;
+}
+.final-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,15,40,0.5) 0%, rgba(0,30,80,0.6) 50%, rgba(0,15,40,0.7) 100%);
+  z-index: 1;
   pointer-events: none;
 }
 .final-cta-title {
   position: relative;
+  z-index: 2;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(36px, 5vw, 72px);
@@ -1792,13 +1896,14 @@ ul, ol { list-style: none; }
 }
 .final-cta-sub {
   position: relative;
+  z-index: 2;
   font-size: 18px;
   color: rgba(255, 255, 255, 0.88);
   max-width: 560px;
   margin: 0 auto 40px;
   line-height: 1.55;
 }
-.final-cta .btn-primary { position: relative; }
+.final-cta .btn-primary { position: relative; z-index: 2; }
 
 /* ==================================================
    FOLD 13 — LEAD GEN FORM
@@ -1838,7 +1943,7 @@ ul, ol { list-style: none; }
       <a href="#skills">Skills</a>
       <a href="#syllabus">Syllabus</a>
       <a href="#faq">FAQ</a>
-      <a href="#apply" class="nav-cta">Apply Now</a>
+      <a href="#lead-gen" class="nav-cta">Apply Now</a>
     </div>
   </div>
 </nav>
@@ -1870,8 +1975,8 @@ ul, ol { list-style: none; }
       build a personal protocol, and turn the next decades into your strongest.
     </p>
     <div class="hero-cta-row">
-      <a href="#apply" class="btn-primary">
-        Apply Now
+      <a href="#lead-gen" class="btn-primary btn-primary--lg">
+        Reserve Your Seat
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M13 5l7 7-7 7"/>
         </svg>
@@ -1902,73 +2007,105 @@ ul, ol { list-style: none; }
     </div>
     <div class="topics-grid">
       <a href="/topics/nutrition.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a10 10 0 0 0-4 19.2M12 2a10 10 0 0 1 4 19.2M12 2v20"/>
             <path d="M6 8c2 2 4 2 6 0M18 8c-2 2-4 2-6 0"/>
           </svg>
         </div>
-        <div class="topic-label">Nutrition</div>
+        <div>
+          <div class="topic-label">Nutrition</div>
+          <div class="topic-desc">Fuel strategies for cellular health and metabolic optimization.</div>
+        </div>
       </a>
       <a href="/topics/sleep.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
           </svg>
         </div>
-        <div class="topic-label">Sleep</div>
+        <div>
+          <div class="topic-label">Sleep</div>
+          <div class="topic-desc">Circadian rhythm and deep recovery protocols.</div>
+        </div>
       </a>
       <a href="/topics/supplements.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="8" width="18" height="8" rx="4"/>
             <path d="M12 8v8"/>
           </svg>
         </div>
-        <div class="topic-label">Supplements</div>
+        <div>
+          <div class="topic-label">Supplements</div>
+          <div class="topic-desc">Evidence-based compounds, doses, and timing.</div>
+        </div>
       </a>
       <a href="/topics/exercise.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 8v8M18 8v8M2 10v4M22 10v4M6 12h12"/>
           </svg>
         </div>
-        <div class="topic-label">Exercise & Movement</div>
+        <div>
+          <div class="topic-label">Exercise & Movement</div>
+          <div class="topic-desc">Zone 2, strength, VO2 max, and mobility practices.</div>
+        </div>
       </a>
       <a href="/topics/mental-health.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10Z" opacity=".3"/>
             <path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10Z"/>
           </svg>
         </div>
-        <div class="topic-label">Mental &amp; Emotional</div>
+        <div>
+          <div class="topic-label">Mental & Emotional</div>
+          <div class="topic-desc">Stress resilience, cognitive health, and emotional regulation.</div>
+        </div>
       </a>
       <a href="/topics/metabolic.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12h3l3-8 4 16 3-8h5"/>
           </svg>
         </div>
-        <div class="topic-label">Metabolic Health</div>
+        <div>
+          <div class="topic-label">Metabolic Health</div>
+          <div class="topic-desc">Glucose, insulin, and metabolic flexibility decoded.</div>
+        </div>
       </a>
       <a href="/topics/biomarkers.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9"/>
             <path d="M12 3v18M3 12h18"/>
           </svg>
         </div>
-        <div class="topic-label">Biomarkers &amp; Testing</div>
+        <div>
+          <div class="topic-label">Biomarkers & Testing</div>
+          <div class="topic-desc">Blood panels, biological age, and what to track.</div>
+        </div>
       </a>
       <a href="/topics/protocols.html" class="topic-card reveal">
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div class="topic-icon">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 11l3 3L22 4"/>
             <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
           </svg>
         </div>
-        <div class="topic-label">Protocols &amp; Habits</div>
+        <div>
+          <div class="topic-label">Protocols & Habits</div>
+          <div class="topic-desc">Daily systems that compound into lasting change.</div>
+        </div>
       </a>
     </div>
   </div>
@@ -2686,6 +2823,10 @@ ul, ol { list-style: none; }
 <section class="final-cta" id="apply">
   <div class="container">
     <div class="final-cta-card reveal">
+      <video class="final-cta-video" autoplay muted loop playsinline>
+        <source src="assets/cta-bg.mp4" type="video/mp4">
+      </video>
+      <div class="final-cta-overlay"></div>
       <h2 class="final-cta-title">Design the life<br>ahead of you.</h2>
       <p class="final-cta-sub">Applications are open for the next cohort. A written protocol. The rest of your life.</p>
       <a href="#lead-gen" class="btn-primary">
