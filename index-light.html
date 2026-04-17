@@ -706,15 +706,10 @@ ul, ol { list-style: none; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 900px 700px at 50% 45%, rgba(0, 110, 255, 0.22) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 500px at 15% 85%, rgba(0, 80, 200, 0.14) 0%, transparent 60%),
-    radial-gradient(ellipse 500px 500px at 85% 15%, rgba(51, 139, 255, 0.12) 0%, transparent 60%);
+    radial-gradient(ellipse 900px 700px at 50% 45%, rgba(0, 110, 255, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 20% 80%, rgba(51, 139, 255, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 500px at 80% 20%, rgba(0, 180, 255, 0.12) 0%, transparent 60%);
   pointer-events: none;
-  animation: deepdiveBg 8s ease-in-out infinite alternate;
-}
-@keyframes deepdiveBg {
-  0% { opacity: 0.8; }
-  100% { opacity: 1; }
 }
 .deepdive-header {
   text-align: center;
@@ -734,6 +729,21 @@ ul, ol { list-style: none; }
   margin: 0 auto;
   z-index: 2;
 }
+/* Orbit ring — animated rotating dashed circle */
+.hex-orbit {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  border: 2px dashed rgba(51,139,255,0.25);
+  z-index: 0;
+  animation: orbitSpin 60s linear infinite;
+  pointer-events: none;
+}
+@keyframes orbitSpin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
 /* Center ring */
 .hex-center {
   position: absolute;
@@ -741,20 +751,20 @@ ul, ol { list-style: none; }
   transform: translate(-50%, -50%);
   width: 180px; height: 180px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(40px) saturate(1.4);
-  -webkit-backdrop-filter: blur(40px) saturate(1.4);
-  border: 1.5px solid rgba(255,255,255,0.22);
-  box-shadow: 0 0 60px rgba(0,110,255,0.15), 0 0 120px rgba(0,110,255,0.06), inset 0 0 40px rgba(255,255,255,0.04);
+  background: rgba(0,110,255,0.12);
+  backdrop-filter: blur(40px) saturate(1.6);
+  -webkit-backdrop-filter: blur(40px) saturate(1.6);
+  border: 2px solid rgba(51,139,255,0.45);
+  box-shadow: 0 0 60px rgba(0,110,255,0.3), 0 0 120px rgba(0,110,255,0.12), inset 0 0 60px rgba(0,110,255,0.08);
   display: flex; align-items: center; justify-content: center;
   flex-direction: column;
   z-index: 10;
   transition: all 0.5s var(--ease);
-  animation: centerPulse 4s ease-in-out infinite;
+  animation: centerPulse 3s ease-in-out infinite;
 }
 @keyframes centerPulse {
-  0%, 100% { box-shadow: 0 0 60px rgba(0,110,255,0.15), 0 0 120px rgba(0,110,255,0.06), inset 0 0 40px rgba(255,255,255,0.04); }
-  50% { box-shadow: 0 0 80px rgba(0,110,255,0.25), 0 0 160px rgba(0,110,255,0.1), inset 0 0 50px rgba(255,255,255,0.06); }
+  0%, 100% { box-shadow: 0 0 60px rgba(0,110,255,0.3), 0 0 120px rgba(0,110,255,0.12), inset 0 0 60px rgba(0,110,255,0.08); }
+  50% { box-shadow: 0 0 80px rgba(0,110,255,0.5), 0 0 160px rgba(0,110,255,0.2), inset 0 0 80px rgba(0,110,255,0.12); }
 }
 .hex-center-label {
   font-family: var(--font-display);
@@ -766,105 +776,126 @@ ul, ol { list-style: none; }
 }
 .hex-center-sub {
   font-size: 12px;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.6);
   margin-top: 5px;
   text-align: center;
 }
-/* Connector lines */
+/* Connector lines — thick glowing beams */
 .hex-line {
   position: absolute;
   top: 50%; left: 50%;
   width: 180px;
-  height: 3px;
+  height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.18), rgba(255,255,255,0.04));
+  background: linear-gradient(90deg, rgba(51,139,255,0.15), rgba(51,139,255,0.4), rgba(51,139,255,0.15));
   transform-origin: 0 0;
   z-index: 1;
   transition: all 0.5s var(--ease);
-  box-shadow: 0 0 8px rgba(255,255,255,0.04);
+  box-shadow: 0 0 12px rgba(51,139,255,0.15);
 }
 .hex-line.active {
-  height: 3px;
-  background: linear-gradient(90deg, rgba(0,110,255,0.2), rgba(51,139,255,0.9), rgba(0,110,255,0.2));
-  box-shadow: 0 0 16px rgba(0,110,255,0.5), 0 0 40px rgba(0,110,255,0.2);
-  animation: lineGlow 2s ease-in-out infinite;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(51,139,255,0.3), #338BFF, rgba(51,139,255,0.3));
+  box-shadow: 0 0 20px rgba(0,110,255,0.6), 0 0 50px rgba(0,110,255,0.3), 0 0 80px rgba(0,110,255,0.1);
+  animation: lineGlow 1.5s ease-in-out infinite;
 }
 @keyframes lineGlow {
-  0%, 100% { box-shadow: 0 0 16px rgba(0,110,255,0.5), 0 0 40px rgba(0,110,255,0.2); }
-  50% { box-shadow: 0 0 24px rgba(0,110,255,0.7), 0 0 60px rgba(0,110,255,0.35); }
+  0%, 100% { box-shadow: 0 0 20px rgba(0,110,255,0.6), 0 0 50px rgba(0,110,255,0.3), 0 0 80px rgba(0,110,255,0.1); }
+  50% { box-shadow: 0 0 30px rgba(0,110,255,0.8), 0 0 70px rgba(51,139,255,0.5), 0 0 100px rgba(0,110,255,0.2); }
 }
-/* Hex nodes — heavy frosted glass */
+/* Hex nodes — strong frosted glass with colored borders */
 .hex-node {
   position: absolute;
   width: 130px; height: 130px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(32px) saturate(1.3);
-  -webkit-backdrop-filter: blur(32px) saturate(1.3);
-  border: 1.5px solid rgba(255,255,255,0.2);
-  box-shadow: 0 8px 32px rgba(0,20,80,0.3), inset 0 0 20px rgba(255,255,255,0.03);
+  backdrop-filter: blur(32px) saturate(1.5);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5);
   display: flex; align-items: center; justify-content: center;
   flex-direction: column;
   cursor: pointer;
   transition: all 0.5s var(--ease);
   z-index: 5;
-  animation: nodeFloat 6s ease-in-out infinite;
+  animation: nodeFloat 5s ease-in-out infinite;
 }
-/* Stagger float animations per node */
+/* Stagger float animations */
 .hex-node[data-hex="0"] { animation-delay: 0s; }
-.hex-node[data-hex="1"] { animation-delay: -1s; }
-.hex-node[data-hex="2"] { animation-delay: -2s; }
-.hex-node[data-hex="3"] { animation-delay: -3s; }
-.hex-node[data-hex="4"] { animation-delay: -4s; }
-.hex-node[data-hex="5"] { animation-delay: -5s; }
+.hex-node[data-hex="1"] { animation-delay: -0.8s; }
+.hex-node[data-hex="2"] { animation-delay: -1.6s; }
+.hex-node[data-hex="3"] { animation-delay: -2.5s; }
+.hex-node[data-hex="4"] { animation-delay: -3.3s; }
+.hex-node[data-hex="5"] { animation-delay: -4.1s; }
 @keyframes nodeFloat {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-8px); }
 }
-/* Different blue tints per node */
-.hex-node[data-hex="0"] { background: rgba(0,110,255,0.08); border-color: rgba(0,110,255,0.2); }
-.hex-node[data-hex="1"] { background: rgba(51,139,255,0.08); border-color: rgba(51,139,255,0.2); }
-.hex-node[data-hex="2"] { background: rgba(0,80,200,0.1); border-color: rgba(0,80,200,0.22); }
-.hex-node[data-hex="3"] { background: rgba(90,160,255,0.08); border-color: rgba(90,160,255,0.2); }
-.hex-node[data-hex="4"] { background: rgba(0,60,160,0.1); border-color: rgba(0,60,160,0.22); }
-.hex-node[data-hex="5"] { background: rgba(30,100,220,0.09); border-color: rgba(30,100,220,0.2); }
+/* Each node gets a distinct color — all blue family but clearly different */
+.hex-node[data-hex="0"] {
+  background: rgba(0,110,255,0.2);
+  border: 2px solid rgba(0,110,255,0.55);
+  box-shadow: 0 0 30px rgba(0,110,255,0.25), inset 0 0 30px rgba(0,110,255,0.08);
+}
+.hex-node[data-hex="1"] {
+  background: rgba(51,180,255,0.18);
+  border: 2px solid rgba(51,180,255,0.5);
+  box-shadow: 0 0 30px rgba(51,180,255,0.2), inset 0 0 30px rgba(51,180,255,0.06);
+}
+.hex-node[data-hex="2"] {
+  background: rgba(100,160,255,0.18);
+  border: 2px solid rgba(100,160,255,0.5);
+  box-shadow: 0 0 30px rgba(100,160,255,0.2), inset 0 0 30px rgba(100,160,255,0.06);
+}
+.hex-node[data-hex="3"] {
+  background: rgba(140,190,255,0.15);
+  border: 2px solid rgba(140,190,255,0.45);
+  box-shadow: 0 0 30px rgba(140,190,255,0.2), inset 0 0 30px rgba(140,190,255,0.06);
+}
+.hex-node[data-hex="4"] {
+  background: rgba(0,80,200,0.22);
+  border: 2px solid rgba(0,80,200,0.55);
+  box-shadow: 0 0 30px rgba(0,80,200,0.25), inset 0 0 30px rgba(0,80,200,0.08);
+}
+.hex-node[data-hex="5"] {
+  background: rgba(70,140,255,0.18);
+  border: 2px solid rgba(70,140,255,0.5);
+  box-shadow: 0 0 30px rgba(70,140,255,0.2), inset 0 0 30px rgba(70,140,255,0.06);
+}
 .hex-node:hover, .hex-node.active {
-  background: rgba(0,110,255,0.3) !important;
-  border-color: rgba(51,139,255,0.7) !important;
-  box-shadow: 0 0 50px rgba(0,110,255,0.4), 0 0 100px rgba(0,110,255,0.15), inset 0 0 40px rgba(0,110,255,0.15);
-  transform: scale(1.12) translateY(0) !important;
+  background: rgba(0,110,255,0.35) !important;
+  border-color: #338BFF !important;
+  box-shadow: 0 0 40px rgba(0,110,255,0.6), 0 0 80px rgba(0,110,255,0.3), 0 0 120px rgba(0,110,255,0.1), inset 0 0 50px rgba(0,110,255,0.15) !important;
+  transform: scale(1.15) translateY(0) !important;
   animation: none;
 }
 .hex-node-icon {
   width: 40px; height: 40px;
   margin-bottom: 8px;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.85);
   transition: color 0.4s var(--ease);
 }
 .hex-node:hover .hex-node-icon, .hex-node.active .hex-node-icon { color: #fff; }
-.hex-node-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; }
+.hex-node-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.8; }
 .hex-node-label {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 13px;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.9);
   text-align: center;
   line-height: 1.15;
   transition: color 0.4s var(--ease);
 }
 .hex-node:hover .hex-node-label, .hex-node.active .hex-node-label { color: #fff; }
-/* Detail panel — heavy frosted glass (outside chart) */
+/* Detail panel — strong frosted glass (outside chart) */
 .hex-detail {
   width: 620px;
   max-width: 90%;
   margin: 48px auto 0;
   padding: 40px 44px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(48px) saturate(1.5);
-  -webkit-backdrop-filter: blur(48px) saturate(1.5);
-  border: 1.5px solid rgba(255,255,255,0.22);
+  background: rgba(0,60,180,0.15);
+  backdrop-filter: blur(48px) saturate(1.6);
+  -webkit-backdrop-filter: blur(48px) saturate(1.6);
+  border: 2px solid rgba(51,139,255,0.35);
   border-radius: var(--radius-lg);
-  box-shadow: 0 16px 64px rgba(0,20,80,0.35), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow: 0 16px 64px rgba(0,20,80,0.4), 0 0 40px rgba(0,110,255,0.1), inset 0 1px 0 rgba(255,255,255,0.1);
   opacity: 0;
   transform: translateY(16px);
   pointer-events: none;
@@ -1176,18 +1207,18 @@ ul, ol { list-style: none; }
 .how-card-num {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 72px;
+  font-size: 80px;
   line-height: 1;
-  color: rgba(255,255,255,0.22);
+  color: #338BFF;
+  opacity: 0.35;
   position: absolute;
-  top: 20px;
-  right: 24px;
+  top: 16px;
+  right: 22px;
   transition: all 0.5s var(--ease);
-  text-shadow: 0 0 30px rgba(0,110,255,0.15);
 }
 .how-card:hover .how-card-num {
-  color: rgba(255,255,255,0.4);
-  text-shadow: 0 0 40px rgba(51,139,255,0.3);
+  opacity: 0.6;
+  color: #5AA0FF;
 }
 .how-card-icon {
   width: 56px;
@@ -2110,6 +2141,8 @@ ul, ol { list-style: none; }
       <p class="section-subtitle">Real lessons, real data, real protocols. Hover each node to explore.</p>
     </div>
     <div class="hex-chart reveal" id="hexChart">
+      <!-- Orbit ring -->
+      <div class="hex-orbit"></div>
       <!-- Center hub -->
       <div class="hex-center">
         <div class="hex-center-label">Your<br>Protocol</div>
@@ -2771,6 +2804,16 @@ ul, ol { list-style: none; }
     const centerSize = 180 * scale;
     center.style.width = centerSize + 'px';
     center.style.height = centerSize + 'px';
+
+    // Orbit ring
+    const orbit = chart.querySelector('.hex-orbit');
+    if (orbit) {
+      const orbitSize = (sR * 2 + sNode * 0.4);
+      orbit.style.width = orbitSize + 'px';
+      orbit.style.height = orbitSize + 'px';
+      orbit.style.top = sCy + 'px';
+      orbit.style.left = sCx + 'px';
+    }
 
     // Chart height — detail panel is now outside the chart container
     chart.style.height = (sCy + sR + sNode / 2 + 40) + 'px';
