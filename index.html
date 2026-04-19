@@ -4257,6 +4257,282 @@ html {
   }
 }
 
+/* ==================================================
+   BOTTOM FOLDS FIX v4 — per Omri's directions
+   ================================================== */
+
+/* --- 1. HEX/OS DIAGRAM: Glass see-through 3D nodes (not blue) --- */
+.hex-node[data-hex="0"],
+.hex-node[data-hex="1"],
+.hex-node[data-hex="2"],
+.hex-node[data-hex="3"],
+.hex-node[data-hex="4"],
+.hex-node[data-hex="5"] {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1.5px solid rgba(255,255,255,0.18) !important;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.3),
+    0 0 60px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.2) !important;
+  backdrop-filter: blur(24px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
+}
+.hex-node:hover, .hex-node.active {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.35) !important;
+  box-shadow:
+    0 12px 48px rgba(0,0,0,0.4),
+    0 0 80px rgba(255,255,255,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.25),
+    inset 0 -1px 0 rgba(0,0,0,0.3) !important;
+}
+/* Center node also glass */
+.hex-center {
+  background: rgba(255,255,255,0.08) !important;
+  border: 1.5px solid rgba(255,255,255,0.2) !important;
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    inset 0 -1px 0 rgba(0,0,0,0.25) !important;
+  backdrop-filter: blur(24px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
+}
+
+/* --- 2. TEACHERS: Remove cards, keep headline only --- */
+.teachers-grid { display: none !important; }
+
+/* --- 3. CERTS STRIP: Text-only badges, no icons/shields --- */
+.certs-strip-badge::before { display: none !important; }
+.certs-strip-badge {
+  padding: 20px 24px !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border-radius: 12px !important;
+  text-align: center !important;
+}
+.certs-strip-badge:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.22) !important;
+}
+.certs-strip-abbr {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  color: #fff !important;
+  margin-bottom: 4px !important;
+}
+.certs-strip-name {
+  font-size: 11px !important;
+  color: rgba(255,255,255,0.55) !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+
+/* --- 4. FAQ: Bigger, more readable fonts --- */
+.faq .section-title {
+  font-size: clamp(42px, 5.5vw, 72px) !important;
+  color: #fff !important;
+}
+.faq-q span, .faq-q {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,0.85) !important;
+  letter-spacing: -0.01em !important;
+}
+.faq-num {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: rgba(0,110,255,0.7) !important;
+  opacity: 1 !important;
+}
+.faq-a, .faq-a p {
+  font-size: 17px !important;
+  line-height: 1.7 !important;
+  color: rgba(255,255,255,0.7) !important;
+  font-weight: 400 !important;
+}
+.faq-item {
+  padding: 24px 32px !important;
+  border-radius: 16px !important;
+  margin-bottom: 12px !important;
+}
+.faq-icon {
+  color: #006EFF !important;
+}
+
+/* --- 5. LEAD GEN: Enlarged form --- */
+.lead-gen {
+  padding: 100px 0 80px !important;
+}
+.lead-gen-inner {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+}
+.lead-gen-headline {
+  font-size: clamp(36px, 5vw, 56px) !important;
+  margin-bottom: 40px !important;
+}
+.lead-gen-form {
+  max-width: 100% !important;
+}
+.lead-gen-row {
+  display: flex !important;
+  gap: 16px !important;
+  margin-bottom: 20px !important;
+}
+.lead-gen-row input {
+  flex: 1 !important;
+  padding: 22px 24px !important;
+  font-size: 18px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  background: rgba(255,255,255,0.06) !important;
+  color: #fff !important;
+}
+.lead-gen-row input::placeholder {
+  color: rgba(255,255,255,0.4) !important;
+  font-size: 16px !important;
+}
+.lead-gen-form button {
+  width: 100% !important;
+  padding: 22px 40px !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  border-radius: 14px !important;
+  background: #006EFF !important;
+  color: #fff !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  letter-spacing: 0.01em !important;
+}
+.lead-gen-form button:hover {
+  background: #338BFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(0,110,255,0.4) !important;
+}
+
+/* --- 6. BOTTOM FOLDS: Enlarged headlines --- */
+.teachers .section-title,
+.certs-strip .section-title,
+.value .section-title,
+.testimonials .section-title {
+  font-size: clamp(40px, 5vw, 64px) !important;
+}
+
+/* --- 7. BOTTOM FOLD CARDS: Different colors per card --- */
+/* Value cards — each a different accent tint */
+.value-card[data-accent="1"] {
+  border-left: 3px solid #006EFF !important;
+  background: rgba(0,110,255,0.06) !important;
+}
+.value-card[data-accent="2"] {
+  border-left: 3px solid #5FB6B0 !important;
+  background: rgba(95,182,176,0.06) !important;
+}
+.value-card[data-accent="3"] {
+  border-left: 3px solid #E8A75A !important;
+  background: rgba(232,167,90,0.06) !important;
+}
+.value-card[data-accent="4"] {
+  border-left: 3px solid #A78BFA !important;
+  background: rgba(167,139,250,0.06) !important;
+}
+.value-card[data-accent="5"] {
+  border-left: 3px solid #F87171 !important;
+  background: rgba(248,113,113,0.06) !important;
+}
+.value-card[data-accent="6"] {
+  border-left: 3px solid #34D399 !important;
+  background: rgba(52,211,153,0.06) !important;
+}
+/* How-v2 cards — different colors per step */
+.how-v2-card:nth-child(1) { border-top: 3px solid #006EFF !important; }
+.how-v2-card:nth-child(2) { border-top: 3px solid #5FB6B0 !important; }
+.how-v2-card:nth-child(3) { border-top: 3px solid #E8A75A !important; }
+.how-v2-card:nth-child(4) { border-top: 3px solid #A78BFA !important; }
+.how-v2-card:nth-child(5) { border-top: 3px solid #F87171 !important; }
+.how-v2-card:nth-child(6) { border-top: 3px solid #34D399 !important; }
+/* Step numbers match card color */
+.how-v2-card:nth-child(1) .how-v2-num { color: #006EFF !important; }
+.how-v2-card:nth-child(2) .how-v2-num { color: #5FB6B0 !important; }
+.how-v2-card:nth-child(3) .how-v2-num { color: #E8A75A !important; }
+.how-v2-card:nth-child(4) .how-v2-num { color: #A78BFA !important; }
+.how-v2-card:nth-child(5) .how-v2-num { color: #F87171 !important; }
+.how-v2-card:nth-child(6) .how-v2-num { color: #34D399 !important; }
+/* Testimonial cards — subtle color differences */
+.testimonial-card:nth-child(1) { border-top: 2px solid rgba(0,110,255,0.4) !important; }
+.testimonial-card:nth-child(2) { border-top: 2px solid rgba(95,182,176,0.4) !important; }
+.testimonial-card:nth-child(3) { border-top: 2px solid rgba(232,167,90,0.4) !important; }
+.testimonial-card:nth-child(4) { border-top: 2px solid rgba(167,139,250,0.4) !important; }
+
+/* --- 8. LIGHT-BLUE CTAs linking to lead gen --- */
+.section-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: 'Codec Pro', 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #7EC8FF;
+  background: rgba(126,200,255,0.08);
+  border: 1.5px solid rgba(126,200,255,0.25);
+  border-radius: 60px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-top: 28px;
+}
+.section-cta-btn:hover {
+  background: rgba(126,200,255,0.15);
+  border-color: rgba(126,200,255,0.45);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(126,200,255,0.2);
+}
+.section-cta-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+}
+
+/* --- MOBILE OVERRIDES for all v4 changes --- */
+@media (max-width: 600px) {
+  .faq-q span, .faq-q {
+    font-size: 17px !important;
+  }
+  .faq-item {
+    padding: 18px 20px !important;
+  }
+  .faq-num {
+    font-size: 14px !important;
+  }
+  .lead-gen-row {
+    flex-direction: column !important;
+  }
+  .lead-gen-row input {
+    padding: 18px 20px !important;
+    font-size: 16px !important;
+  }
+  .lead-gen-form button {
+    padding: 18px 24px !important;
+    font-size: 17px !important;
+  }
+  .section-cta-btn {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+  .certs-strip-badges {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5056,6 +5332,7 @@ html {
       <span class="eyebrow" style="margin-bottom: 12px; display: block;">Your Instructors</span>
       <h2 class="section-title" style="margin-bottom: 16px;">Credible, Dedicated Instructors</h2>
       <p class="section-subtitle" style="margin: 0 auto; max-width: 620px;">Experienced teachers who practice what the research says, work directly with you, and answer the questions your GP can't.</p>
+      <a href="#lead-gen" class="section-cta-btn">Reserve Your Seat <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div class="teachers-grid reveal">
       <div class="teacher-card">
@@ -5120,6 +5397,9 @@ html {
         <span class="certs-strip-divider"></span>
         <span class="certs-strip-name">Extended Learning Alliance</span>
       </div>
+    </div>
+    <div style="text-align: center; padding-top: 24px;">
+      <a href="#lead-gen" class="section-cta-btn">Apply Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -5213,6 +5493,9 @@ html {
         <div class="quote-meta">Trustpilot · 4 stars · June 2025</div>
       </div>
     </div>
+    <div style="text-align: center; padding-top: 32px;">
+      <a href="#lead-gen" class="section-cta-btn">Get Early Access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
   </div>
 </section>
 
@@ -5290,6 +5573,9 @@ html {
           Yes. Every session is recorded and materials are posted for on-your-own-time review. We still encourage live attendance — the cohort discussion is where a lot of the best learning happens — but life gets in the way, and the recording is there when it does.
         </div></div>
       </div>
+    </div>
+    <div style="text-align: center; padding-top: 32px;">
+      <a href="#lead-gen" class="section-cta-btn">Reserve Your Seat <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
