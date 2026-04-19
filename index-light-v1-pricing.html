@@ -2639,6 +2639,367 @@ ul, ol { list-style: none; }
   .phase-title { font-size: 20px !important; }
   .final-cta-title { font-size: 26px !important; }
 }
+
+/* ==================================================
+   COMPREHENSIVE DESIGN FIXES
+   Brighter cards, bigger fonts, better phases, premium feel
+   ================================================== */
+
+/* --- GLOBAL: Bigger fonts everywhere --- */
+.section-title {
+  font-size: clamp(44px, 6vw, 72px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.02 !important;
+}
+.section-subtitle {
+  font-size: clamp(17px, 1.3vw, 20px) !important;
+  line-height: 1.6 !important;
+}
+
+/* --- HERO: Bigger text --- */
+.hero-title {
+  font-size: clamp(60px, 9vw, 120px) !important;
+}
+.hero-sub {
+  font-size: clamp(17px, 1.4vw, 22px) !important;
+  max-width: 660px !important;
+}
+.hero-academy-name {
+  font-size: clamp(13px, 1.5vw, 18px) !important;
+  letter-spacing: 0.28em !important;
+}
+
+/* --- TOPIC CARDS (Fold 2): Brighter, more premium --- */
+.topics {
+  padding: 140px 0 120px !important;
+}
+.topic-card {
+  background: rgba(0, 18, 60, 0.6) !important;
+  border: 1px solid rgba(0, 110, 255, 0.18) !important;
+  box-shadow: 0 4px 24px rgba(0, 30, 100, 0.15), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+}
+.topic-card:hover {
+  background: rgba(0, 25, 80, 0.7) !important;
+  border-color: rgba(0, 110, 255, 0.35) !important;
+  box-shadow: 0 20px 56px rgba(0, 50, 150, 0.25), 0 0 0 1px rgba(0, 110, 255, 0.2) !important;
+}
+.topic-card-title {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
+
+/* --- SKILLS CARDS (Fold 3): Brighter backgrounds, consistent text --- */
+.skills {
+  padding: 130px 0 !important;
+  background: var(--surface) !important;
+}
+.skill-card {
+  box-shadow: 0 8px 32px rgba(0, 30, 90, 0.12) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+.skill-card:hover {
+  box-shadow: 0 28px 64px rgba(0, 30, 90, 0.22), 0 0 0 2px rgba(0, 110, 255, 0.3) !important;
+}
+.skill-title {
+  font-size: 28px !important;
+  line-height: 1.1 !important;
+}
+.skill-card:first-child .skill-title {
+  font-size: 36px !important;
+}
+.skill-sub {
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  color: rgba(255,255,255,0.9) !important;
+}
+/* Ensure all skill-content is positioned consistently at the bottom */
+.skill-content {
+  padding: 32px !important;
+  justify-content: flex-end !important;
+}
+
+/* --- SYLLABUS PHASES (Fold 4): Much bigger circles, cleaner layout --- */
+.syllabus {
+  padding: 150px 0 170px !important;
+}
+.syl-timeline {
+  gap: 56px !important;
+  margin-bottom: 64px !important;
+}
+.syl-circle {
+  width: 140px !important;
+  height: 140px !important;
+  background: rgba(0, 18, 50, 0.7) !important;
+  border-width: 2.5px !important;
+  box-shadow: 0 0 48px rgba(0, 110, 255, 0.1), inset 0 0 32px rgba(0, 110, 255, 0.06) !important;
+}
+.syl-phase:hover .syl-circle,
+.syl-phase.active .syl-circle {
+  transform: scale(1.12) !important;
+  box-shadow: 0 0 64px rgba(0, 110, 255, 0.25), inset 0 0 40px rgba(0, 110, 255, 0.1) !important;
+}
+.syl-circle-num {
+  font-size: 34px !important;
+  font-weight: 900 !important;
+}
+.syl-label {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  margin-top: 18px !important;
+}
+.syl-sessions {
+  font-size: 13px !important;
+  margin-top: 6px !important;
+}
+.syl-connector {
+  top: 70px !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, var(--phase-1), var(--phase-2), var(--phase-3), var(--phase-4)) !important;
+  opacity: 0.35 !important;
+}
+.syl-detail-inner {
+  background: rgba(0, 14, 46, 0.8) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 20px !important;
+  padding: 36px 40px !important;
+  box-shadow: 0 20px 64px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+.syllabus .section-title {
+  font-size: clamp(48px, 6vw, 80px) !important;
+}
+
+/* --- BIO-AGE QUIZ (Fold 6): Bigger title, right sizing --- */
+.bioquiz-title {
+  font-size: clamp(36px, 4.5vw, 62px) !important;
+}
+.bioquiz-body {
+  font-size: 18px !important;
+}
+
+/* --- HOW IT WORKS / METHODOLOGY (Fold 7): Premium, impactful --- */
+.how {
+  padding: 150px 0 170px !important;
+}
+.how-title {
+  font-size: clamp(48px, 7vw, 92px) !important;
+  letter-spacing: -0.04em !important;
+}
+.how-sub {
+  font-size: clamp(17px, 1.3vw, 20px) !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+.how-card {
+  padding: 40px 30px 34px !important;
+  border-radius: 20px !important;
+  background: rgba(0, 18, 55, 0.7) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(0, 110, 255, 0.15) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  margin: 0 10px !important;
+}
+.how-card:hover {
+  transform: translateY(-12px) !important;
+  box-shadow: 0 28px 72px rgba(0, 40, 120, 0.35), 0 0 0 1px rgba(0, 110, 255, 0.3) !important;
+  background: rgba(0, 25, 70, 0.85) !important;
+  border-color: rgba(0, 110, 255, 0.35) !important;
+}
+.how-card-num {
+  width: 44px !important;
+  height: 44px !important;
+  font-size: 15px !important;
+  margin-bottom: 24px !important;
+  box-shadow: 0 0 24px rgba(0, 110, 255, 0.1) !important;
+}
+.how-card-title {
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  margin-bottom: 16px !important;
+}
+.how-card-desc {
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* --- VALUE CARDS (Fold 9): Brighter, more premium --- */
+.value {
+  padding: 140px 0 !important;
+}
+.value-card {
+  background: rgba(0, 18, 55, 0.7) !important;
+  border-left: 3px solid var(--card-accent, #006EFF) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+  padding: 40px 32px !important;
+  border-radius: 20px !important;
+}
+.value-card:hover {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--card-accent) !important;
+}
+.value-title {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+}
+.value-desc {
+  font-size: 16px !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* --- TESTIMONIALS (Fold 10): Clean, premium --- */
+.testimonials {
+  padding: 140px 0 !important;
+}
+.test-card {
+  border-radius: 20px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255,255,255,0.7) !important;
+}
+.test-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 56px rgba(0, 110, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* --- FAQ (Fold 11): Bigger text --- */
+.faq {
+  padding: 140px 0 !important;
+}
+.faq .section-title {
+  font-size: clamp(44px, 6vw, 72px) !important;
+}
+.faq-q-text {
+  font-size: 19px !important;
+}
+
+/* --- CTA (Fold 12): Bigger headline --- */
+.final-cta-title {
+  font-size: clamp(48px, 6vw, 80px) !important;
+  letter-spacing: -0.03em !important;
+}
+.final-cta-sub {
+  font-size: 18px !important;
+}
+
+/* --- LEAD GEN (Fold 13): Bigger headline --- */
+.lead-gen-headline {
+  font-size: clamp(32px, 4vw, 48px) !important;
+}
+
+/* --- CERTS STRIP: Slightly bigger text --- */
+.cert-pill-abbr {
+  font-size: 14px !important;
+}
+
+/* --- INSTRUCTOR SECTION: Bigger title --- */
+.instructors .section-title {
+  font-size: clamp(40px, 5vw, 64px) !important;
+}
+
+/* ==================================================
+   MOBILE FIXES — Critical
+   ================================================== */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(48px, 12vw, 72px) !important;
+  }
+  .section-title {
+    font-size: clamp(34px, 8vw, 48px) !important;
+  }
+  .syllabus .section-title {
+    font-size: clamp(36px, 9vw, 52px) !important;
+  }
+  .how-title {
+    font-size: clamp(38px, 10vw, 56px) !important;
+  }
+  .skill-title {
+    font-size: 22px !important;
+  }
+  .skill-card:first-child .skill-title {
+    font-size: 26px !important;
+  }
+  
+  /* Phases on mobile — 2x2 grid */
+  .syl-timeline {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 32px 40px !important;
+  }
+  .syl-phase {
+    flex: 0 0 calc(50% - 24px) !important;
+  }
+  .syl-connector {
+    display: none !important;
+  }
+  .syl-circle {
+    width: 110px !important;
+    height: 110px !important;
+  }
+  .syl-circle-num {
+    font-size: 28px !important;
+  }
+  .syl-label {
+    font-size: 15px !important;
+  }
+  
+  /* Bio-age — smaller on mobile */
+  .bioquiz-card {
+    padding: 48px 24px !important;
+  }
+  .bioquiz-title {
+    font-size: clamp(28px, 7vw, 38px) !important;
+  }
+  .bioquiz-body {
+    font-size: 15px !important;
+  }
+  .bioquiz-badge {
+    max-width: 220px !important;
+  }
+  .bioquiz-badge-num {
+    font-size: 52px !important;
+  }
+  
+  /* How-it-works mobile */
+  .how {
+    padding: 100px 0 120px !important;
+  }
+  .how-card {
+    padding: 28px 22px 24px !important;
+    margin: 0 !important;
+  }
+  .how-card-title {
+    font-size: 20px !important;
+  }
+  
+  /* Value cards mobile */
+  .value-card {
+    padding: 28px 24px !important;
+  }
+  
+  /* CTA mobile */
+  .final-cta-title {
+    font-size: clamp(36px, 9vw, 52px) !important;
+  }
+  
+  /* FAQ mobile */
+  .faq-q-text {
+    font-size: 17px !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-title {
+    font-size: clamp(44px, 11vw, 64px) !important;
+  }
+  .syl-circle {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .syl-circle-num {
+    font-size: 26px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2819,7 +3180,7 @@ ul, ol { list-style: none; }
     </div>
     <div class="skills-grid">
       <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
-        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-cells.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-eating.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
