@@ -327,40 +327,6 @@ ul, ol { list-style: none; }
 .btn-primary--lg:hover {
   box-shadow: 0 18px 56px rgba(0, 110, 255, 0.45);
 }
-/* Hero CTA glow wrapper */
-.hero-cta-wrap {
-  position: relative;
-  display: inline-block;
-}
-.hero-cta-glow {
-  position: absolute;
-  inset: -8px;
-  border-radius: 999px;
-  background: rgba(0,110,255,0.25);
-  filter: blur(20px);
-  opacity: 0.7;
-  animation: ctaPulse 2.5s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-.hero-cta-wrap .btn-primary--lg {
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 40px rgba(0, 110, 255, 0.4), 0 0 80px rgba(0, 110, 255, 0.2);
-}
-.hero-cta-wrap:hover .btn-primary--lg {
-  box-shadow: 0 0 60px rgba(0, 110, 255, 0.5), 0 0 120px rgba(0, 110, 255, 0.3);
-}
-.hero-cta-wrap:hover .hero-cta-glow {
-  opacity: 1;
-}
-.hero-cta-wrap:hover .btn-primary--lg svg {
-  transform: translateX(6px);
-}
-@keyframes ctaPulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
 
 .trustpilot {
   display: inline-flex;
@@ -684,10 +650,6 @@ ul, ol { list-style: none; }
   color: #fff;
   isolation: isolate;
 }
-.skill-card:first-child {
-  grid-column: 1 / -1;
-  height: 420px;
-}
 .skill-card:hover {
   transform: translateY(-6px);
   box-shadow:
@@ -772,12 +734,17 @@ ul, ol { list-style: none; }
   transform: translate(4px, -4px);
 }
 .skill-arrow svg { width: 16px; height: 16px; stroke: currentColor; }
+.skill-card:first-child {
+  grid-column: 1 / -1;
+  height: 420px;
+}
 @media (max-width: 1000px) {
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
   .skills-grid { grid-template-columns: 1fr; }
   .skill-card { height: 300px; }
+  .skill-card:first-child { height: 340px; }
 }
 
 /* ==================================================
@@ -807,7 +774,7 @@ ul, ol { list-style: none; }
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 32px;
-  padding: 36px 44px;
+  padding: 28px 32px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -833,32 +800,32 @@ ul, ol { list-style: none; }
 .phase-num {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 28px;
-  color: var(--phase-color);
-  width: 72px;
-  height: 72px;
+  font-size: 22px;
+  color: white;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--phase-color) 12%, white);
-  border: 2px solid color-mix(in srgb, var(--phase-color) 25%, white);
+  background: linear-gradient(135deg, #006EFF, #338BFF);
+  border: none;
 }
 .phase-title-wrap {
   min-width: 0;
 }
 .phase-label {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--phase-color);
+  color: #006EFF;
   margin-bottom: 6px;
 }
 .phase-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(30px, 3vw, 44px);
+  font-size: clamp(26px, 3vw, 36px);
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -881,10 +848,14 @@ ul, ol { list-style: none; }
 .phase-body {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.6s var(--ease);
-  will-change: max-height;
+  transition: max-height 0.6s cubic-bezier(0.22,1,0.36,1);
 }
-.phase.open .phase-body { max-height: 1200px; }
+.phase.open .phase-body { max-height: 900px; }
+.phase.open {
+  background: rgba(255,255,255,0.95);
+  border-color: rgba(0,110,255,0.2);
+  box-shadow: 0 16px 50px rgba(0,110,255,0.08);
+}
 .sessions {
   padding: 0 44px 36px 140px;
   display: flex;
@@ -898,13 +869,16 @@ ul, ol { list-style: none; }
   align-items: flex-start;
   padding: 18px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-left: 3px solid rgba(0,110,255,0.15);
+  padding-left: 24px;
+  margin-bottom: 20px;
 }
 .session:first-child { border-top: none; padding-top: 6px; }
 .session-num {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 15px;
-  color: var(--ink-4);
+  color: #006EFF;
   padding-top: 2px;
 }
 .session-title {
@@ -916,9 +890,9 @@ ul, ol { list-style: none; }
   margin-bottom: 6px;
 }
 .session-desc {
-  font-size: 15px;
-  color: var(--ink-3);
-  line-height: 1.55;
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.65;
 }
 
 @media (max-width: 720px) {
@@ -946,6 +920,7 @@ ul, ol { list-style: none; }
     radial-gradient(ellipse 500px 500px at 80% 20%, rgba(0, 180, 255, 0.12) 0%, transparent 60%);
   pointer-events: none;
 }
+.deepdive .container { position: relative; }
 .deepdive-header {
   text-align: center;
   margin-bottom: 72px;
@@ -959,8 +934,8 @@ ul, ol { list-style: none; }
 /* --- Hex Chart Container --- */
 .hex-chart {
   position: relative;
-  width: 840px;
-  height: 780px;
+  width: 900px;
+  height: 840px;
   margin: 0 auto;
   z-index: 2;
 }
@@ -969,7 +944,7 @@ ul, ol { list-style: none; }
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 560px; height: 560px;
+  width: 620px; height: 620px;
   border-radius: 50%;
   border: 2px dashed rgba(51,139,255,0.25);
   z-index: 0;
@@ -984,7 +959,7 @@ ul, ol { list-style: none; }
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 180px; height: 180px;
+  width: 200px; height: 200px;
   border-radius: 50%;
   background: rgba(0,110,255,0.12);
   backdrop-filter: blur(40px) saturate(1.6);
@@ -1041,7 +1016,7 @@ ul, ol { list-style: none; }
 /* Hex nodes — strong frosted glass with colored borders */
 .hex-node {
   position: absolute;
-  width: 156px; height: 156px;
+  width: 150px; height: 150px;
   border-radius: 50%;
   backdrop-filter: blur(32px) saturate(1.5);
   -webkit-backdrop-filter: blur(32px) saturate(1.5);
@@ -1102,7 +1077,7 @@ ul, ol { list-style: none; }
   animation: none;
 }
 .hex-node-icon {
-  width: 46px; height: 46px;
+  width: 40px; height: 40px;
   margin-bottom: 8px;
   color: rgba(255,255,255,0.85);
   transition: color 0.4s var(--ease);
@@ -1112,35 +1087,35 @@ ul, ol { list-style: none; }
 .hex-node-label {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   color: rgba(255,255,255,0.9);
   text-align: center;
   line-height: 1.15;
   transition: color 0.4s var(--ease);
 }
 .hex-node:hover .hex-node-label, .hex-node.active .hex-node-label { color: #fff; }
-/* Detail panel — strong frosted glass (outside chart) */
+/* Detail panel — side panel positioned absolutely within deepdive container */
 .hex-detail {
-  width: 620px;
-  max-width: 90%;
-  margin: 48px auto 0;
-  padding: 40px 44px;
-  background: rgba(0,60,180,0.15);
-  backdrop-filter: blur(48px) saturate(1.6);
-  -webkit-backdrop-filter: blur(48px) saturate(1.6);
-  border: 2px solid rgba(51,139,255,0.35);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 16px 64px rgba(0,20,80,0.4), 0 0 40px rgba(0,110,255,0.1), inset 0 1px 0 rgba(255,255,255,0.1);
+  position: absolute;
+  right: -20px; top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  padding: 36px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(30px) saturate(1.5);
+  -webkit-backdrop-filter: blur(30px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   opacity: 0;
-  transform: translateY(16px);
   pointer-events: none;
-  transition: all 0.6s var(--ease);
-  min-height: 180px;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 20;
 }
 .hex-detail.visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
+  right: 0;
 }
 .hex-detail-tag {
   font-size: 11px;
@@ -1153,13 +1128,13 @@ ul, ol { list-style: none; }
 .hex-detail-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 30px;
+  font-size: 26px;
   line-height: 1.1;
   color: #fff;
   margin-bottom: 12px;
 }
 .hex-detail-desc {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   color: rgba(255,255,255,0.75);
   margin-bottom: 18px;
@@ -1168,7 +1143,7 @@ ul, ol { list-style: none; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #5AA0FF;
   transition: gap 0.3s var(--ease);
@@ -1177,8 +1152,8 @@ ul, ol { list-style: none; }
 /* Responsive: stack for mobile */
 @media (max-width: 900px) {
   .hex-chart { width: 100%; height: auto; min-height: 500px; }
-  .hex-node { width: 120px !important; height: 120px !important; }
-  .hex-center { width: 140px; height: 140px; }
+  .hex-node { width: 100px !important; height: 100px !important; }
+  .hex-center { width: 130px; height: 130px; }
   .hex-center-label { font-size: 14px; }
   .hex-node-icon { width: 30px; height: 30px; }
   .hex-node-label { font-size: 11px; }
@@ -1618,65 +1593,142 @@ ul, ol { list-style: none; }
   .teachers-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
 }
 
+/* Teacher cert strip — shiny black bar with cert pill badges */
+.teacher-cert-strip {
+  max-width: 900px;
+  margin: 48px auto 0;
+  height: auto;
+  min-height: 60px;
+  background: linear-gradient(90deg, #0a0a0a, #1a1a1a, #0a0a0a);
+  border-radius: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.teacher-cert-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+  background-size: 250% 100%;
+  animation: strip-shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes strip-shimmer {
+  0% { background-position: 160% 0; }
+  100% { background-position: -160% 0; }
+}
+.teacher-cert-strip .cert-pill {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+  font-size: 12px;
+  padding: 7px 16px;
+}
+.teacher-cert-strip .cert-pill:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.3);
+}
+@media (max-width: 720px) {
+  .teacher-cert-strip { padding: 12px 16px; gap: 8px; border-radius: 12px; }
+}
+
 /* Cert badges below teacher cards */
 .certs {
   padding: 60px 0 120px;
-  background: #0B1120;
+  background: var(--bg);
 }
 .certs-header {
   text-align: center;
   max-width: 860px;
   margin: 0 auto 48px;
 }
-.certs-header .eyebrow { color: #5AA0FF; }
-.certs-header .section-title { color: #fff; }
+/* Old grid layout removed — now uses pill row */
+
+/* New pill-style cert badges */
 .cert-pill-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 14px;
-  max-width: 900px;
-  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 40px;
+  background: linear-gradient(135deg, #0a1628 0%, #0e1e3a 50%, #0a1628 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.cert-pill-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.04) 50%, transparent 65%);
+  background-size: 300% 100%;
+  animation: cert-shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+@keyframes cert-shimmer {
+  0% { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
 }
 .cert-pill {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 22px;
-  border-radius: 999px;
+  gap: 9px;
+  padding: 10px 20px;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.2);
-  transition: all 0.3s var(--ease);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
   white-space: nowrap;
+  transition: all 0.35s var(--ease);
+  position: relative;
+  z-index: 1;
 }
 .cert-pill:hover {
-  background: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.15);
   border-color: rgba(255,255,255,0.35);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 .cert-pill-shield {
-  width: 18px; height: 18px;
-  color: #5AA0FF;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
+  color: rgba(168,199,255,0.9);
 }
 .cert-pill-abbr {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 14px;
+  letter-spacing: 0.04em;
   color: #fff;
-  letter-spacing: 0.02em;
 }
 .cert-pill-divider {
   width: 1px;
-  height: 16px;
+  height: 14px;
   background: rgba(255,255,255,0.25);
   flex-shrink: 0;
 }
 .cert-pill-name {
-  font-size: 13px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.3;
-  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 400;
+}
+@media (max-width: 720px) {
+  .cert-pill-row { padding: 24px 20px; gap: 10px; }
+  .cert-pill { font-size: 12px; padding: 8px 14px; }
 }
 
 /* ==================================================
@@ -2147,8 +2199,11 @@ ul, ol { list-style: none; }
 @media (max-width: 600px) { .lead-gen-row { flex-direction: column; } }
 
 /* ==================================================
-   PRICING SECTION
+   FOLD 11b — PRICING SECTION
    ================================================== */
+/* ============================================================
+   SECTION SHELL
+   ============================================================ */
 .lla-pricing {
   background: var(--surface);
   padding: 96px 24px 80px;
@@ -2157,14 +2212,20 @@ ul, ol { list-style: none; }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .lla-pricing__inner {
   max-width: 1120px;
   margin: 0 auto;
 }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
 .lla-pricing__header {
   text-align: center;
   margin-bottom: 48px;
 }
+
 .lla-pricing__eyebrow {
   display: inline-flex;
   align-items: center;
@@ -2176,6 +2237,7 @@ ul, ol { list-style: none; }
   color: var(--blue);
   margin-bottom: 18px;
 }
+
 .lla-pricing__eyebrow::before,
 .lla-pricing__eyebrow::after {
   content: '';
@@ -2186,6 +2248,7 @@ ul, ol { list-style: none; }
   opacity: 0.45;
   flex-shrink: 0;
 }
+
 .lla-pricing__title {
   font-family: var(--font-display);
   font-size: clamp(30px, 4.5vw, 48px);
@@ -2195,6 +2258,7 @@ ul, ol { list-style: none; }
   color: var(--ink);
   margin: 0 0 14px;
 }
+
 .lla-pricing__subtitle {
   font-size: 17px;
   font-weight: 400;
@@ -2202,6 +2266,10 @@ ul, ol { list-style: none; }
   line-height: 1.6;
   margin: 0;
 }
+
+/* ============================================================
+   BILLING TOGGLE
+   ============================================================ */
 .lla-pricing__toggle-row {
   display: flex;
   align-items: center;
@@ -2210,6 +2278,7 @@ ul, ol { list-style: none; }
   margin-bottom: 52px;
   flex-wrap: wrap;
 }
+
 .toggle-label {
   font-size: 14px;
   font-weight: 500;
@@ -2218,10 +2287,12 @@ ul, ol { list-style: none; }
   user-select: none;
   transition: color 180ms var(--ease);
 }
+
 .toggle-label.is-active {
   color: var(--ink);
   font-weight: 600;
 }
+
 .toggle-switch {
   position: relative;
   width: 52px;
@@ -2230,10 +2301,12 @@ ul, ol { list-style: none; }
   flex-shrink: 0;
   outline: none;
 }
+
 .toggle-switch:focus-visible .toggle-track {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
+
 .toggle-track {
   width: 52px;
   height: 28px;
@@ -2242,6 +2315,7 @@ ul, ol { list-style: none; }
   transition: background 180ms var(--ease);
   display: block;
 }
+
 .toggle-thumb {
   position: absolute;
   top: 3px;
@@ -2254,28 +2328,35 @@ ul, ol { list-style: none; }
   transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
 }
+
 .lla-pricing[data-billing="annual"] .toggle-track {
   background: var(--blue);
 }
+
 .lla-pricing[data-billing="annual"] .toggle-thumb {
   transform: translateX(24px);
 }
+
 .lla-pricing[data-billing="annual"] .label-annual {
   color: var(--ink);
   font-weight: 600;
 }
+
 .lla-pricing[data-billing="annual"] .label-monthly {
   color: var(--ink-4);
   font-weight: 500;
 }
+
 .lla-pricing[data-billing="monthly"] .label-monthly {
   color: var(--ink);
   font-weight: 600;
 }
+
 .lla-pricing[data-billing="monthly"] .label-annual {
   color: var(--ink-4);
   font-weight: 500;
 }
+
 .save-pill {
   display: inline-flex;
   align-items: center;
@@ -2293,29 +2374,44 @@ ul, ol { list-style: none; }
   pointer-events: none;
   white-space: nowrap;
 }
+
 .lla-pricing[data-billing="annual"] .save-pill {
   opacity: 1;
   transform: scale(1) translateX(0);
 }
+
+/* ============================================================
+   PRICE VISIBILITY
+   ============================================================ */
 .price-annual,
 .price-monthly {
   transition: opacity 160ms var(--ease);
 }
+
 .lla-pricing[data-billing="annual"] .price-monthly,
 .lla-pricing[data-billing="monthly"] .price-annual {
   display: none;
 }
+
 .lla-pricing[data-billing="annual"] .price-annual,
 .lla-pricing[data-billing="monthly"] .price-monthly {
   display: flex;
   flex-direction: column;
 }
+
+/* ============================================================
+   CARDS GRID
+   ============================================================ */
 .lla-pricing__cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   align-items: start;
 }
+
+/* ============================================================
+   INDIVIDUAL CARD
+   ============================================================ */
 .pricing-card {
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
@@ -2325,10 +2421,12 @@ ul, ol { list-style: none; }
   transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 260ms var(--ease);
   position: relative;
 }
+
 .pricing-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 36px rgba(0,0,0,0.11), 0 2px 8px rgba(0,0,0,0.06);
 }
+
 .pricing-card--featured {
   border-color: var(--blue);
   border-width: 2px;
@@ -2337,10 +2435,12 @@ ul, ol { list-style: none; }
   margin-top: -14px;
   margin-bottom: -14px;
 }
+
 .pricing-card--featured:hover {
   transform: translateY(-7px);
   box-shadow: 0 14px 44px rgba(0, 110, 255, 0.22), 0 2px 8px rgba(0,0,0,0.07);
 }
+
 .pricing-card--featured::before {
   content: '';
   position: absolute;
@@ -2351,6 +2451,10 @@ ul, ol { list-style: none; }
   background: var(--blue);
   border-radius: 16px 16px 0 0;
 }
+
+/* ============================================================
+   MOST POPULAR BADGE
+   ============================================================ */
 .popular-badge {
   position: absolute;
   top: -15px;
@@ -2367,6 +2471,10 @@ ul, ol { list-style: none; }
   white-space: nowrap;
   box-shadow: 0 2px 10px rgba(0, 110, 255, 0.32);
 }
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
 .card__tier {
   font-family: var(--font-display);
   font-size: 13px;
@@ -2376,6 +2484,7 @@ ul, ol { list-style: none; }
   color: var(--blue);
   margin: 0 0 7px;
 }
+
 .card__tagline {
   font-size: 13.5px;
   color: var(--ink-4);
@@ -2383,10 +2492,15 @@ ul, ol { list-style: none; }
   line-height: 1.5;
   min-height: 42px;
 }
+
+/* ============================================================
+   PRICE BLOCK
+   ============================================================ */
 .price-block {
   margin-bottom: 22px;
   min-height: 90px;
 }
+
 .price-block__main {
   display: flex;
   align-items: flex-end;
@@ -2394,6 +2508,7 @@ ul, ol { list-style: none; }
   line-height: 1;
   margin-bottom: 5px;
 }
+
 .price-block__currency {
   font-family: var(--font-display);
   font-size: 21px;
@@ -2401,6 +2516,7 @@ ul, ol { list-style: none; }
   color: var(--ink-3);
   padding-bottom: 7px;
 }
+
 .price-block__amount {
   font-family: var(--font-display);
   font-size: 54px;
@@ -2409,6 +2525,7 @@ ul, ol { list-style: none; }
   letter-spacing: -0.03em;
   line-height: 1;
 }
+
 .price-block__period {
   font-size: 13px;
   color: var(--ink-4);
@@ -2416,15 +2533,18 @@ ul, ol { list-style: none; }
   padding-left: 1px;
   font-weight: 500;
 }
+
 .price-block__sub {
   font-size: 12.5px;
   color: var(--ink-4);
   line-height: 1.55;
 }
+
 .price-block__sub strong {
   color: var(--ink-3);
   font-weight: 600;
 }
+
 .price-block__save {
   display: inline-block;
   background: var(--blue-light);
@@ -2436,11 +2556,19 @@ ul, ol { list-style: none; }
   margin-top: 7px;
   letter-spacing: 0.01em;
 }
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
 .card__divider {
   border: none;
   border-top: 1.5px solid #e2e8f0;
   margin: 0 0 20px;
 }
+
+/* ============================================================
+   FEATURES LIST
+   ============================================================ */
 .features-label {
   font-size: 10.5px;
   font-weight: 700;
@@ -2449,6 +2577,7 @@ ul, ol { list-style: none; }
   color: var(--ink-4);
   margin: 0 0 13px;
 }
+
 .features-list {
   list-style: none;
   padding: 0;
@@ -2457,6 +2586,7 @@ ul, ol { list-style: none; }
   flex-direction: column;
   gap: 10px;
 }
+
 .features-list li {
   display: flex;
   align-items: flex-start;
@@ -2465,16 +2595,22 @@ ul, ol { list-style: none; }
   color: var(--ink-3);
   line-height: 1.5;
 }
+
 .features-list li svg {
   flex-shrink: 0;
   margin-top: 1px;
   color: var(--blue);
 }
+
 .feature-inherited {
   color: var(--ink-4);
   font-style: italic;
   font-size: 12.5px;
 }
+
+/* ============================================================
+   CTA BUTTONS
+   ============================================================ */
 .btn-cta {
   display: block;
   width: 100%;
@@ -2486,37 +2622,51 @@ ul, ol { list-style: none; }
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background 160ms var(--ease), color 160ms var(--ease), border-color 160ms var(--ease), box-shadow 160ms var(--ease), transform 100ms ease;
+  transition:
+    background 160ms var(--ease),
+    color 160ms var(--ease),
+    border-color 160ms var(--ease),
+    box-shadow 160ms var(--ease),
+    transform 100ms ease;
   letter-spacing: 0.005em;
   line-height: 1.2;
   border: 2px solid transparent;
   box-sizing: border-box;
 }
+
 .btn-cta:active {
   transform: scale(0.975);
 }
+
 .btn-outline {
   background: transparent;
   border-color: var(--blue);
   color: var(--blue);
 }
+
 .btn-outline:hover {
   background: rgba(0, 110, 255, 0.07);
   border-color: var(--blue-hover);
   color: var(--blue-hover);
 }
+
 .btn-filled {
   background: var(--blue);
   border-color: var(--blue);
   color: #fff;
   box-shadow: 0 2px 10px rgba(0, 110, 255, 0.30);
 }
+
 .btn-filled:hover {
   background: var(--blue-hover);
   border-color: var(--blue-hover);
   box-shadow: 0 4px 18px rgba(0, 110, 255, 0.40);
   color: #fff;
 }
+
+/* ============================================================
+   TRUST STRIP
+   ============================================================ */
 .lla-pricing__trust {
   display: flex;
   align-items: center;
@@ -2525,6 +2675,7 @@ ul, ol { list-style: none; }
   margin-top: 48px;
   flex-wrap: wrap;
 }
+
 .trust-item {
   display: flex;
   align-items: center;
@@ -2533,47 +2684,65 @@ ul, ol { list-style: none; }
   color: var(--ink-3);
   font-weight: 500;
 }
+
 .trust-item svg {
   color: var(--blue);
   flex-shrink: 0;
 }
+
+/* ============================================================
+   RESPONSIVE — PRICING TABLET
+   ============================================================ */
 @media (max-width: 900px) {
   .lla-pricing__cards {
     grid-template-columns: 1fr;
     max-width: 460px;
     margin: 0 auto;
   }
+
   .pricing-card--featured {
     margin-top: 0;
     margin-bottom: 0;
   }
+
   .lla-pricing {
     padding: 72px 20px 64px;
   }
 }
+
+/* ============================================================
+   RESPONSIVE — PRICING MOBILE
+   ============================================================ */
 @media (max-width: 560px) {
   .lla-pricing {
     padding: 56px 16px 48px;
   }
+
   .lla-pricing__title {
     font-size: 28px;
   }
+
   .lla-pricing__subtitle {
     font-size: 15px;
   }
+
   .price-block__amount {
     font-size: 46px;
   }
+
   .pricing-card {
     padding: 26px 20px 22px;
   }
+
   .pricing-card--featured {
     padding-top: 42px;
   }
+
   .lla-pricing__toggle-row {
     gap: 10px;
     margin-bottom: 40px;
   }
+
   .lla-pricing__trust {
     gap: 20px;
     flex-direction: column;
@@ -2582,216 +2751,325 @@ ul, ol { list-style: none; }
   }
 }
 
+/* ==================================================
+   HERO CTA — Premium animated CTA
+   ================================================== */
+.hero-cta-wrap { position: relative; display: inline-block; }
+.hero-cta-glow {
+  position: absolute; inset: -8px; border-radius: 999px;
+  background: rgba(0,110,255,0.25);
+  filter: blur(20px);
+  animation: ctaGlow 2.5s ease-in-out infinite;
+  pointer-events: none; z-index: 0;
+}
+@keyframes ctaGlow { 0%,100%{opacity:0.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.08)} }
+.btn-primary--lg { position: relative; z-index: 1; padding: 22px 56px !important; font-size: 19px !important; }
+.hero-cta-hint {
+  margin-top: 18px; font-size: 14px; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.5px; animation: fadeInUp 1s ease 0.5s both;
+  text-align: center; width: 100%;
+}
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
 /* ============================== */
 /* MOBILE RESPONSIVE OVERHAUL     */
 /* ============================== */
 
-/* Mobile Menu Button */
+/* Mobile Navigation — Hamburger Menu */
 .mobile-menu-btn {
   display: none;
   background: none;
   border: none;
+  font-size: 28px;
   color: var(--ink);
   cursor: pointer;
-  padding: 8px;
-  z-index: 1001;
+  padding: 4px 8px;
+  line-height: 1;
+  z-index: 201;
 }
-
-/* Mobile Nav Overlay */
 .mobile-nav-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.95);
-  z-index: 9999;
+  z-index: 200;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 32px;
   opacity: 0;
-  transition: opacity 0.3s ease;
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 .mobile-nav-overlay.open {
   display: flex;
   opacity: 1;
   pointer-events: auto;
 }
-.mobile-nav-close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  padding: 8px;
-}
-.mobile-nav-links {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-}
-.mobile-nav-link {
+.mobile-nav-overlay a {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
-  color: #fff;
-  text-decoration: none;
+  color: var(--ink);
+  padding: 12px 24px;
   transition: color 0.2s ease;
 }
-.mobile-nav-link:hover { color: var(--blue); }
-.mobile-nav-cta {
+.mobile-nav-overlay a:hover { color: var(--blue); }
+.mobile-nav-overlay .nav-cta {
   background: var(--blue);
-  color: #fff !important;
+  color: #fff;
   padding: 16px 40px;
   border-radius: 999px;
-  font-size: 20px;
-  margin-top: 16px;
-}
-
-/* Hex mobile list (shown on mobile, hidden on desktop) */
-.deepdive-mobile-list {
-  display: none;
-  flex-direction: column;
-  gap: 12px;
-  padding: 0 20px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.deepdive-mobile-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: rgba(0,60,180,0.12);
-  border: 1px solid rgba(51,139,255,0.25);
-  border-radius: 14px;
-  padding: 18px 20px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.deepdive-mobile-card:hover {
-  background: rgba(0,60,180,0.22);
-  border-color: rgba(51,139,255,0.5);
-  transform: translateY(-2px);
-}
-.deepdive-mobile-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(0,110,255,0.2);
-  border: 1.5px solid rgba(0,110,255,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: #5AA0FF;
-}
-.deepdive-mobile-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-.deepdive-mobile-text { flex: 1; min-width: 0; }
-.deepdive-mobile-title {
-  font-family: var(--font-display);
+  font-size: 18px;
   font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 4px;
+  box-shadow: 0 4px 14px rgba(0,110,255,0.25);
 }
-.deepdive-mobile-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.4;
-}
-.deepdive-mobile-arrow {
-  color: #5AA0FF;
-  flex-shrink: 0;
+.mobile-nav-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 4px 10px;
+  line-height: 1;
 }
 
 @media (max-width: 768px) {
-  /* Nav */
+
+  /* --- Navigation --- */
   .nav-links { display: none !important; }
   .mobile-menu-btn { display: block; }
 
-  /* Hero */
-  .hero-title { font-size: 38px !important; }
-  .hero-sub { font-size: 16px; }
+  /* --- Hero --- */
+  .hero { padding: 100px 0 60px; min-height: auto; }
+  .hero-title { font-size: 38px !important; line-height: 1.05; letter-spacing: -0.02em; }
+  .hero-sub { font-size: 16px; margin-bottom: 32px; }
   .hero-inner { padding: 0 20px; }
-  .hero-cta-wrap .btn-primary--lg { padding: 18px 36px; font-size: 16px; }
-  .trustpilot { font-size: 13px; }
+  .hero-kicker { font-size: 11px; margin-bottom: 24px; padding: 6px 14px; }
+  .hero-cta-row { margin-bottom: 32px; }
+  .btn-primary--lg { padding: 18px 36px !important; font-size: 16px !important; }
+  .hero-cta-hint { font-size: 13px; }
+  .trustpilot { font-size: 12px; padding: 10px 16px; gap: 10px; }
 
-  /* Section titles — global cap */
-  .section-title { font-size: 30px !important; }
+  /* --- Section titles (global) --- */
+  .section-title { font-size: 30px !important; line-height: 1.05; }
+  .section-subtitle { font-size: 16px; }
 
-  /* Section padding */
-  .topics, .skills, .syllabus, .deepdive, .bio-quiz, .how-it-works,
-  .teachers, .certs, .value, .testimonials, .faq, .lead-gen, .final-cta {
-    padding: 60px 20px !important;
+  /* --- Topics (Explore Longevity) --- */
+  .topics { padding: 60px 0; }
+  .topics-header { margin-bottom: 40px; }
+  .topics-header .section-title { font-size: 30px !important; }
+  .topics-header .section-subtitle { font-size: 16px; }
+  .topics-grid { grid-template-columns: 1fr !important; gap: 16px; }
+  .topic-card { min-height: 180px; padding: 28px 24px; }
+  .topic-number { font-size: 80px; }
+  .topic-label { font-size: 20px; }
+  .topic-desc { font-size: 14px; }
+  .topic-icon { width: 48px; height: 48px; margin-bottom: 16px; }
+
+  /* --- Skills (Six Longevity Skills) --- */
+  .skills { padding: 60px 0; }
+  .skills-header { margin-bottom: 40px; }
+
+  /* --- Syllabus --- */
+  .syllabus { padding: 60px 0; }
+  .syllabus-header { margin-bottom: 48px; }
+  .phase-head { padding: 20px 16px; gap: 12px; grid-template-columns: auto 1fr auto; }
+  .phase-num { width: 44px; height: 44px; font-size: 18px; }
+  .phase-title { font-size: 22px !important; }
+  .phase-label { font-size: 12px; letter-spacing: 1px; }
+  .phase-toggle { width: 40px; height: 40px; }
+  .sessions { padding: 0 16px 24px 16px; }
+  .session { grid-template-columns: 36px 1fr; gap: 12px; padding-left: 16px; }
+  .session-title { font-size: 17px; }
+  .session-desc { font-size: 14px; line-height: 1.55; }
+
+  /* --- Deep Dive (Hex Diagram) — CRITICAL FIX --- */
+  .deepdive { padding: 60px 0 80px; }
+  .deepdive-header { margin-bottom: 40px; }
+  .hex-chart { display: none !important; }
+  .hex-detail {
+    position: static !important;
+    transform: none !important;
+    display: none !important;
+  }
+  /* Show mobile topic list instead */
+  .deepdive-mobile-list { display: flex !important; }
+  .deepdive-mobile-list {
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+  }
+  .deepdive-mobile-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+  .deepdive-mobile-card:hover {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.3);
+  }
+  .deepdive-mobile-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(0,110,255,0.2);
+    border: 1.5px solid rgba(51,139,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.9);
+  }
+  .deepdive-mobile-icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  .deepdive-mobile-text { flex: 1; }
+  .deepdive-mobile-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .deepdive-mobile-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
+  }
+  .deepdive-mobile-arrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: #5AA0FF;
+    flex-shrink: 0;
   }
 
-  /* Topics grid */
-  .topics-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  /* --- Bio Quiz --- */
+  .bioquiz { padding: 40px 0 60px; }
+  .bioquiz-card { padding: 36px 24px; gap: 28px; }
+  .bioquiz-title { font-size: 28px !important; }
+  .bioquiz-body { font-size: 15px; margin-bottom: 24px; }
+  .bioquiz-cta { padding: 14px 28px; font-size: 15px; }
+  .bioquiz-badge { max-width: 220px; }
+  .bioquiz-badge-num { font-size: 48px; }
 
-  /* Skills */
-  .skills-grid { grid-template-columns: 1fr !important; gap: 16px; }
-  .skill-card:first-child { height: 320px; }
-  .skill-card { height: 240px; }
+  /* --- How It Works --- */
+  .how { padding: 60px 0 80px; }
+  .how-header { margin-bottom: 0; }
+  .how-title { font-size: 30px !important; }
+  .how-logo { height: 52px; margin-bottom: 24px; }
+  .how-track { margin-top: 40px; }
+  .how-card { padding: 28px 24px; min-height: auto; }
+  .how-card-num { font-size: 56px; }
+  .how-card-title { font-size: 20px; }
+  .how-card-desc { font-size: 14px; }
 
-  /* Hex diagram — hide SVG, show mobile list */
-  .hex-chart { display: none !important; }
-  .hex-detail { display: none !important; }
-  .deepdive-mobile-list { display: flex !important; }
+  /* --- Teachers / Instructors --- */
+  .instructors { padding: 60px 0 40px; }
+  .instructors-header { margin-bottom: 40px; }
+  .instructors-header .section-title { font-size: 28px !important; }
+  .teacher-card { padding: 36px 24px; }
+  .teacher-avatar { width: 100px; height: 100px; }
+  .teacher-name { font-size: 20px; }
+  .teacher-bio { font-size: 14px; }
+  /* Badge strip fix */
+  .teacher-cert-strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 16px;
+  }
+  .teacher-cert-strip .cert-pill {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
 
-  /* Syllabus */
-  .phase-head { padding: 20px !important; gap: 12px !important; }
-  .phase-num { width: 44px !important; height: 44px !important; font-size: 18px !important; }
-  .phase-title { font-size: 22px !important; }
-  .sessions { padding: 0 20px 24px 20px !important; }
+  /* --- Certifications --- */
+  .certs { padding: 40px 0 60px; }
+  .certs-header { margin-bottom: 32px; }
+  .cert-pill-row {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px 16px;
+    gap: 8px;
+  }
+  .cert-pill {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+  }
 
-  /* Teachers */
-  .teachers .section-title { font-size: 28px !important; }
-  .teacher-badges-strip { flex-direction: column !important; align-items: stretch !important; }
-  .teacher-badge-pill { width: 100% !important; justify-content: center !important; }
-  .teacher-card { padding: 20px !important; }
-  .teacher-avatar { width: 60px !important; height: 60px !important; }
+  /* --- What Makes This Different --- */
+  .value { padding: 60px 0; }
+  .value-header { margin-bottom: 32px; }
+  .value-card { flex: 0 0 85% !important; min-height: auto; padding: 32px 24px; }
 
-  /* Certs */
-  .cert-pill-row { flex-direction: column !important; align-items: center !important; }
-  .cert-pill { width: 100%; justify-content: center; }
+  /* --- Testimonials --- */
+  .testimonials { padding: 60px 0; }
+  .testimonials-header { margin-bottom: 40px; }
+  .quote-card { padding: 32px 24px 28px; }
+  .quote-text { font-size: 16px; margin-bottom: 20px; }
 
-  /* How it works */
-  .hiw-cards { grid-template-columns: 1fr !important; }
+  /* --- FAQ --- */
+  .faq { padding: 60px 0; }
+  .faq-header { margin-bottom: 40px; }
+  .faq-header .section-title { font-size: 30px !important; }
+  .faq-q { padding: 20px; font-size: 18px; gap: 12px; }
+  .faq-num {
+    display: inline-block !important;
+    font-size: 12px;
+    margin-right: 12px;
+  }
+  .faq-icon { width: 36px; height: 36px; margin-left: 12px; }
+  .faq-a-inner { padding: 0 20px 20px; padding-left: 48px; font-size: 15px; }
 
-  /* Value cards */
-  .value-cards { grid-template-columns: 1fr !important; }
-
-  /* Testimonials */
-  .testimonial-card { padding: 24px 20px !important; }
-
-  /* FAQ */
-  .faq-num { display: inline-block !important; }
-
-  /* Pricing */
-  .lla-pricing { padding: 60px 16px !important; }
+  /* --- Pricing --- */
+  .lla-pricing { padding: 60px 16px; }
   .lla-pricing__trust { gap: 16px; }
 
-  /* Final CTA */
+  /* --- Final CTA --- */
+  .final-cta { padding: 60px 0; }
+  .final-cta-card { padding: 60px 24px; }
   .final-cta-title { font-size: 30px !important; }
-  .final-cta-sub { font-size: 15px; }
+  .final-cta-sub { font-size: 16px; margin-bottom: 28px; }
 
-  /* Lead gen */
-  .lead-gen-title { font-size: 28px !important; }
+  /* --- Lead Gen Form --- */
+  .lead-gen { padding: 60px 0; }
+  .lead-gen-headline { font-size: 24px !important; margin-bottom: 28px; }
 
-  /* Footer */
-  .footer-grid { grid-template-columns: 1fr !important; gap: 32px; }
+  /* --- Footer --- */
+  .footer { padding: 48px 0 32px; }
+  .footer-top { grid-template-columns: 1fr !important; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 }
 
+/* Extra small screens */
 @media (max-width: 480px) {
   .hero-title { font-size: 32px !important; }
   .section-title { font-size: 26px !important; }
-  .skill-card:first-child { height: 280px; }
-  .skill-card { height: 220px; }
-  .phase-title { font-size: 20px !important; }
-  .final-cta-title { font-size: 26px !important; }
+  .topics-grid { grid-template-columns: 1fr !important; }
+  .value-card { flex: 0 0 92% !important; }
+  .how-card-num { font-size: 48px; top: 12px; right: 16px; }
 }
+
+/* Hide mobile list on desktop */
+.deepdive-mobile-list { display: none; }
 </style>
 </head>
 <body>
@@ -2814,22 +3092,16 @@ ul, ol { list-style: none; }
       <a href="#faq">FAQ</a>
       <a href="#lead-gen" class="nav-cta">Apply Now</a>
     </div>
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">&#9776;</button>
   </div>
 </nav>
-
-<div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
-  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close navigation menu">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-  </button>
-  <nav class="mobile-nav-links">
-    <a href="#skills" class="mobile-nav-link">Skills</a>
-    <a href="#syllabus" class="mobile-nav-link">Syllabus</a>
-    <a href="#faq" class="mobile-nav-link">FAQ</a>
-    <a href="#lead-gen" class="mobile-nav-link mobile-nav-cta">Apply Now</a>
-  </nav>
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+  <a href="#skills" class="mobile-nav-link">Skills</a>
+  <a href="#syllabus" class="mobile-nav-link">Syllabus</a>
+  <a href="#faq" class="mobile-nav-link">FAQ</a>
+  <a href="#lead-gen" class="nav-cta mobile-nav-link">Apply Now</a>
 </div>
 
 <!-- ==============================================
@@ -2860,14 +3132,13 @@ ul, ol { list-style: none; }
     </p>
     <div class="hero-cta-row">
       <div class="hero-cta-wrap">
-        <div class="hero-cta-glow" aria-hidden="true"></div>
+        <div class="hero-cta-glow"></div>
         <a href="#lead-gen" class="btn-primary btn-primary--lg">
           Reserve Your Seat
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 5l7 7-7 7"/>
-          </svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
+      <p class="hero-cta-hint">Limited seats · Next cohort starts soon</p>
     </div>
     <div class="trustpilot">
       <div class="trustpilot-stars">
@@ -2893,7 +3164,7 @@ ul, ol { list-style: none; }
       <p class="section-subtitle" style="margin:0 auto;">Eight areas of practice that shape how long and how well you live. Start anywhere.</p>
     </div>
     <div class="topics-grid">
-      <a href="topics/nutrition.html" class="topic-card reveal">
+      <a href="topics/nutrition-longevity.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">01</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -2908,7 +3179,7 @@ ul, ol { list-style: none; }
           <div class="topic-desc">Fuel strategies for cellular health and metabolic optimization.</div>
         </div>
       </a>
-      <a href="topics/sleep.html" class="topic-card reveal">
+      <a href="topics/sleep-circadian-health.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">02</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -2922,7 +3193,7 @@ ul, ol { list-style: none; }
           <div class="topic-desc">Circadian rhythm and deep recovery protocols.</div>
         </div>
       </a>
-      <a href="topics/supplements.html" class="topic-card reveal">
+      <a href="topics/supplements-health-tech.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">03</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -2937,7 +3208,7 @@ ul, ol { list-style: none; }
           <div class="topic-desc">Evidence-based compounds, doses, and timing.</div>
         </div>
       </a>
-      <a href="topics/exercise.html" class="topic-card reveal">
+      <a href="topics/exercise-movement.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">04</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -2951,7 +3222,7 @@ ul, ol { list-style: none; }
           <div class="topic-desc">Zone 2, strength, VO2 max, and mobility practices.</div>
         </div>
       </a>
-      <a href="topics/mental-health.html" class="topic-card reveal">
+      <a href="topics/mental-emotional-health.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">05</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -2966,7 +3237,7 @@ ul, ol { list-style: none; }
           <div class="topic-desc">Stress resilience, cognitive health, and emotional regulation.</div>
         </div>
       </a>
-      <a href="topics/metabolic.html" class="topic-card reveal">
+      <a href="topics/metabolic-health-blood-sugar.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">06</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -2980,7 +3251,7 @@ ul, ol { list-style: none; }
           <div class="topic-desc">Glucose, insulin, and metabolic flexibility decoded.</div>
         </div>
       </a>
-      <a href="topics/biomarkers.html" class="topic-card reveal">
+      <a href="topics/biomarkers-testing.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">07</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -2995,7 +3266,7 @@ ul, ol { list-style: none; }
           <div class="topic-desc">Blood panels, biological age, and what to track.</div>
         </div>
       </a>
-      <a href="topics/protocols.html" class="topic-card reveal">
+      <a href="topics/protocols-habits.html" class="topic-card reveal">
         <div class="topic-shine"></div>
         <span class="topic-number">08</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
@@ -3025,20 +3296,9 @@ ul, ol { list-style: none; }
       <p class="section-subtitle">Each one is backed by research, covered in our course, and explored in depth on our blog.</p>
     </div>
     <div class="skills-grid">
-      <a class="skill-card reveal" href="topics/biomarkers-testing.html" aria-label="Cellular Regeneration — how your cells repair, recycle, and renew">
-        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-cells.mp4" type="video/mp4"></video></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
-        <div class="skill-content">
-          <div class="skill-eyebrow">Cells &amp; Aging</div>
-          <h3 class="skill-title">Cellular Regeneration</h3>
-          <p class="skill-sub">How your cells repair, recycle, and renew.</p>
-        </div>
-      </a>
+      <!-- Card 1: Featured / full-width (skill-card:first-child spans all columns at 420px) -->
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Turn Back the Clock — brain aging and cognition">
-        <div class="skill-bg brain"><video autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg brain"><video autoplay muted loop playsinline><source src="assets/skill-cells.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -3049,6 +3309,7 @@ ul, ol { list-style: none; }
           <p class="skill-sub">Why your brain feels older than the calendar.</p>
         </div>
       </a>
+      <!-- Card 2 -->
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Rewrite Your Mental OS — mindset and beliefs about aging">
         <div class="skill-bg mindset"><video autoplay muted loop playsinline><source src="assets/skill-biometric.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
@@ -3061,6 +3322,7 @@ ul, ol { list-style: none; }
           <p class="skill-sub">How beliefs become biology.</p>
         </div>
       </a>
+      <!-- Card 3 -->
       <a class="skill-card reveal" href="topics/protocols-habits.html" aria-label="Your Skin Tells a Story — skin as a longevity organ">
         <div class="skill-bg skin"><video autoplay muted loop playsinline><source src="assets/skill-skin.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
@@ -3073,6 +3335,7 @@ ul, ol { list-style: none; }
           <p class="skill-sub">The frontline organ of longevity.</p>
         </div>
       </a>
+      <!-- Card 4 -->
       <a class="skill-card reveal" href="topics/supplements-health-tech.html" aria-label="Supplements That Actually Matter — evidence-based supplements">
         <div class="skill-bg supplements"><video autoplay muted loop playsinline><source src="assets/skill-pill.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
@@ -3085,6 +3348,7 @@ ul, ol { list-style: none; }
           <p class="skill-sub">Five non-trendy supplements that quietly work.</p>
         </div>
       </a>
+      <!-- Card 5 -->
       <a class="skill-card reveal" href="topics/nutrition-longevity.html" aria-label="Eat for Your Eyes — nutrition for lifelong vision">
         <div class="skill-bg eyes"><video autoplay muted loop playsinline><source src="assets/skill-berries.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
@@ -3095,6 +3359,19 @@ ul, ol { list-style: none; }
           <div class="skill-eyebrow">Vision &amp; Nutrition</div>
           <h3 class="skill-title">Eat for Your Eyes</h3>
           <p class="skill-sub">Nutrition for lifelong vision.</p>
+        </div>
+      </a>
+      <!-- Card 6: Cellular Regeneration (clock video) -->
+      <a class="skill-card reveal" href="topics/biomarkers-testing.html" aria-label="Cellular Regeneration — how your cells repair, recycle, and renew">
+        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
+        <div class="skill-overlay"></div>
+        <span class="skill-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+        <div class="skill-content">
+          <div class="skill-eyebrow">Cell Biology</div>
+          <h3 class="skill-title">Cellular Regeneration</h3>
+          <p class="skill-sub">How your cells repair, recycle, and renew.</p>
         </div>
       </a>
     </div>
@@ -3335,59 +3612,57 @@ ul, ol { list-style: none; }
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
     </div>
-
-    <!-- Mobile hex replacement — vertical card list -->
+    <!-- Mobile-friendly topic list (replaces hex on small screens) -->
     <div class="deepdive-mobile-list">
-      <a class="deepdive-mobile-card" href="topics/metabolic-health-blood-sugar.html">
-        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div>
+      <a href="/topics/metabolic-health-blood-sugar.html" class="deepdive-mobile-card">
+        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
         <div class="deepdive-mobile-text">
           <div class="deepdive-mobile-title">Metabolic Health</div>
-          <div class="deepdive-mobile-desc">Glucose, lipids, and inflammation markers decoded.</div>
+          <div class="deepdive-mobile-desc">Read your own blood work.</div>
         </div>
-        <svg class="deepdive-mobile-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <span class="deepdive-mobile-arrow">&rarr;</span>
       </a>
-      <a class="deepdive-mobile-card" href="topics/exercise-movement.html">
-        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24"><path d="M6 8v8M18 8v8M2 10v4M22 10v4M6 12h12"/></svg></div>
+      <a href="/topics/exercise-movement.html" class="deepdive-mobile-card">
+        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
         <div class="deepdive-mobile-text">
-          <div class="deepdive-mobile-title">Exercise &amp; Movement</div>
-          <div class="deepdive-mobile-desc">Strength, zone 2 cardio, stability, and VO2 max.</div>
+          <div class="deepdive-mobile-title">Exercise & Movement</div>
+          <div class="deepdive-mobile-desc">Train for the next forty years.</div>
         </div>
-        <svg class="deepdive-mobile-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <span class="deepdive-mobile-arrow">&rarr;</span>
       </a>
-      <a class="deepdive-mobile-card" href="topics/sleep-circadian-health.html">
-        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
+      <a href="/topics/sleep-circadian-health.html" class="deepdive-mobile-card">
+        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></div>
         <div class="deepdive-mobile-text">
-          <div class="deepdive-mobile-title">Sleep &amp; Circadian</div>
-          <div class="deepdive-mobile-desc">Sleep architecture, light exposure, and recovery.</div>
+          <div class="deepdive-mobile-title">Sleep & Circadian</div>
+          <div class="deepdive-mobile-desc">Circadian rhythm, decoded.</div>
         </div>
-        <svg class="deepdive-mobile-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <span class="deepdive-mobile-arrow">&rarr;</span>
       </a>
-      <a class="deepdive-mobile-card" href="topics/mental-emotional-health.html">
-        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10Z"/></svg></div>
+      <a href="/topics/mental-emotional-health.html" class="deepdive-mobile-card">
+        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"/><path d="M12 8v4l3 3"/></svg></div>
         <div class="deepdive-mobile-text">
-          <div class="deepdive-mobile-title">Stress &amp; Emotions</div>
-          <div class="deepdive-mobile-desc">Chronic stress, cortisol, and resilience building.</div>
+          <div class="deepdive-mobile-title">Stress & Emotions</div>
+          <div class="deepdive-mobile-desc">Regulate the cortisol loop.</div>
         </div>
-        <svg class="deepdive-mobile-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <span class="deepdive-mobile-arrow">&rarr;</span>
       </a>
-      <a class="deepdive-mobile-card" href="topics/supplements-health-tech.html">
-        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4"/><path d="M12 8v8"/></svg></div>
+      <a href="/topics/supplements-health-tech.html" class="deepdive-mobile-card">
+        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <div class="deepdive-mobile-text">
-          <div class="deepdive-mobile-title">Supplements &amp; Tools</div>
-          <div class="deepdive-mobile-desc">Evidence-based compounds and real data.</div>
+          <div class="deepdive-mobile-title">Supplements & Tools</div>
+          <div class="deepdive-mobile-desc">Evidence over hype.</div>
         </div>
-        <svg class="deepdive-mobile-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <span class="deepdive-mobile-arrow">&rarr;</span>
       </a>
-      <a class="deepdive-mobile-card" href="topics/protocols-habits.html">
-        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <a href="/topics/protocols-habits.html" class="deepdive-mobile-card">
+        <div class="deepdive-mobile-icon"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
         <div class="deepdive-mobile-text">
-          <div class="deepdive-mobile-title">Protocols &amp; Habits</div>
-          <div class="deepdive-mobile-desc">Daily systems that compound into lasting change.</div>
+          <div class="deepdive-mobile-title">Protocols & Habits</div>
+          <div class="deepdive-mobile-desc">Build a blueprint that sticks.</div>
         </div>
-        <svg class="deepdive-mobile-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <span class="deepdive-mobile-arrow">&rarr;</span>
       </a>
     </div>
-
   </div>
 </section>
 
@@ -3487,31 +3762,48 @@ ul, ol { list-style: none; }
   <div class="container">
     <div class="instructors-header reveal">
       <p class="instructors-bridge">The teachers and clinicians behind your longevity education</p>
-      <span class="eyebrow" style="margin-bottom: 16px; display: block;">Your Instructors</span>
+      <span class="eyebrow" style="margin-bottom: 16px; display: block;">Leading Teachers</span>
       <h2 class="section-title">Teachers and Clinicians<br>at the Frontier of Longevity.</h2>
       <p class="section-subtitle" style="margin: 0 auto;">Not celebrity doctors — credible, dedicated instructors who practice what the research says, work directly with you, and answer the questions your GP can’t.</p>
     </div>
-    <div class="teachers-grid">
-      <div class="teacher-card reveal reveal-delay-1">
-        <div class="teacher-avatar"><img src="assets/maya-elhalal.jpg" alt="Maya Elhalal"></div>
-        <h3 class="teacher-name">Maya Elhalal</h3>
-        <p class="teacher-role">Lead Instructor &amp; Longevity Educator</p>
-        <p class="teacher-bio">Founder of Longevity Science. Experienced in aging science workshops, glucose management, and lifestyle optimization. Leads longevity strategy programs and retreats across three continents.</p>
-      </div>
-      <div class="teacher-card reveal reveal-delay-2">
-        <div class="teacher-avatar"><img src="assets/david-barzilai.jpg" alt="David Barzilai, MD, PhD"></div>
-        <h3 class="teacher-name">David Barzilai, MD, PhD</h3>
-        <p class="teacher-role">Healthspan Coach</p>
-        <p class="teacher-bio">Physician and healthspan coaching specialist. Focuses on metabolic health, stress, sleep, and daily habits — grounded in longevity science, not expensive clinical interventions.</p>
-      </div>
-      <div class="teacher-card reveal reveal-delay-3">
-        <div class="teacher-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h3 class="teacher-name">Guest Faculty</h3>
-        <p class="teacher-role">xLongevity Certified Coaches</p>
-        <p class="teacher-bio">Certified longevity coaches trained in age-related biology, lifestyle optimization, and behavior change. Specialists in translating complex science into daily practice you can sustain.</p>
-      </div>
+    <!-- Certification credentials strip -->
+    <div class="teacher-cert-strip reveal">
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/><path d="M8 12l3 3 5-5.5" stroke-width="2"/></svg>
+        <span class="cert-pill-abbr">ACE</span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
+        <span class="cert-pill-name">American Council on Exercise</span>
+      </span>
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
+        <span class="cert-pill-abbr">NASM</span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
+        <span class="cert-pill-name">National Academy of Sports Medicine</span>
+      </span>
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
+        <span class="cert-pill-abbr">IFM</span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
+        <span class="cert-pill-name">Institute for Functional Medicine</span>
+      </span>
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
+        <span class="cert-pill-abbr">NBHWC</span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
+        <span class="cert-pill-name">National Board for Health &amp; Wellness Coaching</span>
+      </span>
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
+        <span class="cert-pill-abbr">PN</span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
+        <span class="cert-pill-name">Precision Nutrition</span>
+      </span>
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
+        <span class="cert-pill-abbr">xLA</span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
+        <span class="cert-pill-name">Extended Learning Alliance</span>
+      </span>
     </div>
   </div>
 </section>
@@ -3523,42 +3815,48 @@ ul, ol { list-style: none; }
       <h2 class="section-title">Backed by leading<br>health credentials.</h2>
     </div>
     <div class="cert-pill-row reveal">
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+      <!-- ACE -->
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/><path d="M8 12l3 3 5-5.5" stroke-width="2"/></svg>
         <span class="cert-pill-abbr">ACE</span>
-        <span class="cert-pill-divider"></span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
         <span class="cert-pill-name">American Council on Exercise</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+      </span>
+      <!-- NASM -->
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
         <span class="cert-pill-abbr">NASM</span>
-        <span class="cert-pill-divider"></span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
         <span class="cert-pill-name">National Academy of Sports Medicine</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+      </span>
+      <!-- IFM -->
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
         <span class="cert-pill-abbr">IFM</span>
-        <span class="cert-pill-divider"></span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
         <span class="cert-pill-name">Institute for Functional Medicine</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+      </span>
+      <!-- NBHWC -->
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
         <span class="cert-pill-abbr">NBHWC</span>
-        <span class="cert-pill-divider"></span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
         <span class="cert-pill-name">National Board for Health &amp; Wellness Coaching</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+      </span>
+      <!-- PN -->
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
         <span class="cert-pill-abbr">PN</span>
-        <span class="cert-pill-divider"></span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
         <span class="cert-pill-name">Precision Nutrition</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="cert-pill-abbr">XLA</span>
-        <span class="cert-pill-divider"></span>
+      </span>
+      <!-- xLA -->
+      <span class="cert-pill">
+        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5v6c0 4.75 3.35 9.15 8 10.5C16.65 20.15 20 15.75 20 11V5L12 2z"/></svg>
+        <span class="cert-pill-abbr">xLA</span>
+        <span class="cert-pill-divider" aria-hidden="true"></span>
         <span class="cert-pill-name">Extended Learning Alliance</span>
-      </div>
+      </span>
     </div>
   </div>
 </section>
@@ -3759,37 +4057,52 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-<!-- ==============================================
-     PRICING SECTION
-     ============================================== -->
+<!-- FOLD 11b — PRICING -->
 <section class="lla-pricing" data-billing="annual" aria-labelledby="lla-pricing-heading">
   <div class="lla-pricing__inner">
 
+    <!-- Header -->
     <header class="lla-pricing__header">
       <p class="lla-pricing__eyebrow" aria-hidden="true">Pricing</p>
       <h2 class="lla-pricing__title" id="lla-pricing-heading">Invest in your next decade.</h2>
       <p class="lla-pricing__subtitle">Choose the path that fits your commitment level.</p>
     </header>
 
+    <!-- Billing Toggle -->
     <div class="lla-pricing__toggle-row" role="group" aria-label="Billing period">
       <span class="toggle-label label-monthly">Monthly</span>
-      <button class="toggle-switch" id="lla-billing-toggle" role="switch" aria-checked="true" aria-label="Toggle billing period: currently Annual" tabindex="0">
+
+      <button
+        class="toggle-switch"
+        id="lla-billing-toggle"
+        role="switch"
+        aria-checked="true"
+        aria-label="Toggle billing period: currently Annual"
+        tabindex="0"
+      >
         <span class="toggle-track" aria-hidden="true"></span>
         <span class="toggle-thumb" aria-hidden="true"></span>
       </button>
+
       <span class="toggle-label label-annual">Annual</span>
+
       <span class="save-pill" aria-live="polite" aria-label="Save up to 28% with annual billing">
-        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M9.5 2.5L4.5 8.5L1.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+          <path d="M9.5 2.5L4.5 8.5L1.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         Save up to 28%
       </span>
     </div>
 
+    <!-- Cards -->
     <div class="lla-pricing__cards" role="list">
 
       <!-- TIER 1: EXPLORER -->
       <article class="pricing-card" role="listitem" aria-label="Explorer plan">
         <p class="card__tier">Explorer</p>
         <p class="card__tagline">Your foundation for a longer, healthier life.</p>
+
+        <!-- Annual -->
         <div class="price-block price-annual">
           <div class="price-block__main">
             <span class="price-block__currency">$</span>
@@ -3798,6 +4111,8 @@ ul, ol { list-style: none; }
           <p class="price-block__sub">Billed upfront &middot; <strong>That's just $107/mo</strong></p>
           <span class="price-block__save">Save $498 &mdash; 28% off</span>
         </div>
+
+        <!-- Monthly -->
         <div class="price-block price-monthly">
           <div class="price-block__main">
             <span class="price-block__currency">$</span>
@@ -3806,23 +4121,59 @@ ul, ol { list-style: none; }
           </div>
           <p class="price-block__sub">Billed monthly &middot; <strong>$1,788 over 12 months</strong></p>
         </div>
+
         <hr class="card__divider">
+
         <p class="features-label">What's included</p>
         <ul class="features-list" aria-label="Explorer plan features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>All 12 live sessions (90 min each)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Session recordings (lifetime access)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Full course materials &amp; resources</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Community forum access</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Small group sessions (max 15 people)</li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            All 12 live sessions (90 min each)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Session recordings (lifetime access)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Full course materials &amp; resources
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Community forum access
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Small group sessions (max 15 people)
+          </li>
         </ul>
+
         <a href="#" class="btn-cta btn-outline" role="button">Get Started</a>
       </article>
 
       <!-- TIER 2: ACCELERATOR (FEATURED) -->
       <article class="pricing-card pricing-card--featured" role="listitem" aria-label="Accelerator plan, most popular">
         <span class="popular-badge">Most Popular</span>
+
         <p class="card__tier">Accelerator</p>
         <p class="card__tagline">The complete longevity system with personal coaching.</p>
+
+        <!-- Annual -->
         <div class="price-block price-annual">
           <div class="price-block__main">
             <span class="price-block__currency">$</span>
@@ -3831,6 +4182,8 @@ ul, ol { list-style: none; }
           <p class="price-block__sub">Billed upfront &middot; <strong>That's just $149/mo</strong></p>
           <span class="price-block__save">Save $598 &mdash; 25% off</span>
         </div>
+
+        <!-- Monthly -->
         <div class="price-block price-monthly">
           <div class="price-block__main">
             <span class="price-block__currency">$</span>
@@ -3839,16 +4192,55 @@ ul, ol { list-style: none; }
           </div>
           <p class="price-block__sub">Billed monthly &middot; <strong>$2,388 over 12 months</strong></p>
         </div>
+
         <hr class="card__divider">
+
         <p class="features-label">Everything in Explorer, plus</p>
         <ul class="features-list" aria-label="Accelerator plan features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Personal Longevity Blueprint</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>CGM device included (continuous glucose monitor)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>2 one-on-one coaching sessions</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority small group (max 10 people)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Certificate of completion</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-inherited">All Explorer features included</span></li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Personal Longevity Blueprint
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            CGM device included (continuous glucose monitor)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            2 one-on-one coaching sessions
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Priority small group (max 10 people)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Certificate of completion
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="feature-inherited">All Explorer features included</span>
+          </li>
         </ul>
+
         <a href="#" class="btn-cta btn-filled" role="button">Reserve Your Seat</a>
       </article>
 
@@ -3856,6 +4248,8 @@ ul, ol { list-style: none; }
       <article class="pricing-card" role="listitem" aria-label="Catalyst plan">
         <p class="card__tier">Catalyst</p>
         <p class="card__tagline">Maximum support for those who want transformational results.</p>
+
+        <!-- Annual -->
         <div class="price-block price-annual">
           <div class="price-block__main">
             <span class="price-block__currency">$</span>
@@ -3864,6 +4258,8 @@ ul, ol { list-style: none; }
           <p class="price-block__sub">Billed upfront &middot; <strong>That's just $232/mo</strong></p>
           <span class="price-block__save">Save $798 &mdash; 22% off</span>
         </div>
+
+        <!-- Monthly -->
         <div class="price-block price-monthly">
           <div class="price-block__main">
             <span class="price-block__currency">$</span>
@@ -3872,37 +4268,86 @@ ul, ol { list-style: none; }
           </div>
           <p class="price-block__sub">Billed monthly &middot; <strong>$3,588 over 12 months</strong></p>
         </div>
+
         <hr class="card__divider">
+
         <p class="features-label">Everything in Accelerator, plus</p>
         <ul class="features-list" aria-label="Catalyst plan features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>6 one-on-one coaching sessions</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>VIP WhatsApp group with instructors</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Lifetime community access</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced biomarker analysis session</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Early access to future courses</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-inherited">All Accelerator features included</span></li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            6 one-on-one coaching sessions
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            VIP WhatsApp group with instructors
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Lifetime community access
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Advanced biomarker analysis session
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Early access to future courses
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="feature-inherited">All Accelerator features included</span>
+          </li>
         </ul>
+
         <a href="#" class="btn-cta btn-outline" role="button">Apply Now</a>
       </article>
 
-    </div>
+    </div><!-- /cards -->
 
+    <!-- Trust Strip -->
     <div class="lla-pricing__trust" role="list" aria-label="Trust indicators">
       <div class="trust-item" role="listitem">
-        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><path d="M8.5 1.5L10.48 5.96L15.5 6.81L11.75 10.47L12.64 15.5L8.5 13.25L4.36 15.5L5.25 10.47L1.5 6.81L6.52 5.96L8.5 1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true">
+          <path d="M8.5 1.5L10.48 5.96L15.5 6.81L11.75 10.47L12.64 15.5L8.5 13.25L4.36 15.5L5.25 10.47L1.5 6.81L6.52 5.96L8.5 1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
         30-day money-back guarantee
       </div>
       <div class="trust-item" role="listitem">
-        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><rect x="1.5" y="5.5" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 5.5V4A3.5 3.5 0 0 1 12 4v1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8.5" cy="10.75" r="1.15" fill="currentColor"/></svg>
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true">
+          <rect x="1.5" y="5.5" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M5 5.5V4A3.5 3.5 0 0 1 12 4v1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="8.5" cy="10.75" r="1.15" fill="currentColor"/>
+        </svg>
         Secure payment &middot; SSL encrypted
       </div>
       <div class="trust-item" role="listitem">
-        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 5v4.2l2.8 1.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="7" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M8.5 5v4.2l2.8 1.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         Next cohort starts in 3 weeks
       </div>
     </div>
 
-  </div>
+  </div><!-- /inner -->
 </section>
 
 <!-- ==============================================
@@ -3977,10 +4422,10 @@ ul, ol { list-style: none; }
       <div class="footer-col">
         <h4>Topics</h4>
         <ul>
-          <li><a href="topics/nutrition.html">Nutrition</a></li>
-          <li><a href="topics/sleep.html">Sleep</a></li>
-          <li><a href="topics/metabolic.html">Metabolic</a></li>
-          <li><a href="topics/protocols.html">Protocols</a></li>
+          <li><a href="topics/nutrition-longevity.html">Nutrition</a></li>
+          <li><a href="topics/sleep-circadian-health.html">Sleep</a></li>
+          <li><a href="topics/metabolic-health-blood-sugar.html">Metabolic</a></li>
+          <li><a href="topics/protocols-habits.html">Protocols</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -4123,17 +4568,17 @@ ul, ol { list-style: none; }
   const detailLink = document.getElementById('hexDetailLink');
 
   const data = [
-    { tag: 'Metabolic Health', title: 'Read your own blood work.', desc: 'Learn to interpret glucose, lipids, and inflammation markers. Understand what your labs actually mean — and which numbers matter most for longevity.', link: 'topics/metabolic-health-blood-sugar.html' },
-    { tag: 'Exercise & Movement', title: 'Train for the next forty years.', desc: 'Strength, zone 2 cardio, stability, and VO2 max — the exercise patterns that extend healthspan, not just fitness.', link: 'topics/exercise-movement.html' },
-    { tag: 'Sleep & Circadian', title: 'Circadian rhythm, decoded.', desc: 'How sleep architecture, light exposure, and timing reshape your recovery, cognition, and hormone regulation.', link: 'topics/sleep-circadian-health.html' },
-    { tag: 'Stress & Emotions', title: 'Regulate the cortisol loop.', desc: 'Chronic stress accelerates biological aging. Learn evidence-based techniques to interrupt the cycle and build resilience.', link: 'topics/mental-emotional-health.html' },
-    { tag: 'Supplements & Tools', title: 'Evidence over hype.', desc: 'Cut through marketing noise. Learn which supplements have real data behind them — and which are just packaging.', link: 'topics/supplements-health-tech.html' },
-    { tag: 'Protocols & Habits', title: 'Build a blueprint that sticks.', desc: 'Design a personalized longevity protocol grounded in your own data, habits, and goals — tested and peer-reviewed by your cohort.', link: 'topics/protocols-habits.html' }
+    { tag: 'Metabolic Health', title: 'Read your own blood work.', desc: 'Learn to interpret glucose, lipids, and inflammation markers. Understand what your labs actually mean — and which numbers matter most for longevity.', link: '/topics/metabolic-health-blood-sugar.html' },
+    { tag: 'Exercise & Movement', title: 'Train for the next forty years.', desc: 'Strength, zone 2 cardio, stability, and VO2 max — the exercise patterns that extend healthspan, not just fitness.', link: '/topics/exercise-movement.html' },
+    { tag: 'Sleep & Circadian', title: 'Circadian rhythm, decoded.', desc: 'How sleep architecture, light exposure, and timing reshape your recovery, cognition, and hormone regulation.', link: '/topics/sleep-circadian-health.html' },
+    { tag: 'Stress & Emotions', title: 'Regulate the cortisol loop.', desc: 'Chronic stress accelerates biological aging. Learn evidence-based techniques to interrupt the cycle and build resilience.', link: '/topics/mental-emotional-health.html' },
+    { tag: 'Supplements & Tools', title: 'Evidence over hype.', desc: 'Cut through marketing noise. Learn which supplements have real data behind them — and which are just packaging.', link: '/topics/supplements-health-tech.html' },
+    { tag: 'Protocols & Habits', title: 'Build a blueprint that sticks.', desc: 'Design a personalized longevity protocol grounded in your own data, habits, and goals — tested and peer-reviewed by your cohort.', link: '/topics/protocols-habits.html' }
   ];
 
   // Position nodes in a circle — bigger chart
   const cx = 420, cy = 350, radius = 280;
-  const nodeSize = 156;
+  const nodeSize = 130;
 
   function positionChart() {
     const w = chart.offsetWidth;
@@ -4312,25 +4757,32 @@ ul, ol { list-style: none; }
    ================================================== */
 (function () {
   'use strict';
+
   var section = document.querySelector('.lla-pricing');
   var btn     = document.getElementById('lla-billing-toggle');
+
   if (!section || !btn) return;
+
   function setBilling(isAnnual) {
     section.setAttribute('data-billing', isAnnual ? 'annual' : 'monthly');
     btn.setAttribute('aria-checked', isAnnual ? 'true' : 'false');
     btn.setAttribute('aria-label',
       'Toggle billing period: currently ' + (isAnnual ? 'Annual' : 'Monthly'));
   }
+
   btn.addEventListener('click', function () {
     var current = section.getAttribute('data-billing');
     setBilling(current !== 'annual');
   });
+
   btn.addEventListener('keydown', function (e) {
     if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
       btn.click();
     }
   });
+
+  // Initialise (annual is default via HTML attribute)
   setBilling(section.getAttribute('data-billing') === 'annual');
 }());
 
@@ -4343,30 +4795,23 @@ ul, ol { list-style: none; }
   var closeBtn = document.getElementById('mobileNavClose');
   if (!btn || !overlay) return;
 
-  function openMenu() {
+  btn.addEventListener('click', function() {
     overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden', 'false');
-    btn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
-  }
+  });
+
   function closeMenu() {
     overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden', 'true');
-    btn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
 
-  btn.addEventListener('click', openMenu);
-  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  closeBtn.addEventListener('click', closeMenu);
 
-  overlay.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+  // Close when clicking a nav link
+  overlay.querySelectorAll('a').forEach(function(link) {
     link.addEventListener('click', closeMenu);
   });
-
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closeMenu();
-  });
-}());
+})();
 </script>
 </body>
 </html>
