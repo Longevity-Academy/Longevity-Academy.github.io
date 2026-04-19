@@ -721,151 +721,144 @@ ul, ol { list-style: none; }
   .skill-card { height: 300px; }
 }
 
-/* ==================================================
-   FOLD 4 — SYLLABUS PHASES (Visual Circle Timeline)
-   ================================================== */
-.syllabus {
-  padding: 140px 0 160px;
-  background: linear-gradient(165deg, #030d1a 0%, #001233 50%, #001a3d 100%);
+
+/* ======= THE COMPLETE PROTOCOL — ACCORDION CURRICULUM (DARK THEME) ======= */
+.curriculum {
   position: relative;
+  padding: 140px 0 160px;
   overflow: hidden;
+  /* LIGHT background to break the dark monotony */
+  background: linear-gradient(180deg, #f8f9fc 0%, #ffffff 40%, #f5f7fa 100%);
 }
-.syllabus::before {
+.curriculum::after {
   content: '';
   position: absolute;
-  top: 40%; left: 50%;
-  transform: translate(-50%, -50%);
+  top: 20%; left: 50%; transform: translateX(-50%);
   width: 900px; height: 600px;
-  background: radial-gradient(ellipse, rgba(0,110,255,0.12) 0%, transparent 70%);
-  pointer-events: none;
+  background: radial-gradient(circle, rgba(0,110,255,0.04) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
 }
-.syllabus-header {
-  text-align: center;
-  margin-bottom: 80px;
-  position: relative;
-  z-index: 2;
+.curriculum-header { text-align: center; margin-bottom: 80px; position: relative; z-index: 1; }
+.curriculum-bridge {
+  font-size: 14px; font-style: italic; color: #666;
+  margin-bottom: 12px; letter-spacing: 0.2px;
 }
-.syllabus .eyebrow { color: rgba(0,110,255,0.85); }
-.syllabus .section-title { color: #fff; }
-.syllabus .section-subtitle { color: rgba(255,255,255,0.65); }
-
-/* --- Phase circles row --- */
-/* Circle timeline */
-.syl-timeline {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 48px;
-  position: relative;
-  margin-bottom: 48px;
+.curriculum .eyebrow { color: #006EFF !important; }
+.curriculum .section-title { 
+  color: #0a1628 !important;
+  font-size: clamp(44px, 6vw, 72px) !important;
 }
-.syl-connector {
-  position: absolute;
-  top: 60px;
-  left: 15%;
-  right: 15%;
-  height: 2px;
-  background: linear-gradient(90deg, #006EFF, #00D1FF, #7B61FF, #FF6B6B);
-  opacity: 0.3;
-  z-index: 0;
+.curriculum .section-title .gold {
+  color: #006EFF !important;
+  font-style: normal;
 }
-.syl-phase {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
+.curriculum .section-subtitle {
+  color: #444 !important;
+  font-size: clamp(16px, 1.2vw, 19px) !important;
+  max-width: 720px;
+  margin: 16px auto 0;
+  line-height: 1.7;
 }
-.syl-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgba(0, 20, 60, 0.8);
-  border: 2.5px solid var(--phase-color, #006EFF);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 0 0 0 var(--phase-color);
+.curriculum-phases {
+  max-width: 960px; margin: 0 auto; position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: 48px;
 }
-.syl-phase:hover .syl-circle,
-.syl-phase.active .syl-circle {
-  transform: scale(1.1);
-  box-shadow: 0 0 40px rgba(0,110,255,0.25);
-  background: rgba(0, 40, 100, 0.6);
+/* Phase block */
+.phase-block-header {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 20px; padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
-.syl-circle-num {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 28px;
-  color: var(--phase-color, #006EFF);
-  letter-spacing: -0.02em;
+.phase-block-label {
+  font-family: 'Codec Pro', sans-serif; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 3px; color: #006EFF;
+  white-space: nowrap;
 }
-.syl-label {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-  margin-top: 16px;
-  text-align: center;
-  letter-spacing: -0.01em;
+.phase-block-name {
+  font-family: 'Codec Pro', sans-serif; font-weight: 800; font-size: 26px;
+  color: #0a1628; line-height: 1.2;
 }
-.syl-sessions {
-  font-size: 12px;
-  color: rgba(255,255,255,0.45);
-  margin-top: 4px;
-  font-weight: 500;
+.phase-block-sessions {
+  display: flex; flex-direction: column; gap: 12px;
 }
-.syl-detail {
-  max-width: 800px;
-  margin: 0 auto;
-  min-height: 60px;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  pointer-events: none;
-}
-.syl-detail.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.syl-detail-inner {
-  background: rgba(0, 20, 60, 0.7);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,0.1);
+/* Session accordion */
+.curriculum-item {
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 16px;
-  padding: 32px 36px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
-.syl-session-item {
-  display: flex;
-  gap: 16px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+.curriculum-item:hover {
+  background: rgba(255,255,255,1);
+  border-color: rgba(0,110,255,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
-.syl-session-item:last-child { border-bottom: none; }
-.syl-session-num {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  min-width: 28px;
-  padding-top: 2px;
+.curriculum-item.active {
+  background: rgba(255,255,255,1);
+  border-color: rgba(0,110,255,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
 }
-.syl-session-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 4px;
+.curriculum-trigger {
+  width: 100%; display: flex; align-items: center; gap: 16px;
+  padding: 20px 24px; background: none; border: none;
+  cursor: pointer; text-align: left; transition: background 0.2s;
 }
-.syl-session-desc {
-  font-size: 14px;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.5;
+.curriculum-trigger:hover { background: rgba(0,110,255,0.02); }
+.curriculum-num {
+  font-family: 'Codec Pro', sans-serif; font-weight: 800; font-size: 16px;
+  color: #006EFF; min-width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,110,255,0.06);
+  border: 1px solid rgba(0,110,255,0.12);
+  border-radius: 12px; flex-shrink: 0;
 }
+.curriculum-trigger-text { flex: 1; }
+.curriculum-trigger-text h3 {
+  font-family: 'Codec Pro', sans-serif; font-weight: 700; font-size: 17px;
+  color: #0a1628; line-height: 1.3;
+}
+.curriculum-chevron {
+  width: 22px; height: 22px; color: #999;
+  transition: transform 0.3s; flex-shrink: 0;
+}
+.curriculum-item.active .curriculum-chevron { transform: rotate(180deg); color: #006EFF; }
+.curriculum-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.curriculum-body-inner { padding: 0 24px 24px 84px; }
+.curriculum-section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: #006EFF; margin-bottom: 8px; margin-top: 16px;
+}
+.curriculum-section-label:first-child { margin-top: 0; }
+.curriculum-goals { margin-bottom: 8px; list-style: none; }
+.curriculum-goals li {
+  position: relative; padding-left: 20px; font-size: 14.5px;
+  line-height: 1.6; color: #555; margin-bottom: 4px;
+}
+.curriculum-goals li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 6px; border-radius: 50%; background: #006EFF;
+}
+.curriculum-flow { font-size: 14.5px; line-height: 1.65; color: #555; margin-bottom: 8px; }
+.curriculum-work {
+  font-size: 14.5px; line-height: 1.65; color: #555;
+  padding: 12px 16px; background: rgba(0,110,255,0.05);
+  border-left: 3px solid #006EFF; border-radius: 0 12px 12px 0;
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .curriculum { padding: 80px 0 100px; }
+  .curriculum-header { margin-bottom: 48px; }
+  .curriculum-trigger { padding: 16px; }
+  .curriculum-body-inner { padding: 0 16px 20px 16px; }
+  .curriculum-num { min-width: 38px; height: 38px; font-size: 14px; }
+  .curriculum-trigger-text h3 { font-size: 15px; }
+  .phase-block-name { font-size: 22px; }
+  .phase-block-header { flex-direction: column; gap: 4px; }
+}
+
 /* ==================================================
    FOLD 5 — DEEP DIVE (Interactive Hexagonal Chart)
    ================================================== */
@@ -2108,10 +2101,6 @@ ul, ol { list-style: none; }
 .lead-gen-trust svg { width: 16px; height: 16px; color: #006EFF; flex-shrink: 0; }
 @media (max-width: 600px) { .lead-gen-row { flex-direction: column; } }
 
-@media (max-width: 700px) {
-}
-@media (max-width: 560px) {
-}
 
 /* ============================== */
 /* MOBILE RESPONSIVE OVERHAUL     */
@@ -2347,328 +2336,199 @@ ul, ol { list-style: none; }
   .final-cta-title { font-size: 26px !important; }
 }
 
-/* ======= TOPIC CARD VIDEO BACKGROUNDS + COLOR VARIETY ======= */
+/* ======= TOPIC CARDS — FEWER, LARGER, WITH MOTION VIDEO ======= */
+.topic-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 24px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
 .topic-card {
   position: relative !important;
   overflow: hidden !important;
-  min-height: 210px !important;
-  border-radius: 18px !important;
+  min-height: 280px !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  padding: 32px !important;
 }
 .topic-video-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 20px;
 }
 .topic-video-bg video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
+  opacity: 0.4;
   transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .topic-card:hover .topic-video-bg video {
-  opacity: 0.5;
-  transform: scale(1.05);
+  opacity: 0.6;
+  transform: scale(1.06);
 }
 .topic-card .topic-number,
 .topic-card .topic-arrow,
-.topic-card .topic-label,
-.topic-card .topic-desc,
+.topic-card > div,
 .topic-card > * {
   position: relative;
   z-index: 2;
 }
-/* --- Each topic card has a DIFFERENT base color --- */
+/* Gradient overlay for text readability */
+.topic-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 70%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 1;
+  border-radius: 0 0 20px 20px;
+}
+/* Each card unique color tint */
 .topic-card:nth-child(1) { 
-  background: linear-gradient(145deg, rgba(0, 50, 120, 0.75) 0%, rgba(0, 25, 70, 0.92) 100%) !important;
-  border: 1px solid rgba(0, 140, 255, 0.22) !important;
+  background: linear-gradient(145deg, rgba(0, 50, 120, 0.8) 0%, rgba(0, 20, 60, 0.95) 100%) !important;
+  border: 1px solid rgba(0, 140, 255, 0.2) !important;
 }
 .topic-card:nth-child(2) { 
-  background: linear-gradient(145deg, rgba(30, 0, 90, 0.75) 0%, rgba(15, 0, 55, 0.92) 100%) !important;
-  border: 1px solid rgba(140, 90, 255, 0.22) !important;
+  background: linear-gradient(145deg, rgba(30, 0, 90, 0.8) 0%, rgba(12, 0, 50, 0.95) 100%) !important;
+  border: 1px solid rgba(140, 90, 255, 0.2) !important;
 }
 .topic-card:nth-child(3) { 
-  background: linear-gradient(145deg, rgba(0, 60, 70, 0.75) 0%, rgba(0, 30, 45, 0.92) 100%) !important;
-  border: 1px solid rgba(0, 210, 190, 0.22) !important;
+  background: linear-gradient(145deg, rgba(60, 25, 0, 0.8) 0%, rgba(30, 10, 0, 0.95) 100%) !important;
+  border: 1px solid rgba(255, 170, 70, 0.2) !important;
 }
 .topic-card:nth-child(4) { 
-  background: linear-gradient(145deg, rgba(60, 25, 0, 0.75) 0%, rgba(35, 12, 0, 0.92) 100%) !important;
-  border: 1px solid rgba(255, 170, 70, 0.22) !important;
+  background: linear-gradient(145deg, rgba(0, 55, 65, 0.8) 0%, rgba(0, 25, 35, 0.95) 100%) !important;
+  border: 1px solid rgba(0, 210, 190, 0.2) !important;
 }
 .topic-card:nth-child(5) { 
-  background: linear-gradient(145deg, rgba(50, 5, 50, 0.75) 0%, rgba(25, 0, 35, 0.92) 100%) !important;
-  border: 1px solid rgba(210, 90, 210, 0.22) !important;
+  background: linear-gradient(145deg, rgba(50, 5, 50, 0.8) 0%, rgba(25, 0, 30, 0.95) 100%) !important;
+  border: 1px solid rgba(210, 90, 210, 0.2) !important;
 }
 .topic-card:nth-child(6) { 
-  background: linear-gradient(145deg, rgba(0, 45, 30, 0.75) 0%, rgba(0, 20, 15, 0.92) 100%) !important;
-  border: 1px solid rgba(0, 230, 140, 0.22) !important;
+  background: linear-gradient(145deg, rgba(60, 10, 10, 0.75) 0%, rgba(30, 5, 10, 0.95) 100%) !important;
+  border: 1px solid rgba(255, 110, 110, 0.2) !important;
 }
-.topic-card:nth-child(7) { 
-  background: linear-gradient(145deg, rgba(60, 10, 10, 0.7) 0%, rgba(35, 5, 12, 0.92) 100%) !important;
-  border: 1px solid rgba(255, 110, 110, 0.22) !important;
+/* Hover glow */
+.topic-card:nth-child(1):hover { box-shadow: 0 24px 64px rgba(0,110,255,0.3) !important; }
+.topic-card:nth-child(2):hover { box-shadow: 0 24px 64px rgba(130,80,255,0.3) !important; }
+.topic-card:nth-child(3):hover { box-shadow: 0 24px 64px rgba(255,160,60,0.3) !important; }
+.topic-card:nth-child(4):hover { box-shadow: 0 24px 64px rgba(0,200,180,0.3) !important; }
+.topic-card:nth-child(5):hover { box-shadow: 0 24px 64px rgba(200,80,200,0.3) !important; }
+.topic-card:nth-child(6):hover { box-shadow: 0 24px 64px rgba(255,100,100,0.3) !important; }
+.topic-label {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  position: relative;
+  z-index: 2;
 }
-.topic-card:nth-child(8) { 
-  background: linear-gradient(145deg, rgba(0, 30, 70, 0.75) 0%, rgba(0, 50, 95, 0.92) 100%) !important;
-  border: 1px solid rgba(0, 190, 255, 0.22) !important;
+.topic-desc {
+  font-size: 16px !important;
+  position: relative;
+  z-index: 2;
 }
-/* Hover glow per topic card */
-.topic-card:nth-child(1):hover { box-shadow: 0 20px 60px rgba(0,110,255,0.25), 0 0 0 1px rgba(0,140,255,0.3) !important; }
-.topic-card:nth-child(2):hover { box-shadow: 0 20px 60px rgba(130,80,255,0.25), 0 0 0 1px rgba(140,90,255,0.3) !important; }
-.topic-card:nth-child(3):hover { box-shadow: 0 20px 60px rgba(0,200,180,0.25), 0 0 0 1px rgba(0,210,190,0.3) !important; }
-.topic-card:nth-child(4):hover { box-shadow: 0 20px 60px rgba(255,160,60,0.25), 0 0 0 1px rgba(255,170,70,0.3) !important; }
-.topic-card:nth-child(5):hover { box-shadow: 0 20px 60px rgba(200,80,200,0.25), 0 0 0 1px rgba(210,90,210,0.3) !important; }
-.topic-card:nth-child(6):hover { box-shadow: 0 20px 60px rgba(0,220,130,0.25), 0 0 0 1px rgba(0,230,140,0.3) !important; }
-.topic-card:nth-child(7):hover { box-shadow: 0 20px 60px rgba(255,100,100,0.25), 0 0 0 1px rgba(255,110,110,0.3) !important; }
-.topic-card:nth-child(8):hover { box-shadow: 0 20px 60px rgba(0,180,255,0.25), 0 0 0 1px rgba(0,190,255,0.3) !important; }
-/* Topic number colors */
-.topic-card:nth-child(1) .topic-number { color: rgba(0,170,255,0.18) !important; }
-.topic-card:nth-child(2) .topic-number { color: rgba(150,110,255,0.18) !important; }
-.topic-card:nth-child(3) .topic-number { color: rgba(0,220,200,0.18) !important; }
-.topic-card:nth-child(4) .topic-number { color: rgba(255,180,80,0.18) !important; }
-.topic-card:nth-child(5) .topic-number { color: rgba(220,100,220,0.18) !important; }
-.topic-card:nth-child(6) .topic-number { color: rgba(0,240,150,0.18) !important; }
-.topic-card:nth-child(7) .topic-number { color: rgba(255,120,120,0.18) !important; }
-.topic-card:nth-child(8) .topic-number { color: rgba(0,200,255,0.18) !important; }
+.topic-number {
+  font-size: 100px !important;
+  position: relative;
+  z-index: 2;
+}
 
-/* ======= HOW IT WORKS — DIFFERENT COLORS PER CARD ======= */
-.how-card:nth-child(1) { 
-  background: linear-gradient(145deg, rgba(0, 40, 100, 0.85) 0%, rgba(0, 20, 55, 0.95) 100%) !important;
-  border-top: 3px solid #006EFF !important;
-  border: 1px solid rgba(0,110,255,0.15) !important;
-  border-top: 3px solid #006EFF !important;
+@media (max-width: 768px) {
+  .topic-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  .topic-card {
+    min-height: 220px !important;
+  }
+  .topic-label { font-size: 22px !important; }
 }
-.how-card:nth-child(2) { 
-  background: linear-gradient(145deg, rgba(25, 10, 75, 0.85) 0%, rgba(12, 0, 48, 0.95) 100%) !important;
-  border: 1px solid rgba(123,97,255,0.15) !important;
-  border-top: 3px solid #7B61FF !important;
-}
+
+/* ======= HOW IT WORKS — MORE LIGHT, DIFFERENT COLORS ======= */
+/* removed old how override */
 .how-card:nth-child(3) { 
-  background: linear-gradient(145deg, rgba(0, 45, 55, 0.85) 0%, rgba(0, 22, 38, 0.95) 100%) !important;
-  border: 1px solid rgba(0,201,176,0.15) !important;
+  background: linear-gradient(145deg, rgba(0, 45, 55, 0.85), rgba(0, 22, 38, 0.95)) !important;
   border-top: 3px solid #00C9B0 !important;
 }
 .how-card:nth-child(4) { 
-  background: linear-gradient(145deg, rgba(50, 22, 0, 0.85) 0%, rgba(28, 10, 0, 0.95) 100%) !important;
-  border: 1px solid rgba(232,167,90,0.15) !important;
+  background: linear-gradient(145deg, rgba(50, 22, 0, 0.85), rgba(28, 10, 0, 0.95)) !important;
   border-top: 3px solid #E8A75A !important;
 }
 .how-card:nth-child(1) .how-card-num { color: #006EFF !important; border-color: rgba(0,110,255,0.35) !important; background: rgba(0,110,255,0.15) !important; }
 .how-card:nth-child(2) .how-card-num { color: #7B61FF !important; border-color: rgba(123,97,255,0.35) !important; background: rgba(123,97,255,0.15) !important; }
 .how-card:nth-child(3) .how-card-num { color: #00C9B0 !important; border-color: rgba(0,201,176,0.35) !important; background: rgba(0,201,176,0.15) !important; }
 .how-card:nth-child(4) .how-card-num { color: #E8A75A !important; border-color: rgba(232,167,90,0.35) !important; background: rgba(232,167,90,0.15) !important; }
-/* How card hover glow */
-.how-card:nth-child(1):hover { box-shadow: 0 16px 48px rgba(0,110,255,0.2) !important; }
-.how-card:nth-child(2):hover { box-shadow: 0 16px 48px rgba(123,97,255,0.2) !important; }
-.how-card:nth-child(3):hover { box-shadow: 0 16px 48px rgba(0,201,176,0.2) !important; }
-.how-card:nth-child(4):hover { box-shadow: 0 16px 48px rgba(232,167,90,0.2) !important; }
-
-/* ======= VALUE CARDS — COLOR VARIETY ======= */
-.value-card:nth-child(1) { border-left-color: #006EFF !important; }
-.value-card:nth-child(2) { 
-  border-left-color: #7B61FF !important; 
-  background: linear-gradient(145deg, rgba(25,10,65,0.7) 0%, rgba(10,0,38,0.9) 100%) !important; 
-}
-.value-card:nth-child(3) { 
-  border-left-color: #00C9B0 !important; 
-  background: linear-gradient(145deg, rgba(0,40,45,0.7) 0%, rgba(0,18,28,0.9) 100%) !important; 
-}
-.value-card:nth-child(4) { 
-  border-left-color: #E8A75A !important; 
-  background: linear-gradient(145deg, rgba(45,22,0,0.7) 0%, rgba(22,10,0,0.9) 100%) !important; 
+.how-card-title { font-size: 26px !important; }
+.how-card-desc { font-size: 16px !important; }
+.how-card { padding: 40px 32px 36px !important; border-radius: 20px !important; }
+@media (max-width: 768px) {
+  .how-title { font-size: clamp(40px, 11vw, 60px) !important; }
+  .how-card { padding: 28px 22px 24px !important; }
+  .how-card-title { font-size: 22px !important; }
 }
 
-/* ======= METHODOLOGY — APPLE-LEVEL 3D REDESIGN ======= */
-.syllabus {
-  padding: 160px 0 180px !important;
-  background: linear-gradient(165deg, #030d1a 0%, #001233 40%, #001a4d 100%) !important;
+/* ======= CERT BADGES — 2.5X BIGGER, LESS TALL STRIP, 2 LINES ======= */
+.certs {
+  padding: 32px 0 !important;
+  background: rgba(255,255,255,0.03) !important;
 }
-.syllabus::before {
-  width: 1200px !important;
-  height: 900px !important;
-  background: radial-gradient(ellipse, rgba(0,110,255,0.15) 0%, transparent 65%) !important;
-}
-.syllabus::after {
-  content: '';
-  position: absolute;
-  bottom: 10%;
-  right: 10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(ellipse, rgba(123,97,255,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.syllabus-header {
-  margin-bottom: 100px !important;
-}
-.syllabus .section-title {
-  font-size: clamp(52px, 7vw, 88px) !important;
-  letter-spacing: -0.04em !important;
-  line-height: 1.05 !important;
-}
-.syllabus .section-subtitle {
-  font-size: clamp(17px, 1.3vw, 21px) !important;
-  max-width: 600px;
-  margin: 16px auto 0;
-}
-
-/* --- 3D PHASE CIRCLES — much larger, centered, dramatic --- */
-.syl-timeline {
+.cert-pill-row {
   display: flex !important;
+  flex-wrap: wrap !important;
   justify-content: center !important;
-  align-items: flex-start !important;
-  gap: 64px !important;
-  position: relative !important;
-  margin-bottom: 56px !important;
-  perspective: 1200px !important;
-}
-.syl-connector {
-  top: 85px !important;
-  left: 12% !important;
-  right: 12% !important;
-  height: 3px !important;
-  background: linear-gradient(90deg, #006EFF, #00D1FF, #7B61FF, #FF6B6B) !important;
-  opacity: 0.4 !important;
-  filter: blur(0.5px);
-}
-.syl-phase {
-  display: flex !important;
-  flex-direction: column !important;
   align-items: center !important;
-  cursor: pointer !important;
-  position: relative !important;
-  z-index: 1 !important;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
-}
-.syl-phase:hover {
-  transform: translateY(-8px) !important;
-}
-.syl-circle {
-  width: 170px !important;
-  height: 170px !important;
-  border-radius: 50% !important;
-  background: rgba(0, 15, 50, 0.6) !important;
-  border: 2.5px solid var(--phase-color, #006EFF) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
-  box-shadow: 
-    0 0 0 0 var(--phase-color),
-    0 0 60px rgba(0,0,0,0.3),
-    inset 0 0 30px rgba(0,0,0,0.2) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-.syl-phase:hover .syl-circle,
-.syl-phase.active .syl-circle {
-  transform: scale(1.12) !important;
-  box-shadow: 
-    0 0 50px rgba(0,110,255,0.3),
-    0 0 100px rgba(0,110,255,0.1),
-    inset 0 0 40px rgba(0,60,180,0.15) !important;
-  background: rgba(0, 30, 90, 0.7) !important;
-  border-width: 3px !important;
-}
-/* Active state uses the phase's own color for glow */
-.syl-phase[data-syl="0"]:hover .syl-circle,
-.syl-phase[data-syl="0"].active .syl-circle {
-  box-shadow: 0 0 50px rgba(0,110,255,0.35), 0 0 100px rgba(0,110,255,0.12), inset 0 0 40px rgba(0,60,180,0.2) !important;
-}
-.syl-phase[data-syl="1"]:hover .syl-circle,
-.syl-phase[data-syl="1"].active .syl-circle {
-  box-shadow: 0 0 50px rgba(0,209,255,0.35), 0 0 100px rgba(0,209,255,0.12), inset 0 0 40px rgba(0,130,200,0.2) !important;
-}
-.syl-phase[data-syl="2"]:hover .syl-circle,
-.syl-phase[data-syl="2"].active .syl-circle {
-  box-shadow: 0 0 50px rgba(123,97,255,0.35), 0 0 100px rgba(123,97,255,0.12), inset 0 0 40px rgba(80,50,200,0.2) !important;
-}
-.syl-phase[data-syl="3"]:hover .syl-circle,
-.syl-phase[data-syl="3"].active .syl-circle {
-  box-shadow: 0 0 50px rgba(255,107,107,0.35), 0 0 100px rgba(255,107,107,0.12), inset 0 0 40px rgba(200,60,60,0.2) !important;
-}
-
-.syl-circle-num {
-  font-size: 42px !important;
-  font-weight: 900 !important;
-  letter-spacing: -0.03em !important;
-}
-.syl-label {
-  font-size: 20px !important;
-  font-weight: 700 !important;
-  margin-top: 20px !important;
-  letter-spacing: -0.01em !important;
-  color: #fff !important;
-}
-.syl-sessions {
-  font-size: 14px !important;
-  color: rgba(255,255,255,0.5) !important;
-  margin-top: 6px !important;
-  font-weight: 500 !important;
-}
-
-/* Detail panel — shows on hover, larger, premium glass */
-.syl-detail {
-  max-width: 900px !important;
+  gap: 16px 20px !important;
+  max-width: 1100px !important;
   margin: 0 auto !important;
+  padding: 0 24px !important;
 }
-.syl-detail.visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+.cert-label {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 3px !important;
+  color: rgba(255,255,255,0.4) !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin-bottom: 8px !important;
 }
-.syl-detail-inner {
-  background: rgba(0, 15, 50, 0.6) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
-  border-radius: 24px !important;
-  padding: 40px 48px !important;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
+.cert-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 14px 24px !important;
+  border-radius: 14px !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  font-size: 15px !important;
 }
-
-/* --- Subtle floating particles animation for the methodology section --- */
-@keyframes floatOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
-  25% { transform: translate(30px, -20px) scale(1.1); opacity: 0.25; }
-  50% { transform: translate(-20px, -40px) scale(0.95); opacity: 0.2; }
-  75% { transform: translate(-30px, -10px) scale(1.05); opacity: 0.18; }
+.cert-pill-abbr {
+  font-weight: 800 !important;
+  font-size: 17px !important;
+  color: #fff !important;
+  letter-spacing: 0.5px !important;
 }
-.syllabus .syl-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+.cert-pill-name {
+  font-size: 14px !important;
+  color: rgba(255,255,255,0.65) !important;
 }
-.syllabus .syl-orb:nth-child(1) {
-  width: 300px; height: 300px;
-  top: 15%; left: 5%;
-  background: radial-gradient(circle, rgba(0,110,255,0.15), transparent 70%);
-  animation: floatOrb 12s ease-in-out infinite;
-}
-.syllabus .syl-orb:nth-child(2) {
-  width: 200px; height: 200px;
-  top: 60%; right: 8%;
-  background: radial-gradient(circle, rgba(123,97,255,0.12), transparent 70%);
-  animation: floatOrb 15s ease-in-out infinite 3s;
-}
-.syllabus .syl-orb:nth-child(3) {
-  width: 250px; height: 250px;
-  bottom: 10%; left: 30%;
-  background: radial-gradient(circle, rgba(0,209,255,0.1), transparent 70%);
-  animation: floatOrb 18s ease-in-out infinite 6s;
+@media (max-width: 768px) {
+  .cert-pill { padding: 10px 18px !important; font-size: 13px !important; }
+  .cert-pill-abbr { font-size: 15px !important; }
+  .cert-pill-name { font-size: 12px !important; }
 }
 
-/* ======= BIGGER FONTS EVERYWHERE ======= */
+/* ======= BIGGER FONTS + LIGHT VARIETY ======= */
 .hero-title {
   font-size: clamp(64px, 10vw, 130px) !important;
 }
 .hero-sub {
   font-size: clamp(18px, 1.5vw, 22px) !important;
-}
-.hero-academy-name {
-  font-size: clamp(13px, 1.6vw, 19px) !important;
-  letter-spacing: 0.3em !important;
 }
 .section-title {
   font-size: clamp(44px, 6vw, 76px) !important;
@@ -2677,214 +2537,402 @@ ul, ol { list-style: none; }
 .section-subtitle {
   font-size: clamp(17px, 1.3vw, 21px) !important;
 }
-.topic-label {
-  font-size: 22px !important;
-  font-weight: 800 !important;
+/* Make topics section lighter */
+.topics {
+  background: linear-gradient(165deg, #050f22 0%, #0a1832 50%, #061228 100%) !important;
+  position: relative !important;
 }
-.topic-desc {
-  font-size: 15px !important;
-}
-.skill-title {
-  font-size: 30px !important;
-}
-.skill-card:first-child .skill-title {
-  font-size: 38px !important;
-}
-.skill-sub {
-  font-size: 16px !important;
-}
-/* How It Works */
-.how-title {
-  font-size: clamp(52px, 7vw, 96px) !important;
-}
-.how-sub {
-  font-size: clamp(17px, 1.3vw, 21px) !important;
-}
-.how-card {
-  padding: 40px 32px 36px !important;
-  border-radius: 20px !important;
-}
-.how-card-title {
-  font-size: 26px !important;
-}
-.how-card-desc {
-  font-size: 16px !important;
-}
-.how-card-num {
-  width: 48px !important;
-  height: 48px !important;
-  font-size: 16px !important;
-}
-/* Value cards */
-.value-title {
-  font-size: 28px !important;
-}
-.value-desc {
-  font-size: 16px !important;
-}
-/* Bio-age */
-.bioquiz-title {
-  font-size: clamp(36px, 4.5vw, 64px) !important;
-}
-.bioquiz-body {
-  font-size: 18px !important;
-}
-/* FAQ */
-.faq .section-title {
-  font-size: clamp(44px, 6vw, 76px) !important;
-}
-.faq-q-text {
-  font-size: 20px !important;
-}
-/* CTA */
-.final-cta-title {
-  font-size: clamp(48px, 7vw, 84px) !important;
-}
-.final-cta-sub {
-  font-size: 19px !important;
-}
-/* Lead gen */
-.lead-gen-headline {
-  font-size: clamp(32px, 4.5vw, 52px) !important;
-}
-
-/* ======= MORE LIGHT — Radial glows on dark sections ======= */
-.topics { position: relative !important; }
 .topics::after {
-  content: '' !important;
-  position: absolute !important;
-  top: 25% !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 1100px !important;
-  height: 900px !important;
-  background: radial-gradient(ellipse, rgba(0,110,255,0.1) 0%, transparent 65%) !important;
-  pointer-events: none !important;
-  z-index: 0 !important;
-}
-.how-it-works { position: relative !important; }
-.how-it-works::after {
   content: '';
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1200px;
-  height: 900px;
-  background: radial-gradient(ellipse, rgba(0,130,255,0.12) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-.value { position: relative !important; }
-.value::after {
-  content: '';
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1000px;
-  height: 700px;
-  background: radial-gradient(ellipse, rgba(0,110,255,0.08) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-.testimonials { position: relative !important; }
-.testimonials::after {
-  content: '';
-  position: absolute;
-  top: 30%;
-  left: 40%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 600px;
-  background: radial-gradient(ellipse, rgba(123,97,255,0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-.faq { position: relative !important; }
-.faq::after {
-  content: '';
-  position: absolute;
-  top: 20%;
-  right: 10%;
-  width: 700px;
-  height: 600px;
-  background: radial-gradient(ellipse, rgba(0,180,255,0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 1100px; height: 900px;
+  background: radial-gradient(ellipse, rgba(0,110,255,0.1) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
 }
 
-/* ======= MOBILE RESPONSIVE OVERRIDES ======= */
+/* VALUE SECTION — LIGHT BACKGROUND to break monotony */
+.value {
+  background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 40%, #f8f9fc 100%) !important;
+  position: relative;
+}
+.value .eyebrow { color: #006EFF !important; }
+.value .section-title { color: #0a1628 !important; }
+.value-card {
+  background: rgba(255,255,255,0.9) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  border-left: 4px solid #006EFF !important;
+}
+.value-card:nth-child(2) { border-left-color: #7B61FF !important; }
+.value-card:nth-child(3) { border-left-color: #00C9B0 !important; }
+.value-card:nth-child(4) { border-left-color: #E8A75A !important; }
+.value-title { color: #0a1628 !important; font-size: 28px !important; }
+.value-desc { color: #444 !important; font-size: 16px !important; }
+.value-arrow { 
+  color: #0a1628 !important;
+  border-color: rgba(0,0,0,0.15) !important;
+}
+.value-arrow:hover { background: rgba(0,110,255,0.08) !important; }
+.value-arrow:disabled { opacity: 0.3 !important; }
+
+/* FAQ — lighter background */
+.faq {
+  background: #f8f9fc !important;
+}
+.faq .eyebrow { color: #006EFF !important; }
+.faq .section-title { color: #0a1628 !important; }
+.faq-item {
+  background: rgba(255,255,255,0.95) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+}
+.faq-q-text { color: #0a1628 !important; font-size: 20px !important; }
+.faq-q-num { color: #006EFF !important; }
+.faq-a-body { color: #444 !important; }
+.faq-q-icon { color: #006EFF !important; }
+
+/* Bio-age quiz — smaller on mobile */
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: clamp(50px, 13vw, 76px) !important;
-  }
-  .section-title {
-    font-size: clamp(36px, 9vw, 50px) !important;
-  }
-  .syllabus .section-title {
-    font-size: clamp(38px, 10vw, 56px) !important;
-  }
-  .how-title {
-    font-size: clamp(40px, 11vw, 60px) !important;
-  }
-  .skill-title {
-    font-size: 24px !important;
-  }
-  .skill-card:first-child .skill-title {
-    font-size: 28px !important;
-  }
-  
-  /* Phases on mobile — 2x2 grid, larger */
-  .syl-timeline {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 36px 48px !important;
-    perspective: none !important;
-  }
-  .syl-phase {
-    flex: 0 0 calc(50% - 28px) !important;
-  }
-  .syl-connector { display: none !important; }
-  .syl-circle {
-    width: 130px !important;
-    height: 130px !important;
-  }
-  .syl-circle-num { font-size: 32px !important; }
-  .syl-label { font-size: 17px !important; }
-  .syl-sessions { font-size: 13px !important; }
-  .syl-detail-inner { padding: 28px 24px !important; border-radius: 18px !important; }
-  .syllabus-header { margin-bottom: 64px !important; }
-  
-  /* Bio-age SMALLER on mobile */
+  .hero-title { font-size: clamp(50px, 13vw, 76px) !important; }
+  .section-title { font-size: clamp(36px, 9vw, 50px) !important; }
   .bioquiz-card { padding: 44px 24px !important; }
   .bioquiz-title { font-size: clamp(28px, 7vw, 38px) !important; }
   .bioquiz-body { font-size: 15px !important; }
   .bioquiz-badge { max-width: 200px !important; }
   .bioquiz-badge-num { font-size: 48px !important; }
-  
-  /* How cards mobile */
-  .how-card { padding: 28px 22px 24px !important; }
-  .how-card-title { font-size: 22px !important; }
-  
-  /* CTA */
   .final-cta-title { font-size: clamp(38px, 10vw, 54px) !important; }
-  .faq-q-text { font-size: 17px !important; }
-  .topic-label { font-size: 19px !important; }
-  
-  /* Topic video bg — slightly higher opacity on mobile for visibility */
-  .topic-video-bg video { opacity: 0.25 !important; }
-  
-  /* Orbs smaller on mobile */
-  .syllabus .syl-orb { display: none; }
 }
 
-@media (max-width: 540px) {
-  .hero-title { font-size: clamp(46px, 12vw, 68px) !important; }
-  .syl-circle { width: 110px !important; height: 110px !important; }
-  .syl-circle-num { font-size: 28px !important; }
-  .syl-label { font-size: 15px !important; }
-  .syl-timeline { gap: 28px 36px !important; }
+/* Skill titles bigger */
+.skill-title { font-size: 30px !important; }
+.skill-card:first-child .skill-title { font-size: 38px !important; }
+.skill-sub { font-size: 16px !important; }
+@media (max-width: 768px) {
+  .skill-title { font-size: 24px !important; }
+  .skill-card:first-child .skill-title { font-size: 28px !important; }
+}
+
+/* Lead gen — keep light */
+.lead-gen-headline { font-size: clamp(32px, 4.5vw, 52px) !important; }
+
+/* Final CTA */
+.final-cta-title { font-size: clamp(48px, 7vw, 84px) !important; }
+.final-cta-sub { font-size: 19px !important; }
+
+
+/* ======= TOPIC CARDS V2 — WITH MOTION VIDEO BG ======= */
+.topics {
+  background: linear-gradient(180deg, #0A1628 0%, #0D1B2A 100%) !important;
+  padding: 120px 0 100px !important;
+}
+.topics .section-title { color: #fff !important; }
+.topics .section-subtitle { color: rgba(255,255,255,0.55) !important; }
+.topics .eyebrow { color: #006EFF !important; }
+.topics-grid { display: none !important; } /* hide old grid */
+.topic-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.topic-v2 {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.topic-v2:hover { transform: translateY(-4px); }
+.topic-v2-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.topic-v2-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.topic-v2:hover .topic-v2-video video {
+  opacity: 0.75;
+  transform: scale(1.06);
+}
+.topic-v2-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%);
+  border-radius: 20px;
+}
+.topic-v2-content {
+  position: relative;
+  z-index: 2;
+}
+.topic-v2-num {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: #006EFF;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 8px;
+}
+.topic-v2-title {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.topic-v2-desc {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.7);
+}
+.topic-v2-arrow {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background 0.3s, transform 0.3s;
+}
+.topic-v2:hover .topic-v2-arrow {
+  background: #006EFF;
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 900px) {
+  .topic-grid-v2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .topic-grid-v2 { grid-template-columns: 1fr; }
+  .topic-v2 { min-height: 240px; }
+}
+
+/* ======= HOW IT WORKS V2 — SLIDER, LIGHT BG ======= */
+.how { display: none !important; } /* hide old */
+.how-v2 {
+  background: linear-gradient(180deg, #F8FAFC 0%, #EFF3F8 100%);
+  padding: 120px 0 100px;
+  position: relative;
+}
+.how-v2-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.how-v2-logo {
+  height: 42px;
+  width: auto;
+  margin-bottom: 28px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.7;
+}
+.how-v2-title {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 5vw, 56px);
+  color: #0D1B2A;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.how-v2-sub {
+  font-size: 18px;
+  color: #556;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.how-v2-slider-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.how-v2-track-container {
+  overflow: hidden;
+  flex: 1;
+  border-radius: 16px;
+}
+.how-v2-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 8px 0;
+}
+.how-v2-card {
+  flex: 0 0 calc(33.333% - 14px);
+  min-width: calc(33.333% - 14px);
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 28px;
+  box-shadow: 0 2px 16px rgba(0,30,80,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.how-v2-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,30,80,0.1);
+}
+.how-v2-num {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  color: #006EFF;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}
+.how-v2-card-title {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #0D1B2A;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.how-v2-card-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #556;
+  margin-bottom: 16px;
+}
+.how-v2-card-meta {
+  font-size: 13px;
+  color: #006EFF;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.how-v2-arrow {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,30,80,0.15);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #0D1B2A;
+  transition: all 0.3s;
+  z-index: 2;
+}
+.how-v2-arrow:hover { background: #006EFF; color: #fff; border-color: #006EFF; }
+.how-v2-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+.how-v2-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0,30,80,0.15);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.how-v2-dot.active {
+  background: #006EFF;
+  width: 28px;
+  border-radius: 5px;
+}
+
+@media (max-width: 900px) {
+  .how-v2-card { flex: 0 0 calc(50% - 10px); min-width: calc(50% - 10px); }
+}
+@media (max-width: 600px) {
+  .how-v2-card { flex: 0 0 calc(85%); min-width: calc(85%); }
+  .how-v2-arrow { display: none; }
+  .how-v2-track-container { overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+  .how-v2-card { scroll-snap-align: start; }
+}
+
+/* ======= CERTS V2 — 2.5X BIGGER, VISIBLE ======= */
+.certs { display: none !important; } /* hide old */
+.certs-v2 {
+  background: #F8FAFC;
+  padding: 64px 0;
+  border-top: 1px solid rgba(0,30,80,0.06);
+  border-bottom: 1px solid rgba(0,30,80,0.06);
+}
+.certs-v2-label {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(13,27,42,0.35);
+  margin-bottom: 32px;
+}
+.certs-v2-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.cert-badge-v2 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 28px;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(0,30,80,0.08);
+  box-shadow: 0 2px 8px rgba(0,30,80,0.04);
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-width: 280px;
+}
+.cert-badge-v2:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,30,80,0.08);
+}
+.cert-badge-v2-shield { flex-shrink: 0; }
+.cert-badge-v2-abbr {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #0D1B2A;
+  display: block;
+  line-height: 1.2;
+}
+.cert-badge-v2-name {
+  font-size: 13px;
+  color: #556;
+  line-height: 1.4;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .certs-v2-grid { gap: 12px; }
+  .cert-badge-v2 { min-width: calc(50% - 12px); flex: 0 0 calc(50% - 12px); padding: 16px 18px; }
+}
+@media (max-width: 480px) {
+  .cert-badge-v2 { min-width: 100%; flex: 0 0 100%; }
 }
 
 </style>
@@ -2905,7 +2953,7 @@ ul, ol { list-style: none; }
     </a>
     <div class="nav-links">
       <a href="#skills">Skills</a>
-      <a href="#syllabus">Syllabus</a>
+      <a href="#syllabus">Curriculum</a>
       <a href="#faq">FAQ</a>
       <a href="#lead-gen" class="nav-cta">Apply Now</a>
     </div>
@@ -2921,7 +2969,7 @@ ul, ol { list-style: none; }
   </button>
   <nav class="mobile-nav-links">
     <a href="#skills" class="mobile-nav-link">Skills</a>
-    <a href="#syllabus" class="mobile-nav-link">Syllabus</a>
+    <a href="#syllabus" class="mobile-nav-link">Curriculum</a>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
     <a href="#lead-gen" class="mobile-nav-link mobile-nav-cta">Apply Now</a>
   </nav>
@@ -2984,80 +3032,68 @@ ul, ol { list-style: none; }
     <div class="topics-header reveal">
       <span class="eyebrow">Explore</span>
       <h2 class="section-title">Longevity, organized.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">The eight areas of longevity science covered in our 12-session course.</p>
+      <p class="section-subtitle" style="margin:0 auto;">The core areas of longevity science covered in our 12-session course.</p>
     </div>
-    <div class="topics-grid">
-      <a href="topics/nutrition-longevity.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-eating.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">01</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Nutrition</div>
-          <div class="topic-desc">Fuel strategies for cellular health and metabolic optimization.</div>
+    <div class="topic-grid-v2">
+      <a href="topics/nutrition-longevity.html" class="topic-v2 reveal">
+        <div class="topic-v2-video"><video src="assets/skill-eating.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-overlay"></div>
+        <div class="topic-v2-content">
+          <span class="topic-v2-num">01</span>
+          <h3 class="topic-v2-title">Nutrition</h3>
+          <p class="topic-v2-desc">Fuel strategies for cellular health and metabolic optimization.</p>
         </div>
+        <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/sleep-circadian-health.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-sleep.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">02</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Sleep</div>
-          <div class="topic-desc">Circadian rhythm and deep recovery protocols.</div>
+      <a href="topics/sleep-circadian-health.html" class="topic-v2 reveal">
+        <div class="topic-v2-video"><video src="assets/learn-sleep.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-overlay"></div>
+        <div class="topic-v2-content">
+          <span class="topic-v2-num">02</span>
+          <h3 class="topic-v2-title">Sleep</h3>
+          <p class="topic-v2-desc">Circadian rhythm and deep recovery protocols.</p>
         </div>
+        <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/supplements-health-tech.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-pill.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">03</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Supplements</div>
-          <div class="topic-desc">Evidence-based compounds, doses, and timing.</div>
+      <a href="topics/exercise-movement.html" class="topic-v2 reveal">
+        <div class="topic-v2-video"><video src="assets/learn-train.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-overlay"></div>
+        <div class="topic-v2-content">
+          <span class="topic-v2-num">03</span>
+          <h3 class="topic-v2-title">Exercise &amp; Movement</h3>
+          <p class="topic-v2-desc">Zone 2, strength, VO2 max, and mobility practices.</p>
         </div>
+        <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/exercise-movement.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-train.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">04</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Exercise &amp; Movement</div>
-          <div class="topic-desc">Zone 2, strength, VO2 max, and mobility practices.</div>
+      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal">
+        <div class="topic-v2-video"><video src="assets/learn-blood.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-overlay"></div>
+        <div class="topic-v2-content">
+          <span class="topic-v2-num">04</span>
+          <h3 class="topic-v2-title">Metabolic Health</h3>
+          <p class="topic-v2-desc">Glucose, insulin, and metabolic flexibility decoded.</p>
         </div>
+        <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/mental-emotional-health.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-biometric.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">05</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Mental &amp; Emotional</div>
-          <div class="topic-desc">Stress resilience, cognitive health, and emotional regulation.</div>
+      <a href="topics/biomarkers-testing.html" class="topic-v2 reveal">
+        <div class="topic-v2-video"><video src="assets/learn-protocol.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-overlay"></div>
+        <div class="topic-v2-content">
+          <span class="topic-v2-num">05</span>
+          <h3 class="topic-v2-title">Biomarkers &amp; Testing</h3>
+          <p class="topic-v2-desc">Blood panels, biological age, and what to track.</p>
         </div>
+        <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/metabolic-health-blood-sugar.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-blood.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">06</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Metabolic Health</div>
-          <div class="topic-desc">Glucose, insulin, and metabolic flexibility decoded.</div>
+      <a href="topics/protocols-habits.html" class="topic-v2 reveal">
+        <div class="topic-v2-video"><video src="assets/skill-matcha.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-overlay"></div>
+        <div class="topic-v2-content">
+          <span class="topic-v2-num">06</span>
+          <h3 class="topic-v2-title">Protocols &amp; Habits</h3>
+          <p class="topic-v2-desc">Daily systems that compound into lasting change.</p>
         </div>
-      </a>
-      <a href="topics/biomarkers-testing.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">07</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Biomarkers &amp; Testing</div>
-          <div class="topic-desc">Blood panels, biological age, and what to track.</div>
-        </div>
-      </a>
-      <a href="topics/protocols-habits.html" class="topic-card reveal">
-        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-protocol.mp4" type="video/mp4"></video></div>
-        <span class="topic-number">08</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div>
-          <div class="topic-label">Protocols &amp; Habits</div>
-          <div class="topic-desc">Daily systems that compound into lasting change.</div>
-        </div>
+        <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
     </div>
   </div>
@@ -3150,51 +3186,332 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-<!-- ==============================================
-     FOLD 4 — SYLLABUS PHASES
-     ============================================== -->
-<section class="syllabus" id="syllabus">
-  <div class="syl-orb"></div><div class="syl-orb"></div><div class="syl-orb"></div>
+<section class="curriculum" id="syllabus">
   <div class="container">
-    <div class="syllabus-header reveal">
-      <span class="eyebrow">Our Methodology</span>
-      <h2 class="section-title">12 Sessions.<br>4 Phases.<br>Your Protocol.</h2>
-      <p class="section-subtitle">A structured 12-week online course designed by eTeacher Group. Each phase builds on the last — science-backed, teacher-led, peer-driven.</p>
+    <div class="curriculum-header reveal">
+      <p class="curriculum-bridge">From metabolic foundations to your personal longevity protocol</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">The Complete Protocol</p>
+      <h2 class="section-title">12 Sessions. 12 Weeks.<br>One Complete <span class="gold">Operating System</span>.</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Each 90-minute session builds on the last. Live instruction, cohort discussion, hands-on protocols, and between-session experiments designed to make the science stick in your biology — not just your notes.</p>
     </div>
-    <div class="syl-timeline reveal">
-      <div class="syl-connector"></div>
-      <div class="syl-phase" data-syl="0">
-        <div class="syl-circle" style="--phase-color: #006EFF;">
-          <span class="syl-circle-num">01</span>
+    <div class="curriculum-phases">
+
+      <!-- PHASE 1: Foundation -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 1 · Sessions 1–3</span>
+          <span class="phase-block-name">Foundation</span>
         </div>
-        <div class="syl-label">Foundations</div>
-        <div class="syl-sessions">Sessions 1–3</div>
-      </div>
-      <div class="syl-phase" data-syl="1">
-        <div class="syl-circle" style="--phase-color: #00D1FF;">
-          <span class="syl-circle-num">02</span>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="1">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">01</span>
+              <div class="curriculum-trigger-text">
+                <h3>Reframing Aging: From Disease Avoidance to Healthspan Design</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand aging as a modifiable trajectory, not a fixed decline</li>
+                  <li>Articulate your personal healthspan goals with clarity and specificity</li>
+                  <li>Shift mindset from fixing problems to designing resilient systems</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Welcome + framing → Mini-lecture on the biology of aging → Guided personal reflection → Breakout group introductions → Group synthesis and discussion → Introduction to the "Longevity Lens" framework</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete a 3-day lifestyle awareness log tracking energy, meals, sleep, movement, and mood patterns.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="2">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">02</span>
+              <div class="curriculum-trigger-text">
+                <h3>Metabolic Health: Why Blood Sugar Is the Central Signal</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand glucose as a signal, not a villain — and why it matters for aging</li>
+                  <li>See how metabolic dysfunction develops silently over years</li>
+                  <li>Understand why weight alone is a poor marker of metabolic health</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Review lifestyle logs → Visual walkthrough of glucose curves → Case comparisons (healthy vs. dysregulated) → Myth dismantling session → CGM preview and introduction</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete a detailed food recall and energy crash mapping exercise — identify when you crash, what you ate, and how you felt.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="3">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">03</span>
+              <div class="curriculum-trigger-text">
+                <h3>Nutrition for Longevity: Inputs vs. Responses</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Stop thinking in dietary rules; start thinking in metabolic responses</li>
+                  <li>Understand how protein, fiber, and fat processing affects glucose</li>
+                  <li>Design a default meal framework personalized to your biology</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Interactive lecture on nutrient responses → Meal deconstruction exercise → Group comparison of individual responses → Design your default meal framework</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Try 1–2 meal adjustments based on your framework and document the results in your learning journal.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="syl-label">Data & Discovery</div>
-        <div class="syl-sessions">Sessions 4–6</div>
       </div>
-      <div class="syl-phase" data-syl="2">
-        <div class="syl-circle" style="--phase-color: #7B61FF;">
-          <span class="syl-circle-num">03</span>
+
+      <!-- PHASE 2: Data & Discovery -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 2 · Sessions 4–5</span>
+          <span class="phase-block-name">Data &amp; Discovery</span>
         </div>
-        <div class="syl-label">Lifestyle Integration</div>
-        <div class="syl-sessions">Sessions 7–9</div>
-      </div>
-      <div class="syl-phase" data-syl="3">
-        <div class="syl-circle" style="--phase-color: #FF6B6B;">
-          <span class="syl-circle-num">04</span>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="4">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">04</span>
+              <div class="curriculum-trigger-text">
+                <h3>Beyond the Standard Lipid Panel: Seeing the Invisible</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand how CGM technology works and what it measures</li>
+                  <li>Learn what the data actually means — spikes, variability, baselines</li>
+                  <li>Reduce anxiety around numbers and develop a healthy data relationship</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">CGM fundamentals lecture → Walk through real anonymized datasets → Group interpretation exercises → CGM setup guidance for those using devices</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Begin your CGM experiment or review provided anonymized datasets. Record observations about your own patterns.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="5">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">05</span>
+              <div class="curriculum-trigger-text">
+                <h3>Food Order, Composition &amp; Glucose Curves</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Learn how eating sequence (food order) materially impacts glucose response</li>
+                  <li>Understand carbohydrate context — why the same carb acts differently in different meals</li>
+                  <li>Reduce glucose spikes without restriction or deprivation</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Share CGM observations from the week → Facilitator-guided curve comparison → Design safe food experiments → Expectation-setting for realistic progress</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Run individual food experiments — try different meal orders, compositions, and timings. Document results with CGM data or subjective energy tracking.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="syl-label">Your Protocol</div>
-        <div class="syl-sessions">Sessions 10–12</div>
       </div>
-    </div>
-    <!-- Detail panel — shows on hover -->
-    <div class="syl-detail" id="sylDetail">
-      <div class="syl-detail-inner" id="sylDetailInner"></div>
+
+      <!-- PHASE 3: Lifestyle Systems -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 3 · Sessions 6–8</span>
+          <span class="phase-block-name">Lifestyle Systems</span>
+        </div>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="6">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">06</span>
+              <div class="curriculum-trigger-text">
+                <h3>Training for the Centenarian Olympics</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand muscle as the body's primary glucose sink</li>
+                  <li>Learn the minimum effective dose of movement for metabolic benefit</li>
+                  <li>Design a sustainable, age-appropriate movement plan</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">CGM examples with and without post-meal movement → Movement planning workshop → Peer review of individual plans → Commitment check-in</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Run movement experiments with CGM tracking — compare glucose curves on days with and without post-meal walks or resistance training.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="7">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">07</span>
+              <div class="curriculum-trigger-text">
+                <h3>Sleep, Circadian Rhythm &amp; Overnight Glucose</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>See sleep as a metabolic regulation system, not just rest</li>
+                  <li>Understand the effects of late eating, blue light, and irregular schedules on glucose</li>
+                  <li>Design one targeted sleep experiment based on your data</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Overnight CGM data review → Sleep habit audit → Troubleshooting workshop for common sleep disruptors → Design your personal sleep experiment</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Run your sleep experiment for one week — track bedtime, wake time, late eating, screen exposure, and overnight glucose patterns.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="8">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">08</span>
+              <div class="curriculum-trigger-text">
+                <h3>Stress, Emotions &amp; Non-Food Glucose Spikes</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Recognize that emotions and stress cause measurable glucose spikes — without any food</li>
+                  <li>Learn evidence-based nervous system regulation tools</li>
+                  <li>Map your personal stress triggers and build a regulation plan</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">CGM stress spike examples → Guided nervous system regulation exercise → Personal trigger mapping → Design your regulation toolkit</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Practice your chosen stress regulation technique daily. Note any glucose changes during stressful events vs. calm periods.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 4: Integration -->
+      <div class="phase-block reveal">
+        <div class="phase-block-header">
+          <span class="phase-block-label">Phase 4 · Sessions 9–12</span>
+          <span class="phase-block-name">Integration</span>
+        </div>
+        <div class="phase-block-sessions">
+          <div class="curriculum-item" data-session="9">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">09</span>
+              <div class="curriculum-trigger-text">
+                <h3>Supplements, Tests &amp; Health Tech Literacy</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Avoid biohacking traps and expensive interventions with no evidence</li>
+                  <li>Learn decision filters for evaluating supplements, tests, and wearable data</li>
+                  <li>Develop critical thinking about health marketing claims</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Supplement label teardown exercise → Wearable data obsession discussion → Practice applying the decision framework to real products → Group debate</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Conduct a personal supplement audit — evaluate everything you currently take against the decision framework. Cut what doesn't pass.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="10">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">10</span>
+              <div class="curriculum-trigger-text">
+                <h3>Social Health, Purpose &amp; Longevity</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand the psychosocial predictors of healthy aging — loneliness, purpose, community</li>
+                  <li>Recognize that social connection is as impactful as diet and exercise</li>
+                  <li>Design intentional social habits that support your healthspan</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Research review on social health and longevity → Values reflection exercise → Social habit design workshop → Accountability pairing</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete a social connection inventory — map your relationships, identify gaps, and initiate one new or renewed connection this week.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="11">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">11</span>
+              <div class="curriculum-trigger-text">
+                <h3>Personal Longevity Blueprint</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Integrate all 10 sessions into a coherent, sustainable personal plan</li>
+                  <li>Build a realistic blueprint without overwhelm or overcommitment</li>
+                  <li>Design your own failure recovery systems and habit stacks</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Blueprint construction workshop → Peer coaching sessions (paired review) → Failure planning and obstacle pre-emption → Draft sharing and feedback</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Complete your Personal Longevity Blueprint — a comprehensive document covering nutrition, movement, sleep, stress, social health, and monitoring systems.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="12">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">12</span>
+              <div class="curriculum-trigger-text">
+                <h3>Reflection, Integration &amp; Your Next 90 Days</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Reflect on your transformation from session 1 to session 12</li>
+                  <li>Synthesize your CGM insights and behavioral experiments into lasting habits</li>
+                  <li>Build a concrete 90-day action plan for continued progress</li>
+                </ul>
+                <div class="curriculum-section-label">90-Minute Flow</div>
+                <p class="curriculum-flow">Before/after reflections → CGM insights synthesis → Commitment statements → 90-day action plan construction → Graduation and celebration</p>
+                <div class="curriculum-section-label">Final Output</div>
+                <p class="curriculum-work">Your completed Personal Longevity Blueprint + 90-Day Action Plan — two living documents that guide your healthspan journey beyond the course.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -3352,64 +3669,59 @@ ul, ol { list-style: none; }
 <!-- ==============================================
      FOLD 7 — HOW IT WORKS
      ============================================== -->
-<section class="how">
-  <div class="container how-inner">
-    <div class="how-header reveal">
-      <img src="assets/eteacher-group-logo.jpg" alt="eTeacher Group" class="how-logo">
-      <span class="eyebrow">How It Works</span>
-      <h2 class="how-title">How It Works</h2>
-      <p class="how-sub">Four simple steps from enrollment to your personal longevity protocol.</p>
+<section class="how-v2" id="how">
+  <div class="container">
+    <div class="how-v2-header reveal">
+      <img src="assets/e-teacher-logo-dark.png" alt="eTeacher Group" class="how-v2-logo">
+      <span class="eyebrow" style="color: #006EFF;">How It Works</span>
+      <h2 class="how-v2-title">How It Works</h2>
+      <p class="how-v2-sub">Six clear steps from enrollment to your personal longevity protocol.</p>
     </div>
-    <div class="how-track reveal">
-      <div class="how-card">
-        <span class="how-card-num">01</span>
-        <div class="how-card-icon">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3 class="how-card-title">Apply &amp; Match</h3>
-        <p class="how-card-desc">Submit a short application. We review your background and goals, then place you in a cohort of 8–15 people with compatible interests and schedules.</p>
-        <div class="how-card-detail">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Takes about 5 minutes
-        </div>
-      </div>
-      <div class="how-card">
-        <span class="how-card-num">02</span>
-        <div class="how-card-icon">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
-        </div>
-        <h3 class="how-card-title">Baseline Assessment</h3>
-        <p class="how-card-desc">Complete a health intake questionnaire and share any existing lab work. This becomes your personal starting point — the data you'll track against over twelve weeks.</p>
-        <div class="how-card-detail">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-          Health data + lab review
-        </div>
-      </div>
-      <div class="how-card">
-        <span class="how-card-num">03</span>
-        <div class="how-card-icon">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <h3 class="how-card-title">Learn Live Weekly</h3>
-        <p class="how-card-desc">Attend 90-minute live online sessions with your cohort and instructor. Each week covers a new longevity topic — with real data, case studies, and hands-on exercises.</p>
-        <div class="how-card-detail">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          12 weeks · 90 min each
-        </div>
-      </div>
-      <div class="how-card">
-        <span class="how-card-num">04</span>
-        <div class="how-card-icon">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
-        <h3 class="how-card-title">Build Your Protocol</h3>
-        <p class="how-card-desc">In the final phase, you assemble everything you've learned into a written, personalized longevity protocol — tested, peer-reviewed by your cohort, and yours to keep.</p>
-        <div class="how-card-detail">
-          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Your personal blueprint
+    <div class="how-v2-slider-wrap reveal">
+      <button class="how-v2-arrow how-v2-prev" aria-label="Previous"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="how-v2-track-container">
+        <div class="how-v2-track" id="howTrack">
+          <div class="how-v2-card" style="border-top: 3px solid #006EFF;">
+            <span class="how-v2-num">01</span>
+            <h3 class="how-v2-card-title">Apply &amp; Match</h3>
+            <p class="how-v2-card-desc">Submit a short application. We review your background and goals, then place you in a cohort of 8–15 people with compatible interests and schedules.</p>
+            <span class="how-v2-card-meta">Takes about 5 minutes</span>
+          </div>
+          <div class="how-v2-card" style="border-top: 3px solid #338BFF;">
+            <span class="how-v2-num">02</span>
+            <h3 class="how-v2-card-title">Baseline Assessment</h3>
+            <p class="how-v2-card-desc">Complete a health intake questionnaire and share any existing lab work. This becomes your personal starting point — the data you'll track against over twelve weeks.</p>
+            <span class="how-v2-card-meta">Health data + lab review</span>
+          </div>
+          <div class="how-v2-card" style="border-top: 3px solid #4DA6FF;">
+            <span class="how-v2-num">03</span>
+            <h3 class="how-v2-card-title">Meet Your Cohort</h3>
+            <p class="how-v2-card-desc">Join a live orientation call with your instructor and classmates. Set expectations, learn the platform, and build the group dynamic that carries you through twelve weeks.</p>
+            <span class="how-v2-card-meta">Live kickoff session</span>
+          </div>
+          <div class="how-v2-card" style="border-top: 3px solid #0099FF;">
+            <span class="how-v2-num">04</span>
+            <h3 class="how-v2-card-title">Learn Live Weekly</h3>
+            <p class="how-v2-card-desc">Attend 90-minute live online sessions with your cohort and instructor. Each week covers a new longevity topic — with real data, case studies, and hands-on exercises.</p>
+            <span class="how-v2-card-meta">12 weeks · 90 min each</span>
+          </div>
+          <div class="how-v2-card" style="border-top: 3px solid #006EFF;">
+            <span class="how-v2-num">05</span>
+            <h3 class="how-v2-card-title">Experiment Between Sessions</h3>
+            <p class="how-v2-card-desc">Apply what you learn each week with guided experiments — food logs, sleep tracking, movement challenges. Real change comes from practice, not just theory.</p>
+            <span class="how-v2-card-meta">Hands-on weekly protocols</span>
+          </div>
+          <div class="how-v2-card" style="border-top: 3px solid #338BFF;">
+            <span class="how-v2-num">06</span>
+            <h3 class="how-v2-card-title">Build Your Protocol</h3>
+            <p class="how-v2-card-desc">In the final phase, you assemble everything you've learned into a written, personalized longevity protocol — tested, peer-reviewed by your cohort, and yours to keep.</p>
+            <span class="how-v2-card-meta">Your personal blueprint</span>
+          </div>
         </div>
       </div>
+      <button class="how-v2-arrow how-v2-next" aria-label="Next"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
     </div>
+    <div class="how-v2-dots" id="howDots"></div>
   </div>
 </section>
 
@@ -3426,38 +3738,82 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-<section class="certs">
-  <div class="cert-pill-row">
-    <span class="cert-label">Recognized by</span>
-    <div class="cert-pill">
-      <span class="cert-pill-abbr">ACE</span>
-      <span class="cert-pill-divider"></span>
-      <span class="cert-pill-name">American Council on Exercise</span>
-    </div>
-    <div class="cert-pill">
-      <span class="cert-pill-abbr">NASM</span>
-      <span class="cert-pill-divider"></span>
-      <span class="cert-pill-name">National Academy of Sports Medicine</span>
-    </div>
-    <div class="cert-pill">
-      <span class="cert-pill-abbr">IFM</span>
-      <span class="cert-pill-divider"></span>
-      <span class="cert-pill-name">Institute for Functional Medicine</span>
-    </div>
-    <div class="cert-pill">
-      <span class="cert-pill-abbr">NBHWC</span>
-      <span class="cert-pill-divider"></span>
-      <span class="cert-pill-name">National Board for Health &amp; Wellness Coaching</span>
-    </div>
-    <div class="cert-pill">
-      <span class="cert-pill-abbr">PN</span>
-      <span class="cert-pill-divider"></span>
-      <span class="cert-pill-name">Precision Nutrition</span>
-    </div>
-    <div class="cert-pill">
-      <span class="cert-pill-abbr">XLA</span>
-      <span class="cert-pill-divider"></span>
-      <span class="cert-pill-name">Extended Learning Alliance</span>
+<section class="certs-v2">
+  <div class="container">
+    <div class="certs-v2-label">Recognized by</div>
+    <div class="certs-v2-grid">
+      <div class="cert-badge-v2">
+        <div class="cert-badge-v2-shield">
+          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
+            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
+            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-badge-v2-text">
+          <span class="cert-badge-v2-abbr">ACE</span>
+          <span class="cert-badge-v2-name">American Council on Exercise</span>
+        </div>
+      </div>
+      <div class="cert-badge-v2">
+        <div class="cert-badge-v2-shield">
+          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
+            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
+            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-badge-v2-text">
+          <span class="cert-badge-v2-abbr">NASM</span>
+          <span class="cert-badge-v2-name">National Academy of Sports Medicine</span>
+        </div>
+      </div>
+      <div class="cert-badge-v2">
+        <div class="cert-badge-v2-shield">
+          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
+            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
+            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-badge-v2-text">
+          <span class="cert-badge-v2-abbr">IFM</span>
+          <span class="cert-badge-v2-name">Institute for Functional Medicine</span>
+        </div>
+      </div>
+      <div class="cert-badge-v2">
+        <div class="cert-badge-v2-shield">
+          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
+            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
+            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-badge-v2-text">
+          <span class="cert-badge-v2-abbr">NBHWC</span>
+          <span class="cert-badge-v2-name">National Board for Health &amp; Wellness Coaching</span>
+        </div>
+      </div>
+      <div class="cert-badge-v2">
+        <div class="cert-badge-v2-shield">
+          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
+            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
+            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-badge-v2-text">
+          <span class="cert-badge-v2-abbr">PN</span>
+          <span class="cert-badge-v2-name">Precision Nutrition</span>
+        </div>
+      </div>
+      <div class="cert-badge-v2">
+        <div class="cert-badge-v2-shield">
+          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
+            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
+            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="cert-badge-v2-text">
+          <span class="cert-badge-v2-abbr">XLA</span>
+          <span class="cert-badge-v2-name">Extended Learning Alliance</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -3632,8 +3988,6 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-
-
 <!-- ==============================================
      FOLD 12 — FINAL CTA
      ============================================== -->
@@ -3644,8 +3998,8 @@ ul, ol { list-style: none; }
         <source src="assets/cta-bg.mp4" type="video/mp4">
       </video>
       <div class="final-cta-overlay"></div>
-      <h2 class="final-cta-title">Design the life<br>ahead of you.</h2>
-      <p class="final-cta-sub">Applications are open for the next cohort. A written protocol. The rest of your life.</p>
+      <h2 class="final-cta-title">It's Your <span style="color:#7EC8FF;font-weight:900;">Life</span>.<br>Live It Well.</h2>
+      <p class="final-cta-sub">Applications are open for the next cohort. Your personal longevity protocol starts here.</p>
       <a href="#lead-gen" class="btn-primary">
         Apply Now
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -3698,7 +4052,7 @@ ul, ol { list-style: none; }
         <h4>Course</h4>
         <ul>
           <li><a href="#skills">Skills</a></li>
-          <li><a href="#syllabus">Syllabus</a></li>
+          <li><a href="#syllabus">Curriculum</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#lead-gen">Apply</a></li>
         </ul>
@@ -3750,36 +4104,25 @@ ul, ol { list-style: none; }
   els.forEach(e => io.observe(e));
 })();
 
-/* ==================================================
-   Syllabus Circle Hover — show detail panel
-   ================================================== */
-(function() {
-  var phases = document.querySelectorAll('.syl-phase');
-  var detail = document.getElementById('sylDetail');
-  var inner = document.getElementById('sylDetailInner');
-  if (!phases.length || !detail || !inner) return;
 
-  var data = [
-    { title: 'Phase 1: Foundations', desc: 'Sessions 1\u20133 cover the science of aging, biological age vs chronological age, key longevity biomarkers, and how to read your own baseline data. You\'ll set your personal health inventory.' },
-    { title: 'Phase 2: Data & Discovery', desc: 'Sessions 4\u20136 dive into metabolic health, CGM readings, blood panel interpretation, sleep architecture, and exercise physiology. You start tracking and experimenting with your own data.' },
-    { title: 'Phase 3: Lifestyle Integration', desc: 'Sessions 7\u20139 focus on nutrition protocols, stress management, supplement evaluation, and building sustainable daily routines. You test what works for your body and lifestyle.' },
-    { title: 'Phase 4: Your Protocol', desc: 'Sessions 10\u201312 bring it all together. Peer coaching, protocol refinement, and your personal longevity blueprint \u2014 a written document you\'ll keep long after the course ends.' }
-  ];
-
-  function show(i) {
-    phases.forEach(function(p, j) { p.classList.toggle('active', j === i); });
-    inner.innerHTML = '<h4 style="color:#fff;font-size:24px;margin:0 0 14px;font-weight:800;letter-spacing:-0.02em;">' + data[i].title + '</h4><p style="color:rgba(255,255,255,0.75);font-size:17px;line-height:1.7;margin:0;">' + data[i].desc + '</p>';
-    detail.classList.add('visible');
-  }
-
-  phases.forEach(function(phase, i) {
-    phase.addEventListener('mouseenter', function() { show(i); });
-    phase.addEventListener('click', function() { show(i); });
+/* Curriculum accordion toggle */
+function toggleCurriculum(btn) {
+  var item = btn.closest('.curriculum-item');
+  var body = item.querySelector('.curriculum-body');
+  var wasActive = item.classList.contains('active');
+  
+  // Close all
+  document.querySelectorAll('.curriculum-item').forEach(function(ci) {
+    ci.classList.remove('active');
+    ci.querySelector('.curriculum-body').style.maxHeight = null;
   });
-
-  // Show first by default
-  setTimeout(function() { show(0); }, 800);
-})();
+  
+  // Open clicked if it wasn't open
+  if (!wasActive) {
+    item.classList.add('active');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
 
 /* ==================================================
    Value slider
@@ -4028,6 +4371,7 @@ ul, ol { list-style: none; }
   });
 })();
 
+/* Pricing toggle removed — simple 2-option layout */
 
 /* ==================================================
    Mobile Hamburger Menu
@@ -4063,5 +4407,42 @@ ul, ol { list-style: none; }
   });
 }());
 </script>
+
+<script>
+/* How It Works Slider */
+(function() {
+  const track = document.getElementById('howTrack');
+  const dotsContainer = document.getElementById('howDots');
+  if (!track || !dotsContainer) return;
+  
+  const cards = track.querySelectorAll('.how-v2-card');
+  let currentSlide = 0;
+  const cardsPerView = window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+  const totalSlides = Math.ceil(cards.length / cardsPerView);
+  
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'how-v2-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+  
+  function goToSlide(n) {
+    currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+    const cardWidth = cards[0].offsetWidth + 20; // gap
+    track.style.transform = `translateX(-${currentSlide * cardsPerView * cardWidth}px)`;
+    dotsContainer.querySelectorAll('.how-v2-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+  
+  const prevBtn = document.querySelector('.how-v2-prev');
+  const nextBtn = document.querySelector('.how-v2-next');
+  if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+})();
+</script>
+
 </body>
 </html>
