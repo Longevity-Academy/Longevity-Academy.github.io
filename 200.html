@@ -3127,56 +3127,6 @@ ul, ol { list-style: none; }
 h2.section-title {
   font-size: clamp(38px, 5.5vw, 64px) !important;
 }
-
-/* ======= MOBILE CARD TEXT FIX ======= */
-@media (max-width: 768px) {
-  .topic-v2-title {
-    font-size: 22px !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.3px !important;
-  }
-  .topic-v2-desc {
-    font-size: 14px !important;
-    line-height: 1.4 !important;
-    opacity: 0.9 !important;
-  }
-  .topic-v2-number {
-    font-size: 13px !important;
-  }
-  .skill-title {
-    font-size: 22px !important;
-    line-height: 1.2 !important;
-  }
-  .skill-desc {
-    font-size: 13px !important;
-    line-height: 1.4 !important;
-  }
-  .section-title {
-    font-size: clamp(32px, 8vw, 48px) !important;
-  }
-}
-
-@keyframes subtleZoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.08); }
-}
-
-@media (max-width: 768px) {
-  .certs-strip-badges {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .certs-strip-badge {
-    padding: 12px 8px !important;
-  }
-  .certs-strip-badge-abbr {
-    font-size: 16px !important;
-  }
-  .certs-strip-badge-name {
-    font-size: 10px !important;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -3353,7 +3303,7 @@ h2.section-title {
     </div>
     <div class="skills-grid">
       <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
-        <div class="skill-bg cells" style="background: url('assets/img-metabolic.jpg') center/cover no-repeat; animation: subtleZoom 12s ease-in-out infinite alternate;"></div>
+        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/glucose-mitochondria.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
