@@ -959,9 +959,10 @@ ul, ol { list-style: none; }
 /* --- Hex Chart Container --- */
 .hex-chart {
   position: relative;
-  width: 840px;
-  height: 780px;
-  margin: 0 auto;
+  width: 680px;
+  min-width: 500px;
+  height: 700px;
+  flex-shrink: 1;
   z-index: 2;
 }
 /* Orbit ring — animated rotating dashed circle */
@@ -1119,12 +1120,21 @@ ul, ol { list-style: none; }
   transition: color 0.4s var(--ease);
 }
 .hex-node:hover .hex-node-label, .hex-node.active .hex-node-label { color: #fff; }
-/* Detail panel — strong frosted glass (outside chart) */
+/* Flex wrapper: hex chart left, detail panel right */
+.hex-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+/* Detail panel — strong frosted glass (side panel) */
 .hex-detail {
-  width: 620px;
-  max-width: 90%;
-  margin: 48px auto 0;
-  padding: 40px 44px;
+  width: 380px;
+  min-width: 320px;
+  flex-shrink: 0;
+  padding: 40px 36px;
   background: rgba(0,60,180,0.15);
   backdrop-filter: blur(48px) saturate(1.6);
   -webkit-backdrop-filter: blur(48px) saturate(1.6);
@@ -1132,15 +1142,16 @@ ul, ol { list-style: none; }
   border-radius: var(--radius-lg);
   box-shadow: 0 16px 64px rgba(0,20,80,0.4), 0 0 40px rgba(0,110,255,0.1), inset 0 1px 0 rgba(255,255,255,0.1);
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateX(16px);
   pointer-events: none;
   transition: all 0.6s var(--ease);
   min-height: 180px;
+  align-self: center;
 }
 .hex-detail.visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 .hex-detail-tag {
   font-size: 11px;
@@ -1182,7 +1193,9 @@ ul, ol { list-style: none; }
   .hex-center-label { font-size: 14px; }
   .hex-node-icon { width: 30px; height: 30px; }
   .hex-node-label { font-size: 11px; }
-  .hex-detail { width: 92%; max-width: 92%; padding: 28px 24px; }
+  .hex-layout { flex-direction: column; align-items: center; }
+  .hex-detail { width: 92%; max-width: 92%; min-width: 0; padding: 28px 24px; transform: translateY(16px); }
+  .hex-detail.visible { transform: translateY(0); }
   .hex-line { display: none; }
 }
 .placeholder-note {
@@ -1634,47 +1647,48 @@ ul, ol { list-style: none; }
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
-  max-width: 900px;
+  gap: 16px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 .cert-pill {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 22px;
+  gap: 14px;
+  padding: 18px 32px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.25);
   transition: all 0.3s var(--ease);
   white-space: nowrap;
 }
 .cert-pill:hover {
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.35);
-  transform: translateY(-2px);
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 .cert-pill-shield {
-  width: 18px; height: 18px;
+  width: 28px; height: 28px;
   color: #5AA0FF;
   flex-shrink: 0;
 }
 .cert-pill-abbr {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 800;
+  font-size: 18px;
   color: #fff;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 .cert-pill-divider {
-  width: 1px;
-  height: 16px;
-  background: rgba(255,255,255,0.25);
+  width: 1.5px;
+  height: 22px;
+  background: rgba(255,255,255,0.3);
   flex-shrink: 0;
 }
 .cert-pill-name {
-  font-size: 13px;
-  color: rgba(255,255,255,0.7);
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
   line-height: 1.3;
   font-weight: 500;
 }
@@ -2147,10 +2161,10 @@ ul, ol { list-style: none; }
 @media (max-width: 600px) { .lead-gen-row { flex-direction: column; } }
 
 /* ==================================================
-   PRICING SECTION
+   PRICING SECTION — 2 options: Monthly vs Upfront
    ================================================== */
 .lla-pricing {
-  background: var(--surface);
+  background: var(--surface, #F5F7FA);
   padding: 96px 24px 80px;
   font-family: var(--font-body);
   color: var(--text-primary);
@@ -2158,7 +2172,7 @@ ul, ol { list-style: none; }
   -moz-osx-font-smoothing: grayscale;
 }
 .lla-pricing__inner {
-  max-width: 1120px;
+  max-width: 900px;
   margin: 0 auto;
 }
 .lla-pricing__header {
@@ -2173,7 +2187,7 @@ ul, ol { list-style: none; }
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: #006EFF;
   margin-bottom: 18px;
 }
 .lla-pricing__eyebrow::before,
@@ -2192,330 +2206,201 @@ ul, ol { list-style: none; }
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -0.025em;
-  color: var(--ink);
+  color: #111;
   margin: 0 0 14px;
 }
 .lla-pricing__subtitle {
   font-size: 17px;
   font-weight: 400;
-  color: var(--ink-3);
+  color: #5A6472;
   line-height: 1.6;
   margin: 0;
 }
-.lla-pricing__toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 52px;
-  flex-wrap: wrap;
+/* Two pricing cards side by side */
+.lla-pricing__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 48px;
 }
-.toggle-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink-4);
-  cursor: pointer;
-  user-select: none;
-  transition: color 180ms var(--ease);
-}
-.toggle-label.is-active {
-  color: var(--ink);
-  font-weight: 600;
-}
-.toggle-switch {
+.pricing-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 40px 36px 36px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 260ms ease, border-color 260ms ease;
   position: relative;
-  width: 52px;
-  height: 28px;
-  cursor: pointer;
-  flex-shrink: 0;
-  outline: none;
-}
-.toggle-switch:focus-visible .toggle-track {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
-}
-.toggle-track {
-  width: 52px;
-  height: 28px;
-  background: var(--surface-2);
-  border-radius: 14px;
-  transition: background 180ms var(--ease);
-  display: block;
-}
-.toggle-thumb {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 22px;
-  height: 22px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
-  transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: none;
-}
-.lla-pricing[data-billing="annual"] .toggle-track {
-  background: var(--blue);
-}
-.lla-pricing[data-billing="annual"] .toggle-thumb {
-  transform: translateX(24px);
-}
-.lla-pricing[data-billing="annual"] .label-annual {
-  color: var(--ink);
-  font-weight: 600;
-}
-.lla-pricing[data-billing="annual"] .label-monthly {
-  color: var(--ink-4);
-  font-weight: 500;
-}
-.lla-pricing[data-billing="monthly"] .label-monthly {
-  color: var(--ink);
-  font-weight: 600;
-}
-.lla-pricing[data-billing="monthly"] .label-annual {
-  color: var(--ink-4);
-  font-weight: 500;
-}
-.save-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--blue-light);
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 5px 12px;
-  border-radius: 999px;
-  opacity: 0;
-  transform: scale(0.85) translateX(-4px);
-  transition: opacity 220ms var(--ease), transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: none;
-  white-space: nowrap;
-}
-.lla-pricing[data-billing="annual"] .save-pill {
-  opacity: 1;
-  transform: scale(1) translateX(0);
-}
-.price-annual,
-.price-monthly {
-  transition: opacity 160ms var(--ease);
-}
-.lla-pricing[data-billing="annual"] .price-monthly,
-.lla-pricing[data-billing="monthly"] .price-annual {
-  display: none;
-}
-.lla-pricing[data-billing="annual"] .price-annual,
-.lla-pricing[data-billing="monthly"] .price-monthly {
   display: flex;
   flex-direction: column;
 }
-.lla-pricing__cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  align-items: start;
-}
-.pricing-card {
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 32px 28px 28px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.05);
-  transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 260ms var(--ease);
-  position: relative;
-}
 .pricing-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 36px rgba(0,0,0,0.11), 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
 }
 .pricing-card--featured {
-  border-color: var(--blue);
+  border-color: #006EFF;
   border-width: 2px;
-  box-shadow: 0 4px 28px rgba(0, 110, 255, 0.15), 0 1px 4px rgba(0,0,0,0.06);
-  padding-top: 48px;
-  margin-top: -14px;
-  margin-bottom: -14px;
+  box-shadow: 0 4px 28px rgba(0, 110, 255, 0.12), 0 1px 4px rgba(0,0,0,0.06);
 }
 .pricing-card--featured:hover {
   transform: translateY(-7px);
-  box-shadow: 0 14px 44px rgba(0, 110, 255, 0.22), 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 14px 44px rgba(0, 110, 255, 0.18);
 }
 .pricing-card--featured::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
+  top: -2px; left: -2px; right: -2px;
   height: 4px;
-  background: var(--blue);
-  border-radius: 16px 16px 0 0;
+  background: #006EFF;
+  border-radius: 20px 20px 0 0;
 }
 .popular-badge {
   position: absolute;
   top: -15px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--blue);
+  background: #006EFF;
   color: #fff;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  padding: 5px 16px;
+  padding: 6px 18px;
   border-radius: 999px;
   white-space: nowrap;
   box-shadow: 0 2px 10px rgba(0, 110, 255, 0.32);
 }
-.card__tier {
+.pricing-card__label {
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--blue);
-  margin: 0 0 7px;
+  color: #006EFF;
+  margin: 0 0 8px;
 }
-.card__tagline {
-  font-size: 13.5px;
-  color: var(--ink-4);
-  margin: 0 0 24px;
+.pricing-card__desc {
+  font-size: 14px;
+  color: #5A6472;
+  margin: 0 0 28px;
   line-height: 1.5;
-  min-height: 42px;
 }
-.price-block {
-  margin-bottom: 22px;
-  min-height: 90px;
-}
-.price-block__main {
+.pricing-card__price {
   display: flex;
   align-items: flex-end;
-  gap: 3px;
+  gap: 4px;
   line-height: 1;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
-.price-block__currency {
+.pricing-card__currency {
   font-family: var(--font-display);
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 700;
-  color: var(--ink-3);
-  padding-bottom: 7px;
+  color: #5A6472;
+  padding-bottom: 8px;
 }
-.price-block__amount {
+.pricing-card__amount {
   font-family: var(--font-display);
-  font-size: 54px;
+  font-size: 56px;
   font-weight: 800;
-  color: var(--ink);
+  color: #111;
   letter-spacing: -0.03em;
   line-height: 1;
 }
-.price-block__period {
-  font-size: 13px;
-  color: var(--ink-4);
-  padding-bottom: 9px;
-  padding-left: 1px;
+.pricing-card__period {
+  font-size: 14px;
+  color: #5A6472;
+  padding-bottom: 10px;
   font-weight: 500;
 }
-.price-block__sub {
-  font-size: 12.5px;
-  color: var(--ink-4);
-  line-height: 1.55;
+.pricing-card__sub {
+  font-size: 13px;
+  color: #5A6472;
+  line-height: 1.5;
+  margin-bottom: 8px;
 }
-.price-block__sub strong {
-  color: var(--ink-3);
+.pricing-card__sub strong {
+  color: #111;
   font-weight: 600;
 }
-.price-block__save {
+.pricing-card__save {
   display: inline-block;
-  background: var(--blue-light);
-  color: var(--blue);
-  font-size: 11px;
+  background: rgba(0, 110, 255, 0.08);
+  color: #006EFF;
+  font-size: 12px;
   font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 5px;
-  margin-top: 7px;
-  letter-spacing: 0.01em;
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 28px;
 }
-.card__divider {
-  border: none;
-  border-top: 1.5px solid #e2e8f0;
-  margin: 0 0 20px;
-}
-.features-label {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--ink-4);
-  margin: 0 0 13px;
-}
-.features-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.features-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  font-size: 13.5px;
-  color: var(--ink-3);
-  line-height: 1.5;
-}
-.features-list li svg {
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: var(--blue);
-}
-.feature-inherited {
-  color: var(--ink-4);
-  font-style: italic;
-  font-size: 12.5px;
-}
-.btn-cta {
+.pricing-card__cta {
   display: block;
   width: 100%;
-  padding: 14px 20px;
-  border-radius: 9px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background 160ms var(--ease), color 160ms var(--ease), border-color 160ms var(--ease), box-shadow 160ms var(--ease), transform 100ms ease;
-  letter-spacing: 0.005em;
-  line-height: 1.2;
-  border: 2px solid transparent;
-  box-sizing: border-box;
+  transition: all 200ms ease;
+  margin-top: auto;
 }
-.btn-cta:active {
-  transform: scale(0.975);
-}
-.btn-outline {
+.pricing-card__cta--outline {
   background: transparent;
-  border-color: var(--blue);
-  color: var(--blue);
+  border: 2px solid #006EFF;
+  color: #006EFF;
 }
-.btn-outline:hover {
+.pricing-card__cta--outline:hover {
   background: rgba(0, 110, 255, 0.07);
-  border-color: var(--blue-hover);
-  color: var(--blue-hover);
 }
-.btn-filled {
-  background: var(--blue);
-  border-color: var(--blue);
+.pricing-card__cta--filled {
+  background: #006EFF;
+  border: 2px solid #006EFF;
   color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 110, 255, 0.30);
+  box-shadow: 0 4px 16px rgba(0, 110, 255, 0.3);
 }
-.btn-filled:hover {
-  background: var(--blue-hover);
-  border-color: var(--blue-hover);
-  box-shadow: 0 4px 18px rgba(0, 110, 255, 0.40);
-  color: #fff;
+.pricing-card__cta--filled:hover {
+  background: #338BFF;
+  border-color: #338BFF;
+  box-shadow: 0 6px 24px rgba(0, 110, 255, 0.4);
+}
+/* Shared features list (below the two cards) */
+.pricing-includes {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+.pricing-includes__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 20px;
+}
+.pricing-includes__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 32px;
+  text-align: left;
+}
+.pricing-includes__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #5A6472;
+  line-height: 1.5;
+}
+.pricing-includes__item svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #006EFF;
 }
 .lla-pricing__trust {
   display: flex;
@@ -2530,25 +2415,24 @@ ul, ol { list-style: none; }
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: var(--ink-3);
+  color: #5A6472;
   font-weight: 500;
 }
 .trust-item svg {
-  color: var(--blue);
+  color: #006EFF;
   flex-shrink: 0;
 }
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   .lla-pricing__cards {
     grid-template-columns: 1fr;
-    max-width: 460px;
-    margin: 0 auto;
-  }
-  .pricing-card--featured {
-    margin-top: 0;
-    margin-bottom: 0;
+    max-width: 440px;
+    margin: 0 auto 48px;
   }
   .lla-pricing {
     padding: 72px 20px 64px;
+  }
+  .pricing-includes__grid {
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 560px) {
@@ -2558,21 +2442,11 @@ ul, ol { list-style: none; }
   .lla-pricing__title {
     font-size: 28px;
   }
-  .lla-pricing__subtitle {
-    font-size: 15px;
-  }
-  .price-block__amount {
+  .pricing-card__amount {
     font-size: 46px;
   }
   .pricing-card {
-    padding: 26px 20px 22px;
-  }
-  .pricing-card--featured {
-    padding-top: 42px;
-  }
-  .lla-pricing__toggle-row {
-    gap: 10px;
-    margin-bottom: 40px;
+    padding: 28px 22px 24px;
   }
   .lla-pricing__trust {
     gap: 20px;
@@ -2755,7 +2629,10 @@ ul, ol { list-style: none; }
 
   /* Certs */
   .cert-pill-row { flex-direction: column !important; align-items: center !important; }
-  .cert-pill { width: 100%; justify-content: center; }
+  .cert-pill { width: 100%; justify-content: center; padding: 14px 24px; gap: 10px; }
+  .cert-pill-shield { width: 22px; height: 22px; }
+  .cert-pill-abbr { font-size: 16px; }
+  .cert-pill-name { font-size: 13px; }
 
   /* How it works */
   .hiw-cards { grid-template-columns: 1fr !important; }
@@ -3025,16 +2902,16 @@ ul, ol { list-style: none; }
       <p class="section-subtitle">Each one is backed by research, covered in our course, and explored in depth on our blog.</p>
     </div>
     <div class="skills-grid">
-      <a class="skill-card reveal" href="topics/biomarkers-testing.html" aria-label="Cellular Regeneration — how your cells repair, recycle, and renew">
-        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-cells.mp4" type="video/mp4"></video></div>
+      <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
+        <div class="skill-bg cells"><img src="assets/img-metabolic.jpg" alt="Metabolic health" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Cells &amp; Aging</div>
-          <h3 class="skill-title">Cellular Regeneration</h3>
-          <p class="skill-sub">How your cells repair, recycle, and renew.</p>
+          <div class="skill-eyebrow">Sessions 2 &amp; 3</div>
+          <h3 class="skill-title">The Glucose Problem Most Doctors Miss</h3>
+          <p class="skill-sub">Why insulin resistance begins decades before diagnosis — and the metabolic biomarkers that predict it before your fasting glucose does.</p>
         </div>
       </a>
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Turn Back the Clock — brain aging and cognition">
@@ -3284,6 +3161,7 @@ ul, ol { list-style: none; }
       <h2 class="section-title">Explore what<br>you'll learn.</h2>
       <p class="section-subtitle">Real lessons, real data, real protocols. Hover each node to explore.</p>
     </div>
+    <div class="hex-layout">
     <div class="hex-chart reveal" id="hexChart">
       <!-- Orbit ring -->
       <div class="hex-orbit"></div>
@@ -3325,7 +3203,7 @@ ul, ol { list-style: none; }
         <div class="hex-node-label">Protocols<br>&amp; Habits</div>
       </div>
     </div>
-    <!-- Detail panel (outside hex-chart so it doesn't overlap nodes) -->
+    <!-- Detail panel (side panel, right of hex chart) -->
     <div class="hex-detail reveal" id="hexDetail">
       <div class="hex-detail-tag" id="hexDetailTag"></div>
       <h3 class="hex-detail-title" id="hexDetailTitle"></h3>
@@ -3335,6 +3213,7 @@ ul, ol { list-style: none; }
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
     </div>
+    </div><!-- end hex-layout -->
 
     <!-- Mobile hex replacement — vertical card list -->
     <div class="deepdive-mobile-list">
@@ -3762,129 +3641,76 @@ ul, ol { list-style: none; }
 <!-- ==============================================
      PRICING SECTION
      ============================================== -->
-<section class="lla-pricing" data-billing="annual" aria-labelledby="lla-pricing-heading">
+<section class="lla-pricing" aria-labelledby="lla-pricing-heading">
   <div class="lla-pricing__inner">
 
     <header class="lla-pricing__header">
       <p class="lla-pricing__eyebrow" aria-hidden="true">Pricing</p>
       <h2 class="lla-pricing__title" id="lla-pricing-heading">Invest in your next decade.</h2>
-      <p class="lla-pricing__subtitle">Choose the path that fits your commitment level.</p>
+      <p class="lla-pricing__subtitle">Same course. Same content. Choose how you'd like to pay.</p>
     </header>
-
-    <div class="lla-pricing__toggle-row" role="group" aria-label="Billing period">
-      <span class="toggle-label label-monthly">Monthly</span>
-      <button class="toggle-switch" id="lla-billing-toggle" role="switch" aria-checked="true" aria-label="Toggle billing period: currently Annual" tabindex="0">
-        <span class="toggle-track" aria-hidden="true"></span>
-        <span class="toggle-thumb" aria-hidden="true"></span>
-      </button>
-      <span class="toggle-label label-annual">Annual</span>
-      <span class="save-pill" aria-live="polite" aria-label="Save up to 28% with annual billing">
-        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M9.5 2.5L4.5 8.5L1.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Save up to 28%
-      </span>
-    </div>
 
     <div class="lla-pricing__cards" role="list">
 
-      <!-- TIER 1: EXPLORER -->
-      <article class="pricing-card" role="listitem" aria-label="Explorer plan">
-        <p class="card__tier">Explorer</p>
-        <p class="card__tagline">Your foundation for a longer, healthier life.</p>
-        <div class="price-block price-annual">
-          <div class="price-block__main">
-            <span class="price-block__currency">$</span>
-            <span class="price-block__amount">1,290</span>
-          </div>
-          <p class="price-block__sub">Billed upfront &middot; <strong>That's just $107/mo</strong></p>
-          <span class="price-block__save">Save $498 &mdash; 28% off</span>
+      <!-- OPTION 1: MONTHLY -->
+      <article class="pricing-card" role="listitem" aria-label="Monthly billing">
+        <p class="pricing-card__label">Monthly</p>
+        <p class="pricing-card__desc">Pay as you learn, month by month.</p>
+        <div class="pricing-card__price">
+          <span class="pricing-card__currency">$</span>
+          <span class="pricing-card__amount">99</span>
+          <span class="pricing-card__period">/mo</span>
         </div>
-        <div class="price-block price-monthly">
-          <div class="price-block__main">
-            <span class="price-block__currency">$</span>
-            <span class="price-block__amount">149</span>
-            <span class="price-block__period">/mo</span>
-          </div>
-          <p class="price-block__sub">Billed monthly &middot; <strong>$1,788 over 12 months</strong></p>
-        </div>
-        <hr class="card__divider">
-        <p class="features-label">What's included</p>
-        <ul class="features-list" aria-label="Explorer plan features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>All 12 live sessions (90 min each)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Session recordings (lifetime access)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Full course materials &amp; resources</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Community forum access</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Small group sessions (max 15 people)</li>
-        </ul>
-        <a href="#" class="btn-cta btn-outline" role="button">Get Started</a>
+        <p class="pricing-card__sub"><strong>$1,188 total</strong> over 12 months</p>
+        <div style="margin-bottom:28px"></div>
+        <a href="#lead-gen" class="pricing-card__cta pricing-card__cta--outline">Get Started</a>
       </article>
 
-      <!-- TIER 2: ACCELERATOR (FEATURED) -->
-      <article class="pricing-card pricing-card--featured" role="listitem" aria-label="Accelerator plan, most popular">
-        <span class="popular-badge">Most Popular</span>
-        <p class="card__tier">Accelerator</p>
-        <p class="card__tagline">The complete longevity system with personal coaching.</p>
-        <div class="price-block price-annual">
-          <div class="price-block__main">
-            <span class="price-block__currency">$</span>
-            <span class="price-block__amount">1,790</span>
-          </div>
-          <p class="price-block__sub">Billed upfront &middot; <strong>That's just $149/mo</strong></p>
-          <span class="price-block__save">Save $598 &mdash; 25% off</span>
+      <!-- OPTION 2: UPFRONT (FEATURED) -->
+      <article class="pricing-card pricing-card--featured" role="listitem" aria-label="Upfront billing, best value">
+        <span class="popular-badge">Best Value</span>
+        <p class="pricing-card__label">Pay Upfront</p>
+        <p class="pricing-card__desc">One payment, biggest savings.</p>
+        <div class="pricing-card__price">
+          <span class="pricing-card__currency">$</span>
+          <span class="pricing-card__amount">899</span>
         </div>
-        <div class="price-block price-monthly">
-          <div class="price-block__main">
-            <span class="price-block__currency">$</span>
-            <span class="price-block__amount">199</span>
-            <span class="price-block__period">/mo</span>
-          </div>
-          <p class="price-block__sub">Billed monthly &middot; <strong>$2,388 over 12 months</strong></p>
-        </div>
-        <hr class="card__divider">
-        <p class="features-label">Everything in Explorer, plus</p>
-        <ul class="features-list" aria-label="Accelerator plan features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Personal Longevity Blueprint</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>CGM device included (continuous glucose monitor)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>2 one-on-one coaching sessions</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority small group (max 10 people)</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Certificate of completion</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-inherited">All Explorer features included</span></li>
-        </ul>
-        <a href="#" class="btn-cta btn-filled" role="button">Reserve Your Seat</a>
+        <p class="pricing-card__sub">One-time payment &middot; <strong>That's just $75/mo</strong></p>
+        <span class="pricing-card__save">Save $289 &mdash; 24% off</span>
+        <a href="#lead-gen" class="pricing-card__cta pricing-card__cta--filled">Reserve Your Seat</a>
       </article>
 
-      <!-- TIER 3: CATALYST -->
-      <article class="pricing-card" role="listitem" aria-label="Catalyst plan">
-        <p class="card__tier">Catalyst</p>
-        <p class="card__tagline">Maximum support for those who want transformational results.</p>
-        <div class="price-block price-annual">
-          <div class="price-block__main">
-            <span class="price-block__currency">$</span>
-            <span class="price-block__amount">2,790</span>
-          </div>
-          <p class="price-block__sub">Billed upfront &middot; <strong>That's just $232/mo</strong></p>
-          <span class="price-block__save">Save $798 &mdash; 22% off</span>
-        </div>
-        <div class="price-block price-monthly">
-          <div class="price-block__main">
-            <span class="price-block__currency">$</span>
-            <span class="price-block__amount">299</span>
-            <span class="price-block__period">/mo</span>
-          </div>
-          <p class="price-block__sub">Billed monthly &middot; <strong>$3,588 over 12 months</strong></p>
-        </div>
-        <hr class="card__divider">
-        <p class="features-label">Everything in Accelerator, plus</p>
-        <ul class="features-list" aria-label="Catalyst plan features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>6 one-on-one coaching sessions</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>VIP WhatsApp group with instructors</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Lifetime community access</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced biomarker analysis session</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Early access to future courses</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="feature-inherited">All Accelerator features included</span></li>
-        </ul>
-        <a href="#" class="btn-cta btn-outline" role="button">Apply Now</a>
-      </article>
+    </div>
 
+    <!-- Shared features — listed once -->
+    <div class="pricing-includes">
+      <p class="pricing-includes__title">Both options include everything:</p>
+      <div class="pricing-includes__grid">
+        <div class="pricing-includes__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          12 live sessions (90 min each)
+        </div>
+        <div class="pricing-includes__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Small groups of 8–15 people
+        </div>
+        <div class="pricing-includes__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Session recordings (lifetime access)
+        </div>
+        <div class="pricing-includes__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Full course materials &amp; resources
+        </div>
+        <div class="pricing-includes__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Community forum access
+        </div>
+        <div class="pricing-includes__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M4.75 8.25L6.85 10.35L11.25 5.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Personal longevity protocol
+        </div>
+      </div>
     </div>
 
     <div class="lla-pricing__trust" role="list" aria-label="Trust indicators">
@@ -4131,15 +3957,15 @@ ul, ol { list-style: none; }
     { tag: 'Protocols & Habits', title: 'Build a blueprint that sticks.', desc: 'Design a personalized longevity protocol grounded in your own data, habits, and goals — tested and peer-reviewed by your cohort.', link: 'topics/protocols-habits.html' }
   ];
 
-  // Position nodes in a circle — bigger chart
-  const cx = 420, cy = 350, radius = 280;
-  const nodeSize = 156;
+  // Position nodes in a circle
+  const cx = 340, cy = 340, radius = 240;
+  const nodeSize = 140;
 
   function positionChart() {
     const w = chart.offsetWidth;
-    const scale = Math.min(1, w / 840);
+    const scale = Math.min(1, w / 680);
     const sCx = w / 2;
-    const sCy = 350 * scale;
+    const sCy = 340 * scale;
     const sR = radius * scale;
     const sNode = nodeSize * scale;
 
@@ -4181,7 +4007,7 @@ ul, ol { list-style: none; }
       orbit.style.left = sCx + 'px';
     }
 
-    // Chart height — detail panel is now outside the chart container
+    // Chart height
     chart.style.height = (sCy + sR + sNode / 2 + 40) + 'px';
   }
 
@@ -4307,32 +4133,7 @@ ul, ol { list-style: none; }
   });
 })();
 
-/* ==================================================
-   PRICING BILLING TOGGLE
-   ================================================== */
-(function () {
-  'use strict';
-  var section = document.querySelector('.lla-pricing');
-  var btn     = document.getElementById('lla-billing-toggle');
-  if (!section || !btn) return;
-  function setBilling(isAnnual) {
-    section.setAttribute('data-billing', isAnnual ? 'annual' : 'monthly');
-    btn.setAttribute('aria-checked', isAnnual ? 'true' : 'false');
-    btn.setAttribute('aria-label',
-      'Toggle billing period: currently ' + (isAnnual ? 'Annual' : 'Monthly'));
-  }
-  btn.addEventListener('click', function () {
-    var current = section.getAttribute('data-billing');
-    setBilling(current !== 'annual');
-  });
-  btn.addEventListener('keydown', function (e) {
-    if (e.key === ' ' || e.key === 'Enter') {
-      e.preventDefault();
-      btn.click();
-    }
-  });
-  setBilling(section.getAttribute('data-billing') === 'annual');
-}());
+/* Pricing toggle removed — simple 2-option layout */
 
 /* ==================================================
    Mobile Hamburger Menu
