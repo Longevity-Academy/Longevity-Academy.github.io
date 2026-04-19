@@ -2935,6 +2935,173 @@ ul, ol { list-style: none; }
   .cert-badge-v2 { min-width: 100%; flex: 0 0 100%; }
 }
 
+
+/* ======= CERTS BLACK STRIP — 2.5x BIGGER TEXT ======= */
+.certs-v2 { display: none !important; }
+.certs-strip {
+  background: #000;
+  padding: 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.certs-strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.certs-strip-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  padding: 28px 32px 28px 0;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.certs-strip-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.certs-strip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 24px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.25s ease;
+  white-space: nowrap;
+}
+.certs-strip-badge:last-child { border-right: none; }
+.certs-strip-badge:hover { background: rgba(255,255,255,0.04); }
+.certs-strip-abbr {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.certs-strip-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+}
+.certs-strip-name {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .certs-strip-label { 
+    width: 100%; 
+    border-right: none; 
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    padding: 20px 0;
+  }
+  .certs-strip-badges { justify-content: center; }
+  .certs-strip-badge { padding: 16px 18px; }
+  .certs-strip-abbr { font-size: 16px; }
+  .certs-strip-name { font-size: 12px; }
+}
+@media (max-width: 600px) {
+  .certs-strip-badge { 
+    flex: 0 0 50%; 
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    justify-content: center;
+  }
+  .certs-strip-divider { display: none; }
+  .certs-strip-name { display: none; }
+  .certs-strip-abbr { font-size: 20px; }
+}
+
+/* ======= CURRICULUM — COLORED PHASES, LARGER FONTS ======= */
+.curriculum {
+  background: linear-gradient(180deg, #F0F4F8 0%, #F8FAFC 50%, #EFF3F8 100%) !important;
+  padding: 120px 0 100px !important;
+}
+.curriculum .eyebrow { 
+  color: #006EFF !important;
+  font-size: 14px !important;
+  letter-spacing: 4px !important;
+}
+.curriculum .section-title {
+  font-size: clamp(38px, 5.5vw, 64px) !important;
+  font-weight: 900 !important;
+  line-height: 1.08 !important;
+  color: #0a1628 !important;
+}
+.curriculum .gold {
+  color: #006EFF !important;
+}
+.curriculum-bridge {
+  font-size: 18px !important;
+  color: #556 !important;
+  font-style: normal !important;
+}
+.curriculum .section-subtitle {
+  font-size: 18px !important;
+  color: #556 !important;
+  max-width: 620px !important;
+  margin: 0 auto !important;
+}
+
+/* Phase block header COLORS */
+.phase-block {
+  margin-bottom: 48px !important;
+}
+.phase-block-label {
+  font-size: 13px !important;
+  letter-spacing: 3px !important;
+}
+.phase-block-name {
+  font-size: 32px !important;
+  font-weight: 900 !important;
+}
+
+/* Phase 1 = Blue */
+.phase-block:nth-child(1) .phase-block-label { color: #6FA8FF !important; }
+.phase-block:nth-child(1) .phase-block-name { color: #2060C0 !important; }
+.phase-block:nth-child(1) .phase-block-header { border-bottom-color: rgba(111,168,255,0.3) !important; }
+.phase-block:nth-child(1) .curriculum-num { background: rgba(111,168,255,0.12) !important; color: #4488DD !important; }
+
+/* Phase 2 = Amber */
+.phase-block:nth-child(2) .phase-block-label { color: #E8A75A !important; }
+.phase-block:nth-child(2) .phase-block-name { color: #B07830 !important; }
+.phase-block:nth-child(2) .phase-block-header { border-bottom-color: rgba(232,167,90,0.3) !important; }
+.phase-block:nth-child(2) .curriculum-num { background: rgba(232,167,90,0.12) !important; color: #C88A40 !important; }
+
+/* Phase 3 = Teal */
+.phase-block:nth-child(3) .phase-block-label { color: #5FB6B0 !important; }
+.phase-block:nth-child(3) .phase-block-name { color: #3A8A85 !important; }
+.phase-block:nth-child(3) .phase-block-header { border-bottom-color: rgba(95,182,176,0.3) !important; }
+.phase-block:nth-child(3) .curriculum-num { background: rgba(95,182,176,0.12) !important; color: #4EA09A !important; }
+
+/* Phase 4 = Indigo */
+.phase-block:nth-child(4) .phase-block-label { color: #7B7FCF !important; }
+.phase-block:nth-child(4) .phase-block-name { color: #3B3F91 !important; }
+.phase-block:nth-child(4) .phase-block-header { border-bottom-color: rgba(59,63,145,0.3) !important; }
+.phase-block:nth-child(4) .curriculum-num { background: rgba(59,63,145,0.12) !important; color: #5558B0 !important; }
+
+/* Accordion items slightly larger */
+.curriculum-trigger-text h3 {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+}
+.curriculum-section-label {
+  color: #006EFF !important;
+  font-size: 12px !important;
+}
+
 </style>
 </head>
 <body>
@@ -3105,8 +3272,8 @@ ul, ol { list-style: none; }
 <section class="skills" id="skills">
   <div class="container">
     <div class="skills-header reveal">
-      <span class="eyebrow">Six Longevity Skills</span>
-      <h2 class="section-title">Course Lessons<br>in Detail</h2>
+      <span class="eyebrow">Inside the Protocol</span>
+      <h2 class="section-title">Five Deep Dives Your<br><span style="color:#006EFF;">Doctor Won't Give You</span></h2>
       <p class="section-subtitle">Each lesson is backed by peer-reviewed research and taught by certified instructors.</p>
     </div>
     <div class="skills-grid">
@@ -3189,10 +3356,10 @@ ul, ol { list-style: none; }
 <section class="curriculum" id="syllabus">
   <div class="container">
     <div class="curriculum-header reveal">
-      <p class="curriculum-bridge">From metabolic foundations to your personal longevity protocol</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">The Complete Protocol</p>
-      <h2 class="section-title">12 Sessions. 12 Weeks.<br>One Complete <span class="gold">Operating System</span>.</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">Each 90-minute session builds on the last. Live instruction, cohort discussion, hands-on protocols, and between-session experiments designed to make the science stick in your biology — not just your notes.</p>
+      <p class="curriculum-bridge">A structured 12-week online course designed by eTeacher Group</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">Our Methodology</p>
+      <h2 class="section-title">12 Sessions. 4 Phases.<br><span class="gold">Your Protocol</span>.</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Each phase builds on the last — science-backed, teacher-led, peer-driven.</p>
     </div>
     <div class="curriculum-phases">
 
@@ -3529,8 +3696,8 @@ ul, ol { list-style: none; }
   <div class="container">
     <div class="deepdive-header reveal">
       <span class="eyebrow">Inside the Course</span>
-      <h2 class="section-title">Course<br>Overview</h2>
-      <p class="section-subtitle">Hover each area to see what you'll cover in the course.</p>
+      <h2 class="section-title">Your Longevity<br>Operating System</h2>
+      <p class="section-subtitle">Six interconnected areas of science — each one feeds the next. Hover to explore.</p>
     </div>
     <div class="hex-layout">
     <div class="hex-chart reveal" id="hexChart">
@@ -3738,81 +3905,39 @@ ul, ol { list-style: none; }
   </div>
 </section>
 
-<section class="certs-v2">
-  <div class="container">
-    <div class="certs-v2-label">Recognized by</div>
-    <div class="certs-v2-grid">
-      <div class="cert-badge-v2">
-        <div class="cert-badge-v2-shield">
-          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
-            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
-            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="cert-badge-v2-text">
-          <span class="cert-badge-v2-abbr">ACE</span>
-          <span class="cert-badge-v2-name">American Council on Exercise</span>
-        </div>
+<section class="certs-strip">
+  <div class="certs-strip-inner">
+    <span class="certs-strip-label">Recognized by</span>
+    <div class="certs-strip-badges">
+      <div class="certs-strip-badge">
+        <span class="certs-strip-abbr">ACE</span>
+        <span class="certs-strip-divider"></span>
+        <span class="certs-strip-name">American Council on Exercise</span>
       </div>
-      <div class="cert-badge-v2">
-        <div class="cert-badge-v2-shield">
-          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
-            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
-            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="cert-badge-v2-text">
-          <span class="cert-badge-v2-abbr">NASM</span>
-          <span class="cert-badge-v2-name">National Academy of Sports Medicine</span>
-        </div>
+      <div class="certs-strip-badge">
+        <span class="certs-strip-abbr">NASM</span>
+        <span class="certs-strip-divider"></span>
+        <span class="certs-strip-name">National Academy of Sports Medicine</span>
       </div>
-      <div class="cert-badge-v2">
-        <div class="cert-badge-v2-shield">
-          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
-            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
-            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="cert-badge-v2-text">
-          <span class="cert-badge-v2-abbr">IFM</span>
-          <span class="cert-badge-v2-name">Institute for Functional Medicine</span>
-        </div>
+      <div class="certs-strip-badge">
+        <span class="certs-strip-abbr">IFM</span>
+        <span class="certs-strip-divider"></span>
+        <span class="certs-strip-name">Institute for Functional Medicine</span>
       </div>
-      <div class="cert-badge-v2">
-        <div class="cert-badge-v2-shield">
-          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
-            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
-            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="cert-badge-v2-text">
-          <span class="cert-badge-v2-abbr">NBHWC</span>
-          <span class="cert-badge-v2-name">National Board for Health &amp; Wellness Coaching</span>
-        </div>
+      <div class="certs-strip-badge">
+        <span class="certs-strip-abbr">NBHWC</span>
+        <span class="certs-strip-divider"></span>
+        <span class="certs-strip-name">National Board for Health &amp; Wellness Coaching</span>
       </div>
-      <div class="cert-badge-v2">
-        <div class="cert-badge-v2-shield">
-          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
-            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
-            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="cert-badge-v2-text">
-          <span class="cert-badge-v2-abbr">PN</span>
-          <span class="cert-badge-v2-name">Precision Nutrition</span>
-        </div>
+      <div class="certs-strip-badge">
+        <span class="certs-strip-abbr">PN</span>
+        <span class="certs-strip-divider"></span>
+        <span class="certs-strip-name">Precision Nutrition</span>
       </div>
-      <div class="cert-badge-v2">
-        <div class="cert-badge-v2-shield">
-          <svg viewBox="0 0 40 48" width="40" height="48" fill="none">
-            <path d="M20 2L4 10v12c0 11.11 6.84 21.5 16 24 9.16-2.5 16-12.89 16-24V10L20 2z" fill="#006EFF" fill-opacity="0.12" stroke="#006EFF" stroke-width="1.5"/>
-            <path d="M16 24l4 4 8-8" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="cert-badge-v2-text">
-          <span class="cert-badge-v2-abbr">XLA</span>
-          <span class="cert-badge-v2-name">Extended Learning Alliance</span>
-        </div>
+      <div class="certs-strip-badge">
+        <span class="certs-strip-abbr">XLA</span>
+        <span class="certs-strip-divider"></span>
+        <span class="certs-strip-name">Extended Learning Alliance</span>
       </div>
     </div>
   </div>
