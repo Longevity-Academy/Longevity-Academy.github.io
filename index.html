@@ -2275,10 +2275,11 @@ ul, ol { list-style: none; }
   .skill-card:first-child { height: 320px; }
   .skill-card { height: 240px; }
 
-  /* Hex diagram — hide SVG, show mobile list */
-  .hex-chart { display: none !important; }
-  .hex-detail { display: none !important; }
-  .deepdive-mobile-list { display: flex !important; }
+  /* Hex diagram — scale down for mobile */
+  .hex-chart { transform: scale(0.75); transform-origin: center top; margin-bottom: -60px; }
+  .hex-detail { margin-top: 0; }
+  .hex-layout { flex-direction: column; align-items: center; }
+  .deepdive-mobile-list { display: none !important; }
 
   /* Syllabus */
   .phase-head { padding: 20px !important; gap: 12px !important; }
