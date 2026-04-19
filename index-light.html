@@ -255,7 +255,7 @@ ul, ol { list-style: none; }
 .hero-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(56px, 10vw, 148px);
+  font-size: clamp(68px, 11vw, 168px);
   line-height: 0.92;
   letter-spacing: -0.03em;
   color: #fff;
@@ -284,7 +284,7 @@ ul, ol { list-style: none; }
 .hero-academy-name {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(18px, 2.5vw, 28px);
+  font-size: clamp(22px, 3vw, 36px);
   color: rgba(255, 255, 255, 0.9);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -296,7 +296,7 @@ ul, ol { list-style: none; }
   font-weight: 800;
 }
 .hero-sub {
-  font-size: clamp(17px, 1.6vw, 22px);
+  font-size: clamp(19px, 1.8vw, 26px);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.88);
   max-width: 720px;
@@ -505,11 +505,11 @@ ul, ol { list-style: none; }
   justify-content: space-between;
   padding: 32px 28px;
   min-height: 220px;
-  background: rgba(0, 20, 60, 0.85);
+  background: var(--tc-bg, rgba(0, 20, 60, 0.85));
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(0, 110, 255, 0.2);
-  border-left: 3px solid rgba(0, 110, 255, 0.5);
+  border: 1px solid var(--tc-border, rgba(0, 110, 255, 0.2));
+  border-left: 3px solid var(--tc-accent, rgba(0, 110, 255, 0.5));
   border-radius: 16px;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
   position: relative;
@@ -517,6 +517,15 @@ ul, ol { list-style: none; }
   text-decoration: none;
   will-change: transform;
 }
+/* Varied topic card tints */
+.topic-card:nth-child(1) { --tc-bg: rgba(0, 30, 80, 0.92); --tc-accent: #006EFF; --tc-border: rgba(0, 110, 255, 0.3); }
+.topic-card:nth-child(2) { --tc-bg: rgba(0, 14, 45, 0.85); --tc-accent: #4DA6FF; --tc-border: rgba(77, 166, 255, 0.25); }
+.topic-card:nth-child(3) { --tc-bg: rgba(10, 22, 65, 0.92); --tc-accent: #0099FF; --tc-border: rgba(0, 153, 255, 0.28); }
+.topic-card:nth-child(4) { --tc-bg: rgba(0, 10, 38, 0.85); --tc-accent: #338BFF; --tc-border: rgba(51, 139, 255, 0.22); }
+.topic-card:nth-child(5) { --tc-bg: rgba(5, 25, 72, 0.92); --tc-accent: #006EFF; --tc-border: rgba(0, 110, 255, 0.25); }
+.topic-card:nth-child(6) { --tc-bg: rgba(0, 12, 42, 0.85); --tc-accent: #4DA6FF; --tc-border: rgba(77, 166, 255, 0.28); }
+.topic-card:nth-child(7) { --tc-bg: rgba(8, 28, 75, 0.92); --tc-accent: #0099FF; --tc-border: rgba(0, 153, 255, 0.3); }
+.topic-card:nth-child(8) { --tc-bg: rgba(0, 8, 32, 0.85); --tc-accent: #338BFF; --tc-border: rgba(51, 139, 255, 0.22); }
 .topic-card::before {
   content: '';
   position: absolute;
@@ -1361,11 +1370,15 @@ ul, ol { list-style: none; }
   z-index: 1;
   overflow: hidden;
   margin: 0 8px;
-  background: rgba(0, 20, 60, 0.85);
+  background: var(--hc-bg, rgba(0, 20, 60, 0.85));
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(0,110,255,0.18);
-  border-top: 2px solid rgba(0,110,255,0.4);
+  border: 1px solid var(--hc-border, rgba(0,110,255,0.18));
+  border-top: 2px solid var(--hc-top, rgba(0,110,255,0.4));
 }
+.how-card:nth-child(1) { --hc-bg: rgba(0, 30, 80, 0.92); --hc-top: #006EFF; --hc-border: rgba(0,110,255,0.28); }
+.how-card:nth-child(2) { --hc-bg: rgba(0, 12, 42, 0.85); --hc-top: #4DA6FF; --hc-border: rgba(77,166,255,0.25); }
+.how-card:nth-child(3) { --hc-bg: rgba(8, 22, 68, 0.92); --hc-top: #0099FF; --hc-border: rgba(0,153,255,0.28); }
+.how-card:nth-child(4) { --hc-bg: rgba(0, 8, 35, 0.85); --hc-top: #338BFF; --hc-border: rgba(51,139,255,0.22); }
 .how-card:first-child { margin-left: 0; }
 .how-card:last-child { margin-right: 0; }
 .how-card::before {
@@ -1560,7 +1573,7 @@ ul, ol { list-style: none; }
 /* Cert trust strip — thin bar */
 .certs {
   padding: 0;
-  background: #0A0F1A;
+  background: #000;
   border-top: 1px solid rgba(255,255,255,0.06);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
@@ -1671,10 +1684,10 @@ ul, ol { list-style: none; }
   position: relative;
   padding: 36px 32px;
   border-radius: var(--radius-lg);
-  background: rgba(0, 20, 60, 0.8);
+  background: var(--vc-bg, rgba(0, 20, 60, 0.8));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0,110,255,0.15);
+  border: 1px solid var(--vc-border, rgba(0,110,255,0.15));
   border-left: 3px solid var(--card-accent, #006EFF);
   overflow: hidden;
   min-height: 320px;
@@ -1682,6 +1695,10 @@ ul, ol { list-style: none; }
   flex-direction: column;
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s ease;
 }
+.value-card[data-accent="1"] { --vc-bg: rgba(0, 25, 72, 0.85); --vc-border: rgba(0,110,255,0.2); }
+.value-card[data-accent="2"] { --vc-bg: rgba(5, 15, 50, 0.85); --vc-border: rgba(123,97,255,0.15); }
+.value-card[data-accent="3"] { --vc-bg: rgba(0, 12, 44, 0.85); --vc-border: rgba(255,107,107,0.12); }
+.value-card[data-accent="4"] { --vc-bg: rgba(0, 20, 58, 0.85); --vc-border: rgba(0,209,255,0.15); }
 .value-card::before {
   content: '';
   position: absolute;
@@ -2517,7 +2534,7 @@ ul, ol { list-style: none; }
   .mobile-menu-btn { display: block; }
 
   /* Hero */
-  .hero-title { font-size: 38px !important; }
+  .hero-title { font-size: 46px !important; }
   
 /* Hero academy name above main title */
 .hero-academy-name {
@@ -2615,7 +2632,7 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: 32px !important; }
+  .hero-title { font-size: 40px !important; }
   .section-title { font-size: 26px !important; }
   .skill-card:first-child { height: 280px; }
   .skill-card { height: 220px; }
@@ -2802,7 +2819,7 @@ ul, ol { list-style: none; }
     </div>
     <div class="skills-grid">
       <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
-        <div class="skill-bg cells"><img src="assets/img-metabolic.jpg" alt="Metabolic health" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-cells.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -3143,34 +3160,11 @@ ul, ol { list-style: none; }
      FOLD 8 — INSTRUCTORS & CREDENTIALS
      ============================================== -->
 <section class="instructors" id="teachers">
-  <div class="container">
-    <div class="instructors-header reveal">
-      <p class="instructors-bridge">Meet your course instructors</p>
-      <span class="eyebrow" style="margin-bottom: 16px; display: block;">Your Instructors</span>
-      <h2 class="section-title">Your Instructors</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">Not celebrity doctors — credible, dedicated instructors who practice what the research says, work directly with you, and answer the questions your GP can’t.</p>
-    </div>
-    <div class="teachers-grid">
-      <div class="teacher-card reveal reveal-delay-1">
-        <div class="teacher-avatar"><img src="assets/maya-elhalal.jpg" alt="Maya Elhalal"></div>
-        <h3 class="teacher-name">Maya Elhalal</h3>
-        <p class="teacher-role">Lead Instructor &amp; Longevity Educator</p>
-        <p class="teacher-bio">Founder of Longevity Science. Experienced in aging science workshops, glucose management, and lifestyle optimization. Leads longevity strategy programs and retreats across three continents.</p>
-      </div>
-      <div class="teacher-card reveal reveal-delay-2">
-        <div class="teacher-avatar"><img src="assets/david-barzilai.jpg" alt="David Barzilai, MD, PhD"></div>
-        <h3 class="teacher-name">David Barzilai, MD, PhD</h3>
-        <p class="teacher-role">Healthspan Coach</p>
-        <p class="teacher-bio">Physician and healthspan coaching specialist. Focuses on metabolic health, stress, sleep, and daily habits — grounded in longevity science, not expensive clinical interventions.</p>
-      </div>
-      <div class="teacher-card reveal reveal-delay-3">
-        <div class="teacher-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <h3 class="teacher-name">Guest Faculty</h3>
-        <p class="teacher-role">xLongevity Certified Coaches</p>
-        <p class="teacher-bio">Certified longevity coaches trained in age-related biology, lifestyle optimization, and behavior change. Specialists in translating complex science into daily practice you can sustain.</p>
-      </div>
+  <div class="container" style="padding-top: 48px; padding-bottom: 24px;">
+    <div class="instructors-header reveal" style="text-align: center; margin-bottom: 0;">
+      <span class="eyebrow" style="margin-bottom: 12px; display: block;">Your Instructors</span>
+      <h2 class="section-title" style="margin-bottom: 16px;">Credible, Dedicated Instructors</h2>
+      <p class="section-subtitle" style="margin: 0 auto; max-width: 620px;">Experienced teachers who practice what the research says, work directly with you, and answer the questions your GP can’t.</p>
     </div>
   </div>
 </section>
