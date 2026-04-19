@@ -732,7 +732,7 @@ ul, ol { list-style: none; }
   padding: 140px 0 160px;
   overflow: hidden;
   /* LIGHT background to break the dark monotony */
-  background: linear-gradient(180deg, #f8f9fc 0%, #ffffff 40%, #f5f7fa 100%);
+  background: linear-gradient(180deg, #f0f4fa 0%, #f8faff 30%, #ffffff 50%, #f5f8fc 80%, #eef2f9 100%);
 }
 .curriculum::after {
   content: '';
@@ -2954,10 +2954,10 @@ ul, ol { list-style: none; }
 /* ======= CERTS BLACK STRIP — 2.5x BIGGER TEXT ======= */
 .certs-v2 { display: none !important; }
 .certs-strip {
-  background: #000;
-  padding: 0;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, #040d1a 0%, #0a1628 100%);
+  padding: 48px 0;
+  border-top: 1px solid rgba(0,110,255,0.15);
+  border-bottom: 1px solid rgba(0,110,255,0.15);
 }
 .certs-strip-inner {
   display: flex;
@@ -2969,12 +2969,12 @@ ul, ol { list-style: none; }
   padding: 0 24px;
 }
 .certs-strip-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  padding: 16px 0;
+  color: rgba(255,255,255,0.45);
+  padding: 0 0 28px 0;
   border-right: none;
   width: 100%;
   text-align: center;
@@ -2984,76 +2984,77 @@ ul, ol { list-style: none; }
 .certs-strip-badges {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: center;
+  gap: 16px;
+  align-items: stretch;
   width: 100%;
 }
 .certs-strip-badge {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 20px 24px;
-  border-right: 1px solid rgba(255,255,255,0.08);
-  transition: background 0.25s ease;
-  white-space: nowrap;
+  gap: 10px;
+  padding: 28px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,110,255,0.15);
+  background: rgba(0,110,255,0.04);
+  transition: all 0.3s ease;
+  text-align: center;
   position: relative;
 }
 .certs-strip-badge::before {
   content: '';
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,110,255,0.6);
-  background: rgba(0,110,255,0.15);
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  border: 2px solid rgba(0,110,255,0.5);
+  background: linear-gradient(135deg, rgba(0,110,255,0.15) 0%, rgba(0,110,255,0.05) 100%);
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Shield shape via clip-path */
+  clip-path: polygon(50% 0%, 100% 12%, 100% 70%, 50% 100%, 0% 70%, 0% 12%);
+  border: none;
+  background: linear-gradient(135deg, rgba(0,110,255,0.35) 0%, rgba(0,110,255,0.12) 100%);
 }
-.certs-strip-badge:last-child { border-right: none; }
-.certs-strip-badge:hover { background: rgba(255,255,255,0.06); }
+.certs-strip-badge:hover { 
+  background: rgba(0,110,255,0.08); 
+  border-color: rgba(0,110,255,0.3);
+  transform: translateY(-2px);
+}
 .certs-strip-abbr {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 24px;
   color: #fff;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 .certs-strip-divider {
-  width: 1px;
-  height: 18px;
-  background: rgba(255,255,255,0.25);
-  flex-shrink: 0;
+  display: none;
 }
 .certs-strip-name {
-  font-size: 14px;
-  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
   font-weight: 500;
+  line-height: 1.3;
 }
 
 @media (max-width: 900px) {
-  .certs-strip-label { 
-    width: 100%; 
-    border-right: none; 
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    text-align: center;
-    padding: 20px 0;
-  }
-  .certs-strip-badges { justify-content: center; }
-  .certs-strip-badge { padding: 16px 18px; }
-  .certs-strip-abbr { font-size: 16px; }
-  .certs-strip-name { font-size: 12px; }
+  .certs-strip { padding: 36px 0; }
+  .certs-strip-badges { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .certs-strip-badge { padding: 20px 12px; }
+  .certs-strip-abbr { font-size: 20px; }
+  .certs-strip-name { font-size: 11px; }
+  .certs-strip-badge::before { width: 44px; height: 44px; }
 }
 @media (max-width: 600px) {
-  .certs-strip-badge { 
-    flex: 0 0 50%; 
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    justify-content: center;
-  }
-  .certs-strip-divider { display: none; }
-  .certs-strip-name { display: none; }
-  .certs-strip-abbr { font-size: 22px; }
-  .certs-strip-badge::before { width: 30px; height: 30px; }
+  .certs-strip { padding: 28px 0; }
+  .certs-strip-badges { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .certs-strip-badge { padding: 16px 8px; border-radius: 12px; }
+  .certs-strip-badge::before { width: 36px; height: 36px; }
+  .certs-strip-abbr { font-size: 16px; }
+  .certs-strip-name { display: block; font-size: 10px; }
+  .certs-strip-label { padding-bottom: 20px; }
 }
 
 /* ======= CURRICULUM — COLORED PHASES, LARGER FONTS ======= */
@@ -3190,16 +3191,18 @@ h2.section-title {
 
 @media (max-width: 768px) {
   .certs-strip-badges {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
   }
   .certs-strip-badge {
-    padding: 12px 8px !important;
+    padding: 14px 8px !important;
   }
-  .certs-strip-badge-abbr {
-    font-size: 16px !important;
+  .certs-strip-abbr {
+    font-size: 15px !important;
   }
-  .certs-strip-badge-name {
-    font-size: 10px !important;
+  .certs-strip-name {
+    font-size: 9px !important;
+    display: block !important;
   }
 }
 
