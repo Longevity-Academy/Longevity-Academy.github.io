@@ -2640,364 +2640,544 @@ ul, ol { list-style: none; }
   .final-cta-title { font-size: 26px !important; }
 }
 
-/* ==================================================
-   COMPREHENSIVE DESIGN FIXES
-   Brighter cards, bigger fonts, better phases, premium feel
-   ================================================== */
-
-/* --- GLOBAL: Bigger fonts everywhere --- */
-.section-title {
-  font-size: clamp(44px, 6vw, 72px) !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.035em !important;
-  line-height: 1.02 !important;
-}
-.section-subtitle {
-  font-size: clamp(17px, 1.3vw, 20px) !important;
-  line-height: 1.6 !important;
-}
-
-/* --- HERO: Bigger text --- */
-.hero-title {
-  font-size: clamp(60px, 9vw, 120px) !important;
-}
-.hero-sub {
-  font-size: clamp(17px, 1.4vw, 22px) !important;
-  max-width: 660px !important;
-}
-.hero-academy-name {
-  font-size: clamp(13px, 1.5vw, 18px) !important;
-  letter-spacing: 0.28em !important;
-}
-
-/* --- TOPIC CARDS (Fold 2): Brighter, more premium --- */
-.topics {
-  padding: 140px 0 120px !important;
-}
+/* ======= TOPIC CARD VIDEO BACKGROUNDS + COLOR VARIETY ======= */
 .topic-card {
-  background: rgba(0, 18, 60, 0.6) !important;
-  border: 1px solid rgba(0, 110, 255, 0.18) !important;
-  box-shadow: 0 4px 24px rgba(0, 30, 100, 0.15), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 210px !important;
+  border-radius: 18px !important;
 }
-.topic-card:hover {
-  background: rgba(0, 25, 80, 0.7) !important;
-  border-color: rgba(0, 110, 255, 0.35) !important;
-  box-shadow: 0 20px 56px rgba(0, 50, 150, 0.25), 0 0 0 1px rgba(0, 110, 255, 0.2) !important;
+.topic-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 18px;
 }
-.topic-card-title {
-  font-size: 20px !important;
-  font-weight: 800 !important;
+.topic-video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.topic-card:hover .topic-video-bg video {
+  opacity: 0.5;
+  transform: scale(1.05);
+}
+.topic-card .topic-number,
+.topic-card .topic-arrow,
+.topic-card .topic-label,
+.topic-card .topic-desc,
+.topic-card > * {
+  position: relative;
+  z-index: 2;
+}
+/* --- Each topic card has a DIFFERENT base color --- */
+.topic-card:nth-child(1) { 
+  background: linear-gradient(145deg, rgba(0, 50, 120, 0.75) 0%, rgba(0, 25, 70, 0.92) 100%) !important;
+  border: 1px solid rgba(0, 140, 255, 0.22) !important;
+}
+.topic-card:nth-child(2) { 
+  background: linear-gradient(145deg, rgba(30, 0, 90, 0.75) 0%, rgba(15, 0, 55, 0.92) 100%) !important;
+  border: 1px solid rgba(140, 90, 255, 0.22) !important;
+}
+.topic-card:nth-child(3) { 
+  background: linear-gradient(145deg, rgba(0, 60, 70, 0.75) 0%, rgba(0, 30, 45, 0.92) 100%) !important;
+  border: 1px solid rgba(0, 210, 190, 0.22) !important;
+}
+.topic-card:nth-child(4) { 
+  background: linear-gradient(145deg, rgba(60, 25, 0, 0.75) 0%, rgba(35, 12, 0, 0.92) 100%) !important;
+  border: 1px solid rgba(255, 170, 70, 0.22) !important;
+}
+.topic-card:nth-child(5) { 
+  background: linear-gradient(145deg, rgba(50, 5, 50, 0.75) 0%, rgba(25, 0, 35, 0.92) 100%) !important;
+  border: 1px solid rgba(210, 90, 210, 0.22) !important;
+}
+.topic-card:nth-child(6) { 
+  background: linear-gradient(145deg, rgba(0, 45, 30, 0.75) 0%, rgba(0, 20, 15, 0.92) 100%) !important;
+  border: 1px solid rgba(0, 230, 140, 0.22) !important;
+}
+.topic-card:nth-child(7) { 
+  background: linear-gradient(145deg, rgba(60, 10, 10, 0.7) 0%, rgba(35, 5, 12, 0.92) 100%) !important;
+  border: 1px solid rgba(255, 110, 110, 0.22) !important;
+}
+.topic-card:nth-child(8) { 
+  background: linear-gradient(145deg, rgba(0, 30, 70, 0.75) 0%, rgba(0, 50, 95, 0.92) 100%) !important;
+  border: 1px solid rgba(0, 190, 255, 0.22) !important;
+}
+/* Hover glow per topic card */
+.topic-card:nth-child(1):hover { box-shadow: 0 20px 60px rgba(0,110,255,0.25), 0 0 0 1px rgba(0,140,255,0.3) !important; }
+.topic-card:nth-child(2):hover { box-shadow: 0 20px 60px rgba(130,80,255,0.25), 0 0 0 1px rgba(140,90,255,0.3) !important; }
+.topic-card:nth-child(3):hover { box-shadow: 0 20px 60px rgba(0,200,180,0.25), 0 0 0 1px rgba(0,210,190,0.3) !important; }
+.topic-card:nth-child(4):hover { box-shadow: 0 20px 60px rgba(255,160,60,0.25), 0 0 0 1px rgba(255,170,70,0.3) !important; }
+.topic-card:nth-child(5):hover { box-shadow: 0 20px 60px rgba(200,80,200,0.25), 0 0 0 1px rgba(210,90,210,0.3) !important; }
+.topic-card:nth-child(6):hover { box-shadow: 0 20px 60px rgba(0,220,130,0.25), 0 0 0 1px rgba(0,230,140,0.3) !important; }
+.topic-card:nth-child(7):hover { box-shadow: 0 20px 60px rgba(255,100,100,0.25), 0 0 0 1px rgba(255,110,110,0.3) !important; }
+.topic-card:nth-child(8):hover { box-shadow: 0 20px 60px rgba(0,180,255,0.25), 0 0 0 1px rgba(0,190,255,0.3) !important; }
+/* Topic number colors */
+.topic-card:nth-child(1) .topic-number { color: rgba(0,170,255,0.18) !important; }
+.topic-card:nth-child(2) .topic-number { color: rgba(150,110,255,0.18) !important; }
+.topic-card:nth-child(3) .topic-number { color: rgba(0,220,200,0.18) !important; }
+.topic-card:nth-child(4) .topic-number { color: rgba(255,180,80,0.18) !important; }
+.topic-card:nth-child(5) .topic-number { color: rgba(220,100,220,0.18) !important; }
+.topic-card:nth-child(6) .topic-number { color: rgba(0,240,150,0.18) !important; }
+.topic-card:nth-child(7) .topic-number { color: rgba(255,120,120,0.18) !important; }
+.topic-card:nth-child(8) .topic-number { color: rgba(0,200,255,0.18) !important; }
+
+/* ======= HOW IT WORKS — DIFFERENT COLORS PER CARD ======= */
+.how-card:nth-child(1) { 
+  background: linear-gradient(145deg, rgba(0, 40, 100, 0.85) 0%, rgba(0, 20, 55, 0.95) 100%) !important;
+  border-top: 3px solid #006EFF !important;
+  border: 1px solid rgba(0,110,255,0.15) !important;
+  border-top: 3px solid #006EFF !important;
+}
+.how-card:nth-child(2) { 
+  background: linear-gradient(145deg, rgba(25, 10, 75, 0.85) 0%, rgba(12, 0, 48, 0.95) 100%) !important;
+  border: 1px solid rgba(123,97,255,0.15) !important;
+  border-top: 3px solid #7B61FF !important;
+}
+.how-card:nth-child(3) { 
+  background: linear-gradient(145deg, rgba(0, 45, 55, 0.85) 0%, rgba(0, 22, 38, 0.95) 100%) !important;
+  border: 1px solid rgba(0,201,176,0.15) !important;
+  border-top: 3px solid #00C9B0 !important;
+}
+.how-card:nth-child(4) { 
+  background: linear-gradient(145deg, rgba(50, 22, 0, 0.85) 0%, rgba(28, 10, 0, 0.95) 100%) !important;
+  border: 1px solid rgba(232,167,90,0.15) !important;
+  border-top: 3px solid #E8A75A !important;
+}
+.how-card:nth-child(1) .how-card-num { color: #006EFF !important; border-color: rgba(0,110,255,0.35) !important; background: rgba(0,110,255,0.15) !important; }
+.how-card:nth-child(2) .how-card-num { color: #7B61FF !important; border-color: rgba(123,97,255,0.35) !important; background: rgba(123,97,255,0.15) !important; }
+.how-card:nth-child(3) .how-card-num { color: #00C9B0 !important; border-color: rgba(0,201,176,0.35) !important; background: rgba(0,201,176,0.15) !important; }
+.how-card:nth-child(4) .how-card-num { color: #E8A75A !important; border-color: rgba(232,167,90,0.35) !important; background: rgba(232,167,90,0.15) !important; }
+/* How card hover glow */
+.how-card:nth-child(1):hover { box-shadow: 0 16px 48px rgba(0,110,255,0.2) !important; }
+.how-card:nth-child(2):hover { box-shadow: 0 16px 48px rgba(123,97,255,0.2) !important; }
+.how-card:nth-child(3):hover { box-shadow: 0 16px 48px rgba(0,201,176,0.2) !important; }
+.how-card:nth-child(4):hover { box-shadow: 0 16px 48px rgba(232,167,90,0.2) !important; }
+
+/* ======= VALUE CARDS — COLOR VARIETY ======= */
+.value-card:nth-child(1) { border-left-color: #006EFF !important; }
+.value-card:nth-child(2) { 
+  border-left-color: #7B61FF !important; 
+  background: linear-gradient(145deg, rgba(25,10,65,0.7) 0%, rgba(10,0,38,0.9) 100%) !important; 
+}
+.value-card:nth-child(3) { 
+  border-left-color: #00C9B0 !important; 
+  background: linear-gradient(145deg, rgba(0,40,45,0.7) 0%, rgba(0,18,28,0.9) 100%) !important; 
+}
+.value-card:nth-child(4) { 
+  border-left-color: #E8A75A !important; 
+  background: linear-gradient(145deg, rgba(45,22,0,0.7) 0%, rgba(22,10,0,0.9) 100%) !important; 
 }
 
-/* --- SKILLS CARDS (Fold 3): Brighter backgrounds, consistent text --- */
-.skills {
-  padding: 130px 0 !important;
-  background: var(--surface) !important;
-}
-.skill-card {
-  box-shadow: 0 8px 32px rgba(0, 30, 90, 0.12) !important;
-  border: 1px solid rgba(0, 0, 0, 0.06) !important;
-}
-.skill-card:hover {
-  box-shadow: 0 28px 64px rgba(0, 30, 90, 0.22), 0 0 0 2px rgba(0, 110, 255, 0.3) !important;
-}
-.skill-title {
-  font-size: 28px !important;
-  line-height: 1.1 !important;
-}
-.skill-card:first-child .skill-title {
-  font-size: 36px !important;
-}
-.skill-sub {
-  font-size: 16px !important;
-  line-height: 1.55 !important;
-  color: rgba(255,255,255,0.9) !important;
-}
-/* Ensure all skill-content is positioned consistently at the bottom */
-.skill-content {
-  padding: 32px !important;
-  justify-content: flex-end !important;
-}
-
-/* --- SYLLABUS PHASES (Fold 4): Much bigger circles, cleaner layout --- */
+/* ======= METHODOLOGY — APPLE-LEVEL 3D REDESIGN ======= */
 .syllabus {
-  padding: 150px 0 170px !important;
+  padding: 160px 0 180px !important;
+  background: linear-gradient(165deg, #030d1a 0%, #001233 40%, #001a4d 100%) !important;
 }
+.syllabus::before {
+  width: 1200px !important;
+  height: 900px !important;
+  background: radial-gradient(ellipse, rgba(0,110,255,0.15) 0%, transparent 65%) !important;
+}
+.syllabus::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(123,97,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.syllabus-header {
+  margin-bottom: 100px !important;
+}
+.syllabus .section-title {
+  font-size: clamp(52px, 7vw, 88px) !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.05 !important;
+}
+.syllabus .section-subtitle {
+  font-size: clamp(17px, 1.3vw, 21px) !important;
+  max-width: 600px;
+  margin: 16px auto 0;
+}
+
+/* --- 3D PHASE CIRCLES — much larger, centered, dramatic --- */
 .syl-timeline {
-  gap: 56px !important;
-  margin-bottom: 64px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 64px !important;
+  position: relative !important;
+  margin-bottom: 56px !important;
+  perspective: 1200px !important;
+}
+.syl-connector {
+  top: 85px !important;
+  left: 12% !important;
+  right: 12% !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, #006EFF, #00D1FF, #7B61FF, #FF6B6B) !important;
+  opacity: 0.4 !important;
+  filter: blur(0.5px);
+}
+.syl-phase {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 1 !important;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.syl-phase:hover {
+  transform: translateY(-8px) !important;
 }
 .syl-circle {
-  width: 140px !important;
-  height: 140px !important;
-  background: rgba(0, 18, 50, 0.7) !important;
-  border-width: 2.5px !important;
-  box-shadow: 0 0 48px rgba(0, 110, 255, 0.1), inset 0 0 32px rgba(0, 110, 255, 0.06) !important;
+  width: 170px !important;
+  height: 170px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 15, 50, 0.6) !important;
+  border: 2.5px solid var(--phase-color, #006EFF) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  box-shadow: 
+    0 0 0 0 var(--phase-color),
+    0 0 60px rgba(0,0,0,0.3),
+    inset 0 0 30px rgba(0,0,0,0.2) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 .syl-phase:hover .syl-circle,
 .syl-phase.active .syl-circle {
   transform: scale(1.12) !important;
-  box-shadow: 0 0 64px rgba(0, 110, 255, 0.25), inset 0 0 40px rgba(0, 110, 255, 0.1) !important;
+  box-shadow: 
+    0 0 50px rgba(0,110,255,0.3),
+    0 0 100px rgba(0,110,255,0.1),
+    inset 0 0 40px rgba(0,60,180,0.15) !important;
+  background: rgba(0, 30, 90, 0.7) !important;
+  border-width: 3px !important;
 }
-.syl-circle-num {
-  font-size: 34px !important;
-  font-weight: 900 !important;
+/* Active state uses the phase's own color for glow */
+.syl-phase[data-syl="0"]:hover .syl-circle,
+.syl-phase[data-syl="0"].active .syl-circle {
+  box-shadow: 0 0 50px rgba(0,110,255,0.35), 0 0 100px rgba(0,110,255,0.12), inset 0 0 40px rgba(0,60,180,0.2) !important;
 }
-.syl-label {
-  font-size: 17px !important;
-  font-weight: 700 !important;
-  margin-top: 18px !important;
+.syl-phase[data-syl="1"]:hover .syl-circle,
+.syl-phase[data-syl="1"].active .syl-circle {
+  box-shadow: 0 0 50px rgba(0,209,255,0.35), 0 0 100px rgba(0,209,255,0.12), inset 0 0 40px rgba(0,130,200,0.2) !important;
 }
-.syl-sessions {
-  font-size: 13px !important;
-  margin-top: 6px !important;
+.syl-phase[data-syl="2"]:hover .syl-circle,
+.syl-phase[data-syl="2"].active .syl-circle {
+  box-shadow: 0 0 50px rgba(123,97,255,0.35), 0 0 100px rgba(123,97,255,0.12), inset 0 0 40px rgba(80,50,200,0.2) !important;
 }
-.syl-connector {
-  top: 70px !important;
-  height: 2px !important;
-  background: linear-gradient(90deg, var(--phase-1), var(--phase-2), var(--phase-3), var(--phase-4)) !important;
-  opacity: 0.35 !important;
-}
-.syl-detail-inner {
-  background: rgba(0, 14, 46, 0.8) !important;
-  backdrop-filter: blur(28px) !important;
-  -webkit-backdrop-filter: blur(28px) !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
-  border-radius: 20px !important;
-  padding: 36px 40px !important;
-  box-shadow: 0 20px 64px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.06) !important;
-}
-.syllabus .section-title {
-  font-size: clamp(48px, 6vw, 80px) !important;
+.syl-phase[data-syl="3"]:hover .syl-circle,
+.syl-phase[data-syl="3"].active .syl-circle {
+  box-shadow: 0 0 50px rgba(255,107,107,0.35), 0 0 100px rgba(255,107,107,0.12), inset 0 0 40px rgba(200,60,60,0.2) !important;
 }
 
-/* --- BIO-AGE QUIZ (Fold 6): Bigger title, right sizing --- */
+.syl-circle-num {
+  font-size: 42px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+}
+.syl-label {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  margin-top: 20px !important;
+  letter-spacing: -0.01em !important;
+  color: #fff !important;
+}
+.syl-sessions {
+  font-size: 14px !important;
+  color: rgba(255,255,255,0.5) !important;
+  margin-top: 6px !important;
+  font-weight: 500 !important;
+}
+
+/* Detail panel — shows on hover, larger, premium glass */
+.syl-detail {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+.syl-detail.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+.syl-detail-inner {
+  background: rgba(0, 15, 50, 0.6) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 24px !important;
+  padding: 40px 48px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
+}
+
+/* --- Subtle floating particles animation for the methodology section --- */
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+  25% { transform: translate(30px, -20px) scale(1.1); opacity: 0.25; }
+  50% { transform: translate(-20px, -40px) scale(0.95); opacity: 0.2; }
+  75% { transform: translate(-30px, -10px) scale(1.05); opacity: 0.18; }
+}
+.syllabus .syl-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.syllabus .syl-orb:nth-child(1) {
+  width: 300px; height: 300px;
+  top: 15%; left: 5%;
+  background: radial-gradient(circle, rgba(0,110,255,0.15), transparent 70%);
+  animation: floatOrb 12s ease-in-out infinite;
+}
+.syllabus .syl-orb:nth-child(2) {
+  width: 200px; height: 200px;
+  top: 60%; right: 8%;
+  background: radial-gradient(circle, rgba(123,97,255,0.12), transparent 70%);
+  animation: floatOrb 15s ease-in-out infinite 3s;
+}
+.syllabus .syl-orb:nth-child(3) {
+  width: 250px; height: 250px;
+  bottom: 10%; left: 30%;
+  background: radial-gradient(circle, rgba(0,209,255,0.1), transparent 70%);
+  animation: floatOrb 18s ease-in-out infinite 6s;
+}
+
+/* ======= BIGGER FONTS EVERYWHERE ======= */
+.hero-title {
+  font-size: clamp(64px, 10vw, 130px) !important;
+}
+.hero-sub {
+  font-size: clamp(18px, 1.5vw, 22px) !important;
+}
+.hero-academy-name {
+  font-size: clamp(13px, 1.6vw, 19px) !important;
+  letter-spacing: 0.3em !important;
+}
+.section-title {
+  font-size: clamp(44px, 6vw, 76px) !important;
+  letter-spacing: -0.035em !important;
+}
+.section-subtitle {
+  font-size: clamp(17px, 1.3vw, 21px) !important;
+}
+.topic-label {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+}
+.topic-desc {
+  font-size: 15px !important;
+}
+.skill-title {
+  font-size: 30px !important;
+}
+.skill-card:first-child .skill-title {
+  font-size: 38px !important;
+}
+.skill-sub {
+  font-size: 16px !important;
+}
+/* How It Works */
+.how-title {
+  font-size: clamp(52px, 7vw, 96px) !important;
+}
+.how-sub {
+  font-size: clamp(17px, 1.3vw, 21px) !important;
+}
+.how-card {
+  padding: 40px 32px 36px !important;
+  border-radius: 20px !important;
+}
+.how-card-title {
+  font-size: 26px !important;
+}
+.how-card-desc {
+  font-size: 16px !important;
+}
+.how-card-num {
+  width: 48px !important;
+  height: 48px !important;
+  font-size: 16px !important;
+}
+/* Value cards */
+.value-title {
+  font-size: 28px !important;
+}
+.value-desc {
+  font-size: 16px !important;
+}
+/* Bio-age */
 .bioquiz-title {
-  font-size: clamp(36px, 4.5vw, 62px) !important;
+  font-size: clamp(36px, 4.5vw, 64px) !important;
 }
 .bioquiz-body {
   font-size: 18px !important;
 }
-
-/* --- HOW IT WORKS / METHODOLOGY (Fold 7): Premium, impactful --- */
-.how {
-  padding: 150px 0 170px !important;
-}
-.how-title {
-  font-size: clamp(48px, 7vw, 92px) !important;
-  letter-spacing: -0.04em !important;
-}
-.how-sub {
-  font-size: clamp(17px, 1.3vw, 20px) !important;
-  color: rgba(255,255,255,0.6) !important;
-}
-.how-card {
-  padding: 40px 30px 34px !important;
-  border-radius: 20px !important;
-  background: rgba(0, 18, 55, 0.7) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(0, 110, 255, 0.15) !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.05) !important;
-  margin: 0 10px !important;
-}
-.how-card:hover {
-  transform: translateY(-12px) !important;
-  box-shadow: 0 28px 72px rgba(0, 40, 120, 0.35), 0 0 0 1px rgba(0, 110, 255, 0.3) !important;
-  background: rgba(0, 25, 70, 0.85) !important;
-  border-color: rgba(0, 110, 255, 0.35) !important;
-}
-.how-card-num {
-  width: 44px !important;
-  height: 44px !important;
-  font-size: 15px !important;
-  margin-bottom: 24px !important;
-  box-shadow: 0 0 24px rgba(0, 110, 255, 0.1) !important;
-}
-.how-card-title {
-  font-size: 24px !important;
-  font-weight: 800 !important;
-  margin-bottom: 16px !important;
-}
-.how-card-desc {
-  font-size: 15px !important;
-  line-height: 1.65 !important;
-  color: rgba(255,255,255,0.6) !important;
-}
-
-/* --- VALUE CARDS (Fold 9): Brighter, more premium --- */
-.value {
-  padding: 140px 0 !important;
-}
-.value-card {
-  background: rgba(0, 18, 55, 0.7) !important;
-  border-left: 3px solid var(--card-accent, #006EFF) !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.04) !important;
-  padding: 40px 32px !important;
-  border-radius: 20px !important;
-}
-.value-card:hover {
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--card-accent) !important;
-}
-.value-title {
-  font-size: 26px !important;
-  font-weight: 800 !important;
-}
-.value-desc {
-  font-size: 16px !important;
-  color: rgba(255,255,255,0.6) !important;
-}
-
-/* --- TESTIMONIALS (Fold 10): Clean, premium --- */
-.testimonials {
-  padding: 140px 0 !important;
-}
-.test-card {
-  border-radius: 20px !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255,255,255,0.7) !important;
-}
-.test-card:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 20px 56px rgba(0, 110, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* --- FAQ (Fold 11): Bigger text --- */
-.faq {
-  padding: 140px 0 !important;
-}
+/* FAQ */
 .faq .section-title {
-  font-size: clamp(44px, 6vw, 72px) !important;
+  font-size: clamp(44px, 6vw, 76px) !important;
 }
 .faq-q-text {
-  font-size: 19px !important;
+  font-size: 20px !important;
 }
-
-/* --- CTA (Fold 12): Bigger headline --- */
+/* CTA */
 .final-cta-title {
-  font-size: clamp(48px, 6vw, 80px) !important;
-  letter-spacing: -0.03em !important;
+  font-size: clamp(48px, 7vw, 84px) !important;
 }
 .final-cta-sub {
-  font-size: 18px !important;
+  font-size: 19px !important;
 }
-
-/* --- LEAD GEN (Fold 13): Bigger headline --- */
+/* Lead gen */
 .lead-gen-headline {
-  font-size: clamp(32px, 4vw, 48px) !important;
+  font-size: clamp(32px, 4.5vw, 52px) !important;
 }
 
-/* --- CERTS STRIP: Slightly bigger text --- */
-.cert-pill-abbr {
-  font-size: 14px !important;
+/* ======= MORE LIGHT — Radial glows on dark sections ======= */
+.topics { position: relative !important; }
+.topics::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 25% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 1100px !important;
+  height: 900px !important;
+  background: radial-gradient(ellipse, rgba(0,110,255,0.1) 0%, transparent 65%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+.how-it-works { position: relative !important; }
+.how-it-works::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 900px;
+  background: radial-gradient(ellipse, rgba(0,130,255,0.12) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.value { position: relative !important; }
+.value::after {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 700px;
+  background: radial-gradient(ellipse, rgba(0,110,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.testimonials { position: relative !important; }
+.testimonials::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(123,97,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.faq { position: relative !important; }
+.faq::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 700px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(0,180,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* --- INSTRUCTOR SECTION: Bigger title --- */
-.instructors .section-title {
-  font-size: clamp(40px, 5vw, 64px) !important;
-}
-
-/* ==================================================
-   MOBILE FIXES — Critical
-   ================================================== */
+/* ======= MOBILE RESPONSIVE OVERRIDES ======= */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: clamp(48px, 12vw, 72px) !important;
+    font-size: clamp(50px, 13vw, 76px) !important;
   }
   .section-title {
-    font-size: clamp(34px, 8vw, 48px) !important;
+    font-size: clamp(36px, 9vw, 50px) !important;
   }
   .syllabus .section-title {
-    font-size: clamp(36px, 9vw, 52px) !important;
-  }
-  .how-title {
     font-size: clamp(38px, 10vw, 56px) !important;
   }
+  .how-title {
+    font-size: clamp(40px, 11vw, 60px) !important;
+  }
   .skill-title {
-    font-size: 22px !important;
+    font-size: 24px !important;
   }
   .skill-card:first-child .skill-title {
-    font-size: 26px !important;
+    font-size: 28px !important;
   }
   
-  /* Phases on mobile — 2x2 grid */
+  /* Phases on mobile — 2x2 grid, larger */
   .syl-timeline {
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 32px 40px !important;
+    gap: 36px 48px !important;
+    perspective: none !important;
   }
   .syl-phase {
-    flex: 0 0 calc(50% - 24px) !important;
+    flex: 0 0 calc(50% - 28px) !important;
   }
-  .syl-connector {
-    display: none !important;
-  }
+  .syl-connector { display: none !important; }
   .syl-circle {
-    width: 110px !important;
-    height: 110px !important;
+    width: 130px !important;
+    height: 130px !important;
   }
-  .syl-circle-num {
-    font-size: 28px !important;
-  }
-  .syl-label {
-    font-size: 15px !important;
-  }
+  .syl-circle-num { font-size: 32px !important; }
+  .syl-label { font-size: 17px !important; }
+  .syl-sessions { font-size: 13px !important; }
+  .syl-detail-inner { padding: 28px 24px !important; border-radius: 18px !important; }
+  .syllabus-header { margin-bottom: 64px !important; }
   
-  /* Bio-age — smaller on mobile */
-  .bioquiz-card {
-    padding: 48px 24px !important;
-  }
-  .bioquiz-title {
-    font-size: clamp(28px, 7vw, 38px) !important;
-  }
-  .bioquiz-body {
-    font-size: 15px !important;
-  }
-  .bioquiz-badge {
-    max-width: 220px !important;
-  }
-  .bioquiz-badge-num {
-    font-size: 52px !important;
-  }
+  /* Bio-age SMALLER on mobile */
+  .bioquiz-card { padding: 44px 24px !important; }
+  .bioquiz-title { font-size: clamp(28px, 7vw, 38px) !important; }
+  .bioquiz-body { font-size: 15px !important; }
+  .bioquiz-badge { max-width: 200px !important; }
+  .bioquiz-badge-num { font-size: 48px !important; }
   
-  /* How-it-works mobile */
-  .how {
-    padding: 100px 0 120px !important;
-  }
-  .how-card {
-    padding: 28px 22px 24px !important;
-    margin: 0 !important;
-  }
-  .how-card-title {
-    font-size: 20px !important;
-  }
+  /* How cards mobile */
+  .how-card { padding: 28px 22px 24px !important; }
+  .how-card-title { font-size: 22px !important; }
   
-  /* Value cards mobile */
-  .value-card {
-    padding: 28px 24px !important;
-  }
+  /* CTA */
+  .final-cta-title { font-size: clamp(38px, 10vw, 54px) !important; }
+  .faq-q-text { font-size: 17px !important; }
+  .topic-label { font-size: 19px !important; }
   
-  /* CTA mobile */
-  .final-cta-title {
-    font-size: clamp(36px, 9vw, 52px) !important;
-  }
+  /* Topic video bg — slightly higher opacity on mobile for visibility */
+  .topic-video-bg video { opacity: 0.25 !important; }
   
-  /* FAQ mobile */
-  .faq-q-text {
-    font-size: 17px !important;
-  }
+  /* Orbs smaller on mobile */
+  .syllabus .syl-orb { display: none; }
 }
 
 @media (max-width: 540px) {
-  .hero-title {
-    font-size: clamp(44px, 11vw, 64px) !important;
-  }
-  .syl-circle {
-    width: 100px !important;
-    height: 100px !important;
-  }
-  .syl-circle-num {
-    font-size: 26px !important;
-  }
+  .hero-title { font-size: clamp(46px, 12vw, 68px) !important; }
+  .syl-circle { width: 110px !important; height: 110px !important; }
+  .syl-circle-num { font-size: 28px !important; }
+  .syl-label { font-size: 15px !important; }
+  .syl-timeline { gap: 28px 36px !important; }
 }
 
 </style>
@@ -3101,6 +3281,7 @@ ul, ol { list-style: none; }
     </div>
     <div class="topics-grid">
       <a href="topics/nutrition-longevity.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-eating.mp4" type="video/mp4"></video></div>
         <span class="topic-number">01</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3109,6 +3290,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="topics/sleep-circadian-health.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-sleep.mp4" type="video/mp4"></video></div>
         <span class="topic-number">02</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3117,6 +3299,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="topics/supplements-health-tech.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-pill.mp4" type="video/mp4"></video></div>
         <span class="topic-number">03</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3125,6 +3308,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="topics/exercise-movement.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-train.mp4" type="video/mp4"></video></div>
         <span class="topic-number">04</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3133,6 +3317,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="topics/mental-emotional-health.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-biometric.mp4" type="video/mp4"></video></div>
         <span class="topic-number">05</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3141,6 +3326,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="topics/metabolic-health-blood-sugar.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-blood.mp4" type="video/mp4"></video></div>
         <span class="topic-number">06</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3149,6 +3335,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="topics/biomarkers-testing.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
         <span class="topic-number">07</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3157,6 +3344,7 @@ ul, ol { list-style: none; }
         </div>
       </a>
       <a href="topics/protocols-habits.html" class="topic-card reveal">
+        <div class="topic-video-bg"><video autoplay muted loop playsinline><source src="assets/learn-protocol.mp4" type="video/mp4"></video></div>
         <span class="topic-number">08</span>
         <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
@@ -3180,7 +3368,7 @@ ul, ol { list-style: none; }
     </div>
     <div class="skills-grid">
       <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
-        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-eating.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-cells.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -3259,11 +3447,12 @@ ul, ol { list-style: none; }
      FOLD 4 — SYLLABUS PHASES
      ============================================== -->
 <section class="syllabus" id="syllabus">
+  <div class="syl-orb"></div><div class="syl-orb"></div><div class="syl-orb"></div>
   <div class="container">
     <div class="syllabus-header reveal">
-      <span class="eyebrow">The Syllabus</span>
+      <span class="eyebrow">Our Methodology</span>
       <h2 class="section-title">12 Sessions.<br>4 Phases.<br>Your Protocol.</h2>
-      <p class="section-subtitle">A structured 12-week online course. Each phase builds on the last.</p>
+      <p class="section-subtitle">A structured 12-week online course designed by eTeacher Group. Each phase builds on the last — science-backed, teacher-led, peer-driven.</p>
     </div>
     <div class="syl-timeline reveal">
       <div class="syl-connector"></div>
@@ -3461,7 +3650,7 @@ ul, ol { list-style: none; }
     <div class="how-header reveal">
       <img src="assets/eteacher-group-logo.jpg" alt="eTeacher Group" class="how-logo">
       <span class="eyebrow">How It Works</span>
-      <h2 class="how-title">How the Course Works</h2>
+      <h2 class="how-title">How It Works</h2>
       <p class="how-sub">Four simple steps from enrollment to your personal longevity protocol.</p>
     </div>
     <div class="how-track reveal">
@@ -3963,7 +4152,7 @@ ul, ol { list-style: none; }
 
   function show(i) {
     phases.forEach(function(p, j) { p.classList.toggle('active', j === i); });
-    inner.innerHTML = '<h4 style="color:#fff;font-size:20px;margin:0 0 10px;font-weight:700;">' + data[i].title + '</h4><p style="color:rgba(255,255,255,0.7);font-size:15px;line-height:1.65;margin:0;">' + data[i].desc + '</p>';
+    inner.innerHTML = '<h4 style="color:#fff;font-size:24px;margin:0 0 14px;font-weight:800;letter-spacing:-0.02em;">' + data[i].title + '</h4><p style="color:rgba(255,255,255,0.75);font-size:17px;line-height:1.7;margin:0;">' + data[i].desc + '</p>';
     detail.classList.add('visible');
   }
 
