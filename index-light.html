@@ -654,7 +654,7 @@ ul, ol { list-style: none; }
 .skill-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.2) 75%, rgba(0,0,0,0.45) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 20%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.75) 100%);
   z-index: 1;
 }
 .skill-content {
@@ -668,17 +668,19 @@ ul, ol { list-style: none; }
 }
 .skill-eyebrow {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 2.2px;
   text-transform: uppercase;
-  color: #A8C7FF;
+  color: #7EC8FF;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
   margin-bottom: 12px;
 }
 .skill-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 26px;
+  font-size: 30px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
   line-height: 1.08;
   letter-spacing: -0.01em;
   color: #fff;
@@ -686,9 +688,10 @@ ul, ol { list-style: none; }
 }
 .skill-sub {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
-  color: rgba(255,255,255,0.88);
+  color: rgba(255,255,255,0.95);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
   max-width: 320px;
 }
 .skill-arrow {
@@ -2259,7 +2262,7 @@ ul, ol { list-style: none; }
   .trustpilot { font-size: 13px; }
 
   /* Section titles — global cap */
-  .section-title { font-size: 30px !important; }
+  .section-title { font-size: 36px !important; }
 
   /* Section padding */
   .topics, .skills, .syllabus, .deepdive, .bio-quiz, .how-it-works,
@@ -2272,8 +2275,8 @@ ul, ol { list-style: none; }
 
   /* Skills */
   .skills-grid { grid-template-columns: 1fr !important; gap: 16px; }
-  .skill-card:first-child { height: 320px; }
-  .skill-card { height: 240px; }
+  .skill-card:first-child { height: 380px; }
+  .skill-card { height: 320px; }
 
   /* Hex diagram — scale down for mobile */
   .hex-chart { transform: scale(0.75); transform-origin: center top; margin-bottom: -60px; }
@@ -2288,7 +2291,7 @@ ul, ol { list-style: none; }
   .sessions { padding: 0 20px 24px 20px !important; }
 
   /* Teachers */
-  .teachers .section-title { font-size: 28px !important; }
+  .teachers .section-title { font-size: 34px !important; }
   .teacher-badges-strip { flex-direction: column !important; align-items: stretch !important; }
   .teacher-badge-pill { width: 100% !important; justify-content: center !important; }
   .teacher-card { padding: 20px !important; }
@@ -2333,12 +2336,15 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 480px) {
-  .hero-title { font-size: 40px !important; }
-  .section-title { font-size: 26px !important; }
-  .skill-card:first-child { height: 280px; }
-  .skill-card { height: 220px; }
-  .phase-title { font-size: 20px !important; }
-  .final-cta-title { font-size: 26px !important; }
+  .hero-title { font-size: 42px !important; }
+  .section-title { font-size: 32px !important; }
+  .skill-card:first-child { height: 340px; }
+  .skill-card { height: 300px; }
+  .phase-title { font-size: 22px !important; }
+  .final-cta-title { font-size: 30px !important; }
+  .skill-title { font-size: 26px !important; }
+  .skill-sub { font-size: 15px !important; }
+  .section-subtitle { font-size: 17px !important; }
 }
 
 /* ======= TOPIC CARDS — FEWER, LARGER, WITH MOTION VIDEO ======= */
@@ -2557,7 +2563,7 @@ ul, ol { list-style: none; }
 
 /* VALUE SECTION — LIGHT BACKGROUND to break monotony */
 .value {
-  background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 40%, #f8f9fc 100%) !important;
+  background: linear-gradient(180deg, #e8f0fe 0%, #f0f4ff 40%, #e8f0fe 100%) !important;
   position: relative;
 }
 .value .eyebrow { color: #006EFF !important; }
@@ -2581,7 +2587,7 @@ ul, ol { list-style: none; }
 
 /* FAQ — lighter background */
 .faq {
-  background: #f8f9fc !important;
+  background: linear-gradient(180deg, #f0f4ff 0%, #e8f0fe 50%, #f0f4ff 100%) !important;
 }
 .faq .eyebrow { color: #006EFF !important; }
 .faq .section-title { color: #0a1628 !important; }
@@ -2677,7 +2683,7 @@ ul, ol { list-style: none; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
   border-radius: 20px;
 }
 .topic-v2-content {
@@ -2696,15 +2702,17 @@ ul, ol { list-style: none; }
 .topic-v2-title {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 800;
-  font-size: 22px;
-  line-height: 1.2;
+  font-size: 26px;
+  line-height: 1.15;
   margin-bottom: 8px;
   color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 .topic-v2-desc {
-  font-size: 14.5px;
+  font-size: 15.5px;
   line-height: 1.55;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 .topic-v2-arrow {
   position: absolute;
@@ -2982,18 +2990,31 @@ ul, ol { list-style: none; }
 .certs-strip-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 16px 20px;
+  gap: 12px;
+  padding: 20px 24px;
   border-right: 1px solid rgba(255,255,255,0.08);
   transition: background 0.25s ease;
   white-space: nowrap;
+  position: relative;
+}
+.certs-strip-badge::before {
+  content: '';
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,110,255,0.6);
+  background: rgba(0,110,255,0.15);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .certs-strip-badge:last-child { border-right: none; }
-.certs-strip-badge:hover { background: rgba(255,255,255,0.04); }
+.certs-strip-badge:hover { background: rgba(255,255,255,0.06); }
 .certs-strip-abbr {
   font-family: 'Codec Pro', sans-serif;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 20px;
   color: #fff;
   letter-spacing: 0.04em;
 }
@@ -3031,7 +3052,8 @@ ul, ol { list-style: none; }
   }
   .certs-strip-divider { display: none; }
   .certs-strip-name { display: none; }
-  .certs-strip-abbr { font-size: 20px; }
+  .certs-strip-abbr { font-size: 22px; }
+  .certs-strip-badge::before { width: 30px; height: 30px; }
 }
 
 /* ======= CURRICULUM — COLORED PHASES, LARGER FONTS ======= */
