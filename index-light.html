@@ -240,7 +240,7 @@ ul, ol { list-style: none; }
   color: rgba(255, 255, 255, 0.95);
   margin-bottom: 32px;
 }
-.hero-kicker-dot {
+.hero-kicker-dot-unused {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -278,6 +278,22 @@ ul, ol { list-style: none; }
   background: rgba(126, 200, 255, 0.28);
   border-radius: 8px;
   z-index: -1;
+}
+
+/* Hero academy name above main title */
+.hero-academy-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+.life-blue {
+  color: #7EC8FF;
+  font-weight: 800;
 }
 .hero-sub {
   font-size: clamp(17px, 1.6vw, 22px);
@@ -426,7 +442,7 @@ ul, ol { list-style: none; }
 }
 .topics {
   padding: 140px 0 120px;
-  background: linear-gradient(180deg, #f0f4ff 0%, #fafbff 40%, #f0f4ff 100%);
+  background: linear-gradient(165deg, #030d1a 0%, #001233 50%, #001a3d 100%);
   position: relative;
   overflow: hidden;
 }
@@ -463,11 +479,14 @@ ul, ol { list-style: none; }
   font-size: clamp(52px, 6vw, 82px);
   letter-spacing: -0.03em;
   line-height: 0.95;
+  color: #fff;
 }
 .topics-header .section-subtitle {
   font-size: 19px;
   max-width: 620px;
+  color: rgba(255,255,255,0.65);
 }
+.topics .eyebrow { color: rgba(0,110,255,0.85); }
 .topics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -479,181 +498,94 @@ ul, ol { list-style: none; }
   .topics-grid { grid-template-columns: repeat(2, 1fr); }
   .topics-header .section-title { font-size: clamp(38px, 8vw, 56px); }
 }
-/* 3D Tilt wrapper — perspective container */
+/* Dark Glassmorphism topic cards */
 .topic-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: space-between;
-  padding: 36px 30px;
-  min-height: 240px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(28px) saturate(1.6);
-  -webkit-backdrop-filter: blur(28px) saturate(1.6);
-  border: 1.5px solid rgba(0, 110, 255, 0.12);
-  border-radius: 24px;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, background 0.4s ease;
+  padding: 32px 28px;
+  min-height: 220px;
+  background: rgba(0, 20, 60, 0.85);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(0, 110, 255, 0.2);
+  border-left: 3px solid rgba(0, 110, 255, 0.5);
+  border-radius: 16px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
   position: relative;
   overflow: hidden;
   text-decoration: none;
-  transform-style: preserve-3d;
   will-change: transform;
-  animation: topic-glow-pulse 5s ease-in-out infinite;
 }
-/* Stagger glow pulse */
-.topic-card:nth-child(1) { animation-delay: 0s; }
-.topic-card:nth-child(2) { animation-delay: 0.5s; }
-.topic-card:nth-child(3) { animation-delay: 1s; }
-.topic-card:nth-child(4) { animation-delay: 1.5s; }
-.topic-card:nth-child(5) { animation-delay: 0.25s; }
-.topic-card:nth-child(6) { animation-delay: 0.75s; }
-.topic-card:nth-child(7) { animation-delay: 1.25s; }
-.topic-card:nth-child(8) { animation-delay: 1.75s; }
-/* Big watermark number */
-.topic-number {
-  position: absolute;
-  top: -10px; right: 6px;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 120px;
-  line-height: 1;
-  color: rgba(0,110,255,0.07);
-  pointer-events: none;
-  z-index: 0;
-  animation: topic-number-pulse 5s ease-in-out infinite;
-  user-select: none;
-  transform: translateZ(20px);
-  transition: color 0.4s ease, transform 0.4s ease;
-}
-.topic-card:nth-child(2) .topic-number { animation-delay: 0.6s; }
-.topic-card:nth-child(3) .topic-number { animation-delay: 1.2s; }
-.topic-card:nth-child(4) .topic-number { animation-delay: 1.8s; }
-.topic-card:nth-child(5) .topic-number { animation-delay: 0.3s; }
-.topic-card:nth-child(6) .topic-number { animation-delay: 0.9s; }
-.topic-card:nth-child(7) .topic-number { animation-delay: 1.5s; }
-.topic-card:nth-child(8) .topic-number { animation-delay: 2.1s; }
-/* Shimmer sweep */
 .topic-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.35) 50%, transparent 75%);
-  background-size: 200% 100%;
-  animation: topic-shimmer 6s ease-in-out infinite;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at top left, rgba(0,110,255,0.12) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
-.topic-card:nth-child(2)::before { animation-delay: 0.7s; }
-.topic-card:nth-child(3)::before { animation-delay: 1.4s; }
-.topic-card:nth-child(4)::before { animation-delay: 2.1s; }
-.topic-card:nth-child(5)::before { animation-delay: 0.35s; }
-.topic-card:nth-child(6)::before { animation-delay: 1.05s; }
-.topic-card:nth-child(7)::before { animation-delay: 1.75s; }
-.topic-card:nth-child(8)::before { animation-delay: 2.45s; }
-/* Animated bottom border glow */
-.topic-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 10%; right: 10%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #006EFF, #338BFF, #5AA3FF, #338BFF, #006EFF, transparent);
-  border-radius: 3px;
-  opacity: 0;
-  transform: scaleX(0);
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-/* 3D Shine overlay — moves with tilt */
-.topic-card .topic-shine {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.35) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 2;
-  border-radius: 24px;
-}
-.topic-card:hover .topic-shine { opacity: 1; }
-/* Hover state — enhanced for 3D */
+.topic-card::after { display: none; }
 .topic-card:hover {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(0, 110, 255, 0.3);
-  box-shadow: 0 30px 70px rgba(0, 110, 255, 0.18), 0 0 0 1px rgba(0,110,255,0.12), 0 0 80px -20px rgba(0,110,255,0.15);
+  transform: translateY(-6px);
+  border-color: rgba(0, 110, 255, 0.5);
+  border-left-color: #006EFF;
+  box-shadow: 0 20px 60px rgba(0, 110, 255, 0.25), 0 0 0 1px rgba(0,110,255,0.2);
 }
-.topic-card:hover::after {
-  opacity: 1;
-  transform: scaleX(1);
-  left: 0; right: 0;
-}
-.topic-card:hover .topic-number {
-  color: rgba(0,110,255,0.12);
-  transform: translateZ(40px);
-}
-.topic-icon {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(0,110,255,0.1), rgba(51,139,255,0.16));
-  color: var(--blue);
-  margin-bottom: 22px;
+/* Small accent numeral */
+.topic-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: rgba(0, 110, 255, 0.7);
+  text-transform: uppercase;
   position: relative;
-  z-index: 3;
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 4px 16px rgba(0,110,255,0.1), inset 0 1px 0 rgba(255,255,255,0.5);
-  transform: translateZ(30px);
+  z-index: 2;
+  margin-bottom: 0;
 }
-.topic-card:hover .topic-icon {
-  background: linear-gradient(135deg, #006EFF, #338BFF);
-  color: #fff;
-  box-shadow: 0 14px 36px rgba(0,110,255,0.35);
-  transform: translateZ(50px) scale(1.1) rotate(-3deg);
-}
+.topic-icon { display: none; }
 .topic-label {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 24px;
+  font-size: 20px;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: #fff;
   position: relative;
-  z-index: 3;
+  z-index: 2;
   margin-bottom: 8px;
-  transform: translateZ(20px);
-  transition: transform 0.4s ease;
+  margin-top: 10px;
+  line-height: 1.2;
 }
-.topic-card:hover .topic-label { transform: translateZ(35px); }
 .topic-desc {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.55;
-  color: var(--ink-2);
+  color: rgba(255, 255, 255, 0.55);
   position: relative;
-  z-index: 3;
-  opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.4s ease;
-  transform: translateZ(15px);
+  z-index: 2;
+  transition: color 0.3s ease;
 }
-.topic-card:hover .topic-desc { opacity: 1; transform: translateZ(25px); }
+.topic-card:hover .topic-desc { color: rgba(255,255,255,0.8); }
 /* Arrow indicator */
 .topic-arrow {
   position: absolute;
-  top: 30px; right: 26px;
-  width: 34px; height: 34px;
+  top: 24px; right: 22px;
+  width: 28px; height: 28px;
   border-radius: 50%;
-  background: rgba(0,110,255,0.06);
+  background: rgba(0,110,255,0.15);
   display: flex; align-items: center; justify-content: center;
   opacity: 0;
-  transform: translateX(-10px) scale(0.8) translateZ(30px);
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(-6px);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 3;
 }
 .topic-card:hover .topic-arrow {
   opacity: 1;
-  transform: translateX(0) scale(1) translateZ(40px);
-  background: rgba(0,110,255,0.12);
+  transform: translateX(0);
+  background: rgba(0,110,255,0.3);
 }
+.topic-card .topic-shine { display: none; }
 
 /* ==================================================
    FOLD 3 — SIX LONGEVITY SKILLS (blog-driven cards)
@@ -781,152 +713,150 @@ ul, ol { list-style: none; }
 }
 
 /* ==================================================
-   FOLD 4 — SYLLABUS PHASES
+   FOLD 4 — SYLLABUS PHASES (Visual Circle Timeline)
    ================================================== */
 .syllabus {
-  padding: 140px 0;
-  background: var(--surface);
-}
-.syllabus-header {
-  margin-bottom: 80px;
-}
-.phases {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.phase {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: #fff;
-  transition: box-shadow var(--transition);
-}
-.phase:hover { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08); }
-.phase-head {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 32px;
-  padding: 36px 44px;
+  padding: 140px 0 160px;
+  background: linear-gradient(165deg, #030d1a 0%, #001233 50%, #001a3d 100%);
   position: relative;
   overflow: hidden;
-  width: 100%;
-  background: transparent;
-  text-align: left;
-  cursor: pointer;
-  border: none;
 }
-.phase-head::before {
+.syllabus::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background: var(--phase-color, var(--blue));
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(ellipse, rgba(0,110,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
-.phase[data-phase="1"] { --phase-color: var(--phase-1); }
-.phase[data-phase="2"] { --phase-color: var(--phase-2); }
-.phase[data-phase="3"] { --phase-color: var(--phase-3); }
-.phase[data-phase="4"] { --phase-color: var(--phase-4); }
+.syllabus-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+.syllabus .eyebrow { color: rgba(0,110,255,0.85); }
+.syllabus .section-title { color: #fff; }
+.syllabus .section-subtitle { color: rgba(255,255,255,0.65); }
 
-.phase-num {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 28px;
-  color: var(--phase-color);
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+/* --- Phase circles row --- */
+/* Circle timeline */
+.syl-timeline {
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--phase-color) 12%, white);
-  border: 2px solid color-mix(in srgb, var(--phase-color) 25%, white);
+  align-items: flex-start;
+  gap: 48px;
+  position: relative;
+  margin-bottom: 48px;
 }
-.phase-title-wrap {
-  min-width: 0;
+.syl-connector {
+  position: absolute;
+  top: 60px;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, #006EFF, #00D1FF, #7B61FF, #FF6B6B);
+  opacity: 0.3;
+  z-index: 0;
 }
-.phase-label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--phase-color);
-  margin-bottom: 6px;
-}
-.phase-title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(30px, 3vw, 44px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-.phase-toggle {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink-2);
-  transition: all var(--transition);
-}
-.phase-toggle svg { transition: transform var(--transition); }
-.phase.open .phase-toggle { background: var(--phase-color); color: #fff; }
-.phase.open .phase-toggle svg { transform: rotate(180deg); }
-
-.phase-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.6s var(--ease);
-  will-change: max-height;
-}
-.phase.open .phase-body { max-height: 1200px; }
-.sessions {
-  padding: 0 44px 36px 140px;
+.syl-phase {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
-.session {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 20px;
-  align-items: flex-start;
-  padding: 18px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+.syl-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(0, 20, 60, 0.8);
+  border: 2.5px solid var(--phase-color, #006EFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 0 0 var(--phase-color);
 }
-.session:first-child { border-top: none; padding-top: 6px; }
-.session-num {
+.syl-phase:hover .syl-circle,
+.syl-phase.active .syl-circle {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px rgba(0,110,255,0.25);
+  background: rgba(0, 40, 100, 0.6);
+}
+.syl-circle-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--phase-color, #006EFF);
+  letter-spacing: -0.02em;
+}
+.syl-label {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 15px;
-  color: var(--ink-4);
+  font-size: 16px;
+  color: #fff;
+  margin-top: 16px;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+.syl-sessions {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+  font-weight: 500;
+}
+.syl-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 60px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.syl-detail.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.syl-detail-inner {
+  background: rgba(0, 20, 60, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 32px 36px;
+}
+.syl-session-item {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.syl-session-item:last-child { border-bottom: none; }
+.syl-session-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  min-width: 28px;
   padding-top: 2px;
 }
-.session-title {
+.syl-session-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 20px;
-  line-height: 1.3;
-  color: var(--ink);
-  margin-bottom: 6px;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 4px;
 }
-.session-desc {
-  font-size: 15px;
-  color: var(--ink-3);
-  line-height: 1.55;
+.syl-session-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
 }
-
-@media (max-width: 720px) {
-  .phase-head { padding: 24px; gap: 16px; }
-  .phase-num { width: 52px; height: 52px; font-size: 20px; }
-  .sessions { padding: 0 24px 28px 24px; }
-}
-
 /* ==================================================
    FOLD 5 — DEEP DIVE (Interactive Hexagonal Chart)
    ================================================== */
@@ -1363,7 +1293,7 @@ ul, ol { list-style: none; }
    ================================================== */
 .how {
   padding: 140px 0 160px;
-  background: var(--surface);
+  background: linear-gradient(165deg, #030d1a 0%, #001233 50%, #001a3d 100%);
   position: relative;
   overflow: hidden;
 }
@@ -1385,16 +1315,17 @@ ul, ol { list-style: none; }
   font-size: clamp(44px, 6vw, 80px);
   line-height: 0.98;
   letter-spacing: -0.03em;
-  color: var(--ink);
+  color: #fff;
   margin-bottom: 20px;
 }
 .how-sub {
   font-size: clamp(16px, 1.2vw, 19px);
-  color: var(--ink-3);
+  color: rgba(255,255,255,0.6);
   line-height: 1.55;
   margin-bottom: 0;
 }
-/* --- Step cards container --- */
+.how .eyebrow { color: rgba(0,110,255,0.85); }
+/* --- Step cards horizontal timeline --- */
 .how-track {
   display: flex;
   justify-content: center;
@@ -1403,126 +1334,121 @@ ul, ol { list-style: none; }
   margin-top: 64px;
   position: relative;
 }
+/* Gradient connector line between steps */
+.how-track::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: calc(12.5% + 16px);
+  right: calc(12.5% + 16px);
+  height: 2px;
+  background: linear-gradient(90deg, #006EFF 0%, #338BFF 50%, #5AA0FF 100%);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
 /* Animated step cards */
 .how-card {
   position: relative;
-  width: 300px;
-  min-height: 400px;
+  flex: 1;
+  max-width: 300px;
   border-radius: var(--radius-xl);
-  padding: 40px 32px 36px;
+  padding: 36px 28px 32px;
   display: flex;
   flex-direction: column;
-  transition: all 0.5s var(--ease);
+  transition: all 0.4s var(--ease);
   cursor: default;
   z-index: 1;
   overflow: hidden;
-  margin-left: -24px;
+  margin: 0 8px;
+  background: rgba(0, 20, 60, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,110,255,0.18);
+  border-top: 2px solid rgba(0,110,255,0.4);
 }
 .how-card:first-child { margin-left: 0; }
-.how-card:nth-child(1) {
-  background: linear-gradient(135deg, #001a3d, #002966);
-  z-index: 4;
-  transform: rotate(-3deg);
-}
-.how-card:nth-child(2) {
-  background: linear-gradient(135deg, #002966, #003d99);
-  z-index: 3;
-  transform: rotate(-1deg) translateY(12px);
-}
-.how-card:nth-child(3) {
-  background: linear-gradient(135deg, #003d99, #0051CC);
-  z-index: 2;
-  transform: rotate(1deg) translateY(8px);
-}
-.how-card:nth-child(4) {
-  background: linear-gradient(135deg, #0051CC, #006EFF);
-  z-index: 1;
-  transform: rotate(3deg);
-}
+.how-card:last-child { margin-right: 0; }
 .how-card::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: radial-gradient(ellipse at top left, rgba(0,110,255,0.1) 0%, transparent 60%);
   pointer-events: none;
 }
 .how-card:hover {
-  transform: rotate(0deg) translateY(-16px) scale(1.04);
+  transform: translateY(-10px);
   z-index: 10;
-  box-shadow: 0 32px 80px rgba(0, 30, 100, 0.4), 0 0 0 1px rgba(0,110,255,0.3);
+  border-color: rgba(0,110,255,0.5);
+  box-shadow: 0 24px 60px rgba(0, 30, 100, 0.35), 0 0 0 1px rgba(0,110,255,0.25);
 }
 .how-card-num {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 80px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
   line-height: 1;
-  color: #338BFF;
-  opacity: 0.35;
-  position: absolute;
-  top: 16px;
-  right: 22px;
-  transition: all 0.5s var(--ease);
-}
-.how-card:hover .how-card-num {
-  opacity: 0.6;
-  color: #5AA0FF;
-}
-.how-card-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.15);
-  display: flex;
+  color: #006EFF;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 28px;
-  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,110,255,0.15);
+  border: 1.5px solid rgba(0,110,255,0.35);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
   transition: all 0.4s var(--ease);
 }
-.how-card:hover .how-card-icon {
-  background: rgba(255,255,255,0.2);
-  border-color: rgba(255,255,255,0.3);
+.how-card:hover .how-card-num {
+  background: rgba(0,110,255,0.3);
+  border-color: rgba(0,110,255,0.6);
 }
-.how-card-icon svg { width: 26px; height: 26px; stroke: currentColor; fill: none; }
+.how-card-icon { display: none; }
 .how-card-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 24px;
-  line-height: 1.1;
+  font-size: 22px;
+  line-height: 1.15;
   color: #fff;
   margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
 }
 .how-card-desc {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.6);
   flex-grow: 1;
+  position: relative;
+  z-index: 2;
 }
 .how-card-detail {
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
   margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.07);
   display: flex;
   align-items: center;
   gap: 6px;
+  position: relative;
+  z-index: 2;
 }
-.how-card-detail svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+.how-card-detail svg { display: none; }
 /* Responsive */
 @media (max-width: 1100px) {
-  .how-card { width: 260px; min-height: 360px; padding: 32px 24px; }
+  .how-card { padding: 28px 22px; }
 }
 @media (max-width: 900px) {
-  .how-track { flex-wrap: wrap; gap: 20px; }
-  .how-card { width: calc(50% - 10px); margin-left: 0; transform: none; }
-  .how-card:nth-child(1), .how-card:nth-child(2), .how-card:nth-child(3), .how-card:nth-child(4) { transform: none; }
+  .how-track { flex-wrap: wrap; gap: 16px; }
+  .how-track::before { display: none; }
+  .how-card { flex: 0 0 calc(50% - 16px); margin: 0; max-width: none; }
 }
 @media (max-width: 540px) {
-  .how-card { width: 100%; min-height: auto; }
+  .how-card { flex: 0 0 100%; min-height: auto; }
 }
 
 /* ==================================================
@@ -1631,66 +1557,69 @@ ul, ol { list-style: none; }
   .teachers-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
 }
 
-/* Cert badges below teacher cards */
+/* Cert trust strip — thin bar */
 .certs {
-  padding: 60px 0 120px;
-  background: #0B1120;
+  padding: 0;
+  background: #0A0F1A;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.certs-header {
-  text-align: center;
-  max-width: 860px;
-  margin: 0 auto 48px;
-}
-.certs-header .eyebrow { color: #5AA0FF; }
-.certs-header .section-title { color: #fff; }
+.certs-header { display: none; }
 .cert-pill-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
-  max-width: 1100px;
+  align-items: center;
+  gap: 0;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
+}
+.cert-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 24px 28px 24px 0;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .cert-pill {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 32px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.1);
-  border: 1.5px solid rgba(255,255,255,0.25);
-  transition: all 0.3s var(--ease);
+  gap: 8px;
+  padding: 24px 20px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 0;
+  transition: background 0.25s ease;
   white-space: nowrap;
 }
-.cert-pill:hover {
-  background: rgba(255,255,255,0.18);
-  border-color: rgba(255,255,255,0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
-.cert-pill-shield {
-  width: 28px; height: 28px;
-  color: #5AA0FF;
-  flex-shrink: 0;
-}
+.cert-pill:last-child { border-right: none; }
+.cert-pill:hover { background: rgba(255,255,255,0.04); }
+.cert-pill-shield { display: none; }
 .cert-pill-abbr {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 18px;
+  font-size: 13px;
   color: #fff;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
 }
 .cert-pill-divider {
-  width: 1.5px;
-  height: 22px;
-  background: rgba(255,255,255,0.3);
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,0.2);
   flex-shrink: 0;
 }
 .cert-pill-name {
-  font-size: 15px;
-  color: rgba(255,255,255,0.8);
-  line-height: 1.3;
-  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 400;
 }
 
 /* ==================================================
@@ -1698,7 +1627,7 @@ ul, ol { list-style: none; }
    ================================================== */
 .value {
   padding: 120px 0;
-  background: var(--surface);
+  background: linear-gradient(165deg, #030d1a 0%, #001233 50%, #001a3d 100%);
   overflow: hidden;
 }
 .value-header {
@@ -1710,13 +1639,15 @@ ul, ol { list-style: none; }
   flex-wrap: wrap;
 }
 .value-nav { display: flex; gap: 12px; }
+.value .eyebrow { color: rgba(0,110,255,0.85); }
+.value .section-title { color: #fff; }
 .value-arrow {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: var(--ink);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1738,56 +1669,56 @@ ul, ol { list-style: none; }
 .value-card {
   flex: 0 0 calc((100% - 48px) / 3);
   position: relative;
-  padding: 40px 32px;
+  padding: 36px 32px;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: rgba(0, 20, 60, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,110,255,0.15);
+  border-left: 3px solid var(--card-accent, #006EFF);
   overflow: hidden;
-  min-height: 380px;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s ease;
 }
 .value-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: var(--card-accent, var(--blue));
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at top left, rgba(0,110,255,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px var(--card-accent);
+  border-left-color: var(--card-accent);
 }
 .value-card[data-accent="1"] { --card-accent: #006EFF; }
 .value-card[data-accent="2"] { --card-accent: var(--phase-3); }
 .value-card[data-accent="3"] { --card-accent: var(--phase-4); }
 .value-card[data-accent="4"] { --card-accent: var(--phase-2); }
 
-.value-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: color-mix(in srgb, var(--card-accent) 12%, white);
-  color: var(--card-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-}
+.value-icon { display: none; }
 .value-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.1;
-  color: var(--ink);
+  color: #fff;
   margin-bottom: 14px;
   letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
 }
 .value-desc {
   font-size: 15px;
-  color: var(--ink-3);
-  line-height: 1.6;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
   flex: 1;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 1000px) { .value-card { flex: 0 0 calc((100% - 24px) / 2); } }
@@ -2587,7 +2518,23 @@ ul, ol { list-style: none; }
 
   /* Hero */
   .hero-title { font-size: 38px !important; }
-  .hero-sub { font-size: 16px; }
+  
+/* Hero academy name above main title */
+.hero-academy-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+.life-blue {
+  color: #7EC8FF;
+  font-weight: 800;
+}
+.hero-sub { font-size: 16px; }
   .hero-inner { padding: 0 20px; }
   .hero-cta-wrap .btn-primary--lg { padding: 18px 36px; font-size: 16px; }
   .trustpilot { font-size: 13px; }
@@ -2628,14 +2575,20 @@ ul, ol { list-style: none; }
   .teacher-avatar { width: 60px !important; height: 60px !important; }
 
   /* Certs */
-  .cert-pill-row { flex-direction: column !important; align-items: center !important; }
-  .cert-pill { width: 100%; justify-content: center; padding: 14px 24px; gap: 10px; }
-  .cert-pill-shield { width: 22px; height: 22px; }
-  .cert-pill-abbr { font-size: 16px; }
-  .cert-pill-name { font-size: 13px; }
+  .cert-pill-row { flex-wrap: wrap; justify-content: flex-start; }
+  .cert-label { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 16px 0 12px; }
+  .cert-pill { padding: 14px 16px; }
+  .cert-pill-name { display: none; }
 
   /* How it works */
   .hiw-cards { grid-template-columns: 1fr !important; }
+  /* Syllabus mobile */
+  .syl-timeline { flex-wrap: wrap; gap: 24px 32px; }
+  .syl-connector { display: none; }
+  .syl-circle { width: 90px; height: 90px; }
+  .syl-circle-num { font-size: 22px; }
+  .syl-label { font-size: 14px; }
+
 
   /* Value cards */
   .value-cards { grid-template-columns: 1fr !important; }
@@ -2724,12 +2677,11 @@ ul, ol { list-style: none; }
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
-    <div class="hero-kicker">
-      <span class="hero-kicker-dot"></span>
-      Longevity Life Academy
+    <div class="hero-academy-name">
+      The Longevity <span class="life-blue">Life</span> Academy
     </div>
     <h1 class="hero-title">
-      Design the <span class="accent-word">life</span><br>ahead of you.
+      It's Your <span class="life-blue">Life</span>.<br>Live It Well.
     </h1>
     <p class="hero-sub">
       A longevity and biohacking course that teaches you to read your body's signals,
@@ -2767,123 +2719,70 @@ ul, ol { list-style: none; }
     <div class="topics-header reveal">
       <span class="eyebrow">Explore</span>
       <h2 class="section-title">Longevity, organized.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">Eight areas of practice that shape how long and how well you live. Start anywhere.</p>
+      <p class="section-subtitle" style="margin:0 auto;">The eight areas of longevity science covered in our 12-session course.</p>
     </div>
     <div class="topics-grid">
-      <a href="topics/nutrition.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/nutrition-longevity.html" class="topic-card reveal">
         <span class="topic-number">01</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2a10 10 0 0 0-4 19.2M12 2a10 10 0 0 1 4 19.2M12 2v20"/>
-            <path d="M6 8c2 2 4 2 6 0M18 8c-2 2-4 2-6 0"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
           <div class="topic-label">Nutrition</div>
           <div class="topic-desc">Fuel strategies for cellular health and metabolic optimization.</div>
         </div>
       </a>
-      <a href="topics/sleep.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/sleep-circadian-health.html" class="topic-card reveal">
         <span class="topic-number">02</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
           <div class="topic-label">Sleep</div>
           <div class="topic-desc">Circadian rhythm and deep recovery protocols.</div>
         </div>
       </a>
-      <a href="topics/supplements.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/supplements-health-tech.html" class="topic-card reveal">
         <span class="topic-number">03</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="8" width="18" height="8" rx="4"/>
-            <path d="M12 8v8"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
           <div class="topic-label">Supplements</div>
           <div class="topic-desc">Evidence-based compounds, doses, and timing.</div>
         </div>
       </a>
-      <a href="topics/exercise.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/exercise-movement.html" class="topic-card reveal">
         <span class="topic-number">04</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 8v8M18 8v8M2 10v4M22 10v4M6 12h12"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
-          <div class="topic-label">Exercise & Movement</div>
+          <div class="topic-label">Exercise &amp; Movement</div>
           <div class="topic-desc">Zone 2, strength, VO2 max, and mobility practices.</div>
         </div>
       </a>
-      <a href="topics/mental-health.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/mental-emotional-health.html" class="topic-card reveal">
         <span class="topic-number">05</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10Z" opacity=".3"/>
-            <path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10Z"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
-          <div class="topic-label">Mental & Emotional</div>
+          <div class="topic-label">Mental &amp; Emotional</div>
           <div class="topic-desc">Stress resilience, cognitive health, and emotional regulation.</div>
         </div>
       </a>
-      <a href="topics/metabolic.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/metabolic-health-blood-sugar.html" class="topic-card reveal">
         <span class="topic-number">06</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 12h3l3-8 4 16 3-8h5"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
           <div class="topic-label">Metabolic Health</div>
           <div class="topic-desc">Glucose, insulin, and metabolic flexibility decoded.</div>
         </div>
       </a>
-      <a href="topics/biomarkers.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/biomarkers-testing.html" class="topic-card reveal">
         <span class="topic-number">07</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 3v18M3 12h18"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
-          <div class="topic-label">Biomarkers & Testing</div>
+          <div class="topic-label">Biomarkers &amp; Testing</div>
           <div class="topic-desc">Blood panels, biological age, and what to track.</div>
         </div>
       </a>
-      <a href="topics/protocols.html" class="topic-card reveal">
-        <div class="topic-shine"></div>
+      <a href="topics/protocols-habits.html" class="topic-card reveal">
         <span class="topic-number">08</span>
-        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
-        <div class="topic-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"/>
-            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-          </svg>
-        </div>
+        <div class="topic-arrow"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#006EFF" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
         <div>
-          <div class="topic-label">Protocols & Habits</div>
+          <div class="topic-label">Protocols &amp; Habits</div>
           <div class="topic-desc">Daily systems that compound into lasting change.</div>
         </div>
       </a>
@@ -2898,8 +2797,8 @@ ul, ol { list-style: none; }
   <div class="container">
     <div class="skills-header reveal">
       <span class="eyebrow">Six Longevity Skills</span>
-      <h2 class="section-title">Six areas of longevity<br>you can act on today.</h2>
-      <p class="section-subtitle">Each one is backed by research, covered in our course, and explored in depth on our blog.</p>
+      <h2 class="section-title">Course Lessons<br>in Detail</h2>
+      <p class="section-subtitle">Each lesson is backed by peer-reviewed research and taught by certified instructors.</p>
     </div>
     <div class="skills-grid">
       <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
@@ -2985,167 +2884,48 @@ ul, ol { list-style: none; }
   <div class="container">
     <div class="syllabus-header reveal">
       <span class="eyebrow">The Syllabus</span>
-      <h2 class="section-title">Twelve sessions.<br>Four phases.</h2>
-      <p class="section-subtitle">Each phase builds on the last, ending with a protocol you wrote and tested yourself.</p>
+      <h2 class="section-title">12 Sessions.<br>4 Phases.<br>Your Protocol.</h2>
+      <p class="section-subtitle">A structured 12-week online course. Each phase builds on the last.</p>
     </div>
-    <div class="phases">
-
-      <div class="phase open" data-phase="1">
-        <button class="phase-head" data-toggle>
-          <div class="phase-num">01</div>
-          <div class="phase-title-wrap">
-            <div class="phase-label">Phase One · Sessions 1–3</div>
-            <div class="phase-title">Foundations.</div>
-          </div>
-          <div class="phase-toggle">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-        </button>
-        <div class="phase-body">
-          <div class="sessions">
-            <div class="session">
-              <div class="session-num">01</div>
-              <div>
-                <h4 class="session-title">Reframing Aging</h4>
-                <p class="session-desc">Healthspan vs lifespan, compression of morbidity, your personal healthspan goals, and the Longevity Lens — metabolism, muscle, sleep, stress, and connection.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">02</div>
-              <div>
-                <h4 class="session-title">Metabolic Health</h4>
-                <p class="session-desc">Blood sugar as the central signal of metabolic health. Glucose variability, flexibility, and a first look at CGM.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">03</div>
-              <div>
-                <h4 class="session-title">Nutrition for Longevity</h4>
-                <p class="session-desc">Protein needs as you age, fiber, ultra-processed food, meal deconstruction, and the principles of a personalized plate.</p>
-              </div>
-            </div>
-          </div>
+    <div class="syl-timeline reveal">
+      <div class="syl-connector"></div>
+      <div class="syl-phase" data-syl="0">
+        <div class="syl-circle" style="--phase-color: #006EFF;">
+          <span class="syl-circle-num">01</span>
         </div>
+        <div class="syl-label">Foundations</div>
+        <div class="syl-sessions">Sessions 1–3</div>
       </div>
-
-      <div class="phase" data-phase="2">
-        <button class="phase-head" data-toggle>
-          <div class="phase-num">02</div>
-          <div class="phase-title-wrap">
-            <div class="phase-label">Phase Two · Sessions 4–6</div>
-            <div class="phase-title">Data &amp; Discovery.</div>
-          </div>
-          <div class="phase-toggle">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-        </button>
-        <div class="phase-body">
-          <div class="sessions">
-            <div class="session">
-              <div class="session-num">04</div>
-              <div>
-                <h4 class="session-title">CGM: Seeing the Invisible</h4>
-                <p class="session-desc">How continuous glucose monitoring works, reading real datasets, and the observation checklist you'll use throughout the course.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">05</div>
-              <div>
-                <h4 class="session-title">Food Order &amp; Glucose Curves</h4>
-                <p class="session-desc">Fiber and protein first, fat's role, liquid vs solid carbs, and designing food experiments you can run at home.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">06</div>
-              <div>
-                <h4 class="session-title">Movement as a Glucose Tool</h4>
-                <p class="session-desc">Muscle as a glucose sink, post-meal walking, resistance training fundamentals, and building a weekly movement plan.</p>
-              </div>
-            </div>
-          </div>
+      <div class="syl-phase" data-syl="1">
+        <div class="syl-circle" style="--phase-color: #00D1FF;">
+          <span class="syl-circle-num">02</span>
         </div>
+        <div class="syl-label">Data & Discovery</div>
+        <div class="syl-sessions">Sessions 4–6</div>
       </div>
-
-      <div class="phase" data-phase="3">
-        <button class="phase-head" data-toggle>
-          <div class="phase-num">03</div>
-          <div class="phase-title-wrap">
-            <div class="phase-label">Phase Three · Sessions 7–9</div>
-            <div class="phase-title">Lifestyle Integration.</div>
-          </div>
-          <div class="phase-toggle">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-        </button>
-        <div class="phase-body">
-          <div class="sessions">
-            <div class="session">
-              <div class="session-num">07</div>
-              <div>
-                <h4 class="session-title">Sleep &amp; Circadian Rhythm</h4>
-                <p class="session-desc">Circadian misalignment, cortisol rhythm, sleep debt, overnight glucose, and sleep experiments you can run this week.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">08</div>
-              <div>
-                <h4 class="session-title">Stress &amp; Emotions</h4>
-                <p class="session-desc">The cortisol–glucose loop, emotional glucose spikes, nervous system regulation, and mapping your personal triggers.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">09</div>
-              <div>
-                <h4 class="session-title">Supplements, Tests &amp; Health Tech</h4>
-                <p class="session-desc">An evidence hierarchy, HbA1c vs CGM, the supplements that actually matter, and a decision framework for new tools.</p>
-              </div>
-            </div>
-          </div>
+      <div class="syl-phase" data-syl="2">
+        <div class="syl-circle" style="--phase-color: #7B61FF;">
+          <span class="syl-circle-num">03</span>
         </div>
+        <div class="syl-label">Lifestyle Integration</div>
+        <div class="syl-sessions">Sessions 7–9</div>
       </div>
-
-      <div class="phase" data-phase="4">
-        <button class="phase-head" data-toggle>
-          <div class="phase-num">04</div>
-          <div class="phase-title-wrap">
-            <div class="phase-label">Phase Four · Sessions 10–12</div>
-            <div class="phase-title">Your Protocol.</div>
-          </div>
-          <div class="phase-toggle">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-        </button>
-        <div class="phase-body">
-          <div class="sessions">
-            <div class="session">
-              <div class="session-num">10</div>
-              <div>
-                <h4 class="session-title">Social Health &amp; Purpose</h4>
-                <p class="session-desc">Psychosocial predictors of longevity, isolation and mortality, purpose and values reflection.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">11</div>
-              <div>
-                <h4 class="session-title">Personal Longevity Blueprint</h4>
-                <p class="session-desc">Integration week. Peer coaching, draft protocol review, and planning for the moments you'll fall off track.</p>
-              </div>
-            </div>
-            <div class="session">
-              <div class="session-num">12</div>
-              <div>
-                <h4 class="session-title">Reflection &amp; the Next 90 Days</h4>
-                <p class="session-desc">Before and after. Your CGM synthesis, your written protocol, and your commitment statements.</p>
-              </div>
-            </div>
-          </div>
+      <div class="syl-phase" data-syl="3">
+        <div class="syl-circle" style="--phase-color: #FF6B6B;">
+          <span class="syl-circle-num">04</span>
         </div>
+        <div class="syl-label">Your Protocol</div>
+        <div class="syl-sessions">Sessions 10–12</div>
       </div>
+    </div>
+    <!-- Detail panel — shows on hover -->
+    <div class="syl-detail" id="sylDetail">
+      <div class="syl-detail-inner" id="sylDetailInner"></div>
     </div>
   </div>
 </section>
 
-<!-- ==============================================
+<!-- ============================================== 
      FOLD 5 — DEEP DIVE INTO CLASSES
      ============================================== -->
 <!--
@@ -3158,8 +2938,8 @@ ul, ol { list-style: none; }
   <div class="container">
     <div class="deepdive-header reveal">
       <span class="eyebrow">Inside the Course</span>
-      <h2 class="section-title">Explore what<br>you'll learn.</h2>
-      <p class="section-subtitle">Real lessons, real data, real protocols. Hover each node to explore.</p>
+      <h2 class="section-title">Course<br>Overview</h2>
+      <p class="section-subtitle">Hover each area to see what you'll cover in the course.</p>
     </div>
     <div class="hex-layout">
     <div class="hex-chart reveal" id="hexChart">
@@ -3303,8 +3083,8 @@ ul, ol { list-style: none; }
     <div class="how-header reveal">
       <img src="assets/eteacher-group-logo.jpg" alt="eTeacher Group" class="how-logo">
       <span class="eyebrow">How It Works</span>
-      <h2 class="how-title">From enrollment<br>to your own protocol.</h2>
-      <p class="how-sub">Four phases. Twelve weeks. Each step builds on the last, ending with a protocol you wrote and tested yourself.</p>
+      <h2 class="how-title">How the Course Works</h2>
+      <p class="how-sub">Four simple steps from enrollment to your personal longevity protocol.</p>
     </div>
     <div class="how-track reveal">
       <div class="how-card">
@@ -3365,9 +3145,9 @@ ul, ol { list-style: none; }
 <section class="instructors" id="teachers">
   <div class="container">
     <div class="instructors-header reveal">
-      <p class="instructors-bridge">The teachers and clinicians behind your longevity education</p>
+      <p class="instructors-bridge">Meet your course instructors</p>
       <span class="eyebrow" style="margin-bottom: 16px; display: block;">Your Instructors</span>
-      <h2 class="section-title">Teachers and Clinicians<br>at the Frontier of Longevity.</h2>
+      <h2 class="section-title">Your Instructors</h2>
       <p class="section-subtitle" style="margin: 0 auto;">Not celebrity doctors — credible, dedicated instructors who practice what the research says, work directly with you, and answer the questions your GP can’t.</p>
     </div>
     <div class="teachers-grid">
@@ -3396,48 +3176,37 @@ ul, ol { list-style: none; }
 </section>
 
 <section class="certs">
-  <div class="container">
-    <div class="certs-header reveal">
-      <span class="eyebrow">Certifications</span>
-      <h2 class="section-title">Backed by leading<br>health credentials.</h2>
+  <div class="cert-pill-row">
+    <span class="cert-label">Recognized by</span>
+    <div class="cert-pill">
+      <span class="cert-pill-abbr">ACE</span>
+      <span class="cert-pill-divider"></span>
+      <span class="cert-pill-name">American Council on Exercise</span>
     </div>
-    <div class="cert-pill-row reveal">
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="cert-pill-abbr">ACE</span>
-        <span class="cert-pill-divider"></span>
-        <span class="cert-pill-name">American Council on Exercise</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="cert-pill-abbr">NASM</span>
-        <span class="cert-pill-divider"></span>
-        <span class="cert-pill-name">National Academy of Sports Medicine</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="cert-pill-abbr">IFM</span>
-        <span class="cert-pill-divider"></span>
-        <span class="cert-pill-name">Institute for Functional Medicine</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="cert-pill-abbr">NBHWC</span>
-        <span class="cert-pill-divider"></span>
-        <span class="cert-pill-name">National Board for Health &amp; Wellness Coaching</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="cert-pill-abbr">PN</span>
-        <span class="cert-pill-divider"></span>
-        <span class="cert-pill-name">Precision Nutrition</span>
-      </div>
-      <div class="cert-pill">
-        <svg class="cert-pill-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 5.5v6.5c0 5.25 3.4 10.2 8 12 4.6-1.8 8-6.75 8-12V5.5L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="cert-pill-abbr">XLA</span>
-        <span class="cert-pill-divider"></span>
-        <span class="cert-pill-name">Extended Learning Alliance</span>
-      </div>
+    <div class="cert-pill">
+      <span class="cert-pill-abbr">NASM</span>
+      <span class="cert-pill-divider"></span>
+      <span class="cert-pill-name">National Academy of Sports Medicine</span>
+    </div>
+    <div class="cert-pill">
+      <span class="cert-pill-abbr">IFM</span>
+      <span class="cert-pill-divider"></span>
+      <span class="cert-pill-name">Institute for Functional Medicine</span>
+    </div>
+    <div class="cert-pill">
+      <span class="cert-pill-abbr">NBHWC</span>
+      <span class="cert-pill-divider"></span>
+      <span class="cert-pill-name">National Board for Health &amp; Wellness Coaching</span>
+    </div>
+    <div class="cert-pill">
+      <span class="cert-pill-abbr">PN</span>
+      <span class="cert-pill-divider"></span>
+      <span class="cert-pill-name">Precision Nutrition</span>
+    </div>
+    <div class="cert-pill">
+      <span class="cert-pill-abbr">XLA</span>
+      <span class="cert-pill-divider"></span>
+      <span class="cert-pill-name">Extended Learning Alliance</span>
     </div>
   </div>
 </section>
@@ -3450,7 +3219,7 @@ ul, ol { list-style: none; }
     <div class="value-header reveal">
       <div>
         <span class="eyebrow">What Makes This Different</span>
-        <h2 class="section-title">Built for practice,<br>not just theory.</h2>
+        <h2 class="section-title">Why This Course<br>Is Different</h2>
       </div>
       <div class="value-nav">
         <button class="value-arrow" id="valPrev" aria-label="Previous">
@@ -3464,44 +3233,18 @@ ul, ol { list-style: none; }
     <div class="value-track-wrap">
       <div class="value-track" id="valTrack">
         <div class="value-card reveal" data-accent="1">
-          <div class="value-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12c0 5-4 9-9 9s-9-4-9-9 4-9 9-9"/>
-              <path d="M14 3h7v7"/>
-              <path d="M10 14L21 3"/>
-            </svg>
-          </div>
           <h3 class="value-title">Live, not recorded.</h3>
           <p class="value-desc">Every session is live with a certified instructor and your cohort. You ask questions in real time. You get real answers. Recordings are available if you miss one, but the live room is where the learning happens.</p>
         </div>
         <div class="value-card reveal" data-accent="2">
-          <div class="value-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 3v18h18"/>
-              <path d="M7 14l4-4 3 3 5-6"/>
-            </svg>
-          </div>
           <h3 class="value-title">Your data, your curriculum.</h3>
           <p class="value-desc">You don't memorize facts about glucose or sleep — you watch them move in your own body. CGM readings, lifestyle logs, and food experiments shape every session you attend.</p>
         </div>
         <div class="value-card reveal" data-accent="3">
-          <div class="value-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
           <h3 class="value-title">Small cohorts, real accountability.</h3>
           <p class="value-desc">Eight to fifteen people. You'll know your classmates' names and they'll know yours. Peer coaching in the final weeks builds the accountability that keeps the protocol alive.</p>
         </div>
         <div class="value-card reveal" data-accent="4">
-          <div class="value-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 11l3 3L22 4"/>
-              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-            </svg>
-          </div>
           <h3 class="value-title">A written protocol you'll keep.</h3>
           <p class="value-desc">The course ends with a document — your personal longevity blueprint, tested against your body over twelve weeks. It's the one deliverable designed to outlast the course itself.</p>
         </div>
@@ -3803,10 +3546,10 @@ ul, ol { list-style: none; }
       <div class="footer-col">
         <h4>Topics</h4>
         <ul>
-          <li><a href="topics/nutrition.html">Nutrition</a></li>
-          <li><a href="topics/sleep.html">Sleep</a></li>
-          <li><a href="topics/metabolic.html">Metabolic</a></li>
-          <li><a href="topics/protocols.html">Protocols</a></li>
+          <li><a href="topics/nutrition-longevity.html">Nutrition</a></li>
+          <li><a href="topics/sleep-circadian-health.html">Sleep</a></li>
+          <li><a href="topics/metabolic-health-blood-sugar.html">Metabolic</a></li>
+          <li><a href="topics/protocols-habits.html">Protocols</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -3848,18 +3591,34 @@ ul, ol { list-style: none; }
 })();
 
 /* ==================================================
-   Phase accordion (syllabus)
+   Syllabus Circle Hover — show detail panel
    ================================================== */
 (function() {
-  const phases = document.querySelectorAll('.phase');
-  phases.forEach(phase => {
-    const head = phase.querySelector('[data-toggle]');
-    head.addEventListener('click', () => {
-      const wasOpen = phase.classList.contains('open');
-      phases.forEach(p => p.classList.remove('open'));
-      if (!wasOpen) phase.classList.add('open');
-    });
+  var phases = document.querySelectorAll('.syl-phase');
+  var detail = document.getElementById('sylDetail');
+  var inner = document.getElementById('sylDetailInner');
+  if (!phases.length || !detail || !inner) return;
+
+  var data = [
+    { title: 'Phase 1: Foundations', desc: 'Sessions 1\u20133 cover the science of aging, biological age vs chronological age, key longevity biomarkers, and how to read your own baseline data. You\'ll set your personal health inventory.' },
+    { title: 'Phase 2: Data & Discovery', desc: 'Sessions 4\u20136 dive into metabolic health, CGM readings, blood panel interpretation, sleep architecture, and exercise physiology. You start tracking and experimenting with your own data.' },
+    { title: 'Phase 3: Lifestyle Integration', desc: 'Sessions 7\u20139 focus on nutrition protocols, stress management, supplement evaluation, and building sustainable daily routines. You test what works for your body and lifestyle.' },
+    { title: 'Phase 4: Your Protocol', desc: 'Sessions 10\u201312 bring it all together. Peer coaching, protocol refinement, and your personal longevity blueprint \u2014 a written document you\'ll keep long after the course ends.' }
+  ];
+
+  function show(i) {
+    phases.forEach(function(p, j) { p.classList.toggle('active', j === i); });
+    inner.innerHTML = '<h4 style="color:#fff;font-size:20px;margin:0 0 10px;font-weight:700;">' + data[i].title + '</h4><p style="color:rgba(255,255,255,0.7);font-size:15px;line-height:1.65;margin:0;">' + data[i].desc + '</p>';
+    detail.classList.add('visible');
+  }
+
+  phases.forEach(function(phase, i) {
+    phase.addEventListener('mouseenter', function() { show(i); });
+    phase.addEventListener('click', function() { show(i); });
   });
+
+  // Show first by default
+  setTimeout(function() { show(0); }, 800);
 })();
 
 /* ==================================================
@@ -3907,6 +3666,7 @@ ul, ol { list-style: none; }
   const items = document.querySelectorAll('.faq-item');
   items.forEach(item => {
     const q = item.querySelector('[data-faq]');
+    if (!q) return;
     q.addEventListener('click', () => {
       const wasOpen = item.classList.contains('open');
       items.forEach(i => i.classList.remove('open'));
@@ -3949,15 +3709,14 @@ ul, ol { list-style: none; }
   const detailLink = document.getElementById('hexDetailLink');
 
   const data = [
-    { tag: 'Metabolic Health', title: 'Read your own blood work.', desc: 'Learn to interpret glucose, lipids, and inflammation markers. Understand what your labs actually mean — and which numbers matter most for longevity.', link: 'topics/metabolic-health-blood-sugar.html' },
-    { tag: 'Exercise & Movement', title: 'Train for the next forty years.', desc: 'Strength, zone 2 cardio, stability, and VO2 max — the exercise patterns that extend healthspan, not just fitness.', link: 'topics/exercise-movement.html' },
+    { tag: 'Metabolic Health', title: 'Read your own blood work.', desc: 'Learn to interpret glucose, lipids, and inflammation markers. Understand what your labs actually mean \u2014 and which numbers matter most for longevity.', link: 'topics/metabolic-health-blood-sugar.html' },
+    { tag: 'Exercise & Movement', title: 'Train for the next forty years.', desc: 'Strength, zone 2 cardio, stability, and VO2 max \u2014 the exercise patterns that extend healthspan, not just fitness.', link: 'topics/exercise-movement.html' },
     { tag: 'Sleep & Circadian', title: 'Circadian rhythm, decoded.', desc: 'How sleep architecture, light exposure, and timing reshape your recovery, cognition, and hormone regulation.', link: 'topics/sleep-circadian-health.html' },
     { tag: 'Stress & Emotions', title: 'Regulate the cortisol loop.', desc: 'Chronic stress accelerates biological aging. Learn evidence-based techniques to interrupt the cycle and build resilience.', link: 'topics/mental-emotional-health.html' },
-    { tag: 'Supplements & Tools', title: 'Evidence over hype.', desc: 'Cut through marketing noise. Learn which supplements have real data behind them — and which are just packaging.', link: 'topics/supplements-health-tech.html' },
-    { tag: 'Protocols & Habits', title: 'Build a blueprint that sticks.', desc: 'Design a personalized longevity protocol grounded in your own data, habits, and goals — tested and peer-reviewed by your cohort.', link: 'topics/protocols-habits.html' }
+    { tag: 'Supplements & Tools', title: 'Evidence over hype.', desc: 'Cut through marketing noise. Learn which supplements have real data behind them \u2014 and which are just packaging.', link: 'topics/supplements-health-tech.html' },
+    { tag: 'Protocols & Habits', title: 'Build a blueprint that sticks.', desc: 'Design a personalized longevity protocol grounded in your own data, habits, and goals \u2014 tested and peer-reviewed by your cohort.', link: 'topics/protocols-habits.html' }
   ];
 
-  // Position nodes in a circle
   const cx = 340, cy = 340, radius = 240;
   const nodeSize = 140;
 
@@ -3979,7 +3738,6 @@ ul, ol { list-style: none; }
       node.style.height = sNode + 'px';
     });
 
-    // Position lines
     lines.forEach((line, i) => {
       const angle = (Math.PI * 2 * i / 6) - Math.PI / 2;
       const lineLen = sR - sNode / 2 + 10;
@@ -3989,7 +3747,6 @@ ul, ol { list-style: none; }
       line.style.top = sCy + 'px';
     });
 
-    // Center
     const center = chart.querySelector('.hex-center');
     center.style.left = sCx + 'px';
     center.style.top = sCy + 'px';
@@ -3997,7 +3754,6 @@ ul, ol { list-style: none; }
     center.style.width = centerSize + 'px';
     center.style.height = centerSize + 'px';
 
-    // Orbit ring
     const orbit = chart.querySelector('.hex-orbit');
     if (orbit) {
       const orbitSize = (sR * 2 + sNode * 0.4);
@@ -4007,7 +3763,6 @@ ul, ol { list-style: none; }
       orbit.style.left = sCx + 'px';
     }
 
-    // Chart height
     chart.style.height = (sCy + sR + sNode / 2 + 40) + 'px';
   }
 
@@ -4019,12 +3774,8 @@ ul, ol { list-style: none; }
   function showDetail(i) {
     if (activeIndex === i) return;
     activeIndex = i;
-    nodes.forEach((n, j) => {
-      n.classList.toggle('active', j === i);
-    });
-    lines.forEach((l, j) => {
-      l.classList.toggle('active', j === i);
-    });
+    nodes.forEach((n, j) => { n.classList.toggle('active', j === i); });
+    lines.forEach((l, j) => { l.classList.toggle('active', j === i); });
     detailTag.textContent = data[i].tag;
     detailTitle.textContent = data[i].title;
     detailDesc.textContent = data[i].desc;
@@ -4044,8 +3795,6 @@ ul, ol { list-style: none; }
     node.addEventListener('click', () => showDetail(i));
   });
 
-  // Keep detail visible — don't hide on mouseleave since detail is below chart.
-  // Only reset when user scrolls away (handled by IntersectionObserver).
   const deepdiveSection = chart.closest('.deepdive');
   if (deepdiveSection) {
     const obs = new IntersectionObserver((entries) => {
@@ -4054,7 +3803,6 @@ ul, ol { list-style: none; }
     obs.observe(deepdiveSection);
   }
 
-  // Show first node by default after a short delay
   setTimeout(() => showDetail(0), 1200);
 })();
 
@@ -4064,32 +3812,23 @@ ul, ol { list-style: none; }
 (function() {
   const cards = document.querySelectorAll('.topic-card');
   if (!cards.length) return;
-
-  // Perspective wrapper on the grid
   const grid = document.querySelector('.topics-grid');
   if (grid) grid.style.perspective = '1200px';
-
-  const MAX_TILT = 12; // degrees
+  const MAX_TILT = 12;
   const TRANSITION_OUT = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s ease';
 
   cards.forEach(card => {
     const shine = card.querySelector('.topic-shine');
-
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-
-      // Normalized -1 to 1
       const rotateY = ((x - centerX) / centerX) * MAX_TILT;
       const rotateX = ((centerY - y) / centerY) * MAX_TILT;
-
       card.style.transition = 'none';
       card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px) scale(1.02)`;
-
-      // Move shine highlight
       if (shine) {
         const pctX = (x / rect.width) * 100;
         const pctY = (y / rect.height) * 100;
@@ -4097,7 +3836,6 @@ ul, ol { list-style: none; }
         shine.style.setProperty('--shine-y', pctY + '%');
       }
     });
-
     card.addEventListener('mouseleave', () => {
       card.style.transition = TRANSITION_OUT;
       card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
@@ -4111,7 +3849,6 @@ ul, ol { list-style: none; }
 (function() {
   const faqItems = document.querySelectorAll('.faq-item');
   if (!faqItems.length) return;
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -4120,13 +3857,11 @@ ul, ol { list-style: none; }
         item.style.animationDelay = (idx * 0.08) + 's';
         item.style.animation = 'faq-slide-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards';
         item.style.opacity = '0';
-        // Force reflow to apply animation
         void item.offsetHeight;
         observer.unobserve(item);
       }
     });
   }, { threshold: 0.1 });
-
   faqItems.forEach(item => {
     item.style.opacity = '0';
     observer.observe(item);
