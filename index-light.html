@@ -653,7 +653,7 @@ ul, ol { list-style: none; }
 .skill-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 85%, rgba(0,0,0,0.75) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 80%, rgba(0,0,0,0.7) 100%);
   z-index: 1;
 }
 .skill-content {
@@ -1055,18 +1055,21 @@ ul, ol { list-style: none; }
 /* Flex wrapper: hex chart left, detail panel right */
 .hex-layout {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 32px;
   position: relative;
   z-index: 2;
 }
-/* Detail panel — strong frosted glass (side panel) */
+/* Detail panel — centered below hex chart */
 .hex-detail {
-  width: 380px;
+  width: 600px;
+  max-width: 90%;
   min-width: 320px;
   flex-shrink: 0;
   padding: 40px 36px;
+  margin: 0 auto;
   background: rgba(0,60,180,0.15);
   backdrop-filter: blur(48px) saturate(1.6);
   -webkit-backdrop-filter: blur(48px) saturate(1.6);
@@ -3069,32 +3072,33 @@ ul, ol { list-style: none; }
 }
 
 /* Phase 1 = Blue */
-.phase-block:nth-child(1) .phase-block-label { color: #6FA8FF !important; }
-.phase-block:nth-child(1) .phase-block-name { color: #2060C0 !important; }
-.phase-block:nth-child(1) .phase-block-header { border-bottom-color: rgba(111,168,255,0.3) !important; }
-.phase-block:nth-child(1) .curriculum-num { background: rgba(111,168,255,0.12) !important; color: #4488DD !important; }
+.phase-block:nth-child(1) .phase-block-label { color: #4D9AFF !important; font-size: 15px !important; font-weight: 800 !important; }
+.phase-block:nth-child(1) .phase-block-name { color: #006EFF !important; font-size: 44px !important; font-weight: 900 !important; }
+.phase-block:nth-child(1) .phase-block-header { border-bottom: 3px solid rgba(0,110,255,0.4) !important; background: linear-gradient(135deg, rgba(0,110,255,0.06) 0%, transparent 100%) !important; padding: 24px !important; border-radius: 12px !important; }
+.phase-block:nth-child(1) .curriculum-num { background: rgba(0,110,255,0.15) !important; color: #006EFF !important; font-size: 18px !important; width: 48px !important; height: 48px !important; border: 2px solid rgba(0,110,255,0.2) !important; }
 
 /* Phase 2 = Amber */
-.phase-block:nth-child(2) .phase-block-label { color: #E8A75A !important; }
-.phase-block:nth-child(2) .phase-block-name { color: #B07830 !important; }
-.phase-block:nth-child(2) .phase-block-header { border-bottom-color: rgba(232,167,90,0.3) !important; }
-.phase-block:nth-child(2) .curriculum-num { background: rgba(232,167,90,0.12) !important; color: #C88A40 !important; }
+.phase-block:nth-child(2) .phase-block-label { color: #E8A040 !important; font-size: 15px !important; font-weight: 800 !important; }
+.phase-block:nth-child(2) .phase-block-name { color: #D4850A !important; font-size: 44px !important; font-weight: 900 !important; }
+.phase-block:nth-child(2) .phase-block-header { border-bottom: 3px solid rgba(232,167,90,0.4) !important; background: linear-gradient(135deg, rgba(232,167,90,0.08) 0%, transparent 100%) !important; padding: 24px !important; border-radius: 12px !important; }
+.phase-block:nth-child(2) .curriculum-num { background: rgba(232,167,90,0.15) !important; color: #C88A30 !important; font-size: 18px !important; width: 48px !important; height: 48px !important; border: 2px solid rgba(232,167,90,0.25) !important; }
 
 /* Phase 3 = Teal */
-.phase-block:nth-child(3) .phase-block-label { color: #5FB6B0 !important; }
-.phase-block:nth-child(3) .phase-block-name { color: #3A8A85 !important; }
-.phase-block:nth-child(3) .phase-block-header { border-bottom-color: rgba(95,182,176,0.3) !important; }
-.phase-block:nth-child(3) .curriculum-num { background: rgba(95,182,176,0.12) !important; color: #4EA09A !important; }
+.phase-block:nth-child(3) .phase-block-label { color: #40BDB5 !important; font-size: 15px !important; font-weight: 800 !important; }
+.phase-block:nth-child(3) .phase-block-name { color: #1A9A92 !important; font-size: 44px !important; font-weight: 900 !important; }
+.phase-block:nth-child(3) .phase-block-header { border-bottom: 3px solid rgba(95,182,176,0.4) !important; background: linear-gradient(135deg, rgba(95,182,176,0.08) 0%, transparent 100%) !important; padding: 24px !important; border-radius: 12px !important; }
+.phase-block:nth-child(3) .curriculum-num { background: rgba(95,182,176,0.15) !important; color: #2A9990 !important; font-size: 18px !important; width: 48px !important; height: 48px !important; border: 2px solid rgba(95,182,176,0.25) !important; }
 
 /* Phase 4 = Indigo */
-.phase-block:nth-child(4) .phase-block-label { color: #7B7FCF !important; }
-.phase-block:nth-child(4) .phase-block-name { color: #3B3F91 !important; }
-.phase-block:nth-child(4) .phase-block-header { border-bottom-color: rgba(59,63,145,0.3) !important; }
-.phase-block:nth-child(4) .curriculum-num { background: rgba(59,63,145,0.12) !important; color: #5558B0 !important; }
+.phase-block:nth-child(4) .phase-block-label { color: #8B8FE0 !important; font-size: 15px !important; font-weight: 800 !important; }
+.phase-block:nth-child(4) .phase-block-name { color: #4B4FC8 !important; font-size: 44px !important; font-weight: 900 !important; }
+.phase-block:nth-child(4) .phase-block-header { border-bottom: 3px solid rgba(75,79,200,0.4) !important; background: linear-gradient(135deg, rgba(75,79,200,0.06) 0%, transparent 100%) !important; padding: 24px !important; border-radius: 12px !important; }
+.phase-block:nth-child(4) .curriculum-num { background: rgba(75,79,200,0.15) !important; color: #4B4FC8 !important; font-size: 18px !important; width: 48px !important; height: 48px !important; border: 2px solid rgba(75,79,200,0.2) !important; }
 
-/* Accordion items slightly larger */
+/* Accordion items larger */
 .curriculum-trigger-text h3 {
-  font-size: 17px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
   font-weight: 700 !important;
 }
 .curriculum-section-label {
@@ -3223,7 +3227,7 @@ ul, ol { list-style: none; }
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/exercise-movement.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video src="assets/learn-train.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video src="assets/exercise-yoga.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">03</span>
@@ -3278,7 +3282,7 @@ ul, ol { list-style: none; }
     </div>
     <div class="skills-grid">
       <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
-        <div class="skill-bg cells"><video autoplay muted loop playsinline><source src="assets/skill-cells.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg cells" style="background: url('assets/img-metabolic.jpg') center/cover no-repeat;"></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -3357,7 +3361,7 @@ ul, ol { list-style: none; }
   <div class="container">
     <div class="curriculum-header reveal">
       <p class="curriculum-bridge">A structured 12-week online course designed by eTeacher Group</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">Our Methodology</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">The Complete Protocol</p>
       <h2 class="section-title">12 Sessions. 4 Phases.<br><span class="gold">Your Protocol</span>.</h2>
       <p class="section-subtitle" style="margin: 0 auto;">Each phase builds on the last — science-backed, teacher-led, peer-driven.</p>
     </div>
