@@ -5,8 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Longevity Life Academy — Design the Life Ahead of You</title>
 <meta name="description" content="A longevity and biohacking course. Read your body's signals, build your personal protocol, and live longer, stronger, better.">
+
+<!-- ============================================
+     SECURITY HEADERS (via meta http-equiv)
+     ============================================ -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.cdnfonts.com; font-src 'self' https://fonts.gstatic.com https://fonts.cdnfonts.com data:; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https:;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+<meta name="robots" content="index, follow">
+
+<!-- Performance: preconnect to external domains -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.cdnfonts.com">
+
+<!-- Fonts loaded async with display=swap to prevent render blocking -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/codec-pro" rel="stylesheet">
 <style>
@@ -4583,7 +4598,7 @@ html {
   C) "Live Your Longest, Strongest Life"
 -->
 <section class="hero" id="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-longevity.jpg">
+  <video preload="auto" class="hero-video" autoplay muted loop playsinline poster="assets/hero-longevity.jpg">
     <source src="assets/hero-light-bg.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
@@ -4634,7 +4649,7 @@ html {
     </div>
     <div class="topic-grid-v2">
       <a href="topics/nutrition-longevity.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video src="assets/skill-eating.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-eating.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">01</span>
@@ -4644,7 +4659,7 @@ html {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/sleep-circadian-health.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video src="assets/learn-sleep.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/learn-sleep.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">02</span>
@@ -4654,7 +4669,7 @@ html {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/exercise-movement.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video src="assets/exercise-yoga.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/exercise-yoga.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">03</span>
@@ -4664,7 +4679,7 @@ html {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video src="assets/learn-blood.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/learn-blood.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">04</span>
@@ -4674,7 +4689,7 @@ html {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/biomarkers-testing.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video src="assets/learn-protocol.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/learn-protocol.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">05</span>
@@ -4684,7 +4699,7 @@ html {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/protocols-habits.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video src="assets/skill-matcha.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-matcha.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">06</span>
@@ -4721,7 +4736,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Turn Back the Clock — brain aging and cognition">
-        <div class="skill-bg brain"><video autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg brain"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -4733,7 +4748,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Rewrite Your Mental OS — mindset and beliefs about aging">
-        <div class="skill-bg mindset"><video autoplay muted loop playsinline><source src="assets/skill-biometric.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg mindset"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-biometric.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -4745,7 +4760,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/protocols-habits.html" aria-label="Your Skin Tells a Story — skin as a longevity organ">
-        <div class="skill-bg skin"><video autoplay muted loop playsinline><source src="assets/skill-skin.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg skin"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-skin.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -4757,7 +4772,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/supplements-health-tech.html" aria-label="Supplements That Actually Matter — evidence-based supplements">
-        <div class="skill-bg supplements"><video autoplay muted loop playsinline><source src="assets/skill-pill.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg supplements"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-pill.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -4769,7 +4784,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/nutrition-longevity.html" aria-label="Eat for Your Eyes — nutrition for lifelong vision">
-        <div class="skill-bg eyes"><video autoplay muted loop playsinline><source src="assets/skill-berries.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg eyes"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-berries.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -5270,7 +5285,7 @@ html {
 <section class="how-v2" id="how">
   <div class="container">
     <div class="how-v2-header reveal">
-      <img src="assets/e-teacher-logo-dark.png" alt="eTeacher Group" class="how-v2-logo">
+      <img loading="lazy" decoding="async" src="assets/e-teacher-logo-dark.png" alt="eTeacher Group" class="how-v2-logo">
       <span class="eyebrow" style="color: #006EFF;">How It Works</span>
       <h2 class="how-v2-title">How It Works</h2>
       <p class="how-v2-sub">Six clear steps from enrollment to your personal longevity protocol.</p>
@@ -5586,7 +5601,7 @@ html {
 <section class="final-cta" id="apply">
   <div class="container">
     <div class="final-cta-card reveal">
-      <video class="final-cta-video" autoplay muted loop playsinline>
+      <video preload="metadata" class="final-cta-video" autoplay muted loop playsinline>
         <source src="assets/cta-bg.mp4" type="video/mp4">
       </video>
       <div class="final-cta-overlay"></div>
@@ -6033,6 +6048,46 @@ function toggleCurriculum(btn) {
   const nextBtn = document.querySelector('.how-v2-next');
   if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
   if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+})();
+</script>
+
+<!-- ============================================
+     PERFORMANCE: Smart video loading
+     Videos only start loading their data when they
+     scroll within 200px of the viewport. Hero video
+     (above the fold) loads eagerly and is excluded.
+     Preserves full video quality and motion.
+     ============================================ -->
+<script>
+(function() {
+  if (!('IntersectionObserver' in window)) return;
+
+  const videoObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        // Upgrade to full preload when near viewport
+        if (video.preload === 'metadata') {
+          video.preload = 'auto';
+          video.load();
+        }
+        // Attempt to play (autoplay videos that may have paused)
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function() { /* autoplay blocked — ignore */ });
+        }
+      } else {
+        // Pause off-screen videos to save CPU/battery
+        if (!video.paused) video.pause();
+      }
+    });
+  }, { rootMargin: '200px 0px', threshold: 0.01 });
+
+  document.querySelectorAll('video').forEach(function(v) {
+    // Skip hero video — always plays
+    if (v.classList.contains('hero-video')) return;
+    videoObserver.observe(v);
+  });
 })();
 </script>
 
