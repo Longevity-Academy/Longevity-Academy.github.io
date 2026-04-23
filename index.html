@@ -4548,6 +4548,84 @@ html {
   }
 }
 
+/* ==========================================================
+   V2 OVERRIDES  — appended Apr 23, 2026
+   Only changes explicitly requested for V2. Nothing else.
+   ========================================================== */
+
+/* Topic cards #4 Metabolic and #5 Biomarkers — stronger contrast for readability */
+.topic-v2--extra-contrast .topic-v2-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.92) 0%,
+    rgba(0,0,0,0.7) 45%,
+    rgba(0,0,0,0.35) 100%
+  );
+}
+.topic-v2--extra-contrast .topic-v2-video video {
+  filter: brightness(0.82) contrast(1.08);
+}
+
+/* Hex nodes — distinct color per node (moved beyond the blue family) */
+.hex-node[data-hex="0"] {
+  background: rgba(0,110,255,0.22) !important;                 /* blue — Metabolic */
+  border: 2px solid rgba(0,110,255,0.7) !important;
+  box-shadow: 0 0 30px rgba(0,110,255,0.35), inset 0 0 30px rgba(0,110,255,0.1) !important;
+}
+.hex-node[data-hex="1"] {
+  background: rgba(46,196,182,0.22) !important;                /* teal — Exercise */
+  border: 2px solid rgba(46,196,182,0.7) !important;
+  box-shadow: 0 0 30px rgba(46,196,182,0.35), inset 0 0 30px rgba(46,196,182,0.1) !important;
+}
+.hex-node[data-hex="2"] {
+  background: rgba(155,93,229,0.22) !important;                /* violet — Sleep */
+  border: 2px solid rgba(155,93,229,0.7) !important;
+  box-shadow: 0 0 30px rgba(155,93,229,0.35), inset 0 0 30px rgba(155,93,229,0.1) !important;
+}
+.hex-node[data-hex="3"] {
+  background: rgba(231,111,81,0.22) !important;                /* coral — Stress */
+  border: 2px solid rgba(231,111,81,0.7) !important;
+  box-shadow: 0 0 30px rgba(231,111,81,0.35), inset 0 0 30px rgba(231,111,81,0.1) !important;
+}
+.hex-node[data-hex="4"] {
+  background: rgba(42,157,143,0.22) !important;                /* deep green — Supplements */
+  border: 2px solid rgba(42,157,143,0.7) !important;
+  box-shadow: 0 0 30px rgba(42,157,143,0.35), inset 0 0 30px rgba(42,157,143,0.1) !important;
+}
+.hex-node[data-hex="5"] {
+  background: rgba(244,162,97,0.22) !important;                /* amber — Protocols */
+  border: 2px solid rgba(244,162,97,0.7) !important;
+  box-shadow: 0 0 30px rgba(244,162,97,0.35), inset 0 0 30px rgba(244,162,97,0.1) !important;
+}
+
+/* Keep hover reading clean — bright white border + per-node glow */
+.hex-node:hover, .hex-node.active {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.9) !important;
+  box-shadow: 0 0 40px rgba(255,255,255,0.35), 0 10px 40px rgba(0,0,0,0.35), inset 0 0 50px rgba(255,255,255,0.08) !important;
+  transform: scale(1.12) translateY(0) !important;
+}
+
+/* Hex hovering detail card — Morpheus: deep black frosted glass, no blue wash */
+.hex-detail {
+  background: linear-gradient(180deg, rgba(18,18,22,0.92) 0%, rgba(8,8,10,0.94) 100%) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(0,0,0,0.3),
+    0 1px 0 rgba(255,255,255,0.08) inset !important;
+  backdrop-filter: blur(24px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.2) !important;
+}
+.hex-detail-tag {
+  color: rgba(255,255,255,0.55) !important;
+}
+.hex-detail-title { color: #ffffff !important; }
+.hex-detail-desc { color: rgba(255,255,255,0.78) !important; }
+.hex-detail-link {
+  color: #ffffff !important;
+}
+
 </style>
 </head>
 <body>
@@ -4599,7 +4677,7 @@ html {
 -->
 <section class="hero" id="hero">
   <video preload="auto" class="hero-video" autoplay muted loop playsinline poster="assets/hero-longevity.jpg">
-    <source src="assets/hero-light-bg.mp4" type="video/mp4">
+    <source src="assets/v2-hero-aging-reversed.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
@@ -4610,8 +4688,9 @@ html {
       It's Your <span class="life-blue">Life</span>.<br>Live It Well.
     </h1>
     <p class="hero-sub">
-      A longevity and biohacking course that teaches you to read your body's signals,
-      build a personal protocol, and turn the next decades into your strongest.
+      The Longevity and biohacking course that simplifies the wonders of longevity
+      so anyone can enjoy it — read your body's signals, build a personal protocol,
+      and turn the next decades into your strongest.
     </p>
     <div class="hero-cta-row">
       <div class="hero-cta-wrap">
@@ -4649,7 +4728,7 @@ html {
     </div>
     <div class="topic-grid-v2">
       <a href="topics/nutrition-longevity.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-eating.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-nutrition-greens.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">01</span>
@@ -4659,7 +4738,7 @@ html {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/sleep-circadian-health.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/learn-sleep.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-sleep-eye.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">02</span>
@@ -4678,7 +4757,7 @@ html {
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal">
+      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal topic-v2--extra-contrast">
         <div class="topic-v2-video"><video preload="metadata" src="assets/learn-blood.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
@@ -4688,7 +4767,7 @@ html {
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/biomarkers-testing.html" class="topic-v2 reveal">
+      <a href="topics/biomarkers-testing.html" class="topic-v2 reveal topic-v2--extra-contrast">
         <div class="topic-v2-video"><video preload="metadata" src="assets/learn-protocol.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
@@ -4748,7 +4827,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Rewrite Your Mental OS — mindset and beliefs about aging">
-        <div class="skill-bg mindset"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-biometric.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg mindset"><video preload="metadata" autoplay muted loop playsinline><source src="assets/v2-mental-bubbles.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -4772,7 +4851,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/supplements-health-tech.html" aria-label="Supplements That Actually Matter — evidence-based supplements">
-        <div class="skill-bg supplements"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-pill.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg supplements"><video preload="metadata" autoplay muted loop playsinline><source src="assets/v2-supplements-meds.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
