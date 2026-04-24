@@ -4548,283 +4548,82 @@ html {
   }
 }
 
+/* ==========================================================
+   V2 OVERRIDES  — appended Apr 23, 2026
+   Only changes explicitly requested for V2. Nothing else.
+   ========================================================== */
 
-/* ==============================================
-   FOLD 2 — ABOUT US (V3)
-   ============================================== */
-.about {
-  position: relative;
-  padding: clamp(80px, 10vw, 140px) 0;
-  background:
-    radial-gradient(1200px 600px at 50% 0%, rgba(0,110,255,0.08) 0%, rgba(0,110,255,0) 60%),
-    linear-gradient(180deg, #FFFFFF 0%, #F5F8FE 100%);
-  overflow: hidden;
+/* Topic cards #4 Metabolic and #5 Biomarkers — stronger contrast for readability */
+.topic-v2--extra-contrast .topic-v2-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.92) 0%,
+    rgba(0,0,0,0.7) 45%,
+    rgba(0,0,0,0.35) 100%
+  );
 }
-.about::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(0,110,255,0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 80%, rgba(0,110,255,0.05) 0%, transparent 45%);
-  pointer-events: none;
-}
-.about-inner {
-  position: relative;
-  max-width: 1040px;
-  margin: 0 auto;
-}
-.about-header {
-  text-align: center;
-  margin-bottom: clamp(32px, 4vw, 48px);
-}
-.about-header .eyebrow {
-  color: var(--blue);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  font-size: 13px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  display: block;
-}
-.about-header .section-title {
-  font-size: clamp(30px, 3.6vw, 48px);
-  line-height: 1.12;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 0 auto;
-  max-width: 920px;
-  font-weight: 800;
-  text-wrap: balance;
-}
-@media (max-width: 768px) {
-  .about-header .section-title .about-title-break { display: none; }
-  .about-header .section-title { font-size: 26px; line-height: 1.2; }
+.topic-v2--extra-contrast .topic-v2-video video {
+  filter: brightness(0.82) contrast(1.08);
 }
 
-/* Collapsible details */
-.about-details {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.88) 100%);
-  border: 1px solid rgba(0,110,255,0.14);
-  border-radius: 24px;
+/* Hex nodes — distinct color per node (moved beyond the blue family) */
+.hex-node[data-hex="0"] {
+  background: rgba(0,110,255,0.22) !important;                 /* blue — Metabolic */
+  border: 2px solid rgba(0,110,255,0.7) !important;
+  box-shadow: 0 0 30px rgba(0,110,255,0.35), inset 0 0 30px rgba(0,110,255,0.1) !important;
+}
+.hex-node[data-hex="1"] {
+  background: rgba(46,196,182,0.22) !important;                /* teal — Exercise */
+  border: 2px solid rgba(46,196,182,0.7) !important;
+  box-shadow: 0 0 30px rgba(46,196,182,0.35), inset 0 0 30px rgba(46,196,182,0.1) !important;
+}
+.hex-node[data-hex="2"] {
+  background: rgba(155,93,229,0.22) !important;                /* violet — Sleep */
+  border: 2px solid rgba(155,93,229,0.7) !important;
+  box-shadow: 0 0 30px rgba(155,93,229,0.35), inset 0 0 30px rgba(155,93,229,0.1) !important;
+}
+.hex-node[data-hex="3"] {
+  background: rgba(231,111,81,0.22) !important;                /* coral — Stress */
+  border: 2px solid rgba(231,111,81,0.7) !important;
+  box-shadow: 0 0 30px rgba(231,111,81,0.35), inset 0 0 30px rgba(231,111,81,0.1) !important;
+}
+.hex-node[data-hex="4"] {
+  background: rgba(42,157,143,0.22) !important;                /* deep green — Supplements */
+  border: 2px solid rgba(42,157,143,0.7) !important;
+  box-shadow: 0 0 30px rgba(42,157,143,0.35), inset 0 0 30px rgba(42,157,143,0.1) !important;
+}
+.hex-node[data-hex="5"] {
+  background: rgba(244,162,97,0.22) !important;                /* amber — Protocols */
+  border: 2px solid rgba(244,162,97,0.7) !important;
+  box-shadow: 0 0 30px rgba(244,162,97,0.35), inset 0 0 30px rgba(244,162,97,0.1) !important;
+}
+
+/* Keep hover reading clean — bright white border + per-node glow */
+.hex-node:hover, .hex-node.active {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.9) !important;
+  box-shadow: 0 0 40px rgba(255,255,255,0.35), 0 10px 40px rgba(0,0,0,0.35), inset 0 0 50px rgba(255,255,255,0.08) !important;
+  transform: scale(1.12) translateY(0) !important;
+}
+
+/* Hex hovering detail card — Morpheus: deep black frosted glass, no blue wash */
+.hex-detail {
+  background: linear-gradient(180deg, rgba(18,18,22,0.92) 0%, rgba(8,8,10,0.94) 100%) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
   box-shadow:
-    0 1px 0 rgba(255,255,255,0.9) inset,
-    0 30px 60px -30px rgba(0,30,90,0.18),
-    0 8px 20px -8px rgba(0,30,90,0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  padding: clamp(28px, 4vw, 44px);
-  transition: all 0.4s cubic-bezier(0.22,0.61,0.36,1);
+    0 30px 90px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(0,0,0,0.3),
+    0 1px 0 rgba(255,255,255,0.08) inset !important;
+  backdrop-filter: blur(24px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.2) !important;
 }
-.about-details[open] {
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.95) inset,
-    0 40px 80px -30px rgba(0,30,90,0.22),
-    0 12px 28px -10px rgba(0,30,90,0.12);
+.hex-detail-tag {
+  color: rgba(255,255,255,0.55) !important;
 }
-.about-summary {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  outline: none;
-}
-.about-summary::-webkit-details-marker { display: none; }
-.about-summary::marker { display: none; }
-.about-preview {
-  font-size: clamp(17px, 1.5vw, 20px);
-  line-height: 1.65;
-  color: var(--ink-2);
-  font-weight: 400;
-  letter-spacing: -0.005em;
-}
-.about-preview strong {
-  color: var(--ink);
-  font-weight: 700;
-}
-.about-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  align-self: flex-start;
-  color: var(--blue);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.01em;
-  padding: 10px 18px;
-  border: 1.5px solid rgba(0,110,255,0.25);
-  border-radius: 999px;
-  background: rgba(0,110,255,0.04);
-  transition: all 0.24s ease;
-}
-.about-summary:hover .about-toggle {
-  background: rgba(0,110,255,0.1);
-  border-color: rgba(0,110,255,0.4);
-  transform: translateY(-1px);
-}
-.about-toggle-icon {
-  transition: transform 0.3s cubic-bezier(0.22,0.61,0.36,1);
-}
-.about-details[open] .about-toggle-icon {
-  transform: rotate(180deg);
-}
-.about-toggle-text--less { display: none; }
-.about-details[open] .about-toggle-text--more { display: none; }
-.about-details[open] .about-toggle-text--less { display: inline; }
-
-.about-body {
-  margin-top: 28px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(0,110,255,0.12);
-  animation: aboutReveal 0.5s cubic-bezier(0.22,0.61,0.36,1);
-}
-@keyframes aboutReveal {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.about-lead {
-  font-size: clamp(16px, 1.3vw, 18px);
-  line-height: 1.75;
-  color: var(--ink-2);
-  margin: 0 0 36px 0;
-  letter-spacing: -0.003em;
-}
-.about-lead strong {
-  color: var(--ink);
-  font-weight: 700;
-}
-
-/* Stat grid */
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-top: 12px;
-}
-.about-stat {
-  text-align: center;
-  padding: 24px 16px;
-  background: linear-gradient(180deg, rgba(0,110,255,0.04) 0%, rgba(0,110,255,0.01) 100%);
-  border: 1px solid rgba(0,110,255,0.10);
-  border-radius: 16px;
-}
-.about-stat-num {
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 800;
-  color: var(--blue);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  margin-bottom: 8px;
-}
-.about-stat-unit {
-  font-size: 0.55em;
-  font-weight: 700;
-  margin-left: 2px;
-  letter-spacing: 0;
-}
-.about-stat-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink-3);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-/* Partner logo strip */
-.about-partners {
-  margin-top: clamp(40px, 5vw, 56px);
-  text-align: center;
-}
-.about-partners-label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-4);
-  margin-bottom: 24px;
-}
-.about-partners-logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(20px, 4vw, 56px);
-  justify-content: center;
-  align-items: center;
-}
-.about-partner-logo {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  color: var(--ink-2);
-  opacity: 0.75;
-  filter: grayscale(100%);
-  transition: all 0.3s ease;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  text-align: center;
-}
-.about-partner-logo:hover {
-  opacity: 1;
-  filter: grayscale(0%);
-}
-.about-partner-logo .logo-sub {
-  font-weight: 500;
-  font-size: 0.85em;
-  letter-spacing: 0.01em;
-  color: var(--ink-3);
-}
-
-/* National Geographic bar logo (brand-accurate styling) */
-.about-partner-logo--natgeo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-align: left;
-}
-.natgeo-bar {
-  width: 6px;
-  height: 44px;
-  background: #FFCC00;
-  flex-shrink: 0;
-}
-/* Note: The gold bar is National Geographic's official brand mark.
-   Elsewhere on the site yellow is forbidden per CEO direction — the only
-   yellow allowed is inside the NatGeo partner logo itself. */
-.natgeo-text {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 1.15;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-}
-.natgeo-sub {
-  font-family: "Inter", -apple-system, sans-serif;
-  font-weight: 700;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  color: var(--ink-3);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .about { padding: 64px 0; }
-  .about-details { padding: 24px 20px; border-radius: 20px; }
-  .about-preview { font-size: 16px; line-height: 1.6; }
-  .about-lead { font-size: 15px; line-height: 1.7; }
-  .about-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  .about-stat { padding: 18px 10px; }
-  .about-stat-num { font-size: 28px; }
-  .about-stat-label { font-size: 11px; }
-  .about-partners-logos { gap: 24px; }
-  .about-partner-logo { font-size: 12px; }
-  .natgeo-bar { height: 36px; width: 5px; }
-  .natgeo-text { font-size: 9px; }
+.hex-detail-title { color: #ffffff !important; }
+.hex-detail-desc { color: rgba(255,255,255,0.78) !important; }
+.hex-detail-link {
+  color: #ffffff !important;
 }
 
 </style>
@@ -4844,7 +4643,6 @@ html {
       Longevity Life Academy
     </a>
     <div class="nav-links">
-      <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#syllabus">Curriculum</a>
       <a href="#faq">FAQ</a>
@@ -4861,7 +4659,6 @@ html {
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
   </button>
   <nav class="mobile-nav-links">
-    <a href="#about" class="mobile-nav-link">About</a>
     <a href="#skills" class="mobile-nav-link">Skills</a>
     <a href="#syllabus" class="mobile-nav-link">Curriculum</a>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
@@ -4870,30 +4667,17 @@ html {
 </div>
 
 <!-- ==============================================
-     FOLD 1 — HERO (V3 — new headlines)
-     ==============================================
-  Three swappable options. Option 1 is active by default.
-  To switch: move the <h1>, <p class="hero-sub">, and <a class="btn-primary"> text
-  from the matching comment block below into the live <section> below.
-
-  OPTION 1 — Aspirational / bold (ACTIVE):
-    Headline: "The Decades Ahead Are Yours."
-    Sub:      "A longevity course for adults who refuse to coast into their 60s, 70s and 80s. Walk away with the protocol, the biomarkers, and the daily practice that make the decades ahead your strongest."
-    CTA:      "Claim Your Seat"
-
-  OPTION 2 — Science / control:
-    Headline: "Read Your Body. Rewrite the Curve."
-    Sub:      "Twelve live sessions with the leading longevity physicians and scientists working today. Learn to read your bloodwork, biomarkers and biology — then build the personal protocol that bends your healthspan curve up."
-    CTA:      "See the Curriculum"
-
-  OPTION 3 — Urgency / transformation:
-    Headline: "The Next Decade Starts Now."
-    Sub:      "Every month you wait, your biology drifts a little further. Start the twelve-session longevity protocol built around your body, your labs, and the life you actually want to live."
-    CTA:      "Start My Protocol"
+     FOLD 1 — HERO
+     ============================================== -->
+<!--
+  Headline options (best shown as default):
+  A) "Your Life. Optimized."
+  B) "Design the Life Ahead of You"   <-- DEFAULT (chosen)
+  C) "Live Your Longest, Strongest Life"
 -->
 <section class="hero" id="hero">
   <video preload="auto" class="hero-video" autoplay muted loop playsinline poster="assets/hero-longevity.jpg">
-    <source src="assets/hero-light-bg.mp4" type="video/mp4">
+    <source src="assets/v2-hero-aging-reversed.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
@@ -4901,18 +4685,18 @@ html {
       The Longevity <span class="life-blue">Life</span> Academy
     </div>
     <h1 class="hero-title">
-      The Decades Ahead<br>Are <span class="life-blue">Yours</span>.
+      It's Your <span class="life-blue">Life</span>.<br>Live It Well.
     </h1>
     <p class="hero-sub">
-      A longevity course for adults who refuse to coast into their 60s, 70s and 80s.
-      Walk away with the protocol, the biomarkers, and the daily practice that
-      make the decades ahead your strongest.
+      The Longevity and biohacking course that simplifies the wonders of longevity
+      so anyone can enjoy it — read your body's signals, build a personal protocol,
+      and turn the next decades into your strongest.
     </p>
     <div class="hero-cta-row">
       <div class="hero-cta-wrap">
         <div class="hero-cta-glow" aria-hidden="true"></div>
         <a href="#lead-gen" class="btn-primary btn-primary--lg">
-          Claim Your Seat
+          Reserve Your Seat
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M13 5l7 7-7 7"/>
           </svg>
@@ -4933,135 +4717,7 @@ html {
 </section>
 
 <!-- ==============================================
-     FOLD 2 — ABOUT US (V3 new fold)
-     ==============================================
-  Three swappable copy versions. Version B is active by default.
-  To switch: replace the <p class="about-lead"> body text with the block below.
-
-  VERSION A — ~80 words (punchy):
-    "Longevity Life Academy is the world's most comprehensive longevity course,
-    built by eTeacher Group — a 25‑year online education pioneer that has delivered
-    over 400,000 courses to students in 197 countries, in partnership with
-    National Geographic Learning and the Hebrew University of Jerusalem.
-    We assembled the top longevity physicians and scientists, combined them with
-    eTeacher's proven live‑learning method, and built one clear path: from where
-    you are today to a personal longevity protocol that is right for your body,
-    your biomarkers, and your life."
-
-  VERSION B — ~150 words (ACTIVE):
-    [see live <p> block below]
-
-  VERSION C — ~250 words (detailed):
-    "Longevity Life Academy is the first dedicated longevity school built by
-    eTeacher Group — a pioneer of online education for the past twenty‑five
-    years. Since 2000, eTeacher has delivered more than 400,000 courses to
-    students in 197 countries, trained a faculty of 600+ instructors, and built
-    five global online schools in partnership with institutions including
-    National Geographic Learning, the Hebrew University of Jerusalem, the
-    Israeli Ministry of Education, and the Ministry of Foreign Affairs. That
-    is the foundation we built this course on.
-    We then did something that had never been done at this scale: we assembled
-    a faculty of the leading longevity physicians, researchers, and protocol
-    designers working today — the people behind the clinics, the books, and
-    the research you already trust — and we combined their knowledge with
-    eTeacher's proven live‑learning methodology and technology. The result is
-    twelve tightly designed sessions that take you from wherever you are today
-    to being fully immersed in a longevity protocol built specifically around
-    your body, your biomarkers, and the decades ahead of you.
-    No fluff. No supplement upsells. No one‑size‑fits‑all wellness. Just the
-    science, translated clearly — taught live, in small groups, by the best
-    people in the field, inside a platform proven across hundreds of thousands
-    of learners. That is the promise of Longevity Life Academy."
--->
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-inner reveal">
-      <div class="about-header">
-        <span class="eyebrow">About Longevity Life Academy</span>
-        <h2 class="section-title">A 25‑year leader in online learning.<span class="about-title-break"><br></span> The best minds in longevity.</h2>
-      </div>
-
-      <!-- Collapsible body: short preview, expands on click -->
-      <details class="about-details">
-        <summary class="about-summary" aria-label="Read the full story">
-          <span class="about-preview">
-            Longevity Life Academy is built by <strong>eTeacher Group</strong>, a pioneer of
-            online education for over 25 years. We assembled the world's leading
-            longevity instructors and combined them with a proven live‑learning
-            method to create the most accessible, comprehensive longevity course in the world.
-          </span>
-          <span class="about-toggle">
-            <span class="about-toggle-text about-toggle-text--more">Read the full story</span>
-            <span class="about-toggle-text about-toggle-text--less">Show less</span>
-            <svg class="about-toggle-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-
-        <div class="about-body">
-          <p class="about-lead">
-            Longevity Life Academy is the first dedicated longevity school built by
-            <strong>eTeacher Group</strong>, a pioneer of online education since 2000.
-            In twenty‑five years, eTeacher has delivered over <strong>400,000 courses</strong> to
-            students in <strong>197 countries</strong>, trained <strong>600+ instructors</strong>, and built five global
-            online schools in partnership with institutions like <strong>National Geographic
-            Learning</strong> and the <strong>Hebrew University of Jerusalem</strong>. We took that proven
-            live‑learning method and paired it with the leading longevity physicians
-            and scientists working today — the people behind the clinics, the books,
-            and the research you already trust. The result is twelve tightly designed
-            sessions that take you from wherever you are today to a personal longevity
-            protocol built around your body, your biomarkers, and your life.
-          </p>
-
-          <!-- Power numbers -->
-          <div class="about-stats">
-            <div class="about-stat">
-              <div class="about-stat-num">25<span class="about-stat-unit">yrs</span></div>
-              <div class="about-stat-label">Building online schools</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">400k<span class="about-stat-unit">+</span></div>
-              <div class="about-stat-label">Courses delivered</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">197</div>
-              <div class="about-stat-label">Countries reached</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">600<span class="about-stat-unit">+</span></div>
-              <div class="about-stat-label">Trained instructors</div>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <!-- Partnership logo strip -->
-      <div class="about-partners" aria-label="Partners and accreditations">
-        <div class="about-partners-label">In partnership with</div>
-        <div class="about-partners-logos">
-          <div class="about-partner-logo about-partner-logo--natgeo" title="National Geographic Learning">
-            <div class="natgeo-bar" aria-hidden="true"></div>
-            <span class="natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="natgeo-sub">LEARNING</span></span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="Hebrew University of Jerusalem">
-            Hebrew University<br><span class="logo-sub">of Jerusalem</span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="Israeli Ministry of Education">
-            Ministry of<br><span class="logo-sub">Education</span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="Israeli Ministry of Foreign Affairs">
-            Ministry of<br><span class="logo-sub">Foreign Affairs</span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="eTeacher Group">
-            eTeacher<br><span class="logo-sub">Group</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================================
-     FOLD 3 — EXPLORE LONGEVITY TOPICS
+     FOLD 2 — EXPLORE LONGEVITY TOPICS
      ============================================== -->
 <section class="topics">
   <div class="container">
@@ -5072,7 +4728,7 @@ html {
     </div>
     <div class="topic-grid-v2">
       <a href="topics/nutrition-longevity.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-eating.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-nutrition-greens.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">01</span>
@@ -5082,7 +4738,7 @@ html {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/sleep-circadian-health.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/learn-sleep.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-sleep-eye.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">02</span>
@@ -5101,7 +4757,7 @@ html {
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal">
+      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal topic-v2--extra-contrast">
         <div class="topic-v2-video"><video preload="metadata" src="assets/learn-blood.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
@@ -5111,7 +4767,7 @@ html {
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/biomarkers-testing.html" class="topic-v2 reveal">
+      <a href="topics/biomarkers-testing.html" class="topic-v2 reveal topic-v2--extra-contrast">
         <div class="topic-v2-video"><video preload="metadata" src="assets/learn-protocol.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
@@ -5171,7 +4827,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Rewrite Your Mental OS — mindset and beliefs about aging">
-        <div class="skill-bg mindset"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-biometric.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg mindset"><video preload="metadata" autoplay muted loop playsinline><source src="assets/v2-mental-bubbles.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -5195,7 +4851,7 @@ html {
         </div>
       </a>
       <a class="skill-card reveal" href="topics/supplements-health-tech.html" aria-label="Supplements That Actually Matter — evidence-based supplements">
-        <div class="skill-bg supplements"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-pill.mp4" type="video/mp4"></video></div>
+        <div class="skill-bg supplements"><video preload="metadata" autoplay muted loop playsinline><source src="assets/v2-supplements-meds.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
