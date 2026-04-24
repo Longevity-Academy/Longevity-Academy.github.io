@@ -5147,6 +5147,67 @@ html {
   .teachers-placeholder-body { font-size: 14px; }
 }
 
+/* ==========================================================
+   HEX CHART — MULTI-COLOR (ported from V2, Apr 23, 2026)
+   Scoped to the "Your Longevity Operating System" fold only.
+   ========================================================== */
+
+/* Hex nodes — distinct color per node (moved beyond the blue family) */
+.hex-node[data-hex="0"] {
+  background: rgba(0,110,255,0.22) !important;                 /* blue — Metabolic */
+  border: 2px solid rgba(0,110,255,0.7) !important;
+  box-shadow: 0 0 30px rgba(0,110,255,0.35), inset 0 0 30px rgba(0,110,255,0.1) !important;
+}
+.hex-node[data-hex="1"] {
+  background: rgba(46,196,182,0.22) !important;                /* teal — Exercise */
+  border: 2px solid rgba(46,196,182,0.7) !important;
+  box-shadow: 0 0 30px rgba(46,196,182,0.35), inset 0 0 30px rgba(46,196,182,0.1) !important;
+}
+.hex-node[data-hex="2"] {
+  background: rgba(155,93,229,0.22) !important;                /* violet — Sleep */
+  border: 2px solid rgba(155,93,229,0.7) !important;
+  box-shadow: 0 0 30px rgba(155,93,229,0.35), inset 0 0 30px rgba(155,93,229,0.1) !important;
+}
+.hex-node[data-hex="3"] {
+  background: rgba(231,111,81,0.22) !important;                /* coral — Stress */
+  border: 2px solid rgba(231,111,81,0.7) !important;
+  box-shadow: 0 0 30px rgba(231,111,81,0.35), inset 0 0 30px rgba(231,111,81,0.1) !important;
+}
+.hex-node[data-hex="4"] {
+  background: rgba(42,157,143,0.22) !important;                /* deep green — Supplements */
+  border: 2px solid rgba(42,157,143,0.7) !important;
+  box-shadow: 0 0 30px rgba(42,157,143,0.35), inset 0 0 30px rgba(42,157,143,0.1) !important;
+}
+.hex-node[data-hex="5"] {
+  background: rgba(244,162,97,0.22) !important;                /* amber — Protocols */
+  border: 2px solid rgba(244,162,97,0.7) !important;
+  box-shadow: 0 0 30px rgba(244,162,97,0.35), inset 0 0 30px rgba(244,162,97,0.1) !important;
+}
+
+/* Keep hover reading clean — bright white border + per-node glow */
+.hex-node:hover, .hex-node.active {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.9) !important;
+  box-shadow: 0 0 40px rgba(255,255,255,0.35), 0 10px 40px rgba(0,0,0,0.35), inset 0 0 50px rgba(255,255,255,0.08) !important;
+  transform: scale(1.12) translateY(0) !important;
+}
+
+/* Hex detail card — Morpheus: deep black frosted glass, no blue wash */
+.hex-detail {
+  background: linear-gradient(180deg, rgba(18,18,22,0.92) 0%, rgba(8,8,10,0.94) 100%) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(0,0,0,0.3),
+    0 1px 0 rgba(255,255,255,0.08) inset !important;
+  backdrop-filter: blur(24px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.2) !important;
+}
+.hex-detail-tag { color: rgba(255,255,255,0.55) !important; }
+.hex-detail-title { color: #ffffff !important; }
+.hex-detail-desc { color: rgba(255,255,255,0.78) !important; }
+.hex-detail-link { color: #ffffff !important; }
+
 </style>
 </head>
 <body>
