@@ -782,6 +782,53 @@ ul, ol { list-style: none; }
   max-width: 960px; margin: 0 auto; position: relative; z-index: 1;
   display: flex; flex-direction: column; gap: 48px;
 }
+/* Curriculum phase tabs (v44) */
+.curriculum-tabs {
+  max-width: 960px; margin: 0 auto 48px; position: relative; z-index: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  padding: 8px; background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(0,0,0,0.06); border-radius: 18px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(10,22,40,0.04);
+}
+.curriculum-tab {
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  gap: 4px; padding: 16px 18px; border-radius: 12px; border: 0;
+  background: transparent; cursor: pointer; text-align: left;
+  transition: all 0.25s ease; font-family: 'Codec Pro', sans-serif;
+  color: #0a1628; min-height: 88px;
+}
+.curriculum-tab:hover { background: rgba(0,110,255,0.06); }
+.curriculum-tab.is-active {
+  background: linear-gradient(135deg, #006EFF 0%, #0050C7 100%);
+  color: #fff; box-shadow: 0 6px 20px rgba(0,110,255,0.28);
+}
+.curriculum-tab-num {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  opacity: 0.7;
+}
+.curriculum-tab.is-active .curriculum-tab-num { opacity: 0.9; }
+.curriculum-tab-name {
+  font-size: 16px; font-weight: 800; line-height: 1.2;
+}
+.curriculum-tab-meta {
+  font-size: 12px; font-weight: 500; opacity: 0.65;
+}
+.curriculum-tab.is-active .curriculum-tab-meta { opacity: 0.85; }
+.phase-block { display: none; }
+.phase-block.is-active { display: block; animation: phaseFadeIn 0.4s ease; }
+@keyframes phaseFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .curriculum-tabs {
+    grid-template-columns: 1fr 1fr; gap: 8px; padding: 6px; margin-bottom: 32px;
+  }
+  .curriculum-tab { padding: 12px 14px; min-height: 72px; }
+  .curriculum-tab-name { font-size: 14px; }
+  .curriculum-tab-meta { font-size: 11px; }
+}
 /* Phase block */
 .phase-block-header {
   display: flex; align-items: baseline; gap: 16px;
@@ -910,11 +957,13 @@ ul, ol { list-style: none; }
 /* --- Hex Chart Container --- */
 .hex-chart {
   position: relative;
-  width: 680px;
-  min-width: 500px;
-  height: 700px;
+  width: 880px;
+  min-width: 560px;
+  max-width: 100%;
+  height: 880px;
   flex-shrink: 1;
   z-index: 2;
+  margin-inline: auto;
 }
 /* Orbit ring — animated rotating dashed circle */
 .hex-orbit {
@@ -2978,108 +3027,54 @@ ul, ol { list-style: none; }
 
 /* ======= CERTS BLACK STRIP — 2.5x BIGGER TEXT ======= */
 .certs-v2 { display: none !important; }
+/* v44 — Thin institutional black bar with official-style logo wordmarks */
 .certs-strip {
-  background: linear-gradient(180deg, #040d1a 0%, #0a1628 100%);
-  padding: 48px 0;
-  border-top: 1px solid rgba(0,110,255,0.15);
-  border-bottom: 1px solid rgba(0,110,255,0.15);
+  background: #000000;
+  padding: 22px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .certs-strip-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 32px;
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
 }
 .certs-strip-label {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-  padding: 0 0 28px 0;
-  border-right: none;
-  width: 100%;
-  text-align: center;
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-family: 'Codec Pro', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.42);
+  white-space: nowrap; flex-shrink: 0;
+  padding-right: 16px; border-right: 1px solid rgba(255,255,255,0.10);
 }
 .certs-strip-badges {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  align-items: stretch;
-  width: 100%;
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 38px; flex: 1; min-width: 0;
 }
 .certs-strip-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 28px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(0,110,255,0.15);
-  background: rgba(0,110,255,0.04);
-  transition: all 0.3s ease;
-  text-align: center;
-  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 32px; opacity: 0.7;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  background: transparent; border: 0; padding: 0; gap: 0;
 }
-.certs-strip-badge::before {
-  content: '';
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  border: 2px solid rgba(0,110,255,0.5);
-  background: linear-gradient(135deg, rgba(0,110,255,0.15) 0%, rgba(0,110,255,0.05) 100%);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Shield shape via clip-path */
-  clip-path: polygon(50% 0%, 100% 12%, 100% 70%, 50% 100%, 0% 70%, 0% 12%);
-  border: none;
-  background: linear-gradient(135deg, rgba(0,110,255,0.35) 0%, rgba(0,110,255,0.12) 100%);
-}
-.certs-strip-badge:hover { 
-  background: rgba(0,110,255,0.08); 
-  border-color: rgba(0,110,255,0.3);
-  transform: translateY(-2px);
-}
-.certs-strip-abbr {
-  font-family: 'Codec Pro', sans-serif;
-  font-weight: 800;
-  font-size: 24px;
-  color: #fff;
-  letter-spacing: 0.06em;
-}
-.certs-strip-divider {
-  display: none;
-}
-.certs-strip-name {
-  font-size: 12px;
-  color: rgba(255,255,255,0.45);
-  font-weight: 500;
-  line-height: 1.3;
-}
+.certs-strip-badge:hover { opacity: 1; transform: translateY(-1px); }
+.certs-strip-badge::before { display: none !important; content: none !important; }
+.certs-strip-badge svg { height: 26px; width: auto; display: block; fill: #ffffff; }
+.certs-strip-abbr,
+.certs-strip-name,
+.certs-strip-divider { display: none !important; }
 
 @media (max-width: 900px) {
-  .certs-strip { padding: 36px 0; }
-  .certs-strip-badges { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .certs-strip-badge { padding: 20px 12px; }
-  .certs-strip-abbr { font-size: 20px; }
-  .certs-strip-name { font-size: 11px; }
-  .certs-strip-badge::before { width: 44px; height: 44px; }
+  .certs-strip { padding: 18px 0; }
+  .certs-strip-inner { gap: 18px; padding: 0 16px; }
+  .certs-strip-badges { gap: 22px; }
+  .certs-strip-badge { height: 26px; }
+  .certs-strip-badge svg { height: 20px; }
+  .certs-strip-label { font-size: 10px; padding-right: 12px; }
 }
 @media (max-width: 600px) {
-  .certs-strip { padding: 28px 0; }
-  .certs-strip-badges { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .certs-strip-badge { padding: 16px 8px; border-radius: 12px; }
-  .certs-strip-badge::before { width: 36px; height: 36px; }
-  .certs-strip-abbr { font-size: 16px; }
-  .certs-strip-name { display: block; font-size: 10px; }
-  .certs-strip-label { padding-bottom: 20px; }
+  .certs-strip-label { width: 100%; text-align: center; border-right: 0; padding-right: 0; padding-bottom: 4px; }
+  .certs-strip-badges { gap: 18px; }
+  .certs-strip-badge svg { height: 18px; }
 }
 
 
@@ -4473,20 +4468,58 @@ html {
   border-left: 3px solid #34D399 !important;
   background: rgba(52,211,153,0.06) !important;
 }
-/* How-v2 cards — different colors per step */
-.how-v2-card:nth-child(1) { border-top: 3px solid #006EFF !important; }
-.how-v2-card:nth-child(2) { border-top: 3px solid #5FB6B0 !important; }
-.how-v2-card:nth-child(3) { border-top: 3px solid #E8A75A !important; }
-.how-v2-card:nth-child(4) { border-top: 3px solid #A78BFA !important; }
-.how-v2-card:nth-child(5) { border-top: 3px solid #F87171 !important; }
-.how-v2-card:nth-child(6) { border-top: 3px solid #34D399 !important; }
-/* Step numbers match card color */
-.how-v2-card:nth-child(1) .how-v2-num { color: #006EFF !important; }
-.how-v2-card:nth-child(2) .how-v2-num { color: #5FB6B0 !important; }
-.how-v2-card:nth-child(3) .how-v2-num { color: #E8A75A !important; }
-.how-v2-card:nth-child(4) .how-v2-num { color: #A78BFA !important; }
-.how-v2-card:nth-child(5) .how-v2-num { color: #F87171 !important; }
-.how-v2-card:nth-child(6) .how-v2-num { color: #34D399 !important; }
+/* How-v2 cards — v44 glass tones (blue / silver / white / black only) */
+.how-v2-card[data-tone] {
+  border-top: 0 !important;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+.how-v2-card[data-tone]::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none; opacity: 0.6;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent 60%);
+}
+.how-v2-card[data-tone="black-glass"] {
+  background: linear-gradient(160deg, #0a1628 0%, #0e1f38 100%) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 32px rgba(10,22,40,0.35) !important;
+}
+.how-v2-card[data-tone="black-glass"] .how-v2-card-title { color: #ffffff !important; }
+.how-v2-card[data-tone="black-glass"] .how-v2-card-desc { color: rgba(255,255,255,0.78) !important; }
+.how-v2-card[data-tone="black-glass"] .how-v2-card-meta { color: #4DA6FF !important; }
+.how-v2-card[data-tone="black-glass"] .how-v2-num { color: rgba(255,255,255,0.18) !important; }
+.how-v2-card[data-tone="light-silver"] {
+  background: linear-gradient(160deg, #f5f7fb 0%, #e6ebf2 100%) !important;
+  border: 1px solid rgba(10,22,40,0.06) !important;
+  color: #0a1628 !important;
+  box-shadow: 0 12px 32px rgba(10,22,40,0.06) !important;
+}
+.how-v2-card[data-tone="light-silver"] .how-v2-num { color: rgba(10,22,40,0.14) !important; }
+.how-v2-card[data-tone="light-silver"] .how-v2-card-meta { color: #006EFF !important; }
+.how-v2-card[data-tone="light-blue"] {
+  background: linear-gradient(160deg, #e8f1ff 0%, #d4e6ff 100%) !important;
+  border: 1px solid rgba(0,110,255,0.18) !important;
+  color: #0a1628 !important;
+  box-shadow: 0 12px 32px rgba(0,110,255,0.10) !important;
+}
+.how-v2-card[data-tone="light-blue"] .how-v2-num { color: rgba(0,110,255,0.22) !important; }
+.how-v2-card[data-tone="light-blue"] .how-v2-card-meta { color: #006EFF !important; }
+.how-v2-card[data-tone="white-glass"] {
+  background: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(10,22,40,0.08) !important;
+  color: #0a1628 !important;
+  box-shadow: 0 12px 32px rgba(10,22,40,0.05) !important;
+}
+.how-v2-card[data-tone="white-glass"] .how-v2-num { color: rgba(10,22,40,0.12) !important; }
+.how-v2-card[data-tone="white-glass"] .how-v2-card-meta { color: #006EFF !important; }
+.how-v2-card[data-tone]:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(10,22,40,0.18) !important;
+}
 /* Testimonial cards — subtle color differences */
 .testimonial-card:nth-child(1) { border-top: 2px solid rgba(0,110,255,0.4) !important; }
 .testimonial-card:nth-child(2) { border-top: 2px solid rgba(95,182,176,0.4) !important; }
@@ -5307,6 +5340,103 @@ body {
     /* Ensure no hard-set !important rules in earlier blocks fight us — already covered above */
   }
 }
+
+/* ============================================================
+   V44 FINAL OVERRIDES — wins over all earlier rules
+   ============================================================ */
+/* Certs strip — hard reset to thin black bar with logo SVGs only */
+.certs-strip {
+  background: #000000 !important;
+  padding: 22px 0 !important;
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+.certs-strip-inner {
+  display: flex !important; flex-direction: row !important;
+  align-items: center !important; justify-content: center !important;
+  flex-wrap: wrap !important; gap: 32px !important;
+  max-width: 1280px !important; margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+.certs-strip-label {
+  font-family: 'Codec Pro', sans-serif !important;
+  font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: 0.22em !important; text-transform: uppercase !important;
+  color: rgba(255,255,255,0.42) !important;
+  white-space: nowrap !important; flex-shrink: 0 !important;
+  padding: 0 16px 0 0 !important;
+  border-right: 1px solid rgba(255,255,255,0.10) !important;
+  border-bottom: 0 !important; width: auto !important;
+  text-align: left !important;
+}
+.certs-strip-badges {
+  display: flex !important; flex-direction: row !important;
+  align-items: center !important; justify-content: center !important;
+  flex-wrap: wrap !important; gap: 38px !important;
+  flex: 1 !important; min-width: 0 !important;
+  grid-template-columns: none !important;
+}
+.certs-strip-badge {
+  display: inline-flex !important; flex-direction: row !important;
+  align-items: center !important; justify-content: center !important;
+  gap: 0 !important; height: 32px !important; width: auto !important;
+  padding: 0 !important; border: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  opacity: 0.78;
+  transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+.certs-strip-badge::before { display: none !important; content: none !important; width: 0 !important; height: 0 !important; }
+.certs-strip-badge:hover { opacity: 1; transform: translateY(-1px); background: transparent !important; border: 0 !important; }
+.certs-strip-badge svg { height: 26px !important; width: auto !important; display: block !important; }
+.certs-strip-abbr, .certs-strip-name, .certs-strip-divider { display: none !important; }
+@media (max-width: 900px) {
+  .certs-strip { padding: 18px 0 !important; }
+  .certs-strip-inner { gap: 18px !important; padding: 0 16px !important; }
+  .certs-strip-badges { gap: 22px !important; }
+  .certs-strip-badge { height: 26px !important; }
+  .certs-strip-badge svg { height: 20px !important; }
+  .certs-strip-label { font-size: 10px !important; padding-right: 12px !important; }
+}
+@media (max-width: 600px) {
+  .certs-strip-label { width: 100% !important; text-align: center !important; border-right: 0 !important; padding: 0 0 4px 0 !important; }
+  .certs-strip-badges { gap: 18px !important; }
+  .certs-strip-badge svg { height: 18px !important; }
+}
+
+/* F13 testimonials — light/snow background variant */
+.testimonials {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%) !important;
+}
+.testimonials .section-title,
+.testimonials .testimonials-header h2 { color: #0a1628 !important; }
+.testimonials .eyebrow,
+.testimonials .testimonials-header .eyebrow { color: #006EFF !important; }
+.testimonials .section-subtitle,
+.testimonials .testimonials-header p { color: rgba(10,22,40,0.62) !important; }
+.testimonials .testimonial-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(10,22,40,0.08) !important;
+  box-shadow: 0 8px 28px rgba(10,22,40,0.06) !important;
+}
+.testimonials .testimonial-card:hover {
+  box-shadow: 0 14px 40px rgba(10,22,40,0.12) !important;
+  transform: translateY(-3px);
+}
+.testimonials .quote-text,
+.testimonials .testimonial-quote,
+.testimonials .testimonial-card p { color: #0a1628 !important; }
+.testimonials .quote-meta,
+.testimonials .testimonial-name,
+.testimonials .testimonial-author { color: #0a1628 !important; }
+.testimonials .testimonial-role,
+.testimonials .testimonial-meta,
+.testimonials .testimonial-card .role { color: rgba(10,22,40,0.55) !important; }
+
+/* Curriculum tabs — guarantee phase visibility */
+.phase-block:not(.is-active) { display: none !important; }
+.phase-block.is-active { display: block !important; }
+
 </style>
 </head>
 <body>
@@ -5373,7 +5503,7 @@ body {
 -->
 <section class="hero" id="hero">
   <video preload="auto" class="hero-video" autoplay muted loop playsinline poster="assets/hero-longevity.jpg">
-    <source src="assets/hero-light-bg.mp4" type="video/mp4">
+    <source src="assets/hero-woman-bubbles.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
@@ -5417,35 +5547,40 @@ body {
      Dark horizontal auto‑scrolling bar — Rosen Hebrew School‑style.
      Logos duplicated once for seamless marquee.
      ============================================== -->
-<section class="trust-strip" aria-label="Trusted institutions and partners">
-  <div class="trust-strip-label">Built on a foundation of trusted institutions</div>
-  <div class="trust-strip-track-wrap">
-    <div class="trust-strip-track">
-      <!-- SET 1 -->
-      <div class="trust-logo trust-logo--natgeo" title="National Geographic Learning">
-        <span class="trust-natgeo-bar" aria-hidden="true"></span>
-        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
+<!-- IBC-style 4-pillar feature strip -->
+<section class="feature-strip" aria-label="Why Longevity Life Academy">
+  <div class="feature-strip-inner">
+    <div class="feature-pillar">
+      <div class="feature-pillar-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"/><path d="M16 8v8l5 3"/></svg>
       </div>
-      <div class="trust-logo trust-logo--text"><span>Hebrew University</span><span class="trust-sub">of Jerusalem</span></div>
-      <div class="trust-logo trust-logo--text"><span>Ministry of</span><span class="trust-sub">Education</span></div>
-      <div class="trust-logo trust-logo--text"><span>Ministry of</span><span class="trust-sub">Foreign Affairs</span></div>
-      <div class="trust-logo trust-logo--text"><span>eTeacher</span><span class="trust-sub">Group</span></div>
-      <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
-      <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">400k+</span><span class="trust-badge-lbl">courses<br>delivered</span></div>
-      <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">197</span><span class="trust-badge-lbl">countries<br>reached</span></div>
-
-      <!-- SET 2 (duplicate for seamless loop) -->
-      <div class="trust-logo trust-logo--natgeo" aria-hidden="true">
-        <span class="trust-natgeo-bar"></span>
-        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
+      <div class="feature-pillar-num">25 yrs</div>
+      <div class="feature-pillar-label">Pioneers in Online Learning</div>
+      <div class="feature-pillar-sub">eTeacher Group · est. 2000</div>
+    </div>
+    <div class="feature-pillar">
+      <div class="feature-pillar-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24V8a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v16"/><path d="M4 24h24"/><path d="M10 14h12M10 18h8"/></svg>
       </div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>Hebrew University</span><span class="trust-sub">of Jerusalem</span></div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>Ministry of</span><span class="trust-sub">Education</span></div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>Ministry of</span><span class="trust-sub">Foreign Affairs</span></div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>eTeacher</span><span class="trust-sub">Group</span></div>
-      <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
-      <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">400k+</span><span class="trust-badge-lbl">courses<br>delivered</span></div>
-      <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">197</span><span class="trust-badge-lbl">countries<br>reached</span></div>
+      <div class="feature-pillar-num">18 Sessions</div>
+      <div class="feature-pillar-label">Live Cohort Curriculum</div>
+      <div class="feature-pillar-sub">4 phases · taught by certified faculty</div>
+    </div>
+    <div class="feature-pillar">
+      <div class="feature-pillar-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="11" r="5"/><path d="M5 28a11 11 0 0 1 22 0"/></svg>
+      </div>
+      <div class="feature-pillar-num">8–15 Peers</div>
+      <div class="feature-pillar-label">Small-Group Learning</div>
+      <div class="feature-pillar-sub">Real cohorts · live discussion</div>
+    </div>
+    <div class="feature-pillar">
+      <div class="feature-pillar-icon" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16l5 5L26 8"/><path d="M28 16v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h14"/></svg>
+      </div>
+      <div class="feature-pillar-num">Your Protocol</div>
+      <div class="feature-pillar-label">Personal Longevity Blueprint</div>
+      <div class="feature-pillar-sub">Built around your biomarkers</div>
     </div>
   </div>
 </section>
@@ -5491,92 +5626,7 @@ body {
     people in the field, inside a platform proven across hundreds of thousands
     of learners. That is the promise of Longevity Life Academy."
 -->
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-inner reveal">
-      <div class="about-header">
-        <span class="eyebrow">About Longevity Life Academy</span>
-        <h2 class="section-title">A 25‑year leader in online learning.<span class="about-title-break"><br></span> The best minds in longevity.</h2>
-      </div>
-
-      <!-- Collapsible body: short preview, expands on click -->
-      <details class="about-details">
-        <summary class="about-summary" aria-label="Read the full story">
-          <span class="about-preview">
-            Longevity Life Academy is built by <strong>eTeacher Group</strong>, a pioneer of
-            online education for over 25 years. We assembled the world's leading
-            longevity instructors and combined them with a proven live‑learning
-            method to create the most accessible, comprehensive longevity course in the world.
-          </span>
-          <span class="about-toggle">
-            <span class="about-toggle-text about-toggle-text--more">Read the full story</span>
-            <span class="about-toggle-text about-toggle-text--less">Show less</span>
-            <svg class="about-toggle-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-
-        <div class="about-body">
-          <p class="about-lead">
-            Longevity Life Academy is the first dedicated longevity school built by
-            <strong>eTeacher Group</strong>, a pioneer of online education since 2000.
-            In twenty‑five years, eTeacher has delivered over <strong>400,000 courses</strong> to
-            students in <strong>197 countries</strong>, trained <strong>600+ instructors</strong>, and built five global
-            online schools in partnership with institutions like <strong>National Geographic
-            Learning</strong> and the <strong>Hebrew University of Jerusalem</strong>. We took that proven
-            live‑learning method and paired it with the leading longevity physicians
-            and scientists working today — the people behind the clinics, the books,
-            and the research you already trust. The result is eighteen tightly designed
-            sessions that take you from wherever you are today to a personal longevity
-            protocol built around your body, your biomarkers, and your life.
-          </p>
-
-          <!-- Power numbers -->
-          <div class="about-stats">
-            <div class="about-stat">
-              <div class="about-stat-num">25<span class="about-stat-unit">yrs</span></div>
-              <div class="about-stat-label">Building online schools</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">400k<span class="about-stat-unit">+</span></div>
-              <div class="about-stat-label">Courses delivered</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">197</div>
-              <div class="about-stat-label">Countries reached</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">600<span class="about-stat-unit">+</span></div>
-              <div class="about-stat-label">Trained instructors</div>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <!-- Partnership logo strip -->
-      <div class="about-partners" aria-label="Partners and accreditations">
-        <div class="about-partners-label">In partnership with</div>
-        <div class="about-partners-logos">
-          <div class="about-partner-logo about-partner-logo--natgeo" title="National Geographic Learning">
-            <div class="natgeo-bar" aria-hidden="true"></div>
-            <span class="natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="natgeo-sub">LEARNING</span></span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="Hebrew University of Jerusalem">
-            Hebrew University<br><span class="logo-sub">of Jerusalem</span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="Israeli Ministry of Education">
-            Ministry of<br><span class="logo-sub">Education</span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="Israeli Ministry of Foreign Affairs">
-            Ministry of<br><span class="logo-sub">Foreign Affairs</span>
-          </div>
-          <div class="about-partner-logo about-partner-logo--text" title="eTeacher Group">
-            eTeacher<br><span class="logo-sub">Group</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- About fold removed in v44 -->
 
 <!-- ==============================================
      FOLD 3 — EXPLORE LONGEVITY TOPICS
@@ -5604,8 +5654,8 @@ body {
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">02</span>
-          <h3 class="topic-v2-title">Sleep</h3>
-          <p class="topic-v2-desc">Circadian rhythm and deep recovery protocols.</p>
+          <h3 class="topic-v2-title">Deep Sleep &amp; Circadian</h3>
+          <p class="topic-v2-desc">Slow-wave restoration, glymphatic clearance, and the circadian rhythm that drives healthspan.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -5620,22 +5670,22 @@ body {
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/learn-blood.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/glucose-mitochondria.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">04</span>
           <h3 class="topic-v2-title">Metabolic Health</h3>
-          <p class="topic-v2-desc">Glucose, insulin, and metabolic flexibility decoded.</p>
+          <p class="topic-v2-desc">Mitochondrial function, glucose control, and the metabolic flexibility that compounds across decades.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/biomarkers-testing.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/learn-protocol.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-hero-aging-reversed.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">05</span>
-          <h3 class="topic-v2-title">Biomarkers &amp; Testing</h3>
-          <p class="topic-v2-desc">Blood panels, biological age, and what to track.</p>
+          <h3 class="topic-v2-title">Biomarkers &amp; Biological Age</h3>
+          <p class="topic-v2-desc">ApoB, hs-CRP, fasting insulin, epigenetic clocks — the data that tells you the truth about your aging.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -5660,80 +5710,80 @@ body {
   <div class="container">
     <div class="skills-header reveal">
       <span class="eyebrow">Inside the Protocol</span>
-      <h2 class="section-title">Five Deep Dives Your<br><span style="color:#006EFF;">Doctor Won't Give You</span></h2>
-      <p class="section-subtitle">Each lesson is backed by peer-reviewed research and taught by certified instructors.</p>
+      <h2 class="section-title">Six Deep Dives Your<br><span style="color:#006EFF;">Doctor Won't Give You</span></h2>
+      <p class="section-subtitle">The longevity terminology your favorite influencers use — finally taught with the science behind it.</p>
     </div>
     <div class="skills-grid">
-      <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="The Glucose Problem Most Doctors Miss">
+      <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="ApoB, LDL & the Real Cause of Heart Disease">
         <div class="skill-bg cells" style="background: url('assets/img-metabolic.jpg') center/cover no-repeat; animation: subtleZoom 12s ease-in-out infinite alternate;"></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Sessions 2 &amp; 3</div>
-          <h3 class="skill-title">The Glucose Problem Most Doctors Miss</h3>
-          <p class="skill-sub">Why insulin resistance begins decades before diagnosis — and the metabolic biomarkers that predict it before your fasting glucose does.</p>
+          <div class="skill-eyebrow">Heart Disease Prevention</div>
+          <h3 class="skill-title">The ApoB Problem Most Doctors Miss</h3>
+          <p class="skill-sub">Why ApoB, not LDL-C, is the real driver of cardiovascular risk — and how proactive lipid testing rewrites the longevity playbook decades before symptoms appear.</p>
         </div>
       </a>
-      <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Turn Back the Clock — brain aging and cognition">
+      <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Cellular Reprogramming & Epigenetic Age Reversal">
         <div class="skill-bg brain"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Brain &amp; Cognition</div>
-          <h3 class="skill-title">Turn Back the Clock</h3>
-          <p class="skill-sub">Why your brain feels older than the calendar.</p>
+          <div class="skill-eyebrow">Epigenetic Age Reversal</div>
+          <h3 class="skill-title">Reset Your Biological Clock</h3>
+          <p class="skill-sub">The Information Theory of Aging, Yamanaka factors, and what cellular reprogramming means for the decades ahead.</p>
         </div>
       </a>
-      <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Rewrite Your Mental OS — mindset and beliefs about aging">
+      <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="The Longevity Toolkit — the five tactics that move the needle">
         <div class="skill-bg mindset"><video preload="metadata" autoplay muted loop playsinline><source src="assets/v2-mental-bubbles.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Mindset &amp; Beliefs</div>
-          <h3 class="skill-title">Rewrite Your Mental OS</h3>
-          <p class="skill-sub">How beliefs become biology.</p>
+          <div class="skill-eyebrow">The Longevity Toolkit</div>
+          <h3 class="skill-title">Five Tactics That Move the Needle</h3>
+          <p class="skill-sub">Zone 2 and VO₂ max, nutritional biochemistry, sleep architecture, emotional health, and the pharmacology of healthspan.</p>
         </div>
       </a>
-      <a class="skill-card reveal" href="topics/protocols-habits.html" aria-label="Your Skin Tells a Story — skin as a longevity organ">
+      <a class="skill-card reveal" href="topics/protocols-habits.html" aria-label="Cellular senescence and the visible markers of aging">
         <div class="skill-bg skin"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-skin.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Skin &amp; Barrier</div>
-          <h3 class="skill-title">Your Skin Tells a Story</h3>
-          <p class="skill-sub">The frontline organ of longevity.</p>
+          <div class="skill-eyebrow">Cellular Senescence</div>
+          <h3 class="skill-title">The Visible Edge of Aging</h3>
+          <p class="skill-sub">Senescent cells, inflammaging, and why your skin is the first system to broadcast what the rest of your body is doing.</p>
         </div>
       </a>
-      <a class="skill-card reveal" href="topics/supplements-health-tech.html" aria-label="Supplements That Actually Matter — evidence-based supplements">
+      <a class="skill-card reveal" href="topics/supplements-health-tech.html" aria-label="Rapamycin, NAD+, NMN — the longevity molecules">
         <div class="skill-bg supplements"><video preload="metadata" autoplay muted loop playsinline><source src="assets/v2-supplements-meds.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Supplements</div>
-          <h3 class="skill-title">Supplements That Actually Matter</h3>
-          <p class="skill-sub">Five non-trendy supplements that quietly work.</p>
+          <div class="skill-eyebrow">Pharmacology of Healthspan</div>
+          <h3 class="skill-title">Rapamycin, NAD+, NMN</h3>
+          <p class="skill-sub">Sirtuins, mTOR inhibition, and the molecules at the frontier of human trials — what the data actually says.</p>
         </div>
       </a>
-      <a class="skill-card reveal" href="topics/nutrition-longevity.html" aria-label="Eat for Your Eyes — nutrition for lifelong vision">
+      <a class="skill-card reveal" href="topics/nutrition-longevity.html" aria-label="Nutritional biochemistry, fasting, and CGM-driven eating">
         <div class="skill-bg eyes"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-berries.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
         <span class="skill-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
         </span>
         <div class="skill-content">
-          <div class="skill-eyebrow">Vision &amp; Nutrition</div>
-          <h3 class="skill-title">Eat for Your Eyes</h3>
-          <p class="skill-sub">Nutrition for lifelong vision.</p>
+          <div class="skill-eyebrow">Nutritional Biochemistry</div>
+          <h3 class="skill-title">Eat for the Mitochondria</h3>
+          <p class="skill-sub">Time-restricted feeding, plant-forward density, and the CGM-driven approach that turns nutrition into a longevity tool, not a diet.</p>
         </div>
       </a>
     </div>
@@ -5748,10 +5798,32 @@ body {
       <h2 class="section-title">18 Sessions. 4 Phases.<br><span class="gold">Your Protocol</span>.</h2>
       <p class="section-subtitle" style="margin: 0 auto;">Each phase builds on the last — science-backed, teacher-led, peer-driven.</p>
     </div>
+    <div class="curriculum-tabs reveal" role="tablist" aria-label="Curriculum phases">
+      <button class="curriculum-tab is-active" data-phase-tab="1" role="tab" aria-selected="true">
+        <span class="curriculum-tab-num">01</span>
+        <span class="curriculum-tab-name">Foundation</span>
+        <span class="curriculum-tab-meta">Sessions 1–3</span>
+      </button>
+      <button class="curriculum-tab" data-phase-tab="2" role="tab" aria-selected="false">
+        <span class="curriculum-tab-num">02</span>
+        <span class="curriculum-tab-name">Data &amp; Discovery</span>
+        <span class="curriculum-tab-meta">Sessions 4–7</span>
+      </button>
+      <button class="curriculum-tab" data-phase-tab="3" role="tab" aria-selected="false">
+        <span class="curriculum-tab-num">03</span>
+        <span class="curriculum-tab-name">Lifestyle Systems</span>
+        <span class="curriculum-tab-meta">Sessions 8–13</span>
+      </button>
+      <button class="curriculum-tab" data-phase-tab="4" role="tab" aria-selected="false">
+        <span class="curriculum-tab-num">04</span>
+        <span class="curriculum-tab-name">Integration &amp; Blueprint</span>
+        <span class="curriculum-tab-meta">Sessions 14–18</span>
+      </button>
+    </div>
     <div class="curriculum-phases">
 
       <!-- PHASE 1: Foundation -->
-      <div class="phase-block reveal">
+      <div class="phase-block reveal is-active" data-phase="1">
         <div class="phase-block-header">
           <span class="phase-block-label">Phase 1 · Sessions 1–3</span>
           <span class="phase-block-name">Foundation</span>
@@ -5830,7 +5902,7 @@ body {
       </div>
 
       <!-- PHASE 2: Data & Discovery -->
-      <div class="phase-block reveal">
+      <div class="phase-block reveal" data-phase="2">
         <div class="phase-block-header">
           <span class="phase-block-label">Phase 2 · Sessions 4–7</span>
           <span class="phase-block-name">Data & Discovery</span>
@@ -5932,7 +6004,7 @@ body {
       </div>
 
       <!-- PHASE 3: Lifestyle Systems -->
-      <div class="phase-block reveal">
+      <div class="phase-block reveal" data-phase="3">
         <div class="phase-block-header">
           <span class="phase-block-label">Phase 3 · Sessions 8–13</span>
           <span class="phase-block-name">Lifestyle Systems</span>
@@ -6080,7 +6152,7 @@ body {
       </div>
 
       <!-- PHASE 4: Integration & Blueprint -->
-      <div class="phase-block reveal">
+      <div class="phase-block reveal" data-phase="4">
         <div class="phase-block-header">
           <span class="phase-block-label">Phase 4 · Sessions 14–18</span>
           <span class="phase-block-name">Integration & Blueprint</span>
@@ -6373,37 +6445,37 @@ body {
       <button class="how-v2-arrow how-v2-prev" aria-label="Previous"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
       <div class="how-v2-track-container">
         <div class="how-v2-track" id="howTrack">
-          <div class="how-v2-card" style="border-top: 3px solid #006EFF;">
+          <div class="how-v2-card" data-tone="black-glass">
             <span class="how-v2-num">01</span>
             <h3 class="how-v2-card-title">Apply &amp; Match</h3>
             <p class="how-v2-card-desc">Submit a short application. We review your background and goals, then place you in a cohort of 8–15 people with compatible interests and schedules.</p>
             <span class="how-v2-card-meta">Takes about 5 minutes</span>
           </div>
-          <div class="how-v2-card" style="border-top: 3px solid #338BFF;">
+          <div class="how-v2-card" data-tone="light-silver">
             <span class="how-v2-num">02</span>
             <h3 class="how-v2-card-title">Baseline Assessment</h3>
             <p class="how-v2-card-desc">Complete a health intake questionnaire and share any existing lab work. This becomes your personal starting point — the data you'll track against over eighteen weeks.</p>
             <span class="how-v2-card-meta">Health data + lab review</span>
           </div>
-          <div class="how-v2-card" style="border-top: 3px solid #4DA6FF;">
+          <div class="how-v2-card" data-tone="light-blue">
             <span class="how-v2-num">03</span>
             <h3 class="how-v2-card-title">Meet Your Cohort</h3>
             <p class="how-v2-card-desc">Join a live orientation call with your instructor and classmates. Set expectations, learn the platform, and build the group dynamic that carries you through eighteen weeks.</p>
             <span class="how-v2-card-meta">Live kickoff session</span>
           </div>
-          <div class="how-v2-card" style="border-top: 3px solid #0099FF;">
+          <div class="how-v2-card" data-tone="white-glass">
             <span class="how-v2-num">04</span>
             <h3 class="how-v2-card-title">Learn Live Weekly</h3>
             <p class="how-v2-card-desc">Attend 50-minute live online sessions with your cohort and instructor. Each week covers a new longevity topic — with real data, case studies, and hands-on exercises.</p>
             <span class="how-v2-card-meta">18 weeks · 50 min each</span>
           </div>
-          <div class="how-v2-card" style="border-top: 3px solid #006EFF;">
+          <div class="how-v2-card" data-tone="black-glass">
             <span class="how-v2-num">05</span>
             <h3 class="how-v2-card-title">Experiment Between Sessions</h3>
             <p class="how-v2-card-desc">Apply what you learn each week with guided experiments — food logs, sleep tracking, movement challenges. Real change comes from practice, not just theory.</p>
             <span class="how-v2-card-meta">Hands-on weekly protocols</span>
           </div>
-          <div class="how-v2-card" style="border-top: 3px solid #338BFF;">
+          <div class="how-v2-card" data-tone="light-blue">
             <span class="how-v2-num">06</span>
             <h3 class="how-v2-card-title">Build Your Protocol</h3>
             <p class="how-v2-card-desc">In the final phase, you assemble everything you've learned into a written, personalized longevity protocol — tested, peer-reviewed by your cohort, and yours to keep.</p>
@@ -6426,101 +6498,69 @@ body {
   their name/title/bio, and the placeholder tile will reflow automatically.
   When all are announced, delete the entire .teachers-placeholder block.
 -->
-<section class="instructors" id="teachers">
+<section class="instructors instructors--simple" id="teachers">
   <div class="container">
-    <div class="instructors-header reveal" style="text-align: center; margin-bottom: 48px;">
+    <div class="instructors-header reveal" style="text-align: center;">
       <span class="eyebrow" style="margin-bottom: 12px; display: block;">Your Instructors</span>
-      <h2 class="section-title" style="margin-bottom: 16px;">Taught by the leading voices<br>in longevity medicine.</h2>
-      <p class="section-subtitle" style="margin: 0 auto; max-width: 640px;">We are finalizing a faculty of physicians, researchers, and protocol designers from the top of the longevity field. Full roster announcement coming shortly.</p>
-    </div>
-
-    <!-- LIVE instructor grid — add signed instructors here as they're confirmed -->
-    <div class="teachers-grid-live reveal">
-      <!-- When an instructor signs, paste a block like this:
-      <div class="teacher-card-live">
-        <div class="teacher-card-live-photo"><img src="assets/instructors/name.jpg" alt="Dr. Name"></div>
-        <div class="teacher-card-live-body">
-          <h4 class="teacher-card-live-name">Dr. Full Name</h4>
-          <span class="teacher-card-live-role">Specialty · Credentials</span>
-          <p class="teacher-card-live-bio">Short bio.</p>
-        </div>
-      </div>
-      -->
-    </div>
-
-    <!-- PLACEHOLDER (remove when full roster is announced) -->
-    <div class="teachers-placeholder reveal">
-      <div class="teachers-placeholder-card">
-        <div class="teachers-placeholder-glow" aria-hidden="true"></div>
-        <div class="teachers-placeholder-inner">
-          <div class="teachers-placeholder-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="24" cy="24" r="20"/>
-              <path d="M24 12v12l8 4"/>
-            </svg>
-          </div>
-          <div class="teachers-placeholder-eyebrow">Announcing soon</div>
-          <h3 class="teachers-placeholder-title">Our Instructors<br>Will Be Announced Shortly</h3>
-          <p class="teachers-placeholder-body">
-            We've partnered with physicians and researchers from the top of the longevity field.
-            As each instructor confirms, we'll reveal them here — one by one, with full bios,
-            credentials, and their chapter of the course.
-          </p>
-          <div class="teachers-placeholder-grid" aria-hidden="true">
-            <div class="teachers-placeholder-slot"><span>01</span><em>Metabolic Health</em></div>
-            <div class="teachers-placeholder-slot"><span>02</span><em>Sleep &amp; Circadian</em></div>
-            <div class="teachers-placeholder-slot"><span>03</span><em>Exercise &amp; VO₂</em></div>
-            <div class="teachers-placeholder-slot"><span>04</span><em>Nutrition &amp; Protocols</em></div>
-            <div class="teachers-placeholder-slot"><span>05</span><em>Biomarkers &amp; Testing</em></div>
-            <div class="teachers-placeholder-slot"><span>06</span><em>Mental &amp; Emotional OS</em></div>
-          </div>
-          <a href="#lead-gen" class="teachers-placeholder-cta">
-            Be first to know
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
+      <h2 class="section-title" style="margin-bottom: 0;">Taught by the leading voices<br>in longevity medicine.</h2>
     </div>
   </div>
 </section>
 
-<section class="certs-strip">
+<section class="certs-strip" aria-label="Industry recognition">
   <div class="certs-strip-inner">
-    <span class="certs-strip-label">Recognized by</span>
+    <span class="certs-strip-label">Recognized &amp; Aligned With</span>
     <div class="certs-strip-badges">
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">ACE</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">American Council on Exercise</span>
+      <!-- ACE — American Council on Exercise -->
+      <div class="certs-strip-badge" title="American Council on Exercise" aria-label="American Council on Exercise">
+        <svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" role="img">
+          <text x="0" y="30" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="34" letter-spacing="1" fill="#fff">ACE</text>
+          <text x="86" y="18" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="10" letter-spacing="1.6" fill="#fff">AMERICAN COUNCIL</text>
+          <text x="86" y="32" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="10" letter-spacing="1.6" fill="#fff">ON EXERCISE®</text>
+        </svg>
       </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">NASM</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">National Academy of Sports Medicine</span>
+      <!-- NASM — National Academy of Sports Medicine -->
+      <div class="certs-strip-badge" title="National Academy of Sports Medicine" aria-label="National Academy of Sports Medicine">
+        <svg viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg" role="img">
+          <text x="0" y="30" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="34" letter-spacing="1" fill="#fff">NASM</text>
+          <text x="108" y="18" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="10" letter-spacing="1.4" fill="#fff">NATIONAL ACADEMY</text>
+          <text x="108" y="32" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="10" letter-spacing="1.4" fill="#fff">OF SPORTS MEDICINE</text>
+        </svg>
       </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">IFM</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">Institute for Functional Medicine</span>
+      <!-- IFM — Institute for Functional Medicine -->
+      <div class="certs-strip-badge" title="Institute for Functional Medicine" aria-label="Institute for Functional Medicine">
+        <svg viewBox="0 0 230 40" xmlns="http://www.w3.org/2000/svg" role="img">
+          <circle cx="16" cy="20" r="15" fill="none" stroke="#fff" stroke-width="2"/>
+          <path d="M16 8 L16 32 M6 14 L26 14 M6 26 L26 26" stroke="#fff" stroke-width="1.6" fill="none"/>
+          <text x="40" y="18" font-family="Georgia, serif" font-weight="700" font-size="15" letter-spacing="0.5" fill="#fff">THE INSTITUTE FOR</text>
+          <text x="40" y="34" font-family="Georgia, serif" font-weight="700" font-size="15" letter-spacing="0.5" fill="#fff">FUNCTIONAL MEDICINE</text>
+        </svg>
       </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">NBHWC</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">National Board for Health &amp; Wellness Coaching</span>
+      <!-- NBHWC — National Board for Health & Wellness Coaching -->
+      <div class="certs-strip-badge" title="National Board for Health &amp; Wellness Coaching" aria-label="National Board for Health and Wellness Coaching">
+        <svg viewBox="0 0 240 40" xmlns="http://www.w3.org/2000/svg" role="img">
+          <text x="0" y="30" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="30" letter-spacing="1" fill="#fff">NBHWC</text>
+          <text x="120" y="18" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="9" letter-spacing="1.2" fill="#fff">NATIONAL BOARD FOR HEALTH</text>
+          <text x="120" y="32" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="9" letter-spacing="1.2" fill="#fff">&amp; WELLNESS COACHING</text>
+        </svg>
       </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">PN</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">Precision Nutrition</span>
+      <!-- PN — Precision Nutrition -->
+      <div class="certs-strip-badge" title="Precision Nutrition" aria-label="Precision Nutrition">
+        <svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" role="img">
+          <circle cx="18" cy="20" r="14" fill="none" stroke="#fff" stroke-width="2"/>
+          <text x="13" y="26" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="15" fill="#fff">PN</text>
+          <text x="42" y="19" font-family="Helvetica, Arial, sans-serif" font-weight="800" font-size="14" letter-spacing="1" fill="#fff">PRECISION</text>
+          <text x="42" y="33" font-family="Helvetica, Arial, sans-serif" font-weight="800" font-size="14" letter-spacing="1" fill="#fff">NUTRITION®</text>
+        </svg>
       </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">XLA</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">Extended Learning Alliance</span>
+      <!-- XLA — Extended Learning Alliance -->
+      <div class="certs-strip-badge" title="Extended Learning Alliance" aria-label="Extended Learning Alliance">
+        <svg viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" role="img">
+          <text x="0" y="30" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="32" letter-spacing="1" fill="#fff">XLA</text>
+          <text x="76" y="18" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="9" letter-spacing="1.4" fill="#fff">EXTENDED LEARNING</text>
+          <text x="76" y="32" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="9" letter-spacing="1.4" fill="#fff">ALLIANCE</text>
+        </svg>
       </div>
-    </div>
-    <div style="text-align: center; padding-top: 24px;">
-      <a href="#lead-gen" class="section-cta-btn">Apply Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -6837,6 +6877,39 @@ function toggleCurriculum(btn) {
   }
 }
 
+/* Curriculum phase tabs (v44) */
+(function initCurriculumTabs() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var tabs = document.querySelectorAll('.curriculum-tab');
+    var blocks = document.querySelectorAll('.phase-block');
+    if (!tabs.length || !blocks.length) return;
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var phase = tab.getAttribute('data-phase-tab');
+        tabs.forEach(function(t) {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        blocks.forEach(function(b) {
+          if (b.getAttribute('data-phase') === phase) {
+            b.classList.add('is-active');
+          } else {
+            b.classList.remove('is-active');
+          }
+        });
+        // Close any open accordions when switching phase
+        document.querySelectorAll('.curriculum-item.active').forEach(function(ci) {
+          ci.classList.remove('active');
+          var body = ci.querySelector('.curriculum-body');
+          if (body) body.style.maxHeight = null;
+        });
+      });
+    });
+  });
+})();
+
 /* ==================================================
    Value slider
    ================================================== */
@@ -6925,22 +6998,22 @@ function toggleCurriculum(btn) {
   const detailLink = document.getElementById('hexDetailLink');
 
   const data = [
-    { tag: 'Metabolic Health', title: 'The signal that runs underneath everything.', desc: 'ApoB, fasting insulin, glucose variability, and time-in-range \u2014 the markers Medicine 3.0 prioritizes over standard panels. Your CGM trace becomes the most honest mirror you have.', link: 'topics/metabolic-health-blood-sugar.html' },
-    { tag: 'Exercise & Movement', title: 'VO2 max as a mortality predictor.', desc: 'Zone 2 base, VO2 max ceiling, strength as the load-bearing pillar. The centenarian decathlon framing for the next forty years \u2014 not a workout plan.', link: 'topics/exercise-movement.html' },
-    { tag: 'Sleep & Circadian', title: 'The metabolic regulator most people overlook.', desc: 'Circadian alignment, sleep architecture, and overnight glucose. Light, temperature, and timing as the cheapest longevity levers we have.', link: 'topics/sleep-circadian-health.html' },
-    { tag: 'Stress & Emotions', title: 'The cortisol\u2013glucose loop, on a CGM.', desc: 'HRV as the upstream signal, the physiological sigh, regulation tools ranked by evidence. Stress shows up on the trace before it shows up in the body.', link: 'topics/mental-emotional-health.html' },
-    { tag: 'Supplements & Tools', title: 'Evidence hierarchy over influencer hype.', desc: 'D3, omega-3, magnesium, creatine as the foundation. Rapamycin and NAD+ precursors in honest context. Wearable triage \u2014 what to act on, what to ignore.', link: 'topics/supplements-health-tech.html' },
+    { tag: 'Metabolic Health', title: 'ApoB, insulin, and metabolic flexibility.', desc: 'ApoB, fasting insulin, glucose variability, and time-in-range \u2014 the markers Medicine 3.0 prioritizes over standard panels. Your CGM trace becomes the most honest mirror you have.', link: 'topics/metabolic-health-blood-sugar.html' },
+    { tag: 'Exercise & Movement', title: 'VO\u2082 max as a mortality predictor.', desc: 'Zone 2 base, VO\u2082 max ceiling, and strength as the load-bearing pillar. The Centenarian Decathlon framing for the next forty years \u2014 not a workout plan.', link: 'topics/exercise-movement.html' },
+    { tag: 'Sleep & Circadian', title: 'Slow-wave sleep and glymphatic clearance.', desc: 'Sleep architecture, circadian alignment, and overnight glucose. Light, temperature, and timing as the most underrated longevity levers we have.', link: 'topics/sleep-circadian-health.html' },
+    { tag: 'Emotional Health', title: 'HRV, the cortisol-glucose loop, and resilience.', desc: 'HRV as the upstream signal, the physiological sigh, regulation tools ranked by evidence. Stress shows up on the trace before it shows up in the body.', link: 'topics/mental-emotional-health.html' },
+    { tag: 'Pharmacology', title: 'Rapamycin, NAD+, NMN \u2014 the longevity molecules.', desc: 'mTOR inhibition, sirtuins, and NAD+ biology. The molecules at the frontier of human trials \u2014 in honest context, not influencer hype.', link: 'topics/supplements-health-tech.html' },
     { tag: 'Protocols & Habits', title: 'Minimum effective dose, designed to compound.', desc: 'Identity-based change, environment design, and the systems that make adherence the default. The blueprint you actually keep \u2014 not the one you read about.', link: 'topics/protocols-habits.html' }
   ];
 
-  const cx = 340, cy = 340, radius = 240;
-  const nodeSize = 140;
+  const cx = 440, cy = 440, radius = 320;
+  const nodeSize = 180;
 
   function positionChart() {
     const w = chart.offsetWidth;
-    const scale = Math.min(1, w / 680);
+    const scale = Math.min(1, w / 880);
     const sCx = w / 2;
-    const sCy = 340 * scale;
+    const sCy = 440 * scale;
     const sR = radius * scale;
     const sNode = nodeSize * scale;
 
@@ -6966,7 +7039,7 @@ function toggleCurriculum(btn) {
     const center = chart.querySelector('.hex-center');
     center.style.left = sCx + 'px';
     center.style.top = sCy + 'px';
-    const centerSize = 180 * scale;
+    const centerSize = 230 * scale;
     center.style.width = centerSize + 'px';
     center.style.height = centerSize + 'px';
 
