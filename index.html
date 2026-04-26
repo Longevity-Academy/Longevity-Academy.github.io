@@ -5437,6 +5437,82 @@ body {
 .phase-block:not(.is-active) { display: none !important; }
 .phase-block.is-active { display: block !important; }
 
+/* How-v2 cards — v44 tone-specific text colors (must override .how-v2-card-title/.desc !important rules) */
+.how-v2-card[data-tone="light-silver"] .how-v2-card-title,
+.how-v2-card[data-tone="light-blue"] .how-v2-card-title,
+.how-v2-card[data-tone="white-glass"] .how-v2-card-title { color: #0a1628 !important; }
+.how-v2-card[data-tone="light-silver"] .how-v2-card-desc,
+.how-v2-card[data-tone="light-blue"] .how-v2-card-desc,
+.how-v2-card[data-tone="white-glass"] .how-v2-card-desc { color: rgba(10,22,40,0.72) !important; }
+.how-v2-card[data-tone="light-silver"] .how-v2-card-meta,
+.how-v2-card[data-tone="light-blue"] .how-v2-card-meta,
+.how-v2-card[data-tone="white-glass"] .how-v2-card-meta { color: #006EFF !important; }
+.how-v2-card[data-tone="black-glass"] .how-v2-card-title { color: #ffffff !important; }
+.how-v2-card[data-tone="black-glass"] .how-v2-card-desc { color: rgba(255,255,255,0.82) !important; }
+.how-v2-card[data-tone="black-glass"] .how-v2-card-meta { color: #4DA6FF !important; }
+
+/* F2 — IBC-style 4-pillar feature strip */
+.feature-strip {
+  background: linear-gradient(180deg, #0a1628 0%, #060f1d 100%);
+  padding: 64px 0;
+  border-top: 1px solid rgba(0,110,255,0.10);
+  border-bottom: 1px solid rgba(0,110,255,0.10);
+  position: relative; z-index: 2;
+}
+.feature-strip-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+}
+.feature-pillar {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 10px; padding: 8px 12px;
+  position: relative;
+}
+.feature-pillar:not(:last-child)::after {
+  content: ''; position: absolute; right: -16px; top: 18%; bottom: 18%;
+  width: 1px; background: rgba(255,255,255,0.08);
+}
+.feature-pillar-icon {
+  width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0,110,255,0.18) 0%, rgba(0,110,255,0.04) 100%);
+  border: 1px solid rgba(0,110,255,0.22);
+  color: #4DA6FF; margin-bottom: 6px;
+}
+.feature-pillar-num {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 800; font-size: 32px; line-height: 1;
+  color: #ffffff; letter-spacing: -0.01em;
+}
+.feature-pillar-label {
+  font-family: 'Codec Pro', sans-serif;
+  font-weight: 700; font-size: 14px;
+  color: #ffffff; line-height: 1.3;
+}
+.feature-pillar-sub {
+  font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.4;
+  font-weight: 500;
+}
+@media (max-width: 900px) {
+  .feature-strip { padding: 48px 0; }
+  .feature-strip-inner { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; padding: 0 24px; }
+  .feature-pillar:not(:last-child)::after { display: none; }
+  .feature-pillar-num { font-size: 26px; }
+}
+@media (max-width: 480px) {
+  .feature-strip { padding: 36px 0; }
+  .feature-strip-inner { gap: 28px 20px; }
+  .feature-pillar-icon { width: 48px; height: 48px; }
+  .feature-pillar-num { font-size: 22px; }
+  .feature-pillar-label { font-size: 13px; }
+}
+
+/* Instructors simple variant — if collapsed to header only */
+.instructors--simple { padding: 60px 0 40px !important; }
+.instructors--simple .teachers-placeholder,
+.instructors--simple .instructor-grid,
+.instructors--simple .instructor-card { display: none !important; }
+
 </style>
 </head>
 <body>
@@ -6529,11 +6605,11 @@ body {
       </div>
       <!-- IFM — Institute for Functional Medicine -->
       <div class="certs-strip-badge" title="Institute for Functional Medicine" aria-label="Institute for Functional Medicine">
-        <svg viewBox="0 0 230 40" xmlns="http://www.w3.org/2000/svg" role="img">
-          <circle cx="16" cy="20" r="15" fill="none" stroke="#fff" stroke-width="2"/>
-          <path d="M16 8 L16 32 M6 14 L26 14 M6 26 L26 26" stroke="#fff" stroke-width="1.6" fill="none"/>
-          <text x="40" y="18" font-family="Georgia, serif" font-weight="700" font-size="15" letter-spacing="0.5" fill="#fff">THE INSTITUTE FOR</text>
-          <text x="40" y="34" font-family="Georgia, serif" font-weight="700" font-size="15" letter-spacing="0.5" fill="#fff">FUNCTIONAL MEDICINE</text>
+        <svg viewBox="0 0 260 40" xmlns="http://www.w3.org/2000/svg" role="img">
+          <circle cx="16" cy="20" r="14" fill="none" stroke="#fff" stroke-width="1.8"/>
+          <path d="M16 9 L16 31 M7 14 L25 14 M7 26 L25 26" stroke="#fff" stroke-width="1.4" fill="none"/>
+          <text x="38" y="18" font-family="Georgia, serif" font-weight="700" font-size="13" letter-spacing="0.4" fill="#fff">THE INSTITUTE FOR</text>
+          <text x="38" y="34" font-family="Georgia, serif" font-weight="700" font-size="13" letter-spacing="0.4" fill="#fff">FUNCTIONAL MEDICINE</text>
         </svg>
       </div>
       <!-- NBHWC — National Board for Health & Wellness Coaching -->
