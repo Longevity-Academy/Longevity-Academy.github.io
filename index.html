@@ -5515,6 +5515,333 @@ body {
 .instructors--simple .instructor-grid,
 .instructors--simple .instructor-card { display: none !important; }
 
+/* ===========================================================
+   v45 OVERRIDES — IIBS-grade hero, lighter site, blog/insights
+   =========================================================== */
+
+/* Hero — trust pill above headline (IIBS pattern) */
+.trustpilot--top {
+  display: inline-flex;
+  margin-bottom: 28px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 10px 22px;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+.trustpilot--top .trustpilot-score { color: #fff; font-weight: 700; }
+
+/* Hero — bigger, condensed, IIBS-grade headline */
+.hero-title {
+  font-size: clamp(64px, 9.5vw, 132px) !important;
+  line-height: 0.9 !important;
+  letter-spacing: -0.035em !important;
+  font-weight: 800 !important;
+}
+.hero-academy-name {
+  font-size: clamp(13px, 1.2vw, 16px) !important;
+  letter-spacing: 0.18em !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,0.78) !important;
+}
+.hero-sub {
+  font-size: clamp(17px, 1.4vw, 21px) !important;
+  max-width: 760px !important;
+  color: rgba(255,255,255,0.92) !important;
+  margin-bottom: 36px !important;
+}
+
+/* Ghost CTA next to primary (dual-CTA IIBS pattern) */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 32px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  letter-spacing: -0.005em;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.7);
+  transform: translateY(-2px);
+}
+.btn-ghost svg { transition: transform 0.2s ease; }
+.btn-ghost:hover svg { transform: translateX(4px); }
+
+/* Hero stats row directly under CTAs (IIBS pattern) */
+.hero-stats-row {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin: 36px 0 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.hero-stats-row li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: rgba(255,255,255,0.92);
+}
+.hero-stats-row strong {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.hero-stats-row span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.7);
+}
+@media (max-width: 600px) {
+  .hero-stats-row { gap: 28px; }
+  .hero-stats-row strong { font-size: 24px; }
+}
+
+/* ===========================================================
+   LIGHTEN THE SITE — break up dark mid-section run
+   =========================================================== */
+
+/* Topics fold — from pure dark to deep navy gradient (lifts noticeably) */
+.topics {
+  background: linear-gradient(180deg, #0a1628 0%, #102241 60%, #0d1c36 100%) !important;
+}
+
+/* Skills/Deep Dives fold — lighter top, navy bottom (visual break) */
+.skills {
+  background: linear-gradient(180deg, #f5f7fb 0%, #eef2f8 100%) !important;
+  color: #0a1628 !important;
+}
+.skills .section-title,
+.skills-header h2 { color: #0a1628 !important; }
+.skills .section-title span[style*="color:#006EFF"] { color: #006EFF !important; }
+.skills .section-subtitle { color: rgba(10,22,40,0.7) !important; }
+.skills .eyebrow { color: #006EFF !important; }
+/* Skill cards keep their dark imagery, just adjust border */
+.skills .skill-card {
+  border: 1px solid rgba(10,22,40,0.08) !important;
+  box-shadow: 0 12px 32px rgba(10,22,40,0.08), 0 4px 12px rgba(10,22,40,0.04) !important;
+}
+
+/* Curriculum — stays light; verify */
+.curriculum {
+  background: linear-gradient(180deg, #fafbfc 0%, #f0f5fb 100%) !important;
+}
+
+/* Bio quiz — brighter blue gradient */
+.bioquiz {
+  background: linear-gradient(180deg, #0d1c36 0%, #1a3a73 50%, #0d1c36 100%) !important;
+}
+
+/* How-It-Works — light editorial */
+.how-v2 {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%) !important;
+  color: #0a1628 !important;
+}
+.how-v2 .how-v2-title,
+.how-v2-header h2 { color: #0a1628 !important; }
+.how-v2 .how-v2-sub { color: rgba(10,22,40,0.65) !important; }
+
+/* Instructors — light cream break */
+.instructors {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%) !important;
+}
+.instructors .section-title { color: #0a1628 !important; }
+
+/* Value fold — dark, but more luminous */
+.value {
+  background: linear-gradient(135deg, #0d1c36 0%, #1e3a6b 100%) !important;
+}
+
+/* Testimonials — keep the snow/light gradient bright */
+.testimonials {
+  background: linear-gradient(180deg, #fafbfc 0%, #eef2f8 100%) !important;
+}
+
+/* ===========================================================
+   INSIGHTS / BLOG FOLD (NEW v45)
+   Editorial light theme with feature-card + 7 supporting cards
+   =========================================================== */
+.insights {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
+  padding: 120px 0 140px;
+  color: #0a1628;
+  position: relative;
+}
+.insights .insights-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 64px;
+}
+.insights .eyebrow {
+  color: #006EFF;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: block;
+}
+.insights .section-title {
+  color: #0a1628 !important;
+  font-size: clamp(48px, 6vw, 80px) !important;
+  font-weight: 800 !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.025em !important;
+  margin-bottom: 24px !important;
+}
+.insights .section-subtitle {
+  color: rgba(10,22,40,0.65);
+  font-size: 19px;
+  line-height: 1.55;
+  margin: 0 auto;
+}
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(260px, auto);
+  gap: 24px;
+}
+.insight-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(10,22,40,0.06);
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #0a1628;
+  box-shadow: 0 8px 24px rgba(10,22,40,0.05);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.insight-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(10,22,40,0.12), 0 8px 20px rgba(10,22,40,0.06);
+  border-color: rgba(0,110,255,0.28);
+}
+.insight-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0a1628;
+}
+.insight-card-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.02);
+  transition: transform 4s ease;
+}
+.insight-card:hover .insight-card-media video { transform: scale(1.06); }
+.insight-card-body {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.insight-card-tag {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #006EFF;
+  font-weight: 700;
+}
+.insight-card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #0a1628;
+  margin: 0;
+}
+.insight-card-excerpt {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(10,22,40,0.7);
+  margin: 0;
+}
+.insight-card-meta {
+  font-size: 12px;
+  color: rgba(10,22,40,0.5);
+  letter-spacing: 0.04em;
+  margin-top: auto;
+  padding-top: 4px;
+}
+/* Featured card — spans 2 cols and 2 rows on desktop */
+.insight-card--feature {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.insight-card--feature .insight-card-media {
+  aspect-ratio: 16 / 9;
+}
+.insight-card--feature .insight-card-title {
+  font-size: 32px;
+  line-height: 1.1;
+}
+.insight-card--feature .insight-card-body {
+  padding: 32px 32px 36px;
+  gap: 14px;
+}
+.insights-foot {
+  text-align: center;
+  margin-top: 56px;
+}
+.insights-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 32px;
+  background: #006EFF;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  box-shadow: 0 12px 32px rgba(0,110,255,0.3);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.insights-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px rgba(0,110,255,0.42);
+}
+
+@media (max-width: 1024px) {
+  .insights-grid { grid-template-columns: repeat(2, 1fr); }
+  .insight-card--feature { grid-column: span 2; grid-row: span 1; }
+  .insight-card--feature .insight-card-title { font-size: 26px; }
+}
+@media (max-width: 600px) {
+  .insights { padding: 80px 0 100px; }
+  .insights-grid { grid-template-columns: 1fr; gap: 18px; }
+  .insight-card--feature { grid-column: span 1; }
+  .insight-card-title { font-size: 20px; }
+  .insight-card--feature .insight-card-title { font-size: 24px; }
+}
+
+/* Mobile: stack hero CTAs */
+@media (max-width: 600px) {
+  .hero-cta-row { flex-direction: column; gap: 14px; }
+  .btn-ghost { width: 100%; justify-content: center; }
+  .hero-cta-wrap { width: 100%; }
+  .hero-cta-wrap .btn-primary--lg { width: 100%; justify-content: center; }
+}
 </style>
 </head>
 <body>
@@ -5585,29 +5912,8 @@ body {
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
-    <div class="hero-academy-name">
-      The Longevity <span class="life-blue">Life</span> Academy
-    </div>
-    <h1 class="hero-title">
-      The Decades Ahead<br>Are <span class="life-blue">Yours</span>.
-    </h1>
-    <p class="hero-sub">
-      A longevity course for adults who refuse to coast into their 60s, 70s and 80s.
-      Walk away with the protocol, the biomarkers, and the daily practice that
-      make the decades ahead your strongest.
-    </p>
-    <div class="hero-cta-row">
-      <div class="hero-cta-wrap">
-        <div class="hero-cta-glow" aria-hidden="true"></div>
-        <a href="#lead-gen" class="btn-primary btn-primary--lg">
-          Claim Your Seat
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-    <div class="trustpilot">
+    <!-- IIBS-style trust pill ABOVE headline -->
+    <div class="trustpilot trustpilot--top">
       <div class="trustpilot-stars">
         <span class="trustpilot-star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
         <span class="trustpilot-star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
@@ -5615,8 +5921,39 @@ body {
         <span class="trustpilot-star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
         <span class="trustpilot-star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
       </div>
-      <span><span class="trustpilot-score">4.6 / 5</span> on Trustpilot · 600+ reviews</span>
+      <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
+    <div class="hero-academy-name">
+      Longevity <span class="life-blue">Life</span> Academy &mdash; by eTeacher Group
+    </div>
+    <h1 class="hero-title">
+      Add Healthy<br>Decades to <span class="life-blue">Your Life</span>.
+    </h1>
+    <p class="hero-sub">
+      An 18-session live longevity protocol &mdash; taught by physicians, scientists, and clinicians at the frontier of healthspan medicine. Built around your biomarkers, your biology, and the years you actually want to live well.
+    </p>
+    <div class="hero-cta-row">
+      <div class="hero-cta-wrap">
+        <div class="hero-cta-glow" aria-hidden="true"></div>
+        <a href="#lead-gen" class="btn-primary btn-primary--lg">
+          Reserve My Cohort Seat
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+      <a href="#syllabus" class="btn-ghost">
+        See the 18-Session Curriculum
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <!-- IIBS-style sub-stats row directly under CTAs -->
+    <ul class="hero-stats-row" aria-label="Course at a glance">
+      <li><strong>18</strong><span>Live sessions</span></li>
+      <li><strong>4</strong><span>Phases</span></li>
+      <li><strong>8&ndash;15</strong><span>Per cohort</span></li>
+      <li><strong>1:1</strong><span>Personal protocol</span></li>
+    </ul>
   </div>
 </section>
 
@@ -5712,9 +6049,9 @@ body {
 <section class="topics">
   <div class="container">
     <div class="topics-header reveal">
-      <span class="eyebrow">Explore</span>
-      <h2 class="section-title">Longevity, organized.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">The core areas of longevity science covered in our 18-session course.</p>
+      <span class="eyebrow">The Six Pillars</span>
+      <h2 class="section-title">The Science of Living<br>Longer, Better.</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Six interconnected systems &mdash; the lifestyle, biological, and biomarker domains that compound healthspan across every decade.</p>
     </div>
     <div class="topic-grid-v2">
       <a href="topics/nutrition-longevity.html" class="topic-v2 reveal">
@@ -5722,18 +6059,18 @@ body {
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">01</span>
-          <h3 class="topic-v2-title">Nutrition</h3>
-          <p class="topic-v2-desc">Fuel strategies for cellular health and metabolic optimization.</p>
+          <h3 class="topic-v2-title">Nutrition for Healthspan</h3>
+          <p class="topic-v2-desc">Plant-forward density, time-restricted feeding, and the macronutrient logic that fuels cellular repair.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/sleep-circadian-health.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-sleep-eye.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-clock.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">02</span>
-          <h3 class="topic-v2-title">Deep Sleep &amp; Circadian</h3>
-          <p class="topic-v2-desc">Slow-wave restoration, glymphatic clearance, and the circadian rhythm that drives healthspan.</p>
+          <h3 class="topic-v2-title">Sleep &amp; Circadian Rhythm</h3>
+          <p class="topic-v2-desc">Slow-wave restoration, glymphatic clearance, and the chronobiology that governs every system in your body.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -5743,37 +6080,37 @@ body {
         <div class="topic-v2-content">
           <span class="topic-v2-num">03</span>
           <h3 class="topic-v2-title">Exercise &amp; Movement</h3>
-          <p class="topic-v2-desc">Zone 2, strength, VO2 max, and mobility practices.</p>
+          <p class="topic-v2-desc">Zone 2 cardio, VO₂ max, strength, and mobility &mdash; the four trainable variables that compress morbidity.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/glucose-mitochondria.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-eating.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">04</span>
           <h3 class="topic-v2-title">Metabolic Health</h3>
-          <p class="topic-v2-desc">Mitochondrial function, glucose control, and the metabolic flexibility that compounds across decades.</p>
+          <p class="topic-v2-desc">Insulin sensitivity, glucose variability, and the metabolic flexibility that determines how you age.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/biomarkers-testing.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-hero-aging-reversed.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-biometric.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">05</span>
           <h3 class="topic-v2-title">Biomarkers &amp; Biological Age</h3>
-          <p class="topic-v2-desc">ApoB, hs-CRP, fasting insulin, epigenetic clocks — the data that tells you the truth about your aging.</p>
+          <p class="topic-v2-desc">ApoB, hs-CRP, fasting insulin, HbA1c, epigenetic clocks &mdash; the data that tells you the truth about how you're aging.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/protocols-habits.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/skill-matcha.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-supplements-meds.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">06</span>
-          <h3 class="topic-v2-title">Protocols &amp; Habits</h3>
-          <p class="topic-v2-desc">Daily systems that compound into lasting change.</p>
+          <h3 class="topic-v2-title">Protocols &amp; Pharmacology</h3>
+          <p class="topic-v2-desc">Rapamycin, NAD+, NMN, GLP-1s &mdash; the supplement and pharmacology protocols with real human data behind them.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -5787,9 +6124,9 @@ body {
 <section class="skills" id="skills">
   <div class="container">
     <div class="skills-header reveal">
-      <span class="eyebrow">Inside the Protocol</span>
-      <h2 class="section-title">Six Deep Dives Your<br><span style="color:#006EFF;">Doctor Won't Give You</span></h2>
-      <p class="section-subtitle">The longevity terminology your favorite influencers use — finally taught with the science behind it.</p>
+      <span class="eyebrow">Deep Dives</span>
+      <h2 class="section-title">The Frontiers Your Doctor<br><span style="color:#006EFF;">Doesn't Have Time For.</span></h2>
+      <p class="section-subtitle">Six longevity topics most clinicians never get to &mdash; the science, the protocols, and what the human data actually shows.</p>
     </div>
     <div class="skills-grid">
       <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="ApoB, LDL & the Real Cause of Heart Disease">
@@ -5872,9 +6209,9 @@ body {
   <div class="container">
     <div class="curriculum-header reveal">
       <p class="curriculum-bridge">A structured 18-week online course designed by eTeacher Group</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">The Complete Protocol</p>
-      <h2 class="section-title">18 Sessions. 4 Phases.<br><span class="gold">Your Protocol</span>.</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">Each phase builds on the last — science-backed, teacher-led, peer-driven.</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">The Curriculum</p>
+      <h2 class="section-title">18 Live Sessions.<br>4 Phases. <span class="gold">One Protocol.</span></h2>
+      <p class="section-subtitle" style="margin: 0 auto;">A structured 18-week journey from longevity foundations to your personal blueprint &mdash; taught live, in cohorts of 8–15.</p>
     </div>
     <div class="curriculum-tabs reveal" role="tablist" aria-label="Curriculum phases">
       <button class="curriculum-tab is-active" data-phase-tab="1" role="tab" aria-selected="true">
@@ -6370,9 +6707,9 @@ body {
 <section class="deepdive">
   <div class="container">
     <div class="deepdive-header reveal">
-      <span class="eyebrow">Inside the Course</span>
-      <h2 class="section-title">Your Longevity<br>Operating System</h2>
-      <p class="section-subtitle">Six interconnected systems — each one feeds the next. The longevity operating system Medicine 3.0 is built on. Hover to explore.</p>
+      <span class="eyebrow">The Operating System</span>
+      <h2 class="section-title">Six Systems. One<br>Healthspan Engine.</h2>
+      <p class="section-subtitle">The interconnected systems that govern how you age &mdash; the framework Medicine 3.0 is built on. Hover to explore each domain.</p>
     </div>
     <div class="hex-layout">
     <div class="hex-chart reveal" id="hexChart">
@@ -6515,8 +6852,8 @@ body {
   <div class="container">
     <div class="how-v2-header reveal">
       <img loading="lazy" decoding="async" src="assets/e-teacher-logo-dark.png" alt="eTeacher Group" class="how-v2-logo">
-      <span class="eyebrow" style="color: #006EFF;">How It Works</span>
-      <h2 class="how-v2-title">How It Works</h2>
+      <span class="eyebrow" style="color: #006EFF;">The Cohort Experience</span>
+      <h2 class="how-v2-title">From Application<br>to Personal Protocol.</h2>
       <p class="how-v2-sub">Six clear steps from enrollment to your personal longevity protocol.</p>
     </div>
     <div class="how-v2-slider-wrap reveal">
@@ -6579,8 +6916,8 @@ body {
 <section class="instructors instructors--simple" id="teachers">
   <div class="container">
     <div class="instructors-header reveal" style="text-align: center;">
-      <span class="eyebrow" style="margin-bottom: 12px; display: block;">Your Instructors</span>
-      <h2 class="section-title" style="margin-bottom: 0;">Taught by the leading voices<br>in longevity medicine.</h2>
+      <span class="eyebrow" style="margin-bottom: 12px; display: block;">The Faculty</span>
+      <h2 class="section-title" style="margin-bottom: 0;">Taught by the Physicians<br>Defining Longevity Medicine.</h2>
     </div>
   </div>
 </section>
@@ -6650,8 +6987,8 @@ body {
   <div class="container">
     <div class="value-header reveal">
       <div>
-        <span class="eyebrow">What Makes This Different</span>
-        <h2 class="section-title">Why This Course<br>Is Different</h2>
+        <span class="eyebrow">Why This Works</span>
+        <h2 class="section-title">Not Another Course.<br>A Personal Protocol.</h2>
       </div>
       <div class="value-nav">
         <button class="value-arrow" id="valPrev" aria-label="Previous">
@@ -6691,8 +7028,8 @@ body {
 <section class="testimonials">
   <div class="container">
     <div class="testimonials-header reveal">
-      <span class="eyebrow">Student Voices</span>
-      <h2 class="section-title">What our<br>students say.</h2>
+      <span class="eyebrow">Cohort Stories</span>
+      <h2 class="section-title">From Our<br>Past Cohorts.</h2>
     </div>
     <div class="testimonials-grid">
       <div class="quote-card reveal" data-tint="1">
@@ -6739,13 +7076,97 @@ body {
 </section>
 
 <!-- ==============================================
+     FOLD — LONGEVITY INSIGHTS / BLOG (v45 NEW)
+     Editorial light-theme fold — 8 longevity topics with imagery + headline + read-time
+     ============================================== -->
+<section class="insights" id="insights">
+  <div class="container">
+    <div class="insights-header reveal">
+      <span class="eyebrow">Longevity Insights</span>
+      <h2 class="section-title">Read Before<br>You Enroll.</h2>
+      <p class="section-subtitle">Free articles from our faculty &mdash; the science, the protocols, and the human data behind every domain we teach.</p>
+    </div>
+    <div class="insights-grid">
+      <a class="insight-card insight-card--feature reveal" href="topics/biomarkers-testing.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/skill-biometric.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Featured · Biomarkers</span>
+          <h3 class="insight-card-title">The Five Biomarkers That Predict the Next 30 Years of Your Life.</h3>
+          <p class="insight-card-excerpt">ApoB. hs-CRP. Fasting insulin. HbA1c. VO₂ max. Each one independently predicts decades of healthspan &mdash; and most annual physicals miss every single one. Here's what they mean and what your numbers should actually look like.</p>
+          <span class="insight-card-meta">12 min read · Dr. Faculty Author</span>
+        </div>
+      </a>
+      <a class="insight-card reveal" href="topics/metabolic-health-blood-sugar.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/skill-eating.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Metabolic</span>
+          <h3 class="insight-card-title">Why Glucose Variability Matters More Than Your A1c.</h3>
+          <span class="insight-card-meta">8 min read</span>
+        </div>
+      </a>
+      <a class="insight-card reveal" href="topics/sleep-circadian-health.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/skill-clock.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Sleep</span>
+          <h3 class="insight-card-title">Slow-Wave Sleep: The Most Underrated Lever in Longevity.</h3>
+          <span class="insight-card-meta">9 min read</span>
+        </div>
+      </a>
+      <a class="insight-card reveal" href="topics/exercise-movement.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/exercise-yoga.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Exercise</span>
+          <h3 class="insight-card-title">VO₂ Max Is the Single Strongest Predictor of All-Cause Mortality.</h3>
+          <span class="insight-card-meta">10 min read</span>
+        </div>
+      </a>
+      <a class="insight-card reveal" href="topics/protocols-habits.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/v2-supplements-meds.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Pharmacology</span>
+          <h3 class="insight-card-title">Rapamycin, NAD+, and What the Human Trials Actually Show.</h3>
+          <span class="insight-card-meta">11 min read</span>
+        </div>
+      </a>
+      <a class="insight-card reveal" href="topics/nutrition-longevity.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/v2-nutrition-greens.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Nutrition</span>
+          <h3 class="insight-card-title">Time-Restricted Feeding: Why the Window Matters More Than the Calories.</h3>
+          <span class="insight-card-meta">7 min read</span>
+        </div>
+      </a>
+      <a class="insight-card reveal" href="topics/mental-emotional-health.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/v2-mental-bubbles.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Mental Healthspan</span>
+          <h3 class="insight-card-title">Loneliness Shortens Your Life More Than Smoking 15 Cigarettes a Day.</h3>
+          <span class="insight-card-meta">9 min read</span>
+        </div>
+      </a>
+      <a class="insight-card reveal" href="topics/aging-skin-cellular.html">
+        <div class="insight-card-media"><video preload="metadata" src="assets/skill-skin.mp4" autoplay muted loop playsinline></video></div>
+        <div class="insight-card-body">
+          <span class="insight-card-tag">Cellular Aging</span>
+          <h3 class="insight-card-title">Senescent Cells: The Real Reason Your Skin Tells the Truth About Aging.</h3>
+          <span class="insight-card-meta">8 min read</span>
+        </div>
+      </a>
+    </div>
+    <div class="insights-foot reveal">
+      <a href="#lead-gen" class="insights-cta">Get the full library when you enroll <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
      FOLD 11 — FAQs
      ============================================== -->
 <section class="faq" id="faq">
   <div class="container faq-inner">
     <div class="faq-header reveal">
-      <span class="eyebrow">FAQ</span>
-      <h2 class="section-title">Questions<br>worth answering.</h2>
+      <span class="eyebrow">Common Questions</span>
+      <h2 class="section-title">Everything You Need<br>to Know.</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
@@ -6829,8 +7250,8 @@ body {
         <source src="assets/cta-bg.mp4" type="video/mp4">
       </video>
       <div class="final-cta-overlay"></div>
-      <h2 class="final-cta-title">It's Your <span style="color:#7EC8FF;font-weight:900;">Life</span>.<br>Live It Well.</h2>
-      <p class="final-cta-sub">Applications are open for the next cohort. Your personal longevity protocol starts here.</p>
+      <h2 class="final-cta-title">The Best Decade of Your <span style="color:#7EC8FF;font-weight:900;">Life</span><br>Hasn't Happened Yet.</h2>
+      <p class="final-cta-sub">Applications are open for the next cohort. The 18-session protocol that decides your next 30 years starts here.</p>
       <a href="#lead-gen" class="btn-primary">
         Apply Now
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -6847,7 +7268,7 @@ body {
 <section class="lead-gen" id="lead-gen">
   <div class="container">
     <div class="lead-gen-inner reveal">
-      <h2 class="lead-gen-headline">Ready to Start? <span>Reserve Your Seat</span></h2>
+      <h2 class="lead-gen-headline">Apply for the Next Cohort. <span>Limited to 8–15 seats.</span></h2>
       <form class="lead-gen-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You\'re on the list ✓'; this.querySelector('button').style.background='#10B981';">
         <div class="lead-gen-row">
           <input type="text" placeholder="First name" required aria-label="First name">
