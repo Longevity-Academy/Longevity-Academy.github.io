@@ -6340,6 +6340,25 @@ html {
 .skill-card:has(.skill-bg.supplements):hover { box-shadow: 0 28px 60px rgba(60,200,150,0.30) !important; }
 .skill-card:has(.skill-bg.eyes):hover { box-shadow: 0 28px 60px rgba(0,200,180,0.30) !important; }
 
+/* Deep Dives 3-up grid — equal cards, no hero spanning */
+.skills-grid-3up { grid-template-columns: repeat(3, 1fr) !important; }
+.skills-grid-3up .skill-card { height: 420px !important; }
+.skills-grid-3up .skill-card:first-child { grid-column: auto !important; height: 420px !important; }
+.skills-grid-3up .skill-card .skill-title { font-size: 30px !important; }
+.skills-grid-3up .skill-card:first-child .skill-title { font-size: 30px !important; }
+@media (max-width: 1023px) {
+  .skills-grid-3up { grid-template-columns: repeat(2, 1fr) !important; }
+  .skills-grid-3up .skill-card,
+  .skills-grid-3up .skill-card:first-child { height: 360px !important; }
+}
+@media (max-width: 700px) {
+  .skills-grid-3up { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .skills-grid-3up .skill-card,
+  .skills-grid-3up .skill-card:first-child { height: 320px !important; }
+  .skills-grid-3up .skill-card .skill-title,
+  .skills-grid-3up .skill-card:first-child .skill-title { font-size: 24px !important; }
+}
+
 
 /* ===== INSTRUCTORS FOLD — DARK V47 ===== */
 .instructors {
@@ -7221,33 +7240,9 @@ a.section-cta-btn[href="#lead-gen"]:hover {
     <div class="skills-header reveal">
       <span class="eyebrow">Deep Dives</span>
       <h2 class="section-title">What Your Doctor<br><span style="color:#006EFF;">Doesn't Have Time to Teach You.</span></h2>
-      <p class="section-subtitle">Six deep-dive lectures on the science, the daily habits, and the real-world results behind a longer, better life.</p>
+      <p class="section-subtitle">Deep-dive lectures on the science, the daily habits, and the real-world results behind a longer, better life.</p>
     </div>
-    <div class="skills-grid">
-      <a class="skill-card reveal" href="topics/metabolic-health-blood-sugar.html" aria-label="Heart Disease &mdash; the part of your blood work most physicals miss">
-        <div class="skill-bg cells" style="background: url('assets/img-metabolic.jpg') center/cover no-repeat; animation: subtleZoom 12s ease-in-out infinite alternate;"></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
-        <div class="skill-content">
-          <div class="skill-eyebrow">Heart Disease Prevention</div>
-          <h3 class="skill-title">The Blood Test Most Physicals Miss</h3>
-          <p class="skill-sub">Why one simple, deeper look at your cholesterol picture changes the longevity playbook decades before any symptoms appear.</p>
-        </div>
-      </a>
-      <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="Cellular reprogramming and biological age reversal">
-        <div class="skill-bg brain"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-clock.mp4" type="video/mp4"></video></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
-        <div class="skill-content">
-          <div class="skill-eyebrow">Reverse Your Biological Age</div>
-          <h3 class="skill-title">Reset Your Body's Clock</h3>
-          <p class="skill-sub">The new science of aging at the cellular level, what's actually possible today, and what it means for the decades ahead.</p>
-        </div>
-      </a>
+    <div class="skills-grid skills-grid-3up">
       <a class="skill-card reveal" href="topics/mental-emotional-health.html" aria-label="The longevity toolkit &mdash; the habits that move the needle">
         <div class="skill-bg mindset"><video preload="metadata" autoplay muted loop playsinline><source src="assets/v2-mental-bubbles.mp4" type="video/mp4"></video></div>
         <div class="skill-overlay"></div>
@@ -7282,18 +7277,6 @@ a.section-cta-btn[href="#lead-gen"]:hover {
           <div class="skill-eyebrow">Supplements &amp; Therapies</div>
           <h3 class="skill-title">Know What You're Actually Taking</h3>
           <p class="skill-sub">Cut through the marketing. Learn which supplements and longevity therapies have real human data behind them &mdash; and which are just packaging.</p>
-        </div>
-      </a>
-      <a class="skill-card reveal" href="topics/nutrition-longevity.html" aria-label="Nutrition, fasting, and food that fits your body">
-        <div class="skill-bg eyes"><video preload="metadata" autoplay muted loop playsinline><source src="assets/skill-berries.mp4" type="video/mp4"></video></div>
-        <div class="skill-overlay"></div>
-        <span class="skill-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </span>
-        <div class="skill-content">
-          <div class="skill-eyebrow">Eat for Energy</div>
-          <h3 class="skill-title">Food That Fits Your Body</h3>
-          <p class="skill-sub">When you eat, what you eat, and the data-driven approach that turns nutrition into a longevity tool, not a diet.</p>
         </div>
       </a>
     </div>
