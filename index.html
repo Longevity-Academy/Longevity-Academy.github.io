@@ -6681,6 +6681,85 @@ html {
   .trustpilot { margin-left: auto !important; margin-right: auto !important; }
 }
 
+
+/* ===== SIX PILLARS — UNIFORM CARD ALIGNMENT (V47 fix) ===== */
+.topic-v2 {
+  min-height: 360px !important;
+}
+.topic-v2-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.topic-v2-num {
+  font-size: 13px !important;
+  letter-spacing: 0.12em !important;
+  margin-bottom: 6px !important;
+  line-height: 1 !important;
+  display: block;
+}
+.topic-v2-title {
+  /* Reserve fixed vertical space for up to 2 lines so numbers align across cards */
+  min-height: calc(1.15em * 2) !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px !important;
+  font-size: 24px !important;
+  line-height: 1.15 !important;
+}
+.topic-v2-desc {
+  /* Clamp desc to 3 lines so each card's content block has uniform height */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .topic-v2 { min-height: 320px !important; }
+  .topic-v2-title { font-size: 22px !important; }
+}
+@media (max-width: 600px) {
+  .topic-v2 { min-height: 260px !important; }
+  .topic-v2-title { min-height: auto !important; -webkit-line-clamp: unset; font-size: 22px !important; }
+  .topic-v2-desc { -webkit-line-clamp: 4; }
+}
+
+/* ===== POWERED-BY eTeacher LOGO ===== */
+.about-powered-brand {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px !important;
+  padding: 8px 0;
+  /* Override gradient text effect since this is now an image */
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+.about-powered-logo-img {
+  display: block;
+  height: clamp(72px, 7vw, 110px);
+  width: auto;
+  max-width: 100%;
+  /* Keep the logo crisp on dark glass background */
+  filter: drop-shadow(0 2px 8px rgba(0, 110, 255, 0.18));
+}
+@media (max-width: 600px) {
+  .about-powered-logo-img { height: 64px; }
+  .about-powered-brand { margin-bottom: 28px !important; }
+}
+/* Defensively force blue on stat units (override any stray yellow cascade) */
+.about-powered .powered-stat-unit,
+.about-powered-stats .powered-stat-unit {
+  color: #5AA0FF !important;
+  -webkit-text-fill-color: #5AA0FF !important;
+  background: none !important;
+}
+
 </style>
 </head>
 <body>
@@ -6875,7 +6954,7 @@ html {
     <div class="about-inner reveal">
       <div class="about-header">
         <span class="eyebrow">About Us</span>
-        <h1 class="about-mainhead">About Longevity Life Academy</h1>
+        <h1 class="about-mainhead">About Longevity <span class="life-blue">Life</span> Academy</h1>
       </div>
 
       <div class="about-body about-body--simple">
@@ -6891,7 +6970,9 @@ html {
       <!-- Powered by eTeacher Group strip -->
       <div class="about-powered">
         <div class="about-powered-label">Powered by</div>
-        <div class="about-powered-brand">eTeacher Group</div>
+        <div class="about-powered-brand">
+          <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="about-powered-logo-img">
+        </div>
         <div class="about-powered-stats">
           <div class="powered-stat">
             <div class="powered-stat-num">400k<span class="powered-stat-unit">+</span></div>
