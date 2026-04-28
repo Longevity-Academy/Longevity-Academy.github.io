@@ -5569,97 +5569,7 @@ html {
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ============================================================
-   1. THE OPERATING SYSTEM — light glass detail card
-   ============================================================ */
-.deepdive {
-  background: linear-gradient(180deg, #F4F8FF 0%, #E8F1FF 50%, #F4F8FF 100%) !important;
-  position: relative;
-  overflow: hidden;
-}
-.deepdive::before, .deepdive::after {
-  content: ''; position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0;
-}
-.deepdive::before {
-  width: 520px; height: 520px;
-  background: radial-gradient(circle, rgba(90,160,255,0.45) 0%, transparent 65%);
-  top: -120px; left: -120px;
-  animation: glassFloat1 16s ease-in-out infinite;
-}
-.deepdive::after {
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(0,110,255,0.32) 0%, transparent 65%);
-  bottom: -180px; right: -160px;
-  animation: glassFloat2 20s ease-in-out infinite;
-}
-.deepdive .container { position: relative; z-index: 1; }
-.deepdive .eyebrow { color: #006EFF !important; }
-.deepdive .section-title { color: #001233 !important; }
-.deepdive .section-subtitle { color: rgba(0,18,51,0.72) !important; }
-.deepdive .hex-center {
-  background: rgba(255,255,255,0.55) !important;
-  border-color: rgba(255,255,255,0.9) !important;
-  box-shadow: 0 12px 40px rgba(0,110,255,0.18), inset 0 1px 0 rgba(255,255,255,0.95) !important;
-  backdrop-filter: blur(20px) saturate(1.4);
-}
-.deepdive .hex-center-label { color: #001233 !important; }
-.deepdive .hex-node {
-  background: rgba(255,255,255,0.7) !important;
-  border: 1.5px solid rgba(255,255,255,0.95) !important;
-  box-shadow: 0 8px 28px rgba(0,60,180,0.12), inset 0 1px 0 rgba(255,255,255,0.9) !important;
-  backdrop-filter: blur(16px) saturate(1.4);
-}
-.deepdive .hex-node-label { color: #001233 !important; }
-.deepdive .hex-node:hover {
-  background: rgba(255,255,255,0.92) !important;
-  box-shadow: 0 16px 44px rgba(0,110,255,0.28), inset 0 1px 0 rgba(255,255,255,1) !important;
-}
-.deepdive .hex-node.active {
-  background: linear-gradient(135deg, #338BFF, #006EFF) !important;
-  border-color: rgba(255,255,255,0.95) !important;
-  box-shadow: 0 18px 50px rgba(0,110,255,0.45) !important;
-}
-.deepdive .hex-node.active .hex-node-label,
-.deepdive .hex-node.active .hex-node-num { color: #fff !important; }
-
-/* The light glass detail card */
-.deepdive .hex-detail {
-  background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(232,241,255,0.7) 100%) !important;
-  backdrop-filter: blur(40px) saturate(1.6) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(1.6) !important;
-  border: 1.5px solid rgba(255,255,255,0.9) !important;
-  box-shadow:
-    0 24px 80px rgba(0,60,180,0.18),
-    0 0 0 1px rgba(255,255,255,0.5) inset,
-    0 1px 0 rgba(255,255,255,1) inset !important;
-  position: relative;
-  overflow: hidden;
-}
-.deepdive .hex-detail::before {
-  content: '';
-  position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-  animation: glassShimmer 6s ease-in-out infinite;
-  pointer-events: none;
-}
-.deepdive .hex-detail.visible { animation: glassPop 0.55s var(--ease, cubic-bezier(0.16,1,0.3,1)) both; }
-.deepdive .hex-detail-tag { color: #006EFF !important; font-size: 13px !important; letter-spacing: 2.4px !important; }
-.deepdive .hex-detail-title { color: #001233 !important; }
-.deepdive .hex-detail-desc { color: rgba(0,18,51,0.78) !important; }
-.deepdive .hex-detail-link { color: #006EFF !important; }
-.deepdive .hex-line { stroke: rgba(0,110,255,0.18) !important; }
-
-/* Mobile deepdive cards */
-.deepdive-mobile-card {
-  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(232,241,255,0.75) 100%) !important;
-  backdrop-filter: blur(20px) saturate(1.4) !important;
-  border: 1.5px solid rgba(255,255,255,0.9) !important;
-  box-shadow: 0 8px 28px rgba(0,60,180,0.12) !important;
-}
-.deepdive-mobile-title { color: #001233 !important; }
-.deepdive-mobile-desc { color: rgba(0,18,51,0.7) !important; }
-.deepdive-mobile-icon svg { stroke: #006EFF !important; }
-.deepdive-mobile-arrow { color: #006EFF !important; }
+/* The Operating System fold reverted to its native dark styling. */
 
 /* ============================================================
    2. HOW IT WORKS — light glass cards with new animation
@@ -6278,59 +6188,438 @@ html {
 }
 
 /* Per-pillar accent colors — overlay tint + border accent */
-.topic-v2--green .topic-v2-overlay {
+.topic-v2--green .topic-v2-overlay { 
   background: linear-gradient(180deg,
-    rgba(20,80,50,0.25) 0%,
-    rgba(20,80,50,0.55) 50%,
-    rgba(20,90,60,0.92) 100%) !important;
+    rgba(0,0,0,0.20) 0%,
+    rgba(0,0,0,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
 }
 .topic-v2--green:hover { box-shadow: 0 24px 60px rgba(40,160,100,0.35) !important; }
 .topic-v2--green .topic-v2-num { color: #6FE3B5 !important; }
 
-.topic-v2--indigo .topic-v2-overlay {
+.topic-v2--indigo .topic-v2-overlay { 
   background: linear-gradient(180deg,
-    rgba(30,30,90,0.25) 0%,
-    rgba(30,30,100,0.55) 50%,
-    rgba(20,30,110,0.92) 100%) !important;
+    rgba(0,0,0,0.20) 0%,
+    rgba(0,0,0,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
 }
 .topic-v2--indigo:hover { box-shadow: 0 24px 60px rgba(80,80,220,0.35) !important; }
 .topic-v2--indigo .topic-v2-num { color: #A8B5FF !important; }
 
-.topic-v2--orange .topic-v2-overlay {
+.topic-v2--orange .topic-v2-overlay { 
   background: linear-gradient(180deg,
-    rgba(120,40,10,0.25) 0%,
-    rgba(140,50,15,0.55) 50%,
-    rgba(160,60,20,0.92) 100%) !important;
+    rgba(0,0,0,0.20) 0%,
+    rgba(0,0,0,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
 }
 .topic-v2--orange:hover { box-shadow: 0 24px 60px rgba(255,120,40,0.35) !important; }
 .topic-v2--orange .topic-v2-num { color: #FFB78A !important; }
 
-.topic-v2--cyan .topic-v2-overlay {
+.topic-v2--cyan .topic-v2-overlay { 
   background: linear-gradient(180deg,
-    rgba(0,80,100,0.25) 0%,
-    rgba(0,90,120,0.55) 50%,
-    rgba(0,100,140,0.92) 100%) !important;
+    rgba(0,0,0,0.20) 0%,
+    rgba(0,0,0,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
 }
 .topic-v2--cyan:hover { box-shadow: 0 24px 60px rgba(0,180,220,0.35) !important; }
 .topic-v2--cyan .topic-v2-num { color: #7DE5FF !important; }
 
-.topic-v2--violet .topic-v2-overlay {
+.topic-v2--violet .topic-v2-overlay { 
   background: linear-gradient(180deg,
-    rgba(70,30,110,0.25) 0%,
-    rgba(80,35,130,0.55) 50%,
-    rgba(90,40,150,0.92) 100%) !important;
+    rgba(0,0,0,0.20) 0%,
+    rgba(0,0,0,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
 }
 .topic-v2--violet:hover { box-shadow: 0 24px 60px rgba(170,90,255,0.35) !important; }
 .topic-v2--violet .topic-v2-num { color: #D4A8FF !important; }
 
-.topic-v2--blue .topic-v2-overlay {
+.topic-v2--blue .topic-v2-overlay { 
   background: linear-gradient(180deg,
-    rgba(0,60,150,0.25) 0%,
-    rgba(0,80,180,0.55) 50%,
-    rgba(0,90,210,0.92) 100%) !important;
+    rgba(0,0,0,0.20) 0%,
+    rgba(0,0,0,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
 }
 .topic-v2--blue:hover { box-shadow: 0 24px 60px rgba(0,140,255,0.45) !important; }
 .topic-v2--blue .topic-v2-num { color: #8BC0FF !important; }
+
+/* ============================================================
+   DEEP DIVES (.skills) — per-card gradient color overlays
+   ============================================================ */
+/* The base .skill-overlay already provides dark legibility.
+   Each card type gets a tinted accent on top so colors emerge,
+   matching the family of pillar colors. */
+.skill-card .skill-bg.cells ~ .skill-overlay,
+.skill-card .skill-bg.cells + .skill-overlay {
+  background: linear-gradient(180deg,
+    rgba(0,180,220,0.18) 0%,
+    rgba(0,80,120,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
+}
+.skill-card .skill-bg.brain ~ .skill-overlay,
+.skill-card .skill-bg.brain + .skill-overlay {
+  background: linear-gradient(180deg,
+    rgba(170,90,255,0.18) 0%,
+    rgba(60,30,120,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
+}
+.skill-card .skill-bg.mindset ~ .skill-overlay,
+.skill-card .skill-bg.mindset + .skill-overlay {
+  background: linear-gradient(180deg,
+    rgba(80,140,255,0.18) 0%,
+    rgba(20,50,140,0.58) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
+}
+.skill-card .skill-bg.skin ~ .skill-overlay,
+.skill-card .skill-bg.skin + .skill-overlay {
+  background: linear-gradient(180deg,
+    rgba(255,140,90,0.18) 0%,
+    rgba(140,55,30,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
+}
+.skill-card .skill-bg.supplements ~ .skill-overlay,
+.skill-card .skill-bg.supplements + .skill-overlay {
+  background: linear-gradient(180deg,
+    rgba(60,200,150,0.18) 0%,
+    rgba(20,90,60,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
+}
+.skill-card .skill-bg.eyes ~ .skill-overlay,
+.skill-card .skill-bg.eyes + .skill-overlay {
+  background: linear-gradient(180deg,
+    rgba(0,200,180,0.18) 0%,
+    rgba(20,90,90,0.55) 55%,
+    rgba(6,14,26,0.92) 100%) !important;
+}
+/* Per-card hover shadow accent */
+.skill-card:has(.skill-bg.cells):hover { box-shadow: 0 28px 60px rgba(0,180,220,0.30) !important; }
+.skill-card:has(.skill-bg.brain):hover { box-shadow: 0 28px 60px rgba(170,90,255,0.30) !important; }
+.skill-card:has(.skill-bg.mindset):hover { box-shadow: 0 28px 60px rgba(80,140,255,0.30) !important; }
+.skill-card:has(.skill-bg.skin):hover { box-shadow: 0 28px 60px rgba(255,140,90,0.30) !important; }
+.skill-card:has(.skill-bg.supplements):hover { box-shadow: 0 28px 60px rgba(60,200,150,0.30) !important; }
+.skill-card:has(.skill-bg.eyes):hover { box-shadow: 0 28px 60px rgba(0,200,180,0.30) !important; }
+
+
+/* ===== INSTRUCTORS FOLD — DARK V47 ===== */
+.instructors {
+  background: linear-gradient(180deg, #050b14 0%, #0a1424 50%, #050b14 100%) !important;
+  padding: 120px 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+.instructors::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,180,255,0.3), transparent);
+}
+.instructors .eyebrow { color: #66b8ff !important; }
+.instructors .section-title { color: #fff !important; }
+.instructors .section-subtitle { color: rgba(255,255,255,0.7) !important; }
+.certs-strip-inline {
+  margin-top: 56px;
+  padding: 40px 32px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.certs-strip-inline-label {
+  display: block;
+  font-family: 'Codec Pro', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 28px;
+}
+.certs-strip-inline-badges {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+.certs-strip-inline-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.25s ease;
+}
+.certs-strip-inline-badge:hover {
+  background: rgba(0,180,255,0.06);
+  border-color: rgba(0,180,255,0.25);
+  transform: translateY(-2px);
+}
+.certs-strip-inline-abbr {
+  font-family: 'Codec Pro', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #fff;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff, #66b8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.certs-strip-inline-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.62);
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .certs-strip-inline-badges { grid-template-columns: repeat(3, 1fr); }
+  .certs-strip-inline-badge { padding: 18px 10px; }
+  .certs-strip-inline-abbr { font-size: 18px; }
+  .certs-strip-inline-name { font-size: 10px; }
+}
+@media (max-width: 480px) {
+  .certs-strip-inline { padding: 28px 18px; }
+  .certs-strip-inline-badges { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .certs-strip-inline-badge { padding: 14px 8px; border-radius: 12px; }
+  .certs-strip-inline-abbr { font-size: 15px; }
+  .certs-strip-inline-name { font-size: 9.5px; }
+}
+
+/* ===== LEAD-GEN V2 — BIG VERTICAL FORM ===== */
+.lead-gen-v2 {
+  position: relative;
+  padding: 140px 0 !important;
+  background: linear-gradient(180deg, #050b14 0%, #0a1730 50%, #050b14 100%) !important;
+  overflow: hidden;
+}
+.lead-gen-v2 .container { position: relative; z-index: 2; }
+.lead-gen-v2-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(0,110,255,0.18), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(102,184,255,0.12), transparent 70%);
+  pointer-events: none;
+}
+.lead-gen-v2-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.lead-gen-v2-eyebrow {
+  color: #66b8ff !important;
+  margin-bottom: 16px;
+  display: block;
+}
+.lead-gen-v2-headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 24px;
+  letter-spacing: -1px;
+}
+.lead-gen-v2-headline span {
+  background: linear-gradient(135deg, #66b8ff 0%, #006EFF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.lead-gen-v2-sub {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 32px;
+  max-width: 520px;
+}
+.lead-gen-v2-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.lead-gen-v2-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.lead-gen-v2-bullets svg {
+  color: #66b8ff;
+  flex-shrink: 0;
+}
+.lead-gen-v2-form {
+  background: rgba(255,255,255,0.97);
+  border-radius: 28px;
+  padding: 48px 44px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.5), 0 8px 24px rgba(0,110,255,0.18);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.lead-gen-v2-form-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 32px;
+  color: #001233;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+.lead-gen-v2-form-sub {
+  font-size: 14px;
+  color: rgba(0,18,51,0.6);
+  margin: 0 0 16px;
+}
+.lead-gen-v2-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lead-gen-v2-field label {
+  font-family: 'Codec Pro', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #001233;
+}
+.lead-gen-v2-field input,
+.lead-gen-v2-field select {
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  border: 1.5px solid rgba(0,18,51,0.12);
+  border-radius: 12px;
+  background: #fff;
+  color: #001233;
+  outline: none;
+  transition: all 0.22s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.lead-gen-v2-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23001233' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  padding-right: 44px;
+  cursor: pointer;
+}
+.lead-gen-v2-field input::placeholder {
+  color: rgba(0,18,51,0.35);
+}
+.lead-gen-v2-field input:focus,
+.lead-gen-v2-field select:focus {
+  border-color: #006EFF;
+  box-shadow: 0 0 0 3px rgba(0,110,255,0.12);
+}
+.lead-gen-v2-submit {
+  width: 100%;
+  padding: 20px 32px;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: 'Codec Pro', sans-serif;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #006EFF, #338BFF);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0,110,255,0.30);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.lead-gen-v2-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0080FF, #5AA3FF);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0,110,255,0.42);
+}
+.lead-gen-v2-submit:disabled { cursor: default; transform: none; }
+.lead-gen-v2-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(0,18,51,0.55);
+  margin: 4px 0 0;
+}
+@media (max-width: 980px) {
+  .lead-gen-v2 { padding: 100px 0 !important; }
+  .lead-gen-v2-grid { grid-template-columns: 1fr; gap: 48px; }
+  .lead-gen-v2-headline { font-size: clamp(32px, 7vw, 44px); text-align: left; }
+  .lead-gen-v2-form { padding: 36px 28px; }
+  .lead-gen-v2-form-title { font-size: 26px; }
+}
+@media (max-width: 480px) {
+  .lead-gen-v2 { padding: 72px 0 !important; }
+  .lead-gen-v2-headline { font-size: 32px; }
+  .lead-gen-v2-sub { font-size: 16px; }
+  .lead-gen-v2-form { padding: 28px 20px; border-radius: 22px; }
+  .lead-gen-v2-form-title { font-size: 22px; }
+  .lead-gen-v2-field input,
+  .lead-gen-v2-field select { padding: 14px 16px; font-size: 15px; }
+  .lead-gen-v2-submit { padding: 16px 24px; font-size: 15px; }
+}
+
+/* ===== CTA standardization ===== */
+.deepdive-cta-btn {
+  background: linear-gradient(135deg, #006EFF 0%, #338BFF 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 8px 28px rgba(0,110,255,0.35) !important;
+}
+.deepdive-cta-btn:hover {
+  background: linear-gradient(135deg, #0080FF 0%, #5AA3FF 100%) !important;
+  transform: translateY(-2px);
+}
+.curriculum-cta .section-cta-btn,
+.how-v2-cta .section-cta-btn {
+  background: linear-gradient(135deg, #006EFF 0%, #338BFF 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 8px 28px rgba(0,110,255,0.30);
+}
+.curriculum-cta .section-cta-btn:hover,
+.how-v2-cta .section-cta-btn:hover {
+  background: linear-gradient(135deg, #0080FF 0%, #5AA3FF 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px rgba(0,110,255,0.42);
+}
+.instructors-cta .section-cta-btn {
+  background: linear-gradient(135deg, #006EFF 0%, #338BFF 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 8px 28px rgba(0,110,255,0.35);
+}
+.instructors-cta .section-cta-btn:hover {
+  background: linear-gradient(135deg, #0080FF 0%, #5AA3FF 100%);
+  transform: translateY(-2px);
+}
+
 </style>
 </head>
 <body>
@@ -6668,7 +6957,7 @@ html {
     </div>
     <div class="fold-cta reveal" style="text-align:center; margin-top:64px;">
       <p style="font-size:18px; color:rgba(255,255,255,0.78); margin:0 0 20px; max-width:560px; margin-left:auto; margin-right:auto;">The next 30 years start with one decision.</p>
-      <a href="#lead-gen" class="section-cta-btn">Reserve My Cohort Seat <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -6759,7 +7048,7 @@ html {
     </div>
     <div class="fold-cta reveal" style="text-align:center; margin-top:72px;">
       <p style="font-size:18px; color:rgba(10,22,40,0.7); margin:0 0 20px; max-width:560px; margin-left:auto; margin-right:auto;">Go deeper than your annual physical ever will.</p>
-      <a href="#lead-gen" class="section-cta-btn">Join the Next Cohort <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -7252,7 +7541,10 @@ html {
 
     </div>
   </div>
-</section>
+    <div class="curriculum-cta reveal" style="text-align:center; margin-top:64px;">
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
 
 <!-- ============================================== 
      FOLD 5 — DEEP DIVE INTO CLASSES
@@ -7377,7 +7669,10 @@ html {
     </div>
 
   </div>
-</section>
+    <div class="deepdive-cta reveal" style="text-align:center; margin-top:48px;">
+      <a href="#lead-gen" class="section-cta-btn deepdive-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
 
 <!-- ==============================================
      FOLD 6 — BIO AGE QUIZ
@@ -7461,7 +7756,10 @@ html {
     </div>
     <div class="how-v2-dots" id="howDots"></div>
   </div>
-</section>
+    <div class="how-v2-cta reveal" style="text-align:center; margin-top:48px;">
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
 
 <!-- ==============================================
      FOLD 8 — INSTRUCTORS (V3 CHANGE 4 — placeholder state)
@@ -7476,8 +7774,8 @@ html {
   <div class="container">
     <div class="instructors-header reveal" style="text-align: center; margin-bottom: 48px;">
       <span class="eyebrow" style="margin-bottom: 12px; display: block;">Your Instructors</span>
-      <h2 class="section-title" style="margin-bottom: 16px;">Taught by the leading voices<br>in longevity medicine.</h2>
-      <p class="section-subtitle" style="margin: 0 auto; max-width: 640px;">We are finalizing a faculty of physicians, researchers, and protocol designers from the top of the longevity field. Full roster announcement coming shortly.</p>
+      <h2 class="section-title" style="margin-bottom: 16px;">Taught by Leading Voices<br>in Longevity Medicine</h2>
+      <p class="section-subtitle" style="margin: 0 auto; max-width: 720px;">A faculty of certified specialists, researchers, and protocol designers backed by the most recognized credentialing bodies in the field.</p>
     </div>
 
     <!-- LIVE instructor grid — add signed instructors here as they're confirmed -->
@@ -7493,83 +7791,42 @@ html {
       </div>
       -->
     </div>
+</div>
 
-    <!-- PLACEHOLDER (remove when full roster is announced) -->
-    <div class="teachers-placeholder reveal">
-      <div class="teachers-placeholder-card">
-        <div class="teachers-placeholder-glow" aria-hidden="true"></div>
-        <div class="teachers-placeholder-inner">
-          <div class="teachers-placeholder-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="24" cy="24" r="20"/>
-              <path d="M24 12v12l8 4"/>
-            </svg>
-          </div>
-          <div class="teachers-placeholder-eyebrow">Announcing soon</div>
-          <h3 class="teachers-placeholder-title">Our Instructors<br>Will Be Announced Shortly</h3>
-          <p class="teachers-placeholder-body">
-            We've partnered with physicians and researchers from the top of the longevity field.
-            As each instructor confirms, we'll reveal them here — one by one, with full bios,
-            credentials, and their chapter of the course.
-          </p>
-          <div class="teachers-placeholder-grid" aria-hidden="true">
-            <div class="teachers-placeholder-slot"><span>01</span><em>Metabolic Health</em></div>
-            <div class="teachers-placeholder-slot"><span>02</span><em>Sleep &amp; Circadian</em></div>
-            <div class="teachers-placeholder-slot"><span>03</span><em>Exercise &amp; Movement</em></div>
-            <div class="teachers-placeholder-slot"><span>04</span><em>Nutrition &amp; Protocols</em></div>
-            <div class="teachers-placeholder-slot"><span>05</span><em>Reading Your Body's Signals</em></div>
-            <div class="teachers-placeholder-slot"><span>06</span><em>Mental &amp; Emotional OS</em></div>
-          </div>
-          <a href="#lead-gen" class="teachers-placeholder-cta">
-            Be first to know
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
+    <!-- CREDENTIAL BADGES STRIP (inline within instructors) -->
+    <div class="certs-strip-inline reveal">
+      <span class="certs-strip-inline-label">Credentialing & Professional Bodies</span>
+      <div class="certs-strip-inline-badges">
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">ACE</span>
+          <span class="certs-strip-inline-name">American Council on Exercise</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">NASM</span>
+          <span class="certs-strip-inline-name">National Academy of Sports Medicine</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">IFM</span>
+          <span class="certs-strip-inline-name">Institute for Functional Medicine</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">NBHWC</span>
+          <span class="certs-strip-inline-name">Nat'l Board for Health &amp; Wellness Coaching</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">PN</span>
+          <span class="certs-strip-inline-name">Precision Nutrition</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">XLA</span>
+          <span class="certs-strip-inline-name">Extended Learning Alliance</span>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="certs-strip">
-  <div class="certs-strip-inner">
-    <span class="certs-strip-label">Recognized by</span>
-    <div class="certs-strip-badges">
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">ACE</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">American Council on Exercise</span>
-      </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">NASM</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">National Academy of Sports Medicine</span>
-      </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">IFM</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">Institute for Functional Medicine</span>
-      </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">NBHWC</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">National Board for Health &amp; Wellness Coaching</span>
-      </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">PN</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">Precision Nutrition</span>
-      </div>
-      <div class="certs-strip-badge">
-        <span class="certs-strip-abbr">XLA</span>
-        <span class="certs-strip-divider"></span>
-        <span class="certs-strip-name">Extended Learning Alliance</span>
-      </div>
+    <div class="instructors-cta reveal" style="text-align:center; margin-top: 48px;">
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
-    <div style="text-align: center; padding-top: 24px;">
-      <a href="#lead-gen" class="section-cta-btn">Apply Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-  </div>
-</section>
+  </section>
 
 <!-- ==============================================
      FOLD 9 — WHAT MAKES THIS DIFFERENT
@@ -7661,12 +7918,91 @@ html {
       </div>
     </div>
     <div style="text-align: center; padding-top: 32px;">
-      <a href="#lead-gen" class="section-cta-btn">Get Early Access <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
 
 
+
+<!-- ==============================================
+     FOLD — LEAD GEN FORM (BIG, vertical, premium)
+     ============================================== -->
+<section class="lead-gen lead-gen-v2" id="lead-gen">
+  <div class="lead-gen-v2-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="lead-gen-v2-grid reveal">
+      <div class="lead-gen-v2-left">
+        <span class="eyebrow lead-gen-v2-eyebrow">Apply for the Next Cohort</span>
+        <h2 class="lead-gen-v2-headline">Enroll Now in <span>Longevity Life Academy</span></h2>
+        <p class="lead-gen-v2-sub">Cohorts are small. Seats are limited. Tell us a little about yourself and our admissions team will reach out personally with the next cohort dates and program details.</p>
+        <ul class="lead-gen-v2-bullets">
+          <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Live, instructor-led 18-week program</li>
+          <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Small cohorts (8–15 students)</li>
+          <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Personal longevity protocol included</li>
+          <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> 1:1 admissions consultation</li>
+        </ul>
+      </div>
+      <div class="lead-gen-v2-right">
+        <form class="lead-gen-v2-form" onsubmit="event.preventDefault(); var b=this.querySelector('button'); b.textContent='Application Received ✓'; b.style.background='#10B981'; b.disabled=true;">
+          <h3 class="lead-gen-v2-form-title">Apply Now</h3>
+          <p class="lead-gen-v2-form-sub">Free, no commitment — admissions team replies within 24 hours.</p>
+          <div class="lead-gen-v2-field">
+            <label for="lg-fname">First Name</label>
+            <input id="lg-fname" type="text" placeholder="Your first name" required autocomplete="given-name">
+          </div>
+          <div class="lead-gen-v2-field">
+            <label for="lg-lname">Last Name</label>
+            <input id="lg-lname" type="text" placeholder="Your last name" required autocomplete="family-name">
+          </div>
+          <div class="lead-gen-v2-field">
+            <label for="lg-email">Email Address</label>
+            <input id="lg-email" type="email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="lead-gen-v2-field">
+            <label for="lg-phone">Phone Number</label>
+            <input id="lg-phone" type="tel" placeholder="+1 (555) 123-4567" required autocomplete="tel">
+          </div>
+          <div class="lead-gen-v2-field">
+            <label for="lg-country">Country</label>
+            <select id="lg-country" required>
+              <option value="" disabled selected>Select your country</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>United Kingdom</option>
+              <option>Australia</option>
+              <option>Germany</option>
+              <option>France</option>
+              <option>Spain</option>
+              <option>Italy</option>
+              <option>Netherlands</option>
+              <option>Switzerland</option>
+              <option>Israel</option>
+              <option>United Arab Emirates</option>
+              <option>Singapore</option>
+              <option>Hong Kong</option>
+              <option>Japan</option>
+              <option>Mexico</option>
+              <option>Brazil</option>
+              <option>Argentina</option>
+              <option>South Africa</option>
+              <option>India</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <button type="submit" class="lead-gen-v2-submit">
+            Submit Application
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <p class="lead-gen-v2-trust">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Your information is secure. We'll never share your details.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ==============================================
      FOLD 11 — FAQs
@@ -7744,7 +8080,7 @@ html {
       </div>
     </div>
     <div style="text-align: center; padding-top: 32px;">
-      <a href="#lead-gen" class="section-cta-btn">Reserve Your Seat <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -7767,28 +8103,6 @@ html {
           <path d="M5 12h14M13 5l7 7-7 7"/>
         </svg>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================================
-     FOLD 13 — LEAD GEN FORM
-     ============================================== -->
-<section class="lead-gen" id="lead-gen">
-  <div class="container">
-    <div class="lead-gen-inner reveal">
-      <h2 class="lead-gen-headline">Ready to Start? <span>Reserve Your Seat</span></h2>
-      <form class="lead-gen-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You\'re on the list ✓'; this.querySelector('button').style.background='#10B981';">
-        <div class="lead-gen-row">
-          <input type="text" placeholder="First name" required aria-label="First name">
-          <input type="email" placeholder="Email address" required aria-label="Email address">
-        </div>
-        <button type="submit">Get Early Access to the Next Cohort →</button>
-      </form>
-      <p class="lead-gen-trust">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Join 400,000+ students learning with us — trusted since 2000
-      </p>
     </div>
   </div>
 </section>
