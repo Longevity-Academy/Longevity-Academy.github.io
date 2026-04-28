@@ -6620,6 +6620,67 @@ html {
   transform: translateY(-2px);
 }
 
+
+/* ===== HERO IMAGE — CGM longevity practice (replaces video) ===== */
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+  z-index: 0;
+  filter: saturate(1.05) contrast(1.05) brightness(0.95);
+}
+/* Stronger overlay for text legibility over photo subject on right */
+.hero .hero-overlay {
+  background:
+    /* Darken left side strongly where headline lives */
+    linear-gradient(90deg, rgba(0, 16, 40, 0.85) 0%, rgba(0, 24, 60, 0.55) 35%, rgba(0, 32, 76, 0.30) 65%, rgba(0, 32, 76, 0.20) 100%),
+    /* Subtle blue depth wash on top */
+    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(0, 110, 255, 0.18) 0%, transparent 65%),
+    /* Bottom vignette */
+    linear-gradient(180deg, rgba(0, 16, 40, 0.0) 60%, rgba(0, 12, 32, 0.45) 100%) !important;
+  mix-blend-mode: normal !important;
+}
+.hero .hero-inner {
+  text-align: left !important;
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: max(8vw, 32px) !important;
+  max-width: 1280px !important;
+}
+.hero-academy-name,
+.hero-title,
+.hero-sub {
+  text-align: left !important;
+}
+.hero-cta-row {
+  justify-content: flex-start !important;
+}
+.trustpilot {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+@media (max-width: 900px) {
+  .hero-image { object-position: 70% center; }
+  .hero .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(0, 16, 40, 0.55) 0%, rgba(0, 16, 40, 0.78) 100%),
+      radial-gradient(ellipse at 50% 30%, rgba(0, 110, 255, 0.20) 0%, transparent 70%) !important;
+  }
+  .hero .hero-inner {
+    text-align: center !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .hero-academy-name,
+  .hero-title,
+  .hero-sub { text-align: center !important; }
+  .hero-cta-row { justify-content: center !important; }
+  .trustpilot { margin-left: auto !important; margin-right: auto !important; }
+}
+
 </style>
 </head>
 <body>
@@ -6685,9 +6746,7 @@ html {
     CTA:      "Start My Protocol"
 -->
 <section class="hero" id="hero">
-  <video preload="auto" class="hero-video" autoplay muted loop playsinline poster="assets/hero-longevity.jpg">
-    <source src="assets/hero-woman-bubbles.mp4" type="video/mp4">
-  </video>
+  <img src="assets/hero-cgm.jpg" alt="Continuous glucose monitor and personalized health protocol" class="hero-image" loading="eager" fetchpriority="high">
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-academy-name">
@@ -6705,7 +6764,7 @@ html {
       <div class="hero-cta-wrap">
         <div class="hero-cta-glow" aria-hidden="true"></div>
         <a href="#lead-gen" class="btn-primary btn-primary--lg">
-          Claim Your Seat
+          Enroll Now
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M13 5l7 7-7 7"/>
           </svg>
