@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Longevity Life Academy</title>
+<meta name="description" content="About Longevity Life Academy by eTeacher. Our vision, mission, and approach to teaching longevity science live, online, in small groups.">
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* RESET */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #060e1a;
+  color: #e8eaed;
+  line-height: 1.6;
+  font-size: 17px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* DESIGN TOKENS */
+:root {
+  --blue-primary: #1976d2;
+  --blue-light: #6BB6FF;
+  --blue-soft: rgba(107, 182, 255, 0.14);
+  --bg: #060e1a;
+  --bg-deep: #03070f;
+  --bg-light: #f4f7fb;
+  --ink: #e8eaed;
+  --ink-light: rgba(255,255,255,0.78);
+  --ink-mute: rgba(255,255,255,0.6);
+  --ink-dark: #0d1b2a;
+  --border-soft: rgba(255,255,255,0.08);
+  --border-light: rgba(13,27,42,0.10);
+}
+
+.container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .container { padding: 0 20px; } }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(6,14,26,0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav-inner {
+  max-width: 1240px; margin: 0 auto; padding: 16px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  font-weight: 800; font-size: 17px; letter-spacing: -0.01em;
+  color: #fff;
+}
+.nav-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: var(--blue-light);
+  padding: 9px 16px; border-radius: 999px;
+  border: 1px solid rgba(107,182,255,0.32);
+  background: rgba(107,182,255,0.06);
+  transition: all 0.25s ease;
+}
+.nav-back:hover { background: rgba(107,182,255,0.14); transform: translateX(-2px); }
+.nav-back svg { width: 14px; height: 14px; transition: transform 0.25s ease; }
+.nav-back:hover svg { transform: translateX(-3px); }
+
+@media (max-width: 640px) {
+  .nav-inner { padding: 14px 20px; }
+  .nav-brand { font-size: 15px; }
+}
+
+/* HERO */
+.hero {
+  padding: 180px 0 100px;
+  background:
+    radial-gradient(1200px 600px at 70% 20%, rgba(25,118,210,0.18), transparent 60%),
+    radial-gradient(900px 500px at 20% 80%, rgba(107,182,255,0.12), transparent 60%),
+    var(--bg);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border-soft);
+}
+.hero-inner { max-width: 980px; }
+.eyebrow {
+  display: inline-block;
+  font-size: 14px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2.4px;
+  color: var(--blue-light);
+  padding: 10px 18px;
+  border: 1px solid rgba(107,182,255,0.36);
+  border-radius: 999px;
+  background: rgba(107,182,255,0.08);
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: 1.02; letter-spacing: -0.025em;
+  font-weight: 800; color: #fff;
+  margin-bottom: 28px;
+}
+.hero h1 .accent { color: var(--blue-light); }
+.hero-lead {
+  font-size: clamp(19px, 2.2vw, 26px);
+  line-height: 1.5; color: var(--ink-light);
+  max-width: 820px; font-weight: 400;
+}
+
+/* SECTION SHARED */
+section.block { padding: 120px 0; position: relative; }
+section.block.dark { background: var(--bg); }
+section.block.deep { background: var(--bg-deep); }
+section.block.light {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+  color: var(--ink-dark);
+}
+section.block.light .eyebrow {
+  color: var(--blue-primary);
+  border-color: rgba(25,118,210,0.32);
+  background: rgba(25,118,210,0.06);
+}
+section.block.light h2,
+section.block.light h3,
+section.block.light p { color: var(--ink-dark); }
+section.block.light p { color: rgba(13,27,42,0.74); }
+
+@media (max-width: 720px) {
+  section.block { padding: 80px 0; }
+  .hero { padding: 130px 0 70px; }
+}
+
+.section-head { max-width: 880px; margin-bottom: 60px; }
+.section-head .eyebrow { margin-bottom: 22px; }
+.section-head h2 {
+  font-size: clamp(34px, 5vw, 60px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+.section-head .lead {
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.6; color: var(--ink-light);
+}
+section.block.light .section-head .lead { color: rgba(13,27,42,0.74); }
+
+/* PILLAR ROW (vision/mission/approach) */
+.pillar-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+@media (max-width: 920px) { .pillar-row { grid-template-columns: 1fr; gap: 20px; } }
+
+.pillar-card {
+  padding: 40px 36px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(107,182,255,0.28);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+.pillar-card::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+  background: linear-gradient(90deg, var(--blue-primary), var(--blue-light));
+  opacity: 0.85;
+}
+.pillar-card .num {
+  font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--blue-light); margin-bottom: 18px;
+}
+.pillar-card h3 {
+  font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; letter-spacing: -0.015em;
+  color: #fff; margin-bottom: 16px;
+}
+.pillar-card p {
+  font-size: 16px; line-height: 1.65; color: var(--ink-light);
+}
+
+/* APPROACH LIST */
+.approach-list {
+  display: grid; grid-template-columns: 1fr; gap: 0;
+  margin-top: 56px; max-width: 980px;
+}
+.approach-item {
+  display: grid; grid-template-columns: 80px 1fr; gap: 32px;
+  padding: 32px 0; border-top: 1px solid var(--border-soft);
+}
+.approach-item:last-child { border-bottom: 1px solid var(--border-soft); }
+.approach-item .step {
+  font-size: 36px; font-weight: 800; color: var(--blue-light);
+  letter-spacing: -0.02em; line-height: 1;
+}
+.approach-item h4 {
+  font-size: clamp(20px, 2vw, 26px); font-weight: 700;
+  color: #fff; margin-bottom: 10px; letter-spacing: -0.01em;
+}
+.approach-item p { color: var(--ink-light); font-size: 16.5px; line-height: 1.65; }
+@media (max-width: 640px) {
+  .approach-item { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* ETEACHER STATS HERO */
+.eteacher-banner {
+  margin: 0 auto 56px;
+  padding: 44px 36px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, rgba(25,118,210,0.92) 0%, rgba(13,71,161,0.96) 100%);
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  position: relative; overflow: hidden;
+}
+.eteacher-banner::before {
+  content: ""; position: absolute; top: -100px; right: -120px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+.eteacher-banner-text h3 {
+  font-size: clamp(26px, 3vw, 38px); font-weight: 800;
+  letter-spacing: -0.018em; line-height: 1.1; margin-bottom: 16px; color: #fff;
+}
+.eteacher-banner-text p {
+  font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.92);
+}
+.eteacher-stats-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  position: relative; z-index: 2;
+}
+.eteacher-stat {
+  text-align: left;
+}
+.eteacher-stat-num {
+  font-size: clamp(32px, 4vw, 46px); font-weight: 800;
+  letter-spacing: -0.025em; line-height: 1;
+  color: #fff; margin-bottom: 6px;
+}
+.eteacher-stat-label {
+  font-size: 13px; color: rgba(255,255,255,0.85);
+  text-transform: uppercase; letter-spacing: 1.4px; font-weight: 600;
+}
+@media (max-width: 920px) {
+  .eteacher-banner { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
+  .eteacher-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+}
+
+/* METHOD CARDS */
+.method-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  margin-top: 44px;
+}
+@media (max-width: 920px) { .method-grid { grid-template-columns: 1fr; } }
+.method-card {
+  padding: 36px 30px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 6px 24px rgba(13,27,42,0.05);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.method-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(13,27,42,0.10);
+}
+.method-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-light));
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 22px;
+  color: #fff;
+}
+.method-icon svg { width: 28px; height: 28px; stroke: #fff; }
+.method-card h3 {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.012em;
+  color: var(--ink-dark); margin-bottom: 12px;
+}
+.method-card p {
+  font-size: 15.5px; color: rgba(13,27,42,0.70); line-height: 1.65;
+}
+
+/* TRACK RECORD */
+.track-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+  margin-top: 44px;
+}
+@media (max-width: 920px) { .track-grid { grid-template-columns: repeat(2, 1fr); } }
+.track-item {
+  text-align: center;
+  padding: 32px 20px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+}
+.track-num {
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 800; letter-spacing: -0.03em;
+  color: var(--blue-primary); line-height: 1;
+  margin-bottom: 10px;
+}
+.track-label {
+  font-size: 14px; color: rgba(13,27,42,0.70); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.2px;
+}
+
+/* PARTNERS */
+.partners-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+  margin-top: 44px;
+}
+@media (max-width: 920px) { .partners-grid { grid-template-columns: repeat(2, 1fr); } }
+.partner-card {
+  padding: 32px 24px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 160px;
+}
+.partner-card .partner-name {
+  font-size: 17px; font-weight: 800; color: var(--ink-dark);
+  letter-spacing: -0.005em; line-height: 1.3;
+}
+.partner-card .partner-sub {
+  font-size: 13px; color: rgba(13,27,42,0.62);
+  margin-top: 8px; font-weight: 500;
+}
+.partner-card.natgeo { background: var(--ink-dark); }
+.partner-card.natgeo .partner-name { color: #fff; }
+.partner-card.natgeo .partner-sub { color: rgba(255,255,255,0.72); }
+.partner-card.natgeo .natgeo-bar {
+  width: 36px; height: 4px; background: #FFCC00; margin-bottom: 12px;
+}
+
+/* QUOTE */
+.quote-block {
+  margin-top: 56px; padding: 44px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(25,118,210,0.10) 0%, rgba(107,182,255,0.04) 100%);
+  border: 1px solid rgba(107,182,255,0.20);
+  position: relative;
+}
+.quote-block::before {
+  content: "\201C"; position: absolute;
+  top: -6px; left: 24px; font-size: 96px;
+  color: var(--blue-light); opacity: 0.32; line-height: 1;
+  font-family: Georgia, serif;
+}
+.quote-block p {
+  font-size: clamp(18px, 2vw, 22px); line-height: 1.55;
+  color: #fff; font-weight: 500; font-style: italic;
+  margin-left: 30px;
+}
+.quote-block .quote-source {
+  margin-top: 18px; margin-left: 30px;
+  font-size: 14px; color: var(--ink-light); font-style: normal;
+  text-transform: uppercase; letter-spacing: 1.4px; font-weight: 600;
+}
+
+/* CTA */
+.final-cta {
+  text-align: center;
+  padding: 100px 0 110px;
+  background:
+    radial-gradient(900px 500px at 50% 50%, rgba(25,118,210,0.18), transparent 60%),
+    var(--bg-deep);
+  border-top: 1px solid var(--border-soft);
+}
+.final-cta h2 {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800; letter-spacing: -0.02em;
+  margin-bottom: 22px; color: #fff;
+}
+.final-cta p {
+  font-size: clamp(16px, 1.5vw, 19px);
+  color: var(--ink-light);
+  max-width: 640px; margin: 0 auto 36px;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--blue-primary), #2196f3);
+  color: #fff; font-weight: 700; font-size: 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(107,182,255,0.4);
+  box-shadow: 0 12px 36px rgba(25,118,210,0.42);
+  transition: all 0.3s ease;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 48px rgba(25,118,210,0.55);
+}
+.cta-btn svg { width: 16px; height: 16px; stroke: #fff; transition: transform 0.3s ease; }
+.cta-btn:hover svg { transform: translateX(4px); }
+
+/* FOOTER */
+.footer {
+  padding: 40px 0; text-align: center;
+  border-top: 1px solid var(--border-soft);
+  background: var(--bg-deep);
+  color: var(--ink-mute);
+  font-size: 14px;
+}
+.footer a { color: var(--blue-light); }
+
+/* SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Longevity Life Academy</div>
+    <a class="nav-back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to home
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <span class="eyebrow">About Us</span>
+      <h1>About <span class="accent">Longevity Life Academy</span></h1>
+      <p class="hero-lead">A new live online school built for the next thirty years of your life — the science of longevity, taught by the best instructors in the world, delivered through the proven eTeacher learning experience.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================
+     TOP HALF — LONGEVITY LIFE ACADEMY
+     Vision, Mission, Approach
+     ============================================ -->
+<section class="block dark">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Foundation</span>
+      <h2>Why this academy exists.</h2>
+      <p class="lead">We assembled the top knowledge with the top teachers and built the most simple, comprehensive, science-backed course on longevity. Our goal is to make you fully immersed in the longevity protocol that's right for you.</p>
+    </div>
+
+    <div class="pillar-row">
+      <div class="pillar-card reveal">
+        <div class="num">01 · Vision</div>
+        <h3>Add years to your life. And life to your years.</h3>
+        <p>We see a world where people don't just live longer — they live stronger, sharper, and more capable. The science of longevity is no longer reserved for elite clinics. It belongs in your daily life, taught clearly, applied simply.</p>
+      </div>
+      <div class="pillar-card reveal">
+        <div class="num">02 · Mission</div>
+        <h3>Translate the science. Build your protocol.</h3>
+        <p>Our mission is to take the best longevity research and the world's leading practitioners, and turn that combined wisdom into a practical, personal protocol you can actually live by — habits, data, and decisions that compound over decades.</p>
+      </div>
+      <div class="pillar-card reveal">
+        <div class="num">03 · Approach</div>
+        <h3>Live, small group, science-first.</h3>
+        <p>Real instructors, real time, real conversations. Small live cohorts where you ask questions, see real data, and walk out with a personalized plan. No pre-recorded lectures, no generic advice, no shortcuts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE TEACH -->
+<section class="block deep">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Approach</span>
+      <h2>How Longevity Life Academy works.</h2>
+      <p class="lead">Four principles shape every cohort, every session, and every protocol you build with us.</p>
+    </div>
+
+    <div class="approach-list">
+      <div class="approach-item reveal">
+        <div class="step">01</div>
+        <div>
+          <h4>Top teachers from across the field.</h4>
+          <p>Not a single host. We bring together leading practitioners across nutrition, sleep, movement, metabolic health, and personalized data — each teaching their own discipline live.</p>
+        </div>
+      </div>
+      <div class="approach-item reveal">
+        <div class="step">02</div>
+        <div>
+          <h4>Science, translated clearly.</h4>
+          <p>We strip away the jargon and the hype. Every session is grounded in current research and translated into language and habits you can actually apply this week, this month, this decade.</p>
+        </div>
+      </div>
+      <div class="approach-item reveal">
+        <div class="step">03</div>
+        <div>
+          <h4>Small live groups, real conversations.</h4>
+          <p>You're not watching a course — you're in a live classroom. Ask questions, share data, get answers from the instructor in the room with you. This is the eTeacher way, refined over decades and adapted for longevity.</p>
+        </div>
+      </div>
+      <div class="approach-item reveal">
+        <div class="step">04</div>
+        <div>
+          <h4>Your personalized protocol.</h4>
+          <p>By the end of the cohort, you have a working protocol — not a book of theory. The daily, weekly, and quarterly habits, plus the data points to track, that fit your body, your life, and your next thirty years.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     BOTTOM HALF — POWERED BY ETEACHER GROUP
+     LMS, Methodology, Track Record, Partners
+     ============================================ -->
+<section class="block light">
+  <div class="container">
+
+    <!-- Banner -->
+    <div class="eteacher-banner reveal">
+      <div class="eteacher-banner-text">
+        <h3>Built on the eTeacher learning platform.</h3>
+        <p>Longevity Life Academy is powered by eTeacher Group — pioneers of live online education, with a proven platform that has trained hundreds of thousands of students across the world.</p>
+      </div>
+      <div class="eteacher-stats-grid">
+        <div class="eteacher-stat">
+          <div class="eteacher-stat-num">400k+</div>
+          <div class="eteacher-stat-label">Courses sold</div>
+        </div>
+        <div class="eteacher-stat">
+          <div class="eteacher-stat-num">197</div>
+          <div class="eteacher-stat-label">Countries reached</div>
+        </div>
+        <div class="eteacher-stat">
+          <div class="eteacher-stat-num">600+</div>
+          <div class="eteacher-stat-label">Trained instructors</div>
+        </div>
+        <div class="eteacher-stat">
+          <div class="eteacher-stat-num">5</div>
+          <div class="eteacher-stat-label">Online schools</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div class="section-head reveal" style="margin-top: 60px;">
+      <span class="eyebrow">Our Methodology</span>
+      <h2>The live learning experience.</h2>
+      <p class="lead">eTeacher pioneered a dynamic, personalized learning experience — bringing the traditional classroom to the internet through real-time, teacher-led instruction. Every Longevity Life Academy cohort is built on that foundation.</p>
+    </div>
+
+    <div class="method-grid">
+      <div class="method-card reveal">
+        <div class="method-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+        <h3>The classroom, online.</h3>
+        <p>We bring the traditional classroom to the internet — synchronous, teacher-led instruction with the dynamics of a real live learning environment.</p>
+      </div>
+      <div class="method-card reveal">
+        <div class="method-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Private and small group instruction.</h3>
+        <p>Real-time private and small group sessions — the personalized, high-engagement format that has produced strong outcomes across our schools for decades.</p>
+      </div>
+      <div class="method-card reveal">
+        <div class="method-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3>Proven, scalable pedagogy.</h3>
+        <p>A learning experience platform refined over years of teaching — synchronous instruction leveraging proven pedagogy that works at scale, not just one-off classes.</p>
+      </div>
+    </div>
+
+    <!-- TRACK RECORD -->
+    <div class="section-head reveal" style="margin-top: 100px;">
+      <span class="eyebrow">Track Record</span>
+      <h2>Decades of online education excellence.</h2>
+      <p class="lead">Numbers that speak to a global, repeatable learning model.</p>
+    </div>
+
+    <div class="track-grid">
+      <div class="track-item reveal">
+        <div class="track-num">5</div>
+        <div class="track-label">Online schools</div>
+      </div>
+      <div class="track-item reveal">
+        <div class="track-num">400k+</div>
+        <div class="track-label">Courses sold</div>
+      </div>
+      <div class="track-item reveal">
+        <div class="track-num">197</div>
+        <div class="track-label">Regions reached</div>
+      </div>
+      <div class="track-item reveal">
+        <div class="track-num">600+</div>
+        <div class="track-label">Trained teachers</div>
+      </div>
+    </div>
+
+    <!-- METHODOLOGY QUOTE -->
+    <div class="quote-block reveal">
+      <p>Pioneering a dynamic and personalized learning experience — bringing the traditional classroom to the internet through synchronous, teacher-led instruction that scales without losing the human element.</p>
+      <div class="quote-source">— eTeacher Group methodology</div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div class="section-head reveal" style="margin-top: 100px;">
+      <span class="eyebrow">Partners &amp; Accreditations</span>
+      <h2>Trusted by global institutions.</h2>
+      <p class="lead">eTeacher Group's schools and platform partner with leading universities, governments, and educational publishers.</p>
+    </div>
+
+    <div class="partners-grid">
+      <div class="partner-card natgeo reveal">
+        <div class="natgeo-bar"></div>
+        <div class="partner-name">National Geographic<br>Learning</div>
+      </div>
+      <div class="partner-card reveal">
+        <div class="partner-name">Hebrew University<br>of Jerusalem</div>
+        <div class="partner-sub">Israel</div>
+      </div>
+      <div class="partner-card reveal">
+        <div class="partner-name">Ministry of<br>Education</div>
+        <div class="partner-sub">Israel</div>
+      </div>
+      <div class="partner-card reveal">
+        <div class="partner-name">Ministry of<br>Foreign Affairs</div>
+        <div class="partner-sub">Israel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Ready for the next thirty years?</h2>
+    <p>Join the cohort. Build your personal longevity protocol with the best teachers in the field — live, online, in a small group.</p>
+    <a href="index.html#lead-gen" class="cta-btn">
+      Reserve My Cohort Seat
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    Longevity Life Academy · by eTeacher · <a href="index.html">Back to home</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

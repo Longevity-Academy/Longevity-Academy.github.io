@@ -6054,6 +6054,283 @@ html {
 .testimonials .quote-text {
   color: #001233 !important;
 }
+
+
+/* ============================================================
+   ABOUT FOLD — clickable, premium, with eTeacher power strip
+   ============================================================ */
+/* Override base .about light background — this fold is now a dark
+   brand moment to make the headline + powered-by stats pop. */
+.about {
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(0,110,255,0.18) 0%, rgba(0,110,255,0) 60%),
+    radial-gradient(900px 500px at 80% 80%, rgba(107,182,255,0.10) 0%, transparent 60%),
+    linear-gradient(180deg, #04101F 0%, #060e1a 60%, #03070f 100%) !important;
+}
+.about::before {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(0,110,255,0.10) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(0,110,255,0.08) 0%, transparent 45%) !important;
+}
+.about-link-wrap {
+  display: block;
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.about-link-wrap:hover { transform: translateY(-2px); }
+.about-link-wrap:hover .about-readmore { gap: 14px; color: #6BB6FF; }
+.about-link-wrap:hover .about-readmore svg { transform: translateX(4px); }
+
+.about-mainhead {
+  font-size: clamp(40px, 6vw, 76px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 0 0;
+  color: #fff;
+  text-align: center;
+}
+.about-lead--gal {
+  font-size: clamp(18px, 2.1vw, 24px);
+  line-height: 1.6;
+  font-weight: 400;
+  color: rgba(255,255,255,0.92);
+  max-width: 880px;
+  margin: 36px auto 18px;
+  text-align: center;
+}
+.about-byline {
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1.4px;
+  color: rgba(255,255,255,0.72);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 56px;
+}
+.about-byline-dot {
+  margin: 0 8px;
+  color: #6BB6FF;
+}
+/* Override existing .about-header eyebrow to look right on dark bg */
+.about .about-header .eyebrow {
+  color: #6BB6FF !important;
+  border: 1px solid rgba(107,182,255,0.30);
+  background: rgba(107,182,255,0.08);
+  padding: 8px 16px;
+  border-radius: 999px;
+  display: inline-block;
+}
+.about .about-header { text-align: center; }
+
+/* Powered-by strip */
+.about-powered {
+  position: relative;
+  padding: 44px 32px 36px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(0,110,255,0.10) 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  margin: 0 auto 48px;
+  max-width: 1100px;
+}
+.about-powered-label {
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.about-powered-brand {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 36px;
+  background: linear-gradient(135deg, #fff 0%, #5AA0FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.about-powered-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+@media (max-width: 900px) {
+  .about-powered-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+.powered-stat { text-align: center; }
+.powered-stat-num {
+  font-size: clamp(34px, 3.8vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.powered-stat-unit {
+  font-size: 0.6em;
+  color: #5AA0FF;
+  font-weight: 700;
+  margin-left: 2px;
+}
+.powered-stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+  letter-spacing: 0.4px;
+}
+
+/* Partners strip */
+.about-partners-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+@media (max-width: 720px) {
+  .about-partners-strip { gap: 18px; }
+}
+/* Force partner logos light so they're readable on the dark .about bg */
+.about .about-partner-logo {
+  color: rgba(255,255,255,0.85) !important;
+  opacity: 0.85;
+  filter: none;
+}
+.about .about-partner-logo:hover { opacity: 1; }
+.about .about-partner-logo .logo-sub {
+  color: rgba(255,255,255,0.6) !important;
+  font-weight: 500;
+  display: block;
+  margin-top: 2px;
+}
+.about .about-partner-logo--text {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  text-align: center;
+}
+.about .natgeo-text {
+  color: #fff !important;
+}
+.about .natgeo-sub {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+.about-readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #5AA0FF;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin: 12px auto 0;
+  width: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+}
+.about-readmore svg { transition: transform 0.3s ease; }
+
+/* ============================================================
+   SIX PILLARS — per-card colors + image media support
+   ============================================================ */
+.topic-v2-media {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+.topic-v2-media img,
+.topic-v2-media video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.topic-v2:hover .topic-v2-media img,
+.topic-v2:hover .topic-v2-media video {
+  transform: scale(1.06);
+}
+
+/* Standardize title size across all 6 cards */
+.topic-v2-title {
+  font-size: clamp(22px, 2vw, 26px) !important;
+  line-height: 1.18 !important;
+  font-weight: 800 !important;
+  margin-bottom: 10px !important;
+  min-height: 60px;
+}
+@media (max-width: 720px) {
+  .topic-v2-title { min-height: auto; }
+}
+
+/* Per-pillar accent colors — overlay tint + border accent */
+.topic-v2--green .topic-v2-overlay {
+  background: linear-gradient(180deg,
+    rgba(20,80,50,0.25) 0%,
+    rgba(20,80,50,0.55) 50%,
+    rgba(20,90,60,0.92) 100%) !important;
+}
+.topic-v2--green:hover { box-shadow: 0 24px 60px rgba(40,160,100,0.35) !important; }
+.topic-v2--green .topic-v2-num { color: #6FE3B5 !important; }
+
+.topic-v2--indigo .topic-v2-overlay {
+  background: linear-gradient(180deg,
+    rgba(30,30,90,0.25) 0%,
+    rgba(30,30,100,0.55) 50%,
+    rgba(20,30,110,0.92) 100%) !important;
+}
+.topic-v2--indigo:hover { box-shadow: 0 24px 60px rgba(80,80,220,0.35) !important; }
+.topic-v2--indigo .topic-v2-num { color: #A8B5FF !important; }
+
+.topic-v2--orange .topic-v2-overlay {
+  background: linear-gradient(180deg,
+    rgba(120,40,10,0.25) 0%,
+    rgba(140,50,15,0.55) 50%,
+    rgba(160,60,20,0.92) 100%) !important;
+}
+.topic-v2--orange:hover { box-shadow: 0 24px 60px rgba(255,120,40,0.35) !important; }
+.topic-v2--orange .topic-v2-num { color: #FFB78A !important; }
+
+.topic-v2--cyan .topic-v2-overlay {
+  background: linear-gradient(180deg,
+    rgba(0,80,100,0.25) 0%,
+    rgba(0,90,120,0.55) 50%,
+    rgba(0,100,140,0.92) 100%) !important;
+}
+.topic-v2--cyan:hover { box-shadow: 0 24px 60px rgba(0,180,220,0.35) !important; }
+.topic-v2--cyan .topic-v2-num { color: #7DE5FF !important; }
+
+.topic-v2--violet .topic-v2-overlay {
+  background: linear-gradient(180deg,
+    rgba(70,30,110,0.25) 0%,
+    rgba(80,35,130,0.55) 50%,
+    rgba(90,40,150,0.92) 100%) !important;
+}
+.topic-v2--violet:hover { box-shadow: 0 24px 60px rgba(170,90,255,0.35) !important; }
+.topic-v2--violet .topic-v2-num { color: #D4A8FF !important; }
+
+.topic-v2--blue .topic-v2-overlay {
+  background: linear-gradient(180deg,
+    rgba(0,60,150,0.25) 0%,
+    rgba(0,80,180,0.55) 50%,
+    rgba(0,90,210,0.92) 100%) !important;
+}
+.topic-v2--blue:hover { box-shadow: 0 24px 60px rgba(0,140,255,0.45) !important; }
+.topic-v2--blue .topic-v2-num { color: #8BC0FF !important; }
 </style>
 </head>
 <body>
@@ -6245,70 +6522,53 @@ html {
     of learners. That is the promise of Longevity Life Academy."
 -->
 <section class="about" id="about">
+  <a class="about-link-wrap" href="about.html" aria-label="Read more about Longevity Life Academy and eTeacher Group">
   <div class="container">
     <div class="about-inner reveal">
       <div class="about-header">
-        <span class="eyebrow">About Longevity Life Academy</span>
-        <h2 class="section-title">A 25‑year leader in online learning.<span class="about-title-break"><br></span> The best minds in longevity.</h2>
+        <span class="eyebrow">About Us</span>
+        <h1 class="about-mainhead">About Longevity Life Academy</h1>
       </div>
 
-      <!-- Collapsible body: short preview, expands on click -->
-      <details class="about-details">
-        <summary class="about-summary" aria-label="Read the full story">
-          <span class="about-preview">
-            Longevity Life Academy is built by <strong>eTeacher Group</strong>, a pioneer of
-            online education for over 25 years. We assembled the world's leading
-            longevity instructors and combined them with a proven live‑learning
-            method to create the most accessible, comprehensive longevity course in the world.
-          </span>
-          <span class="about-toggle">
-            <span class="about-toggle-text about-toggle-text--more">Read the full story</span>
-            <span class="about-toggle-text about-toggle-text--less">Show less</span>
-            <svg class="about-toggle-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
+      <div class="about-body about-body--simple">
+        <p class="about-lead about-lead--gal">
+          The Longevity Life Course. We have assembled the top knowledge with the top
+          teachers, using eTeacher's approach to create the most simple, comprehensive,
+          science-backed course. Be fully immersed with the longevity protocol that's
+          right for you.
+        </p>
+        <p class="about-byline">Longevity Life Academy <span class="about-byline-dot">·</span> by eTeacher</p>
+      </div>
 
-        <div class="about-body">
-          <p class="about-lead">
-            Longevity Life Academy is the first dedicated longevity school built by
-            <strong>eTeacher Group</strong>, a pioneer of online education since 2000.
-            In twenty‑five years, eTeacher has delivered over <strong>400,000 courses</strong> to
-            students in <strong>197 countries</strong>, trained <strong>600+ instructors</strong>, and built five global
-            online schools in partnership with institutions like <strong>National Geographic
-            Learning</strong> and the <strong>Hebrew University of Jerusalem</strong>. We took that proven
-            live‑learning method and paired it with the leading longevity physicians
-            and scientists working today — the people behind the clinics, the books,
-            and the research you already trust. The result is twelve tightly designed
-            sessions that take you from wherever you are today to a personal longevity
-            protocol built around your body, your signals, and your life.
-          </p>
-
-          <!-- Power numbers -->
-          <div class="about-stats">
-            <div class="about-stat">
-              <div class="about-stat-num">25<span class="about-stat-unit">yrs</span></div>
-              <div class="about-stat-label">Building online schools</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">400k<span class="about-stat-unit">+</span></div>
-              <div class="about-stat-label">Courses delivered</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">197</div>
-              <div class="about-stat-label">Countries reached</div>
-            </div>
-            <div class="about-stat">
-              <div class="about-stat-num">600<span class="about-stat-unit">+</span></div>
-              <div class="about-stat-label">Trained instructors</div>
-            </div>
+      <!-- Powered by eTeacher Group strip -->
+      <div class="about-powered">
+        <div class="about-powered-label">Powered by</div>
+        <div class="about-powered-brand">eTeacher Group</div>
+        <div class="about-powered-stats">
+          <div class="powered-stat">
+            <div class="powered-stat-num">400k<span class="powered-stat-unit">+</span></div>
+            <div class="powered-stat-label">Students globally</div>
+          </div>
+          <div class="powered-stat">
+            <div class="powered-stat-num">197</div>
+            <div class="powered-stat-label">Countries reached</div>
+          </div>
+          <div class="powered-stat">
+            <div class="powered-stat-num">25<span class="powered-stat-unit">yrs</span></div>
+            <div class="powered-stat-label">Of online education</div>
+          </div>
+          <div class="powered-stat">
+            <div class="powered-stat-num">600<span class="powered-stat-unit">+</span></div>
+            <div class="powered-stat-label">Trained instructors</div>
+          </div>
+          <div class="powered-stat">
+            <div class="powered-stat-num">5</div>
+            <div class="powered-stat-label">Global online schools</div>
           </div>
         </div>
-      </details>
 
-      <!-- Partnership logo strip -->
-      <div class="about-partners" aria-label="Partners and accreditations">
-        <div class="about-partners-label">In partnership with</div>
-        <div class="about-partners-logos">
+        <!-- Partner / accreditation logos -->
+        <div class="about-partners-strip" aria-label="Partners and accreditations">
           <div class="about-partner-logo about-partner-logo--natgeo" title="National Geographic Learning">
             <div class="natgeo-bar" aria-hidden="true"></div>
             <span class="natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="natgeo-sub">LEARNING</span></span>
@@ -6322,13 +6582,16 @@ html {
           <div class="about-partner-logo about-partner-logo--text" title="Israeli Ministry of Foreign Affairs">
             Ministry of<br><span class="logo-sub">Foreign Affairs</span>
           </div>
-          <div class="about-partner-logo about-partner-logo--text" title="eTeacher Group">
-            eTeacher<br><span class="logo-sub">Group</span>
-          </div>
         </div>
+      </div>
+
+      <div class="about-readmore">
+        Read our story
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </div>
     </div>
   </div>
+  </a>
 </section>
 
 <!-- ==============================================
@@ -6339,31 +6602,31 @@ html {
     <div class="topics-header reveal">
       <span class="eyebrow">The Six Pillars</span>
       <h2 class="section-title">Six Pillars of a<br>Longer, Better Life.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">The interconnected systems &mdash; nutrition, sleep, movement, metabolism, your body's signals, and daily protocols &mdash; that compound a longer, better life across every decade.</p>
+      <p class="section-subtitle" style="margin:0 auto;">The interconnected systems &mdash; nutrition, sleep, movement, metabolism, your body's signals, and your personal protocol &mdash; that compound a longer, better life across every decade.</p>
     </div>
     <div class="topic-grid-v2">
-      <a href="topics/nutrition-longevity.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/v2-nutrition-greens.mp4" autoplay muted loop playsinline></video></div>
+      <a href="topics/nutrition-longevity.html" class="topic-v2 topic-v2--green reveal">
+        <div class="topic-v2-media"><img src="assets/pillars/nutrition-mediterranean.jpg" alt="Mediterranean longevity foods — olive oil, fish, leafy greens, nuts" loading="lazy"></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">01</span>
-          <h3 class="topic-v2-title">Nutrition for a Longer Life</h3>
-          <p class="topic-v2-desc">Plant-forward eating, when you eat, and the food choices that fuel your body's daily repair.</p>
+          <h3 class="topic-v2-title">Nutrition</h3>
+          <p class="topic-v2-desc">The Mediterranean foundation, when you eat, and the food choices that fuel your body's daily repair.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/sleep-circadian-health.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/sleep-blog.mp4" autoplay muted loop playsinline></video></div>
+      <a href="topics/sleep-circadian-health.html" class="topic-v2 topic-v2--indigo reveal">
+        <div class="topic-v2-media"><video preload="metadata" src="assets/sleep-blog.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">02</span>
-          <h3 class="topic-v2-title">Sleep &amp; Daily Rhythm</h3>
+          <h3 class="topic-v2-title">Sleep</h3>
           <p class="topic-v2-desc">Deep, restorative sleep and the natural rhythms that govern energy, mood, and recovery in every system.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/exercise-movement.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/exercise-yoga.mp4" autoplay muted loop playsinline></video></div>
+      <a href="topics/exercise-movement.html" class="topic-v2 topic-v2--orange reveal">
+        <div class="topic-v2-media"><img src="assets/pillars/exercise-strength.jpg" alt="Strength, cardio, and TRX-style training for healthspan" loading="lazy"></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">03</span>
@@ -6372,33 +6635,33 @@ html {
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/glucose-mitochondria.mp4" autoplay muted loop playsinline></video></div>
+      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 topic-v2--cyan reveal">
+        <div class="topic-v2-media"><img src="assets/pillars/metabolic-cgm.jpg" alt="Continuous glucose monitor sensor on the arm — real metabolic tracking" loading="lazy"></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">04</span>
           <h3 class="topic-v2-title">Metabolic Health</h3>
-          <p class="topic-v2-desc">How your body handles food and energy &mdash; the everyday foundation of how well you age.</p>
+          <p class="topic-v2-desc">How your body handles food and energy &mdash; tracked with continuous glucose monitoring and the everyday foundation of how well you age.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/biomarkers-testing.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/reading-body-signals.mp4" autoplay muted loop playsinline></video></div>
+      <a href="topics/biomarkers-testing.html" class="topic-v2 topic-v2--violet reveal">
+        <div class="topic-v2-media"><img src="assets/pillars/signals-wearable.jpg" alt="Health wearable on the wrist tracking real body data" loading="lazy"></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">05</span>
-          <h3 class="topic-v2-title">Reading Your Body's Signals</h3>
-          <p class="topic-v2-desc">The basic blood work, body data, and daily signals that tell you the truth about how you're really aging.</p>
+          <h3 class="topic-v2-title">Reading Your Body Signals</h3>
+          <p class="topic-v2-desc">Wearables, basic blood work, and daily data &mdash; the signals that tell you the truth about how you're really aging.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/protocols-habits.html" class="topic-v2 reveal">
-        <div class="topic-v2-video"><video preload="metadata" src="assets/daily-protocol.mp4" autoplay muted loop playsinline></video></div>
+      <a href="topics/protocols-habits.html" class="topic-v2 topic-v2--blue reveal">
+        <div class="topic-v2-media"><img src="assets/pillars/protocol-applehealth.jpg" alt="Apple Health style dashboard — your personal longevity protocol" loading="lazy"></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">06</span>
-          <h3 class="topic-v2-title">Your Daily Protocol</h3>
-          <p class="topic-v2-desc">Your written, personalized longevity plan &mdash; the daily habits that turn the science into something you actually do.</p>
+          <h3 class="topic-v2-title">Your Longevity Protocol</h3>
+          <p class="topic-v2-desc">Your personalized plan in a clean dashboard view &mdash; the daily habits and metrics that turn the science into something you actually do.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
