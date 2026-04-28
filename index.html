@@ -3781,6 +3781,25 @@ h2.section-title {
 }
 .faq-item:hover .faq-q span,
 .faq-item:hover .faq-q { color: #fff !important; }
+
+/* When FAQ item is open, the headline becomes a colorful brand gradient
+   (blue → light blue) instead of plain white — readable + on-brand */
+.faq-item.open .faq-q,
+.faq-item.open .faq-q span:not(.faq-num),
+.faq-item.open .faq-q-text {
+  background: linear-gradient(135deg, #4D9AFF 0%, #66B8FF 50%, #A8D5FF 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  font-weight: 800 !important;
+}
+/* Keep the small 01/02/03 number readable in solid blue */
+.faq-item.open .faq-num {
+  background: none !important;
+  -webkit-text-fill-color: #006EFF !important;
+  color: #006EFF !important;
+}
 .faq-icon {
   background: rgba(0,110,255,0.1) !important;
   color: #006EFF !important;
@@ -6782,6 +6801,75 @@ html {
   background: none !important;
 }
 
+/* ============================================================
+   UNIFIED ENROLL NOW CTA — darker solid blue gradient everywhere
+   Matches the testimonials/hero CTA so every "Enroll Now" button
+   has identical color, style, and font.
+   ============================================================ */
+.section-cta-btn,
+.testimonials .section-cta-btn,
+.deepdive-cta-btn,
+.curriculum-cta .section-cta-btn,
+.how-v2-cta .section-cta-btn,
+.instructors-cta .section-cta-btn,
+a.section-cta-btn[href="#lead-gen"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 18px 40px !important;
+  font-family: 'Codec Pro', 'Inter', sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  text-decoration: none !important;
+  border-radius: 999px !important;
+  border: none !important;
+  background: linear-gradient(135deg, #006EFF 0%, #338BFF 100%) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  box-shadow: 0 14px 36px rgba(0,110,255,0.35), inset 0 1px 0 rgba(255,255,255,0.3) !important;
+  cursor: pointer !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease !important;
+  margin-top: 28px !important;
+}
+.section-cta-btn:hover,
+.testimonials .section-cta-btn:hover,
+.deepdive-cta-btn:hover,
+.curriculum-cta .section-cta-btn:hover,
+.how-v2-cta .section-cta-btn:hover,
+.instructors-cta .section-cta-btn:hover,
+a.section-cta-btn[href="#lead-gen"]:hover {
+  background: linear-gradient(135deg, #0058D6 0%, #1B7AFF 100%) !important;
+  box-shadow: 0 18px 44px rgba(0,110,255,0.5), inset 0 1px 0 rgba(255,255,255,0.35) !important;
+  transform: translateY(-2px) !important;
+  color: #fff !important;
+}
+.section-cta-btn svg,
+.testimonials .section-cta-btn svg,
+.deepdive-cta-btn svg,
+.curriculum-cta .section-cta-btn svg,
+.how-v2-cta .section-cta-btn svg,
+.instructors-cta .section-cta-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: #fff !important;
+  fill: none !important;
+  stroke-width: 2.5 !important;
+  color: #fff !important;
+  transition: transform 0.3s ease !important;
+}
+.section-cta-btn:hover svg,
+.deepdive-cta-btn:hover svg {
+  transform: translateX(4px) !important;
+}
+@media (max-width: 600px) {
+  .section-cta-btn,
+  .testimonials .section-cta-btn,
+  .deepdive-cta-btn {
+    padding: 16px 32px !important;
+    font-size: 15px !important;
+  }
+}
 </style>
 </head>
 <body>
