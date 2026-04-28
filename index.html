@@ -5475,6 +5475,68 @@ html {
   .insight-card-title { font-size: 20px; }
   .insight-card--feature .insight-card-title { font-size: 24px; }
 }
+
+
+/* Curriculum phase tabs */
+.curriculum-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto 56px;
+  position: relative;
+  z-index: 1;
+}
+.curriculum-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 16px;
+  background: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(0,110,255,0.12);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  font-family: inherit;
+  min-height: 92px;
+}
+.curriculum-tab:hover { background: rgba(0,110,255,0.06); }
+.curriculum-tab.is-active {
+  background: linear-gradient(135deg, #006EFF 0%, #338BFF 100%);
+  border-color: #006EFF;
+  box-shadow: 0 8px 24px rgba(0,110,255,0.25);
+}
+.curriculum-tab-num {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #006EFF;
+  opacity: 0.7;
+}
+.curriculum-tab.is-active .curriculum-tab-num { color: #fff; opacity: 0.9; }
+.curriculum-tab-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #001233;
+}
+.curriculum-tab.is-active .curriculum-tab-name { color: #fff; }
+.curriculum-tab-meta {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.4px;
+}
+.curriculum-tab.is-active .curriculum-tab-meta { color: #fff; opacity: 0.9; }
+.phase-block { display: none; }
+.phase-block.is-active { display: block; animation: phaseFadeIn 0.4s ease; }
+@keyframes phaseFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 720px) {
+  .curriculum-tabs { grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 560px; }
+  .curriculum-tab { padding: 12px 10px; min-height: 78px; }
+  .curriculum-tab-name { font-size: 14px; }
+  .curriculum-tab-meta { font-size: 11px; }
+}
 </style>
 </head>
 <body>
@@ -5925,15 +5987,37 @@ html {
 <section class="curriculum" id="syllabus">
   <div class="container">
     <div class="curriculum-header reveal">
-      <p class="curriculum-bridge">A structured 12-week online course designed by eTeacher Group</p>
-      <p class="eyebrow" style="margin-bottom: 16px;">The Complete Protocol</p>
-      <h2 class="section-title">12 Sessions. 4 Phases.<br><span class="gold">Your Protocol</span>.</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">Each phase builds on the last — science-backed, teacher-led, peer-driven.</p>
+      <p class="curriculum-bridge">A structured 18-week online course designed by eTeacher Group</p>
+      <p class="eyebrow" style="margin-bottom: 16px;">The Curriculum</p>
+      <h2 class="section-title">18 Live Sessions.<br>4 Phases. <span class="gold">One Protocol.</span></h2>
+      <p class="section-subtitle" style="margin: 0 auto;">A structured 18-week journey from longevity foundations to your personal blueprint &mdash; taught live, in cohorts of 8–15.</p>
+    </div>
+    <div class="curriculum-tabs reveal" role="tablist" aria-label="Curriculum phases">
+      <button class="curriculum-tab is-active" data-phase-tab="1" role="tab" aria-selected="true">
+        <span class="curriculum-tab-num">01</span>
+        <span class="curriculum-tab-name">Foundation</span>
+        <span class="curriculum-tab-meta">Sessions 1–3</span>
+      </button>
+      <button class="curriculum-tab" data-phase-tab="2" role="tab" aria-selected="false">
+        <span class="curriculum-tab-num">02</span>
+        <span class="curriculum-tab-name">Data &amp; Discovery</span>
+        <span class="curriculum-tab-meta">Sessions 4–7</span>
+      </button>
+      <button class="curriculum-tab" data-phase-tab="3" role="tab" aria-selected="false">
+        <span class="curriculum-tab-num">03</span>
+        <span class="curriculum-tab-name">Lifestyle Systems</span>
+        <span class="curriculum-tab-meta">Sessions 8–13</span>
+      </button>
+      <button class="curriculum-tab" data-phase-tab="4" role="tab" aria-selected="false">
+        <span class="curriculum-tab-num">04</span>
+        <span class="curriculum-tab-name">Integration &amp; Blueprint</span>
+        <span class="curriculum-tab-meta">Sessions 14–18</span>
+      </button>
     </div>
     <div class="curriculum-phases">
 
       <!-- PHASE 1: Foundation -->
-      <div class="phase-block reveal">
+      <div class="phase-block reveal is-active" data-phase="1">
         <div class="phase-block-header">
           <span class="phase-block-label">Phase 1 · Sessions 1–3</span>
           <span class="phase-block-name">Foundation</span>
@@ -5951,14 +6035,14 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Understand aging as a modifiable trajectory, not a fixed decline</li>
-                  <li>Articulate your personal healthspan goals with clarity and specificity</li>
-                  <li>Shift mindset from fixing problems to designing resilient systems</li>
+                  <li>Understand aging as a modifiable trajectory, not an inevitability</li>
+                  <li>Distinguish lifespan from healthspan and name the compression-of-morbidity target</li>
+                  <li>Articulate a personal reason this course matters</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Welcome + framing → Mini-lecture on the biology of aging → Guided personal reflection → Breakout group introductions → Group synthesis and discussion → Introduction to the "Longevity Lens" framework</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Welcome and group norms → Mini-lecture on healthspan, Medicine 3.0, and aging trajectories → Guided exercise visualizing your 80-year curve → Breakout on the default last decade → Group synthesis and shared course language → Intent-setting close with Longevity Lens preview</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Complete a 3-day lifestyle awareness log tracking energy, meals, sleep, movement, and mood patterns.</p>
+                <p class="curriculum-work">Three-day lifestyle awareness log — sleep, movement, meals, energy. Descriptive only, no judgment.</p>
               </div>
             </div>
           </div>
@@ -5966,7 +6050,7 @@ html {
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
               <span class="curriculum-num">02</span>
               <div class="curriculum-trigger-text">
-                <h3>Metabolic Health: Why Blood Sugar Is the Central Signal</h3>
+                <h3>The Longevity Lens &amp; Baseline Self-Assessment</h3>
               </div>
               <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -5974,14 +6058,14 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Understand glucose as a signal, not a villain — and why it matters for aging</li>
-                  <li>See how metabolic dysfunction develops silently over years</li>
-                  <li>Understand why weight alone is a poor marker of metabolic health</li>
+                  <li>Use the Longevity Lens to evaluate daily choices across four domains</li>
+                  <li>Establish a baseline in energy, mobility, mental clarity, and emotional resilience</li>
+                  <li>Know three field-ready self-assessments with evidence behind them</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Review lifestyle logs → Visual walkthrough of glucose curves → Case comparisons (healthy vs. dysregulated) → Myth dismantling session → CGM preview and introduction</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Recap from Session 1 → Lens demo across the 4-domain frame → Live baseline assessment (cardio fitness estimate, grip strength as a mortality proxy, sit-to-stand, subjective scale) → Pair share on which domain surprised you → Choose one priority domain</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Complete a detailed food recall and energy crash mapping exercise — identify when you crash, what you ate, and how you felt.</p>
+                <p class="curriculum-work">Record three data points — resting HR (7-day average), grip-strength estimate, sit-to-stand count.</p>
               </div>
             </div>
           </div>
@@ -5989,7 +6073,7 @@ html {
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
               <span class="curriculum-num">03</span>
               <div class="curriculum-trigger-text">
-                <h3>Nutrition for Longevity: Inputs vs. Responses</h3>
+                <h3>Metabolic Health: Blood Sugar as Central Signal</h3>
               </div>
               <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -5997,14 +6081,14 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Stop thinking in dietary rules; start thinking in metabolic responses</li>
-                  <li>Understand how protein, fiber, and fat processing affects glucose</li>
-                  <li>Design a default meal framework personalized to your biology</li>
+                  <li>Understand glucose as a signal, not a villain</li>
+                  <li>Recognize silent metabolic dysfunction in normal-weight people</li>
+                  <li>Know why fasting glucose alone misses most of the picture</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Interactive lecture on nutrient responses → Meal deconstruction exercise → Group comparison of individual responses → Design your default meal framework</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Log review → Glucose-as-signal mini-lecture (Snyder, Hall 2018, PREDICT 1) → Three-trace case comparison (healthy vs subclinical vs diabetic) → Breakout on which markers to trust → Group synthesis reframing blood sugar from villain to information</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Try 1–2 meal adjustments based on your framework and document the results in your learning journal.</p>
+                <p class="curriculum-work">One fasted-morning mood and energy log — pre- and post-breakfast, three days.</p>
               </div>
             </div>
           </div>
@@ -6012,17 +6096,17 @@ html {
       </div>
 
       <!-- PHASE 2: Data & Discovery -->
-      <div class="phase-block reveal">
+      <div class="phase-block reveal" data-phase="2">
         <div class="phase-block-header">
-          <span class="phase-block-label">Phase 2 · Sessions 4–5</span>
-          <span class="phase-block-name">Data &amp; Discovery</span>
+          <span class="phase-block-label">Phase 2 · Sessions 4–7</span>
+          <span class="phase-block-name">Data & Discovery</span>
         </div>
         <div class="phase-block-sessions">
           <div class="curriculum-item" data-session="4">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
               <span class="curriculum-num">04</span>
               <div class="curriculum-trigger-text">
-                <h3>Beyond the Standard Lipid Panel: Seeing the Invisible</h3>
+                <h3>Glucose Variability &amp; Metabolic Flexibility</h3>
               </div>
               <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -6030,14 +6114,14 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Understand how CGM technology works and what it measures</li>
-                  <li>Learn what the data actually means — spikes, variability, baselines</li>
-                  <li>Reduce anxiety around numbers and develop a healthy data relationship</li>
+                  <li>Define glucose variability and explain why it predicts risk independently of average glucose</li>
+                  <li>Understand metabolic flexibility — fuel switching between carbs and fat</li>
+                  <li>Identify what drives spikes and what drives recovery</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">CGM fundamentals lecture → Walk through real anonymized datasets → Group interpretation exercises → CGM setup guidance for those using devices</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Recap of glucose-as-signal → Mechanics of variability (SD, time-in-range, MAGE) → Case studies on metabolic flexibility → Breakout to map your suspected drivers → Synthesis previewing the continuous glucose monitor lab</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Begin your CGM experiment or review provided anonymized datasets. Record observations about your own patterns.</p>
+                <p class="curriculum-work">Predict your top three glucose triggers before the continuous glucose monitor arrives — food, stress, sleep, or movement.</p>
               </div>
             </div>
           </div>
@@ -6045,7 +6129,7 @@ html {
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
               <span class="curriculum-num">05</span>
               <div class="curriculum-trigger-text">
-                <h3>Food Order, Composition &amp; Glucose Curves</h3>
+                <h3>continuous glucose monitor: Seeing the Invisible</h3>
               </div>
               <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -6053,14 +6137,60 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Learn how eating sequence (food order) materially impacts glucose response</li>
-                  <li>Understand carbohydrate context — why the same carb acts differently in different meals</li>
-                  <li>Reduce glucose spikes without restriction or deprivation</li>
+                  <li>Apply a continuous glucose monitor and interpret the trace</li>
+                  <li>Distinguish meaningful patterns from noise across 14 days</li>
+                  <li>Understand what continuous glucose monitor data can — and cannot — tell you</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Share CGM observations from the week → Facilitator-guided curve comparison → Design safe food experiments → Expectation-setting for realistic progress</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">continuous glucose monitor applied live with the cohort → App walkthrough and trace anatomy → Review three real participant traces from prior cohorts → Build your personal protocol for the next 14 days of observation</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Run individual food experiments — try different meal orders, compositions, and timings. Document results with CGM data or subjective energy tracking.</p>
+                <p class="curriculum-work">Two weeks of blind observation — wear the continuous glucose monitor, log meals and movement, draw no conclusions yet.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="6">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">06</span>
+              <div class="curriculum-trigger-text">
+                <h3>Nutrition Framework: Inputs vs Responses</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Replace good food / bad food with a personal-response framework</li>
+                  <li>Read your continuous glucose monitor data as nutrition feedback rather than verdict</li>
+                  <li>Identify your three biggest glucose-driving foods</li>
+                </ul>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">continuous glucose monitor data review → Mini-lecture on inputs vs responses → Guided exercise to map your personal response map → Breakout pairs share top triggers and surprises → Synthesis sets up plate architecture</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Build your personal glucose-response map — three foods that spike you, three that don&#x27;t, three to test.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="7">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">07</span>
+              <div class="curriculum-trigger-text">
+                <h3>Plate Architecture: Protein · Fiber · Processing</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Apply the protein-fiber-processing frame to any meal</li>
+                  <li>Understand why food order changes the curve</li>
+                  <li>Recognize ultra-processed food as a glucose multiplier</li>
+                </ul>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Plate architecture mini-lecture (protein floor, fiber lever, processing penalty) → Food-order experiment walkthrough (vegetable → protein → carb) → Live build of three plates from your kitchen → Pair coaching to redesign one weekly meal you&#x27;ve already tested on the continuous glucose monitor</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Run the food-order experiment for three days. Same meal, different order. Capture the continuous glucose monitor trace.</p>
               </div>
             </div>
           </div>
@@ -6068,17 +6198,17 @@ html {
       </div>
 
       <!-- PHASE 3: Lifestyle Systems -->
-      <div class="phase-block reveal">
+      <div class="phase-block reveal" data-phase="3">
         <div class="phase-block-header">
-          <span class="phase-block-label">Phase 3 · Sessions 6–8</span>
+          <span class="phase-block-label">Phase 3 · Sessions 8–13</span>
           <span class="phase-block-name">Lifestyle Systems</span>
         </div>
         <div class="phase-block-sessions">
-          <div class="curriculum-item" data-session="6">
+          <div class="curriculum-item" data-session="8">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-              <span class="curriculum-num">06</span>
+              <span class="curriculum-num">08</span>
               <div class="curriculum-trigger-text">
-                <h3>Training for the Centenarian Olympics</h3>
+                <h3>Fasting &amp; Meal Timing for Longevity</h3>
               </div>
               <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -6086,20 +6216,66 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Understand muscle as the body's primary glucose sink</li>
-                  <li>Learn the minimum effective dose of movement for metabolic benefit</li>
-                  <li>Design a sustainable, age-appropriate movement plan</li>
+                  <li>Distinguish time-restricted eating from prolonged fasting</li>
+                  <li>Understand the autophagy, insulin sensitivity, and circadian arguments — and their limits</li>
+                  <li>Choose a fasting window that fits your life and your data</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">CGM examples with and without post-meal movement → Movement planning workshop → Peer review of individual plans → Commitment check-in</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Evidence review — what TRE actually shows in human RCTs, where rodent autophagy data does and doesn&#x27;t translate → Case studies on women, athletes, and disordered-eating histories → Design a 4-week trial window matched to your continuous glucose monitor and sleep data</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Run movement experiments with CGM tracking — compare glucose curves on days with and without post-meal walks or resistance training.</p>
+                <p class="curriculum-work">Test one meal-timing window for the week. Track continuous glucose monitor, energy, sleep, and adherence.</p>
               </div>
             </div>
           </div>
-          <div class="curriculum-item" data-session="7">
+          <div class="curriculum-item" data-session="9">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-              <span class="curriculum-num">07</span>
+              <span class="curriculum-num">09</span>
+              <div class="curriculum-trigger-text">
+                <h3>Gut Health &amp; the Gut–Brain–Glucose Axis</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand the microbiome as a metabolic organ</li>
+                  <li>Connect fiber, fermentation, and short-chain fatty acids to glucose control</li>
+                  <li>Recognize gut-symptom patterns worth investigating</li>
+                </ul>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Mini-lecture on the gut–brain–glucose axis (vagal tone, SCFA, postbiotics) → Case studies linking dysbiosis to glucose variability and mood → Self-assessment of fiber diversity (30-plants-per-week) → Breakout on what to add before what to remove</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Track plant diversity for one week — target 30 distinct plants. Note any symptom or energy correlations.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="10">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">10</span>
+              <div class="curriculum-trigger-text">
+                <h3>Movement as a Glucose Tool</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Use movement to lower postprandial glucose without changing the meal</li>
+                  <li>Understand steady cardio, cardio fitness, and strength as the foundation of a long life</li>
+                  <li>Build a minimum-effective movement plan you&#x27;ll actually keep</li>
+                </ul>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Centenarian decathlon framing → Movement hierarchy (steady cardio base, cardio fitness ceiling, strength pillar) → Live demo of post-meal walks and how they affect blood sugar → Design a weekly movement floor → Breakout pairs commit to a 2-week trial</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Test a 10-minute post-meal walk after your highest-glucose meal of the day. Capture the continuous glucose monitor delta.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="11">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">11</span>
               <div class="curriculum-trigger-text">
                 <h3>Sleep, Circadian Rhythm &amp; Overnight Glucose</h3>
               </div>
@@ -6109,20 +6285,20 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>See sleep as a metabolic regulation system, not just rest</li>
-                  <li>Understand the effects of late eating, blue light, and irregular schedules on glucose</li>
-                  <li>Design one targeted sleep experiment based on your data</li>
+                  <li>Read overnight continuous glucose monitor data as a sleep quality signal</li>
+                  <li>Apply circadian alignment — light, temperature, timing — as the cheapest longevity lever</li>
+                  <li>Identify your two highest-leverage sleep changes</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Overnight CGM data review → Sleep habit audit → Troubleshooting workshop for common sleep disruptors → Design your personal sleep experiment</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Sleep architecture and the metabolic cost of one bad night → Overnight glucose signatures (dawn phenomenon vs disrupted sleep vs late eating) → Self-assessment across light, temperature, timing, alcohol, caffeine → Commit to a 1-week sleep protocol</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Run your sleep experiment for one week — track bedtime, wake time, late eating, screen exposure, and overnight glucose patterns.</p>
+                <p class="curriculum-work">Run a one-week sleep protocol — fixed wake time, morning light, last meal three hours before bed.</p>
               </div>
             </div>
           </div>
-          <div class="curriculum-item" data-session="8">
+          <div class="curriculum-item" data-session="12">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-              <span class="curriculum-num">08</span>
+              <span class="curriculum-num">12</span>
               <div class="curriculum-trigger-text">
                 <h3>Stress, Emotions &amp; Non-Food Glucose Spikes</h3>
               </div>
@@ -6132,30 +6308,76 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Recognize that emotions and stress cause measurable glucose spikes — without any food</li>
-                  <li>Learn evidence-based nervous system regulation tools</li>
-                  <li>Map your personal stress triggers and build a regulation plan</li>
+                  <li>See stress on a continuous glucose monitor trace and distinguish it from food</li>
+                  <li>Understand the cortisol–glucose loop and its long-tail metabolic cost</li>
+                  <li>Build a regulation toolkit ranked by evidence and convenience</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">CGM stress spike examples → Guided nervous system regulation exercise → Personal trigger mapping → Design your regulation toolkit</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">The stress-glucose loop and your body's recovery signal → Case review of non-food spikes → Live practice of three regulation tools (slow exhale, box breath, body reset) → Map your top two stressors and choose your default tool</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Practice your chosen stress regulation technique daily. Note any glucose changes during stressful events vs. calm periods.</p>
+                <p class="curriculum-work">Catch one non-food spike during the week. Use a regulation tool inside ten minutes and log the continuous glucose monitor response.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="13">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">13</span>
+              <div class="curriculum-trigger-text">
+                <h3>Cardiovascular Longevity: Cardio Fitness, Cholesterol &amp; the #1 Killer</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Understand atherosclerotic cardiovascular disease as the dominant longevity threat</li>
+                  <li>Read the cholesterol picture better than your annual physical does</li>
+                  <li>Treat cardio fitness as a longevity predictor, not just a fitness number</li>
+                </ul>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Four Horsemen framing (heart disease, cancer, brain decline, metabolic disease) → The cholesterol numbers that actually matter, Lp(a) tested once in your life → Prevention timeline that starts decades before the event → Cardio fitness norms by age and sex → Set a personal cardiovascular target</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Order the right cholesterol panel and Lp(a) on your next blood draw. Estimate your current cardio fitness and write your 12-month target.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PHASE 4: Integration -->
-      <div class="phase-block reveal">
+      <!-- PHASE 4: Integration & Blueprint -->
+      <div class="phase-block reveal" data-phase="4">
         <div class="phase-block-header">
-          <span class="phase-block-label">Phase 4 · Sessions 9–12</span>
-          <span class="phase-block-name">Integration</span>
+          <span class="phase-block-label">Phase 4 · Sessions 14–18</span>
+          <span class="phase-block-name">Integration & Blueprint</span>
         </div>
         <div class="phase-block-sessions">
-          <div class="curriculum-item" data-session="9">
+          <div class="curriculum-item" data-session="14">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-              <span class="curriculum-num">09</span>
+              <span class="curriculum-num">14</span>
+              <div class="curriculum-trigger-text">
+                <h3>Blood Testing &amp; Reading Your Numbers</h3>
+              </div>
+              <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="curriculum-body">
+              <div class="curriculum-body-inner">
+                <div class="curriculum-section-label">Learning Goals</div>
+                <ul class="curriculum-goals">
+                  <li>Read a longevity-grade lab panel — the markers Medicine 3.0 prioritizes</li>
+                  <li>Distinguish &#x27;normal&#x27; from &#x27;optimal&#x27; ranges and know the difference</li>
+                  <li>Build a personal panel and cadence you&#x27;ll actually run</li>
+                </ul>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Longevity panel walkthrough (the cholesterol picture, fasting insulin, insulin sensitivity, inflammation, blood sugar, lipid subfractions, hormones, micronutrients) → Optimal vs reference ranges → Live read-through of a sample panel → Build your panel and cadence</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Build your personal blood panel. Compare against your last labs. Identify three markers you want to move.</p>
+              </div>
+            </div>
+          </div>
+          <div class="curriculum-item" data-session="15">
+            <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
+              <span class="curriculum-num">15</span>
               <div class="curriculum-trigger-text">
                 <h3>Supplements, Tests &amp; Health Tech Literacy</h3>
               </div>
@@ -6165,20 +6387,20 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Avoid biohacking traps and expensive interventions with no evidence</li>
-                  <li>Learn decision filters for evaluating supplements, tests, and wearable data</li>
-                  <li>Develop critical thinking about health marketing claims</li>
+                  <li>Apply the evidence hierarchy — RCT, mechanism, anecdote — to any supplement claim</li>
+                  <li>Identify the foundational supplements with the strongest evidence base</li>
+                  <li>Know when wearable data changes a decision and when it&#x27;s just data</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Supplement label teardown exercise → Wearable data obsession discussion → Practice applying the decision framework to real products → Group debate</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Evidence hierarchy and the foundation set (vitamin D3, omega-3, magnesium, creatine) → Context for longevity therapy candidates → Wearable triage (recovery, sleep, cardio fitness) → Audit your own stack and devices</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Conduct a personal supplement audit — evaluate everything you currently take against the decision framework. Cut what doesn't pass.</p>
+                <p class="curriculum-work">Audit your current supplement stack against the evidence hierarchy. Cut what doesn&#x27;t earn its place. Pick one to test for four weeks.</p>
               </div>
             </div>
           </div>
-          <div class="curriculum-item" data-session="10">
+          <div class="curriculum-item" data-session="16">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-              <span class="curriculum-num">10</span>
+              <span class="curriculum-num">16</span>
               <div class="curriculum-trigger-text">
                 <h3>Social Health, Purpose &amp; Longevity</h3>
               </div>
@@ -6188,20 +6410,20 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Understand the psychosocial predictors of healthy aging — loneliness, purpose, community</li>
-                  <li>Recognize that social connection is as impactful as diet and exercise</li>
-                  <li>Design intentional social habits that support your healthspan</li>
+                  <li>Treat social connection as a primary longevity driver, not a soft skill</li>
+                  <li>Recognize loneliness as a measurable mortality risk</li>
+                  <li>Identify one relationship and one purpose practice to invest in</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Research review on social health and longevity → Values reflection exercise → Social habit design workshop → Accountability pairing</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Harvard Study, Blue Zones, and meta-analyses ranking social connection alongside smoking → Self-assessment of your social architecture (close ties, weak ties, community) → Breakout on purpose, ikigai, and the second-half-of-life question → Commit to one relationship and one purpose practice</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Complete a social connection inventory — map your relationships, identify gaps, and initiate one new or renewed connection this week.</p>
+                <p class="curriculum-work">Initiate one social ritual — weekly call, monthly dinner, weekly walk. Schedule the next four occurrences.</p>
               </div>
             </div>
           </div>
-          <div class="curriculum-item" data-session="11">
+          <div class="curriculum-item" data-session="17">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-              <span class="curriculum-num">11</span>
+              <span class="curriculum-num">17</span>
               <div class="curriculum-trigger-text">
                 <h3>Personal Longevity Blueprint</h3>
               </div>
@@ -6211,22 +6433,22 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Integrate all 10 sessions into a coherent, sustainable personal plan</li>
-                  <li>Build a realistic blueprint without overwhelm or overcommitment</li>
-                  <li>Design your own failure recovery systems and habit stacks</li>
+                  <li>Synthesize the program into a written, personal longevity protocol</li>
+                  <li>Translate data and experiments into durable systems</li>
+                  <li>Identify the minimum effective dose across nutrition, movement, sleep, stress, and your body's signals</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Blueprint construction workshop → Peer coaching sessions (paired review) → Failure planning and obstacle pre-emption → Draft sharing and feedback</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Workshop session — draft your blueprint live across nutrition, movement, sleep, stress, and your body's signals → Pair review checking for honesty, specificity, and minimum effective dose → Closing peer-coaching round on the one habit you&#x27;ll defend first</p>
                 <div class="curriculum-section-label">Between-Session Work</div>
-                <p class="curriculum-work">Complete your Personal Longevity Blueprint — a comprehensive document covering nutrition, movement, sleep, stress, social health, and monitoring systems.</p>
+                <p class="curriculum-work">Finalize your written blueprint. Print it. Share it with one person who will hold you to it.</p>
               </div>
             </div>
           </div>
-          <div class="curriculum-item" data-session="12">
+          <div class="curriculum-item" data-session="18">
             <button class="curriculum-trigger" onclick="toggleCurriculum(this)">
-              <span class="curriculum-num">12</span>
+              <span class="curriculum-num">18</span>
               <div class="curriculum-trigger-text">
-                <h3>Reflection, Integration &amp; Your Next 90 Days</h3>
+                <h3>Reflection, Integration &amp; the Next 90 Days</h3>
               </div>
               <svg class="curriculum-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -6234,14 +6456,14 @@ html {
               <div class="curriculum-body-inner">
                 <div class="curriculum-section-label">Learning Goals</div>
                 <ul class="curriculum-goals">
-                  <li>Reflect on your transformation from session 1 to session 12</li>
-                  <li>Synthesize your CGM insights and behavioral experiments into lasting habits</li>
-                  <li>Build a concrete 90-day action plan for continued progress</li>
+                  <li>Translate the blueprint into a 90-day execution plan</li>
+                  <li>Identify the relapse risks and the systems that prevent them</li>
+                  <li>Leave with a peer accountability structure for the year ahead</li>
                 </ul>
-                <div class="curriculum-section-label">90-Minute Flow</div>
-                <p class="curriculum-flow">Before/after reflections → CGM insights synthesis → Commitment statements → 90-day action plan construction → Graduation and celebration</p>
-                <div class="curriculum-section-label">Final Output</div>
-                <p class="curriculum-work">Your completed Personal Longevity Blueprint + 90-Day Action Plan — two living documents that guide your healthspan journey beyond the course.</p>
+                <div class="curriculum-section-label">50-Minute Flow</div>
+                <p class="curriculum-flow">Reflection on the 18 weeks — what changed, what didn&#x27;t, what surprised you → Identity-based change and environment design → Build the 90-day plan (one habit to defend, one experiment, one number to retest) → Cohort closes with peer-accountability commitment</p>
+                <div class="curriculum-section-label">Between-Session Work</div>
+                <p class="curriculum-work">Execute the 90-day plan. Schedule the cohort check-in. Re-run your priority blood marker at day 90.</p>
               </div>
             </div>
           </div>
@@ -7318,6 +7540,39 @@ function toggleCurriculum(btn) {
     // Skip hero video — always plays
     if (v.classList.contains('hero-video')) return;
     videoObserver.observe(v);
+  });
+})();
+
+
+/* Curriculum phase tabs */
+(function initCurriculumTabs() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var tabs = document.querySelectorAll('.curriculum-tab');
+    var blocks = document.querySelectorAll('.phase-block');
+    if (!tabs.length || !blocks.length) return;
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var phase = tab.getAttribute('data-phase-tab');
+        tabs.forEach(function(t) {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+        blocks.forEach(function(b) {
+          if (b.getAttribute('data-phase') === phase) {
+            b.classList.add('is-active');
+          } else {
+            b.classList.remove('is-active');
+          }
+        });
+        document.querySelectorAll('.curriculum-item.active').forEach(function(ci) {
+          ci.classList.remove('active');
+          var body = ci.querySelector('.curriculum-body');
+          if (body) body.style.maxHeight = null;
+        });
+      });
+    });
   });
 })();
 </script>
