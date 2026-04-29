@@ -4996,6 +4996,20 @@ html {
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(0,110,255,0.08) 0%, rgba(0,110,255,0.02) 100%);
 }
+.trust-logo--brand {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  opacity: 0.92;
+  filter: brightness(1.05);
+}
+.trust-logo--brand svg { height: 100%; width: auto; display: block; }
+.trust-logo--microsoft svg { height: 22px; }
+.trust-logo--intel svg { height: 30px; }
+@media (max-width: 700px) {
+  .trust-logo--microsoft svg { height: 18px; }
+  .trust-logo--intel svg { height: 24px; }
+}
 .trust-badge-num {
   font-size: 20px;
   font-weight: 800;
@@ -7166,8 +7180,7 @@ a.section-cta-btn[href="#lead-gen"]:hover {
      Dark horizontal auto‑scrolling bar — Rosen Hebrew School‑style.
      Logos duplicated once for seamless marquee.
      ============================================== -->
-<section class="trust-strip" aria-label="Trusted institutions and partners">
-  <div class="trust-strip-label">Built on a foundation of trusted institutions</div>
+<section class="trust-strip" aria-label="Trusted partners">
   <div class="trust-strip-track-wrap">
     <div class="trust-strip-track">
       <!-- SET 1 -->
@@ -7175,10 +7188,20 @@ a.section-cta-btn[href="#lead-gen"]:hover {
         <span class="trust-natgeo-bar" aria-hidden="true"></span>
         <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
       </div>
-      <div class="trust-logo trust-logo--text"><span>Hebrew University</span><span class="trust-sub">of Jerusalem</span></div>
-      <div class="trust-logo trust-logo--text"><span>Ministry of</span><span class="trust-sub">Education</span></div>
-      <div class="trust-logo trust-logo--text"><span>Ministry of</span><span class="trust-sub">Foreign Affairs</span></div>
-      <div class="trust-logo trust-logo--text"><span>eTeacher</span><span class="trust-sub">Group</span></div>
+      <div class="trust-logo trust-logo--brand trust-logo--microsoft" title="Microsoft">
+        <svg viewBox="0 0 96 20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
+          <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
+          <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
+          <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
+          <text x="24" y="15" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
+        </svg>
+      </div>
+      <div class="trust-logo trust-logo--brand trust-logo--intel" title="Intel">
+        <svg viewBox="0 0 96 28" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="22" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#0071C5" letter-spacing="-1">intel</text>
+        </svg>
+      </div>
       <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
       <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">400k+</span><span class="trust-badge-lbl">courses<br>delivered</span></div>
       <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">197</span><span class="trust-badge-lbl">countries<br>reached</span></div>
@@ -7188,10 +7211,20 @@ a.section-cta-btn[href="#lead-gen"]:hover {
         <span class="trust-natgeo-bar"></span>
         <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
       </div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>Hebrew University</span><span class="trust-sub">of Jerusalem</span></div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>Ministry of</span><span class="trust-sub">Education</span></div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>Ministry of</span><span class="trust-sub">Foreign Affairs</span></div>
-      <div class="trust-logo trust-logo--text" aria-hidden="true"><span>eTeacher</span><span class="trust-sub">Group</span></div>
+      <div class="trust-logo trust-logo--brand trust-logo--microsoft" aria-hidden="true">
+        <svg viewBox="0 0 96 20" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
+          <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
+          <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
+          <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
+          <text x="24" y="15" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
+        </svg>
+      </div>
+      <div class="trust-logo trust-logo--brand trust-logo--intel" aria-hidden="true">
+        <svg viewBox="0 0 96 28" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="22" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#0071C5" letter-spacing="-1">intel</text>
+        </svg>
+      </div>
       <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
       <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">400k+</span><span class="trust-badge-lbl">courses<br>delivered</span></div>
       <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">197</span><span class="trust-badge-lbl">countries<br>reached</span></div>
