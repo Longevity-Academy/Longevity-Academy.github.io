@@ -4034,7 +4034,14 @@ a[class*="cta"], button[class*="cta"], .nav-cta, .hero-cta, .lead-gen-btn {
   padding: 100px 0 80px !important;
 }
 .skills {
-  padding: 100px 0 72px !important;
+  padding: 100px 0 56px !important;
+}
+/* v58: tighten Curriculum padding to remove weird gap before/after Enroll Now */
+.curriculum {
+  padding: 64px 0 64px !important;
+}
+.curriculum-cta {
+  margin-top: 32px !important;
 }
 .value {
   padding: 100px 0 !important;
@@ -4258,6 +4265,13 @@ a[class*="cta"], button[class*="cta"], .nav-cta, .hero-cta, .lead-gen-btn {
 /* --- DEEPDIVE HEX: Harmonize with dark theme --- */
 .deepdive {
   background: linear-gradient(165deg, #001233 0%, #001a3d 30%, #002966 60%, #001233 100%) !important;
+  padding: 72px 0 100px !important;
+}
+@media (max-width: 768px) {
+  .deepdive { padding: 56px 0 80px !important; }
+  .curriculum { padding: 48px 0 48px !important; }
+  .skills { padding: 72px 0 40px !important; }
+  .curriculum-cta { margin-top: 24px !important; }
 }
 
 /* --- Global: Smooth scroll --- */
