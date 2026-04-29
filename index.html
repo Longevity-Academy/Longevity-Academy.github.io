@@ -6892,18 +6892,20 @@ html {
   .trustpilot--top { font-size: 12px !important; padding: 8px 14px !important; }
 }
 
-/* ===== POWERED BY ETEACHER MINI-STRIP (replaces hero stats row) ===== */
+/* ===== POWERED BY ETEACHER STATS BAR (v50 — horizontal cell layout) =====
+   Reference: thin horizontal dividers top + bottom, vertical separators between
+   cells, small eyebrow ABOVE big value, green pulsing dot before "Live".
+   Data preserved: 400k+ Students globally / 197 Countries / 25 yrs Online education
+   / 600+ Trained instructors. Powered-by + eTeacher mark sit to the left. */
 .hero-powered-strip {
   background: linear-gradient(180deg, #050A18 0%, #08111F 100%);
-  border-top: 1px solid rgba(0, 110, 255, 0.18);
-  border-bottom: 1px solid rgba(0, 110, 255, 0.18);
-  padding: 22px 0;
   position: relative;
+  padding: 0;
 }
 .hero-powered-strip::before {
   content: "";
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(0,110,255,0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,110,255,0.06) 0%, transparent 75%);
   pointer-events: none;
 }
 .hero-powered-inner {
@@ -6911,11 +6913,23 @@ html {
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 32px;
+}
+.hero-powered-bar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: stretch;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Powered-by + eTeacher logo cell on the left */
+.hero-powered-brand {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
+  gap: 16px;
+  padding: 18px 28px 18px 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
 }
 .hero-powered-label {
   font-family: var(--font-display);
@@ -6924,29 +6938,47 @@ html {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
 }
 .hero-powered-logo {
-  height: 30px;
+  height: 28px;
   width: auto;
   filter: brightness(1.1);
+  display: block;
 }
-.hero-powered-divider {
-  width: 1px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.16);
-}
+
+/* Stats grid — 5 cells (Live / Students / Countries / Online education / Instructors) */
 .hero-powered-stats {
   list-style: none;
-  display: flex;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
-  gap: 36px;
-  margin: 0; padding: 0;
 }
 .hero-powered-stats li {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px 16px;
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
   line-height: 1.2;
+  min-height: 78px;
+}
+.hero-powered-stats li:last-child { border-right: none; }
+
+/* Eyebrow ABOVE the value */
+.hero-powered-stats li span {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 8px;
+  order: 0;
 }
 .hero-powered-stats li strong {
   font-family: var(--font-display);
@@ -6954,6 +6986,10 @@ html {
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.01em;
+  order: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .hero-powered-stats li strong .unit {
   font-size: 13px;
@@ -6962,26 +6998,68 @@ html {
   margin-left: 2px;
   letter-spacing: 0;
 }
-.hero-powered-stats li span {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
-  margin-top: 2px;
+
+/* Live cell — green pulsing dot before "Live" */
+.hero-powered-stats li.is-live strong { gap: 10px; }
+.hero-powered-live-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.65);
+  position: relative;
+  flex-shrink: 0;
+  animation: heroLivePulse 1.6s ease-out infinite;
 }
-@media (max-width: 900px) {
-  .hero-powered-strip { padding: 20px 0; }
-  .hero-powered-inner { gap: 16px; padding: 0 20px; }
-  .hero-powered-divider { display: none; }
-  .hero-powered-stats { gap: 22px; justify-content: center; flex-wrap: wrap; }
-  .hero-powered-stats li { align-items: center; }
-  .hero-powered-stats li strong { font-size: 18px; }
-  .hero-powered-stats li span { font-size: 10px; }
+@keyframes heroLivePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.65), 0 0 6px rgba(34, 197, 94, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0), 0 0 6px rgba(34, 197, 94, 0.55); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0), 0 0 6px rgba(34, 197, 94, 0.55); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-powered-live-dot { animation: none; box-shadow: 0 0 6px rgba(34, 197, 94, 0.55); }
+}
+
+/* Tablet — keep brand on top, 5 cells in a row below */
+@media (max-width: 1024px) {
+  .hero-powered-bar {
+    grid-template-columns: 1fr;
+  }
+  .hero-powered-brand {
+    justify-content: center;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    padding: 14px 0;
+  }
+}
+
+/* Mobile — wrap stats to 2x2 (+ Live) grid */
+@media (max-width: 720px) {
+  .hero-powered-inner { padding: 0 16px; }
+  .hero-powered-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-powered-stats li {
+    padding: 14px 10px;
+    min-height: 70px;
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  }
+  .hero-powered-stats li:nth-child(2n) { border-right: none; }
+  .hero-powered-stats li:nth-last-child(-n+1) { border-bottom: none; }
+  /* Live takes full width on top */
+  .hero-powered-stats li.is-live {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+  .hero-powered-stats li strong { font-size: 19px; }
+  .hero-powered-stats li span { font-size: 10px; margin-bottom: 6px; }
+  .hero-powered-label { font-size: 10px; }
   .hero-powered-logo { height: 24px; }
+  .hero-powered-brand { gap: 12px; }
 }
-@media (max-width: 480px) {
-  .hero-powered-stats { gap: 14px 18px; }
+@media (max-width: 380px) {
   .hero-powered-stats li strong { font-size: 17px; }
 }
 
@@ -7245,15 +7323,34 @@ a.section-cta-btn[href="#lead-gen"]:hover {
 <!-- Powered by eTeacher mini-strip (replaces hero stats row) -->
 <section class="hero-powered-strip" aria-label="Powered by eTeacher Group">
   <div class="hero-powered-inner">
-    <div class="hero-powered-label">Powered by</div>
-    <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="hero-powered-logo">
-    <div class="hero-powered-divider" aria-hidden="true"></div>
-    <ul class="hero-powered-stats">
-      <li><strong>400k<span class="unit">+</span></strong><span>Students globally</span></li>
-      <li><strong>197</strong><span>Countries</span></li>
-      <li><strong>25<span class="unit">yrs</span></strong><span>Online education</span></li>
-      <li><strong>600<span class="unit">+</span></strong><span>Trained instructors</span></li>
-    </ul>
+    <div class="hero-powered-bar">
+      <div class="hero-powered-brand">
+        <span class="hero-powered-label">Powered by</span>
+        <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="hero-powered-logo">
+      </div>
+      <ul class="hero-powered-stats">
+        <li class="is-live">
+          <span>Format</span>
+          <strong><span class="hero-powered-live-dot" aria-hidden="true"></span>Live</strong>
+        </li>
+        <li>
+          <span>Students globally</span>
+          <strong>400k<span class="unit">+</span></strong>
+        </li>
+        <li>
+          <span>Countries</span>
+          <strong>197</strong>
+        </li>
+        <li>
+          <span>Online education</span>
+          <strong>25<span class="unit">yrs</span></strong>
+        </li>
+        <li>
+          <span>Trained instructors</span>
+          <strong>600<span class="unit">+</span></strong>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
