@@ -7090,28 +7090,13 @@ html {
   max-width: none;
 }
 .hero-powered-strip--in-about .hero-powered-bar {
-  /* Brand on the left + 5 stats on the right (same shape as original hero strip) */
-  grid-template-columns: auto 1fr;
+  /* No brand cell here — logo + POWERED BY are stacked above the card. v55 */
+  grid-template-columns: 1fr;
   border-top: none;
   border-bottom: none;
 }
-.hero-powered-strip--in-about .hero-powered-brand {
-  padding: 16px 24px 16px 4px;
-}
 .hero-powered-strip--in-about .hero-powered-stats {
   grid-template-columns: repeat(5, 1fr);
-}
-/* Tablet — brand stacks on top, 5 stats in a row below */
-@media (max-width: 1024px) {
-  .hero-powered-strip--in-about .hero-powered-bar {
-    grid-template-columns: 1fr;
-  }
-  .hero-powered-strip--in-about .hero-powered-brand {
-    justify-content: center;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-    padding: 12px 0;
-  }
 }
 @media (max-width: 720px) {
   .hero-powered-strip--in-about {
@@ -7502,8 +7487,12 @@ a.section-cta-btn[href="#lead-gen"]:hover {
         </p>
       </div>
 
-      <!-- Powered by eTeacher Group strip (v53: descriptor + relocated stats bar; redundant POWERED BY + eTeacher logo removed since the strip already shows them) -->
-      <div class="about-powered about-powered--no-header">
+      <!-- v55: Powered by eTeacher Group — stacked POWERED BY + logo header ABOVE descriptor and stats strip -->
+      <div class="about-powered">
+        <div class="about-powered-label">Powered by</div>
+        <div class="about-powered-brand">
+          <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="about-powered-logo-img">
+        </div>
         <p class="about-powered-desc">
           eTeacher Group is reshaping online education with a dynamic, personalized
           learning platform built for the modern world. Our proven, teacher-led
@@ -7511,14 +7500,10 @@ a.section-cta-btn[href="#lead-gen"]:hover {
           a purpose-built LMS, and a culture of learning excellence.
         </p>
 
-        <!-- v52/v53: relocated Powered-by stats strip with brand cell restored -->
-        <div class="hero-powered-strip hero-powered-strip--in-about" aria-label="Powered by eTeacher Group">
+        <!-- v55: stats strip below — 5 stats only, no brand cell (logo lives in card header) -->
+        <div class="hero-powered-strip hero-powered-strip--in-about" aria-label="Powered by eTeacher stats">
           <div class="hero-powered-inner">
             <div class="hero-powered-bar">
-              <div class="hero-powered-brand">
-                <span class="hero-powered-label">Powered by</span>
-                <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="hero-powered-logo">
-              </div>
               <ul class="hero-powered-stats">
                 <li class="is-live">
                   <span>Format</span>
