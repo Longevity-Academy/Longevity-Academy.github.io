@@ -7064,6 +7064,48 @@ html {
   .hero-powered-stats li strong { font-size: 17px; }
 }
 
+/* ===== v52: Stats strip when embedded inside the About — Powered by card ===== */
+.hero-powered-strip--in-about {
+  background: transparent;
+  margin-top: 18px;
+  border-radius: 14px;
+  overflow: hidden;
+  /* Stretch flush to the card edges by negating .about-powered's 32px side padding */
+  margin-left: -32px;
+  margin-right: -32px;
+  margin-bottom: -28px; /* flush with card bottom edge */
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+.hero-powered-strip--in-about::before { display: none; }
+.hero-powered-strip--in-about .hero-powered-inner {
+  padding: 0 28px;
+  max-width: none;
+}
+.hero-powered-strip--in-about .hero-powered-bar {
+  /* No brand cell here — logo lives in the card header above */
+  grid-template-columns: 1fr;
+  border-top: none;
+  border-bottom: none;
+}
+.hero-powered-strip--in-about .hero-powered-stats {
+  grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 720px) {
+  .hero-powered-strip--in-about {
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -22px;
+  }
+  .hero-powered-strip--in-about .hero-powered-inner { padding: 0 12px; }
+  .hero-powered-strip--in-about .hero-powered-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* About-powered card: tighten side padding on mobile so the embedded strip breathes */
+@media (max-width: 720px) {
+  .about-powered { padding: 22px 20px 22px; }
+}
 
 /* ===== SIX PILLARS — UNIFORM CARD ALIGNMENT (V47 fix) ===== */
 .topic-v2 {
@@ -7321,39 +7363,7 @@ a.section-cta-btn[href="#lead-gen"]:hover {
   </div>
 </section>
 
-<!-- Powered by eTeacher mini-strip (replaces hero stats row) -->
-<section class="hero-powered-strip" aria-label="Powered by eTeacher Group">
-  <div class="hero-powered-inner">
-    <div class="hero-powered-bar">
-      <div class="hero-powered-brand">
-        <span class="hero-powered-label">Powered by</span>
-        <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="hero-powered-logo">
-      </div>
-      <ul class="hero-powered-stats">
-        <li class="is-live">
-          <span>Format</span>
-          <strong><span class="hero-powered-live-dot" aria-hidden="true"></span>Live</strong>
-        </li>
-        <li>
-          <span>Students globally</span>
-          <strong>400k<span class="unit">+</span></strong>
-        </li>
-        <li>
-          <span>Countries</span>
-          <strong>197</strong>
-        </li>
-        <li>
-          <span>Online education</span>
-          <strong>25<span class="unit">yrs</span></strong>
-        </li>
-        <li>
-          <span>Trained instructors</span>
-          <strong>600<span class="unit">+</span></strong>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+<!-- v52: Powered-by stats strip moved into the About Us “Powered by eTeacher” card. -->
 
 <!-- ==============================================
      TRUST LOGO STRIP (V3 CHANGE 3)
@@ -7469,7 +7479,7 @@ a.section-cta-btn[href="#lead-gen"]:hover {
         </p>
       </div>
 
-      <!-- Powered by eTeacher Group strip -->
+      <!-- Powered by eTeacher Group strip (v52: header logo + descriptor + relocated stats bar) -->
       <div class="about-powered">
         <div class="about-powered-label">Powered by</div>
         <div class="about-powered-brand">
@@ -7481,7 +7491,36 @@ a.section-cta-btn[href="#lead-gen"]:hover {
           methodology brings the classroom to the internet — small live cohorts,
           a purpose-built LMS, and a culture of learning excellence.
         </p>
-        <!-- v51: removed redundant 400k+/197 stats here — already shown in hero Powered by bar -->
+
+        <!-- v52: relocated Powered-by stats strip (was beneath hero) -->
+        <div class="hero-powered-strip hero-powered-strip--in-about" aria-label="Powered by eTeacher Group">
+          <div class="hero-powered-inner">
+            <div class="hero-powered-bar">
+              <ul class="hero-powered-stats">
+                <li class="is-live">
+                  <span>Format</span>
+                  <strong><span class="hero-powered-live-dot" aria-hidden="true"></span>Live</strong>
+                </li>
+                <li>
+                  <span>Students globally</span>
+                  <strong>400k<span class="unit">+</span></strong>
+                </li>
+                <li>
+                  <span>Countries</span>
+                  <strong>197</strong>
+                </li>
+                <li>
+                  <span>Online education</span>
+                  <strong>25<span class="unit">yrs</span></strong>
+                </li>
+                <li>
+                  <span>Online schools</span>
+                  <strong>5</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="about-readmore">
