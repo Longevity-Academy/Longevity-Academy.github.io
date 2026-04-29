@@ -2704,8 +2704,9 @@ ul, ol { list-style: none; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  /* Minimal dark band only at the very bottom for text legibility — no full overlay */
-  background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 28%, rgba(0,0,0,0) 55%);
+  /* v51: lightened overlay so footage colors (warm pill brown, greens, etc.) come through.
+     Only a soft band at the very bottom for text legibility — image is dominant. */
+  background: linear-gradient(to top, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.12) 35%, rgba(0,0,0,0) 65%);
   border-radius: 20px;
 }
 .topic-v2-content {
@@ -6323,15 +6324,15 @@ html {
 }
 
 /* Per-pillar — NO color gradient overlay on the videos themselves.
-   Keep videos clean and bright. Only retain a tiny per-card hover-shadow tint and
-   a colored number for accent. The overlay div is reduced to a subtle bottom legibility band. */
+   v51: lightened to ~30% max so original footage colors dominate.
+   Only the very bottom carries a soft band for title/desc legibility. */
 .topic-v2--green .topic-v2-overlay,
 .topic-v2--indigo .topic-v2-overlay,
 .topic-v2--orange .topic-v2-overlay,
 .topic-v2--cyan .topic-v2-overlay,
 .topic-v2--violet .topic-v2-overlay,
 .topic-v2--blue .topic-v2-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 28%, rgba(0,0,0,0) 55%) !important;
+  background: linear-gradient(to top, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.12) 35%, rgba(0,0,0,0) 65%) !important;
 }
 .topic-v2--green:hover { box-shadow: 0 24px 60px rgba(40,160,100,0.35) !important; }
 .topic-v2--green .topic-v2-num { color: #6FE3B5 !important; }
@@ -7480,16 +7481,7 @@ a.section-cta-btn[href="#lead-gen"]:hover {
           methodology brings the classroom to the internet — small live cohorts,
           a purpose-built LMS, and a culture of learning excellence.
         </p>
-        <div class="about-powered-stats">
-          <div class="powered-stat">
-            <div class="powered-stat-num">400k<span class="powered-stat-unit">+</span></div>
-            <div class="powered-stat-label">Students globally</div>
-          </div>
-          <div class="powered-stat">
-            <div class="powered-stat-num">197</div>
-            <div class="powered-stat-label">Countries reached</div>
-          </div>
-        </div>
+        <!-- v51: removed redundant 400k+/197 stats here — already shown in hero Powered by bar -->
       </div>
 
       <div class="about-readmore">
