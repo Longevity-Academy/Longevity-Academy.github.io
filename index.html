@@ -5010,10 +5010,12 @@ html {
   opacity: 0.92;
   filter: brightness(1.05);
 }
-.trust-logo--brand svg { height: 100%; width: auto; display: block; }
+.trust-logo--brand svg { height: 100%; width: auto; display: block; overflow: visible; }
+.trust-logo--microsoft { min-width: 134px; }
 .trust-logo--microsoft svg { height: 22px; }
 .trust-logo--intel svg { height: 30px; }
 @media (max-width: 700px) {
+  .trust-logo--microsoft { min-width: 110px; }
   .trust-logo--microsoft svg { height: 18px; }
   .trust-logo--intel svg { height: 24px; }
 }
@@ -5564,33 +5566,85 @@ html {
   font-family: inherit;
   min-height: 92px;
 }
-.curriculum-tab:hover { background: rgba(0,110,255,0.06); }
-.curriculum-tab.is-active {
+
+/* Per-phase tinted backgrounds (inactive state) — match the font color of each phase
+   Stronger opacities so each phase reads clearly on the dark navy background. */
+.curriculum-tab[data-phase-tab="1"] {
+  background: linear-gradient(135deg, rgba(0,110,255,0.22) 0%, rgba(77,162,255,0.32) 100%);
+  border-color: rgba(77,162,255,0.45);
+}
+.curriculum-tab[data-phase-tab="2"] {
+  background: linear-gradient(135deg, rgba(212,133,10,0.24) 0%, rgba(232,160,64,0.36) 100%);
+  border-color: rgba(232,160,64,0.50);
+}
+.curriculum-tab[data-phase-tab="3"] {
+  background: linear-gradient(135deg, rgba(26,154,146,0.24) 0%, rgba(64,189,181,0.36) 100%);
+  border-color: rgba(64,189,181,0.50);
+}
+.curriculum-tab[data-phase-tab="4"] {
+  background: linear-gradient(135deg, rgba(75,79,200,0.30) 0%, rgba(139,143,224,0.42) 100%);
+  border-color: rgba(139,143,224,0.55);
+}
+
+/* Hover — stronger saturation */
+.curriculum-tab[data-phase-tab="1"]:hover {
+  background: linear-gradient(135deg, rgba(0,110,255,0.40) 0%, rgba(77,162,255,0.55) 100%);
+  transform: translateY(-2px);
+}
+.curriculum-tab[data-phase-tab="2"]:hover {
+  background: linear-gradient(135deg, rgba(212,133,10,0.40) 0%, rgba(232,160,64,0.58) 100%);
+  transform: translateY(-2px);
+}
+.curriculum-tab[data-phase-tab="3"]:hover {
+  background: linear-gradient(135deg, rgba(26,154,146,0.40) 0%, rgba(64,189,181,0.58) 100%);
+  transform: translateY(-2px);
+}
+.curriculum-tab[data-phase-tab="4"]:hover {
+  background: linear-gradient(135deg, rgba(75,79,200,0.50) 0%, rgba(139,143,224,0.65) 100%);
+  transform: translateY(-2px);
+}
+
+/* Active state — full saturation gradient per phase */
+.curriculum-tab.is-active[data-phase-tab="1"] {
   background: linear-gradient(135deg, #006EFF 0%, #338BFF 100%);
   border-color: #006EFF;
-  box-shadow: 0 8px 24px rgba(0,110,255,0.25);
+  box-shadow: 0 10px 28px rgba(0,110,255,0.32);
 }
-.curriculum-tab-num {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.4px;
-  color: #006EFF;
-  opacity: 0.7;
+.curriculum-tab.is-active[data-phase-tab="2"] {
+  background: linear-gradient(135deg, #D4850A 0%, #E8A040 100%);
+  border-color: #D4850A;
+  box-shadow: 0 10px 28px rgba(212,133,10,0.32);
 }
-.curriculum-tab.is-active .curriculum-tab-num { color: #fff; opacity: 0.9; }
-.curriculum-tab-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: #001233;
+.curriculum-tab.is-active[data-phase-tab="3"] {
+  background: linear-gradient(135deg, #1A9A92 0%, #40BDB5 100%);
+  border-color: #1A9A92;
+  box-shadow: 0 10px 28px rgba(26,154,146,0.32);
 }
+.curriculum-tab.is-active[data-phase-tab="4"] {
+  background: linear-gradient(135deg, #4B4FC8 0%, #8B8FE0 100%);
+  border-color: #4B4FC8;
+  box-shadow: 0 10px 28px rgba(75,79,200,0.32);
+}
+
+/* Per-phase number color (inactive) — bright tints of phase color so they read on dark bg */
+.curriculum-tab-num { font-size: 12px; font-weight: 700; letter-spacing: 1.4px; opacity: 1; }
+.curriculum-tab[data-phase-tab="1"] .curriculum-tab-num { color: #9DC4FF; }
+.curriculum-tab[data-phase-tab="2"] .curriculum-tab-num { color: #F2C58A; }
+.curriculum-tab[data-phase-tab="3"] .curriculum-tab-num { color: #8FD9D3; }
+.curriculum-tab[data-phase-tab="4"] .curriculum-tab-num { color: #B5B7F0; }
+.curriculum-tab.is-active .curriculum-tab-num { color: #fff; opacity: 0.95; }
+
+/* Per-phase name color (inactive) — white for max readability on the dark page */
+.curriculum-tab-name { font-size: 16px; font-weight: 700; color: #ffffff; }
 .curriculum-tab.is-active .curriculum-tab-name { color: #fff; }
-.curriculum-tab-meta {
-  font-size: 12px;
-  font-weight: 600;
-  color: #555;
-  letter-spacing: 0.4px;
-}
-.curriculum-tab.is-active .curriculum-tab-meta { color: #fff; opacity: 0.9; }
+
+/* Per-phase meta (inactive) — soft white tint of phase color */
+.curriculum-tab-meta { font-size: 12px; font-weight: 600; letter-spacing: 0.4px; }
+.curriculum-tab[data-phase-tab="1"] .curriculum-tab-meta { color: rgba(157,196,255,0.85); }
+.curriculum-tab[data-phase-tab="2"] .curriculum-tab-meta { color: rgba(242,197,138,0.88); }
+.curriculum-tab[data-phase-tab="3"] .curriculum-tab-meta { color: rgba(143,217,211,0.88); }
+.curriculum-tab[data-phase-tab="4"] .curriculum-tab-meta { color: rgba(181,183,240,0.90); }
+.curriculum-tab.is-active .curriculum-tab-meta { color: #fff; opacity: 0.92; }
 .phase-block { display: none; }
 .phase-block.is-active { display: block; animation: phaseFadeIn 0.4s ease; }
 @keyframes phaseFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -7217,12 +7271,12 @@ a.section-cta-btn[href="#lead-gen"]:hover {
         <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--microsoft" title="Microsoft">
-        <svg viewBox="0 0 96 20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 118 20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
           <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
           <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
           <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
           <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
-          <text x="24" y="15" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
+          <text x="24" y="15.5" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
         </svg>
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--intel" title="Intel">
@@ -7240,12 +7294,12 @@ a.section-cta-btn[href="#lead-gen"]:hover {
         <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--microsoft" aria-hidden="true">
-        <svg viewBox="0 0 96 20" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 118 20" xmlns="http://www.w3.org/2000/svg">
           <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
           <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
           <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
           <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
-          <text x="24" y="15" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
+          <text x="24" y="15.5" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
         </svg>
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--intel" aria-hidden="true">
