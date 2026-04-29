@@ -3787,8 +3787,17 @@ h2.section-title {
   color: #fff !important;
   font-weight: 700 !important;
 }
+/* v59: hover color changed from white to green per user request — readable on light frosted FAQ cards */
 .faq-item:hover .faq-q span,
-.faq-item:hover .faq-q { color: #fff !important; }
+.faq-item:hover .faq-q,
+.faq-item:hover .faq-q-text,
+.faq-item:hover .faq-q-text * {
+  color: #0A8F5C !important;
+  -webkit-text-fill-color: #0A8F5C !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
 
 /* When FAQ item is open, the headline becomes a colorful brand gradient
    (blue → light blue) instead of plain white — readable + on-brand */
@@ -7283,6 +7292,31 @@ a.section-cta-btn[href="#lead-gen"]:hover {
     padding: 16px 32px !important;
     font-size: 15px !important;
   }
+}
+
+/* ==================================================
+   v59 — FAQ HOVER COLOR (final cascade, highest specificity)
+   User: replace white hover with green for readability
+   ================================================== */
+.faq .faq-item:hover .faq-q,
+.faq .faq-item:hover .faq-q span,
+.faq .faq-item:hover .faq-q .faq-q-text,
+.faq .faq-item:hover .faq-q-text,
+section.faq .faq-item:hover .faq-q,
+section.faq .faq-item:hover .faq-q span:not(.faq-num),
+section.faq .faq-item:hover .faq-q-text {
+  color: #0A8F5C !important;
+  -webkit-text-fill-color: #0A8F5C !important;
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+/* Keep the number badge (01, 02, etc) on its blue brand color even on hover */
+.faq .faq-item:hover .faq-num,
+section.faq .faq-item:hover .faq-num {
+  color: #006EFF !important;
+  -webkit-text-fill-color: #006EFF !important;
 }
 </style>
 </head>
