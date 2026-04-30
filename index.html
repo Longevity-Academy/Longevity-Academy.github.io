@@ -7319,14 +7319,52 @@ section.faq .faq-item:hover .faq-num {
   -webkit-text-fill-color: #006EFF !important;
 }
 /* ==============================================
-   PILLARS MECE UPDATE — let cards grow with content
-   New subheaders are clinical and longer. Remove fixed
-   height + line-clamp so the full text reads cleanly.
+   PILLARS MECE — UNIFIED CARD ALIGNMENT
+   Goal: every card in a row has the same height; the
+   number, title and description start at IDENTICAL Y
+   positions across all 6 cards. Imagery sits at the
+   top, text block is anchored at the bottom with a
+   fixed reserved zone, so longer copy doesn't push the
+   title up while shorter copy sits naturally aligned.
    ============================================== */
+section.topics .topic-grid-v2 {
+  align-items: stretch !important;
+}
 section.topics .topic-v2 {
-  height: auto !important;
-  min-height: 420px !important;
+  height: 520px !important;
+  min-height: 520px !important;
   aspect-ratio: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  padding: 28px !important;
+}
+/* Reserve a fixed text zone at the bottom of every card so the
+   number/title/description always start at the same Y across the row. */
+section.topics .topic-v2-content {
+  position: relative;
+  z-index: 2;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  height: 290px !important;
+}
+section.topics .topic-v2-num {
+  font-size: 13px !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 10px !important;
+  display: block !important;
+  height: 18px !important;
+  line-height: 18px !important;
+}
+section.topics .topic-v2-title {
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 12px 0 !important;
+  height: 58px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.85) !important;
 }
 section.topics .topic-v2-desc {
   -webkit-line-clamp: unset !important;
@@ -7335,20 +7373,53 @@ section.topics .topic-v2-desc {
   max-height: none !important;
   height: auto !important;
   text-overflow: clip !important;
-  font-size: 14px !important;
+  font-size: 13.5px !important;
   line-height: 1.55 !important;
+  color: rgba(255,255,255,0.96) !important;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.85) !important;
+  margin: 0 !important;
+}
+/* Layered overlay: keep top ~40% of the card mostly clear so the
+   imagery is visible, then blend to a strong, even tone behind text. */
+section.topics .topic-v2-overlay {
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,0.05) 0%,
+      rgba(0,0,0,0.10) 35%,
+      rgba(0,0,0,0.55) 55%,
+      rgba(0,0,0,0.82) 75%,
+      rgba(0,0,0,0.92) 100%) !important;
+}
+/* Slight extra brightness on the video so imagery shows through the
+   reserved top zone. */
+section.topics .topic-v2-video video {
+  filter: brightness(1.15) contrast(1.05) !important;
+  opacity: 0.95 !important;
+}
+@media (max-width: 1100px) {
+  section.topics .topic-v2 { height: 540px !important; min-height: 540px !important; }
+  section.topics .topic-v2-content { height: 310px !important; }
 }
 @media (max-width: 760px) {
   section.topics .topic-v2 {
-    min-height: 380px !important;
+    height: auto !important;
+    min-height: 460px !important;
+    padding: 24px !important;
+  }
+  section.topics .topic-v2-content {
+    height: auto !important;
+    min-height: 270px !important;
+  }
+  section.topics .topic-v2-title {
+    font-size: 22px !important;
+    height: auto !important;
+    min-height: 52px !important;
+    margin-bottom: 10px !important;
   }
   section.topics .topic-v2-desc {
-    font-size: 13.5px !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
   }
-}
-/* Slightly stronger overlay so dense text on busy videos stays legible */
-section.topics .topic-v2-overlay {
-  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%) !important;
 }
 </style>
 </head>
