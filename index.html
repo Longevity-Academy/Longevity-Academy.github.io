@@ -7352,18 +7352,21 @@ section.topics .topic-v2-content {
 section.topics .topic-v2-num {
   font-size: 13px !important;
   letter-spacing: 0.08em !important;
-  margin-bottom: 10px !important;
+  margin: 0 0 10px 0 !important;
   display: block !important;
   height: 18px !important;
   line-height: 18px !important;
 }
+/* Title slot: reserves 2-line height across all cards so descriptions
+   start at identical Y. Single-line titles sit at the BOTTOM of the slot
+   (flex-end) so there is no dead air between title and description. */
 section.topics .topic-v2-title {
   font-size: 24px !important;
   line-height: 1.2 !important;
-  margin: 0 0 12px 0 !important;
+  margin: 0 0 10px 0 !important;
   height: 58px !important;
   display: flex !important;
-  align-items: flex-start !important;
+  align-items: flex-end !important;
   text-shadow: 0 2px 14px rgba(0,0,0,0.85) !important;
 }
 section.topics .topic-v2-desc {
@@ -7741,7 +7744,7 @@ section.topics .topic-v2-video video {
         <div class="topic-v2-content">
           <span class="topic-v2-num">04</span>
           <h3 class="topic-v2-title">Supplements &amp; Wearables</h3>
-          <p class="topic-v2-desc">Targeted compounds &mdash; NAD+ precursors (NMN/NR), omega-3s, vitamin D3 + K2, magnesium, and emerging interventions like rapamycin, metformin, and berberine &mdash; are deployed against specific biomarker gaps, not stacked by trend. Continuous glucose monitors, HRV, resting heart rate, and sleep architecture data turn each protocol into a feedback loop, so every supplement, dose, and lifestyle input is judged by what it actually moves in your physiology.</p>
+          <p class="topic-v2-desc">Targeted compounds &mdash; NAD+ precursors (NMN/NR), omega-3s, D3 + K2, magnesium, rapamycin, metformin, berberine &mdash; deployed against specific biomarker gaps, not stacked by trend. CGM, HRV, and sleep data turn every protocol into a feedback loop.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
