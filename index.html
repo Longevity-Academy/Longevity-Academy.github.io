@@ -7318,6 +7318,38 @@ section.faq .faq-item:hover .faq-num {
   color: #006EFF !important;
   -webkit-text-fill-color: #006EFF !important;
 }
+/* ==============================================
+   PILLARS MECE UPDATE — let cards grow with content
+   New subheaders are clinical and longer. Remove fixed
+   height + line-clamp so the full text reads cleanly.
+   ============================================== */
+section.topics .topic-v2 {
+  height: auto !important;
+  min-height: 420px !important;
+  aspect-ratio: auto !important;
+}
+section.topics .topic-v2-desc {
+  -webkit-line-clamp: unset !important;
+  display: block !important;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  text-overflow: clip !important;
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+}
+@media (max-width: 760px) {
+  section.topics .topic-v2 {
+    min-height: 380px !important;
+  }
+  section.topics .topic-v2-desc {
+    font-size: 13.5px !important;
+  }
+}
+/* Slightly stronger overlay so dense text on busy videos stays legible */
+section.topics .topic-v2-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%) !important;
+}
 </style>
 </head>
 <body>
@@ -7328,10 +7360,6 @@ section.faq .faq-item:hover .faq-num {
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <a href="/" class="nav-logo">
-      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Longevity Life Academy">
-        <path d="M16 3 L26 9 V23 L16 29 L6 23 V9 Z" stroke="currentColor" stroke-width="2" fill="none"/>
-        <path d="M16 10 V22 M10 16 H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
       Longevity Life Academy
     </a>
     <div class="nav-links">
@@ -7603,7 +7631,7 @@ section.faq .faq-item:hover .faq-num {
     <div class="topics-header reveal">
       <span class="eyebrow">The Six Pillars</span>
       <h2 class="section-title">Six Pillars of a<br>Longer, Better Life.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">The interconnected systems &mdash; nutrition, sleep, movement, metabolism, your body's signals, and your personal protocol &mdash; that compound a longer, better life across every decade.</p>
+      <p class="section-subtitle" style="margin:0 auto;">The interconnected systems &mdash; nutrition, sleep, movement, supplements and wearables, stress, and your personal protocol &mdash; that compound a longer, better life across every decade.</p>
     </div>
     <div class="topic-grid-v2">
       <a href="topics/nutrition-longevity.html" class="topic-v2 topic-v2--green reveal">
@@ -7612,7 +7640,7 @@ section.faq .faq-item:hover .faq-num {
         <div class="topic-v2-content">
           <span class="topic-v2-num">01</span>
           <h3 class="topic-v2-title">Nutrition</h3>
-          <p class="topic-v2-desc">The Mediterranean foundation, when you eat, and the food choices that fuel your body's daily repair.</p>
+          <p class="topic-v2-desc">Incorporate a daily routine that transforms your kitchen into a medicine cabinet by adopting plant-forward, nutrient-dense food patterns that combat inflammation and promote cellular rejuvenation.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -7622,7 +7650,7 @@ section.faq .faq-item:hover .faq-num {
         <div class="topic-v2-content">
           <span class="topic-v2-num">02</span>
           <h3 class="topic-v2-title">Sleep</h3>
-          <p class="topic-v2-desc">Deep, restorative sleep and the natural rhythms that govern energy, mood, and recovery in every system.</p>
+          <p class="topic-v2-desc">Actionable, science-backed protocols to optimize your sleep architecture and activate cellular repair, reduce inflammation, and reverse biological aging.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -7632,27 +7660,27 @@ section.faq .faq-item:hover .faq-num {
         <div class="topic-v2-content">
           <span class="topic-v2-num">03</span>
           <h3 class="topic-v2-title">Exercise &amp; Movement</h3>
-          <p class="topic-v2-desc">Cardio, strength, and mobility &mdash; the trainable habits that keep you strong, capable, and independent for decades.</p>
+          <p class="topic-v2-desc">Transform your approach to aging by building a resilient body, focusing on functional strength, Zone 2 endurance, and stability to maximize both your lifespan and healthspan.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
-      <a href="topics/metabolic-health-blood-sugar.html" class="topic-v2 topic-v2--cyan reveal">
-        <div class="topic-v2-media"><video preload="metadata" src="assets/glucose-mitochondria.mp4" autoplay muted loop playsinline></video></div>
+      <a href="topics/supplements-health-tech.html" class="topic-v2 topic-v2--cyan reveal">
+        <div class="topic-v2-media"><video preload="metadata" src="assets/v2-supplements-meds.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">04</span>
-          <h3 class="topic-v2-title">Metabolic Health</h3>
-          <p class="topic-v2-desc">How your body handles food and energy &mdash; tracked with continuous glucose monitoring and the everyday foundation of how well you age.</p>
+          <h3 class="topic-v2-title">Supplements &amp; Wearables</h3>
+          <p class="topic-v2-desc">Targeted compounds &mdash; NAD+ precursors (NMN/NR), omega-3s, vitamin D3 + K2, magnesium, and emerging interventions like rapamycin, metformin, and berberine &mdash; are deployed against specific biomarker gaps, not stacked by trend. Continuous glucose monitors, HRV, resting heart rate, and sleep architecture data turn each protocol into a feedback loop, so every supplement, dose, and lifestyle input is judged by what it actually moves in your physiology.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
       <a href="topics/biomarkers-testing.html" class="topic-v2 topic-v2--violet reveal">
-        <div class="topic-v2-media"><video preload="metadata" src="assets/reading-body-signals.mp4" autoplay muted loop playsinline></video></div>
+        <div class="topic-v2-media"><video preload="metadata" src="assets/stress-management-cold-plunge.mp4" autoplay muted loop playsinline></video></div>
         <div class="topic-v2-overlay"></div>
         <div class="topic-v2-content">
           <span class="topic-v2-num">05</span>
-          <h3 class="topic-v2-title">Reading Your Body Signals</h3>
-          <p class="topic-v2-desc">Wearables, basic blood work, and daily data &mdash; the signals that tell you the truth about how you're really aging.</p>
+          <h3 class="topic-v2-title">Stress Management</h3>
+          <p class="topic-v2-desc">Chronic stress drives cortisol dysregulation, HPA-axis dysfunction, accelerated telomere attrition, and rising allostatic load &mdash; measurable upstream contributors to cardiovascular and metabolic disease. The protocol uses autonomic nervous system regulation &mdash; structured breathwork, deliberate cold exposure, vagal tone training, and social connection as a validated mortality predictor &mdash; to keep biology resilient, not relaxed.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -7662,7 +7690,7 @@ section.faq .faq-item:hover .faq-num {
         <div class="topic-v2-content">
           <span class="topic-v2-num">06</span>
           <h3 class="topic-v2-title">Your Longevity Protocol</h3>
-          <p class="topic-v2-desc">Your personalized plan in a clean dashboard view &mdash; the daily habits and metrics that turn the science into something you actually do.</p>
+          <p class="topic-v2-desc">Generic health advice ends here: your protocol is built from your own bloodwork, lipid sub-particles, ApoB, fasting insulin, inflammatory markers, body composition, and continuous wearable data. This is Medicine 3.0 in practice &mdash; a proactive, individualized plan that iterates against your biomarkers and risk profile, so every intervention is measured, owned, and adjusted to your biology.</p>
         </div>
         <div class="topic-v2-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
@@ -8790,10 +8818,6 @@ section.faq .faq-item:hover .faq-num {
     <div class="footer-top">
       <div class="footer-brand">
         <div class="brand-mark">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M16 3 L26 9 V23 L16 29 L6 23 V9 Z" fill="none"/>
-            <path d="M16 10 V22 M10 16 H22" stroke-linecap="round"/>
-          </svg>
           Longevity Life Academy
         </div>
         <p>A longevity and biohacking course from eTeacher Group. Read your own signals. Build your own protocol. Live your longest, strongest life.</p>
