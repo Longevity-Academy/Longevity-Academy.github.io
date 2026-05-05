@@ -8732,7 +8732,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
       <div class="lead-gen-v2-right">
-        <form class="lead-gen-v2-form" onsubmit="event.preventDefault(); var b=this.querySelector('button'); b.textContent='Application Received ✓'; b.style.background='#10B981'; b.disabled=true;">
+        <form class="lead-gen-v2-form" onsubmit="event.preventDefault(); var b=this.querySelector('button'); b.textContent='Application Received ✓'; b.style.background='#10B981'; b.disabled=true; window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:'lead_form_submit', form_location:'lead_gen_section'});">
           <h3 class="lead-gen-v2-form-title">Apply Now</h3>
           <p class="lead-gen-v2-form-sub">Free, no commitment — admissions team replies within 24 hours.</p>
           <div class="lead-gen-v2-field">
@@ -9376,5 +9376,53 @@ function toggleCurriculum(btn) {
 })();
 </script>
 
+<!-- ============================================
+     ANALYTICS: dataLayer event tracking for GTM
+     - cta_click: any nav/section/footer CTA
+     - scroll_depth: 25 / 50 / 75 / 100
+     ============================================ -->
+<script>
+(function(){
+  window.dataLayer = window.dataLayer || [];
+
+  // ---- CTA click tracking ----
+  var ctaSelector = '.section-cta-btn, .nav-cta, .mobile-nav-cta, .deepdive-cta-btn';
+  document.addEventListener('click', function(e){
+    var el = e.target.closest(ctaSelector);
+    if (!el) return;
+    var label = (el.textContent || '').replace(/\s+/g,' ').trim().slice(0,80);
+    var section = (el.closest('section') && (el.closest('section').id || el.closest('section').className.split(' ')[0])) || 'unknown';
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_text: label,
+      cta_location: section,
+      cta_href: el.getAttribute('href') || ''
+    });
+  }, { passive: true });
+
+  // ---- Scroll depth tracking ----
+  var thresholds = [25, 50, 75, 100];
+  var fired = {};
+  function onScroll(){
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    if (max <= 0) return;
+    var pct = Math.round((doc.scrollTop || window.scrollY || 0) / max * 100);
+    thresholds.forEach(function(t){
+      if (!fired[t] && pct >= t) {
+        fired[t] = true;
+        window.dataLayer.push({ event: 'scroll_depth', percent_scrolled: t });
+      }
+    });
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (!ticking) {
+      window.requestAnimationFrame(function(){ onScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
