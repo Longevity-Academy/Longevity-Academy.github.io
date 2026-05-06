@@ -9650,7 +9650,7 @@ function toggleCurriculum(btn) {
      ===================================================== -->
 <script>
 (function(){
-  var ETEACHER_ENV = 'staging'; // set to 'production' after eTeacher staging sign-off
+  var ETEACHER_ENV = 'production'; // staging-tested 2026-05-06; flipped to production per CEO request
   // Routed through Cloudflare Worker proxy (adds CORS headers; eTeacher API has none)
   // Worker source: workspace/eteacher-proxy-worker/src/index.js
   var ENDPOINTS = {
@@ -9776,8 +9776,14 @@ function toggleCurriculum(btn) {
         // Attribution: pass click IDs + UTMs to eTeacher in DynamicParameters
         var attr = getAttribution();
         var dyn = buildDynamicParameters(attr);
+        // Also include Google Ads Campaign ID in DynamicParameters for eTeacher visibility
+        var googleCampaignId = '';
+        if (fields.googleCampaignId && /^\d+$/.test(String(fields.googleCampaignId))) {
+          googleCampaignId = String(fields.googleCampaignId);
+          dyn = (dyn ? dyn + ';' : '') + 'google_campaign_id=' + googleCampaignId;
+        }
         if (dyn) payload.DynamicParameters = dyn.slice(0, 4000);
-        // CampaignID: set via window.LLA_CAMPAIGN_IDS map (keyed by form.id) if user provided IDs.
+        // eTeacher CampaignID (their internal integer). Configure via window.LLA_CAMPAIGN_IDS.
         if (fields.campaignId && /^\d+$/.test(String(fields.campaignId))) {
           payload.CampaignID = parseInt(fields.campaignId, 10);
         }
@@ -9797,11 +9803,18 @@ function toggleCurriculum(btn) {
   @keyframes lg-spin{to{transform:rotate(360deg)}}
 </style>
 <script>
-// Configure once: map form IDs to eTeacher CampaignID integers.
-// Update with values from eTeacher when received. Forms without an entry submit without CampaignID.
+// CampaignID configuration
+// LLA_CAMPAIGN_IDS: eTeacher's internal CampaignID integers, keyed by form.id (waiting on eTeacher).
+// LLA_GOOGLE_CAMPAIGN_IDS: Google Ads Campaign IDs by ISO-2 country code. Sent in DynamicParameters.
 window.LLA_CAMPAIGN_IDS = window.LLA_CAMPAIGN_IDS || {
-  // 'leadGenV2Form':   123456,   // Homepage Apply Now
-  // 'bioLeadGenForm':  123457,   // Bio-Age lead form
+  // 'leadGenV2Form':   123456,   // Homepage Apply Now (eTeacher to provide)
+  // 'bioLeadGenForm':  123457,   // Bio-Age lead form (eTeacher to provide)
+};
+window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
+  // Maps user's selected country to the matching Google Ads campaign ID.
+  // Source: ad campaigns created in Google Ads dashboard.
+  US: '116641',  // LGV_EN_GGL_Search_US_2026-05-05_#116641
+  CA: '116639'   // LGV_EN_GGL_Search_Canada_2026-05-05_#116639
 };
 (function(){
   function getValue(form, name){ var el = form.querySelector('[name="'+name+'"], #'+name); return el ? el.value : ''; }
@@ -9842,8 +9855,13 @@ window.LLA_CAMPAIGN_IDS = window.LLA_CAMPAIGN_IDS || {
         phone:      getValue(form, 'phone')      || getValue(form, 'lg-phone'),
         countryIso: getValue(form, 'country')    || getValue(form, 'lg-country'),
         adminNotes: form.dataset.adminNotes || '',
-        campaignId: (window.LLA_CAMPAIGN_IDS && window.LLA_CAMPAIGN_IDS[form.id]) || ''
+        campaignId: (window.LLA_CAMPAIGN_IDS && window.LLA_CAMPAIGN_IDS[form.id]) || '',
+        googleCampaignId: ''
       };
+      // Google Campaign ID by country (set after we know the country)
+      if (fields.countryIso && window.LLA_GOOGLE_CAMPAIGN_IDS) {
+        fields.googleCampaignId = window.LLA_GOOGLE_CAMPAIGN_IDS[fields.countryIso.toUpperCase()] || '';
+      }
       if (!fields.firstName || !fields.lastName || !fields.email || !fields.phone || !fields.countryIso) {
         showError(form, 'Please fill in all required fields.');
         return;

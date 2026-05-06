@@ -412,7 +412,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        ===================================================== -->
   <script>
   (function(){
-    var ETEACHER_ENV = 'staging'; // set to 'production' after eTeacher staging sign-off
+    var ETEACHER_ENV = 'production'; // staging-tested 2026-05-06; flipped to production per CEO request
     // Routed through Cloudflare Worker proxy (adds CORS headers; eTeacher API has none)
     // Worker source: workspace/eteacher-proxy-worker/src/index.js
     var ENDPOINTS = {
@@ -506,6 +506,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           if (fields.adminNotes) payload.AdminNotes = String(fields.adminNotes).slice(0, 4000);
           var attr = getAttribution();
           var dyn = buildDynamicParameters(attr);
+          if (fields.googleCampaignId && /^\d+$/.test(String(fields.googleCampaignId))) {
+            dyn = (dyn ? dyn + ';' : '') + 'google_campaign_id=' + String(fields.googleCampaignId);
+          }
           if (dyn) payload.DynamicParameters = dyn.slice(0, 4000);
           if (fields.campaignId && /^\d+$/.test(String(fields.campaignId))) {
             payload.CampaignID = parseInt(fields.campaignId, 10);
@@ -529,6 +532,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   window.LLA_CAMPAIGN_IDS = window.LLA_CAMPAIGN_IDS || {
     // 'leadGenV2Form':   123456,
     // 'bioLeadGenForm':  123457,
+  };
+  window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
+    US: '116641', // LGV_EN_GGL_Search_US_2026-05-05_#116641
+    CA: '116639'  // LGV_EN_GGL_Search_Canada_2026-05-05_#116639
   };
   (function(){
     function getValue(form, name){ var el = form.querySelector('[name="'+name+'"], #'+name); return el ? el.value : ''; }
@@ -567,8 +574,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           phone:      getValue(form, 'phone')      || getValue(form, 'bioPhone')  || getValue(form, 'lg-phone'),
           countryIso: getValue(form, 'country')    || getValue(form, 'bioCountry')|| getValue(form, 'lg-country'),
           adminNotes: form.dataset.adminNotes || '',
-          campaignId: (window.LLA_CAMPAIGN_IDS && window.LLA_CAMPAIGN_IDS[form.id]) || ''
+          campaignId: (window.LLA_CAMPAIGN_IDS && window.LLA_CAMPAIGN_IDS[form.id]) || '',
+          googleCampaignId: ''
         };
+        if (fields.countryIso && window.LLA_GOOGLE_CAMPAIGN_IDS) {
+          fields.googleCampaignId = window.LLA_GOOGLE_CAMPAIGN_IDS[fields.countryIso.toUpperCase()] || '';
+        }
         if (!fields.firstName || !fields.lastName || !fields.email || !fields.phone || !fields.countryIso) {
           showError(form, 'Please fill in all required fields.'); return;
         }
