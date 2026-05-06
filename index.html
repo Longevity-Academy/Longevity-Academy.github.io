@@ -9651,9 +9651,11 @@ function toggleCurriculum(btn) {
 <script>
 (function(){
   var ETEACHER_ENV = 'staging'; // set to 'production' after eTeacher staging sign-off
+  // Routed through Cloudflare Worker proxy (adds CORS headers; eTeacher API has none)
+  // Worker source: workspace/eteacher-proxy-worker/src/index.js
   var ENDPOINTS = {
-    staging:    'https://81pg281wke.execute-api.eu-west-1.amazonaws.com/staging/leads',
-    production: 'https://u6ygel4ywa.execute-api.eu-west-1.amazonaws.com/prod/leads'
+    staging:    'https://eteacher-leads-proxy.gitter-omri.workers.dev/leads/staging',
+    production: 'https://eteacher-leads-proxy.gitter-omri.workers.dev/leads/production'
   };
 
   // Best-effort country-by-IP lookup (free, no key, single attempt, no PII).
