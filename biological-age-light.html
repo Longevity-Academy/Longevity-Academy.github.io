@@ -92,6 +92,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .feature p{color:var(--text-2);margin-top:10px}
     @media (max-width:1000px){.hero-grid,.assessment,.pillars,.result-grid{grid-template-columns:1fr}.sticky{position:static}.stats{grid-template-columns:1fr}}
     @media (max-width:720px){.row,.options{grid-template-columns:1fr}.sub{font-size:18px}}
+
+    /* Bio-age lead-gen form (shown after result) */
+    .bio-leadgen{display:none;margin-top:22px;padding:32px 28px;border-radius:24px;background:linear-gradient(160deg,#0a1628 0%,#0d1b2e 50%,#060e1a 100%);box-shadow:0 24px 60px rgba(0,0,0,0.18);border:1px solid rgba(0,110,255,0.14);color:#fff}
+    .bio-leadgen.visible{display:block;animation:bio-fade .5s cubic-bezier(.22,1,.36,1)}
+    .bio-leadgen .bio-leadgen-eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#338BFF;margin-bottom:10px}
+    .bio-leadgen h3{font-family:'Codec Pro','Inter',sans-serif;font-size:clamp(26px,3.4vw,34px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.15;margin:0 0 8px}
+    .bio-leadgen p.bio-leadgen-sub{color:rgba(255,255,255,0.72);font-size:15.5px;line-height:1.6;margin:0 0 22px;max-width:none}
+    .bio-leadgen-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .bio-leadgen-field{display:flex;flex-direction:column;gap:6px}
+    .bio-leadgen-field.full{grid-column:1/-1}
+    .bio-leadgen-field label{font-family:'Codec Pro','Inter',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,0.78);text-align:left;margin:0}
+    .bio-leadgen-field input{width:100%;padding:16px 18px;font-size:15.5px;font-family:'Inter',sans-serif;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;color:#fff;-webkit-text-fill-color:#fff;outline:none;transition:all .22s ease;text-align:left;min-height:auto}
+    .bio-leadgen-field input::placeholder{color:rgba(255,255,255,0.4);-webkit-text-fill-color:rgba(255,255,255,0.4)}
+    .bio-leadgen-field input:focus{border-color:#006EFF;background:rgba(255,255,255,0.09);box-shadow:0 0 0 3px rgba(0,110,255,0.18)}
+    .bio-leadgen-field input:-webkit-autofill,.bio-leadgen-field input:-webkit-autofill:hover,.bio-leadgen-field input:-webkit-autofill:focus{-webkit-text-fill-color:#fff !important;-webkit-box-shadow:0 0 0 100px #0d1b2e inset !important;caret-color:#fff !important}
+    .bio-leadgen-submit{grid-column:1/-1;width:100%;padding:18px 28px;font-family:'Codec Pro','Inter',sans-serif;font-size:16px;font-weight:700;letter-spacing:.4px;color:#fff;background:linear-gradient(135deg,#006EFF,#338BFF);border:none;border-radius:14px;cursor:pointer;box-shadow:0 12px 30px rgba(0,110,255,0.35);transition:transform .22s ease,box-shadow .22s ease;margin-top:6px}
+    .bio-leadgen-submit:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(0,110,255,0.45)}
+    .bio-leadgen-trust{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.55);font-size:13px;margin:14px 0 0;justify-content:center}
+    /* Universal Thank You state on this page */
+    .form-thankyou{display:none;text-align:center;padding:48px 28px;border-radius:24px;background:linear-gradient(160deg,#0a1628 0%,#0d1b2e 50%,#060e1a 100%);border:1px solid rgba(0,110,255,0.18);box-shadow:0 24px 60px rgba(0,0,0,0.35);margin-top:22px;animation:bio-fade .5s cubic-bezier(.22,1,.36,1)}
+    .form-thankyou.visible{display:block}
+    .form-thankyou-icon{width:72px;height:72px;margin:0 auto 22px;border-radius:50%;background:linear-gradient(135deg,#006EFF,#338BFF);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(0,110,255,0.35)}
+    .form-thankyou-icon svg{width:34px;height:34px;color:#fff}
+    .form-thankyou-headline{font-family:'Codec Pro','Inter',sans-serif;font-size:clamp(30px,4vw,42px);font-weight:800;color:#fff;letter-spacing:-.02em;margin:0 0 12px;line-height:1.1;max-width:none}
+    .form-thankyou-text{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.78);max-width:460px;margin:0 auto 26px}
+    .form-thankyou-cta{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;font-family:'Codec Pro','Inter',sans-serif;font-size:15.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,#006EFF,#338BFF);border-radius:999px;text-decoration:none;box-shadow:0 10px 28px rgba(0,110,255,0.35);transition:transform .25s ease}
+    .form-thankyou-cta:hover{transform:translateY(-2px)}
+    .form-thankyou-cta svg{width:18px;height:18px}
+    @keyframes bio-fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @media (max-width:720px){.bio-leadgen-grid{grid-template-columns:1fr}.bio-leadgen{padding:28px 22px}.form-thankyou{padding:40px 22px}}
   </style>
 </head>
 <body>
@@ -215,6 +245,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="result-box"><strong id="readiness">--</strong><span>Next step style</span></div>
             </div>
           </section>
+
+          <form class="bio-leadgen" id="bioLeadGenForm" novalidate>
+            <span class="bio-leadgen-eyebrow">Get your full protocol</span>
+            <h3>Discuss your result with our team.</h3>
+            <p class="bio-leadgen-sub">Leave your details and an admissions advisor will reach out personally to walk you through your snapshot and the next steps in Longevity Life Academy.</p>
+            <div class="bio-leadgen-grid">
+              <div class="bio-leadgen-field">
+                <label for="bioFName">First Name</label>
+                <input id="bioFName" name="firstName" type="text" placeholder="Your first name" required autocomplete="given-name">
+              </div>
+              <div class="bio-leadgen-field">
+                <label for="bioLName">Last Name</label>
+                <input id="bioLName" name="lastName" type="text" placeholder="Your last name" required autocomplete="family-name">
+              </div>
+              <div class="bio-leadgen-field full">
+                <label for="bioEmail">Email Address</label>
+                <input id="bioEmail" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+              </div>
+              <div class="bio-leadgen-field full">
+                <label for="bioPhone">Phone Number</label>
+                <input id="bioPhone" name="phone" type="tel" placeholder="+1 (555) 123-4567" required autocomplete="tel">
+              </div>
+              <button class="bio-leadgen-submit" type="submit">Send my details</button>
+            </div>
+            <p class="bio-leadgen-trust">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Your information is secure. We'll never share your details.
+            </p>
+          </form>
+
+          <div class="form-thankyou" id="bioThankYou" role="status" aria-live="polite">
+            <div class="form-thankyou-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <h3 class="form-thankyou-headline">Thank You!</h3>
+            <p class="form-thankyou-text">We have received your details. One of our team members will be in touch with you shortly. We look forward to welcoming you to Longevity Life Academy.</p>
+            <a class="form-thankyou-cta" href="index.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Back to Home
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -251,8 +322,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function compute(data){const age=Number(data.chronologicalAge||0);if(!age)return null;const modifiers=['sleepHours','energy','nutrition','training','recovery','markers','stress'].map(key=>Number(data[key]||0)).reduce((sum,value)=>sum+value,0);const bioAge=Math.max(18,Math.round(age+modifiers));const gap=bioAge-age;let track='Balanced foundation';let note='Your biological age appears closely aligned with your chronological age. This suggests a stable foundation, with the strongest gains likely to come from a few more intentional choices around sleep, energy, and consistency.';let readinessLabel='Ready for a next step';if((Number(data.stress)+Number(data.sleepHours))>=4){track='Restore the basics';note='Your result suggests that recovery, sleep quality, and stress balance may deserve a little more attention right now.';readinessLabel='Best with a gentle reset'}else if((Number(data.energy)+Number(data.nutrition)+Number(data.markers))>=3){track='Metabolic balance';note='Your result suggests that better energy stability, nourishment, and visibility into key health signals could make a meaningful difference.';readinessLabel='Best with practical structure'}else if((Number(data.training)+Number(data.recovery))<=-3){track='Performance longevity';note='Your result suggests a strong foundation in movement, recovery, and daily rhythm, with room to keep refining what already works well.';readinessLabel='Ready for advanced guidance'}return {age,bioAge,gap,track,note,readinessLabel}}
     function updateLive(){const data=getData();const count=filledCount(data);const pct=Math.round((count/fieldNames.length)*100);progressFill.style.width=pct+'%';miniProgress.textContent=pct+'%';const result=compute(data);if(!result){liveAge.textContent='--';miniTrack.textContent='Pending';liveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';return}liveAge.textContent=result.bioAge;miniTrack.textContent=result.track;liveSummary.textContent=result.gap<=0?`Current estimate: ${Math.abs(result.gap)} year${Math.abs(result.gap)===1?'':'s'} younger than chronological age.`:`Current estimate: ${result.gap} year${result.gap===1?'':'s'} older than chronological age.`}
     form.addEventListener('input', updateLive); form.addEventListener('change', updateLive);
-    form.addEventListener('submit', (e)=>{e.preventDefault();const result=compute(getData());if(!result)return;resultCard.classList.add('visible');ageGap.textContent=result.gap===0?'Aligned with age':(result.gap>0?`+${result.gap} years`:`${result.gap} years`);focusTrack.textContent=result.track;readiness.textContent=result.readinessLabel;resultNarrative.textContent=`Estimated biological age: ${result.bioAge}. ${result.note}`;resultCard.scrollIntoView({behavior:'smooth',block:'nearest'})});
-    form.addEventListener('reset', ()=>{setTimeout(()=>{progressFill.style.width='0%';miniProgress.textContent='0%';miniTrack.textContent='Pending';liveAge.textContent='--';liveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';resultCard.classList.remove('visible')},0)});
+    const bioLeadGen = document.getElementById('bioLeadGenForm');
+    const bioThankYou = document.getElementById('bioThankYou');
+    form.addEventListener('submit', (e)=>{e.preventDefault();const result=compute(getData());if(!result)return;resultCard.classList.add('visible');ageGap.textContent=result.gap===0?'Aligned with age':(result.gap>0?`+${result.gap} years`:`${result.gap} years`);focusTrack.textContent=result.track;readiness.textContent=result.readinessLabel;resultNarrative.textContent=`Estimated biological age: ${result.bioAge}. ${result.note}`;if(bioLeadGen){bioLeadGen.classList.add('visible')}resultCard.scrollIntoView({behavior:'smooth',block:'nearest'})});
+    form.addEventListener('reset', ()=>{setTimeout(()=>{progressFill.style.width='0%';miniProgress.textContent='0%';miniTrack.textContent='Pending';liveAge.textContent='--';liveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';resultCard.classList.remove('visible');if(bioLeadGen){bioLeadGen.classList.remove('visible');bioLeadGen.reset()}if(bioThankYou){bioThankYou.classList.remove('visible')}},0)});
+    if(bioLeadGen){
+      bioLeadGen.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        if(!bioLeadGen.checkValidity()){bioLeadGen.reportValidity();return}
+        // Lock everything: hide bio assessment form + lead-gen form, show Thank You.
+        bioLeadGen.style.display='none';
+        form.style.display='none';
+        // Disable the assessment buttons in case display is reverted somehow.
+        form.querySelectorAll('button').forEach(b=>{b.disabled=true});
+        if(bioThankYou){bioThankYou.classList.add('visible');try{bioThankYou.scrollIntoView({behavior:'smooth',block:'center'})}catch(err){}}
+        try{if(window.dataLayer){window.dataLayer.push({event:'lead_form_submit',form_id:'bioLeadGenForm'})}}catch(err){}
+      });
+    }
   </script>
 </body>
 </html>

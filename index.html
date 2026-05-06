@@ -7552,6 +7552,124 @@ section.topics .topic-v2-video video {
     line-height: 1.5 !important;
   }
 }
+
+/* ============================================
+   FIXES — May 2026
+   1. How It Works subtitle visibility (dark text on dark bg → light)
+   2. Lead-gen-v2 form input text color (was white-on-white from legacy .lead-gen rule)
+   3. Universal Thank You state for every form on the site
+   ============================================ */
+
+/* 1. How It Works subtitle — force light color on dark gradient */
+.how-v2 .how-v2-header p,
+.how-v2 .how-v2-header .how-v2-sub,
+.how-v2 .how-v2-sub {
+  color: rgba(255,255,255,0.72) !important;
+  opacity: 1 !important;
+}
+
+/* 2. Lead-gen-v2 form inputs — restore dark text on white card */
+.lead-gen-v2 .lead-gen-v2-field input[type="text"],
+.lead-gen-v2 .lead-gen-v2-field input[type="email"],
+.lead-gen-v2 .lead-gen-v2-field input[type="tel"],
+.lead-gen-v2 .lead-gen-v2-field input[type="number"],
+.lead-gen-v2 .lead-gen-v2-field select {
+  background: #fff !important;
+  background-color: #fff !important;
+  color: #001233 !important;
+  -webkit-text-fill-color: #001233 !important;
+  border: 1.5px solid rgba(0,18,51,0.14) !important;
+}
+.lead-gen-v2 .lead-gen-v2-field input::placeholder {
+  color: rgba(0,18,51,0.4) !important;
+  -webkit-text-fill-color: rgba(0,18,51,0.4) !important;
+}
+.lead-gen-v2 .lead-gen-v2-field input:focus,
+.lead-gen-v2 .lead-gen-v2-field select:focus {
+  border-color: #006EFF !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(0,110,255,0.12) !important;
+}
+.lead-gen-v2 .lead-gen-v2-field input:-webkit-autofill,
+.lead-gen-v2 .lead-gen-v2-field input:-webkit-autofill:hover,
+.lead-gen-v2 .lead-gen-v2-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #001233 !important;
+  -webkit-box-shadow: 0 0 0 100px #fff inset !important;
+  caret-color: #001233 !important;
+}
+.lead-gen-v2 .lead-gen-v2-field label {
+  color: #001233 !important;
+}
+
+/* 3. Universal Thank You state — works for any form wrapped with .form-with-thankyou */
+.form-thankyou {
+  display: none;
+  text-align: center;
+  padding: 48px 28px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, #0a1628 0%, #0d1b2e 50%, #060e1a 100%);
+  border: 1px solid rgba(0,110,255,0.18);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  animation: thankyou-fade 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.form-thankyou.visible { display: block; }
+.form-thankyou-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #006EFF, #338BFF);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 30px rgba(0,110,255,0.35);
+}
+.form-thankyou-icon svg { width: 34px; height: 34px; color: #fff; }
+.form-thankyou-headline {
+  font-family: 'Codec Pro', 'Inter', sans-serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+.form-thankyou-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  max-width: 460px;
+  margin: 0 auto 28px;
+}
+.form-thankyou-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-family: 'Codec Pro', 'Inter', sans-serif;
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #006EFF, #338BFF);
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(0,110,255,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.form-thankyou-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0,110,255,0.45);
+}
+.form-thankyou-cta svg { width: 18px; height: 18px; }
+@keyframes thankyou-fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 720px) {
+  .form-thankyou { padding: 40px 22px; }
+  .form-thankyou-headline { font-size: 30px; }
+  .form-thankyou-text { font-size: 15.5px; }
+}
 </style>
 </head>
 <body>
@@ -8863,7 +8981,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
       <div class="lead-gen-v2-right">
-        <form class="lead-gen-v2-form" onsubmit="event.preventDefault(); var b=this.querySelector('button'); b.textContent='Application Received ✓'; b.style.background='#10B981'; b.disabled=true;">
+        <form class="lead-gen-v2-form form-with-thankyou" id="leadGenV2Form" data-thankyou-target="leadGenV2ThankYou">
           <h3 class="lead-gen-v2-form-title">Apply Now</h3>
           <p class="lead-gen-v2-form-sub">Free, no commitment — admissions team replies within 24 hours.</p>
           <div class="lead-gen-v2-field">
@@ -8918,6 +9036,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Your information is secure. We'll never share your details.
           </p>
         </form>
+        <div class="form-thankyou" id="leadGenV2ThankYou" role="status" aria-live="polite">
+          <div class="form-thankyou-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+          </div>
+          <h3 class="form-thankyou-headline">Thank You!</h3>
+          <p class="form-thankyou-text">We have received your details. One of our team members will be in touch with you shortly. We look forward to welcoming you to Longevity Life Academy.</p>
+          <a class="form-thankyou-cta" href="#hero">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Home
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -9509,6 +9638,34 @@ function toggleCurriculum(btn) {
       });
     });
   });
+})();
+</script>
+
+<script>
+/* Universal Thank You handler — applies to every form with .form-with-thankyou */
+(function(){
+  function bind(form){
+    if (form.dataset.thankyouBound === '1') return;
+    form.dataset.thankyouBound = '1';
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var targetId = form.getAttribute('data-thankyou-target');
+      var thx = targetId ? document.getElementById(targetId) : form.parentNode.querySelector('.form-thankyou');
+      if (!thx) return;
+      form.style.display = 'none';
+      thx.classList.add('visible');
+      try { thx.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(err){}
+      try { if (window.dataLayer) { window.dataLayer.push({ event: 'lead_form_submit', form_id: form.id || 'unknown' }); } } catch(err){}
+    });
+  }
+  function init(){
+    document.querySelectorAll('form.form-with-thankyou').forEach(bind);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 </script>
 
