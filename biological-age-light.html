@@ -429,6 +429,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       return ipCountryPromise;
     }
     function isValidEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
+
+    // ---------- Click-ID + UTM capture (mirrors index.html) ----------
+    var ATTR_KEYS = ['gclid','fbclid','msclkid','ttclid','li_fat_id','wbraid','gbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var ATTR_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+    var ATTR_STORAGE_KEY = 'lla_attribution_v1';
+    function readAttributionStorage(){
+      try {
+        var raw = localStorage.getItem(ATTR_STORAGE_KEY);
+        if (!raw) return null;
+        var obj = JSON.parse(raw);
+        if (!obj || !obj.ts || (Date.now() - obj.ts) > ATTR_TTL_MS) return null;
+        return obj;
+      } catch(e) { return null; }
+    }
+    function captureAttribution(){
+      try {
+        var params = new URLSearchParams(window.location.search || '');
+        var found = {};
+        var hasAny = false;
+        ATTR_KEYS.forEach(function(k){ var v = params.get(k); if (v) { found[k] = v; hasAny = true; } });
+        if (hasAny) {
+          found.ts = Date.now();
+          found.first_landing = window.location.href;
+          found.first_referrer = document.referrer || '';
+          try { localStorage.setItem(ATTR_STORAGE_KEY, JSON.stringify(found)); } catch(e){}
+          return found;
+        }
+        return readAttributionStorage();
+      } catch(e) { return null; }
+    }
+    var _cachedAttribution = captureAttribution();
+    function getAttribution(){ return _cachedAttribution || readAttributionStorage(); }
+    function buildDynamicParameters(attr){
+      if (!attr) return '';
+      var pairs = [];
+      ATTR_KEYS.forEach(function(k){ if (attr[k]) pairs.push(k + '=' + attr[k]); });
+      return pairs.join(';');
+    }
+
     function postWithRetry(url, payload, attempt){
       attempt = attempt || 1;
       return fetch(url, { method:'POST', headers:{ 'Content-Type':'application/json','Accept':'application/json' }, body: JSON.stringify(payload), credentials:'omit', mode:'cors' })
@@ -446,6 +485,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.eTeacherLeads = {
       endpoint: ENDPOINTS[ETEACHER_ENV],
       env: ETEACHER_ENV,
+      getAttribution: getAttribution,
       submit: function(fields){
         if (!fields || !fields.firstName || !fields.lastName || !isValidEmail(fields.email||'') || !fields.phone || !fields.countryIso) {
           return Promise.resolve({ ok:false, status:0, error:'Missing or invalid fields' });
@@ -464,6 +504,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           };
           if (ipCountry) payload.CountryIsoCodeByIp = ipCountry;
           if (fields.adminNotes) payload.AdminNotes = String(fields.adminNotes).slice(0, 4000);
+          var attr = getAttribution();
+          var dyn = buildDynamicParameters(attr);
+          if (dyn) payload.DynamicParameters = dyn.slice(0, 4000);
+          if (fields.campaignId && /^\d+$/.test(String(fields.campaignId))) {
+            payload.CampaignID = parseInt(fields.campaignId, 10);
+          }
           return postWithRetry(ENDPOINTS[ETEACHER_ENV], payload);
         });
       }
@@ -479,6 +525,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     @keyframes lg-spin{to{transform:rotate(360deg)}}
   </style>
   <script>
+  // CampaignID map shared with index.html semantics. Update with eTeacher-provided IDs.
+  window.LLA_CAMPAIGN_IDS = window.LLA_CAMPAIGN_IDS || {
+    // 'leadGenV2Form':   123456,
+    // 'bioLeadGenForm':  123457,
+  };
   (function(){
     function getValue(form, name){ var el = form.querySelector('[name="'+name+'"], #'+name); return el ? el.value : ''; }
     function showError(form, msg){
@@ -515,7 +566,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           email:      getValue(form, 'email')      || getValue(form, 'bioEmail')  || getValue(form, 'lg-email'),
           phone:      getValue(form, 'phone')      || getValue(form, 'bioPhone')  || getValue(form, 'lg-phone'),
           countryIso: getValue(form, 'country')    || getValue(form, 'bioCountry')|| getValue(form, 'lg-country'),
-          adminNotes: form.dataset.adminNotes || ''
+          adminNotes: form.dataset.adminNotes || '',
+          campaignId: (window.LLA_CAMPAIGN_IDS && window.LLA_CAMPAIGN_IDS[form.id]) || ''
         };
         if (!fields.firstName || !fields.lastName || !fields.email || !fields.phone || !fields.countryIso) {
           showError(form, 'Please fill in all required fields.'); return;
@@ -527,7 +579,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         window.eTeacherLeads.submit(fields).then(function(res){
           form.classList.remove('is-submitting');
           if (res.ok) {
-            try { if (window.dataLayer) { window.dataLayer.push({ event:'lead_form_submit', form_id: form.id || 'unknown', crm_status:'ok', env: window.eTeacherLeads.env }); } } catch(err){}
+            try {
+              var attr = (window.eTeacherLeads.getAttribution && window.eTeacherLeads.getAttribution()) || {};
+              if (window.dataLayer) { window.dataLayer.push({ event:'lead_form_submit', form_id: form.id || 'unknown', crm_status:'ok', env: window.eTeacherLeads.env, gclid: attr.gclid || '', fbclid: attr.fbclid || '', utm_source: attr.utm_source || '', utm_campaign: attr.utm_campaign || '', utm_medium: attr.utm_medium || '' }); }
+            } catch(err){}
             showThankYou(form);
           } else {
             try { if (window.dataLayer) { window.dataLayer.push({ event:'lead_form_submit_error', form_id: form.id || 'unknown', crm_status: res.status, env: window.eTeacherLeads.env }); } } catch(err){}
