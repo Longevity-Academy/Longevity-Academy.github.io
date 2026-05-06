@@ -37,6 +37,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- Fonts loaded async with display=swap to prevent render blocking -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- v8 hero logo lockup fonts: Instrument Serif (wordmark) + Instrument Sans (Est. label) -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/codec-pro" rel="stylesheet">
 <style>
 /* ==================================================
@@ -307,6 +309,118 @@ ul, ol { list-style: none; }
   background: rgba(126, 200, 255, 0.28);
   border-radius: 8px;
   z-index: -1;
+}
+
+/* ==================================================
+   v8 HERO LOGO LOCKUP
+   Stacked Instrument Serif wordmark + italic 'by [eTeacher logo] Group'.
+   Ports motion-banner M01 lockup with frosted-blue + white tones.
+   ================================================== */
+.hero-logo-lockup {
+  display: block;
+  margin: 0 0 56px 0;
+  text-align: inherit;
+}
+.hero-logo-lockup .hll-est {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  justify-content: flex-start;
+}
+.hero-logo-lockup .hll-rule {
+  display: inline-block;
+  width: 60px;
+  height: 1px;
+  background: rgba(184, 212, 232, 0.5);
+}
+.hero-logo-lockup .hll-est-text {
+  font-family: 'Instrument Sans', 'Inter', system-ui, sans-serif;
+  color: #B8D4E8;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+.hero-logo-lockup .hll-wordmark {
+  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+}
+.hero-logo-lockup .hll-l1 {
+  display: block;
+  color: #B8D4E8;
+  font-size: clamp(56px, 7.6vw, 112px);
+}
+.hero-logo-lockup .hll-l2 {
+  display: block;
+  color: #FFFFFF;
+  font-size: clamp(56px, 7.6vw, 112px);
+  margin-top: 2px;
+}
+.hero-logo-lockup .hll-parent {
+  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  color: #FFFFFF;
+}
+.hero-logo-lockup .hll-parent--inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  width: auto;
+}
+.hero-logo-lockup .hll-by,
+.hero-logo-lockup .hll-group {
+  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(36px, 4.6vw, 68px);
+  color: #FFFFFF;
+  line-height: 1;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.35);
+}
+.hero-logo-lockup .hll-eteacher-logo {
+  height: clamp(46px, 5.8vw, 82px);
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+@media (max-width: 600px) {
+  .hero-logo-lockup { margin-bottom: 26px !important; text-align: center !important; }
+  .hero-logo-lockup .hll-est {
+    margin-bottom: 12px !important;
+    gap: 10px !important;
+    justify-content: center !important;
+  }
+  .hero-logo-lockup .hll-rule { width: 36px !important; }
+  .hero-logo-lockup .hll-est-text {
+    font-size: 11px !important;
+    letter-spacing: 0.32em !important;
+  }
+  .hero-logo-lockup .hll-wordmark { margin-bottom: 10px !important; }
+  .hero-logo-lockup .hll-l1,
+  .hero-logo-lockup .hll-l2 {
+    font-size: clamp(40px, 13vw, 64px) !important;
+  }
+  .hero-logo-lockup .hll-parent--inline {
+    gap: 9px !important;
+    flex-wrap: nowrap !important;
+  }
+  .hero-logo-lockup .hll-by,
+  .hero-logo-lockup .hll-group {
+    font-size: clamp(20px, 6.4vw, 30px) !important;
+  }
+  .hero-logo-lockup .hll-eteacher-logo {
+    height: clamp(26px, 7.6vw, 36px) !important;
+  }
 }
 
 /* Hero academy name above main title */
@@ -7517,8 +7631,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
-    <div class="hero-academy-name">
-      Longevity <span class="life-blue">Life</span> Academy
+    <!-- v8: Hero logo lockup — Instrument Serif stacked wordmark with
+         italic 'by [eTeacher logo] Group' parent line per CEO-approved reference. -->
+    <div class="hero-logo-lockup" aria-label="Longevity Life Academy by eTeacher Group">
+      <div class="hll-est"><span class="hll-rule"></span><span class="hll-est-text">Est. 2000</span><span class="hll-rule"></span></div>
+      <div class="hll-wordmark"><span class="hll-l1">Longevity</span><span class="hll-l2">Life Academy</span></div>
+      <div class="hll-parent hll-parent--inline">
+        <span class="hll-by">by</span>
+        <img class="hll-eteacher-logo" src="assets/eteacher-wordmark-only.png" alt="eTeacher">
+        <span class="hll-group">Group</span>
+      </div>
     </div>
     <h1 class="hero-title">
       It's Your Life.<br><span class="life-blue">Live It Well.</span>
@@ -7546,60 +7668,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- v52: Powered-by stats strip moved into the About Us “Powered by eTeacher” card. -->
-
-<!-- ==============================================
-     TRUST LOGO STRIP (V3 CHANGE 3)
-     Dark horizontal auto‑scrolling bar — Rosen Hebrew School‑style.
-     Logos duplicated once for seamless marquee.
-     ============================================== -->
-<section class="trust-strip" aria-label="Trusted partners">
-  <div class="trust-strip-track-wrap">
-    <div class="trust-strip-track">
-      <!-- SET 1 -->
-      <div class="trust-logo trust-logo--natgeo" title="National Geographic Learning">
-        <span class="trust-natgeo-bar" aria-hidden="true"></span>
-        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
-      </div>
-      <div class="trust-logo trust-logo--brand trust-logo--microsoft" title="Microsoft">
-        <svg viewBox="0 0 118 20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
-          <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
-          <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
-          <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
-          <text x="24" y="15.5" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
-        </svg>
-      </div>
-      <div class="trust-logo trust-logo--brand trust-logo--intel" title="Intel">
-        <svg viewBox="0 0 96 28" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="22" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#0071C5" letter-spacing="-1">intel</text>
-        </svg>
-      </div>
-      <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
-
-      <!-- SET 2 (duplicate for seamless loop) -->
-      <div class="trust-logo trust-logo--natgeo" aria-hidden="true">
-        <span class="trust-natgeo-bar"></span>
-        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
-      </div>
-      <div class="trust-logo trust-logo--brand trust-logo--microsoft" aria-hidden="true">
-        <svg viewBox="0 0 118 20" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
-          <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
-          <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
-          <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
-          <text x="24" y="15.5" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
-        </svg>
-      </div>
-      <div class="trust-logo trust-logo--brand trust-logo--intel" aria-hidden="true">
-        <svg viewBox="0 0 96 28" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="22" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#0071C5" letter-spacing="-1">intel</text>
-        </svg>
-      </div>
-      <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- ==============================================
      FOLD 2 — ABOUT US (V3 new fold)
      ==============================================
@@ -8468,6 +8536,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#lead-gen" class="section-cta-btn deepdive-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </section>
+
+
+
+<!-- ==============================================
+     TRUST LOGO STRIP (V3 CHANGE 3)
+     Dark horizontal auto‑scrolling bar — Rosen Hebrew School‑style.
+     Logos duplicated once for seamless marquee.
+     ============================================== -->
+<section class="trust-strip" aria-label="Trusted partners">
+  <div class="trust-strip-track-wrap">
+    <div class="trust-strip-track">
+      <!-- SET 1 -->
+      <div class="trust-logo trust-logo--natgeo" title="National Geographic Learning">
+        <span class="trust-natgeo-bar" aria-hidden="true"></span>
+        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
+      </div>
+      <div class="trust-logo trust-logo--brand trust-logo--microsoft" title="Microsoft">
+        <svg viewBox="0 0 118 20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
+          <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
+          <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
+          <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
+          <text x="24" y="15.5" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
+        </svg>
+      </div>
+      <div class="trust-logo trust-logo--brand trust-logo--intel" title="Intel">
+        <svg viewBox="0 0 96 28" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="22" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#0071C5" letter-spacing="-1">intel</text>
+        </svg>
+      </div>
+      <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
+
+      <!-- SET 2 (duplicate for seamless loop) -->
+      <div class="trust-logo trust-logo--natgeo" aria-hidden="true">
+        <span class="trust-natgeo-bar"></span>
+        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
+      </div>
+      <div class="trust-logo trust-logo--brand trust-logo--microsoft" aria-hidden="true">
+        <svg viewBox="0 0 118 20" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="9" height="9" fill="#F25022"/>
+          <rect x="10" y="0" width="9" height="9" fill="#7FBA00"/>
+          <rect x="0" y="10" width="9" height="9" fill="#00A4EF"/>
+          <rect x="10" y="10" width="9" height="9" fill="#FFB900"/>
+          <text x="24" y="15.5" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Microsoft</text>
+        </svg>
+      </div>
+      <div class="trust-logo trust-logo--brand trust-logo--intel" aria-hidden="true">
+        <svg viewBox="0 0 96 28" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="22" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#0071C5" letter-spacing="-1">intel</text>
+        </svg>
+      </div>
+      <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ==============================================
      FOLD 6 — BIO AGE QUIZ
