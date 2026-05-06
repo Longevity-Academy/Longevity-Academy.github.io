@@ -246,7 +246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </section>
 
-          <form class="bio-leadgen" id="bioLeadGenForm" novalidate>
+          <form class="bio-leadgen form-with-thankyou" id="bioLeadGenForm" data-thankyou-target="bioThankYou" novalidate>
             <span class="bio-leadgen-eyebrow">Get your full protocol</span>
             <h3>Discuss your result with our team.</h3>
             <p class="bio-leadgen-sub">Leave your details and an admissions advisor will reach out personally to walk you through your snapshot and the next steps in Longevity Life Academy.</p>
@@ -266,6 +266,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="bio-leadgen-field full">
                 <label for="bioPhone">Phone Number</label>
                 <input id="bioPhone" name="phone" type="tel" placeholder="+1 (555) 123-4567" required autocomplete="tel">
+              </div>
+              <div class="bio-leadgen-field full">
+                <label for="bioCountry">Country</label>
+                <select id="bioCountry" name="country" required style="width:100%;padding:16px 18px;font-size:15.5px;font-family:'Inter',sans-serif;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;color:#fff;outline:none;transition:all .22s ease">
+                  <option value="" disabled selected>Select your country</option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="AU">Australia</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="ES">Spain</option>
+                  <option value="IT">Italy</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="IL">Israel</option>
+                  <option value="AE">United Arab Emirates</option>
+                  <option value="SG">Singapore</option>
+                  <option value="HK">Hong Kong</option>
+                  <option value="JP">Japan</option>
+                  <option value="MX">Mexico</option>
+                  <option value="BR">Brazil</option>
+                  <option value="AR">Argentina</option>
+                  <option value="ZA">South Africa</option>
+                  <option value="IN">India</option>
+                  <option value="ZZ">Other</option>
+                </select>
               </div>
               <button class="bio-leadgen-submit" type="submit">Send my details</button>
             </div>
@@ -324,21 +351,193 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     form.addEventListener('input', updateLive); form.addEventListener('change', updateLive);
     const bioLeadGen = document.getElementById('bioLeadGenForm');
     const bioThankYou = document.getElementById('bioThankYou');
-    form.addEventListener('submit', (e)=>{e.preventDefault();const result=compute(getData());if(!result)return;resultCard.classList.add('visible');ageGap.textContent=result.gap===0?'Aligned with age':(result.gap>0?`+${result.gap} years`:`${result.gap} years`);focusTrack.textContent=result.track;readiness.textContent=result.readinessLabel;resultNarrative.textContent=`Estimated biological age: ${result.bioAge}. ${result.note}`;if(bioLeadGen){bioLeadGen.classList.add('visible')}resultCard.scrollIntoView({behavior:'smooth',block:'nearest'})});
-    form.addEventListener('reset', ()=>{setTimeout(()=>{progressFill.style.width='0%';miniProgress.textContent='0%';miniTrack.textContent='Pending';liveAge.textContent='--';liveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';resultCard.classList.remove('visible');if(bioLeadGen){bioLeadGen.classList.remove('visible');bioLeadGen.reset()}if(bioThankYou){bioThankYou.classList.remove('visible')}},0)});
-    if(bioLeadGen){
-      bioLeadGen.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        if(!bioLeadGen.checkValidity()){bioLeadGen.reportValidity();return}
-        // Lock everything: hide bio assessment form + lead-gen form, show Thank You.
-        bioLeadGen.style.display='none';
-        form.style.display='none';
-        // Disable the assessment buttons in case display is reverted somehow.
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = getData();
+      const result = compute(data);
+      if(!result) return;
+      resultCard.classList.add('visible');
+      ageGap.textContent = result.gap===0 ? 'Aligned with age' : (result.gap>0 ? `+${result.gap} years` : `${result.gap} years`);
+      focusTrack.textContent = result.track;
+      readiness.textContent = result.readinessLabel;
+      resultNarrative.textContent = `Estimated biological age: ${result.bioAge}. ${result.note}`;
+      // Pass the bio-age result to the lead-gen form as AdminNotes for the CRM.
+      if (bioLeadGen) {
+        const labels = { sleepHours:'Sleep', energy:'Energy', nutrition:'Nutrition', training:'Training', recovery:'Recovery', markers:'Tracking markers', stress:'Stress' };
+        const answers = Object.keys(labels).map(k=>`${labels[k]}=${data[k]||'n/a'}`).join('; ');
+        const notes = [
+          `[Bio-Age Assessment]`,
+          `Chronological: ${data.chronologicalAge}`,
+          `Estimated bio-age: ${result.bioAge}`,
+          `Gap: ${result.gap>=0?'+':''}${result.gap}`,
+          `Track: ${result.track}`,
+          `Readiness: ${result.readinessLabel}`,
+          `Answers: ${answers}`
+        ].join(' | ');
+        bioLeadGen.dataset.adminNotes = notes;
+        bioLeadGen.classList.add('visible');
+      }
+      resultCard.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+    form.addEventListener('reset', ()=>{
+      setTimeout(()=>{
+        progressFill.style.width='0%';
+        miniProgress.textContent='0%';
+        miniTrack.textContent='Pending';
+        liveAge.textContent='--';
+        liveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';
+        resultCard.classList.remove('visible');
+        if(bioLeadGen){
+          bioLeadGen.classList.remove('visible');
+          bioLeadGen.reset();
+          bioLeadGen.style.display = '';
+          delete bioLeadGen.dataset.adminNotes;
+        }
+        if(bioThankYou){ bioThankYou.classList.remove('visible'); }
+      },0);
+    });
+    // After the lead-gen form successfully posts to the CRM, also lock the assessment.
+    if (bioLeadGen) {
+      bioLeadGen.addEventListener('thankyou:shown', function(){
+        form.style.display = 'none';
         form.querySelectorAll('button').forEach(b=>{b.disabled=true});
-        if(bioThankYou){bioThankYou.classList.add('visible');try{bioThankYou.scrollIntoView({behavior:'smooth',block:'center'})}catch(err){}}
-        try{if(window.dataLayer){window.dataLayer.push({event:'lead_form_submit',form_id:'bioLeadGenForm'})}}catch(err){}
       });
     }
+  </script>
+
+  <!-- =====================================================
+       eTeacher Leads CRM Integration (bio-age page)
+       Mirrors the homepage integration. Endpoint switched
+       between staging and production via ETEACHER_ENV.
+       ===================================================== -->
+  <script>
+  (function(){
+    var ETEACHER_ENV = 'staging'; // set to 'production' after eTeacher staging sign-off
+    var ENDPOINTS = {
+      staging:    'https://81pg281wke.execute-api.eu-west-1.amazonaws.com/staging/leads',
+      production: 'https://u6ygel4ywa.execute-api.eu-west-1.amazonaws.com/prod/leads'
+    };
+    var ipCountryPromise = null;
+    function getIpCountry(){
+      if (ipCountryPromise) return ipCountryPromise;
+      ipCountryPromise = fetch('https://ipapi.co/country/', { method:'GET', cache:'force-cache' })
+        .then(function(r){ return r.ok ? r.text() : ''; })
+        .then(function(t){ t=(t||'').trim().toUpperCase(); return /^[A-Z]{2}$/.test(t) ? t : ''; })
+        .catch(function(){ return ''; });
+      return ipCountryPromise;
+    }
+    function isValidEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
+    function postWithRetry(url, payload, attempt){
+      attempt = attempt || 1;
+      return fetch(url, { method:'POST', headers:{ 'Content-Type':'application/json','Accept':'application/json' }, body: JSON.stringify(payload), credentials:'omit', mode:'cors' })
+        .then(function(res){
+          if (res.status === 200) return { ok:true, status:200 };
+          if (res.status >= 400 && res.status < 500) return { ok:false, status:res.status, retryable:false };
+          if (attempt < 3) { var d = Math.pow(2, attempt-1)*1000; return new Promise(function(r){ setTimeout(function(){ r(postWithRetry(url, payload, attempt+1)); }, d); }); }
+          return { ok:false, status:res.status, retryable:true };
+        })
+        .catch(function(err){
+          if (attempt < 3) { var d = Math.pow(2, attempt-1)*1000; return new Promise(function(r){ setTimeout(function(){ r(postWithRetry(url, payload, attempt+1)); }, d); }); }
+          return { ok:false, status:0, retryable:true, error:String(err) };
+        });
+    }
+    window.eTeacherLeads = {
+      endpoint: ENDPOINTS[ETEACHER_ENV],
+      env: ETEACHER_ENV,
+      submit: function(fields){
+        if (!fields || !fields.firstName || !fields.lastName || !isValidEmail(fields.email||'') || !fields.phone || !fields.countryIso) {
+          return Promise.resolve({ ok:false, status:0, error:'Missing or invalid fields' });
+        }
+        return getIpCountry().then(function(ipCountry){
+          var payload = {
+            FirstName: String(fields.firstName).trim(),
+            LastName:  String(fields.lastName).trim(),
+            Email:     String(fields.email).trim(),
+            MobilePhone: String(fields.phone).trim(),
+            CountryIsoCode: String(fields.countryIso).toUpperCase(),
+            LandingPage: window.location.href,
+            UserAgent: navigator.userAgent,
+            ReferringSite: document.referrer || window.location.hostname,
+            QueryString: (window.location.search || '').replace(/^\?/, '')
+          };
+          if (ipCountry) payload.CountryIsoCodeByIp = ipCountry;
+          if (fields.adminNotes) payload.AdminNotes = String(fields.adminNotes).slice(0, 4000);
+          return postWithRetry(ENDPOINTS[ETEACHER_ENV], payload);
+        });
+      }
+    };
+  })();
+  </script>
+
+  <style>
+    .form-with-thankyou .form-error{display:none;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.4);color:#fecaca;border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14px;line-height:1.5;font-family:'Inter',sans-serif}
+    .form-with-thankyou .form-error.visible{display:block}
+    .form-with-thankyou.is-submitting button[type="submit"]{opacity:.7;pointer-events:none;position:relative}
+    .form-with-thankyou.is-submitting button[type="submit"]::after{content:'';position:absolute;right:18px;top:50%;width:16px;height:16px;margin-top:-8px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:lg-spin .7s linear infinite}
+    @keyframes lg-spin{to{transform:rotate(360deg)}}
+  </style>
+  <script>
+  (function(){
+    function getValue(form, name){ var el = form.querySelector('[name="'+name+'"], #'+name); return el ? el.value : ''; }
+    function showError(form, msg){
+      var box = form.querySelector('.form-error');
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'form-error';
+        box.setAttribute('role','alert');
+        var submitBtn = form.querySelector('button[type="submit"], .lead-gen-v2-submit, .bio-leadgen-submit');
+        if (submitBtn && submitBtn.parentNode) submitBtn.parentNode.insertBefore(box, submitBtn.nextSibling);
+        else form.appendChild(box);
+      }
+      box.textContent = msg; box.classList.add('visible');
+    }
+    function clearError(form){ var b = form.querySelector('.form-error'); if (b) b.classList.remove('visible'); }
+    function showThankYou(form){
+      var targetId = form.getAttribute('data-thankyou-target');
+      var thx = targetId ? document.getElementById(targetId) : form.parentNode.querySelector('.form-thankyou');
+      if (!thx) return;
+      form.style.display = 'none';
+      thx.classList.add('visible');
+      try { thx.scrollIntoView({ behavior:'smooth', block:'center' }); } catch(err){}
+      try { form.dispatchEvent(new CustomEvent('thankyou:shown', { bubbles:true })); } catch(err){}
+    }
+    function bind(form){
+      if (form.dataset.thankyouBound === '1') return;
+      form.dataset.thankyouBound = '1';
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        clearError(form);
+        var fields = {
+          firstName:  getValue(form, 'firstName')  || getValue(form, 'bioFName')  || getValue(form, 'lg-fname'),
+          lastName:   getValue(form, 'lastName')   || getValue(form, 'bioLName')  || getValue(form, 'lg-lname'),
+          email:      getValue(form, 'email')      || getValue(form, 'bioEmail')  || getValue(form, 'lg-email'),
+          phone:      getValue(form, 'phone')      || getValue(form, 'bioPhone')  || getValue(form, 'lg-phone'),
+          countryIso: getValue(form, 'country')    || getValue(form, 'bioCountry')|| getValue(form, 'lg-country'),
+          adminNotes: form.dataset.adminNotes || ''
+        };
+        if (!fields.firstName || !fields.lastName || !fields.email || !fields.phone || !fields.countryIso) {
+          showError(form, 'Please fill in all required fields.'); return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
+          showError(form, 'Please enter a valid email address.'); return;
+        }
+        form.classList.add('is-submitting');
+        window.eTeacherLeads.submit(fields).then(function(res){
+          form.classList.remove('is-submitting');
+          if (res.ok) {
+            try { if (window.dataLayer) { window.dataLayer.push({ event:'lead_form_submit', form_id: form.id || 'unknown', crm_status:'ok', env: window.eTeacherLeads.env }); } } catch(err){}
+            showThankYou(form);
+          } else {
+            try { if (window.dataLayer) { window.dataLayer.push({ event:'lead_form_submit_error', form_id: form.id || 'unknown', crm_status: res.status, env: window.eTeacherLeads.env }); } } catch(err){}
+            showError(form, "We couldn't submit your details right now. Please try again in a moment, or email service@eteachergroup.com.");
+          }
+        });
+      });
+    }
+    function init(){ document.querySelectorAll('form.form-with-thankyou').forEach(bind); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
   </script>
 </body>
 </html>

@@ -9003,29 +9003,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="lead-gen-v2-field">
             <label for="lg-country">Country</label>
-            <select id="lg-country" required>
+            <select id="lg-country" name="country" required>
               <option value="" disabled selected>Select your country</option>
-              <option>United States</option>
-              <option>Canada</option>
-              <option>United Kingdom</option>
-              <option>Australia</option>
-              <option>Germany</option>
-              <option>France</option>
-              <option>Spain</option>
-              <option>Italy</option>
-              <option>Netherlands</option>
-              <option>Switzerland</option>
-              <option>Israel</option>
-              <option>United Arab Emirates</option>
-              <option>Singapore</option>
-              <option>Hong Kong</option>
-              <option>Japan</option>
-              <option>Mexico</option>
-              <option>Brazil</option>
-              <option>Argentina</option>
-              <option>South Africa</option>
-              <option>India</option>
-              <option>Other</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="GB">United Kingdom</option>
+              <option value="AU">Australia</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="ES">Spain</option>
+              <option value="IT">Italy</option>
+              <option value="NL">Netherlands</option>
+              <option value="CH">Switzerland</option>
+              <option value="IL">Israel</option>
+              <option value="AE">United Arab Emirates</option>
+              <option value="SG">Singapore</option>
+              <option value="HK">Hong Kong</option>
+              <option value="JP">Japan</option>
+              <option value="MX">Mexico</option>
+              <option value="BR">Brazil</option>
+              <option value="AR">Argentina</option>
+              <option value="ZA">South Africa</option>
+              <option value="IN">India</option>
+              <option value="ZZ">Other</option>
             </select>
           </div>
           <button type="submit" class="lead-gen-v2-submit">
@@ -9642,31 +9642,171 @@ function toggleCurriculum(btn) {
 })();
 </script>
 
+<!-- =====================================================
+     eTeacher Leads CRM Integration
+     Endpoint: AWS API Gateway -> SQS -> Leads consumer
+     Docs: section 6 says staging first, prod after sign-off.
+     Switch ETEACHER_ENV to 'production' once eTeacher signs off.
+     ===================================================== -->
 <script>
-/* Universal Thank You handler — applies to every form with .form-with-thankyou */
 (function(){
+  var ETEACHER_ENV = 'staging'; // set to 'production' after eTeacher staging sign-off
+  var ENDPOINTS = {
+    staging:    'https://81pg281wke.execute-api.eu-west-1.amazonaws.com/staging/leads',
+    production: 'https://u6ygel4ywa.execute-api.eu-west-1.amazonaws.com/prod/leads'
+  };
+
+  // Best-effort country-by-IP lookup (free, no key, single attempt, no PII).
+  // Used only to populate CountryIsoCodeByIp; failure is non-blocking.
+  var ipCountryPromise = null;
+  function getIpCountry(){
+    if (ipCountryPromise) return ipCountryPromise;
+    ipCountryPromise = fetch('https://ipapi.co/country/', { method: 'GET', cache: 'force-cache' })
+      .then(function(r){ return r.ok ? r.text() : ''; })
+      .then(function(t){ t = (t||'').trim().toUpperCase(); return /^[A-Z]{2}$/.test(t) ? t : ''; })
+      .catch(function(){ return ''; });
+    return ipCountryPromise;
+  }
+
+  function isValidEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
+
+  // Retry policy per docs section 4: 3 attempts, exp backoff starting at 1s, only on 5xx / network.
+  function postWithRetry(url, payload, attempt){
+    attempt = attempt || 1;
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: 'omit',
+      mode: 'cors'
+    }).then(function(res){
+      if (res.status === 200) return { ok: true, status: 200 };
+      if (res.status >= 400 && res.status < 500) return { ok: false, status: res.status, retryable: false };
+      // 5xx -> retry
+      if (attempt < 3) {
+        var delay = Math.pow(2, attempt - 1) * 1000;
+        return new Promise(function(resolve){
+          setTimeout(function(){ resolve(postWithRetry(url, payload, attempt + 1)); }, delay);
+        });
+      }
+      return { ok: false, status: res.status, retryable: true };
+    }).catch(function(err){
+      // Network error -> retry
+      if (attempt < 3) {
+        var delay = Math.pow(2, attempt - 1) * 1000;
+        return new Promise(function(resolve){
+          setTimeout(function(){ resolve(postWithRetry(url, payload, attempt + 1)); }, delay);
+        });
+      }
+      return { ok: false, status: 0, retryable: true, error: String(err) };
+    });
+  }
+
+  // Public API: window.eTeacherLeads.submit(fields)
+  // fields: { firstName, lastName, email, phone, countryIso, adminNotes }
+  // Returns Promise<{ ok: bool, status: number, error?: string }>
+  window.eTeacherLeads = {
+    endpoint: ENDPOINTS[ETEACHER_ENV],
+    env: ETEACHER_ENV,
+    submit: function(fields){
+      // Hard validation per docs section 3.3.
+      if (!fields || !fields.firstName || !fields.lastName || !isValidEmail(fields.email||'') || !fields.phone || !fields.countryIso) {
+        return Promise.resolve({ ok: false, status: 0, error: 'Missing or invalid fields' });
+      }
+      return getIpCountry().then(function(ipCountry){
+        var payload = {
+          FirstName: String(fields.firstName).trim(),
+          LastName:  String(fields.lastName).trim(),
+          Email:     String(fields.email).trim(),
+          MobilePhone: String(fields.phone).trim(),
+          CountryIsoCode: String(fields.countryIso).toUpperCase(),
+          LandingPage: window.location.href,
+          UserAgent: navigator.userAgent,
+          ReferringSite: document.referrer || window.location.hostname,
+          QueryString: (window.location.search || '').replace(/^\?/, '')
+        };
+        if (ipCountry) payload.CountryIsoCodeByIp = ipCountry;
+        if (fields.adminNotes) payload.AdminNotes = String(fields.adminNotes).slice(0, 4000);
+        return postWithRetry(ENDPOINTS[ETEACHER_ENV], payload);
+      });
+    }
+  };
+})();
+</script>
+
+<!-- Universal form -> CRM submit handler. Awaits API; only shows Thank You on 200 OK. -->
+<style>
+  .form-with-thankyou .form-error{display:none;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.35);color:#fecaca;border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14px;line-height:1.5;font-family:'Inter',sans-serif}
+  .form-with-thankyou .form-error.visible{display:block}
+  .form-with-thankyou.is-submitting button[type="submit"]{opacity:.7;pointer-events:none;position:relative}
+  .form-with-thankyou.is-submitting button[type="submit"]::after{content:'';position:absolute;right:18px;top:50%;width:16px;height:16px;margin-top:-8px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:lg-spin .7s linear infinite}
+  @keyframes lg-spin{to{transform:rotate(360deg)}}
+</style>
+<script>
+(function(){
+  function getValue(form, name){ var el = form.querySelector('[name="'+name+'"], #'+name); return el ? el.value : ''; }
+  function showError(form, msg){
+    var box = form.querySelector('.form-error');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'form-error';
+      box.setAttribute('role', 'alert');
+      var submitBtn = form.querySelector('button[type="submit"], .lead-gen-v2-submit, .bio-leadgen-submit');
+      if (submitBtn && submitBtn.parentNode) {
+        submitBtn.parentNode.insertBefore(box, submitBtn.nextSibling);
+      } else { form.appendChild(box); }
+    }
+    box.textContent = msg;
+    box.classList.add('visible');
+  }
+  function clearError(form){ var box = form.querySelector('.form-error'); if (box) box.classList.remove('visible'); }
+  function showThankYou(form){
+    var targetId = form.getAttribute('data-thankyou-target');
+    var thx = targetId ? document.getElementById(targetId) : form.parentNode.querySelector('.form-thankyou');
+    if (!thx) return;
+    form.style.display = 'none';
+    thx.classList.add('visible');
+    try { thx.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(err){}
+  }
   function bind(form){
     if (form.dataset.thankyouBound === '1') return;
     form.dataset.thankyouBound = '1';
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var targetId = form.getAttribute('data-thankyou-target');
-      var thx = targetId ? document.getElementById(targetId) : form.parentNode.querySelector('.form-thankyou');
-      if (!thx) return;
-      form.style.display = 'none';
-      thx.classList.add('visible');
-      try { thx.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(err){}
-      try { if (window.dataLayer) { window.dataLayer.push({ event: 'lead_form_submit', form_id: form.id || 'unknown' }); } } catch(err){}
+      clearError(form);
+      // Pull fields from common ids/names (homepage form uses lg-* ids).
+      var fields = {
+        firstName:  getValue(form, 'firstName')  || getValue(form, 'lg-fname'),
+        lastName:   getValue(form, 'lastName')   || getValue(form, 'lg-lname'),
+        email:      getValue(form, 'email')      || getValue(form, 'lg-email'),
+        phone:      getValue(form, 'phone')      || getValue(form, 'lg-phone'),
+        countryIso: getValue(form, 'country')    || getValue(form, 'lg-country'),
+        adminNotes: form.dataset.adminNotes || ''
+      };
+      if (!fields.firstName || !fields.lastName || !fields.email || !fields.phone || !fields.countryIso) {
+        showError(form, 'Please fill in all required fields.');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
+        showError(form, 'Please enter a valid email address.');
+        return;
+      }
+      form.classList.add('is-submitting');
+      window.eTeacherLeads.submit(fields).then(function(res){
+        form.classList.remove('is-submitting');
+        if (res.ok) {
+          try { if (window.dataLayer) { window.dataLayer.push({ event: 'lead_form_submit', form_id: form.id || 'unknown', crm_status: 'ok', env: window.eTeacherLeads.env }); } } catch(err){}
+          showThankYou(form);
+        } else {
+          try { if (window.dataLayer) { window.dataLayer.push({ event: 'lead_form_submit_error', form_id: form.id || 'unknown', crm_status: res.status, env: window.eTeacherLeads.env }); } } catch(err){}
+          showError(form, "We couldn't submit your details right now. Please try again in a moment, or email service@eteachergroup.com.");
+        }
+      });
     });
   }
-  function init(){
-    document.querySelectorAll('form.form-with-thankyou').forEach(bind);
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  function init(){ document.querySelectorAll('form.form-with-thankyou').forEach(bind); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 
