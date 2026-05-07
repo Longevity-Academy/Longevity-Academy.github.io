@@ -415,15 +415,7 @@ ul, ol { list-style: none; }
     font-size: clamp(40px, 13vw, 64px) !important;
   }
   .hero-logo-lockup .hll-parent--inline {
-    gap: 5px !important;
-    flex-wrap: nowrap !important;
-  }
-  .hero-logo-lockup .hll-by,
-  .hero-logo-lockup .hll-group {
-    font-size: clamp(14px, 4.0vw, 19px) !important;
-  }
-  .hero-logo-lockup .hll-eteacher-logo {
-    height: clamp(16px, 4.6vw, 22px) !important;
+    gap: 0 !important;
   }
 }
 
@@ -7312,47 +7304,27 @@ html {
   .topic-v2-desc { -webkit-line-clamp: 4; }
 }
 
-/* ===== UNIVERSAL ETEACHER LOCKUP — "by [logo] Group" — used everywhere ===== */
-.eteacher-lockup {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center;
-  gap: 8px !important;
-  background: none !important;
-  -webkit-text-fill-color: initial !important;
-  padding: 0;
-}
-.eteacher-lockup .etl-by,
-.eteacher-lockup .etl-group {
+/* ===== UNIVERSAL "by eTeacher Group" BYLINE — single italic line, used everywhere ===== */
+.eteacher-byline {
+  display: inline-block !important;
   font-family: 'Instrument Serif', 'Times New Roman', serif !important;
   font-style: italic !important;
   font-weight: 400 !important;
-  font-size: clamp(20px, 2.2vw, 30px) !important;
+  font-size: clamp(22px, 2.4vw, 34px) !important;
   line-height: 1 !important;
   letter-spacing: 0.005em !important;
+  color: rgba(255,255,255,0.92) !important;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.35);
   background: none !important;
   -webkit-text-fill-color: initial !important;
+  white-space: nowrap;
 }
-.eteacher-lockup .etl-by  { margin-right: -2px; }
-.eteacher-lockup .etl-group { margin-left: -2px; }
-.eteacher-lockup .etl-logo {
-  height: clamp(22px, 2.6vw, 34px) !important;
-  width: auto !important;
-  display: inline-block;
-  vertical-align: middle;
-  filter: drop-shadow(0 2px 8px rgba(0, 110, 255, 0.18));
+.eteacher-byline--on-light {
+  color: rgba(20,30,50,0.85) !important;
+  text-shadow: none !important;
 }
-/* Dark-bg variant (hero, About card) */
-.eteacher-lockup--on-dark .etl-by,
-.eteacher-lockup--on-dark .etl-group { color: rgba(255,255,255,0.92) !important; text-shadow: 0 2px 16px rgba(0,0,0,0.35); }
-/* Light-bg variant (How It Works) */
-.eteacher-lockup--on-light .etl-by,
-.eteacher-lockup--on-light .etl-group { color: rgba(20,30,50,0.78) !important; text-shadow: none !important; }
 @media (max-width: 600px) {
-  .eteacher-lockup { gap: 5px !important; flex-wrap: nowrap !important; }
-  .eteacher-lockup .etl-by,
-  .eteacher-lockup .etl-group { font-size: clamp(14px, 4.0vw, 19px) !important; }
-  .eteacher-lockup .etl-logo { height: clamp(16px, 4.6vw, 22px) !important; }
+  .eteacher-byline { font-size: clamp(15px, 4.4vw, 22px) !important; }
 }
 /* Legacy classes still resolve to the new lockup */
 .about-powered-brand {
@@ -7779,9 +7751,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-logo-lockup" aria-label="Longevity Life Academy by eTeacher Group">
       <div class="hll-wordmark"><span class="hll-l1">Longevity</span><span class="hll-l2">Life Academy</span></div>
       <div class="hll-parent hll-parent--inline">
-        <span class="hll-by">by</span>
-        <img class="hll-eteacher-logo" src="assets/eteacher-wordmark-only.png" alt="eTeacher">
-        <span class="hll-group">Group</span>
+        <span class="eteacher-byline">by eTeacher Group</span>
       </div>
     </div>
     <h1 class="hero-title">
@@ -7876,9 +7846,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="about-powered">
         <div class="about-powered-label">Powered by</div>
         <div class="about-powered-brand">
-          <span class="eteacher-lockup eteacher-lockup--on-dark" aria-label="by eTeacher Group">
-            <span class="etl-by">by</span><img class="etl-logo" src="assets/eteacher-wordmark-only.png" alt="eTeacher"><span class="etl-group">Group</span>
-          </span>
+          <span class="eteacher-byline">by eTeacher Group</span>
         </div>
         <p class="about-powered-desc">
           eTeacher Group is reshaping online education with a dynamic, personalized
@@ -8770,9 +8738,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="how-v2" id="how">
   <div class="container">
     <div class="how-v2-header reveal">
-      <span class="eteacher-lockup eteacher-lockup--on-dark how-v2-logo-lockup" aria-label="by eTeacher Group" style="margin-bottom:28px;">
-        <span class="etl-by">by</span><img class="etl-logo" loading="lazy" decoding="async" src="assets/eteacher-wordmark-only.png" alt="eTeacher"><span class="etl-group">Group</span>
-      </span>
+      <span class="eteacher-byline" style="display:block;text-align:center;margin-bottom:28px;">by eTeacher Group</span>
       <h2 class="how-v2-title">How It Works</h2>
       <p class="how-v2-sub">Six clear steps from enrollment to your personal longevity protocol.</p>
     </div>
