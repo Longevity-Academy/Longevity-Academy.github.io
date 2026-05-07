@@ -369,6 +369,15 @@ ul, ol { list-style: none; }
   letter-spacing: -0.005em;
   color: #FFFFFF;
 }
+/* Non-italic byline when paired with uppercase academy name */
+.hero-academy-name + .hero-logo-lockup .hll-parent,
+.hero-academy-name + .hero-logo-lockup .hll-by,
+.hero-academy-name + .hero-logo-lockup .hll-group {
+  font-style: normal !important;
+  font-family: var(--font-display), 'Inter', system-ui, sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+}
 .hero-logo-lockup .hll-parent--inline {
   display: inline-flex;
   align-items: center;
@@ -393,11 +402,23 @@ ul, ol { list-style: none; }
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* Align byline so it starts under "LIFE" in the wordmark above */
+/* Right-align byline under "ACADEMY" in the wordmark above */
+.hero-academy-name {
+  display: block;
+}
 .hero-academy-name + .hero-logo-lockup {
-  margin-left: clamp(180px, 19vw, 280px);
-  margin-top: 0;
-  margin-bottom: 18px;
+  margin-top: 4px;
+  margin-bottom: 56px;
+  margin-left: var(--byline-anchor-x, 0);
+  width: var(--byline-anchor-w, max-content);
+  text-align: left;
+}
+.hero-academy-name + .hero-logo-lockup .hll-parent--inline {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
 }
 .hero-academy-name:has(+ .hero-logo-lockup) {
   margin-bottom: 2px;
@@ -436,14 +457,18 @@ ul, ol { list-style: none; }
   .hero-academy-name + .hero-logo-lockup {
     margin-left: 0 !important;
     margin-top: 2px !important;
-    margin-bottom: 14px !important;
+    margin-bottom: 22px !important;
     text-align: center !important;
+    width: 100% !important;
+    padding-left: 0 !important;
   }
   .hero-academy-name:has(+ .hero-logo-lockup) {
     margin-bottom: 4px !important;
   }
   .hero-academy-name + .hero-logo-lockup .hll-parent--inline {
-    gap: 4px !important;
+    display: inline-flex !important;
+    width: auto !important;
+    gap: 6px !important;
     justify-content: center !important;
   }
 }
@@ -7783,7 +7808,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <!-- Hero school name (uppercase wordmark) + by [eTeacher logo] Group beneath -->
     <div class="hero-academy-name">
-      Longevity <span class="life-blue">Life</span> Academy
+      Longevity <span class="life-blue">Life</span> <span class="academy-word">Academy</span>
     </div>
     <div class="hero-logo-lockup" aria-label="by eTeacher Group">
       <div class="hll-parent hll-parent--inline">
@@ -9921,6 +9946,41 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
   function init(){ document.querySelectorAll('form.form-with-thankyou').forEach(bind); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+</script>
+
+<script>
+/* Anchor by-eTeacher byline under the ACADEMY word of the hero wordmark */
+(function(){
+  function alignByline(){
+    var name = document.querySelector('.hero-academy-name');
+    if (!name) return;
+    var academy = name.querySelector('.academy-word');
+    var lockup = name.nextElementSibling;
+    if (!academy || !lockup || !lockup.classList.contains('hero-logo-lockup')) return;
+    var nameRect = name.getBoundingClientRect();
+    var aRect = academy.getBoundingClientRect();
+    var left = aRect.left - nameRect.left;
+    var width = aRect.width;
+    /* Only apply on viewports >= 601px (mobile keeps centered default) */
+    if (window.matchMedia('(min-width: 601px)').matches) {
+      lockup.style.setProperty('--byline-anchor-x', left + 'px');
+      lockup.style.setProperty('--byline-anchor-w', width + 'px');
+    } else {
+      lockup.style.removeProperty('--byline-anchor-x');
+      lockup.style.removeProperty('--byline-anchor-w');
+    }
+  }
+  function ready(fn){ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
+  ready(function(){
+    alignByline();
+    /* re-run after fonts load to get accurate widths */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignByline);
+    window.addEventListener('resize', alignByline);
+    /* Re-run a couple times to catch late layout shifts */
+    setTimeout(alignByline, 250);
+    setTimeout(alignByline, 1000);
+  });
 })();
 </script>
 
