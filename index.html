@@ -353,12 +353,12 @@ ul, ol { list-style: none; }
 .hero-logo-lockup .hll-l1 {
   display: block;
   color: #B8D4E8;
-  font-size: clamp(56px, 7.6vw, 112px);
+  font-size: clamp(36px, 4.4vw, 64px);
 }
 .hero-logo-lockup .hll-l2 {
   display: block;
   color: #FFFFFF;
-  font-size: clamp(56px, 7.6vw, 112px);
+  font-size: clamp(36px, 4.4vw, 64px);
   margin-top: 2px;
 }
 .hero-logo-lockup .hll-parent {
@@ -412,7 +412,7 @@ ul, ol { list-style: none; }
   .hero-logo-lockup .hll-wordmark { margin-bottom: 10px !important; }
   .hero-logo-lockup .hll-l1,
   .hero-logo-lockup .hll-l2 {
-    font-size: clamp(40px, 13vw, 64px) !important;
+    font-size: clamp(28px, 8vw, 42px) !important;
   }
   .hero-logo-lockup .hll-parent--inline {
     gap: 0 !important;
@@ -2681,7 +2681,7 @@ ul, ol { list-style: none; }
 
 /* ======= BIGGER FONTS + LIGHT VARIETY ======= */
 .hero-title {
-  font-size: clamp(64px, 10vw, 130px) !important;
+  font-size: clamp(76px, 12vw, 168px) !important;
 }
 .hero-sub {
   font-size: clamp(18px, 1.5vw, 22px) !important;
@@ -2747,7 +2747,7 @@ ul, ol { list-style: none; }
 
 /* Bio-age quiz — smaller on mobile */
 @media (max-width: 768px) {
-  .hero-title { font-size: clamp(54px, 14vw, 84px) !important; }
+  .hero-title { font-size: clamp(58px, 15vw, 92px) !important; }
   .section-title { font-size: clamp(40px, 10vw, 56px) !important; }
   .bioquiz-card { padding: 44px 24px !important; }
   .bioquiz-title { font-size: clamp(28px, 7vw, 38px) !important; }
@@ -3291,8 +3291,15 @@ ul, ol { list-style: none; }
   font-size: clamp(38px, 5.5vw, 64px) !important;
   letter-spacing: -0.5px !important;
 }
-.hero-title {
-  font-size: clamp(48px, 8vw, 96px) !important;
+@media (min-width: 769px) {
+  .hero-title {
+    font-size: clamp(76px, 12vw, 168px) !important;
+  }
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(56px, 13vw, 88px) !important;
+  }
 }
 .skill-title {
   font-size: clamp(24px, 3vw, 32px) !important;
@@ -7304,16 +7311,16 @@ html {
   .topic-v2-desc { -webkit-line-clamp: 4; }
 }
 
-/* ===== UNIVERSAL "by eTeacher Group" BYLINE — single italic line, used everywhere ===== */
+/* ===== UNIVERSAL "by eTeacher Group" BYLINE — refined logo-subtitle treatment ===== */
 .eteacher-byline {
   display: inline-block !important;
   font-family: 'Instrument Serif', 'Times New Roman', serif !important;
   font-style: italic !important;
   font-weight: 400 !important;
-  font-size: clamp(22px, 2.4vw, 34px) !important;
+  font-size: clamp(13px, 1.4vw, 18px) !important;
   line-height: 1 !important;
-  letter-spacing: 0.005em !important;
-  color: rgba(255,255,255,0.92) !important;
+  letter-spacing: 0.01em !important;
+  color: rgba(255,255,255,0.88) !important;
   text-shadow: 0 2px 16px rgba(0,0,0,0.35);
   background: none !important;
   -webkit-text-fill-color: initial !important;
@@ -7324,7 +7331,7 @@ html {
   text-shadow: none !important;
 }
 @media (max-width: 600px) {
-  .eteacher-byline { font-size: clamp(15px, 4.4vw, 22px) !important; }
+  .eteacher-byline { font-size: clamp(11px, 3.2vw, 14px) !important; }
 }
 /* Legacy classes still resolve to the new lockup */
 .about-powered-brand {
