@@ -402,23 +402,23 @@ ul, ol { list-style: none; }
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* Right-align byline under "ACADEMY" in the wordmark above */
+/* Left-anchor byline under "Longevity" (under the L) in the wordmark above */
 .hero-academy-name {
   display: block;
 }
 .hero-academy-name + .hero-logo-lockup {
   margin-top: 4px;
   margin-bottom: 56px;
-  margin-left: var(--byline-anchor-x, 0);
-  width: var(--byline-anchor-w, max-content);
+  margin-left: 0;
+  width: auto;
   text-align: left;
 }
 .hero-academy-name + .hero-logo-lockup .hll-parent--inline {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+  display: inline-flex;
+  width: auto;
+  justify-content: flex-start;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 .hero-academy-name:has(+ .hero-logo-lockup) {
   margin-bottom: 2px;
@@ -7808,7 +7808,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <!-- Hero school name (uppercase wordmark) + by [eTeacher logo] Group beneath -->
     <div class="hero-academy-name">
-      Longevity <span class="life-blue">Life</span> <span class="academy-word">Academy</span>
+      <span class="longevity-word">Longevity</span> <span class="life-blue">Life</span> <span class="academy-word">Academy</span>
     </div>
     <div class="hero-logo-lockup" aria-label="by eTeacher Group">
       <div class="hll-parent hll-parent--inline">
@@ -9946,41 +9946,6 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
   function init(){ document.querySelectorAll('form.form-with-thankyou').forEach(bind); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
-})();
-</script>
-
-<script>
-/* Anchor by-eTeacher byline under the ACADEMY word of the hero wordmark */
-(function(){
-  function alignByline(){
-    var name = document.querySelector('.hero-academy-name');
-    if (!name) return;
-    var academy = name.querySelector('.academy-word');
-    var lockup = name.nextElementSibling;
-    if (!academy || !lockup || !lockup.classList.contains('hero-logo-lockup')) return;
-    var nameRect = name.getBoundingClientRect();
-    var aRect = academy.getBoundingClientRect();
-    var left = aRect.left - nameRect.left;
-    var width = aRect.width;
-    /* Only apply on viewports >= 601px (mobile keeps centered default) */
-    if (window.matchMedia('(min-width: 601px)').matches) {
-      lockup.style.setProperty('--byline-anchor-x', left + 'px');
-      lockup.style.setProperty('--byline-anchor-w', width + 'px');
-    } else {
-      lockup.style.removeProperty('--byline-anchor-x');
-      lockup.style.removeProperty('--byline-anchor-w');
-    }
-  }
-  function ready(fn){ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
-  ready(function(){
-    alignByline();
-    /* re-run after fonts load to get accurate widths */
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignByline);
-    window.addEventListener('resize', alignByline);
-    /* Re-run a couple times to catch late layout shifts */
-    setTimeout(alignByline, 250);
-    setTimeout(alignByline, 1000);
-  });
 })();
 </script>
 
