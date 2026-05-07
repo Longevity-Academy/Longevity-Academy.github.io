@@ -380,18 +380,26 @@ ul, ol { list-style: none; }
   font-family: 'Instrument Serif', 'Times New Roman', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(36px, 4.6vw, 68px);
+  font-size: clamp(12px, 1.55vw, 23px);
   color: #FFFFFF;
   line-height: 1;
   text-shadow: 0 2px 16px rgba(0,0,0,0.35);
 }
 .hero-logo-lockup .hll-eteacher-logo {
-  height: clamp(46px, 5.8vw, 82px);
+  height: clamp(15px, 1.95vw, 27px);
   width: auto;
   display: inline-block;
   vertical-align: middle;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+/* Align byline so it starts under "LIFE" in the wordmark above */
+.hero-academy-name + .hero-logo-lockup {
+  margin-left: clamp(150px, 16vw, 240px);
+  margin-top: 6px;
+}
+.hero-academy-name + .hero-logo-lockup .hll-parent--inline {
+  gap: 6px;
 }
 @media (max-width: 600px) {
   .hero-logo-lockup { margin-bottom: 26px !important; text-align: center !important; }
@@ -416,10 +424,18 @@ ul, ol { list-style: none; }
   }
   .hero-logo-lockup .hll-by,
   .hero-logo-lockup .hll-group {
-    font-size: clamp(20px, 6.4vw, 30px) !important;
+    font-size: clamp(11px, 3.4vw, 15px) !important;
   }
   .hero-logo-lockup .hll-eteacher-logo {
-    height: clamp(26px, 7.6vw, 36px) !important;
+    height: clamp(13px, 4vw, 18px) !important;
+  }
+  .hero-academy-name + .hero-logo-lockup {
+    margin-left: 0 !important;
+    text-align: center !important;
+  }
+  .hero-academy-name + .hero-logo-lockup .hll-parent--inline {
+    gap: 4px !important;
+    justify-content: center !important;
   }
 }
 
