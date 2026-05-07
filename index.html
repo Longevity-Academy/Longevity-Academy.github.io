@@ -353,12 +353,12 @@ ul, ol { list-style: none; }
 .hero-logo-lockup .hll-l1 {
   display: block;
   color: #B8D4E8;
-  font-size: clamp(56px, 7.6vw, 112px);
+  font-size: clamp(36px, 4.4vw, 64px);
 }
 .hero-logo-lockup .hll-l2 {
   display: block;
   color: #FFFFFF;
-  font-size: clamp(56px, 7.6vw, 112px);
+  font-size: clamp(36px, 4.4vw, 64px);
   margin-top: 2px;
 }
 .hero-logo-lockup .hll-parent {
@@ -380,16 +380,16 @@ ul, ol { list-style: none; }
   font-family: 'Instrument Serif', 'Times New Roman', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(20px, 2.2vw, 30px);
+  font-size: clamp(13px, 1.4vw, 18px);
   color: rgba(255,255,255,0.92);
   line-height: 1;
   text-shadow: 0 2px 16px rgba(0,0,0,0.35);
-  letter-spacing: 0.005em;
+  letter-spacing: 0.01em;
 }
-.hero-logo-lockup .hll-by { margin-right: -2px; }
-.hero-logo-lockup .hll-group { margin-left: -2px; }
+.hero-logo-lockup .hll-by { margin-right: 2px; }
+.hero-logo-lockup .hll-group { margin-left: 2px; }
 .hero-logo-lockup .hll-eteacher-logo {
-  height: clamp(22px, 2.6vw, 34px);
+  height: clamp(14px, 1.5vw, 20px);
   width: auto;
   display: inline-block;
   vertical-align: middle;
@@ -412,7 +412,14 @@ ul, ol { list-style: none; }
   .hero-logo-lockup .hll-wordmark { margin-bottom: 10px !important; }
   .hero-logo-lockup .hll-l1,
   .hero-logo-lockup .hll-l2 {
-    font-size: clamp(40px, 13vw, 64px) !important;
+    font-size: clamp(28px, 8vw, 42px) !important;
+  }
+  .hero-logo-lockup .hll-by,
+  .hero-logo-lockup .hll-group {
+    font-size: clamp(11px, 3.2vw, 14px) !important;
+  }
+  .hero-logo-lockup .hll-eteacher-logo {
+    height: clamp(12px, 3.6vw, 16px) !important;
   }
   .hero-logo-lockup .hll-parent--inline {
     gap: 0 !important;
@@ -2681,7 +2688,7 @@ ul, ol { list-style: none; }
 
 /* ======= BIGGER FONTS + LIGHT VARIETY ======= */
 .hero-title {
-  font-size: clamp(64px, 10vw, 130px) !important;
+  font-size: clamp(76px, 12vw, 168px) !important;
 }
 .hero-sub {
   font-size: clamp(18px, 1.5vw, 22px) !important;
@@ -2747,7 +2754,7 @@ ul, ol { list-style: none; }
 
 /* Bio-age quiz — smaller on mobile */
 @media (max-width: 768px) {
-  .hero-title { font-size: clamp(54px, 14vw, 84px) !important; }
+  .hero-title { font-size: clamp(58px, 15vw, 92px) !important; }
   .section-title { font-size: clamp(40px, 10vw, 56px) !important; }
   .bioquiz-card { padding: 44px 24px !important; }
   .bioquiz-title { font-size: clamp(28px, 7vw, 38px) !important; }
@@ -3291,8 +3298,15 @@ ul, ol { list-style: none; }
   font-size: clamp(38px, 5.5vw, 64px) !important;
   letter-spacing: -0.5px !important;
 }
-.hero-title {
-  font-size: clamp(48px, 8vw, 96px) !important;
+@media (min-width: 769px) {
+  .hero-title {
+    font-size: clamp(76px, 12vw, 168px) !important;
+  }
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(56px, 13vw, 88px) !important;
+  }
 }
 .skill-title {
   font-size: clamp(24px, 3vw, 32px) !important;
@@ -7751,15 +7765,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-logo-lockup" aria-label="Longevity Life Academy by eTeacher Group">
       <div class="hll-wordmark"><span class="hll-l1">Longevity</span><span class="hll-l2">Life Academy</span></div>
       <div class="hll-parent hll-parent--inline">
-        <span class="eteacher-byline">by eTeacher Group</span>
+        <span class="hll-by">by</span>
+        <img class="hll-eteacher-logo" src="assets/eteacher-wordmark-only.png" alt="eTeacher">
+        <span class="hll-group">Group</span>
       </div>
     </div>
     <h1 class="hero-title">
       It's Your Life.<br><span class="life-blue">Live It Well.</span>
     </h1>
     <p class="hero-sub">
-      Live longer in the body you actually want to live in.
-      A guided protocol built around your biology, your numbers, and the daily practice that turns the next decades into your strongest.
+      The Longevity and biohacking course that simplifies the wonders of longevity
+      so anyone can enjoy it &mdash; read your body's signals, build a personal protocol,
+      and turn the next decades into your strongest.
     </p>
     <div class="hero-cta-row">
       <div class="hero-cta-wrap">
