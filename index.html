@@ -396,7 +396,11 @@ ul, ol { list-style: none; }
 /* Align byline so it starts under "LIFE" in the wordmark above */
 .hero-academy-name + .hero-logo-lockup {
   margin-left: clamp(150px, 16vw, 240px);
-  margin-top: 6px;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+.hero-academy-name:has(+ .hero-logo-lockup) {
+  margin-bottom: 2px;
 }
 .hero-academy-name + .hero-logo-lockup .hll-parent--inline {
   gap: 6px;
@@ -431,7 +435,12 @@ ul, ol { list-style: none; }
   }
   .hero-academy-name + .hero-logo-lockup {
     margin-left: 0 !important;
+    margin-top: 2px !important;
+    margin-bottom: 14px !important;
     text-align: center !important;
+  }
+  .hero-academy-name:has(+ .hero-logo-lockup) {
+    margin-bottom: 4px !important;
   }
   .hero-academy-name + .hero-logo-lockup .hll-parent--inline {
     gap: 4px !important;
