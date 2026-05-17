@@ -7101,35 +7101,6 @@ html {
   .trustpilot--top { font-size: 12px !important; padding: 8px 14px !important; }
 }
 
-/* ===== HERO DNA MARK NEXT TO ACADEMY NAME ===== */
-.hero-academy-name {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
-  justify-content: flex-start !important;
-  width: auto !important;
-}
-.hero-academy-mark {
-  display: inline-block;
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  flex-shrink: 0;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
-}
-/* Force the "by eTeacher Group" line to use the brand blue from the source logo */
-.hero-logo-lockup .hll-by,
-.hero-logo-lockup .hll-group {
-  color: #2E7BFF !important;
-}
-@media (max-width: 900px) {
-  .hero-academy-name { justify-content: center !important; gap: 12px !important; }
-  .hero-academy-mark { width: 56px; height: 56px; }
-}
-@media (max-width: 480px) {
-  .hero-academy-mark { width: 46px; height: 46px; }
-}
-
 /* ===== POWERED BY ETEACHER STATS BAR (v50 — horizontal cell layout) =====
    Reference: thin horizontal dividers top + bottom, vertical separators between
    cells, small eyebrow ABOVE big value, green pulsing dot before "Live".
@@ -7835,10 +7806,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
-    <!-- Hero school name: DNA mark + Longevity Life Academy wordmark (original fonts) -->
+    <!-- Hero school name (uppercase wordmark) + by [eTeacher logo] Group beneath -->
     <div class="hero-academy-name">
-      <img src="assets/lla-mark.png" alt="" class="hero-academy-mark" aria-hidden="true" decoding="async">
-      <span class="hero-academy-name-text"><span class="longevity-word">Longevity</span> <span class="life-blue">Life</span> <span class="academy-word">Academy</span></span>
+      <span class="longevity-word">Longevity</span> <span class="life-blue">Life</span> <span class="academy-word">Academy</span>
     </div>
     <div class="hero-logo-lockup" aria-label="by eTeacher Group">
       <div class="hll-parent hll-parent--inline">
