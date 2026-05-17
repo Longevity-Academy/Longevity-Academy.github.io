@@ -7101,33 +7101,33 @@ html {
   .trustpilot--top { font-size: 12px !important; padding: 8px 14px !important; }
 }
 
-/* ===== HERO BRAND LOCKUP (logo image under trust pill) ===== */
-.hero-brand-lockup {
-  display: flex !important;
-  justify-content: center !important;
+/* ===== HERO DNA MARK NEXT TO ACADEMY NAME ===== */
+.hero-academy-name {
+  display: inline-flex !important;
   align-items: center !important;
-  margin: 14px auto 22px auto !important;
-  width: 100% !important;
+  gap: 14px !important;
+  justify-content: flex-start !important;
 }
-.hero-brand-lockup-img {
-  display: block !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: 520px !important;
-  max-height: 160px !important;
-  object-fit: contain !important;
-  image-rendering: -webkit-optimize-contrast !important;
-  filter: brightness(1.25) contrast(1.05) drop-shadow(0 2px 14px rgba(0,0,0,0.45));
+.hero-academy-mark {
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+}
+/* Force the "by eTeacher Group" line to use the brand blue from the source logo */
+.hero-logo-lockup .hll-by,
+.hero-logo-lockup .hll-group {
+  color: #2E7BFF !important;
 }
 @media (max-width: 900px) {
-  .hero-brand-lockup { margin: 10px auto 18px auto !important; }
-  .hero-brand-lockup-img { max-width: 360px !important; max-height: 120px !important; }
+  .hero-academy-name { justify-content: center !important; gap: 10px !important; }
+  .hero-academy-mark { width: 44px; height: 44px; }
 }
 @media (max-width: 480px) {
-  .hero-brand-lockup-img { max-width: 300px !important; max-height: 100px !important; }
+  .hero-academy-mark { width: 38px; height: 38px; }
 }
-/* Hide any legacy text wordmark/lockup that may still be rendered elsewhere */
-.hero-academy-name, .hero-logo-lockup { display: none !important; }
 
 /* ===== POWERED BY ETEACHER STATS BAR (v50 — horizontal cell layout) =====
    Reference: thin horizontal dividers top + bottom, vertical separators between
@@ -7834,9 +7834,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
-    <!-- Hero brand lockup: DNA mark + Longevity Life Academy + by eTeacher Group -->
-    <div class="hero-brand-lockup">
-      <img src="assets/lla-logo-lockup.png" alt="Longevity Life Academy by eTeacher Group" class="hero-brand-lockup-img" decoding="async">
+    <!-- Hero school name: DNA mark + Longevity Life Academy wordmark (original fonts) -->
+    <div class="hero-academy-name">
+      <img src="assets/lla-mark.png" alt="" class="hero-academy-mark" aria-hidden="true" decoding="async">
+      <span class="hero-academy-name-text"><span class="longevity-word">Longevity</span> <span class="life-blue">Life</span> <span class="academy-word">Academy</span></span>
+    </div>
+    <div class="hero-logo-lockup" aria-label="by eTeacher Group">
+      <div class="hll-parent hll-parent--inline">
+        <span class="hll-by">by</span>
+        <img class="hll-eteacher-logo" src="assets/eteacher-wordmark-only.png" alt="eTeacher">
+        <span class="hll-group">Group</span>
+      </div>
     </div>
     <h1 class="hero-title">
       It's Your Life.<br><span class="life-blue">Live It Well.</span>
