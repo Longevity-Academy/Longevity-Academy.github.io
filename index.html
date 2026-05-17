@@ -7103,15 +7103,16 @@ html {
 
 /* ===== HERO DNA MARK NEXT TO ACADEMY NAME ===== */
 .hero-academy-name {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
-  gap: 14px !important;
+  gap: 16px !important;
   justify-content: flex-start !important;
+  width: auto !important;
 }
 .hero-academy-mark {
   display: inline-block;
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
   flex-shrink: 0;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
@@ -7122,11 +7123,11 @@ html {
   color: #2E7BFF !important;
 }
 @media (max-width: 900px) {
-  .hero-academy-name { justify-content: center !important; gap: 10px !important; }
-  .hero-academy-mark { width: 44px; height: 44px; }
+  .hero-academy-name { justify-content: center !important; gap: 12px !important; }
+  .hero-academy-mark { width: 56px; height: 56px; }
 }
 @media (max-width: 480px) {
-  .hero-academy-mark { width: 38px; height: 38px; }
+  .hero-academy-mark { width: 46px; height: 46px; }
 }
 
 /* ===== POWERED BY ETEACHER STATS BAR (v50 — horizontal cell layout) =====
