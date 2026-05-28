@@ -10,7 +10,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biological Age Assessment — Light Version</title>
+  <title>Biological Age Assessment, Light Version</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -186,7 +186,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <div>
                   <label for="sleepHours">How many hours do you usually sleep?</label>
-                  <select id="sleepHours" name="sleepHours" required>
+                  <select id="sleepHours" name="sleepHours">
                     <option value="">Select</option>
                     <option value="3">Less than 6 hours</option>
                     <option value="1">6 to 7 hours</option>
@@ -201,10 +201,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>Energy and nourishment</h3>
               <p>These answers help estimate how well the body is being fueled and supported day to day.</p>
               <div class="options">
-                <div class="opt"><input type="radio" id="energyStable" name="energy" value="-2" required><label for="energyStable"><strong>Energy feels steady</strong><span>Most days feel balanced, without strong crashes or swings.</span></label></div>
-                <div class="opt"><input type="radio" id="energyCrash" name="energy" value="2" required><label for="energyCrash"><strong>Energy rises and dips</strong><span>Afternoons feel sluggish, or meals tend to cause noticeable highs and lows.</span></label></div>
-                <div class="opt"><input type="radio" id="nutritionStrong" name="nutrition" value="-2" required><label for="nutritionStrong"><strong>Meals feel supportive</strong><span>Most meals include quality food, protein, and a sense of consistency.</span></label></div>
-                <div class="opt"><input type="radio" id="nutritionWeak" name="nutrition" value="2" required><label for="nutritionWeak"><strong>Meals feel irregular</strong><span>Food choices often feel rushed, processed, or inconsistent.</span></label></div>
+                <div class="opt"><input type="radio" id="energyStable" name="energy" value="-2"><label for="energyStable"><strong>Energy feels steady</strong><span>Most days feel balanced, without strong crashes or swings.</span></label></div>
+                <div class="opt"><input type="radio" id="energyCrash" name="energy" value="2"><label for="energyCrash"><strong>Energy rises and dips</strong><span>Afternoons feel sluggish, or meals tend to cause noticeable highs and lows.</span></label></div>
+                <div class="opt"><input type="radio" id="nutritionStrong" name="nutrition" value="-2"><label for="nutritionStrong"><strong>Meals feel supportive</strong><span>Most meals include quality food, protein, and a sense of consistency.</span></label></div>
+                <div class="opt"><input type="radio" id="nutritionWeak" name="nutrition" value="2"><label for="nutritionWeak"><strong>Meals feel irregular</strong><span>Food choices often feel rushed, processed, or inconsistent.</span></label></div>
               </div>
             </div>
 
@@ -212,10 +212,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>Movement and recovery</h3>
               <p>Aging well is closely connected to strength, stamina, and the ability to bounce back.</p>
               <div class="options">
-                <div class="opt"><input type="radio" id="trainingStrong" name="training" value="-3" required><label for="trainingStrong"><strong>Movement is part of the week</strong><span>Strength, cardio, walking, or intentional exercise happens regularly.</span></label></div>
-                <div class="opt"><input type="radio" id="trainingLow" name="training" value="3" required><label for="trainingLow"><strong>Movement is limited</strong><span>Most days are sedentary, with little structured exercise or walking.</span></label></div>
-                <div class="opt"><input type="radio" id="recoveryGood" name="recovery" value="-1" required><label for="recoveryGood"><strong>Recovery feels good</strong><span>Energy usually returns well after effort, and stress feels manageable.</span></label></div>
-                <div class="opt"><input type="radio" id="recoveryPoor" name="recovery" value="2" required><label for="recoveryPoor"><strong>Recovery feels slow</strong><span>The body often feels depleted, sore, or under pressure.</span></label></div>
+                <div class="opt"><input type="radio" id="trainingStrong" name="training" value="-3"><label for="trainingStrong"><strong>Movement is part of the week</strong><span>Strength, cardio, walking, or intentional exercise happens regularly.</span></label></div>
+                <div class="opt"><input type="radio" id="trainingLow" name="training" value="3"><label for="trainingLow"><strong>Movement is limited</strong><span>Most days are sedentary, with little structured exercise or walking.</span></label></div>
+                <div class="opt"><input type="radio" id="recoveryGood" name="recovery" value="-1"><label for="recoveryGood"><strong>Recovery feels good</strong><span>Energy usually returns well after effort, and stress feels manageable.</span></label></div>
+                <div class="opt"><input type="radio" id="recoveryPoor" name="recovery" value="2"><label for="recoveryPoor"><strong>Recovery feels slow</strong><span>The body often feels depleted, sore, or under pressure.</span></label></div>
               </div>
             </div>
 
@@ -223,13 +223,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h3>Awareness and signals</h3>
               <p>Tracking patterns can make healthy changes easier and more precise.</p>
               <div class="options">
-                <div class="opt"><input type="radio" id="markerTracked" name="markers" value="-2" required><label for="markerTracked"><strong>Health signals are tracked</strong><span>Labs, blood pressure, body composition, wearables, or similar trends are reviewed regularly.</span></label></div>
-                <div class="opt"><input type="radio" id="markerUnknown" name="markers" value="2" required><label for="markerUnknown"><strong>There is little visibility</strong><span>Health trends are mostly unknown or only checked occasionally.</span></label></div>
-                <div class="opt"><input type="radio" id="stressLow" name="stress" value="-1" required><label for="stressLow"><strong>Stress feels manageable</strong><span>There is room for rest, recovery, and emotional regulation most weeks.</span></label></div>
-                <div class="opt"><input type="radio" id="stressHigh" name="stress" value="3" required><label for="stressHigh"><strong>Stress feels constant</strong><span>The nervous system often feels overworked, reactive, or stretched.</span></label></div>
+                <div class="opt"><input type="radio" id="markerTracked" name="markers" value="-2"><label for="markerTracked"><strong>Health signals are tracked</strong><span>Labs, blood pressure, body composition, wearables, or similar trends are reviewed regularly.</span></label></div>
+                <div class="opt"><input type="radio" id="markerUnknown" name="markers" value="2"><label for="markerUnknown"><strong>There is little visibility</strong><span>Health trends are mostly unknown or only checked occasionally.</span></label></div>
+                <div class="opt"><input type="radio" id="stressLow" name="stress" value="-1"><label for="stressLow"><strong>Stress feels manageable</strong><span>There is room for rest, recovery, and emotional regulation most weeks.</span></label></div>
+                <div class="opt"><input type="radio" id="stressHigh" name="stress" value="3"><label for="stressHigh"><strong>Stress feels constant</strong><span>The nervous system often feels overworked, reactive, or stretched.</span></label></div>
               </div>
             </div>
 
+            <div class="quiz-error" id="quizError" role="alert" aria-live="polite" style="display:none;margin:0 0 14px;padding:14px 18px;border-radius:12px;background:rgba(255,90,90,0.10);border:1px solid rgba(255,120,120,0.32);color:#ffd0d0;font-size:14.5px;line-height:1.5;"></div>
             <div class="actions">
               <button class="btn" type="submit">See my result</button>
               <button class="btn-secondary" type="reset">Start over</button>
@@ -351,9 +352,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     form.addEventListener('input', updateLive); form.addEventListener('change', updateLive);
     const bioLeadGen = document.getElementById('bioLeadGenForm');
     const bioThankYou = document.getElementById('bioThankYou');
+    const quizError = document.getElementById('quizError');
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
       const data = getData();
+      const otherFields = ['sleepHours','energy','nutrition','training','recovery','markers','stress'];
+      const otherFilled = otherFields.filter(k=>data[k]!==null && data[k]!=='').length;
+      if(!data.chronologicalAge){
+        if(quizError){ quizError.style.display='block'; quizError.textContent='Please enter your age to get your biological age estimate.'; quizError.scrollIntoView({behavior:'smooth',block:'center'}); }
+        return;
+      }
+      if(otherFilled < 3){
+        if(quizError){ quizError.style.display='block'; quizError.textContent='Please complete at least 3 health-style questions to get your biological age estimate.'; quizError.scrollIntoView({behavior:'smooth',block:'center'}); }
+        return;
+      }
+      if(quizError){ quizError.style.display='none'; quizError.textContent=''; }
       const result = compute(data);
       if(!result) return;
       resultCard.classList.add('visible');
