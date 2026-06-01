@@ -40,9 +40,10 @@ button{font-family:inherit;border:none;cursor:pointer}
 /* ============ HEADER ============ */
 .site-header{position:absolute;top:0;left:0;right:0;z-index:50;padding:22px 40px;display:flex;align-items:center;justify-content:space-between}
 .brand-lockup{display:flex;flex-direction:column;line-height:1}
-.brand-name{font-family:var(--font-display);font-weight:800;letter-spacing:-0.01em;font-size:18px;color:#fff;text-transform:uppercase}
-.brand-name .b{color:#6FA8FF}
-.brand-by{font-size:11px;color:rgba(255,255,255,0.7);margin-top:4px;display:flex;align-items:center;gap:6px}
+/* PIXEL-MATCH HOMEPAGE WORDMARK (hero-academy-name styling) */
+.brand-name{font-family:var(--font-display);font-weight:600;font-size:20px;color:rgba(255,255,255,0.95);letter-spacing:0.08em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3)}
+.brand-name .life-blue{color:#7EC8FF;font-weight:800}
+.brand-by{font-size:11px;color:rgba(255,255,255,0.7);margin-top:6px;display:flex;align-items:center;gap:6px}
 .brand-by img{height:14px;width:auto;filter:brightness(0) invert(1);opacity:0.85}
 .header-back{color:rgba(255,255,255,0.85);font-size:14px;font-weight:500;padding:10px 18px;border:1px solid rgba(255,255,255,0.2);border-radius:999px;transition:all 0.2s}
 .header-back:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.4)}
@@ -117,8 +118,8 @@ button{font-family:inherit;border:none;cursor:pointer}
 .footer-col a:hover{color:#fff}
 .footer-bottom{max-width:1320px;margin:48px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
 .footer-brand{display:flex;align-items:center;gap:14px}
-.footer-brand .fb-mark{font-family:var(--font-display);font-weight:800;font-size:16px;letter-spacing:-0.01em}
-.footer-brand .fb-mark .b{color:#6FA8FF}
+.footer-brand .fb-mark{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.95)}
+.footer-brand .fb-mark .life-blue{color:#7EC8FF;font-weight:800}
 .footer-divider{width:1px;height:24px;background:rgba(255,255,255,0.2)}
 .footer-legal{font-size:12px;color:rgba(255,255,255,0.55);display:flex;gap:18px;align-items:center}
 .footer-legal a{color:rgba(255,255,255,0.7)}
@@ -165,7 +166,7 @@ button{font-family:inherit;border:none;cursor:pointer}
 <!-- ============ HEADER ============ -->
 <header class="site-header">
   <div class="brand-lockup">
-    <div class="brand-name">LONGEVITY <span class="b">LIFE</span> ACADEMY</div>
+    <div class="brand-name">Longevity <span class="life-blue">Life</span> Academy</div>
     <div class="brand-by">by <img src="eteacher-wordmark-only.png" alt="eTeacher"> Group</div>
   </div>
   <a href="https://www.longevitylifeacademy.com/" class="header-back">← Back to course</a>
@@ -315,7 +316,7 @@ button{font-family:inherit;border:none;cursor:pointer}
 
   <div class="footer-bottom">
     <div class="footer-brand">
-      <div class="fb-mark">LONGEVITY <span class="b">LIFE</span> ACADEMY</div>
+      <div class="fb-mark">Longevity <span class="life-blue">Life</span> Academy</div>
       <div class="footer-divider"></div>
       <div class="footer-legal">
         <a href="https://www.longevitylifeacademy.com/privacy.html">Privacy Policy</a>
