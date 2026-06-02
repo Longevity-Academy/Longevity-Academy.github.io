@@ -424,13 +424,15 @@ ul, ol { list-style: none; }
 /* Unify eTeacher Group logo sizing sitewide - match the hero version's proportions (compact, in line with body text) */
 .how-v2-logo,
 .about-powered-logo-img {
-  height: clamp(28px, 2.6vw, 38px) !important;
+  height: clamp(32px, 3vw, 44px) !important;
   width: auto !important;
+  filter: none !important; /* remove brightness wash so logo shows in original colors matching hero */
+  opacity: 1 !important;
 }
 @media (max-width: 768px) {
   .how-v2-logo,
   .about-powered-logo-img {
-    height: clamp(24px, 5vw, 30px) !important;
+    height: clamp(26px, 5.5vw, 34px) !important;
   }
 }
 /* Make sure instructor cards never stay invisible (reveal animation safety net) */
@@ -8641,7 +8643,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="about-powered">
         <div class="about-powered-label">Powered by</div>
         <div class="about-powered-brand">
-          <img src="assets/eteacher-wordmark-only.png" alt="eTeacher Group" class="about-powered-logo-img">
+          <img src="assets/e-teacher-logo.png" alt="eTeacher Group" class="about-powered-logo-img">
         </div>
         <p class="about-powered-desc">
           eTeacher Group is reshaping online education with a dynamic, personalized
@@ -8803,7 +8805,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="how-v2" id="how">
   <div class="container">
     <div class="how-v2-header reveal">
-      <img loading="lazy" decoding="async" src="assets/eteacher-wordmark-only.png" alt="eTeacher Group" class="how-v2-logo">
+      <img loading="lazy" decoding="async" src="assets/e-teacher-logo.png" alt="eTeacher Group" class="how-v2-logo">
       <h2 class="how-v2-title">How It Works</h2>
       <p class="how-v2-sub">Six clear steps from enrollment to your personal longevity protocol.</p>
     </div>
