@@ -402,24 +402,45 @@ ul, ol { list-style: none; }
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* Official LLA logo image in hero (added June 2 per CEO) - replaces text wordmark + by-eTeacher lockup since the logo contains both */
+/* Official LLA logo (transparent PNG, original coloring preserved) - DNA + wordmark + by eTeacher Group baked into the artwork */
 .hero-brand-mark {
   display: block;
   width: auto;
-  max-width: 480px;
+  max-width: 500px;
   height: auto;
-  margin: 0 0 36px 0;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.45));
+  margin: 0 0 40px 0;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.4));
 }
 .hero .hero-academy-name,
 .hero .hero-logo-lockup {
   display: none !important;
 }
 @media (max-width: 768px) {
-  .hero-brand-mark { max-width: 300px; margin-bottom: 28px; }
+  .hero-brand-mark { max-width: 320px; margin-bottom: 32px; }
 }
 @media (max-width: 420px) {
-  .hero-brand-mark { max-width: 260px; }
+  .hero-brand-mark { max-width: 270px; }
+}
+/* Unify eTeacher Group logo sizing sitewide - match the hero version's proportions (compact, in line with body text) */
+.how-v2-logo,
+.about-powered-logo-img {
+  height: clamp(28px, 2.6vw, 38px) !important;
+  width: auto !important;
+}
+@media (max-width: 768px) {
+  .how-v2-logo,
+  .about-powered-logo-img {
+    height: clamp(24px, 5vw, 30px) !important;
+  }
+}
+/* Make sure instructor cards never stay invisible (reveal animation safety net) */
+.teachers-grid-live,
+.teachers-grid-live.reveal {
+  opacity: 1 !important;
+}
+.teachers-grid-live img {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 /* Left-anchor byline under "Longevity" (under the L) in the wordmark above */
 .hero-academy-name {
@@ -2754,10 +2775,14 @@ ul, ol { list-style: none; }
 
 /* ======= BIGGER FONTS + LIGHT VARIETY ======= */
 .hero-title {
-  font-size: clamp(64px, 10vw, 130px) !important;
+  /* Down one notch from clamp(64,10vw,130) per CEO June 2 */
+  font-size: clamp(56px, 8.8vw, 116px) !important;
+  margin-bottom: 44px !important; /* more breathing room before sub */
 }
 .hero-sub {
-  font-size: clamp(18px, 1.5vw, 22px) !important;
+  /* Up one notch from clamp(18,1.5vw,22) per CEO June 2 */
+  font-size: clamp(20px, 1.7vw, 25px) !important;
+  margin-bottom: 56px !important; /* more space before CTAs */
 }
 .section-title {
   font-size: clamp(52px, 7vw, 92px) !important;
@@ -7941,8 +7966,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
-    <!-- Hero school name (uppercase wordmark) + by [eTeacher logo] Group beneath -->
-    <img src="assets/lla-logo-full.png" alt="Longevity Life Academy" class="hero-brand-mark" loading="eager" fetchpriority="high">
+    <!-- Hero brand: transparent LLA logo (DNA + wordmark + by eTeacher Group baked in) -->
+    <img src="assets/lla-logo-transparent.png" alt="Longevity Life Academy" class="hero-brand-mark" loading="eager" fetchpriority="high">
     <div class="hero-academy-name">
       <span class="longevity-word">Longevity</span> <span class="life-blue">Life</span> <span class="academy-word">Academy</span>
     </div>
@@ -9133,7 +9158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="lead-gen-v2-right">
         <form class="lead-gen-v2-form form-with-thankyou" id="leadGenV2Form" data-thankyou-target="leadGenV2ThankYou">
           <h3 class="lead-gen-v2-form-title">Apply Now</h3>
-          <p class="lead-gen-v2-form-sub">Free, no commitment, admissions team replies within 24 hours.</p>
+          <p class="lead-gen-v2-form-sub">Our admissions team replies within 24 hours.</p>
           <div class="lead-gen-v2-field">
             <label for="lg-fname">First Name</label>
             <input id="lg-fname" type="text" placeholder="Your first name" required autocomplete="given-name">
