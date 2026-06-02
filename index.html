@@ -402,20 +402,24 @@ ul, ol { list-style: none; }
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* Official LLA logo image in hero (added June 2 per CEO) */
+/* Official LLA logo image in hero (added June 2 per CEO) - replaces text wordmark + by-eTeacher lockup since the logo contains both */
 .hero-brand-mark {
   display: block;
   width: auto;
-  max-width: 440px;
+  max-width: 480px;
   height: auto;
-  margin: 0 0 18px 0;
-  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+  margin: 0 0 36px 0;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.45));
+}
+.hero .hero-academy-name,
+.hero .hero-logo-lockup {
+  display: none !important;
 }
 @media (max-width: 768px) {
-  .hero-brand-mark { max-width: 280px; margin-bottom: 14px; }
+  .hero-brand-mark { max-width: 300px; margin-bottom: 28px; }
 }
 @media (max-width: 420px) {
-  .hero-brand-mark { max-width: 240px; }
+  .hero-brand-mark { max-width: 260px; }
 }
 /* Left-anchor byline under "Longevity" (under the L) in the wordmark above */
 .hero-academy-name {
