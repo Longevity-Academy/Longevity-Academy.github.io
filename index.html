@@ -2770,20 +2770,10 @@ ul, ol { list-style: none; }
   .cert-pill-name { font-size: 12px !important; }
 }
 
-/* ======= HERO TITLE — MATCH FRIEND REFERRAL PAGE FONTS (Instrument Serif) ======= */
+/* ======= HERO TITLE — revert to original Codec Pro display font (slightly smaller per CEO) ======= */
 .hero-title {
-  font-family: 'Instrument Serif', 'Times New Roman', serif !important;
-  font-weight: 400 !important;
-  font-size: clamp(52px, 8vw, 104px) !important;
-  line-height: 1.05 !important;
-  letter-spacing: -0.01em !important;
-  margin-bottom: 44px !important;
-}
-.hero-title .life-blue {
-  font-family: 'Instrument Serif', 'Times New Roman', serif !important;
-  font-style: italic !important;
-  font-weight: 400 !important;
-  color: #6FA8FF !important;
+  font-size: clamp(52px, 8.4vw, 108px) !important;
+  margin-bottom: 40px !important;
 }
 .hero-sub {
   /* Up one notch from clamp(18,1.5vw,22) per CEO June 2 */
@@ -5363,12 +5353,6 @@ html {
   margin-bottom: 18px;
 }
 .teacher-card-live-photo img { width: 100%; height: 100%; object-fit: cover; }
-/* Jordan only: lift face higher and slight zoom-in to match female instructors' framing */
-.teacher-card-live-photo img[src*="jordan.jpg"] {
-  object-position: 50% 18%;
-  transform: scale(1.12);
-  transform-origin: 50% 28%;
-}
 .teacher-card-live-name { color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 4px; }
 .teacher-card-live-role { color: #4DA3FF; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 12px; }
 .teacher-card-live-bio { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.6; margin: 0; }
@@ -8777,36 +8761,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </div>
 
-    <!-- CREDENTIAL BADGES STRIP (inline within instructors) -->
-    <div class="certs-strip-inline reveal">
-      <span class="certs-strip-inline-label">Credentialing & Professional Bodies</span>
-      <div class="certs-strip-inline-badges">
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">ACE</span>
-          <span class="certs-strip-inline-name">American Council on Exercise</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">NASM</span>
-          <span class="certs-strip-inline-name">National Academy of Sports Medicine</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">IFM</span>
-          <span class="certs-strip-inline-name">Institute for Functional Medicine</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">NBHWC</span>
-          <span class="certs-strip-inline-name">Nat'l Board for Health &amp; Wellness Coaching</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">PN</span>
-          <span class="certs-strip-inline-name">Precision Nutrition</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">XLA</span>
-          <span class="certs-strip-inline-name">Extended Learning Alliance</span>
-        </div>
-      </div>
-    </div>
+    <!-- CREDENTIAL BADGES STRIP removed per CEO request - only official logos allowed, awaiting official org artwork -->
     <div class="instructors-cta reveal" style="text-align:center; margin-top: 48px;">
       <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
