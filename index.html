@@ -402,6 +402,21 @@ ul, ol { list-style: none; }
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+/* Official LLA logo image in hero (added June 2 per CEO) */
+.hero-brand-mark {
+  display: block;
+  width: auto;
+  max-width: 440px;
+  height: auto;
+  margin: 0 0 18px 0;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+}
+@media (max-width: 768px) {
+  .hero-brand-mark { max-width: 280px; margin-bottom: 14px; }
+}
+@media (max-width: 420px) {
+  .hero-brand-mark { max-width: 240px; }
+}
 /* Left-anchor byline under "Longevity" (under the L) in the wordmark above */
 .hero-academy-name {
   display: block;
@@ -5229,13 +5244,15 @@ html {
 .trust-logo--microsoft svg { height: 22px; }
 .trust-logo--microsoft .trust-logo-img { height: 28px; }
 .trust-logo--intel svg { height: 30px; }
-.trust-logo--intel .trust-logo-img { height: 32px; }
+.trust-logo--intel .trust-logo-img { height: 38px; mix-blend-mode: normal; filter: none; border-radius: 6px; }
+.trust-logo--natgeo .trust-logo-img { height: 38px; mix-blend-mode: normal; filter: none; border-radius: 4px; }
 @media (max-width: 700px) {
   .trust-logo--microsoft { min-width: 110px; }
   .trust-logo--microsoft svg { height: 18px; }
   .trust-logo--microsoft .trust-logo-img { height: 22px; }
   .trust-logo--intel svg { height: 24px; }
-  .trust-logo--intel .trust-logo-img { height: 26px; }
+  .trust-logo--intel .trust-logo-img { height: 30px; }
+  .trust-logo--natgeo .trust-logo-img { height: 30px; }
 }
 .trust-badge-num {
   font-size: 20px;
@@ -7672,6 +7689,26 @@ section.topics .topic-v2-video video {
   background: #fff !important;
   box-shadow: 0 0 0 3px rgba(0,110,255,0.12) !important;
 }
+/* Country/state dropdown option visibility fix - text was invisible on some browsers */
+.lead-gen-v2-field select,
+.lead-gen-v2 .lead-gen-v2-field select {
+  color: #001233 !important;
+  -webkit-text-fill-color: #001233 !important;
+  background-color: #fff !important;
+}
+.lead-gen-v2-field select option,
+.lead-gen-v2 .lead-gen-v2-field select option {
+  color: #001233 !important;
+  background-color: #ffffff !important;
+  -webkit-text-fill-color: #001233 !important;
+}
+.lead-gen-v2-field select option:checked,
+.lead-gen-v2-field select option:hover,
+.lead-gen-v2 .lead-gen-v2-field select option:checked,
+.lead-gen-v2 .lead-gen-v2-field select option:hover {
+  color: #001233 !important;
+  background-color: #f5f7fb !important;
+}
 .lead-gen-v2 .lead-gen-v2-field input:-webkit-autofill,
 .lead-gen-v2 .lead-gen-v2-field input:-webkit-autofill:hover,
 .lead-gen-v2 .lead-gen-v2-field input:-webkit-autofill:focus {
@@ -7901,6 +7938,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
     <!-- Hero school name (uppercase wordmark) + by [eTeacher logo] Group beneath -->
+    <img src="assets/lla-logo-full.png" alt="Longevity Life Academy" class="hero-brand-mark" loading="eager" fetchpriority="high">
     <div class="hero-academy-name">
       <span class="longevity-word">Longevity</span> <span class="life-blue">Life</span> <span class="academy-word">Academy</span>
     </div>
@@ -8627,33 +8665,111 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="trust-strip-track-wrap">
     <div class="trust-strip-track">
       <!-- SET 1 -->
-      <div class="trust-logo trust-logo--natgeo" title="National Geographic Learning">
-        <span class="trust-natgeo-bar" aria-hidden="true"></span>
-        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
+      <div class="trust-logo trust-logo--brand trust-logo--natgeo" title="National Geographic Learning">
+        <img src="assets/natgeo-logo-official.jpg" alt="National Geographic Learning" class="trust-logo-img">
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--microsoft" title="Microsoft">
         <img src="assets/microsoft-logo-dark.svg" alt="Microsoft" class="trust-logo-img">
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--intel" title="Intel">
-        <img src="assets/intel-logo-dark.svg" alt="Intel" class="trust-logo-img">
+        <img src="assets/intel-logo-official.jpg" alt="Intel" class="trust-logo-img">
       </div>
       <div class="trust-logo trust-logo--badge"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
 
       <!-- SET 2 (duplicate for seamless loop) -->
-      <div class="trust-logo trust-logo--natgeo" aria-hidden="true">
-        <span class="trust-natgeo-bar"></span>
-        <span class="trust-natgeo-text">NATIONAL<br>GEOGRAPHIC<br><span class="trust-natgeo-sub">LEARNING</span></span>
+      <div class="trust-logo trust-logo--brand trust-logo--natgeo" aria-hidden="true">
+        <img src="assets/natgeo-logo-official.jpg" alt="" class="trust-logo-img">
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--microsoft" aria-hidden="true">
         <img src="assets/microsoft-logo-dark.svg" alt="" class="trust-logo-img">
       </div>
       <div class="trust-logo trust-logo--brand trust-logo--intel" aria-hidden="true">
-        <img src="assets/intel-logo-dark.svg" alt="" class="trust-logo-img">
+        <img src="assets/intel-logo-official.jpg" alt="" class="trust-logo-img">
       </div>
       <div class="trust-logo trust-logo--badge" aria-hidden="true"><span class="trust-badge-num">25</span><span class="trust-badge-lbl">years<br>teaching online</span></div>
     </div>
   </div>
 </section>
+
+<section class="instructors" id="teachers">
+  <div class="container">
+    <div class="instructors-header reveal" style="text-align: center; margin-bottom: 48px;">
+      <span class="eyebrow" style="margin-bottom: 12px; display: block;">Your Instructors</span>
+      <h2 class="section-title" style="margin-bottom: 16px;">Taught by Leading Voices<br>in Longevity Medicine</h2>
+      <p class="section-subtitle" style="margin: 0 auto; max-width: 720px;">A faculty of certified specialists, researchers, and protocol designers backed by the most recognized credentialing bodies in the field.</p>
+    </div>
+
+    <!-- LIVE instructor grid -->
+    <div class="teachers-grid-live reveal">
+      <a class="teacher-card-live teacher-card-link" href="teachers/natalie.html">
+        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/natalie.jpg" alt="Natalie Blackbourne" loading="lazy"></div>
+        <div class="teacher-card-live-body">
+          <h4 class="teacher-card-live-name">Natalie Blackbourne</h4>
+          <span class="teacher-card-live-role">Longevity Researcher &amp; Educator</span>
+          <p class="teacher-card-live-bio">M.S. Emotional Intelligence with ~20 years in health and wellness. Focuses on neuroscience and cognitive optimization for long-term vitality.</p>
+        </div>
+      </a>
+      <a class="teacher-card-live teacher-card-link" href="teachers/courtney.html">
+        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/courtney.jpg" alt="Courtney Donofrio" loading="lazy"></div>
+        <div class="teacher-card-live-body">
+          <h4 class="teacher-card-live-name">Courtney Donofrio</h4>
+          <span class="teacher-card-live-role">Integrative Nutrition Health Coach</span>
+          <p class="teacher-card-live-bio">IIN-certified founder of EatBiohackLove, based in Amsterdam. Specializes in gut health, hormone balance, and practical biohacking.</p>
+        </div>
+      </a>
+      <a class="teacher-card-live teacher-card-link" href="teachers/amy.html">
+        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/amy.jpg" alt="Amy Jamieson" loading="lazy"></div>
+        <div class="teacher-card-live-body">
+          <h4 class="teacher-card-live-name">Amy Jamieson</h4>
+          <span class="teacher-card-live-role">Senior Lecturer, UC Santa Barbara</span>
+          <p class="teacher-card-live-bio">M.S. Health Science &amp; Kinesiology, NASM CPT/CES, ACE Health Coach. 25+ years in higher education and a master competitive runner.</p>
+        </div>
+      </a>
+      <a class="teacher-card-live teacher-card-link" href="teachers/jordan.html">
+        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/jordan.jpg" alt="Jordan Lattimore" loading="lazy"></div>
+        <div class="teacher-card-live-body">
+          <h4 class="teacher-card-live-name">Jordan Lattimore</h4>
+          <span class="teacher-card-live-role">Behavioral &amp; Education Specialist</span>
+          <p class="teacher-card-live-bio">B.Sc. Psychology, University of Alberta. 12 years in Costa Rica near the Nicoya Blue Zone, 5+ years in behavioral therapy.</p>
+        </div>
+      </a>
+    </div>
+</div>
+
+    <!-- CREDENTIAL BADGES STRIP (inline within instructors) -->
+    <div class="certs-strip-inline reveal">
+      <span class="certs-strip-inline-label">Credentialing & Professional Bodies</span>
+      <div class="certs-strip-inline-badges">
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">ACE</span>
+          <span class="certs-strip-inline-name">American Council on Exercise</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">NASM</span>
+          <span class="certs-strip-inline-name">National Academy of Sports Medicine</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">IFM</span>
+          <span class="certs-strip-inline-name">Institute for Functional Medicine</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">NBHWC</span>
+          <span class="certs-strip-inline-name">Nat'l Board for Health &amp; Wellness Coaching</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">PN</span>
+          <span class="certs-strip-inline-name">Precision Nutrition</span>
+        </div>
+        <div class="certs-strip-inline-badge">
+          <span class="certs-strip-inline-abbr">XLA</span>
+          <span class="certs-strip-inline-name">Extended Learning Alliance</span>
+        </div>
+      </div>
+    </div>
+    <div class="instructors-cta reveal" style="text-align:center; margin-top: 48px;">
+      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
 
 <section class="how-v2" id="how">
   <div class="container">
@@ -8764,86 +8880,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-
-<section class="instructors" id="teachers">
-  <div class="container">
-    <div class="instructors-header reveal" style="text-align: center; margin-bottom: 48px;">
-      <span class="eyebrow" style="margin-bottom: 12px; display: block;">Your Instructors</span>
-      <h2 class="section-title" style="margin-bottom: 16px;">Taught by Leading Voices<br>in Longevity Medicine</h2>
-      <p class="section-subtitle" style="margin: 0 auto; max-width: 720px;">A faculty of certified specialists, researchers, and protocol designers backed by the most recognized credentialing bodies in the field.</p>
-    </div>
-
-    <!-- LIVE instructor grid -->
-    <div class="teachers-grid-live reveal">
-      <a class="teacher-card-live teacher-card-link" href="teachers/natalie.html">
-        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/natalie.jpg" alt="Natalie Blackbourne" loading="lazy"></div>
-        <div class="teacher-card-live-body">
-          <h4 class="teacher-card-live-name">Natalie Blackbourne</h4>
-          <span class="teacher-card-live-role">Longevity Researcher &amp; Educator</span>
-          <p class="teacher-card-live-bio">M.S. Emotional Intelligence with ~20 years in health and wellness. Focuses on neuroscience and cognitive optimization for long-term vitality.</p>
-        </div>
-      </a>
-      <a class="teacher-card-live teacher-card-link" href="teachers/courtney.html">
-        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/courtney.jpg" alt="Courtney Donofrio" loading="lazy"></div>
-        <div class="teacher-card-live-body">
-          <h4 class="teacher-card-live-name">Courtney Donofrio</h4>
-          <span class="teacher-card-live-role">Integrative Nutrition Health Coach</span>
-          <p class="teacher-card-live-bio">IIN-certified founder of EatBiohackLove, based in Amsterdam. Specializes in gut health, hormone balance, and practical biohacking.</p>
-        </div>
-      </a>
-      <a class="teacher-card-live teacher-card-link" href="teachers/amy.html">
-        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/amy.jpg" alt="Amy Jamieson" loading="lazy"></div>
-        <div class="teacher-card-live-body">
-          <h4 class="teacher-card-live-name">Amy Jamieson</h4>
-          <span class="teacher-card-live-role">Senior Lecturer, UC Santa Barbara</span>
-          <p class="teacher-card-live-bio">M.S. Health Science &amp; Kinesiology, NASM CPT/CES, ACE Health Coach. 25+ years in higher education and a master competitive runner.</p>
-        </div>
-      </a>
-      <a class="teacher-card-live teacher-card-link" href="teachers/jordan.html">
-        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/jordan.jpg" alt="Jordan Lattimore" loading="lazy"></div>
-        <div class="teacher-card-live-body">
-          <h4 class="teacher-card-live-name">Jordan Lattimore</h4>
-          <span class="teacher-card-live-role">Behavioral &amp; Education Specialist</span>
-          <p class="teacher-card-live-bio">B.Sc. Psychology, University of Alberta. 12 years in Costa Rica near the Nicoya Blue Zone, 5+ years in behavioral therapy.</p>
-        </div>
-      </a>
-    </div>
-</div>
-
-    <!-- CREDENTIAL BADGES STRIP (inline within instructors) -->
-    <div class="certs-strip-inline reveal">
-      <span class="certs-strip-inline-label">Credentialing & Professional Bodies</span>
-      <div class="certs-strip-inline-badges">
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">ACE</span>
-          <span class="certs-strip-inline-name">American Council on Exercise</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">NASM</span>
-          <span class="certs-strip-inline-name">National Academy of Sports Medicine</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">IFM</span>
-          <span class="certs-strip-inline-name">Institute for Functional Medicine</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">NBHWC</span>
-          <span class="certs-strip-inline-name">Nat'l Board for Health &amp; Wellness Coaching</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">PN</span>
-          <span class="certs-strip-inline-name">Precision Nutrition</span>
-        </div>
-        <div class="certs-strip-inline-badge">
-          <span class="certs-strip-inline-abbr">XLA</span>
-          <span class="certs-strip-inline-name">Extended Learning Alliance</span>
-        </div>
-      </div>
-    </div>
-    <div class="instructors-cta reveal" style="text-align:center; margin-top: 48px;">
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-  </section>
 
 <section class="value">
   <div class="container">
@@ -9174,7 +9210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Adults who want to take longevity seriously, practical people who'd rather understand their own biology than chase the latest headline. No medical background needed. If you're willing to read your own data and try small experiments, you'll thrive here.
+          For ambitious people who want to optimize their health, energy, and longevity through science-backed nutrition, exercise, recovery, and biomarker tracking. Perfect for high performers, wellness enthusiasts, and anyone ready to take a proactive approach to living longer and feeling better.
         </div></div>
       </div>
       <div class="faq-item reveal">
@@ -9190,7 +9226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          A 50-minute live class with your cohort and a certified instructor. Expect a mix of teaching, real data walkthroughs (including CGM examples), and small-group discussion. Each session ends with a between-session practice, a food experiment, a movement plan, a sleep log, so the next week starts with your own data.
+          Each week, you'll join a 90-minute live session with expert instructors and a community of like-minded people focused on optimizing health, performance, and longevity. Sessions combine science-backed learning, real biomarker and CGM data analysis, and interactive discussions around nutrition, movement, sleep, and recovery. You'll leave with a personalized experiment to apply during the week, turning your own data into actionable insights for long-term health and vitality.
         </div></div>
       </div>
       <div class="faq-item reveal">
@@ -9198,7 +9234,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          No. This is education, not clinical care. We don't diagnose or treat. Our teachers help you understand research, interpret your own signals, and design lifestyle practices. For anything clinical, keep working with your physician.
+          No. This program is educational and focused on helping you better understand the science of longevity, nutrition, movement, recovery, and biomarker tracking. We do not diagnose, treat, or provide clinical care. Our instructors help you interpret research, understand your own health data, and build sustainable lifestyle practices. For medical concerns or clinical decisions, please continue working with your physician.
         </div></div>
       </div>
       <div class="faq-item reveal">
