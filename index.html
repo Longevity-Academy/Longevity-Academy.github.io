@@ -3404,12 +3404,12 @@ ul, ol { list-style: none; }
 }
 @media (min-width: 769px) {
   .hero-title {
-    font-size: clamp(64px, 9.5vw, 132px) !important;
+    font-size: clamp(40px, 5.2vw, 68px) !important;
   }
 }
 @media (max-width: 768px) {
   .hero-title {
-    font-size: clamp(48px, 11vw, 76px) !important;
+    font-size: clamp(36px, 8vw, 54px) !important;
   }
 }
 .skill-title {
@@ -4406,22 +4406,28 @@ a[class*="cta"], button[class*="cta"], .nav-cta, .hero-cta, .lead-gen-btn {
   margin: 0 !important;
 }
 
-/* --- NAV, ensure dark + glass on scroll --- */
+/* --- NAV, dark gradient + glass + strong contrast (CEO June 7) --- */
 .nav {
-  background: rgba(6, 14, 26, 0.85) !important;
-  backdrop-filter: blur(20px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  background: linear-gradient(180deg, #0e1f48 0%, #081634 100%) !important;
+  backdrop-filter: blur(14px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+  border-bottom: 1px solid rgba(126, 200, 255, 0.22) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.45) !important;
 }
 .nav-logo {
   color: #fff !important;
 }
 .nav-links a {
-  color: rgba(255,255,255,0.7) !important;
+  color: rgba(255,255,255,0.92) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4) !important;
 }
 .nav-links a:hover {
-  color: #fff !important;
+  color: #7EC8FF !important;
 }
+.nav-inner { gap: 56px !important; }
+.nav-links { margin-left: 40px !important; }
+.nav-cta { margin-left: 32px !important; }
 
 /* --- DEEP DIVES: Make skills grid last row fill nicer --- */
 .skills-grid {
@@ -7067,14 +7073,16 @@ html {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: 95% center;
+  object-fit: cover;
+  object-position: 75% center;
+  transform: scale(0.92);
+  transform-origin: right center;
   z-index: 0;
   filter: saturate(1.05) contrast(1.05) brightness(0.95);
   background: #060e1f;
 }
 @media (max-width: 768px) {
-  .hero-image { object-fit: cover; object-position: 70% center; }
+  .hero-image { transform: none; object-fit: cover; object-position: 70% center; }
 }
 /* Stronger overlay for text legibility over photo subject on right */
 .hero .hero-overlay {
