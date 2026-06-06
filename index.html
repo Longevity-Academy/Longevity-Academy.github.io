@@ -9951,6 +9951,269 @@ function toggleCurriculum(btn) {
   .form-with-thankyou.is-submitting button[type="submit"]{opacity:.7;pointer-events:none;position:relative}
   .form-with-thankyou.is-submitting button[type="submit"]::after{content:'';position:absolute;right:18px;top:50%;width:16px;height:16px;margin-top:-8px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:lg-spin .7s linear infinite}
   @keyframes lg-spin{to{transform:rotate(360deg)}}
+
+/* ============================================================
+   ULTRA-PREMIUM POLISH — June 7
+   Last-wins overrides for nav, logo, hero typography, and image
+   ============================================================ */
+
+/* ---- NAV: deeper navy, refined glass, premium spacing ---- */
+.nav {
+  padding: 14px 0 !important;
+  background:
+    linear-gradient(180deg, rgba(8, 18, 44, 0.92) 0%, rgba(4, 11, 30, 0.96) 100%) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(126, 200, 255, 0.16) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.04) inset,
+    0 8px 32px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* ---- NAV INNER: precise rhythm ---- */
+.nav-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0 !important;
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  padding: 0 40px !important;
+}
+.nav-logo {
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+.nav-logo-img {
+  height: 52px !important;
+  width: auto !important;
+  max-width: 240px !important;
+  image-rendering: -webkit-optimize-contrast !important;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.45));
+}
+.nav-links {
+  display: flex !important;
+  gap: 38px !important;
+  align-items: center !important;
+  margin: 0 0 0 auto !important;
+  padding-right: 28px !important;
+}
+.nav-links a {
+  font-family: var(--font-display) !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  color: rgba(255,255,255,0.88) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.35) !important;
+  position: relative;
+  padding-bottom: 4px !important;
+  transition: color 220ms ease !important;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, #7EC8FF 0%, #4DA3FF 100%);
+  transition: width 260ms ease, left 260ms ease;
+  border-radius: 2px;
+}
+.nav-links a:hover {
+  color: #fff !important;
+}
+.nav-links a:hover::after {
+  width: 100%;
+  left: 0;
+}
+.nav-cta {
+  flex: 0 0 auto !important;
+  margin-left: 8px !important;
+  padding: 12px 28px !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  background: linear-gradient(135deg, #2E91FF 0%, #0066FF 100%) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(140, 200, 255, 0.55) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.28),
+    inset 0 -1px 0 rgba(0,0,0,0.18),
+    0 6px 22px rgba(20, 110, 240, 0.50),
+    0 1px 3px rgba(0,0,0,0.35) !important;
+  transition: transform 200ms ease, box-shadow 200ms ease !important;
+}
+.nav-cta:hover {
+  transform: translateY(-1px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.32),
+    inset 0 -1px 0 rgba(0,0,0,0.18),
+    0 10px 28px rgba(20, 110, 240, 0.62),
+    0 2px 6px rgba(0,0,0,0.45) !important;
+}
+@media (max-width: 768px) {
+  .nav-inner { padding: 0 20px !important; }
+  .nav-logo-img { height: 42px !important; max-width: 190px !important; }
+}
+
+/* ---- HERO EYEBROW (LONGEVITY LIFE ACADEMY): refined ---- */
+.hero-academy-name {
+  font-family: var(--font-display) !important;
+  font-weight: 500 !important;
+  font-size: clamp(12px, 1vw, 14px) !important;
+  letter-spacing: 0.32em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.72) !important;
+  margin-bottom: 22px !important;
+}
+.hero-academy-name .life-blue {
+  color: #7EC8FF !important;
+  font-weight: 600 !important;
+}
+
+/* ---- HERO TITLE: premium serif accent, tight line-height ---- */
+@media (min-width: 769px) {
+  .hero-title {
+    font-family: var(--font-display) !important;
+    font-size: clamp(56px, 6.4vw, 88px) !important;
+    font-weight: 700 !important;
+    line-height: 0.96 !important;
+    letter-spacing: -0.035em !important;
+    margin-bottom: 26px !important;
+    color: #fff !important;
+    text-shadow: 0 4px 32px rgba(0, 0, 0, 0.45) !important;
+  }
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-family: var(--font-display) !important;
+    font-size: clamp(42px, 10.5vw, 64px) !important;
+    font-weight: 700 !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 22px !important;
+    text-shadow: 0 3px 24px rgba(0, 0, 0, 0.5) !important;
+  }
+}
+.hero-title .life-blue {
+  font-family: 'Instrument Serif', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: #9FD4FF !important;
+  letter-spacing: -0.02em !important;
+  background: linear-gradient(180deg, #BFE2FF 0%, #6FB6FF 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ---- HERO SUB: refined, slightly lighter ---- */
+.hero-sub {
+  font-size: clamp(17px, 1.35vw, 20px) !important;
+  line-height: 1.55 !important;
+  color: rgba(255,255,255,0.92) !important;
+  font-weight: 400 !important;
+  max-width: 580px !important;
+  margin-bottom: 44px !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4) !important;
+}
+.hero-sub strong { font-weight: 700 !important; color: #fff !important; }
+@media (max-width: 768px) {
+  .hero-sub {
+    font-size: clamp(15px, 4vw, 18px) !important;
+    max-width: 100% !important;
+    margin-bottom: 32px !important;
+  }
+}
+
+/* ---- HERO IMAGE: pulled back, refined overlay ---- */
+.hero-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 78% 35% !important;
+  transform: none !important;
+  z-index: 0 !important;
+  filter: saturate(1.08) contrast(1.04) brightness(0.88) !important;
+}
+@media (max-width: 768px) {
+  .hero-image { object-position: 65% 30% !important; }
+}
+
+/* ---- HERO OVERLAY: premium cinematic gradient ---- */
+.hero .hero-overlay {
+  background:
+    linear-gradient(105deg,
+      rgba(4, 11, 30, 0.92) 0%,
+      rgba(6, 14, 35, 0.78) 28%,
+      rgba(8, 18, 40, 0.42) 55%,
+      rgba(8, 18, 40, 0.18) 78%,
+      rgba(8, 18, 40, 0.35) 100%),
+    radial-gradient(ellipse at 10% 40%, rgba(0, 90, 220, 0.28) 0%, transparent 55%) !important;
+}
+@media (max-width: 768px) {
+  .hero .hero-overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(4, 11, 30, 0.78) 0%,
+        rgba(6, 14, 35, 0.62) 40%,
+        rgba(4, 11, 30, 0.88) 100%) !important;
+  }
+}
+
+/* ---- HERO CTAs: refined, premium-grade ---- */
+.hero-cta-row .btn-primary--lg {
+  padding: 18px 36px !important;
+  font-size: 15.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.015em !important;
+  background: linear-gradient(135deg, #2E91FF 0%, #0066FF 100%) !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(140, 200, 255, 0.55) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.30),
+    inset 0 -1px 0 rgba(0,0,0,0.18),
+    0 10px 32px rgba(20, 110, 240, 0.55),
+    0 2px 6px rgba(0,0,0,0.35) !important;
+}
+.hero-cta-row .btn-primary--lg:hover {
+  transform: translateY(-2px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.35),
+    inset 0 -1px 0 rgba(0,0,0,0.18),
+    0 14px 40px rgba(20, 110, 240, 0.68),
+    0 3px 8px rgba(0,0,0,0.45) !important;
+}
+.hero-cta-row .btn-ghost {
+  padding: 18px 32px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  background: rgba(255,255,255,0.08) !important;
+  border: 1.5px solid rgba(255,255,255,0.32) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+.hero-cta-row .btn-ghost:hover {
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.5) !important;
+}
+
+/* ---- TRUSTPILOT CHIP: refined glass ---- */
+.trustpilot {
+  background: rgba(255,255,255,0.10) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  padding: 10px 18px !important;
+  border-radius: 999px !important;
+  margin-bottom: 28px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25) !important;
+}
+
 </style>
 <script>
 // CampaignID configuration
