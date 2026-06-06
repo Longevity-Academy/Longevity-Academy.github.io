@@ -175,22 +175,25 @@ ul, ol { list-style: none; }
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 18px;
   color: var(--ink);
   text-decoration: none;
+  padding: 0;
+  margin: 0;
 }
 .nav-logo svg { width: 28px; height: 28px; }
 .nav-logo-img {
   display: block;
-  height: 38px;
+  height: 58px;
   width: auto;
-  max-width: 220px;
+  max-width: 320px;
+  image-rendering: -webkit-optimize-contrast;
 }
 @media (max-width: 768px) {
-  .nav-logo-img { height: 32px; max-width: 180px; }
+  .nav-logo-img { height: 46px; max-width: 240px; }
 }
 .nav-links {
   display: flex;
@@ -7895,7 +7898,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <a href="/" class="nav-logo" aria-label="Longevity Life Academy home">
-      <img src="assets/lla-logo-transparent.png" alt="Longevity Life Academy" class="nav-logo-img">
+      <img src="assets/lla-logo-transparent@2x.png" alt="Longevity Life Academy" class="nav-logo-img" width="1344" height="628">
     </a>
     <div class="nav-links">
       <a href="about.html">About</a>
