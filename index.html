@@ -159,21 +159,22 @@ ul, ol { list-style: none; }
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 10px 0;
-  background: #0d1b40;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-bottom: 1px solid rgba(120, 160, 240, 0.28);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+  padding: 12px 0;
+  background: linear-gradient(180deg, #0e1f48 0%, #081634 100%);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border-bottom: 1px solid rgba(120, 170, 255, 0.22);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.55);
   transition: background var(--transition);
 }
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 28px;
+  gap: 56px;
 }
-.nav-links .nav-cta { margin-left: 24px; }
+.nav-inner .nav-links { margin-left: 32px; }
+.nav-links .nav-cta { margin-left: 28px; }
 .nav-logo {
   display: flex;
   align-items: center;
@@ -189,13 +190,13 @@ ul, ol { list-style: none; }
 .nav-logo svg { width: 28px; height: 28px; }
 .nav-logo-img {
   display: block;
-  height: 48px;
+  height: 44px;
   width: auto;
-  max-width: 240px;
-  image-rendering: -webkit-optimize-contrast;
+  max-width: 220px;
+  image-rendering: auto;
 }
 @media (max-width: 768px) {
-  .nav-logo-img { height: 38px; max-width: 180px; }
+  .nav-logo-img { height: 36px; max-width: 170px; }
 }
 .nav-links {
   display: flex;
@@ -2780,8 +2781,8 @@ ul, ol { list-style: none; }
 
 /* ======= HERO TITLE — Codec Pro display font, smaller per CEO ======= */
 .hero-title {
-  font-size: clamp(40px, 6.4vw, 80px) !important;
-  margin-bottom: 32px !important;
+  font-size: clamp(36px, 5.4vw, 68px) !important;
+  margin-bottom: 28px !important;
 }
 .hero-sub {
   /* Up one notch from clamp(18,1.5vw,22) per CEO June 2 */
@@ -7066,10 +7067,14 @@ html {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center right;
+  object-fit: contain;
+  object-position: 95% center;
   z-index: 0;
   filter: saturate(1.05) contrast(1.05) brightness(0.95);
+  background: #060e1f;
+}
+@media (max-width: 768px) {
+  .hero-image { object-fit: cover; object-position: 70% center; }
 }
 /* Stronger overlay for text legibility over photo subject on right */
 .hero .hero-overlay {
@@ -7903,7 +7908,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <a href="/" class="nav-logo" aria-label="Longevity Life Academy home">
-      <img src="assets/lla-logo-no-tagline@2x.png?v=4" alt="Longevity Life Academy" class="nav-logo-img" width="1268" height="397">
+      <img src="assets/lla-logo-no-tagline@3x.png?v=5" alt="Longevity Life Academy" class="nav-logo-img" width="1902" height="588">
     </a>
     <div class="nav-links">
       <a href="about.html">About</a>
