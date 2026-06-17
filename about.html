@@ -361,6 +361,10 @@ section.block.light .section-head .lead { color: rgba(13,27,42,0.74); }
 .partner-card.natgeo .natgeo-bar {
   width: 36px; height: 4px; background: #FFCC00; margin-bottom: 12px;
 }
+.partner-card .partner-logo {
+  max-width: 100%; width: auto; height: auto; max-height: 64px;
+  object-fit: contain; display: block;
+}
 
 /* QUOTE */
 .quote-block {
@@ -627,7 +631,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- METHODOLOGY QUOTE -->
     <div class="quote-block reveal">
       <p>Pioneering a dynamic and personalized learning experience, bringing the traditional classroom to the internet through synchronous, teacher-led instruction that scales without losing the human element.</p>
-      <div class="quote-source">,  eTeacher Group methodology</div>
+      <div class="quote-source" style="color: var(--ink-dark);">eTeacher Group methodology</div>
     </div>
 
     <!-- PARTNERS -->
@@ -638,21 +642,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="partners-grid">
-      <div class="partner-card natgeo reveal">
-        <div class="natgeo-bar"></div>
-        <div class="partner-name">National Geographic<br>Learning</div>
+      <div class="partner-card reveal">
+        <img src="assets/partners/natgeo-learning@3x.png" alt="National Geographic Learning" class="partner-logo" loading="lazy">
       </div>
       <div class="partner-card reveal">
-        <div class="partner-name">Hebrew University<br>of Jerusalem</div>
-        <div class="partner-sub">Israel</div>
+        <img src="assets/partners/hebrew-university@3x.png" alt="The Hebrew University of Jerusalem" class="partner-logo" loading="lazy">
       </div>
       <div class="partner-card reveal">
-        <div class="partner-name">Ministry of<br>Education</div>
-        <div class="partner-sub">Israel</div>
+        <img src="assets/partners/ministry-education@3x.png" alt="State of Israel, Ministry of Education" class="partner-logo" loading="lazy">
       </div>
       <div class="partner-card reveal">
-        <div class="partner-name">Ministry of<br>Foreign Affairs</div>
-        <div class="partner-sub">Israel</div>
+        <img src="assets/partners/ministry-foreign-affairs@3x.png" alt="Ministry of Foreign Affairs, Israel" class="partner-logo" loading="lazy">
       </div>
     </div>
   </div>
