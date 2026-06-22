@@ -622,66 +622,86 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   })();
   </script>
 
-  <!-- Floating Enroll CTA (premium glass, top-right) -->
+  <!-- Floating Enroll CTA (premium, top) -->
   <style>
     .lla-float-cta{
-      position:fixed;top:88px;right:28px;z-index:9999;
-      display:inline-flex;align-items:center;gap:14px;
-      padding:14px 22px 14px 18px;border:1px solid rgba(255,255,255,.55);cursor:pointer;
-      font-family:'Inter','Codec Pro',sans-serif;font-weight:600;font-size:15px;letter-spacing:.1px;
-      color:#0A2540;text-decoration:none;border-radius:999px;
-      background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(232,244,255,.88) 100%);
-      backdrop-filter:blur(18px) saturate(160%);
-      -webkit-backdrop-filter:blur(18px) saturate(160%);
-      box-shadow:0 1px 0 rgba(255,255,255,.9) inset,
-                 0 0 0 1px rgba(120,180,255,.25),
-                 0 10px 28px rgba(20,60,120,.14),
-                 0 0 24px rgba(120,190,255,.35);
+      position:fixed;top:96px;right:32px;z-index:9999;
+      display:inline-flex;align-items:stretch;cursor:pointer;text-decoration:none;
+      font-family:'Inter','Codec Pro',sans-serif;
+      border-radius:18px;overflow:hidden;
+      background:linear-gradient(180deg,#0F2D52 0%,#0A2240 100%);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:
+        0 0 0 1px rgba(120,180,255,.18),
+        0 14px 36px rgba(8,30,60,.28),
+        0 0 28px rgba(120,190,255,.18);
       opacity:0;transform:translateY(-12px);pointer-events:none;
-      transition:opacity .4s ease, transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
+      transition:opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
     }
     .lla-float-cta.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
     .lla-float-cta:hover{
-      box-shadow:0 1px 0 rgba(255,255,255,1) inset,
-                 0 0 0 1px rgba(120,180,255,.45),
-                 0 14px 36px rgba(20,60,120,.18),
-                 0 0 38px rgba(120,190,255,.6);
       transform:translateY(-2px);
+      box-shadow:
+        0 0 0 1px rgba(140,200,255,.35),
+        0 18px 44px rgba(8,30,60,.34),
+        0 0 44px rgba(120,190,255,.42);
     }
-    .lla-float-cta .lla-cta-dot{
-      width:10px;height:10px;border-radius:50%;
-      background:radial-gradient(circle at 30% 30%,#9BD4FF 0%,#3FA3FF 60%,#1B6FD8 100%);
-      box-shadow:0 0 10px rgba(63,163,255,.9),0 0 18px rgba(155,212,255,.7);
+    .lla-float-cta .lla-cta-text{
+      display:flex;flex-direction:column;justify-content:center;
+      padding:14px 18px 14px 20px;gap:4px;
+    }
+    .lla-float-cta .lla-cta-eyebrow{
+      display:flex;align-items:center;gap:8px;
+      font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+      color:#8FB9F0;
+    }
+    .lla-float-cta .lla-cta-eyebrow::before{
+      content:"";width:6px;height:6px;border-radius:50%;
+      background:#5EB6FF;box-shadow:0 0 8px #5EB6FF,0 0 14px rgba(94,182,255,.7);
       animation:llaDot 2.2s ease-in-out infinite;
-      flex:none;
     }
-    .lla-float-cta .lla-cta-label{display:flex;flex-direction:column;line-height:1.1;text-align:left}
-    .lla-float-cta .lla-cta-top{font-weight:700;font-size:14.5px;color:#0A2540;letter-spacing:.2px}
-    .lla-float-cta .lla-cta-sub{font-weight:500;font-size:11.5px;color:#3D6B9E;margin-top:3px;letter-spacing:.3px;text-transform:uppercase}
-    .lla-float-cta .lla-cta-arrow{margin-left:2px;width:16px;height:16px;color:#3FA3FF;transition:transform .25s ease}
+    .lla-float-cta .lla-cta-title{
+      font-family:'Codec Pro','Inter',sans-serif;
+      font-size:15.5px;font-weight:700;color:#fff;letter-spacing:.1px;line-height:1.1;
+    }
+    .lla-float-cta .lla-cta-pill{
+      display:flex;align-items:center;gap:8px;
+      padding:0 22px;margin:8px 8px 8px 6px;border-radius:12px;
+      background:linear-gradient(180deg,#5EB6FF 0%,#2E8BE6 100%);
+      color:#06243F;font-weight:800;font-size:14.5px;letter-spacing:.1px;
+      box-shadow:0 1px 0 rgba(255,255,255,.55) inset, 0 8px 20px rgba(46,139,230,.32);
+    }
+    .lla-float-cta .lla-cta-pill .price{font-size:15.5px;font-weight:900}
+    .lla-float-cta .lla-cta-pill .mo{font-size:11px;font-weight:700;color:#0A2240;opacity:.78;letter-spacing:.06em}
+    .lla-float-cta .lla-cta-arrow{width:16px;height:16px;color:#06243F;transition:transform .25s ease}
     .lla-float-cta:hover .lla-cta-arrow{transform:translateX(3px)}
     @keyframes llaDot{
-      0%,100%{box-shadow:0 0 10px rgba(63,163,255,.9),0 0 18px rgba(155,212,255,.7)}
-      50%{box-shadow:0 0 16px rgba(63,163,255,1),0 0 30px rgba(155,212,255,.95)}
+      0%,100%{box-shadow:0 0 8px #5EB6FF,0 0 14px rgba(94,182,255,.7)}
+      50%{box-shadow:0 0 14px #5EB6FF,0 0 24px rgba(94,182,255,1)}
     }
-    @media (max-width:640px){
-      .lla-float-cta{top:14px;bottom:auto;right:12px;left:12px;justify-content:center;padding:12px 18px}
-      .lla-float-cta .lla-cta-label{flex-direction:row;align-items:baseline;gap:8px}
-      .lla-float-cta .lla-cta-sub{margin-top:0;font-size:11px}
+    @media (max-width:720px){
+      .lla-float-cta{top:12px;right:12px;left:12px;border-radius:14px}
+      .lla-float-cta .lla-cta-text{padding:10px 12px 10px 14px;flex:1;min-width:0}
+      .lla-float-cta .lla-cta-title{font-size:14px}
+      .lla-float-cta .lla-cta-eyebrow{font-size:9.5px}
+      .lla-float-cta .lla-cta-pill{padding:0 14px;margin:6px 6px 6px 4px;border-radius:10px}
+      .lla-float-cta .lla-cta-pill .price{font-size:14px}
+      .lla-float-cta .lla-cta-pill .mo{font-size:10px}
     }
   </style>
-  <a href="#bioAgeForm" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now — $289 per month">
-    <span class="lla-cta-dot" aria-hidden="true"></span>
-    <span class="lla-cta-label">
-      <span class="lla-cta-top">Enroll Now</span>
-      <span class="lla-cta-sub">$289 / month</span>
+  <a href="#bioAgeForm" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now in The Longevity Blueprint — $289 per month">
+    <span class="lla-cta-text">
+      <span class="lla-cta-eyebrow">Enroll Now</span>
+      <span class="lla-cta-title">The Longevity Blueprint</span>
     </span>
-    <svg class="lla-cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    <span class="lla-cta-pill">
+      <span class="price">$289</span><span class="mo">/ MO</span>
+      <svg class="lla-cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    </span>
   </a>
   <script>
     (function(){
       var cta=document.getElementById('llaFloatCta');
-      // Prefer visible lead-gen form; fallback to quiz form (which produces the lead-gen)
       function target(){
         var lead=document.getElementById('bioLeadGenForm');
         if(lead){var r=lead.getBoundingClientRect();if(r.height>0&&r.width>0)return lead}
