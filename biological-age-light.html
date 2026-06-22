@@ -670,7 +670,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       .lla-float-cta .lla-cta-sub{margin-top:0;font-size:11px}
     }
   </style>
-  <a href="#bioLeadGenForm" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now — $289 per month">
+  <a href="#bioAgeForm" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now — $289 per month">
     <span class="lla-cta-dot" aria-hidden="true"></span>
     <span class="lla-cta-label">
       <span class="lla-cta-top">Enroll Now</span>
@@ -681,12 +681,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
     (function(){
       var cta=document.getElementById('llaFloatCta');
-      var form=document.getElementById('bioLeadGenForm');
+      // Prefer visible lead-gen form; fallback to quiz form (which produces the lead-gen)
+      function target(){
+        var lead=document.getElementById('bioLeadGenForm');
+        if(lead){var r=lead.getBoundingClientRect();if(r.height>0&&r.width>0)return lead}
+        return document.getElementById('bioAgeForm');
+      }
       function onScroll(){if(window.scrollY>140){cta.classList.add('is-visible')}else{cta.classList.remove('is-visible')}}
       window.addEventListener('scroll',onScroll,{passive:true});onScroll();
       cta.addEventListener('click',function(e){
         e.preventDefault();
-        if(form){form.scrollIntoView({behavior:'smooth',block:'start'})}
+        var t=target();
+        if(t){t.scrollIntoView({behavior:'smooth',block:'start'})}
       });
     })();
   </script>
