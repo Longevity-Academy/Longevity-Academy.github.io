@@ -621,5 +621,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     else init();
   })();
   </script>
+
+  <!-- Floating Enroll CTA -->
+  <style>
+    .lla-float-cta{
+      position:fixed;right:24px;bottom:24px;z-index:9999;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:18px 30px;border:none;cursor:pointer;
+      font-family:'Codec Pro','Inter',sans-serif;font-weight:800;font-size:17px;letter-spacing:.2px;
+      color:#06243F;text-decoration:none;border-radius:999px;
+      background:linear-gradient(135deg,#BFE3FF 0%,#7EC8FF 45%,#2E91FF 100%);
+      box-shadow:0 0 0 1px rgba(255,255,255,.6) inset,
+                 0 10px 30px rgba(46,145,255,.45),
+                 0 0 28px rgba(126,200,255,.85),
+                 0 0 56px rgba(46,145,255,.55);
+      opacity:0;transform:translateY(20px);pointer-events:none;
+      transition:opacity .35s ease, transform .35s ease, box-shadow .25s ease, filter .25s ease;
+      animation:llaCtaPulse 2.4s ease-in-out infinite;
+    }
+    .lla-float-cta.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    .lla-float-cta:hover{filter:brightness(1.05);transform:translateY(-2px);
+      box-shadow:0 0 0 1px rgba(255,255,255,.7) inset,
+                 0 14px 40px rgba(46,145,255,.55),
+                 0 0 40px rgba(126,200,255,1),
+                 0 0 80px rgba(46,145,255,.7);
+    }
+    .lla-float-cta .lla-cta-price{color:#fff;background:rgba(6,36,63,.85);padding:4px 10px;border-radius:999px;font-size:14px;font-weight:700}
+    @keyframes llaCtaPulse{
+      0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.6) inset,0 10px 30px rgba(46,145,255,.45),0 0 28px rgba(126,200,255,.85),0 0 56px rgba(46,145,255,.55)}
+      50%{box-shadow:0 0 0 1px rgba(255,255,255,.6) inset,0 12px 34px rgba(46,145,255,.55),0 0 38px rgba(126,200,255,1),0 0 76px rgba(46,145,255,.75)}
+    }
+    @media (max-width:640px){
+      .lla-float-cta{right:12px;left:12px;bottom:16px;justify-content:center;padding:16px 20px;font-size:15px}
+    }
+  </style>
+  <a href="#bioLeadGenForm" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now — Just $289 a month">
+    Enroll Now <span class="lla-cta-price">Just $289/mo</span>
+  </a>
+  <script>
+    (function(){
+      var cta=document.getElementById('llaFloatCta');
+      var form=document.getElementById('bioLeadGenForm');
+      function onScroll(){if(window.scrollY>180){cta.classList.add('is-visible')}else{cta.classList.remove('is-visible')}}
+      window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+      cta.addEventListener('click',function(e){
+        e.preventDefault();
+        if(form){form.scrollIntoView({behavior:'smooth',block:'start'})}
+      });
+    })();
+  </script>
 </body>
 </html>
