@@ -7644,12 +7644,14 @@ section.topics .topic-v2-title {
   text-shadow: 0 2px 14px rgba(0,0,0,0.85) !important;
 }
 section.topics .topic-v2-desc {
-  -webkit-line-clamp: unset !important;
-  display: block !important;
-  overflow: visible !important;
-  max-height: none !important;
+  /* Clamp every pillar description to a maximum of 6 lines; longer copy is cut off with an ellipsis */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 6 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-height: calc(1.55em * 6) !important;
   height: auto !important;
-  text-overflow: clip !important;
   font-size: 13.5px !important;
   line-height: 1.55 !important;
   color: rgba(255,255,255,0.96) !important;
