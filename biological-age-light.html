@@ -702,17 +702,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
     (function(){
       var cta=document.getElementById('llaFloatCta');
-      function target(){
-        var lead=document.getElementById('bioLeadGenForm');
-        if(lead){var r=lead.getBoundingClientRect();if(r.height>0&&r.width>0)return lead}
-        return document.getElementById('bioAgeForm');
-      }
       function onScroll(){if(window.scrollY>140){cta.classList.add('is-visible')}else{cta.classList.remove('is-visible')}}
       window.addEventListener('scroll',onScroll,{passive:true});onScroll();
       cta.addEventListener('click',function(e){
         e.preventDefault();
-        var t=target();
-        if(t){t.scrollIntoView({behavior:'smooth',block:'start'})}
+        // Reveal the lead-gen form (bypass the bio-age quiz) and scroll to it.
+        var rc=document.getElementById('resultCard');
+        var lead=document.getElementById('bioLeadGenForm');
+        if(rc) rc.classList.add('visible');
+        if(lead) lead.classList.add('visible');
+        var t=lead||rc;
+        if(t){
+          // wait one frame so display:block takes effect before scrollIntoView
+          requestAnimationFrame(function(){
+            t.scrollIntoView({behavior:'smooth',block:'start'});
+            var first=lead&&lead.querySelector('input,select,textarea');
+            if(first){setTimeout(function(){try{first.focus({preventScroll:true})}catch(_){}},700);}
+          });
+        }
       });
     })();
   </script>
