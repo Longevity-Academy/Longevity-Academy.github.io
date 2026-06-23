@@ -1,5 +1,12 @@
 /* Shared LLA nav — scoped to body.has-shared-nav. Matches index.html nav verbatim. */
 body.has-shared-nav { padding-top: 0; }
+
+/* Hide any legacy per-page nav so only the shared nav renders */
+body.has-shared-nav nav.nav:not(.lla-shared-nav),
+body.has-shared-nav nav#nav:not(.lla-shared-nav) {
+  display: none !important;
+}
+
 body.has-shared-nav .lla-shared-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 12px 0;
