@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Pricing Preview — The Longevity Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#06121F;color:#E7EEF7;font-family:'Inter',-apple-system,Segoe UI,sans-serif;-webkit-font-smoothing:antialiased}
+  .preview-banner{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#FFB020,#FF7A00);color:#1A0B00;text-align:center;font-weight:700;padding:10px 16px;font-size:13px;letter-spacing:.2px}
+  .pricing{
+    position:relative;
+    padding:96px 24px 120px;
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(63,163,255,.18), transparent 60%),
+      radial-gradient(700px 460px at 10% 30%, rgba(94,182,255,.14), transparent 65%),
+      linear-gradient(180deg,#06121F 0%,#081A2E 100%);
+    overflow:hidden;
+  }
+  .pricing::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+  }
+  .container{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:8px 14px;border-radius:999px;
+    background:rgba(94,182,255,.08);border:1px solid rgba(94,182,255,.22);
+    color:#9DC8FF;font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#5EB6FF;box-shadow:0 0 10px #5EB6FF}
+  .headline{
+    font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1.05;
+    margin:20px 0 14px;color:#fff;
+  }
+  .headline .grad{
+    background:linear-gradient(135deg,#9DC8FF 0%,#5EB6FF 45%,#2E8BE6 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{color:rgba(231,238,247,.7);max-width:680px;font-size:17px;line-height:1.55;margin-bottom:34px}
+  .toggle{
+    display:inline-flex;padding:6px;border-radius:999px;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+    margin-bottom:48px;backdrop-filter:blur(10px);
+  }
+  .toggle button{
+    background:transparent;border:none;color:rgba(231,238,247,.7);
+    padding:11px 22px;border-radius:999px;cursor:pointer;
+    font-family:inherit;font-weight:600;font-size:14.5px;letter-spacing:.2px;
+    display:inline-flex;align-items:center;gap:8px;transition:all .25s ease;
+  }
+  .toggle button.active{
+    background:linear-gradient(180deg,#5EB6FF,#2E8BE6);color:#06243F;
+    box-shadow:0 1px 0 rgba(255,255,255,.45) inset, 0 8px 20px rgba(46,139,230,.32);
+  }
+  .toggle .save{
+    font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px;
+    background:#0F2D52;color:#9DC8FF;letter-spacing:.1em;
+  }
+  .toggle button.active .save{background:#06243F;color:#5EB6FF}
+  .plans{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;
+  }
+  .plan{
+    position:relative;
+    background:linear-gradient(180deg,rgba(15,45,82,.55) 0%,rgba(10,34,64,.55) 100%);
+    border:1px solid rgba(120,180,255,.16);
+    border-radius:24px;padding:36px 32px 32px;
+    backdrop-filter:blur(12px) saturate(140%);
+    -webkit-backdrop-filter:blur(12px) saturate(140%);
+    box-shadow:0 24px 60px rgba(4,16,32,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
+    display:flex;flex-direction:column;gap:22px;
+  }
+  .plan.featured{
+    border:1px solid rgba(140,200,255,.55);
+    box-shadow:0 30px 80px rgba(4,16,32,.6), 0 0 0 1px rgba(140,200,255,.18) inset, 0 0 48px rgba(94,182,255,.18);
+    background:linear-gradient(180deg,rgba(20,60,120,.55) 0%,rgba(10,38,72,.55) 100%);
+  }
+  .plan .ribbon{
+    position:absolute;top:-14px;right:24px;
+    padding:7px 14px;border-radius:999px;
+    background:linear-gradient(180deg,#5EB6FF,#2E8BE6);color:#06243F;
+    font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    box-shadow:0 8px 20px rgba(46,139,230,.45);
+  }
+  .plan h3{
+    font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:#8FB9F0;
+  }
+  .plan .tag{color:rgba(231,238,247,.65);font-size:14.5px;line-height:1.5;margin-top:-12px}
+  .price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .price-was{
+    text-decoration:line-through;text-decoration-color:rgba(231,238,247,.4);
+    color:rgba(231,238,247,.5);font-size:18px;font-weight:600;
+  }
+  .price-now{
+    font-family:'Inter',sans-serif;font-size:54px;font-weight:800;
+    color:#fff;letter-spacing:-.02em;line-height:1;
+  }
+  .price-cents{font-size:22px;font-weight:700;color:rgba(231,238,247,.75);margin-left:-2px}
+  .price-per{color:rgba(231,238,247,.7);font-size:14.5px;font-weight:500}
+  .discount-chip{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;border-radius:999px;
+    background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.35);
+    color:#FFC65C;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  }
+  .billing-line{color:rgba(231,238,247,.62);font-size:14px}
+  .billing-line strong{color:#E7EEF7;font-weight:600}
+  .total-line{
+    padding:14px 16px;border-radius:12px;
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+    display:flex;justify-content:space-between;align-items:center;font-size:14px;
+  }
+  .total-line .lbl{color:rgba(231,238,247,.65)}
+  .total-line .val{color:#fff;font-weight:700}
+  .cta{
+    display:block;text-align:center;text-decoration:none;
+    padding:18px 24px;border-radius:14px;
+    font-weight:800;font-size:15.5px;letter-spacing:.15em;text-transform:uppercase;
+    background:linear-gradient(180deg,#5EB6FF,#2E8BE6);color:#06243F;
+    box-shadow:0 1px 0 rgba(255,255,255,.55) inset, 0 12px 28px rgba(46,139,230,.4);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 36px rgba(46,139,230,.55)}
+  .cta.secondary{
+    background:transparent;border:1.5px solid rgba(140,200,255,.45);color:#9DC8FF;
+    box-shadow:none;
+  }
+  .cta.secondary:hover{background:rgba(94,182,255,.08);border-color:rgba(140,200,255,.7)}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(140,200,255,.25),transparent);margin:2px 0 4px}
+  .features{display:flex;flex-direction:column;gap:11px}
+  .features li{
+    list-style:none;display:flex;align-items:flex-start;gap:12px;
+    font-size:14.5px;color:rgba(231,238,247,.88);line-height:1.5;
+  }
+  .features li svg{flex:none;margin-top:2px;color:#5EB6FF}
+  .features li b{color:#fff;font-weight:600}
+  .footnote{margin-top:32px;color:rgba(231,238,247,.5);font-size:13px;text-align:center}
+  .guarantee{
+    margin-top:22px;display:flex;align-items:center;gap:10px;
+    color:rgba(231,238,247,.7);font-size:13px;
+  }
+  .guarantee svg{color:#5EB6FF}
+
+  @media (max-width:780px){
+    .pricing{padding:64px 16px 80px}
+    .plans{grid-template-columns:1fr;gap:18px}
+    .plan{padding:30px 22px}
+    .plan .ribbon{top:-12px;right:18px}
+    .price-now{font-size:46px}
+    .headline{font-size:34px}
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-banner">
+  PREVIEW ONLY — Pricing fold for review. Not deployed to production. Hosted on the <code>pricing-preview</code> branch.
+</div>
+
+<section class="pricing" aria-label="Pricing">
+  <div class="container">
+
+    <span class="eyebrow">Enrollment · Limited Cohort Seats</span>
+    <h1 class="headline">
+      One program. <span class="grad">Two ways to pay.</span>
+    </h1>
+    <p class="sub">
+      The Longevity Blueprint is a 4.5-month, instructor-led program.
+      Choose how you'd like to be billed — both plans include every lesson, the CGM, your personal protocol, and full LMS access.
+    </p>
+
+    <div class="toggle" role="tablist" aria-label="Billing frequency">
+      <button id="tabMonthly" class="active" type="button" aria-selected="true">Pay Monthly <span class="save">25% OFF</span></button>
+      <button id="tabUpfront" type="button" aria-selected="false">Pay Upfront <span class="save">35% OFF</span></button>
+    </div>
+
+    <div class="plans">
+
+      <!-- MONTHLY PLAN -->
+      <article class="plan" id="planMonthly">
+        <header>
+          <h3>Pay Monthly</h3>
+        </header>
+        <p class="tag">Flexible monthly billing across the full 4.5-month program.</p>
+
+        <div>
+          <div class="price-row">
+            <span class="price-was">$385</span>
+            <span class="price-now">$289<span class="price-cents">.00</span></span>
+            <span class="price-per">/ month</span>
+          </div>
+          <div style="margin-top:10px"><span class="discount-chip">Promo · 25% Off</span></div>
+        </div>
+
+        <div class="billing-line">Billed <strong>monthly</strong> for <strong>4.5 months</strong>. Cancel anytime before next billing date.</div>
+
+        <div class="total-line">
+          <span class="lbl">Program total</span>
+          <span class="val">$1,300.50</span>
+        </div>
+
+        <a href="/#lead-gen" class="cta">Enroll Monthly</a>
+
+        <div class="divider"></div>
+
+        <ul class="features">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Live weekly session</b> with our longevity faculty — every week for 4.5 months</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Full LMS access</b> — recordings, lesson materials, practice tasks, forum, schedule, and progress tracking</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Free Continuous Glucose Monitor</b> shipped to you before Lesson 5, plus the companion app</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Your personal Longevity Protocol</b> built with you across the program</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Every syllabus topic</b> covered live — nutrition, movement, sleep, mental OS, skin & longevity medicine</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Student community & resources</b> — private forum, curated resources, and ongoing support</span>
+          </li>
+        </ul>
+
+        <div class="guarantee">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+          <span>Secure checkout · Cancel anytime</span>
+        </div>
+      </article>
+
+      <!-- UPFRONT PLAN -->
+      <article class="plan featured" id="planUpfront">
+        <div class="ribbon">Best Value · Save 10%</div>
+        <header>
+          <h3>Pay Upfront</h3>
+        </header>
+        <p class="tag">One single payment for the full 4.5-month program. Lock in 10% off the monthly total.</p>
+
+        <div>
+          <div class="price-row">
+            <span class="price-was">$1,800</span>
+            <span class="price-now">$1,170<span class="price-cents">.00</span></span>
+            <span class="price-per">one-time</span>
+          </div>
+          <div style="margin-top:10px"><span class="discount-chip">Promo · 35% Off</span></div>
+        </div>
+
+        <div class="billing-line">Billed <strong>once</strong>. Equivalent to <strong>$260 / month</strong> — a 10% saving versus monthly.</div>
+
+        <div class="total-line">
+          <span class="lbl">You save vs monthly</span>
+          <span class="val">$130.50</span>
+        </div>
+
+        <a href="/#lead-gen" class="cta">Enroll & Pay Upfront</a>
+
+        <div class="divider"></div>
+
+        <ul class="features">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Everything in Pay Monthly</b>, plus:</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>10% lower total cost</b> compared to the monthly plan</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Priority enrollment</b> for the next class — secure your seat first</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>No recurring billing</b> — one clean payment, then focus on your protocol</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><b>Locked promo price</b> — even if list price increases for the next class</span>
+          </li>
+        </ul>
+
+        <div class="guarantee">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+          <span>Secure checkout · 7-day full refund policy</span>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="footnote">
+      All plans include the 4.5-month Longevity Blueprint program, weekly live sessions, full LMS, the CGM &amp; companion app, your personal protocol, and the full syllabus. Promotional pricing applies for the current enrollment window only.
+    </p>
+
+  </div>
+</section>
+
+<script>
+  // Optional UI: collapsing/expanding focus between the two plans on toggle click.
+  // Both plans stay visible; the toggle simply emphasizes one or the other.
+  (function(){
+    var tabM=document.getElementById('tabMonthly');
+    var tabU=document.getElementById('tabUpfront');
+    var pM=document.getElementById('planMonthly');
+    var pU=document.getElementById('planUpfront');
+    function focusPlan(which){
+      if(which==='monthly'){
+        tabM.classList.add('active');tabM.setAttribute('aria-selected','true');
+        tabU.classList.remove('active');tabU.setAttribute('aria-selected','false');
+        pM.classList.add('featured');pM.querySelector('.ribbon')||addRibbon(pM,'Selected');
+        pU.classList.remove('featured');removeRibbon(pU);
+        addRibbon(pM,'Selected');
+      }else{
+        tabU.classList.add('active');tabU.setAttribute('aria-selected','true');
+        tabM.classList.remove('active');tabM.setAttribute('aria-selected','false');
+        pU.classList.add('featured');
+        pM.classList.remove('featured');removeRibbon(pM);
+        addRibbon(pU,'Best Value · Save 10%');
+      }
+    }
+    function addRibbon(el,text){
+      var r=el.querySelector('.ribbon');
+      if(!r){r=document.createElement('div');r.className='ribbon';el.prepend(r);}
+      r.textContent=text;
+    }
+    function removeRibbon(el){var r=el.querySelector('.ribbon');if(r)r.remove();}
+    tabM.addEventListener('click',function(){focusPlan('monthly')});
+    tabU.addEventListener('click',function(){focusPlan('upfront')});
+  })();
+</script>
+
+</body>
+</html>
