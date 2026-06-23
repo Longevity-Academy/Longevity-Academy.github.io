@@ -7877,6 +7877,51 @@ section.instructors .certs-strip-inline-badge {
 section.instructors .certs-strip-inline-abbr { color: #006EFF !important; }
 section.instructors .certs-strip-inline-name { color: rgba(13,27,42,0.7) !important; }
 
+/* LLA-NEON-V1 :: lift Jordan's face + premium white neon on dark folds */
+/* 1) Jordan portrait — scale up + lift face so it matches other instructors */
+.teacher-card-live-photo img[src*="jordan"] {
+  transform: scale(1.18) translateY(-7%);
+  transform-origin: center top;
+}
+
+/* 2) Premium white neon lighting on dark folds */
+section.topics,
+section.deepdive,
+section.how-v2,
+section.value,
+section.final-cta {
+  position: relative;
+}
+section.topics::before,
+section.deepdive::before,
+section.how-v2::before,
+section.value::before,
+section.final-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  box-shadow: 0 0 14px 1px rgba(180,220,255,0.35);
+  pointer-events: none;
+  z-index: 5;
+}
+section.topics .lla-neon-glow,
+section.deepdive .lla-neon-glow,
+section.how-v2 .lla-neon-glow,
+section.value .lla-neon-glow,
+section.final-cta .lla-neon-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 40% at 10% 15%, rgba(190,225,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 90% 85%, rgba(170,215,255,0.10) 0%, transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+/* LLA-NEON-V1 end */
+
 /* Value/Why-Different section, second light fold */
 section.value {
   background: #F5F0E5 !important;
@@ -8018,7 +8063,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="topics">
+<section class="topics"><span class="lla-neon-glow" aria-hidden="true"></span>
   <div class="container">
     <div class="topics-header reveal">
       <span class="eyebrow">The Six Pillars</span>
@@ -8785,7 +8830,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-<section class="how-v2" id="how">
+<section class="how-v2" id="how"><span class="lla-neon-glow" aria-hidden="true"></span>
   <div class="container">
     <div class="how-v2-header reveal">
       <img loading="lazy" decoding="async" src="assets/e-teacher-logo.png" alt="eTeacher Group" class="how-v2-logo">
@@ -8895,7 +8940,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="value">
+<section class="value"><span class="lla-neon-glow" aria-hidden="true"></span>
   <div class="container">
     <div class="value-header reveal">
       <div>
@@ -8934,7 +8979,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="deepdive">
+<section class="deepdive"><span class="lla-neon-glow" aria-hidden="true"></span>
   <div class="container">
     <div class="deepdive-header reveal">
       <span class="eyebrow">The Operating System</span>
@@ -9290,7 +9335,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="final-cta" id="apply">
+<section class="final-cta" id="apply"><span class="lla-neon-glow" aria-hidden="true"></span>
   <div class="container">
     <div class="final-cta-card reveal">
       <video preload="metadata" class="final-cta-video" autoplay muted loop playsinline>
