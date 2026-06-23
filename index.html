@@ -10308,5 +10308,128 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
 })();
 </script>
 
+
+  <!-- Global Floating Enroll CTA -->
+  <style>
+    .lla-float-cta{
+      position:fixed;top:96px;right:32px;z-index:9999;
+      display:inline-flex;align-items:stretch;cursor:pointer;text-decoration:none;
+      font-family:'Inter','Codec Pro',sans-serif;
+      border-radius:18px;overflow:hidden;
+      background:linear-gradient(180deg,#0F2D52 0%,#0A2240 100%);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:
+        0 0 0 1px rgba(120,180,255,.18),
+        0 14px 36px rgba(8,30,60,.28),
+        0 0 28px rgba(120,190,255,.18);
+      opacity:0;transform:translateY(-12px);pointer-events:none;
+      transition:opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
+    }
+    .lla-float-cta.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+    .lla-float-cta:hover{
+      transform:translateY(-2px);
+      box-shadow:
+        0 0 0 1px rgba(140,200,255,.35),
+        0 18px 44px rgba(8,30,60,.34),
+        0 0 44px rgba(120,190,255,.42);
+    }
+    .lla-float-cta .lla-cta-text{
+      display:flex;flex-direction:column;justify-content:center;
+      padding:14px 18px 14px 20px;gap:4px;
+    }
+    .lla-float-cta .lla-cta-eyebrow{
+      display:flex;align-items:center;gap:8px;
+      font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+      color:#8FB9F0;
+    }
+    .lla-float-cta .lla-cta-eyebrow::before{
+      content:"";width:6px;height:6px;border-radius:50%;
+      background:#5EB6FF;box-shadow:0 0 8px #5EB6FF,0 0 14px rgba(94,182,255,.7);
+      animation:llaDot 2.2s ease-in-out infinite;
+    }
+    .lla-float-cta .lla-cta-title{
+      font-family:'Codec Pro','Inter',sans-serif;
+      font-size:15.5px;font-weight:700;color:#fff;letter-spacing:.1px;line-height:1.1;
+    }
+    .lla-float-cta .lla-cta-pill{
+      display:flex;align-items:center;gap:8px;
+      padding:0 22px;margin:8px 8px 8px 6px;border-radius:12px;
+      background:linear-gradient(180deg,#5EB6FF 0%,#2E8BE6 100%);
+      color:#06243F;font-weight:800;font-size:14.5px;letter-spacing:.1px;
+      box-shadow:0 1px 0 rgba(255,255,255,.55) inset, 0 8px 20px rgba(46,139,230,.32);
+    }
+    .lla-float-cta .lla-cta-pill .price{font-size:15.5px;font-weight:900}
+    .lla-float-cta .lla-cta-pill .mo{font-size:11px;font-weight:700;color:#0A2240;opacity:.78;letter-spacing:.06em}
+    .lla-float-cta .lla-cta-arrow{width:16px;height:16px;color:#06243F;transition:transform .25s ease}
+    .lla-float-cta:hover .lla-cta-arrow{transform:translateX(3px)}
+    @keyframes llaDot{
+      0%,100%{box-shadow:0 0 8px #5EB6FF,0 0 14px rgba(94,182,255,.7)}
+      50%{box-shadow:0 0 14px #5EB6FF,0 0 24px rgba(94,182,255,1)}
+    }
+    @media (max-width:720px){
+      .lla-float-cta{top:12px;right:12px;left:12px;border-radius:14px}
+      .lla-float-cta .lla-cta-text{padding:10px 12px 10px 14px;flex:1;min-width:0}
+      .lla-float-cta .lla-cta-title{font-size:14px}
+      .lla-float-cta .lla-cta-eyebrow{font-size:9.5px}
+      .lla-float-cta .lla-cta-pill{padding:0 14px;margin:6px 6px 6px 4px;border-radius:10px}
+      .lla-float-cta .lla-cta-pill .price{font-size:14px}
+      .lla-float-cta .lla-cta-pill .mo{font-size:10px}
+    }
+  </style>
+  <a href="/#lead-gen" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now in The Longevity Blueprint — $289 per month">
+    <span class="lla-cta-text">
+      <span class="lla-cta-eyebrow">Enroll Now</span>
+      <span class="lla-cta-title">The Longevity Blueprint</span>
+    </span>
+    <span class="lla-cta-pill">
+      <span class="price">$289</span><span class="mo">/ MO</span>
+      <svg class="lla-cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+    </span>
+  </a>
+  <script>
+    (function(){
+      var cta=document.getElementById('llaFloatCta');
+      if(!cta) return;
+      function onScroll(){if(window.scrollY>140){cta.classList.add('is-visible')}else{cta.classList.remove('is-visible')}}
+      window.addEventListener('scroll',onScroll,{passive:true});
+      // Always show after a short delay even without scroll, so users on short pages see it
+      setTimeout(function(){cta.classList.add('is-visible')},800);
+      onScroll();
+      var path=(location.pathname||'').toLowerCase();
+      var isHome = path==='/' || path==='' || /(^|\/)(index(\.html)?|index-light\.html)$/.test(path);
+      var isBio = /biological-age-light\.html$/.test(path);
+      cta.addEventListener('click',function(e){
+        // Same-page handler for the homepage
+        if(isHome){
+          e.preventDefault();
+          var lead=document.getElementById('lead-gen')||document.getElementById('leadGenV2Form');
+          if(lead){lead.scrollIntoView({behavior:'smooth',block:'start'});
+            var first=lead.querySelector('input,select,textarea');
+            if(first){setTimeout(function(){try{first.focus({preventScroll:true})}catch(_){}},700);}
+          }
+          return;
+        }
+        // Bio-age internal page: reveal embedded lead-gen and scroll to it
+        if(isBio){
+          e.preventDefault();
+          var rc=document.getElementById('resultCard');
+          var blead=document.getElementById('bioLeadGenForm');
+          if(rc) rc.classList.add('visible');
+          if(blead) blead.classList.add('visible');
+          var t=blead||rc;
+          if(t){
+            requestAnimationFrame(function(){
+              t.scrollIntoView({behavior:'smooth',block:'start'});
+              var first=blead&&blead.querySelector('input,select,textarea');
+              if(first){setTimeout(function(){try{first.focus({preventScroll:true})}catch(_){}},700);}
+            });
+          }
+          return;
+        }
+        // Other pages: default href "/#lead-gen" navigates to homepage anchor
+      });
+    })();
+  </script>
+
 </body>
 </html>

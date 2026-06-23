@@ -622,7 +622,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   })();
   </script>
 
-  <!-- Floating Enroll CTA (premium, top) -->
+
+  <!-- Global Floating Enroll CTA -->
   <style>
     .lla-float-cta{
       position:fixed;top:96px;right:32px;z-index:9999;
@@ -689,7 +690,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       .lla-float-cta .lla-cta-pill .mo{font-size:10px}
     }
   </style>
-  <a href="#bioAgeForm" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now in The Longevity Blueprint — $289 per month">
+  <a href="/#lead-gen" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now in The Longevity Blueprint — $289 per month">
     <span class="lla-cta-text">
       <span class="lla-cta-eyebrow">Enroll Now</span>
       <span class="lla-cta-title">The Longevity Blueprint</span>
@@ -702,26 +703,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
     (function(){
       var cta=document.getElementById('llaFloatCta');
+      if(!cta) return;
       function onScroll(){if(window.scrollY>140){cta.classList.add('is-visible')}else{cta.classList.remove('is-visible')}}
-      window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+      window.addEventListener('scroll',onScroll,{passive:true});
+      // Always show after a short delay even without scroll, so users on short pages see it
+      setTimeout(function(){cta.classList.add('is-visible')},800);
+      onScroll();
+      var path=(location.pathname||'').toLowerCase();
+      var isHome = path==='/' || path==='' || /(^|\/)(index(\.html)?|index-light\.html)$/.test(path);
+      var isBio = /biological-age-light\.html$/.test(path);
       cta.addEventListener('click',function(e){
-        e.preventDefault();
-        // Reveal the lead-gen form (bypass the bio-age quiz) and scroll to it.
-        var rc=document.getElementById('resultCard');
-        var lead=document.getElementById('bioLeadGenForm');
-        if(rc) rc.classList.add('visible');
-        if(lead) lead.classList.add('visible');
-        var t=lead||rc;
-        if(t){
-          // wait one frame so display:block takes effect before scrollIntoView
-          requestAnimationFrame(function(){
-            t.scrollIntoView({behavior:'smooth',block:'start'});
-            var first=lead&&lead.querySelector('input,select,textarea');
+        // Same-page handler for the homepage
+        if(isHome){
+          e.preventDefault();
+          var lead=document.getElementById('lead-gen')||document.getElementById('leadGenV2Form');
+          if(lead){lead.scrollIntoView({behavior:'smooth',block:'start'});
+            var first=lead.querySelector('input,select,textarea');
             if(first){setTimeout(function(){try{first.focus({preventScroll:true})}catch(_){}},700);}
-          });
+          }
+          return;
         }
+        // Bio-age internal page: reveal embedded lead-gen and scroll to it
+        if(isBio){
+          e.preventDefault();
+          var rc=document.getElementById('resultCard');
+          var blead=document.getElementById('bioLeadGenForm');
+          if(rc) rc.classList.add('visible');
+          if(blead) blead.classList.add('visible');
+          var t=blead||rc;
+          if(t){
+            requestAnimationFrame(function(){
+              t.scrollIntoView({behavior:'smooth',block:'start'});
+              var first=blead&&blead.querySelector('input,select,textarea');
+              if(first){setTimeout(function(){try{first.focus({preventScroll:true})}catch(_){}},700);}
+            });
+          }
+          return;
+        }
+        // Other pages: default href "/#lead-gen" navigates to homepage anchor
       });
     })();
   </script>
+
 </body>
 </html>
