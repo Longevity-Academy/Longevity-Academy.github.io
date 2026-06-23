@@ -7,326 +7,507 @@
 <title>Pricing — The Longevity Blueprint</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{
+  --ink-0:#04101F; --ink-1:#081A36; --ink-2:#0F2D52;
+  --line:rgba(159,200,255,.14); --line-strong:rgba(159,200,255,.32);
+  --txt:#E9F0FB; --txt-mute:rgba(233,240,251,.62); --txt-dim:rgba(233,240,251,.42);
+  --blue:#5EB6FF; --blue-2:#2E8BE6; --blue-3:#0066ff;
+  --gold:#E8C68C; --gold-2:#C9A567;
+  --green:#5EFFA4;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#04101F;color:#E7EEF7;font-family:'Inter',-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{background:var(--ink-0);color:var(--txt);font-family:'Inter',-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"ss01","cv11"}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
+button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
 
-.preview-banner{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#FFB020,#FF7A00);color:#1A0B00;text-align:center;font-weight:700;padding:10px 16px;font-size:12.5px;letter-spacing:.4px;text-transform:uppercase}
+.banner{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,#FFB020,#FF7A00);color:#1A0B00;text-align:center;font-weight:800;padding:9px 16px;font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
 
-/* ================ SECTION ================ */
+/* ============================================
+   SECTION SHELL — editorial, deep, atmospheric
+   ============================================ */
 .pricing{
-  position:relative;
-  padding:112px 24px 140px;
-  overflow:hidden;
+  position:relative;overflow:hidden;
+  padding:140px 24px 160px;
   background:
-    radial-gradient(1100px 600px at 80% -8%, rgba(63,163,255,.22), transparent 60%),
-    radial-gradient(820px 520px at 10% 25%, rgba(94,182,255,.16), transparent 65%),
-    radial-gradient(1000px 700px at 50% 110%, rgba(0,110,255,.14), transparent 65%),
-    linear-gradient(180deg,#04101F 0%,#0A1A33 55%,#05111F 100%);
+    radial-gradient(1400px 700px at 82% -10%, rgba(94,182,255,.18), transparent 60%),
+    radial-gradient(900px 600px at 8% 20%, rgba(46,139,230,.16), transparent 65%),
+    radial-gradient(1200px 800px at 50% 115%, rgba(0,80,200,.14), transparent 65%),
+    linear-gradient(180deg, #04101F 0%, #08182F 35%, #050F1E 100%);
 }
 .pricing::before{
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(120,170,255,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(120,170,255,.05) 1px, transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 75%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 75%);
-  pointer-events:none;
+    linear-gradient(rgba(159,200,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(159,200,255,.045) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 50% at 50% 25%, #000 35%, transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 50% at 50% 25%, #000 35%, transparent 80%);
 }
-.pricing-wrap{position:relative;z-index:2;max-width:1240px;margin:0 auto}
+.pricing::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 25% 38%, rgba(94,182,255,.04) 0%, transparent 14%),
+    radial-gradient(circle at 78% 65%, rgba(232,198,140,.025) 0%, transparent 16%);
+}
+.wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto}
 
-/* ---------------- HEADER ---------------- */
-.pricing-eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:8px 18px;border-radius:999px;
-  background:linear-gradient(135deg, rgba(94,182,255,.18), rgba(46,139,230,.12));
-  border:1px solid rgba(120,180,255,.35);
-  color:#9ECBFF;font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+/* ============================================
+   EDITORIAL HEADER ROW
+   ============================================ */
+.editorial-head{
+  display:grid;grid-template-columns:120px 1fr 120px;align-items:center;gap:24px;
+  padding-bottom:18px;border-bottom:1px solid var(--line);
+  margin-bottom:48px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--txt-dim);
 }
-.pricing-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#5EB6FF;box-shadow:0 0 12px #5EB6FF;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.25)}}
-.pricing-head{text-align:center;max-width:880px;margin:0 auto 64px}
-.pricing-head h2{
+.editorial-head .l,.editorial-head .r{display:flex;align-items:center;gap:10px}
+.editorial-head .r{justify-content:flex-end}
+.editorial-head .c{text-align:center;color:var(--blue);font-weight:600}
+.editorial-head .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px var(--blue);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+
+/* ============================================
+   HERO HEADLINE BLOCK
+   ============================================ */
+.hero-row{display:grid;grid-template-columns:1.4fr 1fr;gap:80px;align-items:end;margin-bottom:88px}
+@media(max-width:980px){.hero-row{grid-template-columns:1fr;gap:32px}}
+
+.kicker{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:28px;
+}
+.kicker .num{
+  width:28px;height:28px;border-radius:50%;border:1px solid var(--gold-2);
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:11px;font-weight:700;letter-spacing:0;
+}
+.kicker .rule{width:48px;height:1px;background:linear-gradient(90deg, var(--gold-2), transparent)}
+
+h1.headline{
   font-family:'Instrument Serif','Times New Roman',serif;
-  font-weight:400;font-size:clamp(44px,5.6vw,76px);line-height:1.02;letter-spacing:-.02em;
-  margin:22px auto 18px;color:#fff;
+  font-weight:400;font-size:clamp(58px,7.4vw,108px);line-height:.94;letter-spacing:-.025em;
+  color:#fff;margin:0;
 }
-.pricing-head h2 .accent{font-style:italic;color:#9ECBFF;position:relative;display:inline-block}
-.pricing-head h2 .accent::after{content:"";position:absolute;left:0;right:0;bottom:6%;height:10%;background:rgba(126,200,255,.25);border-radius:6px;z-index:-1}
-.pricing-head p{color:rgba(231,238,247,.7);font-size:17px;line-height:1.6;max-width:640px;margin:0 auto;font-weight:400}
+h1.headline .it{font-style:italic;color:#fff}
+h1.headline .accent{
+  font-style:italic;
+  background:linear-gradient(135deg, var(--gold) 0%, #fff 50%, var(--blue) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  position:relative;display:inline-block;
+}
+h1.headline .accent::after{
+  content:"";position:absolute;left:2%;right:2%;bottom:8%;height:4px;
+  background:linear-gradient(90deg, transparent, var(--gold-2) 30%, var(--gold-2) 70%, transparent);
+  opacity:.55;
+}
 
-/* trust strip */
-.trust-strip{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:34px;color:rgba(231,238,247,.6);font-size:13px;font-weight:500}
-.trust-strip .ts-item{display:inline-flex;align-items:center;gap:8px}
-.trust-strip .ts-item svg{width:16px;height:16px;color:#5EB6FF}
-.trust-strip .ts-sep{width:1px;height:14px;background:rgba(255,255,255,.12)}
+.hero-side{padding-bottom:14px}
+.hero-side .lede{font-size:17.5px;line-height:1.65;color:var(--txt-mute);font-weight:400;max-width:440px}
+.hero-side .lede strong{color:#fff;font-weight:600}
+.hero-side .meta{
+  display:flex;flex-direction:column;gap:8px;margin-top:24px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--txt-dim);
+}
+.hero-side .meta div{display:flex;justify-content:space-between;gap:16px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.hero-side .meta div span:last-child{color:#fff;font-weight:600;letter-spacing:.06em}
 
-/* ---------------- CARDS ---------------- */
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
-@media(max-width:880px){.pricing-grid{grid-template-columns:1fr;gap:22px}}
+/* ============================================
+   PLANS — comparative split card
+   ============================================ */
+.plans{
+  position:relative;
+  display:grid;grid-template-columns:1fr 1.18fr;gap:0;
+  background:linear-gradient(180deg, rgba(15,40,80,.55), rgba(8,22,46,.7));
+  border:1px solid var(--line-strong);
+  border-radius:32px;overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,10,30,.6), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+}
+@media(max-width:960px){.plans{grid-template-columns:1fr}}
 
 .plan{
-  position:relative;
-  background:linear-gradient(180deg, rgba(20,40,75,.78) 0%, rgba(8,22,50,.85) 100%);
-  border:1px solid rgba(120,170,255,.18);
-  border-radius:24px;
-  padding:40px 36px 36px;
-  backdrop-filter:blur(18px) saturate(140%);
-  -webkit-backdrop-filter:blur(18px) saturate(140%);
-  box-shadow:0 22px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
-  display:flex;flex-direction:column;
-  transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .35s;
+  position:relative;padding:54px 56px 48px;display:flex;flex-direction:column;min-height:740px;
 }
-.plan:hover{transform:translateY(-6px);border-color:rgba(120,170,255,.32);box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(94,182,255,.18), inset 0 1px 0 rgba(255,255,255,.08)}
+.plan + .plan{border-left:1px solid var(--line)}
+@media(max-width:960px){.plan{padding:42px 28px 36px;min-height:0}.plan + .plan{border-left:none;border-top:1px solid var(--line)}}
+
 .plan--featured{
-  background:linear-gradient(180deg, rgba(15,45,82,.92) 0%, rgba(10,34,64,.95) 100%);
-  border:1px solid rgba(94,182,255,.45);
-  box-shadow:
-    0 30px 80px rgba(0,30,80,.55),
-    0 0 0 1px rgba(94,182,255,.22),
-    inset 0 1px 0 rgba(255,255,255,.1),
-    0 0 60px rgba(94,182,255,.12);
+  background:
+    radial-gradient(700px 400px at 70% 0%, rgba(94,182,255,.16), transparent 65%),
+    linear-gradient(180deg, rgba(15,45,82,.55), rgba(10,28,58,.55));
 }
 .plan--featured::before{
-  content:"";position:absolute;inset:-1px;border-radius:24px;padding:1.5px;
-  background:linear-gradient(135deg, rgba(94,182,255,.55), rgba(46,139,230,.1) 40%, rgba(94,182,255,.45));
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;
-  pointer-events:none;
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg, var(--gold), var(--blue) 50%, transparent);
 }
+@media(max-width:960px){.plan--featured::before{top:0;left:0;right:0;bottom:auto;width:auto;height:3px;background:linear-gradient(90deg, var(--gold), var(--blue) 50%, transparent)}}
 
+.plan-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.plan-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--txt-dim);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.plan-eyebrow .num{
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line-strong);
+  display:inline-flex;align-items:center;justify-content:center;color:var(--txt);font-size:10px;
+}
+.plan-name{font-family:'Instrument Serif',serif;font-size:36px;font-weight:400;letter-spacing:-.01em;color:#fff;line-height:1.05}
+.plan-name .it{font-style:italic;color:var(--gold)}
+.plan-tag{margin-top:10px;font-size:14px;color:var(--txt-mute);line-height:1.55;max-width:280px}
+.plan-chip{
+  flex-shrink:0;align-self:flex-start;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:999px;
+  background:rgba(232,198,140,.1);border:1px solid rgba(232,198,140,.45);
+  color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.plan-chip--blue{background:rgba(94,182,255,.12);border-color:rgba(94,182,255,.5);color:var(--blue)}
+.plan-chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+
+/* ribbon top */
 .plan-ribbon{
-  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-  background:linear-gradient(135deg,#5EB6FF 0%,#2E8BE6 100%);
-  color:#fff;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
-  padding:7px 18px;border-radius:999px;
-  box-shadow:0 8px 24px rgba(46,139,230,.55), inset 0 1px 0 rgba(255,255,255,.4);
-  white-space:nowrap;
+  position:absolute;top:-1px;right:28px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+  color:#1A0B00;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  padding:9px 16px;border-radius:0 0 6px 6px;
+  box-shadow:0 8px 24px rgba(232,198,140,.45);
 }
 
-.plan-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:10px}
-.plan-name{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#9ECBFF}
-.plan-tagline{font-size:13.5px;color:rgba(231,238,247,.65);margin-top:6px;line-height:1.5}
-.plan-badge{
-  background:rgba(255,176,32,.14);border:1px solid rgba(255,176,32,.4);
-  color:#FFB020;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-  padding:5px 12px;border-radius:999px;white-space:nowrap;
+/* price block */
+.plan-pricewrap{padding:38px 0 26px;display:flex;flex-direction:column;gap:8px}
+.plan-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.plan-price .curr{font-family:'Instrument Serif',serif;font-size:38px;color:rgba(255,255,255,.65);font-weight:400;line-height:1}
+.plan-price .amt{
+  font-family:'Instrument Serif',serif;font-size:clamp(88px,11vw,128px);line-height:.88;letter-spacing:-.035em;font-weight:400;
+  background:linear-gradient(180deg, #fff 0%, #C8DDF7 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.plan-badge--best{background:rgba(94,182,255,.16);border-color:rgba(94,182,255,.5);color:#5EB6FF}
-
-.plan-price{margin:26px 0 6px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.plan-price .currency{font-family:'Instrument Serif',serif;font-size:36px;color:rgba(255,255,255,.85);font-weight:400;line-height:1}
-.plan-price .amount{font-family:'Instrument Serif',serif;font-size:84px;line-height:.95;letter-spacing:-.02em;font-weight:400;color:#fff;background:linear-gradient(180deg,#fff 0%,#C7DBF5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.plan-price .per{color:rgba(231,238,247,.6);font-size:18px;font-weight:500}
-.plan-was{display:inline-flex;align-items:center;gap:10px;color:rgba(231,238,247,.55);font-size:14px;margin-top:6px;font-weight:500}
-.plan-was s{text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:rgba(255,255,255,.35)}
+.plan-price .per{color:var(--txt-mute);font-size:18px;font-weight:500;font-family:'Inter',sans-serif;letter-spacing:.01em}
+.plan-was{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--txt-dim);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+.plan-was s{text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:rgba(255,255,255,.3)}
 .plan-was .save{
-  background:linear-gradient(135deg, rgba(94,255,164,.18), rgba(34,200,120,.12));
-  border:1px solid rgba(94,255,164,.4);
-  color:#5EFFA4;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  padding:3px 10px;border-radius:999px;
+  background:rgba(94,255,164,.1);border:1px solid rgba(94,255,164,.4);
+  color:var(--green);font-weight:700;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;
 }
-.plan-total{margin-top:14px;padding-top:18px;border-top:1px dashed rgba(120,170,255,.18);font-size:13.5px;color:rgba(231,238,247,.65);line-height:1.55}
-.plan-total strong{color:#fff;font-weight:700}
 
+/* breakdown bar */
+.plan-bar{
+  margin-top:8px;padding:18px 20px;border-radius:12px;
+  background:rgba(0,0,0,.18);border:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;
+}
+.plan-bar .cell{display:flex;flex-direction:column;gap:4px}
+.plan-bar .cell .lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--txt-dim)}
+.plan-bar .cell .val{font-family:'Instrument Serif',serif;font-size:22px;color:#fff;font-weight:400;letter-spacing:-.01em}
+.plan-bar .cell .val.accent{color:var(--green)}
+
+/* CTA */
 .plan-cta{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  margin-top:24px;padding:18px 28px;border-radius:14px;
-  font-family:'Inter',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.02em;
-  cursor:pointer;border:none;color:#fff;
-  transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, filter .25s;
+  margin-top:28px;display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:20px 28px;border-radius:14px;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.04em;
+  color:#fff;transition:all .3s cubic-bezier(.2,.7,.2,1);
+  text-transform:uppercase;
 }
 .plan-cta--primary{
-  background:linear-gradient(135deg,#1a7fff 0%,#0066ff 60%,#0052cc 100%);
-  box-shadow:0 16px 36px rgba(0,102,255,.5), inset 0 1px 0 rgba(255,255,255,.3);
+  background:linear-gradient(135deg, #2E8BE6 0%, #0066ff 60%, #0050c8 100%);
+  box-shadow:0 18px 40px rgba(0,102,255,.45), inset 0 1px 0 rgba(255,255,255,.3);
+  position:relative;overflow:hidden;
 }
-.plan-cta--primary:hover{transform:translateY(-2px);box-shadow:0 22px 48px rgba(0,102,255,.62), inset 0 1px 0 rgba(255,255,255,.35)}
+.plan-cta--primary::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+  transform:translateX(-100%);transition:transform .8s;
+}
+.plan-cta--primary:hover{transform:translateY(-2px);box-shadow:0 24px 52px rgba(0,102,255,.6), inset 0 1px 0 rgba(255,255,255,.4)}
+.plan-cta--primary:hover::after{transform:translateX(100%)}
 .plan-cta--ghost{
-  background:rgba(255,255,255,.04);
-  border:1.5px solid rgba(120,180,255,.35);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);border:1.5px solid var(--line-strong);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
 }
-.plan-cta--ghost:hover{background:rgba(94,182,255,.1);border-color:rgba(94,182,255,.6);transform:translateY(-2px)}
+.plan-cta--ghost:hover{background:rgba(94,182,255,.08);border-color:var(--blue);transform:translateY(-2px)}
 .plan-cta svg{width:18px;height:18px;stroke-width:2.5}
 
-.plan-features{margin-top:28px;display:flex;flex-direction:column;gap:14px}
-.plan-feature{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:rgba(231,238,247,.88);line-height:1.5}
+/* feature list */
+.plan-features{margin-top:32px;display:flex;flex-direction:column;gap:0;flex:1}
+.plan-feature{
+  display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:flex-start;
+  padding:14px 0;border-bottom:1px solid var(--line);
+  font-size:14.5px;color:rgba(233,240,251,.86);line-height:1.55;
+}
+.plan-feature:last-child{border-bottom:none}
 .plan-feature .ic{
-  flex-shrink:0;width:22px;height:22px;border-radius:50%;
-  background:linear-gradient(135deg, rgba(94,182,255,.28), rgba(46,139,230,.18));
-  border:1px solid rgba(94,182,255,.45);
-  display:flex;align-items:center;justify-content:center;color:#9ECBFF;margin-top:1px;
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:rgba(94,182,255,.12);border:1px solid rgba(94,182,255,.4);
+  display:flex;align-items:center;justify-content:center;color:var(--blue);margin-top:1px;
 }
-.plan-feature .ic svg{width:12px;height:12px;stroke-width:3}
+.plan-feature .ic svg{width:11px;height:11px;stroke-width:3}
 .plan-feature strong{color:#fff;font-weight:600}
-.plan--featured .plan-feature .ic{background:linear-gradient(135deg,#5EB6FF,#2E8BE6);border-color:rgba(94,182,255,.7);color:#fff;box-shadow:0 4px 12px rgba(46,139,230,.4)}
+.plan--featured .plan-feature .ic{background:linear-gradient(135deg, var(--blue), var(--blue-2));border-color:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(46,139,230,.4)}
+.plan-feature--gold .ic{background:linear-gradient(135deg, var(--gold), var(--gold-2)) !important;border-color:var(--gold) !important;color:#1A0B00 !important;box-shadow:0 4px 12px rgba(232,198,140,.4) !important}
 
-.plan-fineprint{margin-top:22px;padding-top:18px;border-top:1px solid rgba(120,170,255,.1);font-size:12px;color:rgba(231,238,247,.5);line-height:1.55;text-align:center}
-
-/* ---------------- INCLUDED BAR ---------------- */
-.included{
-  margin-top:48px;padding:32px 36px;
-  background:linear-gradient(135deg, rgba(15,45,82,.5), rgba(8,22,50,.55));
-  border:1px solid rgba(120,170,255,.18);
-  border-radius:20px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+.plan-foot{
+  margin-top:24px;padding-top:18px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--txt-dim);
 }
-@media(max-width:880px){.included{grid-template-columns:1fr 1fr;padding:24px}}
-@media(max-width:520px){.included{grid-template-columns:1fr 1fr}}
-.included-item{display:flex;align-items:center;gap:12px}
-.included-item .ic{
-  width:38px;height:38px;border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg, rgba(94,182,255,.2), rgba(46,139,230,.12));
-  border:1px solid rgba(94,182,255,.35);
-  display:flex;align-items:center;justify-content:center;color:#9ECBFF;
-}
-.included-item .ic svg{width:18px;height:18px;stroke-width:2}
-.included-item .label{font-size:13px;color:rgba(231,238,247,.92);font-weight:600;line-height:1.35}
-.included-item .sub{font-size:11.5px;color:rgba(231,238,247,.55);font-weight:500;margin-top:2px}
+.plan-foot .l{display:flex;align-items:center;gap:8px}
+.plan-foot .l svg{width:13px;height:13px;color:var(--green)}
 
-/* ---------------- GUARANTEE ---------------- */
-.guarantee{
-  margin-top:32px;text-align:center;
-  display:inline-flex;align-items:center;justify-content:center;gap:12px;
-  padding:14px 24px;border-radius:999px;
-  background:rgba(94,255,164,.06);border:1px solid rgba(94,255,164,.28);
-  color:rgba(231,238,247,.85);font-size:13.5px;font-weight:500;
-  width:auto;margin-left:auto;margin-right:auto;
+/* ============================================
+   INCLUDED — premium 4-pillar editorial bar
+   ============================================ */
+.included{margin-top:72px}
+.included-label{
+  display:flex;align-items:center;gap:18px;margin-bottom:28px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--txt-dim);
 }
-.guarantee-wrap{display:flex;justify-content:center;margin-top:32px}
-.guarantee svg{width:20px;height:20px;color:#5EFFA4;flex-shrink:0}
-.guarantee strong{color:#fff;font-weight:700}
+.included-label .rule{flex:1;height:1px;background:linear-gradient(90deg, var(--line-strong), transparent)}
+.included-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:880px){.included-grid{grid-template-columns:1fr 1fr;gap:14px}}
 
-/* mobile tweaks */
-@media(max-width:520px){
-  .pricing{padding:88px 18px 100px}
-  .plan{padding:32px 24px 30px;border-radius:20px}
-  .plan-price .amount{font-size:68px}
-  .pricing-head{margin-bottom:48px}
+.inc-card{
+  padding:28px 24px;border-radius:18px;
+  background:linear-gradient(180deg, rgba(15,40,80,.4), rgba(8,22,46,.5));
+  border:1px solid var(--line);
+  transition:all .3s cubic-bezier(.2,.7,.2,1);
+  position:relative;overflow:hidden;
+}
+.inc-card:hover{border-color:var(--line-strong);transform:translateY(-3px);background:linear-gradient(180deg, rgba(15,45,90,.55), rgba(8,22,52,.6))}
+.inc-card::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 0%, rgba(94,182,255,.06), transparent 50%);
+  pointer-events:none;
+}
+.inc-card .ic{
+  width:42px;height:42px;border-radius:11px;
+  background:linear-gradient(135deg, rgba(94,182,255,.2), rgba(46,139,230,.1));
+  border:1px solid rgba(94,182,255,.32);
+  display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:18px;
+}
+.inc-card .ic svg{width:20px;height:20px;stroke-width:1.8}
+.inc-card .title{font-family:'Instrument Serif',serif;font-size:22px;color:#fff;font-weight:400;letter-spacing:-.01em;line-height:1.15;margin-bottom:6px}
+.inc-card .sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt-dim)}
+
+/* ============================================
+   FAQ-LITE / GUARANTEE STRIP
+   ============================================ */
+.foot-row{margin-top:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:stretch}
+@media(max-width:880px){.foot-row{grid-template-columns:1fr;gap:18px}}
+
+.guarantee-card{
+  padding:36px 40px;border-radius:20px;
+  background:
+    radial-gradient(600px 300px at 90% 0%, rgba(94,255,164,.1), transparent 60%),
+    linear-gradient(180deg, rgba(20,50,40,.55), rgba(8,28,22,.65));
+  border:1px solid rgba(94,255,164,.25);
+  display:flex;gap:24px;align-items:center;
+}
+.guarantee-card .shield{
+  width:60px;height:60px;border-radius:14px;flex-shrink:0;
+  background:linear-gradient(135deg, rgba(94,255,164,.2), rgba(40,180,100,.15));
+  border:1px solid rgba(94,255,164,.45);
+  display:flex;align-items:center;justify-content:center;color:var(--green);
+}
+.guarantee-card .shield svg{width:30px;height:30px;stroke-width:1.8}
+.guarantee-card h3{font-family:'Instrument Serif',serif;font-size:26px;color:#fff;font-weight:400;letter-spacing:-.01em;margin-bottom:6px}
+.guarantee-card p{font-size:14px;color:var(--txt-mute);line-height:1.55}
+
+.support-card{
+  padding:36px 40px;border-radius:20px;
+  background:linear-gradient(180deg, rgba(15,40,80,.5), rgba(8,22,46,.6));
+  border:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:center;gap:12px;
+}
+.support-card .lbl{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--txt-dim)}
+.support-card h3{font-family:'Instrument Serif',serif;font-size:22px;color:#fff;font-weight:400;letter-spacing:-.01em;line-height:1.2}
+.support-card a{color:var(--blue);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;margin-top:6px}
+
+/* ============================================
+   MOBILE REFINEMENTS
+   ============================================ */
+@media(max-width:680px){
+  .pricing{padding:100px 18px 110px}
+  .editorial-head{grid-template-columns:1fr;gap:8px;text-align:center}
+  .editorial-head .l,.editorial-head .r{justify-content:center}
+  .hero-row{margin-bottom:56px}
+  .plan{padding:38px 24px 32px}
+  .plan-pricewrap{padding:30px 0 22px}
+  .plan-bar{grid-template-columns:1fr;gap:14px}
+  .plan-foot{flex-direction:column;align-items:flex-start;gap:6px}
+  .inc-card{padding:22px 18px}
+  .guarantee-card,.support-card{padding:26px 22px}
+  .guarantee-card{flex-direction:column;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<div class="preview-banner">Pricing Preview — Not Live on Production</div>
+<div class="banner">Pricing Preview · Not Live on Production</div>
 
 <section class="pricing">
-  <div class="pricing-wrap">
+  <div class="wrap">
 
-    <div class="pricing-head">
-      <span class="pricing-eyebrow"><span class="dot"></span>Investment in Your Decades Ahead</span>
-      <h2>Two ways to <span class="accent">live it well</span></h2>
-      <p>The Longevity Blueprint is a 4.5-month, science-led program. Choose the plan that fits how you want to commit — both unlock the full course, the free CGM, and your personal protocol.</p>
-      <div class="trust-strip">
-        <span class="ts-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 600+ verified Trustpilot reviews</span>
-        <span class="ts-sep"></span>
-        <span class="ts-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Backed by eTeacher Group</span>
-        <span class="ts-sep"></span>
-        <span class="ts-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 14-day full refund</span>
-      </div>
+    <!-- editorial top bar -->
+    <div class="editorial-head">
+      <div class="l"><span class="dot"></span><span>Issue 01 · 2026</span></div>
+      <div class="c">The Longevity Blueprint — Pricing</div>
+      <div class="r"><span>4.5-Month Program</span></div>
     </div>
 
-    <div class="pricing-grid">
+    <!-- hero row -->
+    <div class="hero-row">
+      <div>
+        <div class="kicker"><span class="num">§</span><span>Investment</span><span class="rule"></span></div>
+        <h1 class="headline">Two ways<br>to <span class="accent">live it well.</span></h1>
+      </div>
+      <aside class="hero-side">
+        <p class="lede">Both plans unlock the <strong>complete 4.5-month live program</strong>, your free continuous glucose monitor, and a personal protocol built around your biology — chosen by how you prefer to commit.</p>
+        <div class="meta">
+          <div><span>Format</span><span>Live · Weekly</span></div>
+          <div><span>Cohort</span><span>Limited Seats</span></div>
+          <div><span>Refund</span><span>14 Days · Full</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- plans -->
+    <div class="plans">
 
       <!-- MONTHLY -->
-      <div class="plan">
-        <div class="plan-head">
+      <article class="plan">
+        <header class="plan-head">
           <div>
+            <div class="plan-eyebrow"><span class="num">01</span><span>Plan A</span></div>
             <div class="plan-name">Monthly</div>
-            <div class="plan-tagline">Pay as you progress — five monthly installments.</div>
+            <p class="plan-tag">Pay as you progress through the program. Five monthly installments, cancel anytime.</p>
           </div>
-          <span class="plan-badge">25% off</span>
+          <span class="plan-chip"><span class="dot"></span>25% off</span>
+        </header>
+
+        <div class="plan-pricewrap">
+          <div class="plan-price">
+            <span class="curr">$</span><span class="amt">289</span><span class="per">/ month</span>
+          </div>
+          <div class="plan-was"><s>$385/mo</s><span class="save">Save $96/mo</span></div>
         </div>
 
-        <div class="plan-price">
-          <span class="currency">$</span><span class="amount">289</span><span class="per">/ month</span>
+        <div class="plan-bar">
+          <div class="cell"><span class="lbl">Total Program</span><span class="val">$1,300.50</span></div>
+          <div class="cell"><span class="lbl">Billing</span><span class="val">Monthly · Flex</span></div>
         </div>
-        <div class="plan-was"><s>$385/mo</s> <span class="save">Save $96/mo</span></div>
-
-        <div class="plan-total">Total program cost: <strong>$1,300.50</strong> over 4.5 months. Cancel anytime before the next billing cycle.</div>
 
         <a href="https://www.longevitylifeacademy.com/#lead-gen" class="plan-cta plan-cta--ghost">
           Start Monthly
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
 
-        <div class="plan-features">
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Full 4.5-month live program — weekly sessions with longevity physicians and scientists</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Free continuous glucose monitor</strong> shipped at lesson 5</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Personal protocol built around your labs and biology</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Companion app, full LMS, forum, recordings &amp; resources</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Lifetime access to your protocol and progress dashboard</span></div>
-        </div>
+        <ul class="plan-features">
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Full 4.5-month live program — weekly sessions with longevity physicians</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Free continuous glucose monitor</strong> shipped at lesson 5</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Personal protocol built around your labs and biology</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Companion app, full LMS, forum, recordings &amp; resources</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Lifetime access to your protocol &amp; progress dashboard</span></li>
+        </ul>
 
-        <div class="plan-fineprint">Billed monthly · Cancel anytime · No setup fee</div>
-      </div>
+        <div class="plan-foot">
+          <span class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>Cancel Anytime</span>
+          <span>No Setup Fee</span>
+        </div>
+      </article>
 
       <!-- UPFRONT (featured) -->
-      <div class="plan plan--featured">
+      <article class="plan plan--featured">
         <div class="plan-ribbon">Most Chosen · Save $130</div>
-        <div class="plan-head">
+        <header class="plan-head">
           <div>
-            <div class="plan-name">Upfront</div>
-            <div class="plan-tagline">One payment, deepest savings, full commitment.</div>
+            <div class="plan-eyebrow"><span class="num">02</span><span>Plan B · Recommended</span></div>
+            <div class="plan-name"><span class="it">Upfront</span></div>
+            <p class="plan-tag">One payment, deepest savings, priority cohort placement and bonus alumni access.</p>
           </div>
-          <span class="plan-badge plan-badge--best">35% off</span>
+          <span class="plan-chip plan-chip--blue"><span class="dot"></span>35% off</span>
+        </header>
+
+        <div class="plan-pricewrap">
+          <div class="plan-price">
+            <span class="curr">$</span><span class="amt">1,170</span><span class="per">one-time</span>
+          </div>
+          <div class="plan-was"><s>$1,800</s><span class="save">10% cheaper</span></div>
         </div>
 
-        <div class="plan-price">
-          <span class="currency">$</span><span class="amount">1,170</span><span class="per">one-time</span>
+        <div class="plan-bar">
+          <div class="cell"><span class="lbl">All-In Cost</span><span class="val">$1,170</span></div>
+          <div class="cell"><span class="lbl">Vs. Monthly</span><span class="val accent">Save $130.50</span></div>
         </div>
-        <div class="plan-was"><s>$1,800</s> <span class="save">10% cheaper than monthly</span></div>
-
-        <div class="plan-total">All-in cost: <strong>$1,170</strong>. No further charges. Saves <strong>$130.50</strong> vs the monthly plan.</div>
 
         <a href="https://www.longevitylifeacademy.com/#lead-gen" class="plan-cta plan-cta--primary">
           Enroll Upfront
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
 
-        <div class="plan-features">
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Everything in <strong>Monthly</strong>, plus —</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Priority cohort placement</strong> &amp; choice of session schedule</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Quarterly check-ins with your protocol advisor for 12 months</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Lifetime cohort alumni access — future sessions &amp; new content</span></div>
-          <div class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Saves <strong>$130.50</strong> vs the monthly plan</span></div>
+        <ul class="plan-features">
+          <li class="plan-feature plan-feature--gold"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Everything in Monthly</strong>, plus —</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Priority cohort placement</strong> &amp; choice of session schedule</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Quarterly check-ins with your protocol advisor for 12 months</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Lifetime alumni access — future sessions &amp; new content drops</span></li>
+          <li class="plan-feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Saves <strong>$130.50</strong> vs the monthly plan</span></li>
+        </ul>
+
+        <div class="plan-foot">
+          <span class="l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>14-Day Refund</span>
+          <span>No Hidden Fees</span>
         </div>
-
-        <div class="plan-fineprint">One-time payment · 14-day refund · No hidden fees</div>
-      </div>
+      </article>
 
     </div>
 
-    <!-- INCLUDED IN BOTH -->
+    <!-- included -->
     <div class="included">
-      <div class="included-item">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-        <div><div class="label">Weekly live sessions</div><div class="sub">4.5 months, 12+ classes</div></div>
-      </div>
-      <div class="included-item">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/><path d="M12 8v8M8 12h8"/></svg></span>
-        <div><div class="label">Free CGM device</div><div class="sub">Shipped at lesson 5</div></div>
-      </div>
-      <div class="included-item">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h12"/></svg></span>
-        <div><div class="label">Personal protocol</div><div class="sub">Built around your labs</div></div>
-      </div>
-      <div class="included-item">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg></span>
-        <div><div class="label">Full LMS &amp; app</div><div class="sub">Recordings, forum, resources</div></div>
+      <div class="included-label"><span>Both plans include</span><span class="rule"></span></div>
+      <div class="included-grid">
+        <div class="inc-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="title">Weekly Live<br>Sessions</div>
+          <div class="sub">4.5 mo · 12+ classes</div>
+        </div>
+        <div class="inc-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/><path d="M12 8v8M8 12h8"/></svg></div>
+          <div class="title">Free CGM<br>Device</div>
+          <div class="sub">Shipped at lesson 5</div>
+        </div>
+        <div class="inc-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
+          <div class="title">Personal<br>Protocol</div>
+          <div class="sub">Built on your labs</div>
+        </div>
+        <div class="inc-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg></div>
+          <div class="title">Full LMS<br>&amp; App</div>
+          <div class="sub">Recordings · Forum</div>
+        </div>
       </div>
     </div>
 
-    <div class="guarantee-wrap">
-      <div class="guarantee">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span><strong>14-day full refund</strong> — try the program risk-free</span>
+    <!-- guarantee + support -->
+    <div class="foot-row">
+      <div class="guarantee-card">
+        <div class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div>
+          <h3>14-day full refund guarantee</h3>
+          <p>Join the program. Attend the first sessions. If it's not for you, we refund every cent — no questions, no friction.</p>
+        </div>
+      </div>
+      <div class="support-card">
+        <span class="lbl">Have questions?</span>
+        <h3>Talk to a longevity advisor before you enroll.</h3>
+        <a href="mailto:advisor@longevitylifeacademy.com">advisor@longevitylifeacademy.com <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
       </div>
     </div>
 
