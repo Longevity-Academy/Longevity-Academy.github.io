@@ -221,24 +221,11 @@ ul{list-style:none}
 .inc.c5{--accent:230,80,160;--accent-2:255,130,200}
 .inc.c6{--accent:80,200,120;--accent-2:140,230,170}
 
-/* ===== GUARANTEE + ADVISOR ROW ===== */
-.bottom-row{margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:760px){.bottom-row{grid-template-columns:1fr}}
-.gcard{
-  padding:36px 36px;border-radius:20px;
-  border:1px solid var(--line-2);
-  background:linear-gradient(180deg, rgba(13,35,68,.55), rgba(7,21,42,.65));
-  display:flex;gap:22px;align-items:flex-start;
-}
-.gcard .ic{
-  width:54px;height:54px;border-radius:14px;flex-shrink:0;
-  background:rgba(0,110,255,.16);border:1px solid rgba(0,110,255,.45);
-  display:flex;align-items:center;justify-content:center;color:var(--blue-soft);
-}
-.gcard .ic svg{width:26px;height:26px;stroke-width:1.8}
-.gcard h3{font-family:'Instrument Serif',serif;font-size:24px;font-weight:400;color:#fff;letter-spacing:-.005em;line-height:1.2;margin-bottom:8px}
-.gcard p{font-size:14.5px;line-height:1.55;color:var(--mute)}
-.gcard a{color:var(--blue-soft);font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:6px;margin-top:8px}
+/* ===== ADVISOR STRIP ===== */
+.advisor-strip{margin-top:48px;text-align:center;padding:22px}
+.advisor-strip p{font-size:15px;color:var(--mute);font-weight:400}
+.advisor-strip a{color:var(--blue-soft);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(126,200,255,.35);padding-bottom:2px;transition:border-color .2s}
+.advisor-strip a:hover{border-color:var(--blue-soft)}
 
 /* mobile tweaks */
 @media(max-width:580px){
@@ -246,7 +233,7 @@ ul{list-style:none}
   .head{margin-bottom:48px}
   .plan-flag{position:static;align-self:flex-start;margin-bottom:18px}
   .plan-meta-grid{grid-template-columns:1fr}
-  .gcard{padding:26px 22px;flex-direction:column;text-align:left}
+
 }
 </style>
 </head>
@@ -278,7 +265,7 @@ ul{list-style:none}
       <article class="plan">
         <div class="plan-eyebrow">Plan A</div>
         <h2 class="plan-name">Monthly</h2>
-        <p class="plan-tag">Pay as you progress through the 18 weeks. Five monthly installments, no commitment.</p>
+        <p class="plan-tag">Pay across the 18 weeks. Same program, same access, monthly installments.</p>
 
         <div class="plan-divider"></div>
 
@@ -298,12 +285,13 @@ ul{list-style:none}
         </a>
 
         <ul class="feats">
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>18 live online sessions</strong> with longevity expert teachers</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Free continuous glucose monitor</strong> shipped during the course</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Small class of 8–15 — peer review and discussion</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Weekly experiments — food, sleep, movement, glucose</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Companion app, session recordings, class forum &amp; resources</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Your <strong>written personal longevity protocol</strong> on completion</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>18 weeks live online</strong> — weekly 50-minute sessions with longevity expert teachers</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Small class of 8–15 adults</strong> — peer-reviewed discussion, not lectures</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Free continuous glucose monitor</strong> shipped before lesson 5, with companion app for 14 days of monitoring</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Six pillars curriculum</strong> — Nutrition, Sleep, Exercise &amp; Movement, Supplements &amp; Wearables, Stress, and Your Protocol</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Companion LMS</strong> — session recordings, weekly assignments, class forum and resources</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Your written personal longevity protocol</strong> — peer-reviewed by your class, yours to keep</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>14-day full refund</strong> from your first live session</span></li>
         </ul>
 
         <div class="plan-foot"><strong>Cancel anytime</strong> &middot; No setup fee</div>
@@ -314,7 +302,7 @@ ul{list-style:none}
         <span class="plan-flag"><span class="dot"></span>Most Chosen</span>
         <div class="plan-eyebrow">Plan B · Recommended</div>
         <h2 class="plan-name"><span class="it">Upfront</span></h2>
-        <p class="plan-tag">Pay once. Save more. Priority placement in your preferred cohort and schedule.</p>
+        <p class="plan-tag">Same program, same access. Pay once and save 10% versus monthly.</p>
 
         <div class="plan-divider"></div>
 
@@ -334,12 +322,13 @@ ul{list-style:none}
         </a>
 
         <ul class="feats">
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Everything in the Monthly plan</strong>, plus —</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Priority cohort placement</strong> &amp; first pick of class schedule</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Quarterly check-ins with your protocol advisor for 12 months</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Lifetime alumni access — new content drops &amp; refresh sessions</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Saves <strong>$130.50</strong> compared with the monthly plan</span></li>
-          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Includes <strong>14-day full refund</strong> from your first live session</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>18 weeks live online</strong> — weekly 50-minute sessions with longevity expert teachers</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Small class of 8–15 adults</strong> — peer-reviewed discussion, not lectures</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Free continuous glucose monitor</strong> shipped before lesson 5, with companion app for 14 days of monitoring</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Six pillars curriculum</strong> — Nutrition, Sleep, Exercise &amp; Movement, Supplements &amp; Wearables, Stress, and Your Protocol</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Companion LMS</strong> — session recordings, weekly assignments, class forum and resources</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>Your written personal longevity protocol</strong> — peer-reviewed by your class, yours to keep</span></li>
+          <li class="feat"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><strong>14-day full refund</strong> from your first live session</span></li>
         </ul>
 
         <div class="plan-foot"><strong>One-time payment</strong> &middot; 14-day full refund &middot; No hidden fees</div>
@@ -347,62 +336,9 @@ ul{list-style:none}
 
     </div>
 
-    <!-- INCLUDED IN BOTH -->
-    <div class="includes">
-      <span class="eyebrow"><span class="rule"></span>Included in both plans<span class="rule"></span></span>
-      <h2>The full <span class="it">Longevity Blueprint</span> experience</h2>
-
-      <div class="includes-grid">
-        <div class="inc c1">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-          <h3>18 live online sessions</h3>
-          <p>Weekly 50-minute classes taught by longevity expert teachers — live, not pre-recorded.</p>
-        </div>
-        <div class="inc c2">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <h3>Small class of 8–15</h3>
-          <p>Discussion-based learning with classmates on similar goals. Real peer review of your data, weekly.</p>
-        </div>
-        <div class="inc c3">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H7a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-2M9 11V7a3 3 0 013-3h0a3 3 0 013 3v4M9 11h6"/></svg></div>
-          <h3>Free CGM device</h3>
-          <p>A continuous glucose monitor shipped to you during the course — see your body's signals in real time.</p>
-        </div>
-        <div class="inc c4">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
-          <h3>The six pillars curriculum</h3>
-          <p>Nutrition, Sleep, Exercise &amp; Movement, Supplements &amp; Wearables, Stress Management, and Your Protocol.</p>
-        </div>
-        <div class="inc c5">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg></div>
-          <h3>Companion app &amp; LMS</h3>
-          <p>Session recordings, weekly assignments, class forum, food logs, sleep tracking, and resources — all in one place.</p>
-        </div>
-        <div class="inc c6">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h12"/></svg></div>
-          <h3>Your personal protocol</h3>
-          <p>By the final phase, you assemble a written, personalized longevity protocol — peer-reviewed by your class, yours to keep.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- GUARANTEE + ADVISOR -->
-    <div class="bottom-row">
-      <div class="gcard">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div>
-          <h3>14-day full refund</h3>
-          <p>Join the program, attend your first live sessions, and meet your class. If the course isn't right for you, we refund every cent — no questions, no friction.</p>
-        </div>
-      </div>
-      <div class="gcard">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <div>
-          <h3>Speak with an advisor first</h3>
-          <p>Not sure which plan fits? Our team will help you understand the program, the schedule, and the protocol that matches your goals.</p>
-          <a href="mailto:advisor@longevitylifeacademy.com">advisor@longevitylifeacademy.com <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-        </div>
-      </div>
+    <!-- ADVISOR -->
+    <div class="advisor-strip">
+      <p>Not sure which plan fits? <a href="mailto:advisor@longevitylifeacademy.com">Speak with an advisor first →</a></p>
     </div>
 
   </div>
