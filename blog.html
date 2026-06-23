@@ -44,8 +44,44 @@ a { color: inherit; text-decoration: none; }
 footer { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); font-size: 13px; text-align: center; }
 </style>
 
+  <link rel="stylesheet" href="assets/lla-nav.css?v=1">
 </head>
-<body>
+<body class="has-shared-nav">
+<!-- LLA_SHARED_NAV -->
+<nav class="lla-shared-nav" id="llaSharedNav" aria-label="Site navigation">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Longevity Life Academy home">
+      <img src="assets/lla-logo-no-tagline@3x.png?v=5" alt="Longevity Life Academy" class="nav-logo-img" width="1902" height="588">
+    </a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="index.html#syllabus">Curriculum</a>
+      <a href="cgm.html">CGM</a>
+      <a href="biological-age-light.html">Bio-Age Quiz</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#lead-gen" class="nav-cta">Apply Now</a>
+    </div>
+    <button class="mobile-menu-btn" id="llaMobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+<div class="lla-mobile-nav-overlay" id="llaMobileNavOverlay" aria-hidden="true">
+  <button class="lla-mobile-nav-close" id="llaMobileNavClose" aria-label="Close navigation menu">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <nav class="lla-mobile-nav-links">
+    <a href="about.html" class="lla-mobile-nav-link">About</a>
+    <a href="index.html#syllabus" class="lla-mobile-nav-link">Curriculum</a>
+    <a href="cgm.html" class="lla-mobile-nav-link">CGM</a>
+    <a href="biological-age-light.html" class="lla-mobile-nav-link">Bio-Age Quiz</a>
+    <a href="blog.html" class="lla-mobile-nav-link">Blog</a>
+    <a href="index.html#faq" class="lla-mobile-nav-link">FAQ</a>
+    <a href="index.html#lead-gen" class="lla-mobile-nav-link lla-mobile-nav-cta">Apply Now</a>
+  </nav>
+</div>
+
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-brand">Longevity Life Academy</a>
@@ -240,5 +276,6 @@ footer { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.06); color: r
     })();
   </script>
 
+  <script src="assets/lla-nav.js?v=1" defer></script>
 </body>
 </html>

@@ -104,11 +104,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bio-leadgen-field{display:flex;flex-direction:column;gap:6px}
     .bio-leadgen-field.full{grid-column:1/-1}
     .bio-leadgen-field label{font-family:'Codec Pro','Inter',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,0.78);text-align:left;margin:0}
-    .bio-leadgen-field input,.bio-leadgen-field select,.bio-leadgen-field textarea{width:100%;padding:16px 18px;font-size:15.5px;font-family:'Inter',sans-serif;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;color:#fff !important;-webkit-text-fill-color:#fff !important;outline:none;transition:all .22s ease;text-align:left;min-height:auto;appearance:none;-webkit-appearance:none}
-    .bio-leadgen-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;cursor:pointer}
-    .bio-leadgen-field select option{background:#0d1b2e;color:#fff}
+    .bio-leadgen-field input,.bio-leadgen-field textarea{width:100%;padding:16px 18px;font-size:15.5px;font-family:'Inter',sans-serif;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;color:#fff !important;-webkit-text-fill-color:#fff !important;outline:none;transition:all .22s ease;text-align:left;min-height:auto;appearance:none;-webkit-appearance:none}
+    .bio-leadgen-field select{width:100%;padding:16px 42px 16px 18px;font-size:15.5px;font-family:'Inter',sans-serif;background-color:#ffffff !important;color:#0a1628 !important;-webkit-text-fill-color:#0a1628 !important;border:1.5px solid rgba(255,255,255,0.18);border-radius:14px;outline:none;transition:all .22s ease;text-align:left;min-height:auto;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%230a1628' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+    .bio-leadgen-field select option{background:#ffffff !important;color:#0a1628 !important}
     .bio-leadgen-field input::placeholder,.bio-leadgen-field textarea::placeholder{color:rgba(255,255,255,0.5);-webkit-text-fill-color:rgba(255,255,255,0.5)}
-    .bio-leadgen-field input:focus,.bio-leadgen-field select:focus,.bio-leadgen-field textarea:focus{border-color:#006EFF;background:rgba(255,255,255,0.09);box-shadow:0 0 0 3px rgba(0,110,255,0.18)}
+    .bio-leadgen-field input:focus,.bio-leadgen-field textarea:focus{border-color:#006EFF;background:rgba(255,255,255,0.09);box-shadow:0 0 0 3px rgba(0,110,255,0.18)}
+    .bio-leadgen-field select:focus{border-color:#006EFF;box-shadow:0 0 0 3px rgba(0,110,255,0.28)}
     .bio-leadgen-field input:-webkit-autofill,.bio-leadgen-field input:-webkit-autofill:hover,.bio-leadgen-field input:-webkit-autofill:focus,.bio-leadgen-field select:-webkit-autofill,.bio-leadgen-field textarea:-webkit-autofill{-webkit-text-fill-color:#fff !important;-webkit-box-shadow:0 0 0 100px #0d1b2e inset !important;caret-color:#fff !important;color:#fff !important}
     .bio-leadgen-submit{grid-column:1/-1;width:100%;padding:18px 28px;font-family:'Codec Pro','Inter',sans-serif;font-size:16px;font-weight:700;letter-spacing:.4px;color:#fff;background:linear-gradient(135deg,#006EFF,#338BFF);border:none;border-radius:14px;cursor:pointer;box-shadow:0 12px 30px rgba(0,110,255,0.35);transition:transform .22s ease,box-shadow .22s ease;margin-top:6px}
     .bio-leadgen-submit:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(0,110,255,0.45)}
@@ -126,8 +127,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @keyframes bio-fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @media (max-width:720px){.bio-leadgen-grid{grid-template-columns:1fr}.bio-leadgen{padding:28px 22px}.form-thankyou{padding:40px 22px}}
   </style>
+  <link rel="stylesheet" href="assets/lla-nav.css?v=1">
 </head>
-<body>
+<body class="has-shared-nav">
+<!-- LLA_SHARED_NAV -->
+<nav class="lla-shared-nav" id="llaSharedNav" aria-label="Site navigation">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Longevity Life Academy home">
+      <img src="assets/lla-logo-no-tagline@3x.png?v=5" alt="Longevity Life Academy" class="nav-logo-img" width="1902" height="588">
+    </a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="index.html#syllabus">Curriculum</a>
+      <a href="cgm.html">CGM</a>
+      <a href="biological-age-light.html">Bio-Age Quiz</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#lead-gen" class="nav-cta">Apply Now</a>
+    </div>
+    <button class="mobile-menu-btn" id="llaMobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+<div class="lla-mobile-nav-overlay" id="llaMobileNavOverlay" aria-hidden="true">
+  <button class="lla-mobile-nav-close" id="llaMobileNavClose" aria-label="Close navigation menu">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <nav class="lla-mobile-nav-links">
+    <a href="about.html" class="lla-mobile-nav-link">About</a>
+    <a href="index.html#syllabus" class="lla-mobile-nav-link">Curriculum</a>
+    <a href="cgm.html" class="lla-mobile-nav-link">CGM</a>
+    <a href="biological-age-light.html" class="lla-mobile-nav-link">Bio-Age Quiz</a>
+    <a href="blog.html" class="lla-mobile-nav-link">Blog</a>
+    <a href="index.html#faq" class="lla-mobile-nav-link">FAQ</a>
+    <a href="index.html#lead-gen" class="lla-mobile-nav-link lla-mobile-nav-cta">Apply Now</a>
+  </nav>
+</div>
+
   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMRKXXJV"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -273,7 +310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
               <div class="bio-leadgen-field full">
                 <label for="bioCountry">Country</label>
-                <select id="bioCountry" name="country" required style="width:100%;padding:16px 18px;font-size:15.5px;font-family:'Inter',sans-serif;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;color:#fff;outline:none;transition:all .22s ease">
+                <select id="bioCountry" name="country" required>
                   <option value="" disabled selected>Select your country</option>
                   <option value="US">United States</option>
                   <option value="CA">Canada</option>
@@ -747,5 +784,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })();
   </script>
 
+  <script src="assets/lla-nav.js?v=1" defer></script>
 </body>
 </html>
