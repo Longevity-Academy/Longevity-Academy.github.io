@@ -113,6 +113,58 @@
     '307':'WY'
   };
 
+  /* =========================================================================
+   * USA-ONLY LEAD GATE
+   * Single source of truth for validating that a phone number is a real
+   * US (NANP, +1) number whose 3-digit area code is an assigned US area code.
+   * Canadian / Caribbean / international numbers are rejected so no non-US
+   * lead can ever be submitted to the CRM.
+   * Exposed as window.LLA_US.validatePhone(raw) and window.LLA_US.stateForAreaCode(ac).
+   * ========================================================================= */
+  var US_AREA_CODES = {};
+  for (var _ac in NANP) { if (NANP.hasOwnProperty(_ac)) US_AREA_CODES[_ac] = true; }
+
+  // Normalize any user input down to the 10 NANP digits, stripping a leading
+  // US country code "1" if present. Returns null if it cannot be a US number.
+  function normalizeUSDigits(raw) {
+    if (raw == null) return null;
+    var d = String(raw).replace(/\D/g, '');
+    if (!d) return null;
+    // If the user typed a non-US country code (e.g. +853 Macau, +49 Germany,
+    // +86 China), the digit string will NOT be a clean 10-digit NANP number
+    // and will NOT start with a single "1" + 10 digits. Handle the two valid
+    // US shapes only: 10 digits, or 11 digits starting with 1.
+    if (d.length === 11 && d.charAt(0) === '1') d = d.substring(1);
+    if (d.length !== 10) return null;
+    return d;
+  }
+
+  // Full US phone validation. Returns { ok, e164, national, areaCode, state }.
+  function validatePhone(raw) {
+    var d = normalizeUSDigits(raw);
+    if (!d) return { ok: false, reason: 'format' };
+    var ac = d.substring(0, 3);
+    // NANP rules: area code + exchange must not start with 0 or 1.
+    if (ac.charAt(0) === '0' || ac.charAt(0) === '1') return { ok: false, reason: 'area_code_invalid' };
+    if (d.charAt(3) === '0' || d.charAt(3) === '1') return { ok: false, reason: 'exchange_invalid' };
+    // Must be an assigned US area code (excludes Canada + Caribbean +1 codes).
+    if (!US_AREA_CODES[ac]) return { ok: false, reason: 'non_us_area_code' };
+    return {
+      ok: true,
+      e164: '+1' + d,
+      national: d,
+      areaCode: ac,
+      state: NANP[ac] || ''
+    };
+  }
+
+  window.LLA_US = window.LLA_US || {};
+  window.LLA_US.AREA_CODES = US_AREA_CODES;
+  window.LLA_US.NANP = NANP;
+  window.LLA_US.validatePhone = validatePhone;
+  window.LLA_US.normalizeUSDigits = normalizeUSDigits;
+  window.LLA_US.stateForAreaCode = function (ac) { return NANP[ac] || ''; };
+
   function extractAreaCode(raw) {
     if (!raw) return null;
     var d = String(raw).replace(/\D/g, '');
