@@ -10002,6 +10002,7 @@ function toggleCurriculum(btn) {
       }
       return getIpCountry().then(function(ipCountry){
         var payload = {
+          ProductID: 26,
           FirstName: String(fields.firstName).trim(),
           LastName:  String(fields.lastName).trim(),
           Email:     String(fields.email).trim(),
