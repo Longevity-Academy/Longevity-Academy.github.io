@@ -5339,9 +5339,12 @@ html {
   .teachers-grid-live { grid-template-columns: 1fr; }
 }
 .teachers-grid-live:empty { display: none; }
-.teacher-card-live.is-founding { position: relative; background: linear-gradient(180deg, rgba(0,110,255,0.12) 0%, rgba(0,110,255,0.04) 100%); border-color: rgba(0,110,255,0.45); box-shadow: 0 0 0 1px rgba(0,110,255,0.25), 0 18px 44px -18px rgba(0,110,255,0.55); }
-.teacher-card-live.is-founding:hover { border-color: rgba(77,163,255,0.7); }
-.teacher-founding-badge { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 999px; background: linear-gradient(135deg, #006EFF, #4DA3FF); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 12px -2px rgba(0,110,255,0.6); z-index: 2; }
+/* Founding faculty featured row — Julie centered + popped */
+.teachers-featured-live { display: flex; justify-content: center; margin-bottom: 34px; }
+.teacher-card-live.is-founding { position: relative; width: 320px; max-width: 92%; transform: scale(1.06); background: linear-gradient(180deg, rgba(0,110,255,0.16) 0%, rgba(0,110,255,0.05) 100%); border-color: rgba(0,110,255,0.55); box-shadow: 0 0 0 1px rgba(0,110,255,0.35), 0 26px 60px -20px rgba(0,110,255,0.7); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+.teacher-card-live.is-founding:hover { transform: scale(1.09) translateY(-4px); border-color: rgba(77,163,255,0.85); box-shadow: 0 0 0 1px rgba(0,110,255,0.45), 0 34px 74px -18px rgba(0,110,255,0.85); }
+@media (max-width: 540px) { .teacher-card-live.is-founding { transform: none; width: 100%; } .teacher-card-live.is-founding:hover { transform: translateY(-4px); } }
+.teacher-founding-badge { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 999px; background: linear-gradient(135deg, #006EFF, #4DA3FF); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; box-shadow: 0 4px 12px -2px rgba(0,110,255,0.6); z-index: 2; }
 .teacher-founding-badge svg { width: 11px; height: 11px; fill: #fff; }
 .teacher-card-live {
   background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
@@ -8786,10 +8789,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="section-subtitle" style="margin: 0 auto; max-width: 720px;">A faculty of certified specialists, researchers, and protocol designers backed by the most recognized credentialing bodies in the field.</p>
     </div>
 
-    <!-- LIVE instructor grid -->
-    <div class="teachers-grid-live reveal">
+    <!-- FOUNDING FACULTY featured (centered, popped) -->
+    <div class="teachers-featured-live reveal">
       <a class="teacher-card-live teacher-card-link is-founding" href="teachers/julie-gibson-clark.html">
-        <span class="teacher-founding-badge"><svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 3h14v2H5v-2z"></path></svg>Founding</span>
+        <span class="teacher-founding-badge"><svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 3h14v2H5v-2z"></path></svg>Founding Faculty</span>
         <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/julie-gibson-clark.jpg" alt="Julie Gibson Clark" loading="lazy"></div>
         <div class="teacher-card-live-body">
           <h4 class="teacher-card-live-name">Julie Gibson Clark</h4>
@@ -8797,6 +8800,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="teacher-card-live-bio">#2 slowest-aging person in the world on the Rejuvenation Olympics. A leading voice in accessible, evidence-based longevity.</p>
         </div>
       </a>
+    </div>
+
+    <!-- LIVE instructor grid -->
+    <div class="teachers-grid-live reveal">
       <a class="teacher-card-live teacher-card-link" href="teachers/natalie.html">
         <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/natalie.jpg" alt="Natalie Blackbourne" loading="lazy"></div>
         <div class="teacher-card-live-body">
