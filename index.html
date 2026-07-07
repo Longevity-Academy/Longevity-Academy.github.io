@@ -5339,6 +5339,10 @@ html {
   .teachers-grid-live { grid-template-columns: 1fr; }
 }
 .teachers-grid-live:empty { display: none; }
+.teacher-card-live.is-founding { position: relative; background: linear-gradient(180deg, rgba(0,110,255,0.12) 0%, rgba(0,110,255,0.04) 100%); border-color: rgba(0,110,255,0.45); box-shadow: 0 0 0 1px rgba(0,110,255,0.25), 0 18px 44px -18px rgba(0,110,255,0.55); }
+.teacher-card-live.is-founding:hover { border-color: rgba(77,163,255,0.7); }
+.teacher-founding-badge { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 999px; background: linear-gradient(135deg, #006EFF, #4DA3FF); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 4px 12px -2px rgba(0,110,255,0.6); z-index: 2; }
+.teacher-founding-badge svg { width: 11px; height: 11px; fill: #fff; }
 .teacher-card-live {
   background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
   border: 1px solid rgba(255,255,255,0.08);
@@ -8784,6 +8788,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- LIVE instructor grid -->
     <div class="teachers-grid-live reveal">
+      <a class="teacher-card-live teacher-card-link is-founding" href="teachers/julie-gibson-clark.html">
+        <span class="teacher-founding-badge"><svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 3h14v2H5v-2z"></path></svg>Founding</span>
+        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/julie-gibson-clark.jpg" alt="Julie Gibson Clark" loading="lazy"></div>
+        <div class="teacher-card-live-body">
+          <h4 class="teacher-card-live-name">Julie Gibson Clark</h4>
+          <span class="teacher-card-live-role">Ranked #2 &middot; Rejuvenation Olympics</span>
+          <p class="teacher-card-live-bio">#2 slowest-aging person in the world on the Rejuvenation Olympics. A leading voice in accessible, evidence-based longevity.</p>
+        </div>
+      </a>
       <a class="teacher-card-live teacher-card-link" href="teachers/natalie.html">
         <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/natalie.jpg" alt="Natalie Blackbourne" loading="lazy"></div>
         <div class="teacher-card-live-body">
