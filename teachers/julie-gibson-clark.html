@@ -4,123 +4,175 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Julie Gibson Clark — Founding Faculty | Longevity Life Academy</title>
-<meta name="description" content="Julie Gibson Clark ranked #2 in the world on the Rejuvenation Olympics — aging at just 0.665 years per calendar year on a fraction of a billionaire's budget. She is Founding Faculty at Longevity Life Academy.">
+<meta name="description" content="Julie Gibson Clark is one of the slowest-aging people ever measured — ranked #2 in the world on the Rejuvenation Olympics. Her cells age roughly a third slower than a typical adult's. Now she teaches how at Longevity Life Academy.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Julie Gibson Clark — Founding Faculty | Longevity Life Academy">
+<meta property="og:description" content="One of the slowest-aging people ever measured — #2 in the world. Her cells age about a third slower than average. Now Founding Faculty at Longevity Life Academy.">
+<meta property="og:type" content="profile">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.cdnfonts.com/css/codec-pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --accent: #006EFF;
     --accent-lt: #4DA3FF;
+    --accent-2: #6BB6FF;
+    --gold: #E9C46A;
     --navy: #02091C;
     --navy-2: #060e1a;
     --navy-3: #0a1628;
-    --font-display: 'Codec Pro', 'Inter', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --line: rgba(255,255,255,0.08);
+    --ink-70: rgba(255,255,255,0.72);
+    --ink-55: rgba(255,255,255,0.55);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body { font-family: var(--font-body); color: #fff; background: var(--navy); line-height: 1.7; font-size: 17px; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
   /* NAV */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(2,9,28,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(2,9,28,0.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
   .nav-inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 62px; }
-  .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 16px; letter-spacing: -0.01em; }
+  .nav-logo { font-weight: 800; font-size: 16px; letter-spacing: -0.01em; }
   .nav-logo span { color: var(--accent-lt); }
   .nav-back { font-size: 14px; color: var(--accent-lt); font-weight: 600; display: inline-flex; align-items: center; gap: 7px; transition: opacity 0.15s; }
   .nav-back:hover { opacity: 0.7; }
   .nav-back svg { width: 16px; height: 16px; }
 
   /* HERO */
-  .hero { position: relative; min-height: 92vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .hero { position: relative; min-height: 96vh; display: flex; align-items: flex-end; overflow: hidden; }
   .hero-img { position: absolute; inset: 0; }
-  .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 28%; }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 24%; transform: scale(1.04); animation: heroZoom 20s ease-out forwards; }
+  @keyframes heroZoom { to { transform: scale(1); } }
   .hero-scrim { position: absolute; inset: 0; background:
-      linear-gradient(180deg, rgba(2,9,28,0.55) 0%, rgba(2,9,28,0.15) 30%, rgba(2,9,28,0.75) 78%, var(--navy) 100%),
-      linear-gradient(90deg, rgba(2,9,28,0.7) 0%, rgba(2,9,28,0.1) 55%); }
-  .hero-content { position: relative; z-index: 2; width: 100%; padding-bottom: 68px; }
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; background: rgba(0,110,255,0.16); border: 1px solid rgba(77,163,255,0.4); color: var(--accent-lt); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; margin-bottom: 22px; }
-  .hero-eyebrow svg { width: 15px; height: 15px; fill: #FFD86B; }
-  .hero h1 { font-family: var(--font-display); font-size: clamp(42px, 8vw, 84px); font-weight: 800; line-height: 0.98; letter-spacing: -0.03em; margin-bottom: 20px; }
-  .hero-sub { font-size: clamp(18px, 2.4vw, 23px); color: rgba(255,255,255,0.82); max-width: 620px; line-height: 1.5; font-weight: 400; }
+      linear-gradient(180deg, rgba(2,9,28,0.55) 0%, rgba(2,9,28,0.08) 30%, rgba(2,9,28,0.74) 74%, var(--navy) 100%),
+      linear-gradient(90deg, rgba(2,9,28,0.80) 0%, rgba(2,9,28,0.04) 60%); }
+  .hero-content { position: relative; z-index: 2; width: 100%; padding-bottom: 76px; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 9px; background: rgba(0,110,255,0.14); border: 1px solid rgba(77,163,255,0.4); color: var(--accent-lt); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; margin-bottom: 24px; }
+  .hero-eyebrow svg { width: 15px; height: 15px; fill: var(--gold); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(44px, 8.4vw, 94px); font-weight: 600; line-height: 0.94; letter-spacing: -0.02em; margin-bottom: 22px; text-shadow: 0 2px 44px rgba(0,0,0,0.45); }
+  .hero h1 em { font-style: italic; font-weight: 500; color: var(--accent-2); }
+  .hero-sub { font-size: clamp(18px, 2.4vw, 23px); color: rgba(255,255,255,0.88); max-width: 680px; line-height: 1.5; font-weight: 400; }
   .hero-sub b { color: #fff; font-weight: 700; }
 
   /* STAT BAND */
-  .statband { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .statband { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); border-bottom: 1px solid var(--line); }
   .statband-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .stat { padding: 40px 20px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); }
+  .stat { padding: 44px 20px; text-align: center; border-right: 1px solid var(--line); position: relative; }
   .stat:last-child { border-right: none; }
-  .stat b { display: block; font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 46px); font-weight: 800; color: #fff; letter-spacing: -0.02em; background: linear-gradient(180deg,#fff,#9cc6ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .stat span { display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 8px; }
+  .stat b { display: block; font-family: var(--font-display); font-size: clamp(30px, 4.4vw, 48px); font-weight: 600; letter-spacing: -0.02em; background: linear-gradient(180deg,#fff,#9cc6ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat span { display: block; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-55); margin-top: 10px; line-height: 1.4; }
 
   /* SECTIONS */
-  section.block { padding: 84px 0; }
-  .eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-lt); margin-bottom: 16px; }
-  h2.title { font-family: var(--font-display); font-size: clamp(30px, 5vw, 48px); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 28px; }
-  .lead { font-size: 19px; color: rgba(255,255,255,0.78); line-height: 1.7; max-width: 760px; }
+  section.block { padding: 92px 0; }
+  .eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-lt); margin-bottom: 16px; }
+  h2.title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 28px; }
+  h2.title em { font-style: italic; color: var(--accent-2); font-weight: 500; }
+  .lead { font-size: 18.5px; color: var(--ink-70); line-height: 1.75; max-width: 760px; }
   .lead p { margin-bottom: 22px; }
-  .lead strong { color: #fff; }
+  .lead p:last-child { margin-bottom: 0; }
+  .lead strong { color: #fff; font-weight: 600; }
+
+  /* CELLULAR AGE — the science hero */
+  .science { background: radial-gradient(ellipse at 50% -10%, rgba(0,80,214,0.20) 0%, rgba(0,80,214,0) 60%), linear-gradient(180deg, var(--navy) 0%, var(--navy-3) 100%); }
+  .science .head { text-align: center; max-width: 720px; margin: 0 auto; }
+  .science .lead { margin: 0 auto; text-align: center; }
+  .pace { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 52px; }
+  .pace-card { position: relative; background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)); border: 1px solid var(--line); border-radius: 24px; padding: 38px 34px 34px; overflow: hidden;
+    box-shadow: 0 30px 80px -34px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06); }
+  .pace-card.her { border-color: rgba(77,163,255,0.5); background: linear-gradient(180deg, rgba(0,110,255,0.13), rgba(0,110,255,0.03)); box-shadow: 0 30px 80px -30px rgba(0,110,255,0.45), inset 0 1px 0 rgba(255,255,255,0.12); }
+  .pace-card .who { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-55); margin-bottom: 6px; }
+  .pace-card.her .who { color: var(--gold); }
+  .pace-card .big { font-family: var(--font-display); font-size: clamp(52px, 9vw, 82px); font-weight: 600; line-height: 0.95; letter-spacing: -0.03em; }
+  .pace-card .unit { font-size: 14px; color: var(--ink-55); margin-top: 4px; }
+  .bar { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); margin-top: 26px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; border-radius: 999px; }
+  .bar.her > i { width: 66.5%; background: linear-gradient(90deg,#0057d6,#4DA3FF); box-shadow: 0 0 18px rgba(0,110,255,0.6); }
+  .bar.avg > i { width: 100%; background: rgba(255,255,255,0.28); }
+  .pace-card .cap { font-size: 14.5px; color: var(--ink-70); margin-top: 16px; line-height: 1.55; }
+  .science-note { text-align: center; font-size: 14px; color: var(--ink-55); margin-top: 30px; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .science-note a { color: var(--accent-lt); }
 
   /* STORY split */
-  .story { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+  .story { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 60px; align-items: center; }
   .story-media { position: relative; }
-  .story-media img { width: 100%; border-radius: 20px; display: block; box-shadow: 0 30px 70px -25px rgba(0,0,0,0.8); }
+  .story-media img { width: 100%; border-radius: 20px; display: block;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 30px 70px -25px rgba(0,0,0,0.85), 0 40px 90px -40px rgba(0,110,255,0.35); }
   .story-media .badge { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: linear-gradient(90deg,#0057d6,#2f8bff); color: #fff; font-size: 13px; font-weight: 700; padding: 12px 22px; border-radius: 999px; box-shadow: 0 14px 30px -8px rgba(0,110,255,0.6); }
 
-  /* PR strip */
-  .pr { background: linear-gradient(180deg, var(--navy-2) 0%, var(--navy-3) 100%); }
-  .pr-label { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 34px; }
-  .pr-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 40px; }
-  .pr-logos a { font-family: var(--font-display); font-weight: 800; font-size: clamp(18px, 2.4vw, 26px); color: rgba(255,255,255,0.62); letter-spacing: 0.01em; transition: color 0.25s, transform 0.25s; }
-  .pr-logos a:hover { color: #fff; transform: translateY(-2px); }
+  /* PULL QUOTE */
+  .pullquote { background: radial-gradient(ellipse at 50% -20%, rgba(0,80,214,0.16), transparent 60%), var(--navy-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
+  .pullquote .mark { font-family: var(--font-display); font-size: 90px; line-height: 0.5; color: var(--accent-lt); opacity: 0.5; }
+  .pullquote blockquote { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: clamp(26px, 4.2vw, 44px); line-height: 1.22; letter-spacing: -0.01em; max-width: 900px; margin: 22px auto 26px; }
+  .pullquote cite { display: block; font-style: normal; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-55); }
 
-  /* Olympics feature */
-  .olympics { background: radial-gradient(ellipse at 50% 0%, rgba(0,80,214,0.18) 0%, rgba(0,80,214,0) 60%), linear-gradient(180deg, var(--navy-3) 0%, var(--navy) 100%); }
-  .olympics-card { background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); border: 1px solid rgba(77,163,255,0.25); border-radius: 26px; padding: clamp(32px,5vw,56px); position: relative; overflow: hidden; }
-  .olympics-card::before { content:""; position:absolute; top:-50%; right:-10%; width:420px; height:420px; background: radial-gradient(circle, rgba(0,110,255,0.22), transparent 65%); filter: blur(30px); pointer-events:none; }
-  .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; margin-top: 36px; position: relative; z-index: 2; }
-  .vs-side { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 26px 22px; text-align: center; }
-  .vs-side.win { border-color: rgba(77,163,255,0.5); background: rgba(0,110,255,0.1); box-shadow: 0 0 40px -10px rgba(0,110,255,0.5); }
-  .vs-side .who { font-family: var(--font-display); font-weight: 800; font-size: 20px; margin-bottom: 6px; }
-  .vs-side .tag { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-lt); margin-bottom: 16px; }
-  .vs-side .num { font-family: var(--font-display); font-size: 40px; font-weight: 800; letter-spacing: -0.02em; }
-  .vs-side .note { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; }
-  .vs-mid { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: rgba(255,255,255,0.4); }
+  /* PROTOCOL TIMELINE */
+  .timeline { background: var(--navy-2); }
+  .tl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
+  .tl-card { background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012)); border: 1px solid var(--line); border-radius: 18px; padding: 26px 24px; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+  .tl-card:hover { transform: translateY(-4px); border-color: rgba(77,163,255,0.4); box-shadow: 0 24px 50px -24px rgba(0,110,255,0.4); }
+  .tl-time { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--accent-lt); letter-spacing: 0.02em; margin-bottom: 6px; }
+  .tl-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .tl-card p { font-size: 14.5px; color: var(--ink-70); line-height: 1.6; }
 
   /* Quotes */
   .quotes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-  .qcard { background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); border: 1px solid rgba(255,255,255,0.08); border-left: 3px solid var(--accent); border-radius: 16px; padding: 30px 26px; transition: transform 0.3s, border-color 0.3s; }
+  .qcard { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 16px; padding: 30px 26px; transition: transform 0.3s, border-color 0.3s; }
   .qcard:hover { transform: translateY(-4px); border-left-color: var(--accent-lt); }
-  .qcard .qmark { font-family: var(--font-display); font-size: 46px; line-height: 0.6; color: var(--accent-lt); opacity: 0.7; }
-  .qcard p { font-size: 18px; font-weight: 500; color: #fff; line-height: 1.5; margin: 10px 0 16px; }
+  .qcard .qmark { font-family: var(--font-display); font-size: 52px; line-height: 0.6; color: var(--accent-lt); opacity: 0.7; }
+  .qcard p { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 20px; color: #fff; line-height: 1.4; margin: 12px 0 16px; }
   .qcard .qlabel { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-lt); }
 
-  /* Gallery */
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .gallery figure { border-radius: 18px; overflow: hidden; position: relative; aspect-ratio: 3/4; }
-  .gallery figure:first-child { grid-column: span 2; aspect-ratio: 16/11; }
-  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-  .gallery figure:hover img { transform: scale(1.05); }
+  /* PRESS — real screenshots in browser-frame cards */
+  .press { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-3) 100%); }
+  .press .head { text-align: center; max-width: 740px; margin: 0 auto; }
+  .press-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 50px; }
+  .press-grid .feature { grid-column: span 2; }
+  .clip { border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 34px 80px -30px rgba(0,0,0,0.85), 0 44px 100px -50px rgba(0,110,255,0.3);
+    transition: transform 0.35s ease, box-shadow 0.35s ease; }
+  .clip:hover { transform: translateY(-5px); box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 44px 100px -30px rgba(0,0,0,0.9), 0 54px 120px -50px rgba(0,110,255,0.45); }
+  .clip .bar-top { display: flex; align-items: center; gap: 7px; padding: 11px 15px; background: #f1f2f4; border-bottom: 1px solid #e2e4e8; }
+  .clip .bar-top i { width: 11px; height: 11px; border-radius: 50%; background: #d6d9de; display: inline-block; }
+  .clip .bar-top .url { margin-left: 10px; font-family: var(--font-body); font-size: 12px; color: #8a8f98; background: #fff; border: 1px solid #e2e4e8; border-radius: 7px; padding: 5px 12px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .clip .shot { position: relative; overflow: hidden; background: #fff; }
+  .clip .shot img { width: 100%; display: block; }
+  .press-cap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 6px 0; }
+  .press-cap .outlet { font-family: var(--font-display); font-weight: 600; font-size: 17px; color: #fff; }
+  .press-cap .read { font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--accent-lt); display: inline-flex; align-items: center; gap: 6px; }
+  .press-cap .read svg { width: 14px; height: 14px; }
 
-  /* Protocol chips */
-  .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-  .chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 12px 20px; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 9px; }
-  .chip svg { width: 17px; height: 17px; stroke: var(--accent-lt); }
+  /* JOINING LLA */
+  .joining { background: radial-gradient(ellipse at 50% 0%, rgba(0,80,214,0.18) 0%, rgba(0,80,214,0) 60%), var(--navy-2); }
+  .join-card { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 0; border-radius: 26px; overflow: hidden; border: 1px solid rgba(77,163,255,0.22);
+    box-shadow: 0 40px 100px -40px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.06); }
+  .join-media { position: relative; min-height: 100%; }
+  .join-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .join-body { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)); padding: clamp(34px,4.4vw,52px); }
+  .join-body .eyebrow { margin-bottom: 14px; }
+  .join-body h2 { font-family: var(--font-display); font-size: clamp(28px,3.6vw,40px); font-weight: 600; line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .join-body h2 em { font-style: italic; color: var(--accent-2); font-weight: 500; }
+  .join-body p { font-size: 16.5px; color: var(--ink-70); line-height: 1.7; margin-bottom: 26px; }
+  .teach-list { display: grid; gap: 14px; }
+  .teach-list li { list-style: none; display: flex; align-items: flex-start; gap: 13px; font-size: 15.5px; color: rgba(255,255,255,0.9); }
+  .teach-list svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; stroke: var(--accent-lt); fill: none; stroke-width: 2.4; }
 
   /* CTA */
-  .cta-final { background: linear-gradient(165deg, #020b18 0%, #001233 55%, #001840 100%); text-align: center; }
-  .cta-final h2 { font-family: var(--font-display); font-size: clamp(32px,5.5vw,56px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 20px; }
-  .cta-final p { font-size: 19px; color: rgba(255,255,255,0.72); max-width: 620px; margin: 0 auto 34px; }
+  .cta-final { background: radial-gradient(ellipse at 50% 120%, rgba(0,110,255,0.28), transparent 60%), linear-gradient(165deg, #020b18 0%, #001233 55%, #001840 100%); text-align: center; }
+  .cta-final h2 { font-family: var(--font-display); font-size: clamp(32px,5.5vw,58px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.04; margin-bottom: 20px; }
+  .cta-final h2 em { font-style: italic; color: var(--accent-2); font-weight: 500; }
+  .cta-final p { font-size: 19px; color: var(--ink-70); max-width: 620px; margin: 0 auto 34px; }
   .cta-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(90deg,#0057d6,#2f8bff); color: #fff; font-weight: 700; font-size: 17px; padding: 18px 40px; border-radius: 12px; box-shadow: 0 18px 40px -12px rgba(0,110,255,0.7); transition: transform 0.3s, box-shadow 0.3s; }
-  .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 26px 54px -12px rgba(0,110,255,0.85); }
+  .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 26px 54px -12px rgba(0,110,255,0.9); }
   .cta-btn svg { width: 20px; height: 20px; }
 
-  footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 34px 24px; text-align: center; font-size: 13.5px; color: rgba(255,255,255,0.45); }
+  footer { border-top: 1px solid var(--line); padding: 34px 24px; text-align: center; font-size: 13.5px; color: rgba(255,255,255,0.45); }
   footer a { color: var(--accent-lt); }
-  .disclaimer { max-width: 820px; margin: 18px auto 0; font-size: 11.5px; line-height: 1.6; color: rgba(255,255,255,0.32); }
+  .disclaimer { max-width: 860px; margin: 18px auto 0; font-size: 11.5px; line-height: 1.6; color: rgba(255,255,255,0.32); }
 
   /* reveal */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -129,18 +181,25 @@
   @media (max-width: 860px) {
     .statband-grid { grid-template-columns: repeat(2,1fr); }
     .stat:nth-child(2) { border-right: none; }
-    .stat { border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .story { grid-template-columns: 1fr; gap: 44px; }
+    .stat { border-bottom: 1px solid var(--line); }
+    .pace { grid-template-columns: 1fr; }
+    .story { grid-template-columns: 1fr; gap: 46px; }
     .story-media { order: -1; }
+    .tl { grid-template-columns: 1fr 1fr; }
     .quotes-grid { grid-template-columns: 1fr; }
-    .gallery { grid-template-columns: 1fr 1fr; }
-    .gallery figure:first-child { grid-column: span 2; }
-    .versus { grid-template-columns: 1fr; }
-    .vs-mid { transform: rotate(90deg); }
+    .press-grid { grid-template-columns: 1fr; }
+    .press-grid .feature { grid-column: span 1; }
+    .join-card { grid-template-columns: 1fr; }
+    .join-media { min-height: 280px; }
   }
   @media (max-width: 540px) {
-    .hero { min-height: 80vh; }
-    section.block { padding: 60px 0; }
+    .hero { min-height: 84vh; }
+    section.block { padding: 62px 0; }
+    .tl { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-img img { animation: none; transform: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
   }
 </style>
 </head>
@@ -164,10 +223,10 @@
     <div class="wrap">
       <span class="hero-eyebrow">
         <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 3h14v2H5v-2z"/></svg>
-        Founding Faculty · Longevity Life Academy
+        Founding Faculty &middot; Longevity Life Academy
       </span>
-      <h1>Julie Gibson<br>Clark</h1>
-      <p class="hero-sub">The single mom from Phoenix who <b>out-aged the billionaires</b> — ranked <b>#2 in the world</b> on the Rejuvenation Olympics, at a fraction of the cost.</p>
+      <h1>One of the slowest-aging<br>people <em>ever measured.</em></h1>
+      <p class="hero-sub">Julie Gibson Clark ranked <b>#2 in the world</b> at the Rejuvenation Olympics. Her cells age about <b>a third slower</b> than a typical adult&rsquo;s &mdash; and she teaches exactly how.</p>
     </div>
   </div>
 </header>
@@ -176,71 +235,109 @@
 <div class="statband">
   <div class="wrap">
     <div class="statband-grid">
-      <div class="stat"><b>0.665</b><span>Pace of Aging</span></div>
-      <div class="stat"><b>#2</b><span>Rejuvenation Olympics</span></div>
-      <div class="stat"><b>~$12</b><span>Per Day Protocol</span></div>
-      <div class="stat"><b>~11 yrs</b><span>Biological Age Reversed</span></div>
+      <div class="stat"><b>#2</b><span>In the World<br>Rejuvenation Olympics</span></div>
+      <div class="stat"><b>0.665</b><span>Pace of Aging<br>DunedinPACE</span></div>
+      <div class="stat"><b>~8 mo</b><span>Biological Aging<br>Per Calendar Year</span></div>
+      <div class="stat"><b>~34%</b><span>Slower Than<br>Average</span></div>
     </div>
   </div>
 </div>
 
-<!-- STORY -->
+<!-- CELLULAR AGE SCIENCE -->
+<section class="block science">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" style="text-align:center;">Her Cellular Age</span>
+      <h2 class="title">Her body doesn&rsquo;t keep<br><em>calendar time.</em></h2>
+      <p class="lead">Scientists measure the true speed of aging with the <strong>DunedinPACE</strong> epigenetic clock &mdash; how many biological years your cells gain for every year on the calendar. A score of <strong>1.0</strong> is a normal, average pace. Julie&rsquo;s is <strong>0.665</strong>.</p>
+    </div>
+
+    <div class="pace">
+      <div class="pace-card">
+        <div class="who">A Typical Adult</div>
+        <div class="big">1.00</div>
+        <div class="unit">years aged per calendar year</div>
+        <div class="bar avg"><i></i></div>
+        <p class="cap">Cells age in lockstep with the calendar &mdash; one biological year for every year lived.</p>
+      </div>
+      <div class="pace-card her">
+        <div class="who">&#9733; Julie Gibson Clark</div>
+        <div class="big">0.665</div>
+        <div class="unit">years aged per calendar year</div>
+        <div class="bar her"><i></i></div>
+        <p class="cap">Roughly <strong style="color:#fff;">eight months of biological aging</strong> for every twelve on the calendar &mdash; about a third slower than average.</p>
+      </div>
+    </div>
+    <p class="science-note">Score reflects Julie&rsquo;s publicly reported result on the <a href="https://www.rejuvenationolympics.com/dunedin-pace" target="_blank" rel="noopener">Rejuvenation Olympics leaderboard</a>, measured with the DunedinPACE epigenetic clock via a TruDiagnostic blood test. Lower is slower aging.</p>
+  </div>
+</section>
+
+<!-- HOW SHE GOT THERE -->
 <section class="block">
   <div class="wrap">
     <div class="story">
       <div>
-        <span class="eyebrow">The Story</span>
-        <h2 class="title">Not a billionaire.<br>Just relentless.</h2>
+        <span class="eyebrow">How She Got There</span>
+        <h2 class="title">It started with a<br><em>wake-up call.</em></h2>
         <div class="lead">
-          <p>Julie Gibson Clark is a former structural engineer turned recruiter and single mom from Phoenix, Arizona. She didn't set out to become a longevity icon — she set out to be there for her son for as long as possible.</p>
-          <p>With a disciplined routine of <strong>diet, exercise, sleep and a handful of well-chosen supplements</strong>, she slowed her biological aging to just <strong>0.665 of a year for every calendar year</strong> — roughly 34% slower than average, effectively rolling back her biological age by more than a decade.</p>
-          <p>That result placed her <strong>#2 in the world</strong> on the Rejuvenation Olympics leaderboard — a global ranking of biological aging measured by DNA-methylation clocks — where she famously sat <strong>ahead of tech biohacker Bryan Johnson</strong>, who reportedly spends around $2 million a year chasing the same goal.</p>
+          <p>Julie is a former structural engineer turned recruiter and a single mom in Phoenix, Arizona. Her turning point wasn&rsquo;t a lab or a longevity clinic &mdash; it was a diagnosis of <strong>heavy-metal poisoning</strong> that forced her to rebuild her health from the ground up.</p>
+          <p>What followed wasn&rsquo;t extreme biohacking. It was a set of <strong>fundamentals held with total consistency</strong>: real food, daily movement, protected sleep, meditation, and only a few well-chosen supplements. No million-dollar lab. No team of doctors.</p>
+          <p>Years of that rhythm slowed her pace of aging to <strong>0.665</strong> &mdash; enough to put her <strong>#2 in the world</strong> on the Rejuvenation Olympics leaderboard, a spot she held for over a year.</p>
         </div>
       </div>
       <div class="story-media">
         <img src="../assets/instructors/julie-portrait.jpg" alt="Julie Gibson Clark portrait">
-        <span class="badge">Ageing at 65 days per 100</span>
+        <span class="badge">Fundamentals, held for years</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PR STRIP -->
-<section class="block pr">
+<!-- PULL QUOTE -->
+<section class="block pullquote">
   <div class="wrap">
-    <p class="pr-label">As Featured In</p>
-    <div class="pr-logos">
-      <a href="https://fortune.com/well/2023/11/04/longevity-women-biohackers-diet-exercise-bryan-johnson/" target="_blank" rel="noopener">FORTUNE</a>
-      <a href="https://www.businessinsider.com/woman-spending-less-than-millionaire-bryan-johnson-anti-aging-ranking-2023-11" target="_blank" rel="noopener">Business Insider</a>
-      <a href="https://www.wsj.com/health/wellness/longevity-competitive-sport-aging-d425764e" target="_blank" rel="noopener">The Wall Street Journal</a>
-      <a href="https://www.yahoo.com/lifestyle/56-old-recruiter-sets-aside-160243368.html" target="_blank" rel="noopener">Yahoo</a>
-      <a href="https://www.scmp.com/lifestyle/health-wellness/article/3264695/" target="_blank" rel="noopener">SCMP</a>
-      <a href="https://www.thesun.co.uk/wellness/28036126/budget-biohacker-single-mum-julie-gibson-clark-ageing-backwards/" target="_blank" rel="noopener">The Sun</a>
-    </div>
+    <div class="mark">&ldquo;</div>
+    <blockquote>It has to be like brushing your teeth.</blockquote>
+    <cite>Julie Gibson Clark &middot; on consistency</cite>
   </div>
 </section>
 
-<!-- OLYMPICS -->
-<section class="block olympics">
+<!-- PROTOCOL TIMELINE -->
+<section class="block timeline">
   <div class="wrap">
-    <span class="eyebrow" style="text-align:center;">The Rejuvenation Olympics</span>
-    <h2 class="title" style="text-align:center;">She beat the $2M budget<br>with discipline.</h2>
-    <p class="lead" style="margin:0 auto 4px; text-align:center;">The Rejuvenation Olympics ranks the world's slowest agers using the DunedinPACE epigenetic clock. Julie held the #2 spot for over a year — outpacing the field's biggest spenders.</p>
-    <div class="olympics-card" style="margin-top:44px;">
-      <div class="versus">
-        <div class="vs-side win">
-          <div class="who">Julie Gibson Clark</div>
-          <div class="tag">Ranked #2 · Budget Biohacker</div>
-          <div class="num">0.665</div>
-          <div class="note">~$12 a day · diet, exercise, sleep, a few supplements</div>
-        </div>
-        <div class="vs-mid">vs</div>
-        <div class="vs-side">
-          <div class="who">Bryan Johnson</div>
-          <div class="tag">Ranked behind Julie</div>
-          <div class="num">~0.72</div>
-          <div class="note">~$2M a year · full-time longevity operation</div>
-        </div>
+    <span class="eyebrow">A Day In Her Protocol</span>
+    <h2 class="title">Simple. Consistent.<br><em>Repeatable.</em></h2>
+    <p class="lead">No exotic hardware, no seven-figure lab &mdash; just a rhythm she can keep for decades. This is the exact kind of routine she teaches at the Academy.</p>
+    <div class="tl">
+      <div class="tl-card">
+        <div class="tl-time">5:00 AM</div>
+        <h3>Rise &amp; center</h3>
+        <p>Wakes before the house does &mdash; reads, journals and meditates with green tea in hand. &ldquo;The quietest, most peaceful part of the day.&rdquo;</p>
+      </div>
+      <div class="tl-card">
+        <div class="tl-time">7:00 AM</div>
+        <h3>Move &amp; sweat</h3>
+        <p>Strength work, a Norwegian 4&times;4 for VO&#8322; max, then sauna and a cold shower. The trick: &ldquo;Just go for the sauna. That&rsquo;s all you have to do today.&rdquo;</p>
+      </div>
+      <div class="tl-card">
+        <div class="tl-time">Late morning</div>
+        <h3>Eat the rainbow</h3>
+        <p>A big greens drink, a warm greens latte, then roughly a pound of colorful vegetables with protein grazed across the day.</p>
+      </div>
+      <div class="tl-card">
+        <div class="tl-time">1:00 PM</div>
+        <h3>20 minutes of calm</h3>
+        <p>Transcendental Meditation, a daily practice since 2019. Her most surprising benefit? Deeper, steadier sleep.</p>
+      </div>
+      <div class="tl-card">
+        <div class="tl-time">Early evening</div>
+        <h3>Dinner &amp; connection</h3>
+        <p>An early meal &mdash; ideally about three hours before bed &mdash; built around time with her son, not just macros.</p>
+      </div>
+      <div class="tl-card">
+        <div class="tl-time">9:00 PM</div>
+        <h3>Guard the sleep</h3>
+        <p>An evening walk, then lights out. &ldquo;You cannot biohack your way out of a good night&rsquo;s sleep.&rdquo;</p>
       </div>
     </div>
   </div>
@@ -250,50 +347,92 @@
 <section class="block">
   <div class="wrap">
     <span class="eyebrow">In Her Words</span>
-    <h2 class="title">The philosophy she teaches.</h2>
+    <h2 class="title">The philosophy <em>she teaches.</em></h2>
     <div class="quotes-grid">
       <div class="qcard">
         <div class="qmark">&ldquo;</div>
-        <p>It has to be like brushing your teeth.</p>
-        <span class="qlabel">On Consistency</span>
+        <p>We don&rsquo;t need millions of dollars to live long, vibrant lives.</p>
+        <span class="qlabel">The Belief</span>
       </div>
       <div class="qcard">
         <div class="qmark">&ldquo;</div>
-        <p>You cannot biohack your way out of a good night's sleep.</p>
-        <span class="qlabel">The Equalizer</span>
+        <p>You cannot biohack your way out of a good night&rsquo;s sleep.</p>
+        <span class="qlabel">The Non-Negotiable</span>
       </div>
       <div class="qcard">
         <div class="qmark">&ldquo;</div>
-        <p>We don't need millions of dollars to live long, vibrant lives.</p>
+        <p>No matter where you are in your health journey &mdash; just start.</p>
         <span class="qlabel">The Mission</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="block" style="padding-top:0;">
+<!-- PRESS — real high-res screenshots -->
+<section class="block press">
   <div class="wrap">
-    <div class="gallery">
-      <figure><img src="../assets/instructors/julie-hero.jpg" alt="Julie Gibson Clark"></figure>
-      <figure><img src="../assets/instructors/julie-portrait.jpg" alt="Julie Gibson Clark portrait"></figure>
-      <figure><img src="../assets/instructors/julie-lifestyle.jpg" alt="Julie Gibson Clark at home"></figure>
+    <div class="head">
+      <span class="eyebrow" style="text-align:center;">In The Press</span>
+      <h2 class="title">The world took<br><em>notice.</em></h2>
+      <p class="lead">Julie&rsquo;s results made global headlines &mdash; from <em>Fortune</em> to <em>Business Insider</em> &mdash; as the woman whose fundamentals outpaced the field.</p>
+    </div>
+    <div class="press-grid">
+      <div class="feature">
+        <a class="clip" href="https://fortune.com/well/2023/11/04/longevity-women-biohackers-diet-exercise-bryan-johnson/" target="_blank" rel="noopener">
+          <div class="bar-top"><i></i><i></i><i></i><span class="url">fortune.com/well</span></div>
+          <div class="shot"><img src="../assets/press/fortune_clean.png" alt="Fortune feature headline: Wealthy men are spending millions to lower their biological ages and live longer. These women are beating them with cheaper solutions"></div>
+        </a>
+        <div class="press-cap">
+          <span class="outlet">Fortune</span>
+          <a class="read" href="https://fortune.com/well/2023/11/04/longevity-women-biohackers-diet-exercise-bryan-johnson/" target="_blank" rel="noopener">Read the feature <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <a class="clip" href="https://www.businessinsider.com/woman-spending-less-than-millionaire-bryan-johnson-anti-aging-ranking-2023-11" target="_blank" rel="noopener">
+          <div class="bar-top"><i></i><i></i><i></i><span class="url">businessinsider.com</span></div>
+          <div class="shot"><img src="../assets/press/bi_clean.png" alt="Business Insider headline about Julie Gibson Clark beating a millionaire in the Rejuvenation Olympics"></div>
+        </a>
+        <div class="press-cap">
+          <span class="outlet">Business Insider</span>
+          <a class="read" href="https://www.businessinsider.com/woman-spending-less-than-millionaire-bryan-johnson-anti-aging-ranking-2023-11" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <a class="clip" href="https://novoslabs.com/blog/novos-customer-stories/julie-gibson-clark-longevity-journey/" target="_blank" rel="noopener">
+          <div class="bar-top"><i></i><i></i><i></i><span class="url">novoslabs.com/blog</span></div>
+          <div class="shot"><img src="../assets/press/novos_clean.png" alt="NOVOS feature: Rejuvenation Olympics Leaderboard — How Julie Gibson Clark Reached the Top"></div>
+        </a>
+        <div class="press-cap">
+          <span class="outlet">NOVOS</span>
+          <a class="read" href="https://novoslabs.com/blog/novos-customer-stories/julie-gibson-clark-longevity-journey/" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- WHAT SHE TEACHES -->
-<section class="block pr">
+<!-- JOINING LLA -->
+<section class="block joining">
   <div class="wrap">
-    <span class="eyebrow">At Longevity Life Academy</span>
-    <h2 class="title">What Julie brings<br>to the cohort.</h2>
-    <p class="lead">As Founding Faculty, Julie teaches the accessible, evidence-based fundamentals that moved her to the top of the world leaderboard — the exact levers anyone can pull, without a billionaire's budget.</p>
-    <div class="chips">
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M3 12h18"/></svg>Sustainable nutrition &amp; fasting rhythm</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 12h4l3-8 4 16 3-8h2"/></svg>VO₂ max &amp; strength training</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>Sleep as the non-negotiable</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Smart, minimal supplementation</span>
-      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 00-4 12.7V17a2 2 0 002 2h4a2 2 0 002-2v-2.3A7 7 0 0012 2z"/></svg>Tracking your own biomarkers</span>
+    <span class="eyebrow" style="text-align:center;">The Next Chapter</span>
+    <h2 class="title" style="text-align:center;">Now she&rsquo;s teaching<br><em>it to you.</em></h2>
+    <p class="lead" style="margin:0 auto 44px; text-align:center;">Julie has joined <strong>Longevity Life Academy</strong> &mdash; the longevity education program by eTeacher Group &mdash; as <strong>Founding Faculty</strong>.</p>
+    <div class="join-card">
+      <div class="join-media">
+        <img src="../assets/instructors/julie-lifestyle.jpg" alt="Julie Gibson Clark">
+      </div>
+      <div class="join-body">
+        <span class="eyebrow">What Julie Teaches</span>
+        <h2>The exact fundamentals behind a <em>world #2 ranking.</em></h2>
+        <p>No billionaire budget, no exotic hardware &mdash; just the accessible, evidence-based levers anyone can pull, taught by the woman who lives them every day.</p>
+        <ul class="teach-list">
+          <li><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Sustainable nutrition &amp; daily eating rhythm</li>
+          <li><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>VO&#8322; max cardio &amp; strength training</li>
+          <li><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Protecting sleep as the true non-negotiable</li>
+          <li><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Meditation &amp; stress as longevity levers</li>
+          <li><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Smart, minimal supplementation &amp; tracking your own biomarkers</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -301,8 +440,8 @@
 <!-- CTA -->
 <section class="block cta-final">
   <div class="wrap">
-    <h2>Learn longevity from<br>the woman who lives it.</h2>
-    <p>Julie's cohort is small and seats are limited. Apply now to learn the exact, budget-friendly protocol behind a world #2 ranking.</p>
+    <h2>Learn longevity from<br><em>the woman who lives it.</em></h2>
+    <p>Julie&rsquo;s cohort is small and seats are limited. Apply now to learn the exact, repeatable protocol behind a world #2 ranking.</p>
     <a class="cta-btn" href="../index.html#lead-gen">
       Enroll in the Next Cohort
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -311,15 +450,15 @@
 </section>
 
 <footer>
-  <div>&copy; Longevity Life Academy · by <a href="../index.html">eTeacher Group</a> · <a href="../index.html#teachers">Back to Instructors</a></div>
-  <p class="disclaimer">Rankings and figures reference Julie Gibson Clark's publicly reported results on the Rejuvenation Olympics leaderboard (DunedinPACE ~0.665) as covered by Fortune, Business Insider, The Wall Street Journal and others. Individual results vary; the Academy's programs are educational and not a substitute for medical advice.</p>
+  <div>&copy; Longevity Life Academy &middot; by <a href="../index.html">eTeacher Group</a> &middot; <a href="../index.html#teachers">Back to Instructors</a></div>
+  <p class="disclaimer">Julie Gibson Clark&rsquo;s pace-of-aging score (DunedinPACE ~0.665) and #2 world ranking reflect her publicly reported results on the Rejuvenation Olympics leaderboard, as covered by Fortune, Business Insider and others. Leaderboard positions change over time as new tests are logged, and epigenetic-clock scores are estimates, not medical diagnoses. Individual results vary; the Academy&rsquo;s programs are educational and not a substitute for medical advice.</p>
 </footer>
 
 <script>
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  document.querySelectorAll('section.block .wrap > *, .story, .story > *').forEach((el,i) => {
+  document.querySelectorAll('section.block .wrap > *, .story, .story > *, .pace-card, .tl-card, .qcard, .press-grid > *, .join-card').forEach((el) => {
     el.classList.add('reveal');
     io.observe(el);
   });
