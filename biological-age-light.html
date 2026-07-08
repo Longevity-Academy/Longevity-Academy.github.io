@@ -14,7 +14,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <title>Biological Age Assessment, Light Version</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/codec-pro" rel="stylesheet">
   <style>
     :root{
@@ -126,6 +126,102 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .form-thankyou-cta svg{width:18px;height:18px}
     @keyframes bio-fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @media (max-width:720px){.bio-leadgen-grid{grid-template-columns:1fr}.bio-leadgen{padding:28px 22px}.form-thankyou{padding:40px 22px}}
+
+    /* ===== Smart lead-capture: contextual course info beside the form ===== */
+    .bio-convert{display:none;margin-top:22px}
+    .bio-convert.visible{display:block;animation:bio-fade .5s cubic-bezier(.22,1,.36,1)}
+    .bio-convert-card{display:grid;grid-template-columns:1.02fr 1fr;gap:0;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(6,16,32,.28);border:1px solid rgba(0,110,255,.16)}
+    /* Left: course context panel */
+    .bio-ctx{position:relative;padding:36px 34px;background:linear-gradient(165deg,#071a36 0%,#0a2142 55%,#04101f 100%);color:#fff;overflow:hidden}
+    .bio-ctx::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 340px at 15% 0%,rgba(0,110,255,.30),transparent 60%),radial-gradient(500px 320px at 100% 100%,rgba(120,90,255,.20),transparent 62%);pointer-events:none}
+    .bio-ctx>*{position:relative;z-index:1}
+    .bio-ctx-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7EC8FF;margin-bottom:14px}
+    .bio-ctx-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#5EB6FF;box-shadow:0 0 8px #5EB6FF,0 0 16px rgba(94,182,255,.7);animation:llaDot 2.2s ease-in-out infinite}
+    .bio-ctx h3{font-family:'Instrument Serif','Times New Roman',serif;font-weight:400;font-size:clamp(28px,3.4vw,38px);line-height:1.06;letter-spacing:-.01em;color:#fff;margin:0 0 6px}
+    .bio-ctx h3 .it{font-style:italic;color:#7EC8FF}
+    .bio-ctx .bio-ctx-track{display:inline-block;margin:2px 0 16px;padding:6px 14px;border-radius:999px;background:rgba(0,110,255,.16);border:1px solid rgba(126,200,255,.3);color:#BFE0FF;font-size:12.5px;font-weight:700;letter-spacing:.02em}
+    .bio-ctx .bio-ctx-lead{color:rgba(233,240,251,.78);font-size:15px;line-height:1.6;margin:0 0 22px;max-width:42ch}
+    .bio-ctx-list{display:flex;flex-direction:column;gap:13px;margin:0 0 26px}
+    .bio-ctx-list li{display:flex;gap:12px;align-items:flex-start;list-style:none;font-size:14.5px;line-height:1.5;color:rgba(233,240,251,.9)}
+    .bio-ctx-list li strong{color:#fff;font-weight:700}
+    .bio-ctx-list .ic{flex:0 0 22px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#006EFF,#338BFF);margin-top:1px;box-shadow:0 4px 12px rgba(0,110,255,.4)}
+    .bio-ctx-list .ic svg{width:13px;height:13px;color:#fff;stroke-width:3}
+    .bio-ctx-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 14px;padding-top:20px;border-top:1px solid rgba(160,200,255,.14)}
+    .bio-ctx-price .amt{font-family:'Instrument Serif','Times New Roman',serif;font-size:32px;color:#fff;line-height:1}
+    .bio-ctx-price .amt span{font-size:15px;color:rgba(233,240,251,.6);font-family:'Inter',sans-serif}
+    .bio-ctx-price .alt{font-size:13px;color:rgba(233,240,251,.62)}
+    .bio-ctx-price .alt b{color:#7EC8FF;font-weight:700}
+    .bio-ctx-trust{display:flex;align-items:center;gap:9px;margin-top:16px;font-size:12.5px;color:rgba(233,240,251,.6)}
+    .bio-ctx-trust .stars{color:#FFC24B;letter-spacing:1px;font-size:13px}
+    /* Right: form column (reuses .bio-leadgen visuals) */
+    .bio-convert .bio-leadgen{display:block;margin-top:0;border-radius:0;box-shadow:none;border:none;background:linear-gradient(160deg,#0a1628 0%,#0d1b2e 55%,#060e1a 100%)}
+    .bio-convert .form-thankyou{margin-top:0;border-radius:0}
+    @media (max-width:860px){.bio-convert-card{grid-template-columns:1fr}.bio-ctx{padding:30px 26px}}
+
+    /* ===== Premium course-info sections (dark navy) ===== */
+    .course-dark{position:relative;background:linear-gradient(180deg,#04101F 0%,#061428 48%,#04101F 100%);color:#fff;padding:96px 0;overflow:hidden}
+    .course-dark::before{content:"";position:absolute;inset:0;background:radial-gradient(760px 460px at 12% -8%,rgba(0,110,255,.20),transparent 62%),radial-gradient(680px 460px at 100% 106%,rgba(120,90,255,.14),transparent 60%);pointer-events:none}
+    .course-dark .wrap{position:relative;z-index:1}
+    .cd-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#7EC8FF}
+    .cd-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:#5EB6FF;box-shadow:0 0 8px #5EB6FF,0 0 16px rgba(94,182,255,.7)}
+    .cd-h2{font-family:'Instrument Serif','Times New Roman',serif;font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-.5px;margin:16px 0 0;max-width:16ch}
+    .course-dark.center .cd-h2{margin-left:auto;margin-right:auto}
+    .cd-h2 .it{font-style:italic;color:#7EC8FF}
+    .cd-sub{font-size:19px;line-height:1.6;color:rgba(233,240,251,.72);max-width:52ch;margin:20px 0 0}
+    .course-dark.center .cd-sub{margin-left:auto;margin-right:auto}
+
+    /* Inside-the-program format cards */
+    .cd-format{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+    .cd-fcard{position:relative;padding:28px 24px;border-radius:22px;background:linear-gradient(165deg,rgba(16,34,62,.9),rgba(8,20,40,.9));border:1px solid rgba(126,200,255,.14);box-shadow:0 24px 54px rgba(4,12,26,.5);text-align:left;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s,box-shadow .35s}
+    .cd-fcard:hover{transform:translateY(-6px);border-color:rgba(126,200,255,.34);box-shadow:0 34px 70px rgba(0,60,150,.34)}
+    .cd-fcard .ficon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#006EFF,#338BFF);box-shadow:0 10px 24px rgba(0,110,255,.4);margin-bottom:18px}
+    .cd-fcard .ficon svg{width:23px;height:23px;color:#fff;stroke-width:2.2}
+    .cd-fcard h4{font-size:18px;font-weight:700;color:#fff;margin:0 0 8px;letter-spacing:-.01em}
+    .cd-fcard p{font-size:14px;line-height:1.55;color:rgba(233,240,251,.7);margin:0}
+    .cd-fcard .big{font-family:'Instrument Serif',serif;font-size:34px;color:#7EC8FF;line-height:1;margin-bottom:6px;display:block}
+
+    /* Six pillars grid */
+    .cd-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+    .cd-pillar{position:relative;border-radius:22px;overflow:hidden;min-height:250px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid rgba(126,200,255,.14);box-shadow:0 24px 54px rgba(4,12,26,.5);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+    .cd-pillar:hover{transform:translateY(-6px)}
+    .cd-pillar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+    .cd-pillar::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,16,31,.05) 0%,rgba(4,16,31,.55) 52%,rgba(4,16,31,.94) 100%);z-index:1}
+    .cd-pillar .pbody{position:relative;z-index:2;padding:22px 22px 24px}
+    .cd-pillar .pnum{font-family:'Instrument Serif',serif;font-size:15px;color:#7EC8FF;letter-spacing:.08em}
+    .cd-pillar h4{font-size:20px;font-weight:700;color:#fff;margin:4px 0 6px;letter-spacing:-.01em}
+    .cd-pillar p{font-size:13.5px;line-height:1.5;color:rgba(233,240,251,.82);margin:0}
+
+    /* Faculty */
+    .cd-faculty{display:grid;grid-template-columns:.86fr 1.14fr;gap:44px;align-items:center;margin-top:52px}
+    .cd-faculty-photo{position:relative;border-radius:26px;overflow:hidden;box-shadow:0 34px 80px rgba(4,12,26,.6);border:1px solid rgba(126,200,255,.16)}
+    .cd-faculty-photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;display:block}
+    .cd-faculty-photo .badge{position:absolute;left:18px;bottom:18px;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:999px;background:rgba(4,16,31,.72);backdrop-filter:blur(10px);border:1px solid rgba(126,200,255,.3);color:#BFE0FF;font-size:12.5px;font-weight:700}
+    .cd-faculty-photo .badge svg{width:14px;height:14px;color:#FFC24B}
+    .cd-faculty-body .cd-h2{font-size:clamp(30px,4vw,46px);max-width:18ch}
+    .cd-faculty-role{color:#7EC8FF;font-size:14px;font-weight:700;letter-spacing:.02em;margin-top:10px}
+    .cd-faculty-body p.bio{font-size:16px;line-height:1.66;color:rgba(233,240,251,.78);margin-top:16px;max-width:50ch}
+    .cd-faculty-stats{display:flex;gap:34px;margin-top:26px;flex-wrap:wrap}
+    .cd-faculty-stats .st strong{display:block;font-family:'Instrument Serif',serif;font-size:34px;color:#fff;line-height:1}
+    .cd-faculty-stats .st span{font-size:13px;color:rgba(233,240,251,.62)}
+
+    /* Outcomes */
+    .cd-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+    .cd-oc{padding:26px 24px;border-radius:20px;background:linear-gradient(165deg,rgba(16,34,62,.72),rgba(8,20,40,.72));border:1px solid rgba(126,200,255,.14);text-align:left}
+    .cd-oc .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(0,110,255,.16);border:1px solid rgba(126,200,255,.3);margin-bottom:16px}
+    .cd-oc .ic svg{width:20px;height:20px;color:#7EC8FF;stroke-width:2.2}
+    .cd-oc h4{font-size:17px;font-weight:700;color:#fff;margin:0 0 7px}
+    .cd-oc p{font-size:14px;line-height:1.55;color:rgba(233,240,251,.7);margin:0}
+
+    /* Trust strip */
+    .cd-trust{margin-top:56px;padding:30px 36px;border-radius:22px;background:linear-gradient(120deg,rgba(0,110,255,.12),rgba(120,90,255,.08));border:1px solid rgba(126,200,255,.2);display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+    .cd-trust .tstat{text-align:center}
+    .cd-trust .tstat strong{display:block;font-family:'Instrument Serif',serif;font-size:38px;color:#fff;line-height:1}
+    .cd-trust .tstat .stars{color:#FFC24B;letter-spacing:2px;font-size:16px;display:block;margin-bottom:2px}
+    .cd-trust .tstat span{font-size:13px;color:rgba(233,240,251,.66)}
+    .cd-trust .tdiv{width:1px;align-self:stretch;background:rgba(160,200,255,.18)}
+
+    @media (max-width:900px){.cd-format{grid-template-columns:repeat(2,1fr)}.cd-pillars{grid-template-columns:repeat(2,1fr)}.cd-outcomes{grid-template-columns:1fr}.cd-faculty{grid-template-columns:1fr;gap:32px}}
+    @media (max-width:560px){.course-dark{padding:68px 0}.cd-format{grid-template-columns:1fr}.cd-pillars{grid-template-columns:1fr}.cd-trust{flex-direction:column;gap:20px}.cd-trust .tdiv{display:none}.cd-faculty-stats{gap:24px}}
   </style>
   <link rel="stylesheet" href="assets/lla-nav.css?v=2">
 </head>
@@ -174,24 +270,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
     <section class="hero">
       <div class="wrap center">
-        <span class="eyebrow">Personal longevity snapshot</span>
-        <h1>Find the age your body may be living at.</h1>
-        <p class="sub">A clean light version of the assessment page, centered and client-friendly, with the questionnaire placed high on the page.</p>
+        <span class="eyebrow">Free 3-minute assessment</span>
+        <h1>What age is your body really living at?</h1>
+        <p class="sub">Answer a few questions about how you sleep, eat, move, and recover. Get an instant estimate of your biological age — and see the one pillar to focus on first.</p>
         <a class="btn" href="#assessment">Start the assessment</a>
 
         <div class="hero-grid">
-          <figure class="image-card"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" alt="Healthy woman stretching outdoors" width="900" height="1125" loading="lazy"></figure>
+          <figure class="image-card"><img src="assets/img-movement.jpg" alt="Adult training and moving with intention" width="900" height="1125" loading="lazy"></figure>
           <div class="panel">
             <span class="eyebrow">What you receive</span>
-            <h3 style="font-size:30px;margin:14px 0">A clear, elegant snapshot of your current longevity patterns.</h3>
-            <p>This version keeps the page bright, airy, and premium while remaining simple and easy to review.</p>
+            <h3 style="font-size:30px;margin:14px 0">A clear snapshot of how your habits are shaping the way you age.</h3>
+            <p>Your personalized biological-age estimate, the focus area that matters most for you right now, and a supportive path into the science-backed protocol taught inside Longevity Life Academy.</p>
             <div class="stats">
               <div class="stat"><strong>3 min</strong><span>To complete</span></div>
-              <div class="stat"><strong>1 result</strong><span>Personalized snapshot</span></div>
-              <div class="stat"><strong>Clear next step</strong><span>Supportive direction</span></div>
+              <div class="stat"><strong>Instant</strong><span>Personalized result</span></div>
+              <div class="stat"><strong>Free CGM</strong><span>Inside the course</span></div>
             </div>
           </div>
-          <figure class="image-card"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80" alt="Nutritious colorful meal on a table" width="900" height="1125" loading="lazy"></figure>
+          <figure class="image-card"><img src="assets/img-nutrition.jpg" alt="Nutritious longevity-focused meal" width="900" height="1125" loading="lazy"></figure>
         </div>
       </div>
     </section>
@@ -289,10 +385,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </section>
 
+          <div class="bio-convert" id="bioConvert">
+           <div class="bio-convert-card">
+            <aside class="bio-ctx">
+              <span class="bio-ctx-eyebrow">Your next step</span>
+              <h3>Turn your result into <span class="it">a real protocol.</span></h3>
+              <div class="bio-ctx-track" id="bioCtxTrack">Personalized to your snapshot</div>
+              <p class="bio-ctx-lead" id="bioCtxLead">Longevity Life Academy is a live, 18-week course that takes you from this snapshot to your own written longevity protocol — guided by expert faculty and your own body's data.</p>
+              <ul class="bio-ctx-list">
+                <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><strong>18 weeks live online</strong> — weekly 50-min sessions in a small class of 8–15 adults.</span></li>
+                <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><strong>Free Abbott Lingo CGM</strong> — shipped before lesson 5, so you see your own glucose data.</span></li>
+                <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><strong>Six-pillar curriculum</strong> — nutrition, sleep, movement, supplements, stress, and your protocol.</span></li>
+                <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><strong>Your personal longevity protocol</strong> — peer-reviewed by your class, yours to keep.</span></li>
+              </ul>
+              <div class="bio-ctx-price">
+                <span class="amt">$289 <span>/mo × 5</span></span>
+                <span class="alt">or <b>$1,249 one-time</b> · cancel anytime, no setup fee</span>
+              </div>
+              <div class="bio-ctx-trust"><span class="stars">★★★★★</span> 4.6 / 5 on Trustpilot · 600+ verified reviews</div>
+            </aside>
           <form class="bio-leadgen form-with-thankyou" id="bioLeadGenForm" data-thankyou-target="bioThankYou" novalidate>
-            <span class="bio-leadgen-eyebrow">Get your full protocol</span>
+            <span class="bio-leadgen-eyebrow">Talk to admissions</span>
             <h3>Discuss your result with our team.</h3>
-            <p class="bio-leadgen-sub">Leave your details and an admissions advisor will reach out personally to walk you through your snapshot and the next steps in Longevity Life Academy.</p>
+            <p class="bio-leadgen-sub">Leave your details and an admissions advisor will reach out personally to walk you through your snapshot and the best way into the program — no commitment.</p>
             <div class="bio-leadgen-grid">
               <div class="bio-leadgen-field">
                 <label for="bioFName">First Name</label>
@@ -386,19 +501,100 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               Back to Home
             </a>
           </div>
+           </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="wrap center">
-        <span class="eyebrow">Assessment pillars</span>
-        <h2>The key patterns that shape healthy aging.</h2>
-        <p class="sub" style="max-width:42ch">Each pillar highlights an area that can meaningfully influence how the body feels, functions, and adapts over time.</p>
-        <div class="pillars">
-          <div class="card feature"><h3 style="font-size:26px">Daily rhythm</h3><p>Sleep quality, stress balance, and the patterns that support resilience.</p></div>
-          <div class="card feature"><h3 style="font-size:26px">Metabolic balance</h3><p>Energy stability, food quality, and the signals that reflect how the body is fueled.</p></div>
-          <div class="card feature"><h3 style="font-size:26px">Movement capacity</h3><p>Strength, cardio, and recovery habits that help preserve vitality.</p></div>
+    <!-- ===== Inside the program ===== -->
+    <section class="course-dark center" id="inside-program">
+      <div class="wrap">
+        <span class="cd-eyebrow">Inside the program</span>
+        <h2 class="cd-h2">A snapshot is the start. <span class="it">A protocol changes things.</span></h2>
+        <p class="cd-sub">Longevity Life Academy turns your result into a written, evidence-based plan — over 18 live weeks, in a small class, guided by faculty and your own body's data.</p>
+        <div class="cd-format">
+          <div class="cd-fcard">
+            <span class="big">18</span>
+            <h4>Weeks, live online</h4>
+            <p>Four phases across 18 live sessions — 18 Live Sessions. 4 Phases. One Protocol.</p>
+          </div>
+          <div class="cd-fcard">
+            <span class="big">8&ndash;15</span>
+            <h4>Small cohort</h4>
+            <p>A class of 8&ndash;15 adults so faculty know you, your data, and your goals.</p>
+          </div>
+          <div class="cd-fcard">
+            <span class="big">50<span style="font-size:16px;color:rgba(233,240,251,.6)">min</span></span>
+            <h4>Weekly live sessions</h4>
+            <p>Recorded, with weekly assignments and a private class forum between sessions.</p>
+          </div>
+          <div class="cd-fcard">
+            <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <h4>Free Abbott Lingo CGM</h4>
+            <p>Shipped before lesson 5 with 14 days of app access, so you see your real glucose data.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== The Six Pillars ===== -->
+    <section class="course-dark center" id="six-pillars" style="padding-top:0">
+      <div class="wrap">
+        <span class="cd-eyebrow">The curriculum</span>
+        <h2 class="cd-h2">Six pillars. <span class="it">One protocol that's yours.</span></h2>
+        <p class="cd-sub">Each pillar builds on your assessment, moving from the fundamentals to a personal longevity protocol you keep for life.</p>
+        <div class="cd-pillars">
+          <div class="cd-pillar"><img src="assets/img-nutrition.jpg" alt="Nutrition" loading="lazy"><div class="pbody"><div class="pnum">Pillar 01</div><h4>Nutrition</h4><p>What to eat and when, tuned to how your body actually responds.</p></div></div>
+          <div class="cd-pillar"><img src="assets/img-sleep.jpg" alt="Sleep" loading="lazy"><div class="pbody"><div class="pnum">Pillar 02</div><h4>Sleep</h4><p>Rhythm, recovery, and the nightly habits that reset the body.</p></div></div>
+          <div class="cd-pillar"><img src="assets/img-movement.jpg" alt="Exercise and movement" loading="lazy"><div class="pbody"><div class="pnum">Pillar 03</div><h4>Exercise &amp; Movement</h4><p>Strength, cardio, and mobility that protect vitality over decades.</p></div></div>
+          <div class="cd-pillar"><img src="assets/img-supplements.jpg" alt="Supplements and wearables" loading="lazy"><div class="pbody"><div class="pnum">Pillar 04</div><h4>Supplements &amp; Wearables</h4><p>What's worth taking, what's worth tracking, and how to read the data.</p></div></div>
+          <div class="cd-pillar"><img src="assets/img-stress.jpg" alt="Stress management" loading="lazy"><div class="pbody"><div class="pnum">Pillar 05</div><h4>Stress Management</h4><p>Nervous-system tools to build resilience and steadier energy.</p></div></div>
+          <div class="cd-pillar"><img src="assets/img-metabolic.jpg" alt="Your longevity protocol" loading="lazy"><div class="pbody"><div class="pnum">Pillar 06</div><h4>Your Longevity Protocol</h4><p>A written plan, peer-reviewed by your class and yours to keep.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Meet your faculty ===== -->
+    <section class="course-dark" id="faculty" style="padding-top:0">
+      <div class="wrap">
+        <div class="cd-faculty">
+          <div class="cd-faculty-photo">
+            <img src="assets/instructors/julie-portrait.jpg" alt="Julie Gibson Clark, Founding Faculty" loading="lazy">
+            <span class="badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.7L12 17.3 5.8 20.8l1.6-6.7L2.2 8.9l6.9-.6z"/></svg> Ranked #2 · Rejuvenation Olympics</span>
+          </div>
+          <div class="cd-faculty-body">
+            <span class="cd-eyebrow">Meet your faculty</span>
+            <h2 class="cd-h2">Julie Gibson Clark</h2>
+            <div class="cd-faculty-role">Founding Faculty · Longevity Life Academy</div>
+            <p class="bio">Ranked the #2 slowest-aging person in the world on the Rejuvenation Olympics, Julie is a leading voice in accessible, evidence-based longevity. She built her results without a private lab or an elite budget — and she teaches exactly that approach here.</p>
+            <div class="cd-faculty-stats">
+              <div class="st"><strong>#2</strong><span>Rejuvenation Olympics</span></div>
+              <div class="st"><strong>18</strong><span>Live weeks with faculty</span></div>
+              <div class="st"><strong>1:1</strong><span>Protocol built around you</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== What you walk away with ===== -->
+    <section class="course-dark center" id="outcomes" style="padding-top:0">
+      <div class="wrap">
+        <span class="cd-eyebrow">What you walk away with</span>
+        <h2 class="cd-h2">Not information. <span class="it">A plan you'll actually use.</span></h2>
+        <div class="cd-outcomes">
+          <div class="cd-oc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div><h4>Your written protocol</h4><p>A personal longevity plan, peer-reviewed by your cohort and yours to keep for life.</p></div>
+          <div class="cd-oc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.8L7 14.3"/></svg></div><h4>Data you can read</h4><p>Real glucose insight from your Lingo CGM, plus the skills to interpret your own markers.</p></div>
+          <div class="cd-oc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4>A small, expert community</h4><p>Faculty who know your name and a cohort walking the same path alongside you.</p></div>
+        </div>
+
+        <div class="cd-trust">
+          <div class="tstat"><span class="stars">★★★★★</span><strong>4.6 / 5</strong><span>Rated on Trustpilot</span></div>
+          <div class="tdiv"></div>
+          <div class="tstat"><strong>600+</strong><span>Verified reviews</span></div>
+          <div class="tdiv"></div>
+          <div class="tstat"><strong>Designed by</strong><span>eTeacher Group</span></div>
         </div>
       </div>
     </section>
@@ -424,6 +620,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     form.addEventListener('input', updateLive); form.addEventListener('change', updateLive);
     const bioLeadGen = document.getElementById('bioLeadGenForm');
     const bioThankYou = document.getElementById('bioThankYou');
+    const bioConvert = document.getElementById('bioConvert');
+    const bioCtxTrack = document.getElementById('bioCtxTrack');
+    const bioCtxLead = document.getElementById('bioCtxLead');
     const quizError = document.getElementById('quizError');
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
@@ -462,6 +661,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         bioLeadGen.dataset.adminNotes = notes;
         bioLeadGen.classList.add('visible');
       }
+      // Personalize the course-info panel to the user's snapshot, then reveal the conversion block.
+      if (bioCtxTrack) {
+        const gapTxt = result.gap===0 ? 'aligned with your chronological age' : (result.gap>0 ? `${result.gap} year${result.gap===1?'':'s'} older than your chronological age` : `${Math.abs(result.gap)} year${Math.abs(result.gap)===1?'':'s'} younger than your chronological age`);
+        bioCtxTrack.textContent = `Your focus: ${result.track}`;
+        if (bioCtxLead) {
+          bioCtxLead.textContent = `Your snapshot puts you ${gapTxt}. Inside the 18-week program you'll turn this into a written longevity protocol — starting with ${result.track.toLowerCase()} — guided by expert faculty and your own body's data.`;
+        }
+      }
+      if (bioConvert) { bioConvert.classList.add('visible'); }
       resultCard.scrollIntoView({behavior:'smooth',block:'nearest'});
     });
     form.addEventListener('reset', ()=>{
@@ -472,6 +680,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         liveAge.textContent='--';
         liveSummary.textContent='Answer the questions to reveal an estimated biological age and the area that may deserve the most attention next.';
         resultCard.classList.remove('visible');
+        if(bioConvert){ bioConvert.classList.remove('visible'); }
         if(bioLeadGen){
           bioLeadGen.classList.remove('visible');
           bioLeadGen.reset();
@@ -823,9 +1032,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           e.preventDefault();
           var rc=document.getElementById('resultCard');
           var blead=document.getElementById('bioLeadGenForm');
+          var bconv=document.getElementById('bioConvert');
           if(rc) rc.classList.add('visible');
           if(blead) blead.classList.add('visible');
-          var t=blead||rc;
+          if(bconv) bconv.classList.add('visible');
+          var t=bconv||blead||rc;
           if(t){
             requestAnimationFrame(function(){
               t.scrollIntoView({behavior:'smooth',block:'start'});
