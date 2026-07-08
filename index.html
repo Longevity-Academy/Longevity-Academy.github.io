@@ -426,6 +426,20 @@ ul, ol { list-style: none; }
 .hero-brand-mark {
   display: none !important;
 }
+/* ===== HERO WORDMARK IMAGE (exact approved artwork) ===== */
+.hero-wordmark-img {
+  display: block;
+  height: auto;
+  width: clamp(200px, 24vw, 320px);
+  max-width: 78vw;
+  margin: 0 0 34px 0;
+}
+@media (max-width: 900px) {
+  .hero-wordmark-img { margin-left: auto; margin-right: auto; }
+}
+@media (max-width: 600px) {
+  .hero-wordmark-img { width: clamp(180px, 62vw, 260px); margin-bottom: 26px; }
+}
 /* ===== HERO WORDMARK LOCKUP (crisp all-CSS, matches official brand exactly) ===== */
 .hero-wordmark {
   display: block;
@@ -8089,12 +8103,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
-    <!-- Hero brand: crisp all-CSS wordmark lockup (razor-sharp at any size; matches official brand) -->
-    <div class="hero-wordmark" aria-label="Longevity Life Academy by eTeacher Group">
-      <div class="hwm-line1">Longevity</div>
-      <div class="hwm-line2">Life Academy</div>
-      <div class="hwm-tagline"><span class="hwm-by">by</span> <span class="hwm-eteacher">eTeacher</span> <span class="hwm-group">Group</span></div>
-    </div>
+    <!-- Hero brand: exact approved transparent LLA logo artwork (identical fonts/colors) -->
+    <img src="assets/lla-logo-exact-transparent@2x.png?v=9" alt="Longevity Life Academy by eTeacher Group" class="hero-wordmark-img" loading="eager" fetchpriority="high" width="1314" height="596">
     <h1 class="hero-title">
       It's Your Life.<br><span class="life-blue">Live It Well.</span>
     </h1>
