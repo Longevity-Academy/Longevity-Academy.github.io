@@ -278,14 +278,30 @@
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
-/* --- Standardized brand logo (by eTeacher Group lockup) --- */
-.nav-logo-img{display:block;height:52px;width:auto;max-width:240px;image-rendering:auto}
-.nav-logo{display:inline-flex;align-items:center;padding:0;margin:0;line-height:0}
-@media (max-width:768px){.nav-logo-img{height:40px;max-width:180px}}
-
-/* Navy nav to match site + logo readability */
-nav, .nav{background:linear-gradient(180deg,#0e1f48 0%,#081634 100%) !important;border-bottom:1px solid rgba(120,170,255,0.22) !important}
-.nav-back{color:#6BB6FF !important}
+/* --- Full site nav (matches homepage) + standardized brand logo --- */
+nav{background:linear-gradient(180deg,#0e1f48 0%,#081634 100%) !important;border-bottom:1px solid rgba(120,170,255,0.22) !important;box-shadow:0 6px 24px rgba(0,0,0,0.45);}
+.nav-inner{max-width:1200px;height:auto;padding:14px 28px;gap:40px;justify-content:flex-start;}
+.nav-logo{display:inline-flex;align-items:center;padding:0;margin:0;line-height:0;flex-shrink:0;}
+.nav-logo-img{display:block;height:74px;width:auto;max-width:300px;image-rendering:auto;}
+.nav-menu{display:flex;align-items:center;gap:30px;margin-left:auto;}
+.nav-menu a{font-family:var(--font-body);font-size:15px;font-weight:600;color:rgba(255,255,255,0.86);text-decoration:none;letter-spacing:-0.01em;transition:color .15s;}
+.nav-menu a:hover{color:#6BB6FF;}
+.nav-menu a.nav-cta{background:var(--blue);color:#fff;padding:10px 22px;border-radius:999px;box-shadow:0 4px 16px rgba(0,110,255,0.4);}
+.nav-menu a.nav-cta:hover{background:var(--blue-hover);color:#fff;}
+.nav-menu a.nav-pricing{color:#fff;}
+.nav-mobile-btn{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:6px;margin-left:auto;}
+@media (max-width:960px){
+  .nav-menu{display:none;}
+  .nav-mobile-btn{display:inline-flex;}
+  .nav-logo-img{height:56px;max-width:230px;}
+  .nav-inner{padding:12px 20px;}
+}
+/* Mobile drawer */
+.nav-drawer{position:fixed;inset:0;z-index:200;background:linear-gradient(180deg,#0e1f48 0%,#081634 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.nav-drawer.open{opacity:1;pointer-events:auto;}
+.nav-drawer a{font-family:var(--font-display);font-size:24px;font-weight:700;color:#fff;text-decoration:none;}
+.nav-drawer a.nav-cta{background:var(--blue);padding:14px 40px;border-radius:999px;font-size:20px;}
+.nav-drawer-close{position:absolute;top:22px;right:24px;background:none;border:none;color:#fff;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -293,12 +309,31 @@ nav, .nav{background:linear-gradient(180deg,#0e1f48 0%,#081634 100%) !important;
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="../index.html" aria-label="Longevity Life Academy home"><img src="../assets/lla-logo-transparent@2x.png?v=6" alt="Longevity Life Academy" class="nav-logo-img" width="1268" height="550"></a>
-    <a class="nav-back" href="../index.html#teachers">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      All Instructors
-    </a>
+    <div class="nav-menu">
+      <a href="../about.html">About</a>
+      <a href="../index.html#syllabus">Curriculum</a>
+      <a href="../cgm.html">CGM</a>
+      <a href="../biological-age-light.html">Bio-Age Quiz</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../index.html#faq">FAQ</a>
+      <a href="../pricing.html" class="nav-pricing">Pricing</a>
+      <a href="../index.html#lead-gen" class="nav-cta">Apply Now</a>
+    </div>
+    <button class="nav-mobile-btn" id="navMobileBtn" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </nav>
+<div class="nav-drawer" id="navDrawer">
+  <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <a href="../about.html">About</a>
+  <a href="../index.html#syllabus">Curriculum</a>
+  <a href="../cgm.html">CGM</a>
+  <a href="../biological-age-light.html">Bio-Age Quiz</a>
+  <a href="../blog.html">Blog</a>
+  <a href="../index.html#faq">FAQ</a>
+  <a href="../pricing.html">Pricing</a>
+  <a href="../index.html#lead-gen" class="nav-cta">Apply Now</a>
+</div>
+<script>(function(){var b=document.getElementById('navMobileBtn'),d=document.getElementById('navDrawer'),c=document.getElementById('navDrawerClose');if(b&&d){b.addEventListener('click',function(){d.classList.add('open');});}if(c&&d){c.addEventListener('click',function(){d.classList.remove('open');});}if(d){d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){d.classList.remove('open');});});}})();</script>
 
 <!-- HERO (dark navy) -->
 <header class="hero">

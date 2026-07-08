@@ -29,7 +29,7 @@ body.has-shared-nav .lla-shared-nav .nav-logo {
   text-decoration: none; padding: 0; margin: 0;
 }
 body.has-shared-nav .lla-shared-nav .nav-logo-img {
-  display: block; height: 44px; width: auto; max-width: 220px;
+  display: block; height: 64px; width: auto; max-width: 270px;
 }
 body.has-shared-nav .lla-shared-nav .nav-links {
   display: flex; gap: 32px; align-items: center;
@@ -91,8 +91,8 @@ body.has-shared-nav .lla-mobile-nav-cta {
 @media (max-width: 768px) {
   body.has-shared-nav .lla-shared-nav .nav-links { display: none !important; }
   body.has-shared-nav .lla-shared-nav .mobile-menu-btn { display: block; }
-  body.has-shared-nav .lla-shared-nav .nav-logo-img { height: 36px; max-width: 170px; }
+  body.has-shared-nav .lla-shared-nav .nav-logo-img { height: 48px; max-width: 210px; }
 }
 /* Push internal-page body content below fixed nav */
-body.has-shared-nav { margin-top: 68px; }
-@media (max-width: 768px) { body.has-shared-nav { margin-top: 60px; } }
+body.has-shared-nav { margin-top: 92px; }
+@media (max-width: 768px) { body.has-shared-nav { margin-top: 72px; } }
