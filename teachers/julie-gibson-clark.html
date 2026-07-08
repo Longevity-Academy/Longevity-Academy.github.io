@@ -277,13 +277,22 @@
     .hero-img img { animation: none; transform: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
   }
+
+/* --- Standardized brand logo (by eTeacher Group lockup) --- */
+.nav-logo-img{display:block;height:52px;width:auto;max-width:240px;image-rendering:auto}
+.nav-logo{display:inline-flex;align-items:center;padding:0;margin:0;line-height:0}
+@media (max-width:768px){.nav-logo-img{height:40px;max-width:180px}}
+
+/* Navy nav to match site + logo readability */
+nav, .nav{background:linear-gradient(180deg,#0e1f48 0%,#081634 100%) !important;border-bottom:1px solid rgba(120,170,255,0.22) !important}
+.nav-back{color:#6BB6FF !important}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="../index.html"><span>Longevity</span> Life Academy</a>
+    <a class="nav-logo" href="../index.html" aria-label="Longevity Life Academy home"><img src="../assets/lla-logo-transparent@2x.png?v=6" alt="Longevity Life Academy" class="nav-logo-img" width="1268" height="550"></a>
     <a class="nav-back" href="../index.html#teachers">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       All Instructors

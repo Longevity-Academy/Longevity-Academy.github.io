@@ -214,6 +214,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .articles-section { padding: 48px 20px; }
     .cta-block { padding: 36px 24px; }
   }
+
+/* --- Standardized brand logo (by eTeacher Group lockup) --- */
+.nav-logo-img{display:block;height:52px;width:auto;max-width:240px;image-rendering:auto}
+.nav-logo{display:inline-flex;align-items:center;padding:0;margin:0;line-height:0}
+@media (max-width:768px){.nav-logo-img{height:40px;max-width:180px}}
+
+/* Navy nav to match site + logo readability */
+nav, .nav{background:linear-gradient(180deg,#0e1f48 0%,#081634 100%) !important;border-bottom:1px solid rgba(120,170,255,0.22) !important}
+.nav-back{color:#6BB6FF !important}
 </style>
 </head>
 <body>
@@ -224,7 +233,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="/"><span>Longevity</span> Life Academy</a>
+    <a class="nav-logo" href="/" aria-label="Longevity Life Academy home"><img src="../assets/lla-logo-transparent@2x.png?v=6" alt="Longevity Life Academy" class="nav-logo-img" width="1268" height="550"></a>
     <a class="nav-back" href="/">← Back to Home</a>
   </div>
 </nav>
