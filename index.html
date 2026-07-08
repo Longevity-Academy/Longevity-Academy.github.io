@@ -191,13 +191,13 @@ ul, ol { list-style: none; }
 .nav-logo svg { width: 28px; height: 28px; }
 .nav-logo-img {
   display: block;
-  height: 64px;
+  height: 72px;
   width: auto;
-  max-width: 260px;
+  max-width: 380px;
   image-rendering: auto;
 }
 @media (max-width: 768px) {
-  .nav-logo-img { height: 48px; max-width: 170px; }
+  .nav-logo-img { height: 54px; max-width: 300px; }
 }
 .nav-links {
   display: flex;
@@ -425,6 +425,56 @@ ul, ol { list-style: none; }
 /* Official LLA logo (transparent PNG, original coloring preserved) - DNA + wordmark + by eTeacher Group baked into the artwork */
 .hero-brand-mark {
   display: none !important;
+}
+/* ===== HERO WORDMARK LOCKUP (crisp all-CSS, matches official brand exactly) ===== */
+.hero-wordmark {
+  display: block;
+  text-align: left;
+  margin: 0 0 40px 0;
+  line-height: 1;
+}
+.hero-wordmark .hwm-line1,
+.hero-wordmark .hwm-line2 {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(42px, 6vw, 82px);
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+  -webkit-font-smoothing: antialiased;
+}
+.hero-wordmark .hwm-line1 { color: #A9CBFF; }   /* Longevity - pale sky blue */
+.hero-wordmark .hwm-line2 { color: #FFFFFF; }   /* Life Academy - white */
+.hero-wordmark .hwm-tagline {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: clamp(20px, 2.6vw, 34px);
+  line-height: 1;
+  margin-top: 10px;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+.hero-wordmark .hwm-by {
+  font-style: italic;
+  color: #FFFFFF;
+}
+.hero-wordmark .hwm-eteacher {
+  font-style: normal;
+  color: #4C9BFF;   /* eTeacher brand blue */
+}
+.hero-wordmark .hwm-group {
+  font-style: italic;
+  color: #FFFFFF;
+}
+@media (max-width: 900px) {
+  .hero-wordmark { text-align: center; }
+}
+@media (max-width: 600px) {
+  .hero-wordmark { margin-bottom: 30px; }
+  .hero-wordmark .hwm-line1,
+  .hero-wordmark .hwm-line2 { font-size: clamp(40px, 13vw, 62px); }
+  .hero-wordmark .hwm-tagline { font-size: clamp(18px, 5.5vw, 28px); }
 }
 /* Unify eTeacher Group logo sizing sitewide - match the hero version's proportions (compact, in line with body text) */
 .how-v2-logo,
@@ -7968,7 +8018,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <a href="/" class="nav-logo" aria-label="Longevity Life Academy home">
-      <img src="assets/lla-logo-transparent@2x.png?v=6" alt="Longevity Life Academy" class="nav-logo-img" width="1268" height="550">
+      <img src="assets/lla-logo-exact-transparent@2x.png?v=9" alt="Longevity Life Academy" class="nav-logo-img" width="1314" height="596">
     </a>
     <div class="nav-links">
       <a href="about.html">About</a>
@@ -8039,12 +8089,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <span><span class="trustpilot-score">4.6 / 5</span> &middot; Trustpilot &middot; 600+ verified reviews</span>
     </div>
-    <!-- Hero brand: transparent LLA logo (DNA + wordmark + by eTeacher Group baked in) -->
-    <img src="assets/lla-logo-transparent.png" alt="Longevity Life Academy" class="hero-brand-mark" loading="eager" fetchpriority="high">
-    <div class="hero-academy-name">
-      <span class="longevity-word">Longevity</span> <span class="life-blue">Life</span> <span class="academy-word">Academy</span>
+    <!-- Hero brand: crisp all-CSS wordmark lockup (razor-sharp at any size; matches official brand) -->
+    <div class="hero-wordmark" aria-label="Longevity Life Academy by eTeacher Group">
+      <div class="hwm-line1">Longevity</div>
+      <div class="hwm-line2">Life Academy</div>
+      <div class="hwm-tagline"><span class="hwm-by">by</span> <span class="hwm-eteacher">eTeacher</span> <span class="hwm-group">Group</span></div>
     </div>
-    <!-- 'by eTeacher Group' lockup removed per CEO -->
     <h1 class="hero-title">
       It's Your Life.<br><span class="life-blue">Live It Well.</span>
     </h1>
