@@ -189,6 +189,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .jb-cta.secondary{background:transparent;border:1px solid rgba(126,200,255,.5);box-shadow:none;color:#CFE6FF}
     .jb-cta.secondary:hover{background:rgba(0,110,255,.12);transform:translateY(-2px);box-shadow:none}
     .jb-note{font-size:14px;color:rgba(200,216,240,.66)}
+    .jb-next{display:flex;align-items:flex-start;gap:10px;margin-top:18px;max-width:52ch;font-size:14.5px;line-height:1.55;color:rgba(214,228,248,.82)}
+    .jb-next svg{flex:none;width:17px;height:17px;margin-top:2px;color:#7EC8FF}
+    .jb-next b{color:#fff;font-weight:700}
     /* Product-info strip inside banner */
     .jb-facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
     .jb-fact{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;background:rgba(10,26,48,.66);border:1px solid rgba(126,200,255,.2);color:#E9F0FB;font-size:13.5px;font-weight:600;line-height:1.2}
@@ -338,28 +341,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="jb-fact"><span class="stars">★★★★★</span> <b>4.6/5</b> Trustpilot · 600+ reviews</span>
           </div>
           <div class="jb-cta-row">
-            <a href="#bioConvert" class="jb-cta" data-open-leadform>Talk to admissions about enrolling</a>
-            <a href="#assessment" class="jb-cta secondary">Get your biological age first</a>
+            <a href="#assessment" class="jb-cta">Get your biological age first</a>
             <span class="jb-note">Free assessment · takes 3 minutes</span>
           </div>
+          <p class="jb-next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <span>Right after your result, our admissions team reaches out — not to review your score, but to get you <b>enrolled in the Longevity Blueprint course at $289/mo</b>, with discounted access to Julie's exclusive Masterclass opening September.</span>
+          </p>
         </div>
       </div>
     </section>
-    <script>
-      (function(){
-        var opener=document.querySelector('[data-open-leadform]');
-        if(!opener)return;
-        opener.addEventListener('click',function(e){
-          e.preventDefault();
-          var box=document.getElementById('bioConvert');
-          if(box){box.classList.add('visible');}
-          var target=document.getElementById('bioLeadGenForm')||box||document.getElementById('assessment');
-          if(target){target.scrollIntoView({behavior:'smooth',block:'center'});}
-          var firstField=document.querySelector('#bioLeadGenForm input,#bioLeadGenForm select');
-          if(firstField){setTimeout(function(){firstField.focus({preventScroll:true});},650);}
-        });
-      })();
-    </script>
 
     <section class="section" id="assessment">
       <div class="wrap assessment">
