@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Longevity Blueprint · Live Cohort · Longevity Life Academy by eTeacher</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0A1E3F;--navy-2:#050c1e;--ink:#0A1220;--cream:#F5F0E5;--neon:#5EB6FF;--blue:#006EFF;--highlight:#FFF3A6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--ink);color:#fff;font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* NAV · real LLA navy */
+  .nav{position:sticky;top:0;z-index:100;padding:14px 0;background:linear-gradient(180deg,#0e1f48 0%,#081634 100%);border-bottom:1px solid rgba(126,200,255,.22);box-shadow:0 2px 20px rgba(0,0,0,.45)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px}
+  .nav-logo img{display:block;height:62px;width:auto;max-width:340px}
+  .nav-cta{background:linear-gradient(135deg,#1a7fff 0%,#0066ff 100%);color:#fff;padding:10px 24px;border-radius:999px;font-size:14px;font-weight:700;box-shadow:0 4px 16px rgba(26,127,255,.45),inset 0 1px 0 rgba(255,255,255,.2);border:1px solid rgba(120,180,255,.4)}
+
+  /* HERO · cells only */
+  .hero{position:relative;overflow:hidden;background:#050c1e}
+  .hero-bg{position:absolute;inset:0;background-image:url('../_assets/hero-cream.jpg');background-size:auto 90%;background-position:right center;background-repeat:no-repeat;background-color:#050C22;opacity:1}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,12,30,.85) 0%,rgba(5,12,30,.55) 55%,rgba(5,12,30,.15) 100%)}
+  .hero-inner{position:relative;max-width:1200px;margin:0 auto;padding:160px 24px 110px;display:grid;grid-template-columns:1fr}
+  .hero-copy{max-width:640px}
+  .hero-wordmark{display:block;height:82px;width:auto;margin-bottom:24px;opacity:.98}
+  .eyebrow{display:inline-block;padding:8px 18px;border:1px solid rgba(126,200,255,.35);border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.14em;color:#7EC8FF;text-transform:uppercase;margin-bottom:22px}
+  h1.hero-title{font-family:'Instrument Serif',Georgia,serif;font-weight:400;line-height:1.05;font-size:clamp(38px,5vw,64px);color:#fff;letter-spacing:-.01em}
+  h1.hero-title em{font-style:italic;color:var(--neon);font-weight:400}
+  .hero p.lede{margin-top:22px;font-size:19px;line-height:1.55;color:#dbe3f5;max-width:560px}
+  .hero p.lede strong{color:#fff}
+  .hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;align-items:center}
+  .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--neon);color:var(--ink);padding:16px 28px;border-radius:14px;font-size:16px;font-weight:700;box-shadow:0 8px 32px rgba(94,182,255,.55)}
+  .hero-meta{font-size:13px;color:#9AB0D6}
+
+  /* PROMO STRIP · designed bar right after hero */
+  .promo-strip{background:linear-gradient(180deg,#0a1a3e 0%,#061127 100%);border-top:1px solid rgba(126,200,255,.25);border-bottom:1px solid rgba(126,200,255,.25);padding:22px 0}
+  .promo-strip-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between}
+  .promo-left{color:#dbe3f5;font-size:14px;line-height:1.55;flex:1 1 420px;min-width:280px}
+  .promo-left b{color:#FFE066;font-size:15px;letter-spacing:.02em;display:block;margin-bottom:4px}
+  .promo-price{font-family:'Instrument Serif',Georgia,serif;font-size:26px;color:#fff;line-height:1;white-space:nowrap}
+  .promo-price s{color:#7d8aab;font-size:18px;margin-right:8px;font-family:'Inter',sans-serif}
+  .promo-cta{background:var(--neon);color:var(--ink);padding:14px 26px;border-radius:12px;font-weight:700;font-size:14px;letter-spacing:.01em;box-shadow:0 6px 22px rgba(94,182,255,.42);white-space:nowrap}
+
+  /* TRUST + URGENCY */
+  .trust{background:#061127;border-top:1px solid rgba(126,200,255,.15);border-bottom:1px solid rgba(126,200,255,.15);padding:18px 0}
+  .trust-inner{display:flex;flex-wrap:wrap;gap:28px 40px;justify-content:center;align-items:center;font-size:14px;color:#c8d3ea}
+  .trust-inner strong{color:#fff}
+  .stars{color:#FFC542;letter-spacing:2px;font-size:14px}
+  .urgency{background:#0a1a3e;padding:16px 0;border-bottom:1px solid rgba(126,200,255,.15)}
+  .urgency-inner{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:center;font-size:14px;color:#dbe3f5}
+  .urgency-inner b{color:#FFE066}
+  .urgency-inner .cta-inline{background:var(--neon);color:var(--ink);padding:10px 20px;border-radius:12px;font-weight:700;font-size:14px}
+
+  section.block{padding:80px 0}
+  .cream{background:var(--cream);color:var(--ink)}
+  h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(30px,3.6vw,46px);line-height:1.15;letter-spacing:-.01em;margin-bottom:16px}
+  h2 em{font-style:italic;color:var(--blue)}
+  .cream h2 em{color:var(--blue)}
+  .lead{font-size:18px;line-height:1.6;max-width:720px;margin-bottom:32px}
+  .cream .lead{color:#425067}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:#fff;border:1px solid #E4DECB;border-radius:18px;padding:26px}
+  .card h3{font-family:'Instrument Serif',Georgia,serif;font-size:22px;font-weight:400;margin-bottom:10px;color:var(--ink)}
+  .card p{font-size:15px;line-height:1.6;color:#4a5468}
+
+  .faculty{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+  .faculty figure{background:#fff;border:1px solid #E4DECB;border-radius:16px;padding:16px;text-align:center;color:var(--ink)}
+  .faculty img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;display:block;margin-bottom:12px}
+  .faculty figcaption{font-size:13px;line-height:1.5;color:#4a5468;text-align:left}
+  .faculty figcaption strong{display:block;color:var(--ink);font-size:15px;margin-bottom:4px;text-align:center}
+  .faculty .founding{color:var(--blue);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;display:block;margin:0 auto 8px;text-align:center}
+
+  .cgm-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .cgm-row img{width:100%;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+
+  /* REDEEM FOLD · big 35% off, tiny price, big CTA */
+  .redeem{background:linear-gradient(180deg,#F5F0E5 0%,#EDE4CE 100%);padding:64px 0;color:var(--ink)}
+  .redeem-inner{max-width:1080px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center}
+  .redeem h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(30px,3.4vw,42px);line-height:1.15;color:var(--ink);margin-bottom:14px}
+  .redeem h2 em{font-style:italic;color:var(--blue)}
+  .redeem p.sub{font-size:16px;line-height:1.55;color:#4a5468;margin-bottom:22px}
+  .redeem-card{background:#fff;border:1px solid #E4DECB;border-radius:22px;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(10,18,32,.10)}
+  .redeem-badge{display:inline-block;background:linear-gradient(135deg,#1a7fff 0%,#0066ff 100%);color:#fff;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border-radius:999px;margin-bottom:20px}
+  .redeem-big{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(72px,10vw,110px);font-weight:400;line-height:.95;color:var(--blue);letter-spacing:-.02em}
+  .redeem-big small{display:block;font-family:'Inter',sans-serif;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:#4a5468;font-weight:700;margin-top:8px}
+  .redeem-price-line{margin:20px 0 24px;color:#4a5468;font-size:15px}
+  .redeem-price-line s{color:#8b95a8;margin-right:8px}
+  .redeem-price-line b{color:var(--ink);font-weight:700}
+  .redeem-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#1a7fff 0%,#0066ff 100%);color:#fff;padding:18px 32px;border-radius:999px;font-size:16px;font-weight:700;box-shadow:0 8px 26px rgba(26,127,255,.4);width:100%;max-width:340px}
+  .redeem-fine{font-size:12px;color:#7a8497;margin-top:14px;letter-spacing:.02em}
+
+  footer{background:linear-gradient(180deg,#081634 0%,#050c1e 100%);color:#c8d3ea;padding:56px 0 32px;font-size:14px;border-top:1px solid rgba(126,200,255,.15)}
+  footer .container{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+  footer h4{color:#fff;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+  footer a{color:#c8d3ea;display:block;padding:4px 0}
+  footer a:hover{color:var(--neon)}
+  footer img{height:56px;width:auto;margin-bottom:14px}
+  footer .fine{grid-column:1/-1;border-top:1px solid rgba(126,200,255,.15);padding-top:20px;margin-top:20px;color:#7d8aab;font-size:12px}
+
+  @media (max-width:820px){
+    .hero-inner{padding:120px 20px 72px}
+    .hero-copy{max-width:100%}
+    .hero-bg::after{background:linear-gradient(180deg,rgba(5,12,30,.65) 0%,rgba(5,12,30,.85) 100%)}
+    .grid-3{grid-template-columns:1fr}
+    .cgm-row{grid-template-columns:1fr}
+    .faculty{grid-template-columns:repeat(2,1fr)}
+    footer .container{grid-template-columns:1fr}
+    .nav-logo img{height:44px}
+    .hero-wordmark{height:54px;margin-bottom:16px}
+    .nav-cta{padding:8px 16px;font-size:13px}
+    h1.hero-title{font-size:34px}
+    .promo-strip-inner{gap:14px}
+    .promo-left{flex:1 1 100%}
+    .promo-price{font-size:22px}
+    .redeem-inner{grid-template-columns:1fr;gap:32px}
+    .redeem-big{font-size:88px}
+    .hero-bg{background-size:cover !important;background-position:center !important}
+  }
+</style>
+<script src="../gate.js"></script></head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="../_assets/images/lla-logo-exact.png" alt="Longevity Life Academy by eTeacher"></a>
+    <a href="#apply" class="nav-cta">Apply Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <img class="hero-wordmark" src="../_assets/images/lla-hero-wordmark-110h.png" alt="Longevity Life Academy by eTeacher">
+      <span class="eyebrow">The Longevity Blueprint · Live Cohort</span>
+      <h1 class="hero-title">The longevity course that turns the next decades into your <em>strongest</em>.</h1>
+      <p class="lede">A guided protocol built around <strong>your biology, your numbers, and the daily practice</strong> that turns the next decades into your strongest. Eighteen live sessions. Small class of 8 to 15. Cohort begins <strong>August 3</strong>.</p>
+      <div class="hero-cta-row">
+        <a href="#apply" class="btn-primary">Reserve My Seat →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="promo-strip">
+  <div class="promo-strip-inner">
+    <div class="promo-left"><b>Founder's pricing · 35% off tuition</b>Applications close in 48 hours</div>
+    <div class="promo-price"><s>$1,650</s> $1,073</div>
+    <a href="#apply" class="promo-cta">Claim 35% Now →</a>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container trust-inner">
+    <span><span class="stars">★★★★★</span> <strong>Excellent</strong> on Trustpilot · 600+ reviews</span>
+    <span><strong>400k+</strong> students</span>
+    <span><strong>197</strong> countries</span>
+    <span><strong>25 yrs</strong> online education</span>
+    <span><strong>Live</strong> format</span>
+  </div>
+</div>
+
+<section class="redeem" id="apply">
+  <div class="redeem-inner">
+    <div>
+      <h2>Redeem your <em>Founder's voucher</em> before applications close.</h2>
+      <p class="sub">Only <b>3 seats remain</b> in the class starting <b>August 3</b>. Your voucher unlocks the full Longevity Blueprint cohort at Founder's pricing. It expires in 48 hours.</p>
+      <p class="sub" style="margin-bottom:0">Live faculty. Free Abbott Lingo CGM by lesson 5. Class of 8 to 15.</p>
+    </div>
+    <div class="redeem-card">
+      <span class="redeem-badge">Founder's Voucher</span>
+      <div class="redeem-big">35%<small>Off Tuition</small></div>
+      <div class="redeem-price-line"><s>$1,650</s> <b>$1,073</b> or $360/month</div>
+      <a href="#" class="redeem-cta">Redeem My 35% Voucher →</a>
+      <div class="redeem-fine">Applications close in 48 hours</div>
+    </div>
+  </div>
+</section>
+
+<section class="block cream">
+  <div class="container">
+    <h2>What you actually <em>get</em></h2>
+    <p class="lead">A structured longevity education, not a webinar. Eighteen live sessions across four phases, one continuous glucose monitor, and a faculty of practicing physicians.</p>
+    <div class="grid-3">
+      <div class="card"><h3>18 live sessions</h3><p>Four phases · six pillars · nutrition, sleep, exercise, supplements, mental health, daily protocol. Recorded if you miss one.</p></div>
+      <div class="card"><h3>Free Abbott Lingo CGM</h3><p>A 14-day continuous glucose monitor arrives before lesson 5, so your training is calibrated to your own metabolism.</p></div>
+      <div class="card"><h3>Class of 8–15</h3><p>Small-cohort format. Direct access to the faculty. Not a 500-person webinar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container">
+    <h2 style="color:#fff">Your <em>faculty</em></h2>
+    <p class="lead" style="color:#c8d3ea">Physicians and clinicians who practice longevity medicine, publish, and coach.</p>
+    <div class="faculty">
+      <figure>
+        <img src="../_assets/instructors/julie-gibson-clark.jpg" alt="Julie Gibson Clark">
+        <figcaption><strong>Julie Gibson Clark</strong><span class="founding">Founding Faculty</span>#2 slowest-aging person in the world on the Rejuvenation Olympics. A leading voice in accessible, evidence-based longevity, and Founding Faculty at Longevity Life Academy.</figcaption>
+      </figure>
+      <figure>
+        <img src="../_assets/instructors/natalie.jpg" alt="Natalie Blackbourne">
+        <figcaption><strong>Natalie Blackbourne</strong>M.S. Emotional Intelligence with ~20 years in health and wellness. Focuses on neuroscience and cognitive optimization for long-term vitality.</figcaption>
+      </figure>
+      <figure>
+        <img src="../_assets/instructors/courtney.jpg" alt="Courtney Donofrio">
+        <figcaption><strong>Courtney Donofrio</strong>IIN-certified founder of EatBiohackLove, based in Amsterdam. Specializes in gut health, hormone balance, and practical biohacking.</figcaption>
+      </figure>
+      <figure>
+        <img src="../_assets/instructors/amy.jpg" alt="Amy Jamieson">
+        <figcaption><strong>Amy Jamieson</strong>M.S. Health Science & Kinesiology, NASM CPT/CES, ACE Health Coach. 25+ years in higher education and a master competitive runner.</figcaption>
+      </figure>
+      <figure>
+        <img src="../_assets/instructors/jordan.jpg" alt="Jordan Lattimore">
+        <figcaption><strong>Jordan Lattimore</strong>B.Sc. Psychology, University of Alberta. 12 years in Costa Rica near the Nicoya Blue Zone, 5+ years in behavioral therapy.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="block cream">
+  <div class="container">
+    <div class="cgm-row">
+      <div>
+        <h2>Your own <em>data</em>, in the course</h2>
+        <p class="lead">A free Abbott Lingo continuous glucose monitor arrives before lesson 5. You learn to read your own metabolism, not textbook averages.</p>
+        <a href="#apply" class="btn-primary">Reserve My Seat →</a>
+      </div>
+      <img src="../_assets/images/lingo-cgm.jpg" alt="Abbott Lingo continuous glucose monitor">
+    </div>
+  </div>
+</section>
+
+
+
+<footer>
+  <div class="container">
+    <div>
+      <img src="../_assets/images/lla-logo-exact.png" alt="Longevity Life Academy by eTeacher">
+      <p style="max-width:420px">A live longevity course by Longevity Life Academy, part of eTeacher Group · 25 years, 400,000+ students, 197 countries.</p>
+    </div>
+    <div>
+      <h4>Program</h4>
+      <a href="https://longevitylifeacademy.com/about.html">About</a>
+      <a href="https://longevitylifeacademy.com/#syllabus">Curriculum</a>
+      <a href="https://longevitylifeacademy.com/cgm.html">CGM</a>
+      <a href="https://longevitylifeacademy.com/pricing.html">Pricing</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="https://longevitylifeacademy.com/blog.html">Blog</a>
+      <a href="https://longevitylifeacademy.com/#faq">FAQ</a>
+      <a href="https://longevitylifeacademy.com/">Home</a>
+    </div>
+    <div class="fine">© 2026 Longevity Life Academy by eTeacher Group · All rights reserved · Trustpilot rating verified · Excellent 600+ reviews</div>
+  </div>
+</footer>
+<a href="#apply" class="fab"><span class="dot"></span>Claim 35% Off Now</a>
+</body>
+</html>
