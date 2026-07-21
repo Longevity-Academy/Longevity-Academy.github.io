@@ -48,7 +48,8 @@
         phone:     (form.querySelector('[name="phone"]')     || {}).value || '',
         countryIso: stateVal,
         adminNotes: ADMIN_PREFIX,
-        campaignId: LGV_CAMPAIGN_ID       // <-- ensures CRM classifies as Longevity Email Marketing
+        campaignId: LGV_CAMPAIGN_ID,      // <-- classifies as Longevity Email Marketing
+        googleCampaignId: '116641'         // <-- matches homepage payload — required for CRM to populate state
       };
       fields.firstName = fields.firstName.trim();
       fields.lastName  = fields.lastName.trim();
