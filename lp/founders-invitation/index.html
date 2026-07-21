@@ -125,7 +125,7 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="../_assets/images/lla-logo-exact.png" alt="Longevity Life Academy by eTeacher"></a>
-    <a href="#apply" class="nav-cta">Apply Now</a>
+    <a href="#lp-apply-form" class="nav-cta">Apply Now</a>
   </div>
 </nav>
 
@@ -138,7 +138,7 @@
       <h1 class="hero-title">The longevity course that turns the next decades into your <em>strongest</em>.</h1>
       <p class="lede">A guided protocol built around <strong>your biology, your numbers, and the daily practice</strong>. Taught live by Dr. Julie Gibson Clark, #2 on the Rejuvenation Olympics, and our founding faculty. Only <strong>3 seats remain</strong> in the class starting <strong>August 3</strong>.</p>
       <div class="hero-cta-row">
-        <a href="#apply" class="btn-primary">Reserve My Seat →</a>
+        <a href="#lp-apply-form" class="btn-primary">Reserve My Seat →</a>
       </div>
     </div>
   </div>
@@ -149,7 +149,7 @@
   <div class="promo-strip-inner">
     <div class="promo-left"><b>Founder's pricing · 35% off tuition</b>Applications close in 48 hours</div>
     <div class="promo-price"><s>$1,650</s> $1,073</div>
-    <a href="#apply" class="promo-cta">Claim 35% Now →</a>
+    <a href="#lp-apply-form" class="promo-cta">Claim 35% Now →</a>
   </div>
 </section>
 
@@ -174,7 +174,7 @@
       <span class="redeem-badge">Founder's Voucher</span>
       <div class="redeem-big">35%<small>Off Tuition</small></div>
       <div class="redeem-price-line"><s>$1,650</s> <b>$1,073</b> or $360/month</div>
-      <a href="#" class="redeem-cta">Redeem My 35% Voucher →</a>
+      <a href="#lp-apply-form" class="redeem-cta">Redeem My 35% Voucher →</a>
       <div class="redeem-fine">Applications close in 48 hours</div>
     </div>
   </div>
@@ -227,7 +227,7 @@
       <div>
         <h2>Your own <em>data</em>, in the course</h2>
         <p class="lead">A free Abbott Lingo continuous glucose monitor arrives before lesson 5. You learn to read your own metabolism, not textbook averages.</p>
-        <a href="#apply" class="btn-primary">Reserve My Seat →</a>
+        <a href="#lp-apply-form" class="btn-primary">Reserve My Seat →</a>
       </div>
       <img src="../_assets/images/lingo-cgm.jpg" alt="Abbott Lingo continuous glucose monitor">
     </div>
@@ -258,6 +258,42 @@
     <div class="fine">© 2026 Longevity Life Academy by eTeacher Group · All rights reserved · Trustpilot rating verified · Excellent 600+ reviews</div>
   </div>
 </footer>
-<a href="#apply" class="fab"><span class="dot"></span>Claim 35% Off Now</a>
+<a href="#lp-apply-form" class="fab"><span class="dot"></span>Claim 35% Off Now</a>
+<link rel="stylesheet" href="../_assets/lp-form.css">
+
+<section class="lp-form-section" id="lp-apply-form">
+  <div class="lp-form-inner">
+    <h2 class="lp-form-title">Redeem your <em>Founder's Voucher</em></h2>
+    <p class="lp-form-sub">Confirm your seat in the class starting <b>August 3</b>. A member of admissions will call within one business day to complete enrollment.</p>
+    <form id="lp-lead-form" class="lp-form" novalidate>
+      <div class="lp-form-row">
+        <input type="text" name="firstName" placeholder="First name" required autocomplete="given-name">
+        <input type="text" name="lastName" placeholder="Last name" required autocomplete="family-name">
+      </div>
+      <div class="lp-form-full">
+        <input type="email" name="email" placeholder="Email address" required autocomplete="email">
+      </div>
+      <div class="lp-form-row">
+        <input type="tel" name="phone" placeholder="US mobile (e.g. 555-123-4567)" required autocomplete="tel">
+        <select name="state" required autocomplete="address-level1">
+          <option value="">US State</option>
+          <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option><option value="DC">District of Columbia</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option><option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option><option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option><option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option><option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option><option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+        </select>
+      </div>
+      <button type="submit" class="lp-form-submit">Redeem My 35% Voucher →</button>
+      <div class="form-error" role="alert"></div>
+      <p class="lp-form-fine">By submitting, you agree to be contacted by Longevity Life Academy admissions. US residents only. Founder's pricing valid 48 hours from your invitation.</p>
+    </form>
+    <div class="lp-thankyou" id="lp-thankyou">
+      <h3>You're on the list.</h3>
+      <p>An admissions advisor will call within one business day to complete your enrollment. Look for a call from a US number.</p>
+    </div>
+  </div>
+</section>
+
+<script src="../_assets/nanp-state-autofill.js"></script>
+<script src="../_assets/eteacher-leads.js"></script>
+<script src="../lp-crm.js"></script>
+
 </body>
 </html>
