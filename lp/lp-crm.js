@@ -1,28 +1,23 @@
-/* LP CRM wiring — same eTeacher endpoint & ProductID 26 as homepage,
-   with EMAIL-MARKETING attribution tag in DynamicParameters + AdminNotes
-   so leads route as email-marketing, NOT as WebLead / paid ads. */
+/* LP CRM wiring — eTeacher endpoint, ProductID 26 (Longevity),
+   CampaignID 117600 (Longevity Email Marketing) — no UTM tagging.
+   The CampaignID is the ONLY source classifier eTeacher CRM honors. */
 (function () {
+  var LGV_CAMPAIGN_ID = 117600;   // Longevity — Email Marketing (per Omri, 2026-07-21)
+
   function boot() {
     if (!window.eTeacherLeads || !window.LLA_US) {
       return setTimeout(boot, 200);
     }
-    var LP_ID = (window.LLA_LP_ATTRIBUTION && window.LLA_LP_ATTRIBUTION.lp_id) || 'unknown-lp';
-    var CAMPAIGN = 'LGV_EN_EMAIL_FoundersVoucher_2026-08';
-    var UTM_SOURCE = 'email';
-    var UTM_MEDIUM = 'email';
-    var ADMIN_PREFIX = 'EMAIL LP · ' + LP_ID.toUpperCase() + ' · Founders Voucher Aug26';
 
-    // Force email-marketing UTMs into the attribution storage that the
-    // eTeacher script reads at submit time (getAttribution → DynamicParameters).
+    var LP_ID = (window.LLA_LP_ATTRIBUTION && window.LLA_LP_ATTRIBUTION.lp_id) || 'lp';
+    var ADMIN_PREFIX = 'LGV EMAIL LP · ' + LP_ID.toUpperCase() + ' · Founders Voucher Aug26';
+
+    // Wipe any stale UTM email-marketing values from prior LP versions so
+    // DynamicParameters no longer carries them into the CRM.
     try {
       var stored = JSON.parse(localStorage.getItem('lla_attribution_v1') || '{}');
-      stored.utm_source   = UTM_SOURCE;
-      stored.utm_medium   = UTM_MEDIUM;
-      stored.utm_campaign = CAMPAIGN;
-      stored.utm_content  = LP_ID;
-      stored.utm_term     = 'founders-voucher-aug26';
-      stored.first_touch_at = stored.first_touch_at || Date.now();
-      stored.last_touch_at  = Date.now();
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){ delete stored[k]; });
+      stored.last_touch_at = Date.now();
       localStorage.setItem('lla_attribution_v1', JSON.stringify(stored));
     } catch (e) {}
 
@@ -45,15 +40,15 @@
       ev.preventDefault();
       clearErr();
 
-      // Read from named inputs (matches live site: name="country" holds US state code)
       var stateVal = (form.querySelector('[name="country"]') || {}).value || '';
       var fields = {
         firstName: (form.querySelector('[name="firstName"]') || {}).value || '',
         lastName:  (form.querySelector('[name="lastName"]')  || {}).value || '',
         email:     (form.querySelector('[name="email"]')     || {}).value || '',
         phone:     (form.querySelector('[name="phone"]')     || {}).value || '',
-        countryIso: stateVal,   // eTeacher submit expects US state code here
-        adminNotes: ADMIN_PREFIX
+        countryIso: stateVal,
+        adminNotes: ADMIN_PREFIX,
+        campaignId: LGV_CAMPAIGN_ID       // <-- ensures CRM classifies as Longevity Email Marketing
       };
       fields.firstName = fields.firstName.trim();
       fields.lastName  = fields.lastName.trim();
@@ -85,9 +80,8 @@
             if (window.dataLayer) window.dataLayer.push({
               event: 'lp_lead_submit',
               lp_id: LP_ID,
-              utm_source: UTM_SOURCE,
-              utm_medium: UTM_MEDIUM,
-              utm_campaign: CAMPAIGN,
+              campaign_id: LGV_CAMPAIGN_ID,
+              product_id: 26,
               crm_status: 'ok'
             });
           } catch (e) {}
