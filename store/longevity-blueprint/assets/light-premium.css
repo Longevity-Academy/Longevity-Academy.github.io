@@ -2526,3 +2526,8 @@ html #lpRoot .fn-stack-head span { font-size: 15px !important; }
 html #lpRoot .fn-price-per, html #lpRoot .fn-per, html #lpRoot [class*="per-mo"] { font-size: 16px !important; }
 html #lpRoot .fn-sticky a, html #lpRoot .fn-sticky .fn-btn, html #lpRoot .fn-sticky span { font-size: 15px !important; }
 html #lpRoot .fn-fac-role, html #lpRoot .fac-role, html #lpRoot [class*="-role"] { font-size: 15.5px !important; }
+
+/* v19b */
+html #lpRoot .pdp-cine-h1, html #lpRoot .pdp-cine-h1 span { font-family: 'Codec Pro','Inter Tight',Inter,sans-serif !important; }
+html #lpRoot .lla-cta-eyebrow { font-size: 15px !important; letter-spacing: 0 !important; }
+html #lpRoot .lla-cta-pill .mo, html #lpRoot .lla-cta-pill span { font-size: 15px !important; }
