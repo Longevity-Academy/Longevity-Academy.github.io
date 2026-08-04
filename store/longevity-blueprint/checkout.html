@@ -145,7 +145,7 @@ a{color:var(--blue);text-decoration:none}
 </header>
 
 <main id="screen-order" class="wrap">
-  <div class="demo"><span>Demo checkout — no card is charged</span></div>
+  <div class="demo"><span>Demo checkout, no card is charged</span></div>
 
   <div class="cols">
     <!-- LEFT -->
@@ -244,7 +244,7 @@ a{color:var(--blue);text-decoration:none}
 <section id="screen-done" class="done">
   <h1>You're enrolled</h1>
   <p>Welcome to The Longevity Blueprint founder's cohort. Your place is reserved. A confirmation and your onboarding steps are on the way, including your start date.</p>
-  <p style="font-size:13px">Demo checkout — no card was charged.</p>
+  <p style="font-size:13px">Demo checkout, no card was charged.</p>
   <a href="index.html">← Back to home</a>
 </section>
 
@@ -260,7 +260,7 @@ document.querySelectorAll('.pay-tab').forEach(function(t){
 // eTeacher CRM checkout wiring (Cloudflare ecommerce spec).
 // In 'ecomm' mode with a live student/order, pulls first-payment details from the
 // Worker (paymentId, amount, gateway config) and reports the gateway result back.
-// Raw card data is NEVER sent to the Worker/CRM — the static card fields stay
+// Raw card data is NEVER sent to the Worker/CRM, the static card fields stay
 // demo-only until the Airwallex drop-in / PayPal SDK is enabled via details config.
 var _ids = window.LLA_ECOMM ? window.LLA_ECOMM.getCheckoutIds() : null;
 var _details = null;
