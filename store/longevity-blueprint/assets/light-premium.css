@@ -2599,3 +2599,23 @@ html #lpRoot .cgm-burst-chip--c { left: 10%; bottom: -2%; }
 
 /* v21: press label contrast */
 html #lpRoot .pdp-press .pdp-press-label, html #lpRoot .pdp-press h3, html #lpRoot .pdp-press .label { color:#3A4A66 !important; }
+
+/* v22: drawer must never spill over the page. Full-height, scrollable, opaque. */
+html #lpRoot .fn-drawer, html .fn-drawer {
+  height: 100dvh !important; max-height: 100dvh !important;
+  overflow-y: auto !important; -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  background: #071A3A !important;
+  padding: 22px 22px 34px !important;
+  gap: 0 !important;
+  justify-content: flex-start !important;
+  z-index: 12000 !important;
+}
+html .fn-drawer:not(.is-open) { pointer-events: none !important; visibility: hidden !important; }
+html .fn-drawer.is-open { visibility: visible !important; }
+html .fn-drawer a.fn-drawer-link { padding: 12px 0 !important; font-size: 20px !important; }
+html .fn-drawer .fn-btn { margin-top: 18px !important; flex: none !important; }
+html .fn-drawer-top { margin-bottom: 10px !important; }
+@media (max-height: 720px) {
+  html .fn-drawer a.fn-drawer-link { padding: 9px 0 !important; font-size: 18px !important; }
+}

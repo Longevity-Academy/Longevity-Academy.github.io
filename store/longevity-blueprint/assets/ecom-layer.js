@@ -128,6 +128,8 @@
   }
   if (toggle) toggle.addEventListener('click', function () { setDrawer(!drawer.classList.contains('is-open')); });
   if (dClose) dClose.addEventListener('click', function () { setDrawer(false); });
+  /* lla_drawer_esc */ document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setDrawer(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 1024) setDrawer(false); });
   $$('#fnDrawer a').forEach(function (a) { a.addEventListener('click', function () { setDrawer(false); }); });
 
   /* ---------------------------------------------------------------
