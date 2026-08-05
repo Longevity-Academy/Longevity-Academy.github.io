@@ -2596,3 +2596,6 @@ html #lpRoot .cgm-burst-chip--c { left: 10%; bottom: -2%; }
   html #lpRoot .cgm-burst-chip-ic { margin-bottom:0; flex:none; }
   html #lpRoot .cgm-burst-chip b { margin-right:6px; }
 }
+
+/* v21: press label contrast */
+html #lpRoot .pdp-press .pdp-press-label, html #lpRoot .pdp-press h3, html #lpRoot .pdp-press .label { color:#3A4A66 !important; }
