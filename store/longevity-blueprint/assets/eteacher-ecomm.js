@@ -26,7 +26,8 @@
   // PreferredCourseId not issued separately -> same course (258).
   CFG.crmCourse = CFG.crmCourse || {};
   if (CFG.crmCourse.mainAbroadCourseId == null) CFG.crmCourse.mainAbroadCourseId = 258;
-  if (CFG.crmCourse.preferredCourseId  == null) CFG.crmCourse.preferredCourseId  = 258;
+  if (CFG.crmCourse.preferredCourseId  == null) CFG.crmCourse.preferredCourseId  = -1;   // Aug 5 2026 eTeacher dev: must be -1, 258 is a different ID type
+  if (CFG.crmCourse.abroadCourseId     == null) CFG.crmCourse.abroadCourseId     = 1774; // Aug 5 2026 eTeacher dev: the class-level course ID
   if (CFG.crmCourse.languageId         == null) CFG.crmCourse.languageId         = 101;
   if (CFG.crmCourse.isTrial            == null) CFG.crmCourse.isTrial            = 0;
 
@@ -134,7 +135,7 @@
       ReferringSite: document.referrer || window.location.hostname,
       QueryString: (window.location.search || '').replace(/^\?/, '')
     };
-    var notes = 'US State: ' + stateCode + ' | SELF-SERVICE ECOMM CHECKOUT · The Longevity Blueprint Founder\u2019s Cohort';
+    var notes = 'US State: ' + stateCode + ' | SELF-SERVICE ECOMM CHECKOUT: The Longevity Blueprint';
     if (fields.startDate) notes += ' · Start: ' + fields.startDate;
     if (fields.smsConsent !== undefined) notes += ' · SMS consent: ' + (fields.smsConsent ? 'yes' : 'no');
     if (fields.promoCode) notes += ' · Promo: ' + fields.promoCode;
@@ -145,7 +146,16 @@
       dyn = (dyn ? dyn + ';' : '') + 'google_campaign_id=' + String(CFG.googleCampaignId);
     }
     if (dyn) payload.DynamicParameters = dyn.slice(0, 4000);
-    if (CFG.campaignId && /^\d+$/.test(String(CFG.campaignId))) payload.CampaignID = parseInt(CFG.campaignId, 10);
+    // Aug 5 2026 eTeacher dev: CampaignID does not exist on this endpoint, it is ignored.
+    // The campaign is read from QueryString only, as cid=<id>.
+    delete payload.CampaignID;
+    (function () {
+      var cid = CFG.campaignId && /^\d+$/.test(String(CFG.campaignId)) ? String(CFG.campaignId) : String(CFG.googleCampaignId || '');
+      if (!/^\d+$/.test(cid)) return;
+      var qs = payload.QueryString || '';
+      if (!/(^|&)cid=/.test(qs)) qs = qs ? qs + '&cid=' + cid : 'cid=' + cid;
+      payload.QueryString = qs.slice(0, 2000);
+    })();
 
     // ECOMM (AddNewECommerceLeadAndOrder) required DTO fields, per eTeacher dev team
     // Aug 4 2026: MainAbroadCourseId missing = server NRE. Values come from config
@@ -153,7 +163,8 @@
     if (CFG.mode === 'ecomm') {
       var crs = CFG.crmCourse || {};
       payload.MainAbroadCourseId = crs.mainAbroadCourseId != null ? crs.mainAbroadCourseId : 0;
-      payload.PreferredCourseId  = crs.preferredCourseId  != null ? crs.preferredCourseId  : payload.MainAbroadCourseId;
+      payload.PreferredCourseId  = crs.preferredCourseId  != null ? crs.preferredCourseId  : -1;
+      payload.AbroadCourseId     = crs.abroadCourseId     != null ? crs.abroadCourseId     : 1774;
       payload.LanguageId         = crs.languageId         != null ? crs.languageId         : 1;
       payload.IsTrial            = crs.isTrial            != null ? crs.isTrial            : 0; // 0 = NoTrial (full-price order), 1 = Trial
       // State handling per eTeacher dev, Aug 4 2026 (final): do NOT send State,
@@ -167,7 +178,7 @@
       // DynamicParameters lands in the lead's notes. Spaces must be %20 ('+' is
       // stripped server-side); avoid '|' and '.' characters in values.
       delete payload.AdminNotes;
-      var noteWords = ['US', 'State', stateCode, 'SELF', 'SERVICE', 'ECOMM', 'CHECKOUT', 'The', 'Longevity', 'Blueprint', 'Founder', 'Cohort'];
+      var noteWords = ['US', 'State', stateCode, 'SELF', 'SERVICE', 'ECOMM', 'CHECKOUT', 'The', 'Longevity', 'Blueprint'];
       if (fields.startDate)  noteWords = noteWords.concat(['Start', String(fields.startDate)]);
       if (fields.smsConsent !== undefined) noteWords = noteWords.concat(['SMS', 'consent', fields.smsConsent ? 'yes' : 'no']);
       if (fields.promoCode)  noteWords = noteWords.concat(['Promo', String(fields.promoCode)]);
