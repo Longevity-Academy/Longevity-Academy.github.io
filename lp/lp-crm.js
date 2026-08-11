@@ -1,8 +1,33 @@
-/* LP CRM wiring — eTeacher endpoint, ProductID 26 (Longevity),
-   CampaignID 117600 (Longevity Email Marketing) — no UTM tagging.
-   The CampaignID is the ONLY source classifier eTeacher CRM honors. */
+/* LP CRM wiring — eTeacher endpoint, ProductID 26 (Longevity).
+   CampaignID is now DYNAMIC: it is read from the ?cid= parameter on the landing
+   URL sent by the email platform, so every future send is classified by its own
+   campaign with no code change. Fallback (no/invalid cid present) = 117648.
+   The CampaignID is the ONLY source classifier eTeacher CRM honors.
+   Updated 2026-08-11 per Sandra (eTeacher Email Marketing). */
 (function () {
-  var LGV_CAMPAIGN_ID = 117600;   // Longevity — Email Marketing (per Omri, 2026-07-21)
+  // Fallback used only when the URL carries no valid cid (e.g. direct visit).
+  var LGV_CAMPAIGN_ID_FALLBACK = 117648;   // LGV_EN_EML Special Founders Gift v2 — 2026-07-29
+
+  /* Reads the campaign id from the URL. Deliberately tolerant, because the
+     email platform sometimes emits a second "?" instead of "&"
+     (e.g. ...?k=lgv-aug26?cid=117648&adGroupId=-1...). A plain
+     URLSearchParams('cid') read returns null on that shape, which is exactly
+     why the page appeared to be hardcoded. This scans the whole URL. */
+  function readCampaignId() {
+    try {
+      var url = String(window.location.href);
+      var m = url.match(/[?&#]cid=(\d{4,10})/i);          // normal, well-formed
+      if (!m) m = url.match(/[?&#][^?&#=]*cid=(\d{4,10})/i); // ?k=x?cid=... shape
+      if (!m) m = url.match(/(?:^|[?&#/])cid[=:](\d{4,10})/i);
+      if (m && m[1]) {
+        var n = parseInt(m[1], 10);
+        if (n > 0) return n;
+      }
+    } catch (e) {}
+    return LGV_CAMPAIGN_ID_FALLBACK;
+  }
+
+  var LGV_CAMPAIGN_ID = readCampaignId();
 
   function boot() {
     if (!window.eTeacherLeads || !window.LLA_US) {
@@ -10,7 +35,7 @@
     }
 
     var LP_ID = (window.LLA_LP_ATTRIBUTION && window.LLA_LP_ATTRIBUTION.lp_id) || 'lp';
-    var ADMIN_PREFIX = 'LGV EMAIL LP · ' + LP_ID.toUpperCase() + ' · Founders Voucher Aug26';
+    var ADMIN_PREFIX = 'LGV EMAIL LP · ' + LP_ID.toUpperCase() + ' · Founders Voucher Aug26 · CID ' + LGV_CAMPAIGN_ID;
 
     // Wipe any stale UTM email-marketing values from prior LP versions so
     // DynamicParameters no longer carries them into the CRM.
@@ -82,6 +107,7 @@
               event: 'lp_lead_submit',
               lp_id: LP_ID,
               campaign_id: LGV_CAMPAIGN_ID,
+              campaign_id_source: (String(window.location.href).toLowerCase().indexOf('cid=') > -1) ? 'url' : 'fallback',
               product_id: 26,
               crm_status: 'ok'
             });
@@ -100,5 +126,9 @@
       });
     });
   }
+  // QA hook so Sandra/eTeacher can verify the resolved value in console:
+  // type  LLA_CAMPAIGN_ID  ->  should print the cid from the URL.
+  try { window.LLA_CAMPAIGN_ID = LGV_CAMPAIGN_ID; } catch (e) {}
+
   boot();
 })();
