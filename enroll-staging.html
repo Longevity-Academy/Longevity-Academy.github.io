@@ -9208,11 +9208,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="eo-head reveal">
       <h1 class="eo-title">Enroll in <span class="life-blue">The Longevity Blueprint</span></h1>
-      <p class="eo-sub">Two ways to start. Pick one.</p>
-      <div class="eo-top-btns">
-        <a href="#lead-gen" class="eo-btn-adv">Apply with an Advisor <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
-        <a href="#" data-checkout-open class="eo-btn-buy">Enroll Instantly &mdash; $289/mo <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-      </div>
+      <p class="eo-sub">Applications for the next class are open.</p>
+      
     </div>
   </div>
 </section>
@@ -9281,15 +9278,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Personal longevity protocol included</li>
           <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> 1:1 admissions consultation</li>
         </ul>
-        <div class="eo-buybox">
-          <div class="eo-buybox-copy">
-            <span class="eo-buybox-title">Skip the call &mdash; enroll instantly</span>
-            <span class="eo-buybox-sub">2-minute secure checkout &middot; pick your class dates &middot; seat confirmed</span>
-          </div>
-          <a href="#" data-checkout-open class="eo-btn-buy eo-btn-buy--lg">Enroll Now &mdash; $289/mo
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-        </div>
+        
       </div>
       <div class="lead-gen-v2-right">
         <form class="lead-gen-v2-form form-with-thankyou" id="leadGenV2Form" data-thankyou-target="leadGenV2ThankYou">
@@ -9376,6 +9365,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Your information is secure. We'll never share your details.
           </p>
+          <div class="lg-or" aria-hidden="true"><span>or</span></div>
+          <a href="#" data-checkout-open class="lg-enroll-online">
+            Enroll Online Now
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <p class="lg-enroll-online-sub">Instant, secure checkout &middot; $289/mo &middot; takes 2 minutes</p>
         </form>
         <div class="form-thankyou" id="leadGenV2ThankYou" role="status" aria-live="polite">
           <div class="form-thankyou-icon" aria-hidden="true">
@@ -10756,6 +10751,16 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
 @media(max-width:520px){#enrollModal .em-dialog{margin:16px 12px;padding:24px 20px 26px;max-height:calc(100vh - 32px)}#enrollModal .em-st{width:82px}#enrollModal .em-lbl{font-size:12px}}
 
 /* Emerald ecommerce CTAs */
+.lg-or{ display:flex; align-items:center; gap:14px; margin:2px 0; }
+.lg-or::before,.lg-or::after{ content:''; flex:1; height:1px; background:#E2E8F1; }
+.lg-or span{ font-family:'Codec Pro','Inter',sans-serif; font-size:13px; font-weight:600; color:#98A3B3; text-transform:uppercase; letter-spacing:.08em; }
+.lg-enroll-online{ width:100%; display:flex; align-items:center; justify-content:center; gap:12px; color:#fff; text-decoration:none; background:linear-gradient(135deg,#12B76A,#0E9F5C); border:none; cursor:pointer; box-shadow:0 12px 32px rgba(18,183,106,.32); transition:all .3s ease; }
+/* pin the green button to the submit button's exact rendered metrics (matches .lead-gen button[type=submit] rule) */
+.lead-gen .lead-gen-v2-form a.lg-enroll-online{ padding:18px 40px !important; font-size:16px !important; font-weight:700 !important; font-family:'Codec Pro',sans-serif !important; letter-spacing:.01em !important; border-radius:14px !important; line-height:20px !important; margin:0 !important; }
+.lg-enroll-online:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(18,183,106,.42); }
+.lg-enroll-online svg{ stroke:#fff; }
+.lg-enroll-online-sub{ text-align:center; font-size:13px; color:#5A6472; margin-top:10px; }
+
 .eo-top-btns{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:30px; }
 .eo-btn-adv{ display:inline-flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:16px; font-weight:700; color:#fff; padding:16px 30px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.3); text-decoration:none; transition:background .2s ease, transform .2s ease; }
 .eo-btn-adv:hover{ background:rgba(255,255,255,.12); transform:translateY(-1px); }
