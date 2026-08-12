@@ -9366,11 +9366,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Your information is secure. We'll never share your details.
           </p>
           <div class="lg-or" aria-hidden="true"><span>or</span></div>
-          <a href="#" data-checkout-open class="lg-enroll-online">
-            Enroll Online Now
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          <a href="#" data-checkout-open class="lg-buy">
+            <span class="lg-buy-main">Enroll Online Now &mdash; $289/mo <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+            <span class="lg-buy-sub">Instant secure checkout &middot; takes 2 minutes</span>
           </a>
-          <p class="lg-enroll-online-sub">Instant, secure checkout &middot; $289/mo &middot; takes 2 minutes</p>
         </form>
         <div class="form-thankyou" id="leadGenV2ThankYou" role="status" aria-live="polite">
           <div class="form-thankyou-icon" aria-hidden="true">
@@ -10750,7 +10749,21 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
 #enrollModal .em-go[disabled]{opacity:.6;cursor:default}
 @media(max-width:520px){#enrollModal .em-dialog{margin:16px 12px;padding:24px 20px 26px;max-height:calc(100vh - 32px)}#enrollModal .em-st{width:82px}#enrollModal .em-lbl{font-size:12px}}
 
-/* Emerald ecommerce CTAs */
+
+/* v2 prominent ecommerce button */
+.lg-or{display:flex;align-items:center;gap:14px;margin:2px 0 4px}
+.lg-or::before,.lg-or::after{content:'';flex:1;height:1px;background:#E2E8F1}
+.lg-or span{font-family:'Codec Pro','Inter',sans-serif;font-size:12.5px;font-weight:600;color:#98A3B3;text-transform:uppercase;letter-spacing:.08em}
+a.lg-buy{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:100%;padding:16px 32px;border-radius:14px;text-decoration:none;background:linear-gradient(135deg,#34D399 0%,#10B981 48%,#059669 100%);border:1px solid rgba(255,255,255,.35);box-shadow:0 14px 38px rgba(16,185,129,.42),inset 0 1px 0 rgba(255,255,255,.35);cursor:pointer;transition:transform .22s ease,box-shadow .22s ease;position:relative;overflow:hidden;margin-top:2px}
+a.lg-buy::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-20deg);animation:lgSheen 3.4s ease-in-out infinite}
+@keyframes lgSheen{0%,55%{left:-60%}85%,100%{left:130%}}
+.lg-buy-main{display:flex;align-items:center;gap:10px;font-family:'Codec Pro','Inter',sans-serif;font-size:17px;font-weight:800;color:#fff;letter-spacing:.01em;line-height:1.25}
+.lg-buy-main svg{stroke:#fff;flex:none}
+.lg-buy-sub{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.92);font-family:'Inter',-apple-system,sans-serif;line-height:1.3}
+a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129,.55),inset 0 1px 0 rgba(255,255,255,.4)}
+@media (prefers-reduced-motion: reduce){ a.lg-buy::after{animation:none} }
+
+/* Emerald ecommerce CTAs (legacy) */
 .lg-or{ display:flex; align-items:center; gap:14px; margin:2px 0; }
 .lg-or::before,.lg-or::after{ content:''; flex:1; height:1px; background:#E2E8F1; }
 .lg-or span{ font-family:'Codec Pro','Inter',sans-serif; font-size:13px; font-weight:600; color:#98A3B3; text-transform:uppercase; letter-spacing:.08em; }
