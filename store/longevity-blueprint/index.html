@@ -9390,6 +9390,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Your information is secure. We'll never share your details.
           </p>
+          <div class="lg-or" aria-hidden="true"><span>or</span></div>
+          <a href="checkout.html" class="lg-buy">
+            <span class="lg-buy-main"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2.5 3h3l2.6 12.5a2 2 0 0 0 2 1.5h7.9a2 2 0 0 0 2-1.6L21.5 8H6.2"/></svg> Enroll Online Now &mdash; $289/mo</span>
+            <span class="lg-buy-sub">Register &rarr; Choose your dates &rarr; Pay online &middot; done in 2 minutes</span>
+          </a>
         </form>
         <div class="form-thankyou" id="leadGenV2ThankYou" role="status" aria-live="polite">
           <div class="form-thankyou-icon" aria-hidden="true">
@@ -10784,5 +10789,19 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.targ
  if(e.isIntersecting){v.preload='auto';try{v.load();if(v.dataset.autoplay)v.setAttribute('autoplay','');var p=v.play();if(p&&p.catch)p.catch(function(){});}catch(x){}io.unobserve(v);}});},{rootMargin:'400px'});
 vs.forEach(function(v){io.observe(v);});})();
 </script>
+<style id="lg-buy-css">
+.lg-or{display:flex;align-items:center;gap:14px;margin:2px 0 4px}
+.lg-or::before,.lg-or::after{content:'';flex:1;height:1px;background:#E2E8F1}
+.lg-or span{font-family:'Codec Pro','Inter',sans-serif;font-size:12.5px;font-weight:600;color:#98A3B3;text-transform:uppercase;letter-spacing:.08em}
+a.lg-buy{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:100%;padding:21px 32px;border-radius:16px;text-decoration:none;background:linear-gradient(135deg,#25DE8C 0%,#10B981 45%,#059669 100%);border:1.5px solid rgba(255,255,255,.45);cursor:pointer;transition:transform .22s ease;position:relative;overflow:hidden;margin-top:4px;animation:lgGlow 2.6s ease-in-out infinite}
+@keyframes lgGlow{0%,100%{box-shadow:0 14px 40px rgba(16,185,129,.5),0 0 0 0 rgba(37,222,140,.55),inset 0 1px 0 rgba(255,255,255,.4)}50%{box-shadow:0 18px 52px rgba(16,185,129,.68),0 0 0 9px rgba(37,222,140,0),inset 0 1px 0 rgba(255,255,255,.45)}}
+a.lg-buy::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-20deg);animation:lgSheen 3.4s ease-in-out infinite}
+@keyframes lgSheen{0%,55%{left:-60%}85%,100%{left:130%}}
+.lg-buy-main{display:flex;align-items:center;gap:11px;font-family:'Codec Pro','Inter',sans-serif;font-size:19px;font-weight:800;color:#fff;letter-spacing:.01em;line-height:1.25;text-shadow:0 1px 2px rgba(4,32,20,.25)}
+.lg-buy-main svg{stroke:#fff;flex:none}
+.lg-buy-sub{font-size:13.5px;font-weight:700;color:#fff;font-family:'Inter',-apple-system,sans-serif;line-height:1.35;opacity:.96}
+a.lg-buy:hover{transform:translateY(-2px)}
+@media (prefers-reduced-motion: reduce){ a.lg-buy::after{animation:none} a.lg-buy{animation:none;box-shadow:0 14px 40px rgba(16,185,129,.5),inset 0 1px 0 rgba(255,255,255,.4)} }
+</style>
 </body>
 </html>
