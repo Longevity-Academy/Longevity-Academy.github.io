@@ -9209,6 +9209,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="eo-head reveal">
       <h1 class="eo-title">Enroll in <span class="life-blue">The Longevity Blueprint</span></h1>
       <p class="eo-sub">Two ways to start. Pick one.</p>
+      <div class="eo-top-btns">
+        <a href="#lead-gen" class="eo-btn-adv">Apply with an Advisor <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        <a href="#" data-checkout-open class="eo-btn-buy">Enroll Instantly &mdash; $289/mo <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
@@ -9277,10 +9281,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Personal longevity protocol included</li>
           <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> 1:1 admissions consultation</li>
         </ul>
-        <div class="eo-orbox">
-          <span class="eo-orbox-or">Prefer to skip the call?</span>
-          <a href="https://lla-checkout.gitter-omri.workers.dev/?enroll=1" class="eo-orbox-btn">Enroll instantly — $289/mo
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        <div class="eo-buybox">
+          <div class="eo-buybox-copy">
+            <span class="eo-buybox-title">Skip the call &mdash; enroll instantly</span>
+            <span class="eo-buybox-sub">2-minute secure checkout &middot; pick your class dates &middot; seat confirmed</span>
+          </div>
+          <a href="#" data-checkout-open class="eo-btn-buy eo-btn-buy--lg">Enroll Now &mdash; $289/mo
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </div>
       </div>
@@ -10584,7 +10591,7 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
       .lla-float-cta .lla-cta-pill .mo{font-size:10px}
     }
   </style>
-  <a href="#enroll-options" class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now in The Longevity Blueprint — $289 per month">
+  <a href="#" data-checkout-open class="lla-float-cta" id="llaFloatCta" aria-label="Enroll Now in The Longevity Blueprint — $289 per month">
     <span class="lla-cta-text">
       <span class="lla-cta-eyebrow">Enroll Now</span>
       <span class="lla-cta-title">The Longevity Blueprint</span>
@@ -10697,5 +10704,209 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
   .eo-card{ padding:34px 26px 30px; }
 }
 </style>
+<style id="ecom-modal-css">
+#enrollModal{position:fixed;inset:0;z-index:9999;display:none}
+#enrollModal.open{display:block}
+#enrollModal .em-backdrop{position:absolute;inset:0;background:rgba(10,18,30,.45)}
+#enrollModal .em-dialog{position:relative;max-width:430px;margin:56px auto;background:#fff;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.28);max-height:calc(100vh - 92px);overflow-y:auto;padding:26px 30px 30px}
+#enrollModal .em-x{position:absolute;top:14px;right:16px;width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:24px;line-height:1;color:#1b2a3d}
+#enrollModal .em-steps{display:flex;align-items:flex-start;justify-content:center;margin:6px 0 22px}
+#enrollModal .em-st{display:flex;flex-direction:column;align-items:center;gap:7px;width:96px}
+#enrollModal .em-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;background:#fff;border:1.5px solid #C9D2DE;color:#98A3B3}
+#enrollModal .em-lbl{font-size:13.5px;color:#98A3B3;font-weight:500;white-space:nowrap}
+#enrollModal .em-st.active .em-dot,#enrollModal .em-st.done .em-dot{background:#006EFF;border-color:#006EFF;color:#fff}
+#enrollModal .em-st.active .em-lbl,#enrollModal .em-st.done .em-lbl{color:#111;font-weight:600}
+#enrollModal .em-bar{height:1.5px;background:#D7DEE8;flex:1;margin-top:13px;max-width:56px}
+#enrollModal .em-bar.done{background:#006EFF}
+#enrollModal h2{font-family:'Codec Pro','Inter',sans-serif;font-size:24px;line-height:1.22;font-weight:800;letter-spacing:-.5px;text-align:center;color:#0B1B33;margin:0 0 22px}
+#enrollModal h2 em{font-style:normal;color:inherit}
+#enrollModal .em-lb{display:block;font-size:13.5px;font-weight:700;color:#0B1B33;margin-bottom:7px}
+#enrollModal .em-in{width:100%;border:1px solid #D5DCE6;border-radius:6px;padding:13px 14px;font-size:14.5px;font-family:'Inter',sans-serif;outline:none;margin-bottom:17px;color:#111;background:#fff}
+#enrollModal .em-in::placeholder{color:#A9B3C1}
+#enrollModal .em-in:focus,#enrollModal select.em-in:focus{border-color:#006EFF}
+#enrollModal select.em-in{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6472' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 13px center;padding-right:38px}
+#enrollModal .em-phone{display:flex;gap:9px;margin-bottom:17px}
+#enrollModal .em-cc{display:flex;align-items:center;gap:5px;border:1px solid #D5DCE6;border-radius:6px;padding:0 12px;font-size:14.5px;font-weight:600;color:#006EFF;background:#fff;flex:none}
+#enrollModal .em-cc span{font-size:15px}
+#enrollModal .em-phone .em-in{margin-bottom:0}
+#enrollModal .em-go{width:100%;background:#006EFF;color:#fff;border:none;border-radius:6px;padding:14px;font-family:'Inter',sans-serif;font-weight:700;font-size:15.5px;cursor:pointer;transition:.15s}
+#enrollModal .em-go:hover{background:#0059D6}
+#enrollModal .em-refund{text-align:center;font-size:12.5px;color:#5A6472;margin-top:12px}
+#enrollModal .em-consent{display:flex;gap:9px;align-items:flex-start;margin-top:16px}
+#enrollModal .em-consent input{width:16px;height:16px;accent-color:#006EFF;margin-top:2px;flex:none}
+#enrollModal .em-consent label{font-size:12px;color:#5A6472;line-height:1.5}
+#enrollModal .em-card{border:1px solid #E3E7EE;border-radius:7px;overflow:hidden;margin-bottom:20px}
+#enrollModal .em-card-b{padding:15px 17px}
+#enrollModal .em-cname{color:#E2571E;font-weight:700;font-size:14.5px;margin-bottom:9px}
+#enrollModal .em-cl{font-size:13.5px;color:#2A2F36;margin-bottom:5px}
+#enrollModal .em-cl b{color:#111;font-weight:700}
+#enrollModal .em-cl.gap{margin-top:12px;margin-bottom:0}
+#enrollModal .em-band{background:#12355B;color:#fff;padding:14px 17px;display:flex;align-items:center;gap:11px}
+#enrollModal .em-band .b-l{font-size:13px;font-weight:600;opacity:.92;margin-bottom:2px}
+#enrollModal .em-band .b-v{font-family:'Codec Pro','Inter',sans-serif;font-weight:800;font-size:16.5px}
+#enrollModal .em-promo{display:flex;gap:10px;margin-bottom:20px}
+#enrollModal .em-promo .em-in{margin-bottom:0}
+#enrollModal .em-apply{padding:0 22px;border:1.5px solid #006EFF;background:#fff;color:#006EFF;border-radius:6px;font-weight:700;font-size:14.5px;cursor:pointer;font-family:'Inter',sans-serif;flex:none}
+#enrollModal .em-apply:hover{background:#E8F1FF}
+#enrollModal .em-screen{display:none}
+#enrollModal .em-screen.on{display:block}
+#enrollModal .em-err{display:none;color:#D93025;font-size:13px;font-weight:600;margin:-9px 0 13px}
+#enrollModal .em-err.on{display:block}
+#enrollModal .em-go[disabled]{opacity:.6;cursor:default}
+@media(max-width:520px){#enrollModal .em-dialog{margin:16px 12px;padding:24px 20px 26px;max-height:calc(100vh - 32px)}#enrollModal .em-st{width:82px}#enrollModal .em-lbl{font-size:12px}}
+
+/* Emerald ecommerce CTAs */
+.eo-top-btns{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:30px; }
+.eo-btn-adv{ display:inline-flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:16px; font-weight:700; color:#fff; padding:16px 30px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.3); text-decoration:none; transition:background .2s ease, transform .2s ease; }
+.eo-btn-adv:hover{ background:rgba(255,255,255,.12); transform:translateY(-1px); }
+.eo-btn-buy{ display:inline-flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:16px; font-weight:800; color:#04121F; padding:16px 30px; border-radius:999px; background:linear-gradient(135deg,#3DDC97 0%,#12B76A 100%); border:1px solid rgba(61,220,151,.7); box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 8px 26px rgba(18,183,106,.45); text-decoration:none; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; }
+.eo-btn-buy svg{ stroke:#04121F; }
+.eo-btn-buy:hover{ transform:translateY(-2px); box-shadow:inset 0 1px 0 rgba(255,255,255,.4), 0 12px 34px rgba(18,183,106,.6); }
+.eo-buybox{ margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 18px; padding:22px 24px; border-radius:16px; background:linear-gradient(135deg, rgba(61,220,151,.12) 0%, rgba(18,183,106,.07) 100%); border:1.5px solid rgba(61,220,151,.45); box-shadow:0 0 34px rgba(18,183,106,.14); }
+.eo-buybox-copy{ display:flex; flex-direction:column; gap:5px; min-width:220px; flex:1; }
+.eo-buybox-title{ font-family:var(--font-display); font-size:18px; font-weight:800; color:#fff; }
+.eo-buybox-sub{ font-size:13.5px; color:rgba(255,255,255,.75); }
+.eo-btn-buy--lg{ font-size:16.5px; padding:17px 32px; flex:none; }
+@media (max-width:640px){ .eo-buybox{ flex-direction:column; align-items:stretch; text-align:center; } .eo-btn-buy--lg{ justify-content:center; } }
+</style>
+<div id="enrollModal" role="dialog" aria-modal="true" aria-label="Enroll">
+  <div class="em-backdrop" data-em-close></div>
+  <div class="em-dialog">
+    <button class="em-x" type="button" data-em-close aria-label="Close">&times;</button>
+
+    <div class="em-steps">
+      <div class="em-st active" id="emS1"><span class="em-dot">1</span><span class="em-lbl">Register</span></div>
+      <span class="em-bar" id="emB1"></span>
+      <div class="em-st" id="emS2"><span class="em-dot">2</span><span class="em-lbl">Select course</span></div>
+      <span class="em-bar" id="emB2"></span>
+      <div class="em-st" id="emS3"><span class="em-dot">3</span><span class="em-lbl">Place order</span></div>
+    </div>
+
+    <h2>Your protocol <em>starts here.</em></h2>
+
+    <!-- STEP 1 -->
+    <div class="em-screen on" id="emStep1">
+      <label class="em-lb" for="emName">Full Name*</label>
+      <input class="em-in" id="emName" type="text" placeholder="Full Name" autocomplete="name" />
+
+      <label class="em-lb" for="emEmail">Email*</label>
+      <input class="em-in" id="emEmail" type="email" placeholder="Email" autocomplete="email" />
+
+      <label class="em-lb" for="emPhone">Mobile Number*</label>
+      <div class="em-phone">
+        <div class="em-cc"><span>US</span>+1</div>
+        <input class="em-in" id="emPhone" type="tel" placeholder="Mobile" autocomplete="tel" />
+      </div>
+
+      <div class="em-err" id="emErr" role="alert"></div>
+      <button class="em-go" type="button" id="emGo1">Continue</button>
+      <p class="em-refund">Fully refundable within 14 days from registration.</p>
+
+      <div class="em-consent">
+        <input type="checkbox" id="emSms" checked />
+        <label for="emSms">By subscribing, you agree to receive SMS messages from Longevity Life Academy. Message frequency varies. Message &amp; Data rates may apply.</label>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="em-screen" id="emStep2">
+      <label class="em-lb" for="emDate">Preferred class time</label>
+      <select class="em-in" id="emDate">
+        <option>Monday evenings, 7:00pm - 7:50pm ET</option>
+        <option>Wednesday midday, 12:00pm - 12:50pm ET</option>
+        <option>Next available start date</option>
+      </select>
+
+      <div class="em-card">
+        <div class="em-card-b">
+          <div class="em-cname">The Longevity Blueprint</div>
+          <div class="em-cl"><b>Schedule:</b> 18 live sessions across 18 weeks, one session every week</div>
+          <div class="em-cl"><b>Time:</b> 7:00pm - 7:50pm ET</div>
+          <div class="em-cl"><b>Lesson duration:</b> 50 min</div>
+          <div class="em-cl gap"><b>Period:</b> 18 weeks</div>
+        </div>
+        <div class="em-band">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3DDC97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <div>
+            <div class="b-l">Course tuition</div>
+            <div class="b-v">$279.00 monthly for 5 months</div>
+          </div>
+        </div>
+      </div>
+
+      <label class="em-lb" for="emPromo">I have promo code</label>
+      <div class="em-promo">
+        <input class="em-in" id="emPromo" type="text" placeholder="Enter promo code" />
+        <button class="em-apply" type="button" id="emApply">Apply</button>
+      </div>
+
+      <button class="em-go" type="button" id="emGo2">Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>window.LLA_ECOMM_CONFIG = { workerBase: 'https://lla-checkout.gitter-omri.workers.dev' };</script>
+<script src="assets/eteacher-ecomm.js" defer></script>
+<script>
+(function(){
+  var m=document.getElementById('enrollModal');
+  function open(){m.classList.add('open');document.body.style.overflow='hidden';}
+  function close(){m.classList.remove('open');document.body.style.overflow='';}
+  function step(n){
+    document.getElementById('emStep1').classList.toggle('on',n===1);
+    document.getElementById('emStep2').classList.toggle('on',n===2);
+    document.getElementById('emS1').className='em-st '+(n>1?'done':'active');
+    document.getElementById('emS2').className='em-st '+(n>=2?'active':'');
+    document.getElementById('emB1').className='em-bar'+(n>=2?' done':'');
+    m.querySelector('.em-dialog').scrollTop=0;
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-checkout-open]');
+    if(a){e.preventDefault();step(1);open();return;}
+    if(e.target.closest('[data-em-close]')){close();}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  var errBox=document.getElementById('emErr');
+  function emErr(msg){errBox.textContent=msg;errBox.classList.add('on');}
+  function emErrClear(){errBox.textContent='';errBox.classList.remove('on');}
+  var ERR_MSG={
+    need_full_name:'Please enter your full name (first and last).',
+    invalid_email:'Please enter a valid email address.',
+    non_us_phone:'Please enter a valid US mobile number 2014 this course is currently open to US students only.',
+    invalid_state:'Please enter a valid US mobile number.',
+    'Missing or invalid fields':'Please fill in all fields.'
+  };
+  document.getElementById('emGo1').addEventListener('click',function(){
+    var btn=this;
+    emErrClear();
+    var fields={
+      fullName:document.getElementById('emName').value,
+      email:document.getElementById('emEmail').value,
+      phone:document.getElementById('emPhone').value,
+      smsConsent:document.getElementById('emSms').checked,
+      startDate:(document.getElementById('emDate')||{}).value||'',
+      promoCode:''
+    };
+    if(!fields.fullName.trim()||!fields.email.trim()||!fields.phone.trim()){emErr('Please fill in all fields.');return;}
+    if(!window.LLA_ECOMM){emErr('Something went wrong , please refresh and try again.');return;}
+    btn.disabled=true;btn.textContent='Please wait\u2026';
+    window.LLA_ECOMM.submitLead(fields).then(function(r){
+      btn.disabled=false;btn.textContent='Continue';
+      if(r.ok){step(2);return;}
+      emErr(ERR_MSG[r.error]||'Something went wrong , please try again in a moment.');
+    });
+  });
+  document.getElementById('emGo2').addEventListener('click',function(){
+    var ids=(window.LLA_ECOMM&&window.LLA_ECOMM.getCheckoutIds())||null;
+    window.location.href='https://lla-checkout.gitter-omri.workers.dev/checkout.html'+(ids&&ids.stid?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)):'');
+  });
+  document.getElementById('emApply').addEventListener('click',function(){
+    var v=document.getElementById('emPromo').value.trim().toUpperCase();
+    this.textContent = (v==='FOUNDER35') ? 'Applied' : 'Apply';
+  });
+  var q=new URLSearchParams(location.search);
+  if(q.get('enroll')){step(q.get('enroll')==='2'?2:1);open();}
+})();
+</script>
 </body>
 </html>
