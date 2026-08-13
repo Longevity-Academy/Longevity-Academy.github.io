@@ -1,7 +1,7 @@
 /* =====================================================================
    LLA E-COMMERCE CONVERSION LAYER  (funnel v2)
    Powers the mechanics of the funnel narrative that lives in index.html:
-     · live countdown to the Aug 21, 2026 founder cohort (deterministic)
+     · live countdown to the Aug 16, 2026 founder cohort (deterministic)
      · real seat scarcity for a small class (8–15 students)
      · sticky bottom buy bar after the hero
      · exit-intent "hold your seat" offer modal (once per session)
@@ -13,7 +13,7 @@
   'use strict';
 
   var CHECKOUT   = 'checkout.html';
-  var COHORT_ISO = '2026-08-21T00:00:00-04:00';   // real cohort start
+  var COHORT_ISO = '2026-08-16T00:00:00-04:00';   // real cohort start
   var SEATS_MAX  = 15;                            // real class ceiling (8–15)
   var SEATS_MIN  = 8;                             // real class floor
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
