@@ -5392,16 +5392,13 @@ html {
    ============================================== */
 .teachers-grid-live {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1040px;
-  margin: 0 auto 40px;
-  justify-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+  margin-bottom: 40px;
 }
-.teachers-grid-live > .teacher-card-live { width: 100%; max-width: 320px; }
-/* Row 2: the last two cards wrapped and centered together in the middle */
-.teachers-row2 { grid-column: 1 / -1; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
-.teachers-row2 > .teacher-card-live { width: 100%; max-width: 320px; flex: 0 1 320px; }
+@media (max-width: 1180px) {
+  .teachers-grid-live { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 980px) {
   .teachers-grid-live { grid-template-columns: repeat(2, 1fr); }
 }
@@ -5409,9 +5406,14 @@ html {
   .teachers-grid-live { grid-template-columns: 1fr; }
 }
 .teachers-grid-live:empty { display: none; }
-/* Founding faculty — Julie pops out (glow + border), stays aligned in grid */
-.teacher-card-live.is-founding { position: relative; transform: translateY(-14px) scale(1.06); z-index: 3; background: linear-gradient(180deg, rgba(0,110,255,0.20) 0%, rgba(0,110,255,0.06) 100%); border-color: rgba(0,110,255,0.7); box-shadow: 0 0 0 2px rgba(0,110,255,0.45), 0 36px 80px -18px rgba(0,110,255,0.85); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-.teacher-card-live.is-founding:hover { transform: translateY(-20px) scale(1.07); border-color: rgba(77,163,255,0.95); box-shadow: 0 0 0 2px rgba(0,110,255,0.55), 0 46px 96px -16px rgba(0,110,255,0.95); }
+/* Founding Faculty highlight — SAME size as other cards, just accented */
+.teacher-card-live.is-founding {
+  position: relative;
+  background: linear-gradient(180deg, rgba(0,110,255,0.12) 0%, rgba(0,110,255,0.04) 100%);
+  border-color: rgba(0,110,255,0.45);
+  box-shadow: 0 0 0 1px rgba(0,110,255,0.25), 0 18px 44px -18px rgba(0,110,255,0.55);
+}
+.teacher-card-live.is-founding:hover { border-color: rgba(77,163,255,0.7); }
 .teacher-founding-badge { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 999px; background: linear-gradient(135deg, #006EFF, #4DA3FF); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; box-shadow: 0 4px 12px -2px rgba(0,110,255,0.6); z-index: 2; }
 .teacher-founding-badge svg { width: 11px; height: 11px; fill: #fff; }
 .teacher-card-live {
@@ -8854,22 +8856,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="section-subtitle" style="margin: 0 auto; max-width: 720px;">A faculty of certified specialists, researchers, and protocol designers backed by the most recognized credentialing bodies in the field.</p>
     </div>
 
-    <!-- LIVE instructor grid: Row 1 = Natalie, Julie (middle), Courtney; Row 2 = Amy, Jordan -->
+    <!-- LIVE instructor grid: Natalie, Courtney, Julie (Founding), Amy, Jordan -->
     <div class="teachers-grid-live reveal">
       <a class="teacher-card-live teacher-card-link" href="teachers/natalie.html">
         <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/natalie.jpg" alt="Natalie Blackbourne" loading="lazy"></div>
         <div class="teacher-card-live-body">
           <h4 class="teacher-card-live-name">Natalie Blackbourne</h4>
-          <span class="teacher-card-live-role">Longevity Researcher &amp; Educator</span>
+          <span class="teacher-card-live-role">Longevity Researcher & Educator</span>
           <p class="teacher-card-live-bio">M.S. Emotional Intelligence with ~20 years in health and wellness. Focuses on neuroscience and cognitive optimization for long-term vitality.</p>
-        </div>
-      </a>
-      <a class="teacher-card-live teacher-card-link is-founding" href="teachers/julie-gibson-clark.html">
-        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/julie-gibson-clark.jpg" alt="Julie Gibson Clark" loading="lazy"></div>
-        <div class="teacher-card-live-body">
-          <h4 class="teacher-card-live-name">Julie Gibson Clark</h4>
-          <span class="teacher-card-live-role">Ranked #2 &middot; Rejuvenation Olympics</span>
-          <p class="teacher-card-live-bio">#2 slowest-aging person in the world on the Rejuvenation Olympics + A leading voice in accessible, evidence-based longevity, and Founding Faculty at Longevity Life Academy.</p>
         </div>
       </a>
       <a class="teacher-card-live teacher-card-link" href="teachers/courtney.html">
@@ -8880,24 +8874,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="teacher-card-live-bio">IIN-certified founder of EatBiohackLove, based in Amsterdam. Specializes in gut health, hormone balance, and practical biohacking.</p>
         </div>
       </a>
-      <div class="teachers-row2">
+      <a class="teacher-card-live teacher-card-link is-founding" href="teachers/julie-gibson-clark.html">
+        <span class="teacher-founding-badge"><svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 3h14v2H5v-2z"/></svg>Founding</span>
+        <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/julie-gibson-clark.jpg" alt="Julie Gibson Clark" loading="lazy"></div>
+        <div class="teacher-card-live-body">
+          <h4 class="teacher-card-live-name">Julie Gibson Clark</h4>
+          <span class="teacher-card-live-role">Ranked #2 &middot; Rejuvenation Olympics</span>
+          <p class="teacher-card-live-bio">#2 slowest-aging person in the world on the Rejuvenation Olympics. A leading voice in accessible, evidence-based longevity.</p>
+        </div>
+      </a>
       <a class="teacher-card-live teacher-card-link" href="teachers/amy.html">
         <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/amy.jpg" alt="Amy Jamieson" loading="lazy"></div>
         <div class="teacher-card-live-body">
           <h4 class="teacher-card-live-name">Amy Jamieson</h4>
           <span class="teacher-card-live-role">Senior Lecturer, UC Santa Barbara</span>
-          <p class="teacher-card-live-bio">M.S. Health Science &amp; Kinesiology, NASM CPT/CES, ACE Health Coach. 25+ years in higher education and a master competitive runner.</p>
+          <p class="teacher-card-live-bio">M.S. Health Science & Kinesiology, NASM CPT/CES, ACE Health Coach. 25+ years in higher education and a master competitive runner.</p>
         </div>
       </a>
       <a class="teacher-card-live teacher-card-link" href="teachers/jordan.html">
         <div class="teacher-card-live-photo teacher-card-live-photo--square"><img src="assets/instructors/jordan.jpg" alt="Jordan Lattimore" loading="lazy"></div>
         <div class="teacher-card-live-body">
           <h4 class="teacher-card-live-name">Jordan Lattimore</h4>
-          <span class="teacher-card-live-role">Behavioral &amp; Education Specialist</span>
+          <span class="teacher-card-live-role">Behavioral & Education Specialist</span>
           <p class="teacher-card-live-bio">B.Sc. Psychology, University of Alberta. 12 years in Costa Rica near the Nicoya Blue Zone, 5+ years in behavioral therapy.</p>
         </div>
       </a>
-      </div>
     </div>
 </div>
 
