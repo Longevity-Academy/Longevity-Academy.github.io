@@ -227,7 +227,7 @@ window.LLA_META=(function(){
           <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3DDC97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           <div>
             <div class="t-lbl">Course tuition fee</div>
-            <div class="t-val">$289.00 monthly for 5 months</div>
+            <div class="t-val">$279.00 monthly for 5 months</div>
           </div>
         </div>
       </div>
@@ -277,13 +277,13 @@ window.LLA_META=(function(){
       <div class="sum">
         <div class="sum-row">
           <span class="k">Course registration fee <span class="tip" title="Charged today to reserve your seat.">?</span></span>
-          <span class="v">$289.00</span>
+          <span class="v">$279.00</span>
         </div>
         <p class="sum-note">Fully refundable within 14 days from registration.</p>
 
         <div class="sum-row">
           <span class="k">Monthly tuition fee <span class="tip" title="Billed monthly after your first class.">?</span></span>
-          <span class="v">4 x $289.00</span>
+          <span class="v">4 x $279.00</span>
         </div>
         <p class="sum-note">Monthly payments begin the month after your first class.</p>
 
@@ -327,7 +327,7 @@ document.querySelectorAll('.pay-tab').forEach(function(t){
 // Raw card data is NEVER sent to the Worker/CRM, the static card fields stay
 // demo-only until the Airwallex drop-in / PayPal SDK is enabled via details config.
 var _ids = window.LLA_ECOMM ? window.LLA_ECOMM.getCheckoutIds() : null;
-try{LLA_META.track('AddToCart',{value:289,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
+try{LLA_META.track('AddToCart',{value:279,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
 var _details = null;
 if (window.LLA_ECOMM && window.LLA_ECOMM.config.mode === 'ecomm' && _ids) {
   window.LLA_ECOMM.fetchCheckoutDetails(_ids).then(function(d){
@@ -351,7 +351,7 @@ function showDone(){
 
 document.getElementById('proceed').addEventListener('click',function(){
   var btn=this;
-  try{LLA_META.track('InitiateCheckout',{value:289,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
+  try{LLA_META.track('InitiateCheckout',{value:279,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
   if (window.LLA_ECOMM && window.LLA_ECOMM.config.mode === 'ecomm' && _ids && _details && _details.paymentId) {
     btn.disabled=true; btn.textContent='Processing\u2026';
     // Live path: gateway result (from Airwallex/PayPal callbacks) is reported to CRM via queue.
@@ -360,12 +360,12 @@ document.getElementById('proceed').addEventListener('click',function(){
       OrderId: String(_ids.orderid),
       PaymentId: String(_details.paymentId),
       PaymentMethod: document.querySelector('.pay-tab.active [alt="PayPal"]') ? 'PayPal' : 'CreditCard',
-      AmountCharged: String(_details.amountCharged || '289.00'),
+      AmountCharged: String(_details.amountCharged || '279.00'),
       ChargeType: 'RegistrationFee',
       IsApproved: true
     }).then(function(r){
       btn.disabled=false; btn.textContent='Proceed';
-      try{LLA_META.track('Purchase',{value:Number(_details.amountCharged)||289,currency:'USD',content_name:'Longevity Blueprint',order_id:String(_ids.orderid)});}catch(e){}
+      try{LLA_META.track('Purchase',{value:Number(_details.amountCharged)||279,currency:'USD',content_name:'Longevity Blueprint',order_id:String(_ids.orderid)});}catch(e){}
       showDone();
     });
     return;
