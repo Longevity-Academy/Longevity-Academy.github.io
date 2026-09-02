@@ -327,7 +327,7 @@ document.querySelectorAll('.pay-tab').forEach(function(t){
 // Raw card data is NEVER sent to the Worker/CRM, the static card fields stay
 // demo-only until the Airwallex drop-in / PayPal SDK is enabled via details config.
 var _ids = window.LLA_ECOMM ? window.LLA_ECOMM.getCheckoutIds() : null;
-try{LLA_META.track('InitiateCheckout',{value:289,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
+try{LLA_META.track('AddToCart',{value:289,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
 var _details = null;
 if (window.LLA_ECOMM && window.LLA_ECOMM.config.mode === 'ecomm' && _ids) {
   window.LLA_ECOMM.fetchCheckoutDetails(_ids).then(function(d){
@@ -351,6 +351,7 @@ function showDone(){
 
 document.getElementById('proceed').addEventListener('click',function(){
   var btn=this;
+  try{LLA_META.track('InitiateCheckout',{value:289,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
   if (window.LLA_ECOMM && window.LLA_ECOMM.config.mode === 'ecomm' && _ids && _details && _details.paymentId) {
     btn.disabled=true; btn.textContent='Processing\u2026';
     // Live path: gateway result (from Airwallex/PayPal callbacks) is reported to CRM via queue.
