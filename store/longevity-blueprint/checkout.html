@@ -158,6 +158,41 @@ a{color:var(--blue);text-decoration:none}
 #screen-done p{font-size:16px !important}
 </style>
 <script src="/assets/ai-attribution.js"></script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1440305917310328');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1440305917310328&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<script>
+window.LLA_META=(function(){
+  function ck(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]+)'));return m?decodeURIComponent(m[1]):'';}
+  function track(name,data,email){
+    try{
+      if(window.LLA_ECOMM_CONFIG&&window.LLA_ECOMM_CONFIG.env==='staging')return;
+      var id='lla_'+name.toLowerCase()+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+      try{if(window.fbq)fbq('track',name,data||{},{eventID:id});}catch(e){}
+      var payload=JSON.stringify({event_name:name,event_id:id,email:email||'',
+        value:(data&&data.value)||0,currency:(data&&data.currency)||'USD',
+        content_name:(data&&data.content_name)||'',order_id:(data&&data.order_id)||'',
+        url:location.href,fbp:ck('_fbp'),fbc:ck('_fbc')});
+      fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:payload,keepalive:true}).catch(function(){});
+    }catch(e){}
+  }
+  return {track:track};
+})();
+</script>
 </head>
 <body>
 
@@ -292,6 +327,7 @@ document.querySelectorAll('.pay-tab').forEach(function(t){
 // Raw card data is NEVER sent to the Worker/CRM, the static card fields stay
 // demo-only until the Airwallex drop-in / PayPal SDK is enabled via details config.
 var _ids = window.LLA_ECOMM ? window.LLA_ECOMM.getCheckoutIds() : null;
+try{LLA_META.track('InitiateCheckout',{value:289,currency:'USD',content_name:'Longevity Blueprint'});}catch(e){}
 var _details = null;
 if (window.LLA_ECOMM && window.LLA_ECOMM.config.mode === 'ecomm' && _ids) {
   window.LLA_ECOMM.fetchCheckoutDetails(_ids).then(function(d){
@@ -328,6 +364,7 @@ document.getElementById('proceed').addEventListener('click',function(){
       IsApproved: true
     }).then(function(r){
       btn.disabled=false; btn.textContent='Proceed';
+      try{LLA_META.track('Purchase',{value:Number(_details.amountCharged)||289,currency:'USD',content_name:'Longevity Blueprint',order_id:String(_ids.orderid)});}catch(e){}
       showDone();
     });
     return;
