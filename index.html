@@ -9985,9 +9985,16 @@ function toggleCurriculum(btn) {
   // ---------- Click-ID + UTM capture ----------
   // Captures gclid/fbclid/etc + utm_* on first landing, persists 30d in localStorage,
   // and surfaces them via window.eTeacherLeads.getAttribution() for inclusion on submit.
-  var ATTR_KEYS = ['gclid','fbclid','msclkid','ttclid','li_fat_id','wbraid','gbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  var ATTR_KEYS = ['cid','gclid','fbclid','msclkid','ttclid','li_fat_id','wbraid','gbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
   var ATTR_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
   var ATTR_STORAGE_KEY = 'lla_attribution_v1';
+  // Email link builders sometimes emit a second '?' instead of '&'
+  // (e.g. utm_content=jm-u1?cid=118086). A URL may only contain one '?', so the
+  // browser folds everything after it into the previous value and cid is lost.
+  // Normalise stray '?' to '&' before parsing. Identical to the masterclass page.
+  function normalizedSearch(){
+    return (window.location.search || '').replace(/^\?/, '').replace(/\?/g, '&');
+  }
   function readAttributionStorage(){
     try {
       var raw = localStorage.getItem(ATTR_STORAGE_KEY);
@@ -9999,7 +10006,7 @@ function toggleCurriculum(btn) {
   }
   function captureAttribution(){
     try {
-      var params = new URLSearchParams(window.location.search || '');
+      var params = new URLSearchParams(normalizedSearch());
       var found = {};
       var hasAny = false;
       ATTR_KEYS.forEach(function(k){
@@ -10100,7 +10107,20 @@ function toggleCurriculum(btn) {
           LandingPage: window.location.href,
           UserAgent: navigator.userAgent,
           ReferringSite: document.referrer || window.location.hostname,
-          QueryString: (window.location.search || '').replace(/^\?/, '')
+          QueryString: (function(){
+            // eTeacher reads the campaign from QueryString as cid=<id>.
+            // Repair stray '?' and, if this page was reached without a cid
+            // (e.g. a click through from pricing.html), restore the stored one.
+            var qs = normalizedSearch();
+            try {
+              var p = new URLSearchParams(qs);
+              if (!p.get('cid')) {
+                var saved = getAttribution();
+                if (saved && saved.cid) { p.set('cid', saved.cid); qs = p.toString(); }
+              }
+            } catch(e){}
+            return qs.slice(0, 2000);
+          })()
         };
         // Always report US for the IP-derived country too, so a foreign IP can
         // never re-tag this lead as non-US downstream.
@@ -10114,6 +10134,13 @@ function toggleCurriculum(btn) {
         var attr = getAttribution();
         var dyn = buildDynamicParameters(attr);
         // Also include Google Ads Campaign ID in DynamicParameters for eTeacher visibility
+        // Never attach the default Google campaign when the visit carries a cid
+        // or arrived from a non-Google source. Identical rule to the masterclass page.
+        var _attr0 = attr || {};
+        var _qsNow = null; try { _qsNow = new URLSearchParams(normalizedSearch()); } catch(e){}
+        var _hasCid = !!(_attr0.cid || (_qsNow && _qsNow.get('cid')));
+        var _nonGoogleSource = !!(_attr0.utm_source || _attr0.fbclid || _attr0.ttclid) && !_attr0.gclid;
+        if (_hasCid || _nonGoogleSource) { fields.googleCampaignId = ''; }
         var googleCampaignId = '';
         if (fields.googleCampaignId && /^\d+$/.test(String(fields.googleCampaignId))) {
           googleCampaignId = String(fields.googleCampaignId);

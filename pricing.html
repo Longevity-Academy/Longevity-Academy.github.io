@@ -550,5 +550,61 @@ ul{list-style:none}
 </section>
 
 <script src="assets/lla-nav.js?v=1" defer></script>
+
+<!-- Attribution carry-through.
+     This page has no lead form: every CTA sends the visitor to the homepage
+     lead form. Without this, the cid from the upsell email dies at the click
+     and eTeacher assigns its default house campaign. Two jobs only:
+     1. repair a stray '?' (link builders emit utm_content=jm-u1?cid=118086)
+        and persist the attribution under the same key the homepage reads;
+     2. carry the query string onto internal links so it survives the click
+        even when localStorage is unavailable.
+     No form, no CRM call, no payload is created on this page. -->
+<script>
+(function(){
+  var ATTR_KEYS = ['cid','gclid','fbclid','msclkid','ttclid','li_fat_id','wbraid','gbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  var ATTR_STORAGE_KEY = 'lla_attribution_v1';
+  function normalizedSearch(){
+    return (window.location.search || '').replace(/^\?/, '').replace(/\?/g, '&');
+  }
+  var qs = normalizedSearch();
+  if (!qs) return;
+  var params;
+  try { params = new URLSearchParams(qs); } catch(e){ return; }
+
+  // 1 · persist, using the identical shape the homepage capture writes
+  try {
+    var found = {}, hasAny = false;
+    ATTR_KEYS.forEach(function(k){ var v = params.get(k); if (v) { found[k] = v; hasAny = true; } });
+    if (hasAny) {
+      found.ts = Date.now();
+      found.first_landing = window.location.href;
+      found.first_referrer = document.referrer || '';
+      localStorage.setItem(ATTR_STORAGE_KEY, JSON.stringify(found));
+    }
+  } catch(e){}
+
+  // 2 · carry the repaired query onto same-site links
+  function decorate(){
+    var host = window.location.hostname;
+    Array.prototype.forEach.call(document.querySelectorAll('a[href]'), function(a){
+      var raw = a.getAttribute('href') || '';
+      if (!raw || raw.charAt(0) === '#') return;
+      if (/^(mailto:|tel:|javascript:)/i.test(raw)) return;
+      var u;
+      try { u = new URL(raw, window.location.href); } catch(e){ return; }
+      if (u.hostname !== host) return;
+      var target = new URLSearchParams(u.search.replace(/^\?/, ''));
+      var changed = false;
+      params.forEach(function(v, k){ if (!target.get(k)) { target.set(k, v); changed = true; } });
+      if (!changed) return;
+      u.search = target.toString();
+      a.setAttribute('href', u.pathname + u.search + u.hash);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', decorate);
+  else decorate();
+})();
+</script>
 </body>
 </html>
