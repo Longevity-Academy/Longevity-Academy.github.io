@@ -503,16 +503,33 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     };
     if(!fields.fullName.trim()||!fields.email.trim()||!fields.phone.trim()){emErr('Please fill in all fields.');return;}
     if(!window.LLA_ECOMM){emErr('Something went wrong \u2014 please refresh and try again.');return;}
-    btn.disabled=true;btn.textContent='Please wait\u2026';
-    window.LLA_ECOMM.submitLead(fields).then(function(r){
-      btn.disabled=false;btn.textContent='Continue';
-      if(r.ok){step(2);return;}
-      emErr(ERR_MSG[r.error]||'Something went wrong \u2014 please try again in a moment.');
-    });
+        /* E-COMMERCE 3-SCREEN CHECKOUT ONLY. No CRM lead is created on this screen.
+     * The details are held in the page and the lead + order are created on the
+     * click that leads to the payment screen. Do not re-add a lead call or any
+     * marketing event here. The separate lead-generation form is unaffected. */
+    window.LLA_ECOMM_PENDING = fields;
+    try{ if(window.sessionStorage) sessionStorage.setItem('lla_pending_enroll',JSON.stringify(fields)); }catch(e){}
+    step(2);
   });
   document.getElementById('emGo2').addEventListener('click',function(){
+    var btn=this;
+    function go(ids){
+      window.location.href='https://lla-checkout.gitter-omri.workers.dev/checkout.html'+(ids&&ids.stid?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)):'');
+    }
     var ids=(window.LLA_ECOMM&&window.LLA_ECOMM.getCheckoutIds())||null;
-    window.location.href='https://lla-checkout.gitter-omri.workers.dev/checkout.html'+(ids&&ids.stid?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)):'');
+    if(ids&&ids.stid){go(ids);return;}
+    var f=window.LLA_ECOMM_PENDING;
+    if(!f){ try{ f=JSON.parse(sessionStorage.getItem('lla_pending_enroll')||'null'); }catch(e){ f=null; } }
+    if(!f||!window.LLA_ECOMM){go(null);return;}
+    if(btn.getAttribute('data-busy')==='1'){return;}
+    btn.setAttribute('data-busy','1');
+    var label=btn.textContent;btn.textContent='Please wait\\u2026';
+    window.LLA_ECOMM.submitLead(f).then(function(r){
+      btn.setAttribute('data-busy','0');btn.textContent=label;
+      if(r&&r.ok){ try{ sessionStorage.removeItem('lla_pending_enroll'); }catch(e){} go((window.LLA_ECOMM.getCheckoutIds())||null);return;}
+      step(1);
+      emErr(ERR_MSG[(r&&r.error)]||'Something went wrong \\u2014 please try again in a moment.');
+    });
   });
   document.getElementById('emApply').addEventListener('click',function(){
     var v=document.getElementById('emPromo').value.trim().toUpperCase();
