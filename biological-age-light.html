@@ -1,7 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
+  <!-- Meta identity bootstrap.
+     The Pixel on this site is loaded by GTM, which initialises it with no user
+     data. Every event GTM fires therefore reaches Meta with no match key, which
+     is why About_Us, Clicked_on_Enroll, Visited_one_of_the_six_pillars and
+     Clicked_on_curriculum score 6.1 out of 10 while the Lead tag scores 9.3.
+     This installs Meta's own Pixel snippet first and attaches the identity to
+     it. GTM's Meta tag begins with `if (f.fbq) return;`, so it reuses this
+     Pixel instead of replacing it and the match keys survive into its events.
+     external_id is present for every visitor, including anonymous ones; email,
+     phone and name are added only once the visitor has supplied them.
+     This fires no event of its own. -->
+<script>(function(){
+  var PIXEL='1440305917310328';
+  function xid(){
+    try{
+      var v=localStorage.getItem('lla_xid_v1');
+      if(!v){ v='lla'+Date.now().toString(36)+Math.random().toString(36).slice(2,12); localStorage.setItem('lla_xid_v1',v); }
+      return v;
+    }catch(e){return '';}
+  }
+  function stored(){
+    var i=null;
+    try{ i=JSON.parse(sessionStorage.getItem('lla_buyer_v1')||'null'); }catch(e){}
+    if(!i||!i.email){ try{ i=JSON.parse(localStorage.getItem('lla_identity_v1')||'null'); }catch(e){} }
+    return i||{};
+  }
+  function letters(s){ return String(s||'').toLowerCase().replace(/[^a-z]/g,''); }
+  function userData(){
+    var i=stored(), ud={external_id:xid()};
+    if(i.email) ud.em=String(i.email).trim().toLowerCase();
+    if(i.phone) ud.ph=String(i.phone).replace(/[^0-9]/g,'');
+    if(i.fn) ud.fn=letters(i.fn);
+    if(i.ln) ud.ln=letters(i.ln);
+    if(i.st) ud.st=String(i.st).trim().toLowerCase();
+    if(i.country) ud.country=String(i.country).trim().toLowerCase();
+    return ud;
+  }
+  var ud=userData();
+  window.dataLayer=window.dataLayer||[];
+  window.dataLayer.push({event:'lla_identity_ready',lla_em:ud.em||'',lla_ph:ud.ph||'',lla_fn:ud.fn||'',lla_ln:ud.ln||'',lla_st:ud.st||'',lla_country:ud.country||'',lla_external_id:ud.external_id||''});
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  try{ window.fbq('init',PIXEL,userData()); }catch(e){}
+})();</script>
+
+<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
