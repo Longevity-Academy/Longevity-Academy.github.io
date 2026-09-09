@@ -177,7 +177,12 @@ src="https://www.facebook.com/tr?id=1440305917310328&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 <script>
 window.LLA_META=(function(){
-  function ck(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]+)'));return m?decodeURIComponent(m[1]):'';}
+  /* Cookie read WITHOUT decoding. decodeURIComponent mutates the _fbc value
+   * (its fbclid segment often contains percent-encoded bytes), and Meta then
+   * reports "Server sending modified fbclid value in fbc parameter" and drops
+   * attribution. The _fbc cookie must travel byte-for-byte as the Pixel wrote it.
+   * Non-clickid cookies (_fbp) also parse fine without decoding. */
+  function ck(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]+)'));return m?m[1]:'';}
   function track(name,data,email){
     try{
       if(window.LLA_ECOMM_CONFIG&&window.LLA_ECOMM_CONFIG.env==='staging')return;
