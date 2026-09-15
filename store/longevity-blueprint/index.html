@@ -10604,17 +10604,23 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
     <!-- STEP 2 -->
     <div class="em-screen" id="emStep2">
       <label class="em-lb" for="emDate">Preferred class time</label>
-      <select class="em-in" id="emDate">
-        <option>Monday evenings, 7:00pm - 7:50pm ET</option>
-        <option>Wednesday midday, 12:00pm - 12:50pm ET</option>
-        <option>Next available start date</option>
+      <select class="em-in" id="emDate" required>
+        <option value="" disabled selected>Choose your class time</option>
+        <optgroup label="September cohort, starts this week">
+          <option value="Mondays 1:00pm ET | 12:00pm CT | 10:00am PT, from Mon Sep 14 (CRM: Mon 20:00 IL)">Mondays 1:00pm ET · 12:00pm CT · 10:00am PT — from Sep 14</option>
+          <option value="Tuesdays 7:00pm ET | 6:00pm CT | 4:00pm PT, from Tue Sep 15 (CRM: Wed 02:00 IL)">Tuesdays 7:00pm ET · 6:00pm CT · 4:00pm PT — from Sep 15</option>
+        </optgroup>
+        <optgroup label="October cohort">
+          <option value="Mondays 8:00pm ET | 7:00pm CT | 5:00pm PT, from Mon Oct 12 (CRM: Tue 03:00 IL)">Mondays 8:00pm ET · 7:00pm CT · 5:00pm PT — from Oct 12</option>
+          <option value="Wednesdays 11:00am ET | 10:00am CT | 8:00am PT, from Wed Oct 14 (CRM: Wed 18:00 IL)">Wednesdays 11:00am ET · 10:00am CT · 8:00am PT — from Oct 14</option>
+        </optgroup>
       </select>
 
       <div class="em-card">
         <div class="em-card-b">
           <div class="em-cname">The Longevity Blueprint</div>
           <div class="em-cl"><b>Schedule:</b> 18 live sessions across 18 weeks, one session every week</div>
-          <div class="em-cl"><b>Time:</b> 7:00pm - 7:50pm ET</div>
+          <div class="em-cl"><b>Time:</b> As selected above · 50-minute live session</div>
           <div class="em-cl"><b>Lesson duration:</b> 50 min</div>
           <div class="em-cl gap"><b>Period:</b> 18 weeks</div>
         </div>
