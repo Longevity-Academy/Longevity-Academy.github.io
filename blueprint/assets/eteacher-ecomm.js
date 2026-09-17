@@ -206,8 +206,13 @@
       LastName: lastName,
       Email: String(fields.email).trim(),
       MobilePhone: e164,
-      CountryIsoCode: countryIso,
-      CountryIsoCodeByIp: countryIso,
+      /* PRICING CURRENCY GUARD (2026-09-09). The CRM prices the order by
+       * CountryIsoCode: an IL lead was minted an ILS Airwallex intent (verified
+       * live, intent int_nlpd6cws2hm4v98p9p1). This product is sold in USD only,
+       * so the order is always created as US and the buyer's real country is
+       * recorded in AdminNotes and kept in the E.164 phone. */
+      CountryIsoCode: 'US',
+      CountryIsoCodeByIp: 'US',
       State: stateCode,
       StateProvinceRegion: stateCode,
       LandingPage: window.location.href,
@@ -238,7 +243,7 @@
       if (window.fbq) window.fbq('init', '1440305917310328', { em: _ident.email, ph: _ident.phone.replace(/[^0-9]/g, ''), fn: _ident.fn, ln: _ident.ln, st: _ident.st, country: 'us', external_id: _xid });
     } catch (e) {}
 
-    var notes = 'US State: ' + stateCode + ' | SELF-SERVICE ECOMM CHECKOUT: The Longevity Blueprint';
+    var notes = 'Buyer country: ' + countryIso + ' | US State: ' + (stateCode || '-') + ' | SELF-SERVICE ECOMM CHECKOUT: The Longevity Blueprint';
     if (fields.startDate) notes += ' · Start: ' + fields.startDate;
     if (fields.smsConsent !== undefined) notes += ' · SMS consent: ' + (fields.smsConsent ? 'yes' : 'no');
     if (fields.promoCode) notes += ' · Promo: ' + fields.promoCode;
@@ -357,6 +362,23 @@
       if (_creating) return _creating;
       var pending = readPending();
       if (!pending) return Promise.reject(new Error('NO_PENDING_LEAD'));
+      /* PLAN FIX (2026-09-17). The payload is snapshotted on screen 1, BEFORE the
+       * buyer picks Monthly/Upfront on screen 2, so it carried the default monthly
+       * price (FirstPayment 179 x 5) even when the buyer chose "$799 one payment"
+       * (verified live: order 8026893, AmountToCharge 179, NumOfPayments 5).
+       * Re-resolve the plan here, on the payment screen where ?plan= is final, so
+       * the CRM order and the Airwallex intent match what the buyer selected. */
+      try {
+        var _pr = activePrice(); var _pl = pending.payload;
+        _pl.FirstPayment     = Number(_pr.firstPayment);
+        _pl.NumberOfPayments = Number(_pr.numberOfPayments);
+        _pl.LeftToPay        = Number(_pr.leftToPay);
+        if (typeof _pl.DynamicParameters === 'string') {
+          _pl.DynamicParameters = /(^|&)plan=(monthly|upfront)/.test(_pl.DynamicParameters)
+            ? _pl.DynamicParameters.replace(/(^|&)plan=(monthly|upfront)/, '$1plan=' + _pr.plan)
+            : (_pl.DynamicParameters + '&plan=' + _pr.plan);
+        }
+      } catch(e){}
       var base = CFG.workerBase.replace(/\/$/, '');
       var prefix = CFG.env === 'staging' ? '/staging' : '';
       _creating = postWithRetry(base + prefix + '/api/lead/ecomm', pending.payload).then(function(r){
