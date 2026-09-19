@@ -120,9 +120,14 @@ a{color:var(--blue);text-decoration:none}
   .sum{position:static}
   .stepper .bar{width:34px;margin:0 7px}
   .stepper .lbl{display:none}
-  .co-head{padding:12px 16px;gap:12px}
-  .callus{font-size:13px}
+  .co-head{padding:10px 14px 8px;gap:10px;flex-wrap:wrap;row-gap:4px;min-height:0}
+  .co-head .logo img{height:38px}
+  .stepper{flex:1 1 auto;min-width:0;justify-content:flex-end}
+  .callus{flex:1 0 100%;font-size:13px;text-align:right;line-height:1.2}
 }
+/* r1: PayPal button placeholder while the PayPal SDK renders */
+#paypal-button-container:empty{min-height:55px;border:1px dashed #C9D2DE;border-radius:6px;display:flex;align-items:center;justify-content:center;background:#F8FAFC}
+#paypal-button-container:empty::before{content:'Loading PayPal\2026';font-size:14px;font-weight:600;color:#5A6472}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -448,11 +453,17 @@ window.LLA_META=(function(){
             <style>@keyframes awxspin{to{transform:rotate(360deg)}}</style>
           </div>
           <div id="awx-status" style="font-size:13px;color:var(--ink-3);margin:6px 0 8px"></div>
+          <!-- PayPal panel (eTeacher pattern: paypal-notice + #paypal-button-container). Shown when the PayPal tab is active. -->
+          <div id="paypalBox" style="display:none">
+            <div class="paypal-notice" style="font-size:15px;line-height:1.45;color:#2A2F36;margin:6px 0 18px">In order to complete your transaction, we will transfer you over to PayPal secure servers.</div>
+            <div id="paypal-button-container"></div>
+            <div id="paypal-status" style="font-size:13px;color:#5A6472;margin-top:10px"></div>
+          </div>
           <div id="awx-julie" style="display:flex;align-items:center;gap:12px;margin:10px 0 14px;padding:12px 14px;border:1px solid #DCE5F2;border-radius:10px;background:#F4F8FF">
             <img src="assets/instructors/julie-gibson-clark.jpg" alt="Julie Gibson Clark" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,40,120,.18)">
             <div style="font-size:14px;line-height:1.35;color:#12233F"><b id="awx-julie-hold">Your seat in this cohort is held for 15 minutes.</b><br><span style="font-size:12.5px;color:#4B5B75">Julie Gibson Clark, Founding Faculty · 2nd slowest-aging woman on Earth · 14-day full refund</span></div>
           </div>
-<a class="et-bump-btn bump-whatsapp lla-wa-inline" href="https://wa.me/12015023701" target="_blank" rel="noopener"><img src="assets/wa/wapp.png" alt="whatsapp"> <span>Start Chat on WhatsApp</span></a>
+<a class="et-bump-btn bump-whatsapp lla-wa-inline" href="https://wa.me/12015023701" target="_blank" rel="noopener"><img src="assets/wa/wapp.png" alt="whatsapp"> <span>Need help finishing registration?</span></a>
 
 
           <!-- The Airwallex Drop-In renders its own "Pay" button. A second site-level Pay button was showing
@@ -460,12 +471,6 @@ window.LLA_META=(function(){
                reference #proceed. !important beats any .proceed{} that came before it. -->
           <button class="proceed" type="button" id="proceed" aria-hidden="true" tabindex="-1"
                   style="display:none !important;visibility:hidden !important;position:absolute !important;left:-9999px !important;width:0 !important;height:0 !important;padding:0 !important;margin:0 !important;border:0 !important;pointer-events:none !important;">Pay now</button>
-          <!-- PayPal panel (eTeacher pattern: paypal-notice + #paypal-button-container). Shown when the PayPal tab is active. -->
-          <div id="paypalBox" style="display:none">
-            <div class="paypal-notice" style="font-size:15px;line-height:1.45;color:#2A2F36;margin:6px 0 18px">In order to complete your transaction, we will transfer you over to PayPal secure servers.</div>
-            <div id="paypal-button-container"></div>
-            <div id="paypal-status" style="font-size:13px;color:#5A6472;margin-top:10px"></div>
-          </div>
         </div>
       </div>
     </div>
