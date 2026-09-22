@@ -108,24 +108,37 @@
     var firstName = parts.shift();
     var lastName = parts.join(' ');
 
-    // USA-ONLY HARD GATE — same as website: valid US (+1 NANP) phone required.
-    var usPhone = (window.LLA_US && window.LLA_US.validatePhone)
-      ? window.LLA_US.validatePhone(fields.phone)
-      : { ok: false, reason: 'validator_unavailable' };
-    if (!usPhone.ok) return { error: 'non_us_phone', reason: usPhone.reason };
-
-    // State: derived from the validated US area code (NANPA map). Every valid
-    // US area code maps to a state, so the Rosen-matched modal needs no extra field.
-    var ac = (usPhone.e164 || '').slice(2, 5);
-    var stateCode = (window.LLA_US && window.LLA_US.stateForAreaCode) ? window.LLA_US.stateForAreaCode(ac) : '';
-    if (!US_STATES[stateCode]) return { error: 'invalid_state' };
+    /* Country: United States plus the rest of the world (same branch as the
+     * live funnel). US path unchanged; a non-US country validates the number
+     * against its own dial plan and sends E.164. Pricing currency guard: the
+     * order is always created as US (USD), real country kept in AdminNotes. */
+    var countryIso = 'US';
+    try { if (window.LLA_COUNTRY && window.LLA_COUNTRY.selected) countryIso = window.LLA_COUNTRY.selected() || 'US'; } catch (e) {}
+    if (fields.countryIso) countryIso = String(fields.countryIso).toUpperCase();
+    var e164, stateCode = '';
+    if (countryIso === 'US') {
+      var usPhone = (window.LLA_US && window.LLA_US.validatePhone)
+        ? window.LLA_US.validatePhone(fields.phone)
+        : { ok: false, reason: 'validator_unavailable' };
+      if (!usPhone.ok) return { error: 'non_us_phone', reason: usPhone.reason };
+      var ac = (usPhone.e164 || '').slice(2, 5);
+      stateCode = (window.LLA_US && window.LLA_US.stateForAreaCode) ? window.LLA_US.stateForAreaCode(ac) : '';
+      if (!US_STATES[stateCode]) return { error: 'invalid_state' };
+      e164 = usPhone.e164;
+    } else {
+      var intl = (window.LLA_COUNTRY && window.LLA_COUNTRY.toE164)
+        ? window.LLA_COUNTRY.toE164(fields.phone, countryIso)
+        : { ok: false, reason: 'validator_unavailable' };
+      if (!intl.ok) return { error: 'invalid_phone', reason: intl.reason };
+      e164 = intl.e164;
+    }
 
     var payload = {
       ProductID: 26,
       FirstName: firstName,
       LastName: lastName,
       Email: String(fields.email).trim(),
-      MobilePhone: usPhone.e164,
+      MobilePhone: e164,
       CountryIsoCode: 'US',
       CountryIsoCodeByIp: 'US',
       State: stateCode,
@@ -135,7 +148,7 @@
       ReferringSite: document.referrer || window.location.hostname,
       QueryString: (window.location.search || '').replace(/^\?/, '')
     };
-    var notes = 'US State: ' + stateCode + ' | SELF-SERVICE ECOMM CHECKOUT: The Longevity Blueprint';
+    var notes = (countryIso === 'US' ? 'US State: ' + stateCode : 'Country: ' + countryIso) + ' | SELF-SERVICE ECOMM CHECKOUT: The Longevity Blueprint';
     if (fields.startDate) notes += ' · Start: ' + fields.startDate;
     if (fields.smsConsent !== undefined) notes += ' · SMS consent: ' + (fields.smsConsent ? 'yes' : 'no');
     if (fields.promoCode) notes += ' · Promo: ' + fields.promoCode;

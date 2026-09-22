@@ -9299,7 +9299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="lead-gen-v2-field">
             <label for="lg-phone">Phone Number <span style="opacity:.7;font-weight:400">(U.S. numbers only)</span></label>
-            <input id="lg-phone" type="tel" placeholder="(555) 123-4567" required autocomplete="tel" inputmode="tel" maxlength="20" pattern="[0-9()+\-.\s]{10,20}">
+            <input id="lg-phone" type="tel" placeholder="Mobile number" required autocomplete="tel" inputmode="tel" maxlength="20" pattern="[0-9()+\-.\s]{6,20}">
           </div>
           <div class="lead-gen-v2-field">
             <label for="lg-country">State <span style="opacity:.7;font-weight:400">(U.S. only)</span></label>
@@ -10481,6 +10481,9 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
       if (window.LLA_GOOGLE_CAMPAIGN_IDS) {
         fields.googleCampaignId = window.LLA_GOOGLE_CAMPAIGN_IDS['US'] || '';
       }
+      var _iso = 'US';
+      try { if (window.LLA_COUNTRY && window.LLA_COUNTRY.selected) _iso = String(window.LLA_COUNTRY.selected() || 'US').toUpperCase(); } catch (e) {}
+      if (_iso !== 'US' && !fields.countryIso) fields.countryIso = _iso;
       if (!fields.firstName || !fields.lastName || !fields.email || !fields.phone || !fields.countryIso) {
         showError(form, 'Please fill in all required fields.');
         return;
@@ -10491,9 +10494,11 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
       }
       // Client-side US phone gate: block non-US / invalid numbers before submit
       // so the user gets clear feedback (and no non-US lead is ever attempted).
-      var _p = (window.LLA_US && window.LLA_US.validatePhone) ? window.LLA_US.validatePhone(fields.phone) : { ok:false };
+      var _p = (_iso === 'US')
+        ? ((window.LLA_US && window.LLA_US.validatePhone) ? window.LLA_US.validatePhone(fields.phone) : { ok:true })
+        : ((window.LLA_COUNTRY && window.LLA_COUNTRY.toE164) ? window.LLA_COUNTRY.toE164(fields.phone, _iso) : { ok:true });
       if (!_p.ok) {
-        showError(form, 'Please enter a valid U.S. phone number. This program is available to U.S. residents only, and we can only accept U.S. phone numbers.');
+        showError(form, _iso === 'US' ? 'Please enter a valid US mobile number, or pick your country from the list.' : 'Please enter a valid mobile number for the selected country.');
         return;
       }
       form.classList.add('is-submitting');
@@ -10911,7 +10916,8 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   var ERR_MSG={
     need_full_name:'Please enter your full name (first and last).',
     invalid_email:'Please enter a valid email address.',
-    non_us_phone:'Please enter a valid US mobile number — this course is currently open to US students only.',
+    non_us_phone:'Please enter a valid US mobile number, or pick your country from the list.',
+    invalid_phone:'Please enter a valid mobile number for the selected country.',
     invalid_state:'Please enter a valid US mobile number.',
     'Missing or invalid fields':'Please fill in all fields.'
   };
@@ -10924,15 +10930,18 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
       phone:document.getElementById('emPhone').value,
       smsConsent:document.getElementById('emSms').checked,
       startDate:(document.getElementById('emDate')||{}).value||'',
+      countryIso:String((document.getElementById('emCountry')||{}).value||'US').toUpperCase(),
       promoCode:''
     };
     if(!fields.fullName.trim()||!fields.email.trim()||!fields.phone.trim()){emErr('Please fill in all fields.');return;}
     if(fields.fullName.trim().split(/\s+/).length<2){emErr(ERR_MSG.need_full_name);return;}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(fields.email.trim())){emErr(ERR_MSG.invalid_email);return;}
-    var _cc=(document.getElementById('emCountry')||{}).value||'US';
-    if(String(_cc).toUpperCase()!=='US'){emErr(ERR_MSG.non_us_phone);return;}
-    var _vp=(window.LLA_US&&window.LLA_US.validatePhone)?window.LLA_US.validatePhone(fields.phone):{ok:true};
-    if(!_vp.ok){emErr(ERR_MSG.non_us_phone);return;}
+    var _cc=String((document.getElementById('emCountry')||{}).value||'US').toUpperCase();
+    fields.countryIso=_cc;
+    var _vp=(_cc==='US')
+      ?((window.LLA_US&&window.LLA_US.validatePhone)?window.LLA_US.validatePhone(fields.phone):{ok:true})
+      :((window.LLA_COUNTRY&&window.LLA_COUNTRY.toE164)?window.LLA_COUNTRY.toE164(fields.phone,_cc):{ok:true});
+    if(!_vp.ok){emErr(_cc==='US'?ERR_MSG.non_us_phone:ERR_MSG.invalid_phone);return;}
     if(!window.LLA_ECOMM){
       var b1=this,t0=Date.now();b1.disabled=true;b1.textContent='One moment\u2026';
       (function w(){if(window.LLA_ECOMM){b1.disabled=false;b1.textContent='Continue';b1.click();return;}
