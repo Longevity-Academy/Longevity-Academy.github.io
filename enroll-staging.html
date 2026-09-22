@@ -10720,7 +10720,10 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
 #enrollModal .em-in::placeholder{color:#A9B3C1}
 #enrollModal .em-in:focus,#enrollModal select.em-in:focus{border-color:#006EFF}
 #enrollModal select.em-in{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6472' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 13px center;padding-right:38px}
-#enrollModal .em-phone{display:flex;gap:9px;margin-bottom:17px}
+#enrollModal .em-phone{display:flex;gap:9px;margin-bottom:9px}
+#enrollModal .em-phone .em-in{margin-bottom:0}
+#enrollModal .em-row{margin-bottom:17px}
+#enrollModal .em-row .em-in{margin-bottom:0}
 #enrollModal .em-cc{display:flex;align-items:center;gap:5px;border:1px solid #D5DCE6;border-radius:6px;padding:0 12px;font-size:14.5px;font-weight:600;color:#006EFF;background:#fff;flex:none}
 #enrollModal .em-cc span{font-size:15px}
 #enrollModal .em-phone .em-in{margin-bottom:0}
@@ -10814,9 +10817,25 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
 
       <label class="em-lb" for="emPhone">Mobile Number*</label>
       <div class="em-phone">
-        <div class="em-cc"><span>US</span>+1</div>
+        <div class="em-cc" id="emCc"><span id="emCcIso">US</span><span id="emCcDial">+1</span></div>
+        <select class="em-in" id="emCountry" data-lla-country="1" aria-label="Country"></select>
+      </div>
+      <div class="em-row">
         <input class="em-in" id="emPhone" type="tel" placeholder="Mobile" autocomplete="tel" />
       </div>
+      <script>
+      (function(){
+        function sync(){
+          var sel=document.getElementById('emCountry'),iso=document.getElementById('emCcIso'),dial=document.getElementById('emCcDial');
+          if(!sel||!iso||!dial) return;
+          var v=(sel.value||'US').toUpperCase(),opt=sel.options[sel.selectedIndex],d=opt&&opt.getAttribute('data-dial');
+          if(!d&&window.LLA_COUNTRY&&window.LLA_COUNTRY.list){try{var L=typeof LLA_COUNTRY.list==='function'?LLA_COUNTRY.list():LLA_COUNTRY.list;L.forEach(function(c){if(c.iso===v)d=c.dial;});}catch(e){}}
+          iso.textContent=v;dial.textContent='+'+(d||'1');
+        }
+        document.addEventListener('change',function(e){if(e.target&&e.target.id==='emCountry')sync();});
+        window.addEventListener('load',function(){setTimeout(sync,0);setTimeout(sync,500);});
+      })();
+      </script>
 
       <div class="em-err" id="emErr" role="alert"></div>
       <button class="em-go" type="button" id="emGo1">Continue</button>
@@ -10865,7 +10884,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   </div>
 </div>
 
-<script>window.LLA_ECOMM_CONFIG = { workerBase: 'https://lla-checkout.gitter-omri.workers.dev' };</script>
+<script>window.LLA_ECOMM_CONFIG = { workerBase: 'https://eteacher-leads-proxy.gitter-omri.workers.dev' };</script>
 <script src="assets/eteacher-ecomm.js" defer></script>
 <script>
 (function(){
@@ -10908,7 +10927,17 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
       promoCode:''
     };
     if(!fields.fullName.trim()||!fields.email.trim()||!fields.phone.trim()){emErr('Please fill in all fields.');return;}
-    if(!window.LLA_ECOMM){emErr('Something went wrong , please refresh and try again.');return;}
+    if(fields.fullName.trim().split(/\s+/).length<2){emErr(ERR_MSG.need_full_name);return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(fields.email.trim())){emErr(ERR_MSG.invalid_email);return;}
+    var _cc=(document.getElementById('emCountry')||{}).value||'US';
+    if(String(_cc).toUpperCase()!=='US'){emErr(ERR_MSG.non_us_phone);return;}
+    var _vp=(window.LLA_US&&window.LLA_US.validatePhone)?window.LLA_US.validatePhone(fields.phone):{ok:true};
+    if(!_vp.ok){emErr(ERR_MSG.non_us_phone);return;}
+    if(!window.LLA_ECOMM){
+      var b1=this,t0=Date.now();b1.disabled=true;b1.textContent='One moment\u2026';
+      (function w(){if(window.LLA_ECOMM){b1.disabled=false;b1.textContent='Continue';b1.click();return;}
+        if(Date.now()-t0>15000){b1.disabled=false;b1.textContent='Continue';emErr('Slow connection. Please tap Continue again.');return;}setTimeout(w,200);})();
+      return;}
     btn.disabled=true;btn.textContent='Please wait\u2026';
     window.LLA_ECOMM.submitLead(fields).then(function(r){
       btn.disabled=false;btn.textContent='Continue';
