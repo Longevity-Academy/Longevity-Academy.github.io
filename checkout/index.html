@@ -966,8 +966,8 @@ async function initAirwallex(){
       intent_id: intentId,
       client_secret: clientSecret,
       currency: 'USD',
-      mode: plan === 'upfront' ? 'payment' : 'recurring',
-      recurringOptions: plan === 'upfront' ? undefined : {
+      mode: plan === 'upfront' || num <= 1 ? 'payment' : 'recurring',
+      recurringOptions: plan === 'upfront' || num <= 1 ? undefined : {
         next_triggered_by: 'merchant',
         currency: 'USD',
         merchant_trigger_reason: 'scheduled'
