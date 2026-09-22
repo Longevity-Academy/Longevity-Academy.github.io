@@ -976,10 +976,16 @@ async function initAirwallex(){
        * button above the card form; googlePayRequestOptions.countryCode is
        * mandatory per Airwallex docs. Same intent, same success handler,
        * same CRM SetECommercePayment and Meta Purchase path as card. */
-      methods:            ['card','googlepay','paypal'],
-      payment_methods:    ['card','googlepay','paypal'],
-      paymentMethods:     ['card','googlepay','paypal'],
-      payment_method_types:['card','googlepay','paypal'],
+      methods:            ['card','googlepay','paypal','applepay'],
+      payment_methods:    ['card','googlepay','paypal','applepay'],
+      paymentMethods:     ['card','googlepay','paypal','applepay'],
+      payment_method_types:['card','googlepay','paypal','applepay'],
+      applePayRequestOptions: {
+        countryCode: 'US',
+        buttonType: 'buy',
+        buttonColor: 'black',
+        totalPriceLabel: 'Longevity Life Academy by eTeacher Group'
+      },
       googlePayRequestOptions: {
         countryCode: 'US',
         merchantInfo: { merchantName: 'Longevity Life Academy by eTeacher Group' },
