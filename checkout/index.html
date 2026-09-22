@@ -449,11 +449,34 @@ header.co-head .logo img {
    "by eTeacher Group" line (royal blue #0A5FE0 on navy ≈ 3.2:1) — acceptable for a
    logo mark, not body text. */
 
-</style></head>
+</style><style id="lla-www-head">
+/* www checkout header matches the site nav: navy ground, official logo (same file as the homepage nav). */
+.co-head{background:#0B1730!important;border-bottom:1px solid rgba(255,255,255,.08)!important;box-shadow:0 8px 30px rgba(3,10,30,.25)!important}
+.co-head .logo img{height:52px!important;width:auto!important}
+.co-head .stepper .lbl{color:rgba(255,255,255,.55)!important}
+.co-head .stepper .st.done .lbl{color:#fff!important}
+.co-head .stepper .dot{background:transparent!important;border-color:rgba(255,255,255,.35)!important;color:rgba(255,255,255,.7)!important}
+.co-head .stepper .st.done .dot{background:#006EFF!important;border-color:#006EFF!important;color:#fff!important}
+.co-head .stepper .bar{background:rgba(255,255,255,.18)!important}
+.co-head .stepper .bar.done{background:#006EFF!important}
+.co-head .callus{color:rgba(255,255,255,.8)!important}
+.co-head .callus a{color:#5EB6FF!important}
+@media(max-width:640px){.co-head .logo img{height:40px!important}}
+/* Order band: centered, single column, nothing touches the edges. */
+#llaOrderHero{padding:30px 28px 28px!important;text-align:center!important}
+#llaOrderHero .oh-grid{grid-template-columns:1fr!important;gap:14px!important;justify-items:center!important}
+#llaOrderHero .oh-eyebrow{display:none!important}
+#llaOrderHero h2{font-size:34px!important;margin:0 auto 8px!important;max-width:100%!important;overflow-wrap:anywhere}
+#llaOrderHero .oh-meta{max-width:640px;margin:0 auto!important}
+#llaOrderHero .oh-price{text-align:center!important}
+#llaOrderHero .oh-chips{justify-content:center!important}
+@media(max-width:760px){#llaOrderHero{padding:22px 16px!important}#llaOrderHero h2{font-size:26px!important}#llaOrderHero .oh-big{font-size:40px!important}}
+</style>
+</head>
 <body>
 
 <header class="co-head">
-  <a class="logo" href="https://www.longevitylifeacademy.com/"><img src="assets/lla-logo-dark-text@2x.png" width="1292" height="574" style="width:auto;height:52px" alt="Longevity Life Academy by eTeacher Group" /></a>
+  <a class="logo" href="https://www.longevitylifeacademy.com/"><img src="assets/lla-logo-nav@2x.png" width="1314" height="596" style="width:auto;height:52px" alt="Longevity Life Academy by eTeacher Group" /></a>
   <div class="stepper"><div class="stepper-in">
     <div class="st done"><span class="dot">1</span><span class="lbl">Your details</span></div>
     <span class="bar done"></span>
