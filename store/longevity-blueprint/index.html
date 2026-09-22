@@ -10504,6 +10504,17 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
 
 
 <script src="assets/nanp-state-autofill.js" defer></script>
+<script>
+  /* 22 Sep 2026: purchase path runs in e-commerce mode so Continue creates the CRM order
+     and the payment step receives StudentId/OrderId. List price on this site: $279 x 5. */
+  window.LLA_ECOMM_CONFIG = window.LLA_ECOMM_CONFIG || {};
+  window.LLA_ECOMM_CONFIG.mode = 'ecomm';
+  window.LLA_ECOMM_CONFIG.env  = 'production';
+  window.LLA_ECOMM_CONFIG.workerBase = 'https://eteacher-leads-proxy.gitter-omri.workers.dev';
+  window.LLA_ECOMM_CONFIG.crmCourse = { preferredCourseId: -1 };
+  window.LLA_ECOMM_CONFIG.crmPrice = { firstPayment: 279, numberOfPayments: 5, leftToPay: 1116 };
+  window.LLA_ECOMM_CONFIG.crmPlans = { monthly: { firstPayment: 279, numberOfPayments: 5, leftToPay: 1116 }, upfront: { firstPayment: 279, numberOfPayments: 5, leftToPay: 1116 } };
+</script>
 <script src="assets/eteacher-ecomm.js" defer></script>
 <script src="assets/ecom-layer.js" defer></script>
 

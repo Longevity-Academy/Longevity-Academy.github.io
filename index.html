@@ -10916,7 +10916,16 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   </div>
 </div>
 
-<script>window.LLA_ECOMM_CONFIG = window.LLA_ECOMM_CONFIG || { workerBase: 'https://eteacher-leads-proxy.gitter-omri.workers.dev' };</script>
+<script>
+  /* 22 Sep 2026: purchase path runs in e-commerce mode so Continue creates the CRM order
+     and the payment step receives StudentId/OrderId. List price on this site: $279 x 5. */
+  window.LLA_ECOMM_CONFIG = window.LLA_ECOMM_CONFIG || {};
+  window.LLA_ECOMM_CONFIG.mode = 'ecomm';
+  window.LLA_ECOMM_CONFIG.env  = 'production';
+  window.LLA_ECOMM_CONFIG.workerBase = 'https://eteacher-leads-proxy.gitter-omri.workers.dev';
+  window.LLA_ECOMM_CONFIG.crmPrice = { firstPayment: 279, numberOfPayments: 5, leftToPay: 1116 };
+  window.LLA_ECOMM_CONFIG.crmPlans = { monthly: { firstPayment: 279, numberOfPayments: 5, leftToPay: 1116 }, upfront: { firstPayment: 279, numberOfPayments: 5, leftToPay: 1116 } };
+</script>
 <script src="/assets/eteacher-ecomm.js" defer></script>
 <script>
 (function(){
@@ -10986,7 +10995,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   document.getElementById('emGo2').addEventListener('click',function(){
     var btn=this;
     function go(ids){
-      window.location.href='https://lla-checkout.gitter-omri.workers.dev/checkout.html'+(ids&&ids.stid?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)):'');
+      window.location.href='/checkout/'+(ids&&ids.stid?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)):'');
     }
     var ids=(window.LLA_ECOMM&&window.LLA_ECOMM.getCheckoutIds())||null;
     if(ids&&ids.stid){go(ids);return;}
