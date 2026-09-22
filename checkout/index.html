@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/assets/lla-clickid-v20260922.js"></script>
 <script>/* 2026-09-21 14:05: production pixel + CAPI relay fire ONLY on the live hosts.
    Preview deployments (*.pages.dev hashes, branch previews) and other hosts got a
    silent fbq and a no-op relay, so test traffic never lands in Events Manager.
    Override for controlled tests: ?llapixel=1 */
 (function(){var h=location.hostname,s=location.search;
-window.LLA_LIVE=(h==='longevitylifeacademy.pages.dev'||/(^|\.)longevitylifeacademy\.com$/.test(h)||/[?&]llapixel=1/.test(s))&&!/[?&](llatest|qa)=1/.test(s);
-window.__llaRelay=function(body){var done=false;function go(){if(done)return;done=true;try{fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});}catch(e){}}
+window.LLA_LIVE=(h==='longevitylifeacademy.pages.dev'||/(^|\.)longevitylifeacademy\.com$/.test(h)||/[?&]llapixel=1(?:&|$)/.test(s))&&!/[?&](llatest|qa)=1(?:&|$)/.test(s);
+window.__llaRelay=function(body){if(!window.LLA_LIVE)return;var done=false;function go(){if(done)return;done=true;try{body=window.__llaRefreshClickPayload?window.__llaRefreshClickPayload(body):body;fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});}catch(e){}}
 /* 2026-09-21 17:05: server copy leaves 1.5 s AFTER the Pixel copy (Meta keeps the first event per event_id; the Pixel copy carries the real _fbc click cookie). Flushed at once if the page is being left. */
 setTimeout(go,1500);try{window.addEventListener('pagehide',go,{once:true});}catch(e){}};
 if(!window.LLA_LIVE){var q=function(){};q.callMethod=null;q.queue=[];q.loaded=true;q.version='2.0';q.push=q;window.fbq=window._fbq=q;
@@ -294,6 +295,7 @@ window.LLA_META=(function(){
   try{ applyAdvancedMatching(); setInterval(applyAdvancedMatching,2000); }catch(e){}
   function track(name,data,email){
     try{
+      if(window.LLA_LIVE===false||/[?&](llatest|qa)=1(?:&|$)/.test(location.search))return;
       if(window.LLA_ECOMM_CONFIG&&window.LLA_ECOMM_CONFIG.env==='staging')return;
       var i=identity();
       if(email&&!i.email) i.email=String(email).trim().toLowerCase();

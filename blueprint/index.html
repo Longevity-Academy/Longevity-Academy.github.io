@@ -7,7 +7,7 @@
    silent fbq and a no-op relay, so test traffic never lands in Events Manager.
    Override for controlled tests: ?llapixel=1 */
 (function(){var h=location.hostname,s=location.search;
-window.LLA_LIVE=(h==='longevitylifeacademy.pages.dev'||/(^|\.)longevitylifeacademy\.com$/.test(h)||/[?&]llapixel=1/.test(s))&&!/[?&](llatest|qa)=1/.test(s);
+window.LLA_LIVE=(h==='longevitylifeacademy.pages.dev'||/(^|\.)longevitylifeacademy\.com$/.test(h)||/[?&]llapixel=1(&|$)/.test(s))&&!/[?&](llatest|qa)=1(&|$)/.test(s);
 window.__llaRelay=function(body){var done=false;function go(){if(done)return;done=true;try{if(window.__llaRefreshClickPayload)body=window.__llaRefreshClickPayload(body);fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});}catch(e){}}
 /* 2026-09-21 17:05: server copy leaves 1.5 s AFTER the Pixel copy (Meta keeps the first event per event_id; the Pixel copy carries the real _fbc click cookie). Flushed at once if the page is being left. */
 setTimeout(go,1500);try{window.addEventListener('pagehide',go,{once:true});}catch(e){}};
@@ -126,6 +126,7 @@ window.LLA_FUNNEL=(function(){
     try{ if(window.sessionStorage) sessionStorage.setItem(key,'1'); }catch(e){}
   }
   function track(name,key){
+    if(window.LLA_LIVE===false) return false;
     if(key&&sent(key)) return false;
     try{
       if(window.LLA_ECOMM_CONFIG&&window.LLA_ECOMM_CONFIG.env==='staging') return false;
