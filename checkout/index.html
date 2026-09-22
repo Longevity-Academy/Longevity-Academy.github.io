@@ -16,7 +16,7 @@ var of=window.fetch;window.fetch=function(u){if(typeof u==='string'&&u.indexOf('
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Place your order — The Longevity Blueprint | Longevity Life Academy</title>
+<title>Place your order, The Longevity Blueprint | Longevity Life Academy</title>
 <meta name="description" content="Place your order for The Longevity Blueprint at Longevity Life Academy." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -465,7 +465,7 @@ header.co-head .logo img {
 </header>
 
 <main id="screen-order" class="wrap">
-  <div class="demo" id="demoBanner" style="display:none"><span>Demo checkout — no card is charged</span></div>
+  <div id="demoBanner" style="display:none"></div>
 
   <div class="cols">
     <!-- LEFT -->
@@ -561,8 +561,7 @@ header.co-head .logo img {
             <div id="paypal-status" style="font-size:13px;color:#5A6472;margin-top:10px"></div>
           </div>
           <div id="awx-julie" style="display:flex;align-items:center;gap:12px;margin:10px 0 14px;padding:12px 14px;border:1px solid #DCE5F2;border-radius:10px;background:#F4F8FF">
-            <img src="assets/instructors/julie-gibson-clark.jpg" alt="Julie Gibson Clark" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,40,120,.18)">
-            <div style="font-size:14px;line-height:1.35;color:#12233F"><b id="awx-julie-hold">Your seat is held for 15 minutes.</b><br><span style="font-size:12.5px;color:#4B5B75">Julie Gibson Clark, Founding Faculty · 2nd slowest-aging woman on Earth · 14-day full refund</span></div>
+            <div style="font-size:14px;line-height:1.35;color:#12233F"><b id="awx-julie-hold">Your seat is held for 15 minutes.</b><br><span style="font-size:12.5px;color:#4B5B75">Full refund within 14 days from registration</span></div>
           </div>
 <a class="et-bump-btn bump-whatsapp lla-wa-inline" href="https://wa.me/12015023701" target="_blank" rel="noopener"><img src="assets/wa/wapp.png" alt="whatsapp"> <span>Need help finishing registration?</span></a>
 
@@ -999,9 +998,9 @@ async function initAirwallex(){
       /* 2026-09-21 14:10: no order in this session (visitor reached the payment page
          without the popup). Send them straight back to the course page with the
          enrollment popup open, keeping the plan and tracking parameters. */
-      try{ var _q=location.search.replace(/^\?/,''); location.replace('index.html?enroll=1'+(_q?'&'+_q:'')); return; }catch(_e){}
+      try{ var _q=location.search.replace(/^\?/,''); location.replace('https://www.longevitylifeacademy.com/?enroll=1'+(_q?'&'+_q:'')); return; }catch(_e){}
       // Nothing written to the CRM. Show the demo state and send the visitor back to enroll.
-      document.getElementById('demoBanner').style.display = 'flex';
+      document.getElementById('demoBanner').style.display = 'none';
       document.getElementById('awx-dropin').innerHTML =
         '<div style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
         + 'No enrollment in progress. Start on the course page to reserve your seat, '
@@ -1018,7 +1017,7 @@ async function initAirwallex(){
       document.getElementById('awx-dropin').innerHTML =
         '<div style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
         + 'This order is no longer active, so we have not loaded a payment form. Nothing has been charged.<br><br>'
-        + '<a href="index.html?enroll=1" style="font-weight:700">&#8592; Start your enrollment again (takes 1 minute)</a></div>';
+        + '<a href="https://www.longevitylifeacademy.com/?enroll=1" style="font-weight:700">&#8592; Start your enrollment again (takes 1 minute)</a></div>';
       setStatus('');
       document.getElementById('proceed').style.display = 'none';
       var _pp = document.getElementById('paypalBox'); if (_pp) _pp.style.display = 'none';
@@ -1032,7 +1031,7 @@ async function initAirwallex(){
       document.getElementById('awx-dropin').innerHTML =
         '<div style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
         + 'We could not open your enrollment just now. Nothing has been charged.<br><br>'
-        + '<a href="index.html?enroll=1" style="font-weight:700">&#8592; Check your details and try again</a></div>';
+        + '<a href="https://www.longevitylifeacademy.com/?enroll=1" style="font-weight:700">&#8592; Check your details and try again</a></div>';
       setStatus('Could not reserve your seat , please try again.', '#c33');
       document.getElementById('proceed').style.display = 'none';
       console.error(e);
@@ -1046,7 +1045,7 @@ async function initAirwallex(){
 if (window.LLA_ECOMM && window.LLA_ECOMM.config && window.LLA_ECOMM.config.mode === 'ecomm') {
   initAirwallex();
 } else {
-  document.getElementById('demoBanner').style.display = 'flex';
+  document.getElementById('demoBanner').style.display = 'none';
   document.getElementById('proceed').addEventListener('click', showDone);
 }
 </script>
