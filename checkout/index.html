@@ -957,7 +957,7 @@ async function initAirwallex(){
     var mountEl = document.getElementById('awx-dropin');
     mountEl.innerHTML = '';
 
-    /* Payment mode with intent_id (recurring schedule enforced server-side by eTeacher's CRM).
+    /* Installments require merchant-triggered recurring consent; pay-in-full is one payment.
      * currency is force-set to 'USD' here as a second belt-and-braces line of defence
      * on top of the pre-mount currency guard above. The intent itself is what actually
      * gets charged, and we already refused to mount unless the intent was minted in USD.
@@ -966,7 +966,12 @@ async function initAirwallex(){
       intent_id: intentId,
       client_secret: clientSecret,
       currency: 'USD',
-      mode: 'payment',
+      mode: plan === 'upfront' ? 'payment' : 'recurring',
+      recurringOptions: plan === 'upfront' ? undefined : {
+        next_triggered_by: 'merchant',
+        currency: 'USD',
+        merchant_trigger_reason: 'scheduled'
+      },
       /* Airwallex filters Drop-in methods by currency + country_code and lists
        * country_code as REQUIRED for paypal. Without it PayPal never renders. */
       country_code: 'US',
@@ -981,7 +986,7 @@ async function initAirwallex(){
       paymentMethods:     ['card','googlepay','paypal','applepay'],
       payment_method_types:['card','googlepay','paypal','applepay'],
       applePayRequestOptions: {
-        countryCode: 'US',
+        countryCode: 'CY',
         buttonType: 'buy',
         buttonColor: 'black',
         totalPriceLabel: 'Longevity Life Academy by eTeacher Group'
