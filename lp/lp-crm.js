@@ -81,13 +81,20 @@
       fields.email     = fields.email.trim();
       fields.phone     = fields.phone.trim();
       fields.countryIso = fields.countryIso.trim().toUpperCase();
+      var _iso = 'US';
+      try { if (window.LLA_COUNTRY && window.LLA_COUNTRY.selected) _iso = String(window.LLA_COUNTRY.selected() || 'US').toUpperCase(); } catch (e) {}
+      if (_iso !== 'US') fields.countryIso = _iso;
 
       if (!fields.firstName) { showErr('Please enter your first name.'); return; }
       if (!fields.lastName)  { showErr('Please enter your last name.'); return; }
       if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) { showErr('Please enter a valid email address.'); return; }
-      if (!fields.phone) { showErr('Please enter your US phone number.'); return; }
+      if (!fields.phone) { showErr('Please enter your mobile number.'); return; }
+      var _p = (_iso === 'US')
+        ? ((window.LLA_US && window.LLA_US.validatePhone) ? window.LLA_US.validatePhone(fields.phone) : { ok: true })
+        : ((window.LLA_COUNTRY && window.LLA_COUNTRY.toE164) ? window.LLA_COUNTRY.toE164(fields.phone, _iso) : { ok: true });
+      if (!_p.ok) { showErr(_iso === 'US' ? 'Please enter a valid US mobile number, or pick your country from the list.' : 'Please enter a valid mobile number for the selected country.'); return; }
       if (!fields.countryIso) {
-        showErr('Please select your US state from the dropdown.');
+        showErr('Please select your state from the dropdown.');
         var sel = form.querySelector('[name="country"]');
         if (sel) { sel.focus(); sel.style.borderColor = '#ff6b6b'; }
         return;
@@ -114,8 +121,9 @@
           } catch (e) {}
         } else {
           var msg = 'We could not submit your application. Please try again in a moment.';
-          if (res && res.error === 'non_us_phone') msg = 'Please enter a valid US mobile number (e.g. 555-123-4567).';
-          else if (res && res.error === 'invalid_state') msg = 'Please select your US state from the dropdown.';
+          if (res && res.error === 'non_us_phone') msg = 'Please enter a valid mobile number for the selected country.';
+          else if (res && res.error === 'invalid_state') msg = 'Please select your state from the dropdown.';
+          else if (res && res.error === 'invalid_phone') msg = 'Please enter a valid mobile number for the selected country.';
           else if (res && res.error === 'Missing or invalid fields') msg = 'Please check all fields are filled correctly.';
           showErr(msg);
         }

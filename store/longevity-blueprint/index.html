@@ -8127,7 +8127,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h1 class="pdp-cine-h1">18 Weeks to Your Own<br><span class="pdp-cine-blue">Longevity Protocol.</span></h1>
     <p class="pdp-cine-sub"><strong>The longevity course</strong>, a guided protocol built around your biology, your numbers, and the daily practice that turns the next decades into your strongest. 18 weekly live classes, an Abbott Lingo CGM shipped free, and your written protocol by week 18.</p>
     <div class="pdp-cine-meta" aria-label="Course format">
-      <span>18 live sessions</span><span>Mondays 7:00pm ET</span><span>Small live classes</span><span>CGM included</span><span>US only</span>
+      <span>18 live sessions</span><span>Mondays 7:00pm ET</span><span>Small live classes</span><span>CGM included</span>
     </div>
     <div class="pdp-cine-ctas">
       <a href="checkout.html" class="pdp-cine-cta" data-fn-cta="hero">Enroll now
@@ -9324,10 +9324,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="lead-gen-v2-field">
             <label for="lg-phone">Phone Number <span style="opacity:.7;font-weight:400">(U.S. numbers only)</span></label>
-            <input id="lg-phone" type="tel" placeholder="(555) 123-4567" required autocomplete="tel" inputmode="tel" maxlength="20" pattern="[0-9()+\-.\s]{10,20}">
+            <input id="lg-phone" type="tel" placeholder="Mobile number" required autocomplete="tel" inputmode="tel" maxlength="20" pattern="[0-9()+\-.\s]{6,20}">
           </div>
           <div class="lead-gen-v2-field">
-            <label for="lg-country">State <span style="opacity:.7;font-weight:400">(U.S. only)</span></label>
+            <label for="lg-country">State</label>
                         <select id="lg-country" name="country" required>
               <option value="" disabled selected>Select your state</option>
               <option value="AL">Alabama</option>
@@ -10460,6 +10460,9 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
       if (window.LLA_GOOGLE_CAMPAIGN_IDS) {
         fields.googleCampaignId = window.LLA_GOOGLE_CAMPAIGN_IDS['US'] || '';
       }
+      var _iso = 'US';
+      try { if (window.LLA_COUNTRY && window.LLA_COUNTRY.selected) _iso = String(window.LLA_COUNTRY.selected() || 'US').toUpperCase(); } catch (e) {}
+      if (_iso !== 'US' && !fields.countryIso) fields.countryIso = _iso;
       if (!fields.firstName || !fields.lastName || !fields.email || !fields.phone || !fields.countryIso) {
         showError(form, 'Please fill in all required fields.');
         return;
@@ -10470,9 +10473,11 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
       }
       // Client-side US phone gate: block non-US / invalid numbers before submit
       // so the user gets clear feedback (and no non-US lead is ever attempted).
-      var _p = (window.LLA_US && window.LLA_US.validatePhone) ? window.LLA_US.validatePhone(fields.phone) : { ok:false };
+      var _p = (_iso === 'US')
+        ? ((window.LLA_US && window.LLA_US.validatePhone) ? window.LLA_US.validatePhone(fields.phone) : { ok:true })
+        : ((window.LLA_COUNTRY && window.LLA_COUNTRY.toE164) ? window.LLA_COUNTRY.toE164(fields.phone, _iso) : { ok:true });
       if (!_p.ok) {
-        showError(form, 'Please enter a valid U.S. phone number. This program is available to U.S. residents only, and we can only accept U.S. phone numbers.');
+        showError(form, _iso === 'US' ? 'Please enter a valid US mobile number, or pick your country from the list.' : 'Please enter a valid mobile number for the selected country.');
         return;
       }
       form.classList.add('is-submitting');
@@ -10528,7 +10533,10 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
 #enrollModal .em-in::placeholder{color:#A9B3C1}
 #enrollModal .em-in:focus,#enrollModal select.em-in:focus{border-color:#006EFF}
 #enrollModal select.em-in{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6472' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 13px center;padding-right:38px}
-#enrollModal .em-phone{display:flex;gap:9px;margin-bottom:17px}
+#enrollModal .em-phone{display:flex;gap:9px;margin-bottom:9px}
+#enrollModal .em-phone .em-in{margin-bottom:0}
+#enrollModal .em-row{margin-bottom:17px}
+#enrollModal .em-row .em-in{margin-bottom:0}
 #enrollModal .em-cc{display:flex;align-items:center;gap:5px;border:1px solid #D5DCE6;border-radius:6px;padding:0 12px;font-size:14.5px;font-weight:600;color:#006EFF;background:#fff;flex:none}
 #enrollModal .em-cc span{font-size:15px}
 #enrollModal .em-phone .em-in{margin-bottom:0}
@@ -10587,9 +10595,25 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
 
       <label class="em-lb" for="emPhone">Mobile Number*</label>
       <div class="em-phone">
-        <div class="em-cc"><span>US</span>+1</div>
+        <div class="em-cc" id="emCc"><span id="emCcIso">US</span><span id="emCcDial">+1</span></div>
+        <select class="em-in" id="emCountry" data-lla-country="1" aria-label="Country"></select>
+      </div>
+      <div class="em-row">
         <input class="em-in" id="emPhone" type="tel" placeholder="Mobile" autocomplete="tel" />
       </div>
+      <script>
+      (function(){
+        function sync(){
+          var sel=document.getElementById('emCountry'),iso=document.getElementById('emCcIso'),dial=document.getElementById('emCcDial');
+          if(!sel||!iso||!dial) return;
+          var v=(sel.value||'US').toUpperCase(),opt=sel.options[sel.selectedIndex],d=opt&&opt.getAttribute('data-dial');
+          if(!d&&window.LLA_COUNTRY&&window.LLA_COUNTRY.list){try{var L=typeof LLA_COUNTRY.list==='function'?LLA_COUNTRY.list():LLA_COUNTRY.list;L.forEach(function(c){if(c.iso===v)d=c.dial;});}catch(e){}}
+          iso.textContent=v;dial.textContent='+'+(d||'1');
+        }
+        document.addEventListener('change',function(e){if(e.target&&e.target.id==='emCountry')sync();});
+        window.addEventListener('load',function(){setTimeout(sync,0);setTimeout(sync,500);});
+      })();
+      </script>
 
       <div class="em-err" id="emErr" role="alert"></div>
       <button class="em-go" type="button" id="emGo1">Continue</button>
@@ -10670,7 +10694,8 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
   var ERR_MSG={
     need_full_name:'Please enter your full name (first and last).',
     invalid_email:'Please enter a valid email address.',
-    non_us_phone:'Please enter a valid US mobile number , this course is currently open to US students only.',
+    non_us_phone:'Please enter a valid US mobile number, or pick your country from the list.',
+    invalid_phone:'Please enter a valid mobile number for the selected country.',
     invalid_state:'Please enter a valid US mobile number.',
     'Missing or invalid fields':'Please fill in all fields.'
   };
@@ -10683,10 +10708,23 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
       phone:document.getElementById('emPhone').value,
       smsConsent:document.getElementById('emSms').checked,
       startDate:(document.getElementById('emDate')||{}).value||'',
+      countryIso:String((document.getElementById('emCountry')||{}).value||'US').toUpperCase(),
       promoCode:''
     };
     if(!fields.fullName.trim()||!fields.email.trim()||!fields.phone.trim()){emErr('Please fill in all fields.');return;}
-    if(!window.LLA_ECOMM){emErr('Something went wrong , please refresh and try again.');return;}
+    if(fields.fullName.trim().split(/\s+/).length<2){emErr(ERR_MSG.need_full_name);return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(fields.email.trim())){emErr(ERR_MSG.invalid_email);return;}
+    var _cc=String((document.getElementById('emCountry')||{}).value||'US').toUpperCase();
+    fields.countryIso=_cc;
+    var _vp=(_cc==='US')
+      ?((window.LLA_US&&window.LLA_US.validatePhone)?window.LLA_US.validatePhone(fields.phone):{ok:true})
+      :((window.LLA_COUNTRY&&window.LLA_COUNTRY.toE164)?window.LLA_COUNTRY.toE164(fields.phone,_cc):{ok:true});
+    if(!_vp.ok){emErr(_cc==='US'?ERR_MSG.non_us_phone:ERR_MSG.invalid_phone);return;}
+    if(!window.LLA_ECOMM){
+      var b1=this,t0=Date.now();b1.disabled=true;b1.textContent='One moment\u2026';
+      (function w(){if(window.LLA_ECOMM){b1.disabled=false;b1.textContent='Continue';b1.click();return;}
+        if(Date.now()-t0>15000){b1.disabled=false;b1.textContent='Continue';emErr('Slow connection. Please tap Continue again.');return;}setTimeout(w,200);})();
+      return;}
         /* E-COMMERCE 3-SCREEN CHECKOUT ONLY. No CRM lead is created on this screen.
      * The details are held in the page and the lead + order are created on the
      * click that leads to the payment screen. Do not re-add a lead call or any
@@ -10707,12 +10745,12 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
     if(!f||!window.LLA_ECOMM){go(null);return;}
     if(btn.getAttribute('data-busy')==='1'){return;}
     btn.setAttribute('data-busy','1');
-    var label=btn.textContent;btn.textContent='Please wait\\u2026';
+    var label=btn.textContent;btn.textContent='Please wait\u2026';
     window.LLA_ECOMM.submitLead(f).then(function(r){
       btn.setAttribute('data-busy','0');btn.textContent=label;
       if(r&&r.ok){ try{ sessionStorage.removeItem('lla_pending_enroll'); }catch(e){} go((window.LLA_ECOMM.getCheckoutIds())||null);return;}
       step(1);
-      emErr(ERR_MSG[(r&&r.error)]||'Something went wrong \\u2014 please try again in a moment.');
+      emErr(ERR_MSG[(r&&r.error)]||'Something went wrong, please try again in a moment.');
     });
   });
   document.getElementById('emApply').addEventListener('click',function(){
