@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/assets/lla-clickid-v20260922.js"></script>
+<script>/* 2026-09-21 14:05: production pixel + CAPI relay fire ONLY on the live hosts.
+   Preview deployments (*.pages.dev hashes, branch previews) and other hosts got a
+   silent fbq and a no-op relay, so test traffic never lands in Events Manager.
+   Override for controlled tests: ?llapixel=1 */
+(function(){var h=location.hostname,s=location.search;
+window.LLA_LIVE=(h==='longevitylifeacademy.pages.dev'||/(^|\.)longevitylifeacademy\.com$/.test(h)||/[?&]llapixel=1/.test(s))&&!/[?&](llatest|qa)=1/.test(s);
+window.__llaRelay=function(body){var done=false;function go(){if(done)return;done=true;try{if(window.__llaRefreshClickPayload)body=window.__llaRefreshClickPayload(body);fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});}catch(e){}}
+/* 2026-09-21 17:05: server copy leaves 1.5 s AFTER the Pixel copy (Meta keeps the first event per event_id; the Pixel copy carries the real _fbc click cookie). Flushed at once if the page is being left. */
+setTimeout(go,1500);try{window.addEventListener('pagehide',go,{once:true});}catch(e){}};
+if(!window.LLA_LIVE){var q=function(){};q.callMethod=null;q.queue=[];q.loaded=true;q.version='2.0';q.push=q;window.fbq=window._fbq=q;
+var of=window.fetch;window.fetch=function(u){if(typeof u==='string'&&u.indexOf('lla-ac-events.vercel.app')>-1)return Promise.resolve(new Response('',{status:204}));return of.apply(this,arguments);};}
+})();</script>
+
 <meta name="robots" content="noindex,nofollow">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -192,7 +206,7 @@ window.LLA_META=(function(){
         value:(data&&data.value)||0,currency:(data&&data.currency)||'USD',
         content_name:(data&&data.content_name)||'',order_id:(data&&data.order_id)||'',
         url:location.href,fbp:ck('_fbp'),fbc:ck('_fbc')});
-      fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:payload,keepalive:true}).catch(function(){});
+      window.__llaRelay(payload);
     }catch(e){}
   }
   return {track:track};

@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/assets/lla-clickid-v20260922.js"></script>
+<script>/* 2026-09-21 14:05: production pixel + CAPI relay fire ONLY on the live hosts.
+   Preview deployments (*.pages.dev hashes, branch previews) and other hosts got a
+   silent fbq and a no-op relay, so test traffic never lands in Events Manager.
+   Override for controlled tests: ?llapixel=1 */
+(function(){var h=location.hostname,s=location.search;
+window.LLA_LIVE=(h==='longevitylifeacademy.pages.dev'||/(^|\.)longevitylifeacademy\.com$/.test(h)||/[?&]llapixel=1/.test(s))&&!/[?&](llatest|qa)=1/.test(s);
+window.__llaRelay=function(body){var done=false;function go(){if(done)return;done=true;try{if(window.__llaRefreshClickPayload)body=window.__llaRefreshClickPayload(body);fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});}catch(e){}}
+/* 2026-09-21 17:05: server copy leaves 1.5 s AFTER the Pixel copy (Meta keeps the first event per event_id; the Pixel copy carries the real _fbc click cookie). Flushed at once if the page is being left. */
+setTimeout(go,1500);try{window.addEventListener('pagehide',go,{once:true});}catch(e){}};
+if(!window.LLA_LIVE){var q=function(){};q.callMethod=null;q.queue=[];q.loaded=true;q.version='2.0';q.push=q;window.fbq=window._fbq=q;
+var of=window.fetch;window.fetch=function(u){if(typeof u==='string'&&u.indexOf('lla-ac-events.vercel.app')>-1)return Promise.resolve(new Response('',{status:204}));return of.apply(this,arguments);};}
+})();</script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -87,14 +101,7 @@ window.LLA_FUNNEL=(function(){
   /* _fbc must travel byte-for-byte as the Pixel wrote it. Decoding it makes
      Meta report a modified fbclid and drop attribution. */
   function fbc(){
-    var c=ck('_fbc'); if(c) return c;
-    try{
-      var q=(location.search.match(/[?&]fbclid=([^&]+)/)||[])[1];
-      if(q) return 'fb.1.'+Date.now()+'.'+q;
-      var a=JSON.parse(localStorage.getItem('lla_attribution_v1')||'null');
-      if(a&&a.fbclid) return 'fb.1.'+(a.ts||Date.now())+'.'+a.fbclid;
-    }catch(e){}
-    return '';
+    return ck('_fbc')||'';
   }
   function letters(s){ return String(s||'').toLowerCase().replace(/[^a-z]/g,''); }
   function identity(){
@@ -141,8 +148,7 @@ window.LLA_FUNNEL=(function(){
         event_time:Math.floor(Date.now()/1000),
         user_agent:navigator.userAgent,url:location.href,
         fbp:ck('_fbp'),fbc:fbc()});
-      fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',
-        headers:{'Content-Type':'text/plain'},body:payload,keepalive:true}).catch(function(){});
+      window.__llaRelay(payload);
       if(key) mark(key);
       return true;
     }catch(e){ return false; }
@@ -167,14 +173,7 @@ window.LLA_FUNNEL=(function(){
   var RELAY='https://lla-ac-events.vercel.app/api/meta/capi';
   function ck(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]+)'));return m?m[1]:'';}
   function fbc(){
-    var c=ck('_fbc'); if(c) return c;
-    try{
-      var q=(location.search.match(/[?&]fbclid=([^&]+)/)||[])[1];
-      if(q) return 'fb.1.'+Date.now()+'.'+q;
-      var a=JSON.parse(localStorage.getItem('lla_attribution_v1')||'null');
-      if(a&&a.fbclid) return 'fb.1.'+(a.ts||Date.now())+'.'+a.fbclid;
-    }catch(e){}
-    return '';
+    return ck('_fbc')||'';
   }
   function letters(s){ return String(s||'').toLowerCase().replace(/[^a-z]/g,''); }
   function identity(){
@@ -211,8 +210,7 @@ window.LLA_FUNNEL=(function(){
         fbp:ck('_fbp'), fbc:fbc()
       };
       if(extra) for(var k in extra){ if(extra.hasOwnProperty(k)) payload[k]=extra[k]; }
-      fetch(RELAY,{method:'POST',headers:{'Content-Type':'text/plain'},
-        body:JSON.stringify(payload), keepalive:true}).catch(function(){});
+      window.__llaRelay(JSON.stringify(payload));
     }catch(e){}
   }
   /* Publish the shared event_id into dataLayer BEFORE GTM fires its Pixel tag
@@ -7122,7 +7120,7 @@ html body#lpRoot#lpRoot#lpRoot#lpRoot#lpRoot#lpRoot#lpRoot#lpRoot #institution .
     try{ if(window.LLA_FUNNEL) window.LLA_FUNNEL.initiateCheckout(); }catch(e){}
     var ids=(window.LLA_ECOMM&&window.LLA_ECOMM.getCheckoutIds())||null;
     var _pln=''; try{_pln=sessionStorage.getItem('lla_plan')||localStorage.getItem('lla_plan')||''}catch(e){}if(_pln!=='monthly'&&_pln!=='upfront')_pln='monthly';var _q=(ids&&ids.stid)?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)+'&plan='+_pln):('?plan='+_pln);var href='checkout.html'+_q;
-    setTimeout(function(){ window.location.href=href; },250);
+    setTimeout(function(){ window.location.href=window.__llaDecorateCheckout?window.__llaDecorateCheckout(href):href; },250);
   });
   document.getElementById('emApply').addEventListener('click',function(){
     var inp=document.getElementById('emPromo'),v=inp.value.trim().toUpperCase(),msg=document.getElementById('emPromoMsg');
