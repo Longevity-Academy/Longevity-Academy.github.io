@@ -860,10 +860,10 @@ async function initAirwallex(){
        * button above the card form; googlePayRequestOptions.countryCode is
        * mandatory per Airwallex docs. Same intent, same success handler,
        * same CRM SetECommercePayment and Meta Purchase path as card. */
-      methods:            ['card','googlepay','paypal','applepay'],
-      payment_methods:    ['card','googlepay','paypal','applepay'],
-      paymentMethods:     ['card','googlepay','paypal','applepay'],
-      payment_method_types:['card','googlepay','paypal','applepay'],
+      methods:            ['card','paypal'],
+      payment_methods:    ['card','paypal'],
+      paymentMethods:     ['card','paypal'],
+      payment_method_types:['card','paypal'],
       applePayRequestOptions: {
         countryCode: 'CY',
         buttonType: 'buy',
