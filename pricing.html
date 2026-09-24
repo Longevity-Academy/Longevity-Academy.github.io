@@ -3,6 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <script id="lla-email-upsell-redirect">
+  /* 2026-09-24: ActiveCampaign LGV emails (VIP onboarding u1-u4, upsells) link here. Send that
+   * traffic to the full-course enrollment page, which accepts the emailed credit code; pre-apply
+   * MASTERCLASS-VIP for the four VIP follow-ups. Direct site visitors are not affected. */
+  (function(){
+    try {
+      var q = new URLSearchParams(location.search);
+      var camp = (q.get('utm_campaign') || '').toLowerCase();
+      if (camp.indexOf('lgv_') !== 0) return;
+      var content = (q.get('utm_content') || '').toLowerCase();
+      q.set('enroll', '1');
+      if (/^jm-u[1-4]$/.test(content)) q.set('code', 'MASTERCLASS-VIP');
+      location.replace('https://longevitylifeacademy.pages.dev/?' + q.toString() + (location.hash || ''));
+    } catch (e) {}
+  })();
+  </script>
 
 <title>Pricing — Longevity Life Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
