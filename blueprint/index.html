@@ -101,7 +101,14 @@ window.LLA_FUNNEL=(function(){
   /* _fbc must travel byte-for-byte as the Pixel wrote it. Decoding it makes
      Meta report a modified fbclid and drop attribution. */
   function fbc(){
-    return ck('_fbc')||'';
+    /* 2026-09-24: Meta spec fallback. Pixel cookie first; else fb.1.<landing ms>.<fbclid RAW from location.search (never URL-decoded)>, stored on first landing for 90d. */
+    var c=ck('_fbc'); if(c) return c;
+    try{ var m=/[?&]fbclid=([^&#]+)/.exec(location.search||'');
+      if(m){ var v='fb.1.'+Date.now()+'.'+m[1]; var o=JSON.parse(localStorage.getItem('lla_fbc_v1')||'null');
+        if(!o||o.raw!==m[1]){ o={v:v,raw:m[1],ts:Date.now()}; localStorage.setItem('lla_fbc_v1',JSON.stringify(o)); } return o.v; }
+      var s=JSON.parse(localStorage.getItem('lla_fbc_v1')||'null'); if(s&&s.v&&(Date.now()-s.ts)<7776000000) return s.v;
+    }catch(e){}
+    return '';
   }
   function letters(s){ return String(s||'').toLowerCase().replace(/[^a-z]/g,''); }
   function identity(){
@@ -174,7 +181,14 @@ window.LLA_FUNNEL=(function(){
   var RELAY='https://lla-ac-events.vercel.app/api/meta/capi';
   function ck(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]+)'));return m?m[1]:'';}
   function fbc(){
-    return ck('_fbc')||'';
+    /* 2026-09-24: Meta spec fallback. Pixel cookie first; else fb.1.<landing ms>.<fbclid RAW from location.search (never URL-decoded)>, stored on first landing for 90d. */
+    var c=ck('_fbc'); if(c) return c;
+    try{ var m=/[?&]fbclid=([^&#]+)/.exec(location.search||'');
+      if(m){ var v='fb.1.'+Date.now()+'.'+m[1]; var o=JSON.parse(localStorage.getItem('lla_fbc_v1')||'null');
+        if(!o||o.raw!==m[1]){ o={v:v,raw:m[1],ts:Date.now()}; localStorage.setItem('lla_fbc_v1',JSON.stringify(o)); } return o.v; }
+      var s=JSON.parse(localStorage.getItem('lla_fbc_v1')||'null'); if(s&&s.v&&(Date.now()-s.ts)<7776000000) return s.v;
+    }catch(e){}
+    return '';
   }
   function letters(s){ return String(s||'').toLowerCase().replace(/[^a-z]/g,''); }
   function identity(){
