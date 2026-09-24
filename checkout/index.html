@@ -214,7 +214,14 @@ window.LLA_META=(function(){
   }
   function fbc(){
     /* 2026-09-21 17:05: only the Pixel's own _fbc cookie, byte for byte. No self-built fb.1.<ts>.<fbclid> (Meta flagged "modified fbclid" on the server copy). No cookie = no fbc. */
-    return ck('_fbc')||'';
+    /* 2026-09-24: Meta spec fallback. Pixel cookie first; else fb.1.<landing ms>.<fbclid RAW from location.search (never URL-decoded)>, stored on first landing for 90d. */
+    var c=ck('_fbc'); if(c) return c;
+    try{ var m=/[?&]fbclid=([^&#]+)/.exec(location.search||'');
+      if(m){ var v='fb.1.'+Date.now()+'.'+m[1]; var o=JSON.parse(localStorage.getItem('lla_fbc_v1')||'null');
+        if(!o||o.raw!==m[1]){ o={v:v,raw:m[1],ts:Date.now()}; localStorage.setItem('lla_fbc_v1',JSON.stringify(o)); } return o.v; }
+      var s=JSON.parse(localStorage.getItem('lla_fbc_v1')||'null'); if(s&&s.v&&(Date.now()-s.ts)<7776000000) return s.v;
+    }catch(e){}
+    return '';
   }
   /* Stable pseudonymous id for this browser. Meta counts external_id as a
    * match key in its own right, so a persistent one lifts Event Match Quality

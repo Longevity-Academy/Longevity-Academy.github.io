@@ -33,7 +33,9 @@
     try {
       var payload = JSON.parse(body);
       var cookie = document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/);
-      payload.fbc = cookie ? cookie[1] : '';
+      /* 2026-09-24: keep a spec-built fallback (fb.1.<ts>.<raw fbclid>) when the Pixel cookie is missing. */
+      var stored = null; try { stored = JSON.parse(localStorage.getItem('lla_fbc_v1') || 'null'); } catch (e) {}
+      payload.fbc = cookie ? cookie[1] : (payload.fbc || (stored && stored.v) || '');
       // Recovered original URL, never a fabricated or normalized click ID.
       payload.url = location.href;
       return JSON.stringify(payload);
