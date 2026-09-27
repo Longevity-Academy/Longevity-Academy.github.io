@@ -798,6 +798,38 @@ function startAwxInit(){
 }
 try { if (window.LLA_ECOMM && window.LLA_ECOMM.config && window.LLA_ECOMM.config.mode === 'ecomm') startAwxInit().catch(function(){}); } catch(e){}
 
+/* 2026-09-27 COURSE ROUTER (Roberto / CRM request): one brand URL, /checkout/?stid=&orderid=,
+ * for every Longevity product, like the other eTeacher brands. The CRM is not changed; we match it.
+ * The CRM order tells us the product (CoursePrice.MainAbroadCourseID 258 = The Longevity Blueprint,
+ * 283 = Longevity Masterclass, AbroadCourseID 1774 / 1823). Blueprint orders continue on this page
+ * exactly as before. Masterclass orders continue on the masterclass checkout, which already reads the
+ * order and picks Standard $49 / VIP $79 from the CRM amount. The forward happens BEFORE any Airwallex
+ * init and BEFORE any funnel event on this page (only the base PageView has fired), the raw query string
+ * is carried byte-for-byte (stid, orderid, IsForTesting, cid, adGroupID, utm_*, fbclid), and it is
+ * same-origin so _fbp/_fbc and localStorage attribution survive. Unknown course ids: no change. */
+window.LLA_COURSE_ROUTER=(function(){
+  var MC_MAIN=283, MC_ABROAD=1823, TARGET='https://www.longevitylifeacademy.com/julie-masterclass/';
+  function isMasterclass(d){
+    var cp=(d&&d.CoursePrice)||{};
+    return Number(cp.MainAbroadCourseID)===MC_MAIN||Number(cp.AbroadCourseID)===MC_ABROAD;
+  }
+  function route(d,ids){
+    try{
+      if(!isMasterclass(d))return false;
+      var oid=String((ids&&ids.orderid)||(d&&(d.OrderId||d.OrderID))||'');
+      var key='lla_course_routed_'+oid;
+      try{ if(sessionStorage.getItem(key)==='1')return false; sessionStorage.setItem(key,'1'); }catch(e){}
+      var qs=location.search||'';
+      if(!/[?&]stid=/.test(qs)&&ids&&ids.stid)qs+=(qs?'&':'?')+'stid='+encodeURIComponent(ids.stid);
+      if(!/[?&]orderid=/.test(qs)&&oid)qs+=(qs?'&':'?')+'orderid='+encodeURIComponent(oid);
+      try{setStatus('Taking you to your masterclass order...');}catch(e){}
+      location.replace(TARGET+qs+(location.hash||''));
+      return true;
+    }catch(e){return false;}
+  }
+  return {route:route,isMasterclass:isMasterclass};
+})();
+
 async function initAirwallex(){
   try {
     try{ LLA_META.buyer(); }catch(e){}   // snapshot buyer email before the staged lead is consumed
@@ -819,6 +851,7 @@ async function initAirwallex(){
       raw = await r.text();
       try { d = JSON.parse(raw); }
       catch (parseErr) { throw new Error('CRM returned non-JSON (HTTP ' + r.status + '): ' + raw.slice(0, 200)); }
+      if (window.LLA_COURSE_ROUTER && LLA_COURSE_ROUTER.route(d, ids)) return; /* masterclass order -> masterclass checkout */
       if (d && d.Airwallex && d.Airwallex.paymentIntentId) break;
       if (_try === 5) {
         /* Still no intent: the CRM no longer honours this order (old link, cancelled
