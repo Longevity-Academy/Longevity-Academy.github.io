@@ -961,26 +961,30 @@ async function initAirwallex(){
      *   plan=upfront -> today = FirstPayment, single row, no future payments row
      * NumOfPayments from the CRM is TOTAL payments including the registration fee
      * charged today; the monthly row must show NumOfPayments-1 or double-count. */
-    /* 2026-09-27 (Roberto / CRM abandoned-cart links): every figure comes from the CRM order.
+    /* 2026-09-27 (Roberto / CRM abandoned-cart links): every figure comes from the CRM order,
+     * using the CRM's own semantics (verified against order 8035241, CRM screen "Payments 4, each of 262.31,
+     * first payment 349.75, total 1399"):
      *   today          = AmountToCharge (= the Airwallex intent amount)
-     *   NumOfPayments  = TOTAL payments INCLUDING today's tuition/registration payment
-     *                    (eTeacher rule: 5 payments = tuition today + 4 installments)
-     *   installment    = (OrderCoursePrice - AmountToCharge) / (NumOfPayments - 1)
-     *   total          = OrderCoursePrice; ListCoursePrice struck through when the order is discounted.
-     * Nothing here is hard-coded to $279 / $1,395 any more. */
+     *   NumOfPayments  = number of installments AFTER today's payment (CRM "Payments" field)
+     *   PaymentPerMonth= amount of each installment (fallback: (OrderCoursePrice - AmountToCharge) / NumOfPayments)
+     *   total          = OrderCoursePrice; ListCoursePrice struck through when the order is discounted. */
     var plan = (window.LLA_ECOMM_PLANS && window.LLA_ECOMM_PLANS.resolvePlan) ? window.LLA_ECOMM_PLANS.resolvePlan() : 'monthly'; /* still drives the Drop-In recurring mode below */
     var money = function(n){ return '$' + Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); };
     var strike = function(txt){ return '<s style="opacity:.5;font-weight:500;margin-right:6px">' + txt + '</s>'; };
-    var num   = Math.max(1, Math.round(Number(d.NumOfPayments) || 1));
-    var total = Number(d.OrderCoursePrice); if (!(total > 0)) total = amount * num;
+    var total = Number(d.OrderCoursePrice) || 0;
     var list  = Number(d.ListCoursePrice) || 0;
     var rest  = Math.max(0, total - amount);
-    var inst  = num > 1 ? rest / (num - 1) : 0;
+    var nInst = Math.max(0, Math.round(Number(d.NumOfPayments) || 0));
+    if (rest < 0.005) nInst = 0;
+    if (nInst === 0 && rest >= 0.005) nInst = 1;
+    var inst  = nInst ? (Number(d.PaymentPerMonth) > 0 ? Number(d.PaymentPerMonth) : rest / nInst) : 0;
+    if (!(total > 0)) total = amount + nInst * inst;
+    var num = nInst + 1; /* total number of payments incl. today, used by the Drop-In mode below */
     var k1 = document.getElementById('sumRow1K'), v1 = document.getElementById('sumRow1V'), n1 = document.getElementById('sumNote1');
     var r2 = document.getElementById('sumRow2'),  v2 = document.getElementById('sumRow2V'), n2 = document.getElementById('sumNote2');
     var v3 = document.getElementById('sumRow3V');
     var setK = function(el, txt){ if (!el) return; if (el.firstChild && el.firstChild.nodeType === 3) el.firstChild.nodeValue = txt + ' '; else el.textContent = txt; };
-    if (num <= 1 || rest < 0.005){
+    if (nInst === 0){
       setK(k1, 'One-time course tuition');
       if (v1) v1.innerHTML = (list > amount + 0.005 ? strike(money(list)) : '') + money(amount);
       if (r2) r2.style.display = 'none';
@@ -991,9 +995,9 @@ async function initAirwallex(){
       setK(k1, 'Course registration fee (today)');
       if (v1) v1.innerHTML = money(amount);
       if (r2) r2.style.display = '';
-      if (v2) v2.innerHTML = (num - 1) + ' x ' + money(inst);
+      if (v2) v2.innerHTML = nInst + ' x ' + money(inst);
       if (n1) n1.textContent = 'Charged today. Fully refundable within 14 days from registration.';
-      if (n2){ n2.style.display = ''; n2.textContent = (num - 1) + ' monthly installments of ' + money(inst) + ' begin the month after your first class.'; }
+      if (n2){ n2.style.display = ''; n2.textContent = nInst + ' monthly installments of ' + money(inst) + ' begin the month after your first class.'; }
       if (v3) v3.innerHTML = (list > total + 0.005 ? strike(money(list)) : '') + money(total);
     }
     try {
