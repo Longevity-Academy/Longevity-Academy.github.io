@@ -620,15 +620,19 @@ header.co-head .logo img {
       <div class="sum">
         <div class="sum-row" id="sumRow1">
           <span class="k" id="sumRow1K">Course registration fee <span class="tip" title="Charged today to reserve your seat.">?</span></span>
-          <span class="v" id="sumRow1V">$279.00</span>
+          <span class="v" id="sumRow1V">&mdash;</span>
         </div>
         <p class="sum-note" id="sumNote1">Fully refundable within 14 days from registration.</p>
 
         <div class="sum-row" id="sumRow2">
           <span class="k">Monthly tuition fee <span class="tip" title="Billed monthly after your first class.">?</span></span>
-          <span class="v" id="sumRow2V">4 x $279.00</span>
+          <span class="v" id="sumRow2V">&mdash;</span>
         </div>
         <p class="sum-note" id="sumNote2">Monthly payments begin the month after your first class.</p>
+        <div class="sum-row" id="sumRow3" style="border-top:1px solid #E6ECF5;margin-top:6px;padding-top:10px">
+          <span class="k" id="sumRow3K">Total course price</span>
+          <span class="v" id="sumRow3V">&mdash;</span>
+        </div>
         <script>
           /* Static summary panel: pre-populate plan-aware values immediately so
            * the page paints correct copy even before the CRM round-trip. The
@@ -957,29 +961,53 @@ async function initAirwallex(){
      *   plan=upfront -> today = FirstPayment, single row, no future payments row
      * NumOfPayments from the CRM is TOTAL payments including the registration fee
      * charged today; the monthly row must show NumOfPayments-1 or double-count. */
-    var LIST_PER_MONTH = 279;
-    var LIST_TOTAL     = 1395;
+    /* 2026-09-27 (Roberto / CRM abandoned-cart links): every figure comes from the CRM order.
+     *   today          = AmountToCharge (= the Airwallex intent amount)
+     *   NumOfPayments  = TOTAL payments INCLUDING today's tuition/registration payment
+     *                    (eTeacher rule: 5 payments = tuition today + 4 installments)
+     *   installment    = (OrderCoursePrice - AmountToCharge) / (NumOfPayments - 1)
+     *   total          = OrderCoursePrice; ListCoursePrice struck through when the order is discounted.
+     * Nothing here is hard-coded to $279 / $1,395 any more. */
+    var plan = (window.LLA_ECOMM_PLANS && window.LLA_ECOMM_PLANS.resolvePlan) ? window.LLA_ECOMM_PLANS.resolvePlan() : 'monthly'; /* still drives the Drop-In recurring mode below */
+    var money = function(n){ return '$' + Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); };
     var strike = function(txt){ return '<s style="opacity:.5;font-weight:500;margin-right:6px">' + txt + '</s>'; };
-    var plan = (window.LLA_ECOMM_PLANS && window.LLA_ECOMM_PLANS.resolvePlan) ? window.LLA_ECOMM_PLANS.resolvePlan() : 'monthly';
-    var rows = document.querySelectorAll('.sum-row');
-    var vs   = document.querySelectorAll('.sum-row .v');
-    var ks   = document.querySelectorAll('.sum-row .k');
-    var num  = Number(d.NumOfPayments || 1);
-    if (plan === 'upfront' || num <= 1){
-      if (ks[0]) ks[0].firstChild.nodeValue = 'One-time course tuition ';
-      if (vs[0]) vs[0].innerHTML = strike('$' + LIST_TOTAL + '.00') + '$' + amount.toFixed(2);
-      if (rows[1]) rows[1].style.display = 'none';
-      var notes = document.querySelectorAll('.sum-note');
-      if (notes[0]) notes[0].textContent = 'Single payment. Full refund inside 14 days from registration.';
-      if (notes[1]) notes[1].style.display = 'none';
+    var num   = Math.max(1, Math.round(Number(d.NumOfPayments) || 1));
+    var total = Number(d.OrderCoursePrice); if (!(total > 0)) total = amount * num;
+    var list  = Number(d.ListCoursePrice) || 0;
+    var rest  = Math.max(0, total - amount);
+    var inst  = num > 1 ? rest / (num - 1) : 0;
+    var k1 = document.getElementById('sumRow1K'), v1 = document.getElementById('sumRow1V'), n1 = document.getElementById('sumNote1');
+    var r2 = document.getElementById('sumRow2'),  v2 = document.getElementById('sumRow2V'), n2 = document.getElementById('sumNote2');
+    var v3 = document.getElementById('sumRow3V');
+    var setK = function(el, txt){ if (!el) return; if (el.firstChild && el.firstChild.nodeType === 3) el.firstChild.nodeValue = txt + ' '; else el.textContent = txt; };
+    if (num <= 1 || rest < 0.005){
+      setK(k1, 'One-time course tuition');
+      if (v1) v1.innerHTML = (list > amount + 0.005 ? strike(money(list)) : '') + money(amount);
+      if (r2) r2.style.display = 'none';
+      if (n1) n1.textContent = 'Single payment, charged today. Full refund within 14 days from registration.';
+      if (n2) n2.style.display = 'none';
+      if (v3) v3.innerHTML = money(amount);
     } else {
-      var discounted = amount > 0 && amount < LIST_PER_MONTH;
-      if (vs[0]) vs[0].innerHTML = (discounted ? strike('$' + LIST_PER_MONTH + '.00') : '') + '$' + amount.toFixed(2);
-      if (vs[1]) {
-        var rest = Math.max(0, num - 1);
-        vs[1].innerHTML = (discounted ? strike(rest + ' x $' + LIST_PER_MONTH + '.00') : '') + rest + ' x $' + amount.toFixed(2);
-      }
+      setK(k1, 'Course registration fee (today)');
+      if (v1) v1.innerHTML = money(amount);
+      if (r2) r2.style.display = '';
+      if (v2) v2.innerHTML = (num - 1) + ' x ' + money(inst);
+      if (n1) n1.textContent = 'Charged today. Fully refundable within 14 days from registration.';
+      if (n2){ n2.style.display = ''; n2.textContent = (num - 1) + ' monthly installments of ' + money(inst) + ' begin the month after your first class.'; }
+      if (v3) v3.innerHTML = (list > total + 0.005 ? strike(money(list)) : '') + money(total);
     }
+    try {
+      var cp = d.CoursePrice || {};
+      var nm = cp.MainAbroadCourseName || cp.AbroadCourseName;
+      if (nm) document.querySelectorAll('.course-name').forEach(function(el){ el.textContent = nm; });
+      var st = document.getElementById('sessionTimeVal');
+      if (st && !(sessionStorage.getItem('lla_start_date') || '')) {
+        var sel = (d.AvailableClasses || []).filter(function(c){ return c && c.SelectedCourse; })[0];
+        var fd = sel && (sel.FirstLessonDate || sel.SemesterStartDate);
+        if (fd) { var dt = new Date(fd); st.textContent = isNaN(dt) ? 'Confirmed by email' : ('Starts ' + dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})); }
+        else st.textContent = 'Confirmed by email after enrollment';
+      }
+    } catch (e) {}
 
     // The elements.bundle.min.js from checkout.airwallex.com attaches window.Airwallex directly.
     var awx = window.Airwallex;
@@ -1203,7 +1231,7 @@ apply();document.addEventListener('DOMContentLoaded',apply);setTimeout(apply,800
   var h=document.createElement('section'); h.id='llaOrderHero'; h.setAttribute('data-no-promo','');
   h.innerHTML='<div class="oh-grid"><div><p class="oh-eyebrow">Your enrollment</p><h2>The Longevity Blueprint</h2><p class="oh-meta">'+(sd?'<b>Starts '+sd+'</b><br>':'')+'18 live sessions &middot; 50 min each &middot; online &middot; lifetime access to recordings</p></div>'
     +'<div class="oh-price"><div class="oh-big">'+price+'</div><div class="oh-was">'+was+'</div><div class="oh-chips">'+chips+'</div></div></div>';
-  function mount(){var main=document.getElementById('screen-order'),cols=main&&main.querySelector('.cols');if(cols&&!document.getElementById('llaOrderHero')){main.insertBefore(h,cols);}
+  function mount(){/* 2026-09-27 (Roberto/CRM): static $279 x 5 banner removed; every amount on this page now comes from the CRM order */
     var sum=document.querySelector('.sum'); if(sum&&pr&&!document.getElementById('llaVipRow')){var hr=sum.querySelector('hr');var vip=document.createElement('div');vip.id='llaVipRow';vip.innerHTML='<span class="k">Julie’s VIP Masterclass ($99)</span><span class="v">Included</span>';var sv=document.createElement('div');sv.id='llaSaveRow';sv.innerHTML='<span>You save</span><span>$249</span>';if(hr){sum.insertBefore(vip,hr);sum.insertBefore(sv,hr);}else{sum.appendChild(vip);sum.appendChild(sv);}}}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount(); setTimeout(mount,600);
 }catch(e){}})();
