@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+/* 2026-09-27 speed-up (Roberto): for CRM links (?stid=&orderid=) ask the CRM for the order the moment the HTML arrives,
+ * in parallel with the rest of the page. A masterclass order (283/1823) is forwarded right away, before the payment
+ * SDK and the page assets load, and the order details are handed to the masterclass page through sessionStorage
+ * (same origin) so it does not need to ask the CRM again before opening the Pay screen. Blueprint orders reuse the
+ * same response below. Same routing rule, same query string, same loop guard as LLA_COURSE_ROUTER. */
+(function(){try{
+  var q=new URLSearchParams(location.search), stid=q.get('stid'), oid=q.get('orderid');
+  if(!stid||!oid)return;
+  var prefix=(q.get('env')==='staging')?'/staging':'';
+  var TARGET='https://www.longevitylifeacademy.com/julie-masterclass/';
+  window.__llaEarlyDetails=fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev'+prefix+'/api/checkout/details',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:String(stid),orderId:String(oid)})})
+    .then(function(r){return r.text();}).then(function(t){try{return JSON.parse(t);}catch(e){return null;}})
+    .then(function(d){
+      try{
+        var cp=(d&&d.CoursePrice)||{};
+        if(Number(cp.MainAbroadCourseID)===283||Number(cp.AbroadCourseID)===1823){
+          var key='lla_course_routed_'+String(oid);
+          if(sessionStorage.getItem(key)!=='1'){
+            sessionStorage.setItem(key,'1');
+            try{sessionStorage.setItem('lla_crm_details_'+String(oid),JSON.stringify({ts:Date.now(),d:d}));}catch(e){}
+            location.replace(TARGET+(location.search||'')+(location.hash||''));
+          }
+        }
+      }catch(e){}
+      return d;
+    }).catch(function(){return null;});
+}catch(e){}})();
+</script>
+
 <script src="/assets/lla-clickid-v20260922.js"></script>
 <script>/* 2026-09-21 14:05: production pixel + CAPI relay fire ONLY on the live hosts.
    Preview deployments (*.pages.dev hashes, branch previews) and other hosts got a
@@ -848,6 +878,17 @@ async function initAirwallex(){
      * 8020862). Retry instead of failing the buyer on the first attempt. */
     var r, raw, d;
     for (var _try = 1; _try <= 8; _try++) {
+      if (_try === 1 && window.__llaEarlyDetails) {
+        /* 2026-09-27 speed-up: the <head> prefetch already asked the CRM for this exact order; use its answer for the first attempt. */
+        try { var early = await window.__llaEarlyDetails; window.__llaEarlyDetails = null;
+          if (early && String(early.OrderId || early.OrderID || '') === String(ids.orderid)) {
+            d = early;
+            if (window.LLA_COURSE_ROUTER && LLA_COURSE_ROUTER.route(d, ids)) return;
+            if (d.Airwallex && d.Airwallex.paymentIntentId) break;
+            continue;
+          }
+        } catch (e) {}
+      }
       r = await fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev' + envPrefix + '/api/checkout/details', {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ studentId: String(ids.stid), orderId: String(ids.orderid) })
