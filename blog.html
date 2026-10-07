@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -40,6 +40,39 @@ a { color: inherit; text-decoration: none; }
 .blog-card-title { color: #fff; font-size: 19px; font-weight: 700; line-height: 1.3; margin: 0 0 10px; letter-spacing: -0.01em; }
 .blog-card-excerpt { color: rgba(255,255,255,0.7); font-size: 14.5px; line-height: 1.6; margin: 0 0 18px; flex: 1; }
 .blog-card-more { color: #6BB6FF; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+
+/* In the press (ported 1:1 from /blueprint/ news fold) */
+.lla-news{--blue:#006EFF;--ink:#0B1B33;--ink-2:#29385A;--ink-3:#5B6B8C;--ink-4:#8B97B3;--silver-2:#E6ECF5;--r-md:22px;--ease:cubic-bezier(.22,1,.36,1);--shadow-card:0 1px 0 rgba(255,255,255,.7) inset,0 30px 70px -34px rgba(10,34,64,.4),0 2px 8px -2px rgba(10,34,64,.08);
+  padding:clamp(64px,9vw,128px) 0;background:linear-gradient(180deg,#F1F5FB,#FFFFFF);font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;color:var(--ink-2);line-height:1.6}
+.lla-news .lla-films-head{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(28px,4vw,48px);text-align:left}
+.lla-news .section-title{font-size:clamp(38px,5vw,70px);line-height:1.03;margin:0 0 20px;color:var(--ink);letter-spacing:-.012em;font-weight:400;font-style:italic;position:relative;padding-top:22px}
+.lla-news .section-title::before{content:"";position:absolute;left:0;top:0;width:52px;height:5px;border-radius:3px;background:linear-gradient(90deg,#006EFF,#22C4F5);box-shadow:0 0 14px rgba(34,196,245,.6)}
+.lla-news .section-title em{color:var(--blue);background:linear-gradient(90deg,#006EFF,#22C4F5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic}
+.lla-news .section-subtitle{font-size:clamp(18px,1.55vw,22px);line-height:1.55;color:var(--ink-3);margin:0;max-width:none}
+.lla-news-grid{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:24px;scroll-snap-type:x mandatory;padding:10px 4px 26px;scrollbar-width:thin;scrollbar-color:rgba(0,110,255,.5) transparent;align-items:flex-start}
+.lla-news-grid::-webkit-scrollbar{height:6px}.lla-news-grid::-webkit-scrollbar-thumb{background:rgba(0,110,255,.5);border-radius:3px}
+.lla-news-card{flex:0 0 calc((100% - 48px) / 3);scroll-snap-align:start;position:relative;display:flex;flex-direction:column;border-radius:var(--r-md);overflow:hidden;background:#fff;border:1px solid rgba(10,34,64,.08);box-shadow:var(--shadow-card);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.lla-news-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;z-index:2;background:linear-gradient(90deg,#006EFF,#7DE5FF);box-shadow:0 0 16px rgba(125,229,255,.7)}
+.lla-news-card:nth-child(3n+2)::before{background:linear-gradient(90deg,#22C4F5,#338BFF)}
+.lla-news-card:nth-child(3n)::before{background:linear-gradient(90deg,#3348D6,#7DE5FF)}
+.lla-news-card:hover{transform:translateY(-6px);box-shadow:0 36px 70px -36px rgba(10,34,64,.5),0 0 0 1px rgba(0,110,255,.18),0 0 40px -14px rgba(0,110,255,.45)}
+.lla-news-media{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--silver-2);position:relative}
+.lla-news-media img,.lla-news-media video{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.lla-news-media img.is-harel{object-position:50% 12%}
+.lla-news-body{display:flex;flex-direction:column;flex:1;padding:20px 22px 18px;gap:10px}
+.lla-news-outlet{font-size:15px;color:var(--blue);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lla-news-outlet i{color:var(--ink-4);position:relative;padding-left:12px}
+.lla-news-outlet i::before{content:"";position:absolute;left:0;top:50%;width:4px;height:4px;border-radius:50%;background:var(--ink-4);transform:translateY(-50%)}
+.lla-news-card h3{font-size:23px;line-height:1.28;color:var(--ink);font-weight:400;font-style:italic;letter-spacing:-.012em;text-wrap:balance}
+.lla-news-sub{font-size:16.5px;line-height:1.55;color:var(--ink-3)}
+.lla-news-meta{margin-top:auto;padding-top:14px;border-top:1px solid rgba(10,34,64,.08);display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--ink-4)}
+.lla-news-meta em{color:var(--blue);display:inline-flex;align-items:center;gap:6px;font-style:italic}
+.lla-news-meta em::after{content:"";width:14px;height:1px;background:currentColor;transition:width .3s var(--ease)}
+.lla-news-card:hover .lla-news-meta em::after{width:24px}
+@media (max-width:900px){.lla-news .lla-films-head{grid-template-columns:1fr;gap:14px}.lla-news .section-title{font-size:clamp(34px,9.6vw,40px);margin-bottom:14px}.lla-news .section-subtitle{font-size:17px}
+  .lla-news-grid{gap:14px;padding:10px 20px 26px;margin:0 -20px;scrollbar-width:none}.lla-news-grid::-webkit-scrollbar{display:none}.lla-news-card{flex:0 0 min(84%,360px)}
+  .lla-news-media{aspect-ratio:2/1}.lla-news-media img.is-harel{object-position:50% 18%}.lla-news-card h3{font-size:20px;line-height:1.3}.lla-news-sub{font-size:15.5px}}
+@media (max-width:720px){.lla-news-grid{display:grid;grid-template-columns:1fr;overflow:visible;margin:0;padding:10px 0 0;scroll-snap-type:none}.lla-news-card{flex:none}.lla-news-body{padding:16px 16px 14px}}
 
 footer { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); font-size: 13px; text-align: center; }
 </style>
@@ -182,6 +215,23 @@ footer { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.06); color: r
     </div>
   </div>
 </section>
+
+<section class="lla-journal lla-news" id="press" aria-label="In the press">
+  <div class="container">
+    <div class="lla-films-head">
+      <h2 class="section-title">In the <em>press.</em></h2>
+      <p class="section-subtitle">Press coverage in AP News and Yahoo Finance, and three deep dives from The Longevity Blog.</p>
+    </div>
+    <div class="lla-news-grid">
+      <a class="lla-news-card lla-news-card--press" href="https://apnews.com/press-release/ein-presswire-newsmatics/press-release-df2283f31104321eae816839632a3c48" target="_blank" rel="noopener"><span class="lla-news-media"><img class="is-harel" src="assets/press/ceo-harel-tayeb.jpg" alt="Harel Tayeb, CEO of eTeacher Group" loading="lazy"></span><span class="lla-news-body"><span class="lla-news-outlet">AP News <i>eTeacher Group</i></span><h3>eTeacher Group Launches Longevity Life Academy to Teach the Longevity Protocol the Wealthy Pay Millions For</h3><span class="lla-news-meta"><span>July 20, 2026</span><em>Read the article</em></span></span></a>
+      <a class="lla-news-card lla-news-card--press lla-news-card--blog" href="topics/supplements-health-tech.html"><span class="lla-news-media"><video preload="none" poster="assets/press/v2-supplements-meds.jpg" src="assets/press/v2-supplements-meds.mp4" muted loop playsinline></video></span><span class="lla-news-body"><span class="lla-news-outlet">The Longevity Blog <i>Supplements and Therapies</i></span><h3>Know What You're Actually Taking</h3><p class="lla-news-sub">NAD precursors, Vitamin D, omega-3s, creatine, senolytics, the short list of supplements with real human data, and the long list of marketing dressed up as science.</p><span class="lla-news-meta"><span>Deep dive</span><em>Read the article</em></span></span></a>
+      <a class="lla-news-card lla-news-card--press lla-news-card--blog" href="topics/mental-emotional-health.html"><span class="lla-news-media"><video preload="none" poster="assets/press/v2-mental-bubbles.jpg" src="assets/press/v2-mental-bubbles.mp4" muted loop playsinline></video></span><span class="lla-news-body"><span class="lla-news-outlet">The Longevity Blog <i>The Longevity Toolkit</i></span><h3>Five Habits That Move the Needle</h3><p class="lla-news-sub">Zone 2 cardio for mitochondrial health, VO2 max as the strongest predictor of all-cause mortality, CGM-driven metabolic tracking, ApoB management, and the sleep architecture that drives recovery.</p><span class="lla-news-meta"><span>Deep dive</span><em>Read the article</em></span></span></a>
+      <a class="lla-news-card lla-news-card--press" href="https://finance.yahoo.com/healthcare/articles/julie-gibson-clark-2nd-slowest-195800053.html" target="_blank" rel="noopener"><span class="lla-news-media"><img src="assets/press/julie-gibson-clark.jpg" alt="Julie Gibson Clark" loading="lazy"></span><span class="lla-news-body"><span class="lla-news-outlet">Yahoo Finance <i>Julie Gibson Clark</i></span><h3>Julie Gibson Clark, 2nd Slowest-Aging Woman on Earth, Joins Longevity Life Academy by eTeacher Group</h3><span class="lla-news-meta"><span>July 27, 2026</span><em>Read the article</em></span></span></a>
+      <a class="lla-news-card lla-news-card--press lla-news-card--blog" href="topics/protocols-habits.html"><span class="lla-news-media"><video preload="none" poster="assets/press/skill-skin.jpg" src="assets/press/skill-skin.mp4" muted loop playsinline></video></span><span class="lla-news-body"><span class="lla-news-outlet">The Longevity Blog <i>Aging on the Outside</i></span><h3>The Visible Edge of Aging</h3><p class="lla-news-sub">Skin as a real-time marker of systemic aging, collagen turnover, oxidative stress, glycation, UV damage, and the topical and oral interventions with actual clinical evidence behind them.</p><span class="lla-news-meta"><span>Deep dive</span><em>Read the article</em></span></span></a>
+    </div>
+  </div>
+</section>
+<script>(function(){var vids=document.querySelectorAll('.lla-news-media video');vids.forEach(function(v){v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','')});function go(v){if(v.preload==='none'){v.preload='auto';v.load()}var p=v.play();if(p&&p.catch)p.catch(function(){})}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){go(v)}else if(!v.paused){v.pause()}})},{rootMargin:'300px 0px',threshold:.01});vids.forEach(function(v){io.observe(v)})}else{vids.forEach(go)}})();</script>
 
 <footer><div class="container">&copy; Longevity Life Academy by eTeacher Group</div></footer>
 
