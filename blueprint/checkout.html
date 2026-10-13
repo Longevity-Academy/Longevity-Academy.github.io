@@ -437,16 +437,13 @@ window.LLA_META=(function(){
             <img src="assets/pay/visa.svg" alt="Visa" />
             <img src="assets/pay/mastercard.svg" alt="Mastercard" />
             <img src="assets/pay/amex.svg" alt="American Express" />
-            <img src="assets/pay/google-pay-mark.svg" alt="Google Pay" class="gpay-mark" />
           </div>
           <div class="pay-tab" data-tab="paypal">
             <img class="pp" src="assets/pay/paypal.svg" alt="PayPal" />
           </div>
         </div>
         <div class="pay-body">
-          <!-- Google Pay: rendered by the Airwallex Drop-In itself (googlepay method), not a site-level button. -->
-
-          <div class="f-lbl" id="payLbl">Card or Google Pay</div>
+          <div class="f-lbl" id="payLbl">Card</div>
           <!-- Airwallex Drop-In mount (real card entry, wired to eTeacher's Airwallex account) -->
           <div id="awx-dropin" style="min-height:220px;border:1px solid #D5DCE6;border-radius:7px;padding:12px;margin-bottom:14px;background:#fff">
             <!-- Visible loading state while the CRM reserves the seat and issues the payment intent (2-8 s). Replaced by the Drop-In on mount. -->
@@ -572,7 +569,7 @@ document.querySelectorAll('.pay-tab').forEach(function(t){
     var pp = t.getAttribute('data-tab') === 'paypal';
     [document.getElementById('awx-dropin'), document.getElementById('awx-status')].forEach(function(el){ if(el) el.style.display = pp ? 'none' : ''; });
     var box = document.getElementById('paypalBox'); if (box) box.style.display = pp ? '' : 'none';
-    var lbl = document.getElementById('payLbl'); if (lbl) lbl.textContent = pp ? 'PayPal' : 'Card or Google Pay';
+    var lbl = document.getElementById('payLbl'); if (lbl) lbl.textContent = pp ? 'PayPal' : 'Card';
     if (pp && window.LLA_RENDER_PAYPAL) window.LLA_RENDER_PAYPAL();
   });
 });
@@ -861,32 +858,10 @@ async function initAirwallex(){
       /* Airwallex filters Drop-in methods by currency + country_code and lists
        * country_code as REQUIRED for paypal. Without it PayPal never renders. */
       country_code: 'US',
-      /* Google Pay (2026-09-17): eTeacher's Airwallex account now reports
-       * googlepay active (oneoff + recurring, USD/US) via
-       * /pa/config/payment_method_types. The Drop-In renders Google's own
-       * button above the card form; googlePayRequestOptions.countryCode is
-       * mandatory per Airwallex docs. Same intent, same success handler,
-       * same CRM SetECommercePayment and Meta Purchase path as card. */
       methods:            ['card','paypal'],
       payment_methods:    ['card','paypal'],
       paymentMethods:     ['card','paypal'],
       payment_method_types:['card','paypal'],
-      applePayRequestOptions: {
-        countryCode: 'CY',
-        buttonType: 'buy',
-        buttonColor: 'black',
-        totalPriceLabel: 'Longevity Life Academy by eTeacher Group'
-      },
-      googlePayRequestOptions: {
-        countryCode: 'US',
-        merchantInfo: { merchantName: 'Longevity Life Academy by eTeacher Group' },
-        buttonType: 'pay',
-        buttonColor: 'black',
-        buttonSizeMode: 'fill',
-        allowedCardNetworks: ['VISA','MASTERCARD','AMEX','DISCOVER'],
-        emailRequired: false,
-        billingAddressRequired: false
-      },
       showPayButton: true,
       appearance: { locale: 'en' }
     });
@@ -915,7 +890,7 @@ async function initAirwallex(){
     dropIn.on('error', function(evt){
       setStatus('✗ Payment failed: ' + ((evt && evt.detail && ((evt.detail.error && evt.detail.error.message) || evt.detail.message)) || 'error') + ' — you were not charged.', '#c33');
     });
-    dropIn.on('ready', function(){ setStatus(awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : 'Secure payment ready (card or Google Pay). This is a live payment of $' + amount.toFixed(2) + ' USD.'); });
+    dropIn.on('ready', function(){ setStatus(awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : 'Secure payment ready (card). This is a live payment of $' + amount.toFixed(2) + ' USD.'); });
 
     // Manual pay button also submits the drop-in
     document.getElementById('proceed').addEventListener('click', function(){
