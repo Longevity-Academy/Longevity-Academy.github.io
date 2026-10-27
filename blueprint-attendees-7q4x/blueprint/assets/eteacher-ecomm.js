@@ -290,7 +290,8 @@
       // Discounted price for this order (activePrice() picks monthly vs upfront).
       var pr = activePrice();
       payload.FirstPayment     = Number(pr.firstPayment);
-      payload.NumberOfPayments = Number(pr.numberOfPayments);
+      // UI configuration counts all payments; CRM counts installments AFTER today.
+      payload.NumberOfPayments = pr.plan === 'upfront' ? 1 : Math.max(0, Number(pr.numberOfPayments) - 1);
       payload.LeftToPay        = Number(pr.leftToPay);
       /* stamp the chosen plan on the CRM lead (allowed chars only) */
       var _planExtra = 'plan=' + pr.plan;
@@ -362,7 +363,10 @@
         stid: String(stid), orderid: String(orderid),
         firstPayment: Number(payload.FirstPayment),
         numberOfPayments: Number(payload.NumberOfPayments),
-        leftToPay: Number(payload.LeftToPay), currency: 'USD'
+        leftToPay: Number(payload.LeftToPay), currency: 'USD', env: CFG.env,
+        scheduleVersion: 2,
+        paymentPerMonth: Number(payload.NumberOfPayments) > 0 ? Number(payload.LeftToPay) / Number(payload.NumberOfPayments) : 0,
+        total: Number(payload.FirstPayment) + Number(payload.LeftToPay)
       }));
     } catch(e){}
   }
@@ -372,7 +376,15 @@
     getExpectedOrderQuote: function(ids, details){
       try {
         var q = JSON.parse(sessionStorage.getItem('lla_order_quote_v1') || 'null');
-        if (q && ids && q.stid === String(ids.stid) && q.orderid === String(ids.orderid)) return q;
+        if (q && ids && q.stid === String(ids.stid) && q.orderid === String(ids.orderid) &&
+            (!q.env || q.env === CFG.env) && q.currency === 'USD' &&
+            ((Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === Number(q.firstPayment) * 4 &&
+              (Number(q.firstPayment) === 149 || Number(q.firstPayment) === 179)) ||
+             (Number(q.numberOfPayments) <= 1 && Number(q.firstPayment) === 799 && Number(q.leftToPay) === 0))) {
+          q.paymentPerMonth = Number(q.numberOfPayments) ? Number(q.leftToPay) / Number(q.numberOfPayments) : 0;
+          q.total = Number(q.firstPayment) + Number(q.leftToPay);
+          return q;
+        }
       } catch(e){}
       // Existing emailed orders must not depend on this browser having created
       // them. Recover only from the current CRM response for the exact order.
@@ -382,23 +394,26 @@
           String(d.StudentId) !== String(ids.stid) ||
           Number(d.MainAbroadCourseID ?? course.MainAbroadCourseID) !== Number(CFG.crmCourse.mainAbroadCourseId) ||
           Number(d.AbroadCourseID ?? course.AbroadCourseID) !== Number(CFG.crmCourse.abroadCourseId) ||
-          d.FirstPayment == null || d.LeftToPay == null || d.AmountToCharge == null) return null;
-      var first = Number(d.FirstPayment), n = Number(d.NumOfPayments), left = Number(d.LeftToPay);
+          d.AmountToCharge == null || d.OrderCoursePrice == null) return null;
+      var first = Number(d.FirstPayment ?? d.AmountToCharge), n = Number(d.NumOfPayments);
+      var left = Number(d.LeftToPay ?? (Number(d.OrderCoursePrice) - first));
       // These are the existing published contracts, not new coupon eligibility.
       // An unknown adjusted quote needs review rather than a silently invented
       // installment schedule. The gateway and CRM amount are checked separately.
       var promo = window.LLA_PROMO || {};
       var allowed = [
-        { firstPayment: Number(promo.regular || 179), numberOfPayments: 5, leftToPay: Number(promo.regularTotal || 895) - Number(promo.regular || 179) },
-        CFG.crmPlans.upfront,
-        { firstPayment: Number(promo.first), numberOfPayments: Number(promo.n), leftToPay: Number(promo.left) }
+        { firstPayment: 179, numberOfPayments: 4, leftToPay: 716 },
+        { firstPayment: 799, numberOfPayments: 0, leftToPay: 0 },
+        { firstPayment: 799, numberOfPayments: 1, leftToPay: 0 },
+        { firstPayment: 149, numberOfPayments: 4, leftToPay: 596 }
       ];
       var matches = allowed.some(function(p){
         return p && first === Number(p.firstPayment) && n === Number(p.numberOfPayments) && left === Number(p.leftToPay);
       });
       if (!matches || first !== Number(d.AmountToCharge)) return null;
       return { stid:String(ids.stid), orderid:String(ids.orderid), firstPayment:first,
-        numberOfPayments:n, leftToPay:left, currency:'USD', source:'crm-existing-order' };
+        numberOfPayments:n, leftToPay:left, paymentPerMonth:n ? left/n : 0,
+        total:first+left, env:CFG.env, scheduleVersion:2, currency:'USD', source:'crm-existing-order' };
     },
     stageLead: function(fields){
       var built = buildLeadPayload(fields);
@@ -426,7 +441,7 @@
       try {
         var _pr = activePrice(); var _pl = pending.payload;
         _pl.FirstPayment     = Number(_pr.firstPayment);
-        _pl.NumberOfPayments = Number(_pr.numberOfPayments);
+        _pl.NumberOfPayments = _pr.plan === 'upfront' ? 1 : Math.max(0, Number(_pr.numberOfPayments) - 1);
         _pl.LeftToPay        = Number(_pr.leftToPay);
         if (typeof _pl.DynamicParameters === 'string') {
           _pl.DynamicParameters = /(^|&)plan=(monthly|upfront)/.test(_pl.DynamicParameters)

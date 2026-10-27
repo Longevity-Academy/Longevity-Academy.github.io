@@ -9,13 +9,23 @@
    Override for controlled tests: ?llapixel=1 */
 (function(){var h=location.hostname,s=location.search;
 /* 2026-09-25 FIX 2: team/test devices stay silent on EVERY page once flagged (sticky). ?llatest=1 or a test email flags the device; ?llatest=0 clears it. */var tf=false;try{if(/[?&](llatest|qa)=1(&|$)/.test(s))localStorage.setItem('lla_tester','1');else if(/[?&]llatest=0(&|$)/.test(s))localStorage.removeItem('lla_tester');tf=localStorage.getItem('lla_tester')==='1';}catch(e){}window.LLA_LIVE=(h==='longevitylifeacademy.pages.dev'||/(^|\.)longevitylifeacademy\.com$/.test(h)||/[?&]llapixel=1(&|$)/.test(s))&&!/[?&](llatest|qa)=1(&|$)/.test(s)&&!tf;window.__llaIsTesterEmail=function(e){e=String(e||'').trim().toLowerCase();return /@(example\.(com|org|net)|test\.com|mailinator\.com|eteacher[a-z0-9-]*\.[a-z.]+|gita-?agency\.[a-z.]+)$/.test(e)||/(^|[._+-])(test|qa|demo)([._+0-9-]|@)/.test(e)||/gitter/.test(e);};window.__llaSilence=function(){try{localStorage.setItem('lla_tester','1');}catch(e){}window.LLA_LIVE=false;var q=function(){};q.callMethod=null;q.queue=[];q.loaded=true;q.version='2.0';q.push=q;window.fbq=window._fbq=q;window.__llaRelay=function(){};};document.addEventListener('change',function(ev){var t=ev.target;if(t&&t.type==='email'&&window.__llaIsTesterEmail(t.value))window.__llaSilence();},true);
-window.__llaRelay=function(body){var done=false;function go(){if(done)return;done=true;try{if(window.__llaRefreshClickPayload)body=window.__llaRefreshClickPayload(body);fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});}catch(e){}}
+if(/[?&]env=staging(&|$)/.test(s))window.LLA_LIVE=false;
+window.__llaRelay=function(body){if(!window.LLA_LIVE)return;var done=false;function go(){if(done||!window.LLA_LIVE)return;done=true;try{if(window.__llaRefreshClickPayload)body=window.__llaRefreshClickPayload(body);fetch('https://lla-ac-events.vercel.app/api/meta/capi',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});}catch(e){}}
 /* 2026-09-21 17:05: server copy leaves 1.5 s AFTER the Pixel copy (Meta keeps the first event per event_id; the Pixel copy carries the real _fbc click cookie). Flushed at once if the page is being left. */
 setTimeout(go,1500);try{window.addEventListener('pagehide',go,{once:true});}catch(e){}};
 if(!window.LLA_LIVE){var q=function(){};q.callMethod=null;q.queue=[];q.loaded=true;q.version='2.0';q.push=q;window.fbq=window._fbq=q;
-var of=window.fetch;window.fetch=function(u){if(typeof u==='string'&&u.indexOf('lla-ac-events.vercel.app')>-1)return Promise.resolve(new Response('',{status:204}));return of.apply(this,arguments);};}
+var of=window.fetch;window.fetch=function(u,options){
+var url=new URL(typeof u==='string'?u:u.url,location.href);
+var method=String((options&&options.method)||(u&&u.method)||'GET').toUpperCase();
+if(url.hostname==='lla-ac-events.vercel.app')return Promise.resolve(new Response(null,{status:204}));
+if(/[?&](qa|llatest)=1(&|$)/.test(s) && method!=='GET' && method!=='HEAD' &&
+  url.hostname==='eteacher-leads-proxy.gitter-omri.workers.dev' &&
+  !/^\/staging\/api\/checkout\/(details|payments\/crm)$/.test(url.pathname))
+  return Promise.reject(new Error('QA_WRITE_BLOCKED'));
+return of.apply(this,arguments);};}
 })();</script>
 
+<script src="https://longevitylifeacademy.pages.dev/assets/lla-relay-receipts.js?v=20260926-candidate"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Place your order — The Longevity Blueprint | Longevity Life Academy</title>
@@ -302,12 +312,20 @@ window.LLA_META=(function(){
   try{ applyAdvancedMatching(); setInterval(applyAdvancedMatching,2000); }catch(e){}
   function track(name,data,email){
     try{
-      if(window.LLA_ECOMM_CONFIG&&window.LLA_ECOMM_CONFIG.env==='staging')return;
+      if(!window.LLA_LIVE || /[?&](env=staging|qa=1|llatest=1)(&|$)/.test(location.search) ||
+        (window.LLA_ECOMM_CONFIG&&window.LLA_ECOMM_CONFIG.env==='staging'))return;
       var i=identity();
       if(email&&!i.email) i.email=String(email).trim().toLowerCase();
       applyAdvancedMatching();
       try{ var _cl=sessionStorage.getItem('lla_cta_location')||''; if(_cl){ data=data||{}; if(!data.cta_location) data.cta_location=_cl; } }catch(e){}
       var id='lla_'+name.toLowerCase()+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+      if(name==='Purchase'){
+        if(!data || !data.order_id || !data.payment_id)return;
+        id='lla_purchase_'+String(data.order_id)+'_'+String(data.payment_id);
+        try{
+          localStorage.setItem(id,'attempted');
+        }catch(e){}
+      }
       try{if(window.fbq)fbq('track',name,data||{},{eventID:id});}catch(e){}
       var payload=JSON.stringify({event_name:name,event_id:id,
         email:i.email||'',phone:i.phone||'',fn:i.fn||'',ln:i.ln||'',
@@ -658,7 +676,7 @@ html.lla-vip-eligible .lla-vip-ck{display:grid!important}
 </script>
 <script src="https://checkout.airwallex.com/assets/elements.bundle.min.js?version=1.160.0"></script>
 <script src="assets/lla-promo.js?v=r17"></script>
-<script src="assets/eteacher-ecomm.js?v=20260924-class2"></script>
+<script src="assets/eteacher-ecomm.js?v=guest-e2e-20261027"></script>
 <script>
 document.querySelectorAll('.pay-tab').forEach(function(t){
   t.addEventListener('click',function(){
@@ -778,7 +796,7 @@ window.LLA_RENDER_PAYPAL = function(){
           }
           _paymentConfirmed = true;
           setStatus('\u2713 PayPal payment succeeded - order #' + o.ids.orderid, '#0a7');
-          try{LLA_META.track('Purchase',{value:Number(o.amount)||179,currency:'USD',content_name:'Longevity Blueprint',order_id:String(o.ids.orderid),content_type:'product',content_ids:[LLA_CONTENT_ID],contents:[{id:LLA_CONTENT_ID,quantity:1,item_price:Number(o.amount)||179}]});}catch(e){}
+          try{LLA_META.track('Purchase',{value:Number(o.amount)||179,currency:'USD',content_name:'Longevity Blueprint',order_id:String(o.ids.orderid),payment_id:String(o.paymentId),content_type:'product',content_ids:[LLA_CONTENT_ID],contents:[{id:LLA_CONTENT_ID,quantity:1,item_price:Number(o.amount)||179}]});}catch(e){}
           return window.LLA_ECOMM.reportPayment({
             StudentId: String(o.ids.stid),
             OrderId: String(o.ids.orderid),
@@ -919,7 +937,16 @@ async function initAirwallex(){
       Number(d.NumOfPayments) === Number(expectedQuote.numberOfPayments) &&
       (d.FirstPayment == null || centsEqual(d.FirstPayment, expectedQuote.firstPayment)) &&
       (d.AmountToCharge == null || centsEqual(d.AmountToCharge, expectedQuote.firstPayment)) &&
-      (d.LeftToPay == null || centsEqual(d.LeftToPay, expectedQuote.leftToPay)));
+      expectedQuote.currency === 'USD' &&
+      Number.isInteger(Number(expectedQuote.numberOfPayments)) &&
+      Number(expectedQuote.numberOfPayments) >= 0 &&
+      centsEqual(d.LeftToPay ?? (Number(d.OrderCoursePrice)-Number(d.AmountToCharge)), expectedQuote.leftToPay) &&
+      (Number(expectedQuote.leftToPay) === 0
+        ? centsEqual(expectedQuote.leftToPay, 0) && (d.PaymentPerMonth == null || centsEqual(d.PaymentPerMonth, 0))
+        : d.PaymentPerMonth != null &&
+          centsEqual(d.PaymentPerMonth, expectedQuote.paymentPerMonth) &&
+          centsEqual(Number(d.PaymentPerMonth) * Number(d.NumOfPayments), expectedQuote.leftToPay)) &&
+      centsEqual(Number(d.OrderCoursePrice), expectedQuote.total));
     if (_cur !== 'USD' || !_amtOk || !_quoteOk) {
       var reason = _cur !== 'USD' ? ('gateway returned ' + (_cur || 'no currency') + ' instead of USD')
         : !_amtOk ? ('gateway returned an invalid amount: ' + String(amount))
@@ -953,24 +980,20 @@ async function initAirwallex(){
      * Purchase counts they read the funnel from. Purchase still fires below,
      * after the gateway confirms the payment. */
 
-    /* Show live amounts in the sum panel. Two-plan support Sep 9 2026:
-     *   plan=monthly -> today = FirstPayment, then (NumOfPayments-1) x FirstPayment
-     *   plan=upfront -> today = FirstPayment, single row, no future payments row
-     * NumOfPayments from the CRM is TOTAL payments including the registration fee
-     * charged today; the monthly row must show NumOfPayments-1 or double-count. */
-    var LIST_PER_MONTH = 279;
-    var LIST_TOTAL     = 1395;
+    /* CRM NumOfPayments counts REMAINING installments after today's payment. */
+    var LIST_PER_MONTH = 179;
+    var LIST_TOTAL     = 895;
     var strike = function(txt){ return '<s style="opacity:.5;font-weight:500;margin-right:6px">' + txt + '</s>'; };
     // The verified order, not a stale plan in this browser, controls payment
     // mode and summary. Particularly important for emailed/cross-device orders.
-    var plan = Number(expectedQuote.numberOfPayments) === 1 ? 'upfront' : 'monthly';
+    var plan = Number(expectedQuote.leftToPay) === 0 ? 'upfront' : 'monthly';
     var rows = document.querySelectorAll('.sum-row');
     var vs   = document.querySelectorAll('.sum-row .v');
     var ks   = document.querySelectorAll('.sum-row .k');
-    var num  = Number(d.NumOfPayments || 1);
+    var num  = Number(d.NumOfPayments);
     document.documentElement.classList.toggle('lla-vip-eligible',
-      !!(window.LLA_PROMO && window.LLA_PROMO.active && plan === 'monthly' && num === 5 && Number(amount) === 149 && _cur === 'USD'));
-    if (plan === 'upfront' || num <= 1){
+      !!(window.LLA_PROMO && window.LLA_PROMO.active && plan === 'monthly' && num === 4 && Number(amount) === 149 && _cur === 'USD'));
+    if (plan === 'upfront' || num === 0){
       if (ks[0]) ks[0].firstChild.nodeValue = 'One-time course tuition ';
       if (vs[0]) vs[0].innerHTML = strike('$' + LIST_TOTAL + '.00') + '$' + amount.toFixed(2);
       if (rows[1]) rows[1].style.display = 'none';
@@ -986,10 +1009,12 @@ async function initAirwallex(){
       var discounted = amount > 0 && amount < LIST_PER_MONTH;
       if (vs[0]) vs[0].innerHTML = (discounted ? strike('$' + LIST_PER_MONTH + '.00') : '') + '$' + amount.toFixed(2);
       if (vs[1]) {
-        var rest = Math.max(0, num - 1);
-        vs[1].innerHTML = (discounted ? strike(rest + ' x $' + LIST_PER_MONTH + '.00') : '') + rest + ' x $' + amount.toFixed(2);
+        var rest = num;
+        vs[1].innerHTML = (discounted ? strike(rest + ' x $' + LIST_PER_MONTH + '.00') : '') + rest + ' x $' + Number(expectedQuote.paymentPerMonth).toFixed(2);
       }
     }
+    var totalNote = document.querySelector('.sum-note');
+    if (totalNote) totalNote.textContent += ' Total tuition: $' + Number(expectedQuote.total).toFixed(2) + ' USD.';
 
     // The elements.bundle.min.js from checkout.airwallex.com attaches window.Airwallex directly.
     var awx = window.Airwallex;
@@ -1018,8 +1043,8 @@ async function initAirwallex(){
       intent_id: intentId,
       client_secret: clientSecret,
       currency: 'USD',
-      mode: plan === 'upfront' || num <= 1 ? 'payment' : 'recurring',
-      recurringOptions: plan === 'upfront' || num <= 1 ? undefined : {
+      mode: plan === 'upfront' || num === 0 ? 'payment' : 'recurring',
+      recurringOptions: plan === 'upfront' || num === 0 ? undefined : {
         next_triggered_by: 'merchant',
         currency: 'USD',
         merchant_trigger_reason: 'scheduled'
@@ -1072,7 +1097,7 @@ async function initAirwallex(){
       }
       _paymentConfirmed = true;
       setStatus('✓ Payment succeeded — order #' + ids.orderid, '#0a7');
-      try{LLA_META.track('Purchase',{value:Number(amount)||179,currency:currency||'USD',content_name:'Longevity Blueprint',order_id:String(ids.orderid),content_type:'product',content_ids:[LLA_CONTENT_ID],contents:[{id:LLA_CONTENT_ID,quantity:1,item_price:Number(amount)||179}]});}catch(e){}
+      try{LLA_META.track('Purchase',{value:Number(amount)||179,currency:currency||'USD',content_name:'Longevity Blueprint',order_id:String(ids.orderid),payment_id:String(paymentId),content_type:'product',content_ids:[LLA_CONTENT_ID],contents:[{id:LLA_CONTENT_ID,quantity:1,item_price:Number(amount)||179}]});}catch(e){}
       // Report to CRM via our Worker (queued to /Students/SetECommercePayment)
       window.LLA_ECOMM.reportPayment({
         StudentId: String(ids.stid),

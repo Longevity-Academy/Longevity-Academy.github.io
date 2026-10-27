@@ -1,5 +1,6 @@
 
 (function(){
+  if(!window.LLA_US){var phoneScript=document.createElement('script');phoneScript.src='blueprint/assets/nanp-state-autofill.js?v=guest-qa1';document.head.append(phoneScript)}
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('video[aria-hidden="true"]').forEach(function(v){v.removeAttribute('autoplay');v.pause()})}
   /* Lead-generation flow: selected code accompanies the callback request.
      Do not send attendees into the existing checkout until a valid future CRM cohort is confirmed. */
