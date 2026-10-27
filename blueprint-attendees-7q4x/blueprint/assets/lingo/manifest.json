@@ -1,0 +1,39 @@
+{
+  "source_page": "https://www.longevitylifeacademy.com/ (index.html, section#cgm .cgm-fold, lines 8722-8751; inline <style> lines 8701-8721)",
+  "section_selector": "section.cgm-fold#cgm",
+  "video_assets": [],
+  "css_background_images": [],
+  "assets": [
+    {
+      "filename": "lingo-1.jpg",
+      "original_path": "assets/cgm/lingo-1.jpg",
+      "source_url": "https://raw.githubusercontent.com/Longevity-Academy/Longevity-Academy.github.io/main/assets/cgm/lingo-1.jpg",
+      "width": 900, "height": 900, "format": "JPEG", "bytes": 32793,
+      "alt": "Abbott Lingo biosensor and app",
+      "role": "phone mockup + sensor photo (Lingo app screen showing glucose 110 mg/dL trace, with white biosensor disc beside it, white background) - grid slot 1"
+    },
+    {
+      "filename": "lingo-2.jpg",
+      "original_path": "assets/cgm/lingo-2.jpg",
+      "source_url": "https://raw.githubusercontent.com/Longevity-Academy/Longevity-Academy.github.io/main/assets/cgm/lingo-2.jpg",
+      "width": 900, "height": 900, "format": "JPEG", "bytes": 96598,
+      "alt": "Lingo packaging",
+      "role": "product packaging photo (navy Lingo by Abbott box with sensor on top, App Store / Google Play badges at bottom) - grid slot 2"
+    },
+    {
+      "filename": "lingo-6.jpg",
+      "original_path": "assets/cgm/lingo-6.jpg",
+      "source_url": "https://raw.githubusercontent.com/Longevity-Academy/Longevity-Academy.github.io/main/assets/cgm/lingo-6.jpg",
+      "width": 900, "height": 900, "format": "JPEG", "bytes": 72421,
+      "alt": "Lingo CGM lifestyle",
+      "role": "lifestyle / brand-ambassador photo (woman wearing sensor on upper arm, holding phone, tagline 'My glucose, my insights', dark background) - grid slot 3"
+    }
+  ],
+  "files": {
+    "html": "homepage-cgm-fold.html",
+    "css": "homepage-cgm-fold.css",
+    "preview": "_preview_contact.jpg",
+    "raw_homepage_copy": "index_src.html"
+  },
+  "notes": "Images are rendered in a 3-col grid (.cgm-fold-images, max-width 1000px, gap 16px), each in a 4:3 rounded (18px) card with object-fit: cover, so the 900x900 squares are cropped to 4:3. Mobile (<=720px): single column, max-width 420px. No srcset, <picture>, background-image or <video> in this section; only inline SVG check/arrow icons."
+}
