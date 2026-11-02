@@ -912,6 +912,11 @@ async function initAirwallex(){
 
     var intentId = d.Airwallex.paymentIntentId;
     var clientSecret = d.Airwallex.clientSecret;
+    /* 2 Nov 2026: CRM mints the intent on an Airwallex Customer (cus_...) and returns it as
+     * Airwallex.customerId. Airwallex requires customer_id on the Drop-In when mode is
+     * 'recurring'; without it the installment consent is not reliably attached to the
+     * customer and the CRM cannot merchant-charge installments 2+. */
+    var customerId = (d.Airwallex && d.Airwallex.customerId) || (d.AirwallexOptions && d.AirwallexOptions.customer_id) || null;
     var amount = d.Airwallex.amount;
     var currency = d.Airwallex.currency;
     var paymentId = d.PaymentID;
@@ -1079,10 +1084,17 @@ async function initAirwallex(){
       client_secret: clientSecret,
       currency: 'USD',
       mode: plan === 'upfront' || num <= 1 ? 'payment' : 'recurring',
+      customer_id: plan === 'upfront' || num <= 1 ? undefined : (customerId || undefined),
+      /* CRM AirwallexOptions prescribe payment_consent {next_triggered_by:'merchant', merchant_trigger_reason:'unscheduled'}.
+       * recurringOptions is the legacy-bundle key, payment_consent the current one; both carry the same values. */
       recurringOptions: plan === 'upfront' || num <= 1 ? undefined : {
         next_triggered_by: 'merchant',
         currency: 'USD',
-        merchant_trigger_reason: 'scheduled'
+        merchant_trigger_reason: 'unscheduled'
+      },
+      payment_consent: plan === 'upfront' || num <= 1 ? undefined : {
+        next_triggered_by: 'merchant',
+        merchant_trigger_reason: 'unscheduled'
       },
       /* Airwallex filters Drop-in methods by currency + country_code and lists
        * country_code as REQUIRED for paypal. Without it PayPal never renders. */
