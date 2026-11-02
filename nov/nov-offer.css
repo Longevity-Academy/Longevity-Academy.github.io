@@ -10,7 +10,7 @@
 #novStrip .ns-code:hover{background:#EAF2FF}
 #novStrip .ns-sub{color:#E6EEFF;font-weight:500}
 html.has-nov-strip body{--nov-strip:44px}
-@media (max-width:640px){#novStrip{height:40px;gap:8px;padding:0 12px;font-size:14px;justify-content:center}#novStrip .ns-t,#novStrip .ns-sub{display:none}#novStrip .ns-code{height:26px;padding:0 10px;font-size:12.5px}}
+@media (max-width:640px){#novStrip{height:40px;gap:8px;padding:0 12px;font-size:14px;justify-content:center}#novStrip .ns-t,#novStrip .ns-sub{display:none}#novStrip .ns-code{height:30px;padding:0 12px;font-size:13px}}
 
 /* Offer fold */
 .nov-offer{position:relative;padding:112px 0 96px;background:linear-gradient(180deg,#FFFFFF 0%,#F2F7FF 100%);overflow:hidden}
