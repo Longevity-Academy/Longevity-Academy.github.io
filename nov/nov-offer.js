@@ -5,6 +5,8 @@
   'use strict';
   var $=function(s,r){return (r||document).querySelector(s)}, all=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var P=window.LLA_PROMO;
+  /* November default, same as pages.dev: the masterclass credit is on unless ?promo=off. */
+  if(P&&!P.active&&new URLSearchParams(location.search).get('promo')!=='off'){P.activate('JULIE249');}
 
   /* Strip sits under the fixed header: measure it. */
   function placeStrip(){
