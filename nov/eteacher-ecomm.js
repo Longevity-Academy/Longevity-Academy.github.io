@@ -78,7 +78,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
   function isValidEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
 
   /* ---------- Click-ID + UTM capture (identical to website integration) ---------- */
-  var ATTR_KEYS = ['gclid','fbclid','msclkid','ttclid','li_fat_id','wbraid','gbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  var ATTR_KEYS = ['gclid','fbclid','msclkid','ttclid','li_fat_id','wbraid','gbraid','utm_source','utm_medium','utm_campaign','utm_content','utm_term','cid','adGroupID','cq_src'];
   var ATTR_TTL_MS = 30 * 24 * 60 * 60 * 1000;
   var ATTR_STORAGE_KEY = 'lla_attribution_v1';
   function readAttributionStorage(){
@@ -107,6 +107,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       var found = {}; var hasAny = false;
       ATTR_KEYS.forEach(function(k){
         var v = RAW_KEYS[k] ? rawParam(k) : params.get(k);
+        if ((k === 'cid' || k === 'adGroupID') && !/^[1-9]\d*$/.test(String(v || ''))) v = '';
         if (v) { found[k] = v; hasAny = true; }
       });
       if (hasAny) {
@@ -254,8 +255,12 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
     if (fields.promoCode) notes += ' · Promo: ' + fields.promoCode;
     payload.AdminNotes = notes.slice(0, 4000);
 
-    var dyn = buildDynamicParameters(getAttribution());
-    if (CFG.googleCampaignId && /^\d+$/.test(String(CFG.googleCampaignId))) {
+    var attr = getAttribution() || {};
+    var source = String(attr.utm_source || attr.cq_src || '').toLowerCase();
+    var isMeta = !!attr.fbclid || /^(facebook|instagram|meta|fb|ig)$/.test(source) || /^(118148|118149)$/.test(String(attr.cid || ''));
+    var isGoogle = !isMeta && (!!(attr.gclid || attr.wbraid || attr.gbraid) || /^(google|googleads|adwords)$/.test(source));
+    var dyn = buildDynamicParameters(attr);
+    if (isGoogle && CFG.googleCampaignId && /^[1-9]\d*$/.test(String(CFG.googleCampaignId))) {
       dyn = (dyn ? dyn + ';' : '') + 'google_campaign_id=' + String(CFG.googleCampaignId);
     }
     if (dyn) payload.DynamicParameters = dyn.slice(0, 4000);
@@ -263,10 +268,13 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
     // The campaign is read from QueryString only, as cid=<id>.
     delete payload.CampaignID;
     (function () {
-      var cid = CFG.campaignId && /^\d+$/.test(String(CFG.campaignId)) ? String(CFG.campaignId) : String(CFG.googleCampaignId || '');
-      if (!/^\d+$/.test(cid)) return;
       var qs = payload.QueryString || '';
-      if (!/(^|&)cid=/.test(qs)) qs = qs ? qs + '&cid=' + cid : 'cid=' + cid;
+      var currentCid = new URLSearchParams(qs).get('cid') || '';
+      var cid = /^[1-9]\d*$/.test(currentCid) ? currentCid : (/^[1-9]\d*$/.test(String(attr.cid || '')) ? String(attr.cid) : (/^[1-9]\d*$/.test(String(CFG.campaignId || '')) ? String(CFG.campaignId) : (isGoogle ? String(CFG.googleCampaignId || '') : '')));
+      // Remove only invalid cid parameters; leave raw click IDs byte-for-byte intact.
+      qs = qs.split('&').filter(function(pair){ return !/^cid=/.test(pair) || /^[1-9]\d*$/.test(pair.slice(4)); }).join('&');
+      if (/^[1-9]\d*$/.test(cid) && !/(^|&)cid=/.test(qs)) qs = qs ? qs + '&cid=' + cid : 'cid=' + cid;
+      if (/^[1-9]\d*$/.test(String(attr.adGroupID || '')) && !/(^|&)adGroupID=/.test(qs)) qs += (qs ? '&' : '') + 'adGroupID=' + attr.adGroupID;
       payload.QueryString = qs.slice(0, 2000);
     })();
 

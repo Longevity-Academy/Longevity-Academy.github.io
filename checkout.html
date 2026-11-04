@@ -189,7 +189,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
   }catch(e){}
   fbq('init','1440305917310328',ud);
 })();
-fbq('track', 'PageView');
+/* PageView is dispatched below through LLA_META with its paired server event. */
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1440305917310328&ev=PageView&noscript=1"
@@ -319,6 +319,7 @@ window.LLA_META=(function(){
       applyAdvancedMatching();
       try{ var _cl=sessionStorage.getItem('lla_cta_location')||''; if(_cl){ data=data||{}; if(!data.cta_location) data.cta_location=_cl; } }catch(e){}
       var id='lla_'+name.toLowerCase()+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
+      if(name==='AddPaymentInfo'&&data&&data.order_id){ id='lla_api_'+String(data.order_id); } /* 2026-11-04: one AddPaymentInfo per order (browser + server share the id) */
       if(name==='Purchase'){
         if(!data || !data.order_id || !data.payment_id)return;
         id=String(data.order_id);
@@ -343,6 +344,39 @@ window.LLA_META=(function(){
     }catch(e){}
   }
   return {track:track,buyer:buyer,identity:identity,applyAdvancedMatching:applyAdvancedMatching};
+})();
+window.LLA_META.track('PageView',{});
+/* 2026-11-04: Meta AddPaymentInfo. Fires once per order the first time the buyer uses the payment
+   surface: focus moves into the Airwallex card form (iframe inside #awx-dropin) or the PayPal button
+   is pressed (createOrder). Measurement only: no payment, CRM or checkout logic is touched. */
+window.LLA_ADD_PAYMENT_INFO=(function(){
+  var fired=false;
+  function orderId(){
+    try{ var q=new URLSearchParams(location.search).get('orderid'); if(q) return String(q); }catch(e){}
+    try{ var ids=window.LLA_ECOMM&&window.LLA_ECOMM.getCheckoutIds&&window.LLA_ECOMM.getCheckoutIds(); if(ids&&ids.orderid) return String(ids.orderid); }catch(e){}
+    return '';
+  }
+  function amount(){
+    try{ var a=Number(window.LLA_CHECKOUT_AMOUNT); if(a>0) return a; }catch(e){}
+    try{ var ids=window.LLA_ECOMM&&window.LLA_ECOMM.getCheckoutIds&&window.LLA_ECOMM.getCheckoutIds(); var q=ids&&window.LLA_ECOMM.getExpectedOrderQuote&&window.LLA_ECOMM.getExpectedOrderQuote(ids,null); if(q&&Number(q.firstPayment)>0) return Number(q.firstPayment); }catch(e){}
+    try{ var c=window.LLA_ECOMM_CONFIG&&window.LLA_ECOMM_CONFIG.crmPrice; if(c&&Number(c.firstPayment)>0) return Number(c.firstPayment); }catch(e){}
+    return 169;
+  }
+  function fire(method){
+    if(fired) return false;
+    var oid=orderId(); if(!oid) return false; /* no order yet: nothing to attach payment info to */
+    fired=true;
+    try{ var k='lla_ev_api_'+oid; if(sessionStorage.getItem(k)) return false; sessionStorage.setItem(k,'1'); }catch(e){}
+    var v=amount();
+    try{ window.LLA_META.track('AddPaymentInfo',{value:v,currency:'USD',content_name:'Longevity Blueprint',order_id:oid,content_type:'product',content_ids:[LLA_CONTENT_ID],contents:[{id:LLA_CONTENT_ID,quantity:1,item_price:v}],payment_method:method||''}); }catch(e){}
+    return true;
+  }
+  /* Card form: Airwallex renders inside an iframe, so the first focus into it is visible to the
+     parent only as window blur with the iframe as activeElement. */
+  window.addEventListener('blur',function(){
+    try{ var a=document.activeElement; var box=document.getElementById('awx-dropin'); if(a&&a.tagName==='IFRAME'&&box&&box.contains(a)) fire('card'); }catch(e){}
+  });
+  return {fire:fire};
 })();
 </script>
 <!-- Microsoft Clarity (session recordings + heatmaps). Paste your Clarity project ID between the quotes below. Inert until pasted. -->
@@ -765,6 +799,7 @@ window.LLA_RENDER_PAYPAL = function(){
     style: { layout: 'vertical', height: 55, shape: 'rect', color: 'blue' },
     createOrder: function(data, actions){
       if (_paymentConfirmed || _paypalCaptureStarted) return Promise.reject(new Error('PAYMENT_ALREADY_SUBMITTED'));
+      try{ if(window.LLA_ADD_PAYMENT_INFO) window.LLA_ADD_PAYMENT_INFO.fire('paypal'); }catch(e){} /* 2026-11-04: Meta AddPaymentInfo */
       if (st) st.textContent = 'Preparing your order...';
       return _orderReady.then(function(o){
         if (st) st.textContent = '';
@@ -877,7 +912,7 @@ async function initAirwallex(){
      * 'recurring'; without it the installment consent is not reliably attached to the
      * customer and the CRM cannot merchant-charge installments 2+. */
     var customerId = (d.Airwallex && d.Airwallex.customerId) || (d.AirwallexOptions && d.AirwallexOptions.customer_id) || null;
-    var amount = Number(d.Airwallex.amount);
+    var amount = Number(d.Airwallex.amount); try{ window.LLA_CHECKOUT_AMOUNT=amount; }catch(e){} /* 2026-11-04: read by LLA_ADD_PAYMENT_INFO */
     var currency = d.Airwallex.currency;
     var paymentId = d.PaymentID;
     if (String(d.OrderId) !== String(ids.orderid) ||
