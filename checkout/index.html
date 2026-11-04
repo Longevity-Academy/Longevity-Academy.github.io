@@ -183,6 +183,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+fbq.disablePushState = true; /* 2026-11-05: no automatic un-ID'd PageView on hash/pushState navigation (Meta SPA util); keeps PageView paired with the server copy */
 /* Advanced matching on the very first call. Meta scores every event on how
  * many match keys it carries, so the identity captured earlier in the funnel
  * is read out of storage BEFORE init and attached to this page's PageView.
