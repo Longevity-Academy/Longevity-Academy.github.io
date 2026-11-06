@@ -1,13 +1,16 @@
 /* Original Masterclass clips within the existing Blueprint VIP card only. */
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4 {
+  grid-template-areas:"photo title" "photo msg" "photo motion" "photo foot";
+}
 html.mf body#lpRoot #julie .jb4-motion {
-  grid-area:photo; width:260px; min-width:0; align-self:center;
-  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;
+  grid-area:motion; width:100%; min-width:0; align-self:center;
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px;
 }
 html.mf body#lpRoot #julie .jb4-clip {
   position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:10px;
   background:#071323;
 }
-html.mf body#lpRoot #julie .jb4-clip-rank { grid-column:1/-1; }
+html.mf body#lpRoot #julie .jb4-clip-rank { grid-column:auto; }
 html.mf body#lpRoot #julie .jb4-clip :is(img,video) {
   display:block; position:absolute; inset:0; width:100%; height:100%;
   object-fit:contain; margin:0; border:0; border-radius:0;
@@ -22,8 +25,8 @@ html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
 }
 @media(max-width:900px) {
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4 {
-    grid-template-columns:minmax(0,1fr);
-    grid-template-areas:"title" "msg" "photo" "foot";
+    grid-template-columns:100px minmax(0,1fr);
+    grid-template-areas:"photo title" "msg msg" "motion motion" "foot foot";
   }
   html.mf body#lpRoot #julie .jb4-motion { width:100%; }
 }
