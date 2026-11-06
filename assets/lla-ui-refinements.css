@@ -45,3 +45,22 @@ html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #how .mf-how5 .how-v2-car
  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about .hero-powered-stats li{padding:16px 10px!important}
 }
 @media(prefers-reduced-motion:reduce){html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) .trust-logos{animation:none!important}}
+/* About fold: consistent text scale and an actually centered full-width paragraph. */
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about :is(h2,h2 em,h2 span){
+ font-family:"Playfair Display",Georgia,serif!important;font-style:normal!important;font-weight:500!important;
+}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about :is(.about-statement,.about-lead,.about-powered-desc){
+ font:400 22px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+ letter-spacing:0!important;text-align:center!important;text-wrap:pretty!important;
+}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about .about-powered-desc{
+ box-sizing:border-box!important;width:100%!important;max-width:none!important;
+ margin:0!important;padding:0 32px!important;border:0!important;
+}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about .hero-powered-stats :is(strong,.unit,li>span){
+ font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-style:normal!important;
+}
+@media(max-width:720px){
+ html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about :is(.about-statement,.about-lead,.about-powered-desc){font-size:20px!important;line-height:1.5!important}
+ html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about .about-powered-desc{padding:0 22px!important}
+}
