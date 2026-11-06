@@ -46,7 +46,7 @@ html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #how .mf-how5 .how-v2-car
 }
 @media(prefers-reduced-motion:reduce){html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) .trust-logos{animation:none!important}}
 /* About fold: consistent text scale and an actually centered full-width paragraph. */
-html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about :is(h2,h2 em,h2 i,h2 span){
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about :is(.about-mainhead,.about-mainhead .life-blue){
  font-family:"Playfair Display",Georgia,serif!important;font-style:normal!important;font-weight:500!important;
 }
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #about :is(.about-statement,.about-lead,.about-powered-desc){
