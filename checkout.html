@@ -515,6 +515,11 @@ header.co-head .logo img {
 /* Show the bonus only after CRM confirms the promo order. */
 .lla-vip-ck{display:none!important}
 html.lla-vip-eligible .lla-vip-ck{display:grid!important}
+.lla-vip-row{display:none!important}
+html.lla-vip-eligible .sum-row.lla-vip-row{display:flex!important}
+html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
+.sum-row.lla-vip-row{border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
+.sum-row.lla-vip-row .v b{color:var(--ink);font-weight:800;margin-left:6px}
 </style><link rel="stylesheet" href="../guest-mobile.css?v=20261027-mobile4"></head>
 <body>
 
@@ -681,6 +686,11 @@ html.lla-vip-eligible .lla-vip-ck{display:grid!important}
           })();
         </script>
 
+        <div class="sum-row lla-vip-row" id="sumRowVip">
+          <span class="k">VIP Masterclass with Julie Gibson Clark</span>
+          <span class="v" data-no-promo><s style="opacity:.5;font-weight:500">$99.00</s><b>Free</b></span>
+        </div>
+        <p class="sum-note lla-vip-row" id="sumNoteVip">Code JULIE249 applied. 90 min, live Q&amp;A, Nov 14.</p>
         <hr />
         <p>Your seat and start date are confirmed instantly by email. The course registration fee is fully refundable within 14 days from registration.</p>
         <p>In case you have decided to cancel your participation please note that live cohorts, like any other classrooms, have limited capacity. Demand for our classes is high and late cancellation prevent other students from obtaining a spot in the upcoming cohort.</p>
@@ -1036,7 +1046,7 @@ async function initAirwallex(){
       verifiedBand.setAttribute('data-no-promo','');
       document.getElementById('heroTuitionVal').textContent='$'+Number(amount).toFixed(2)+(Number(expectedQuote.leftToPay)===0?' one payment':' today');
       document.getElementById('heroTuitionSub').textContent='$'+Number(expectedQuote.total).toFixed(2)+' total'+
-        (Number(expectedQuote.leftToPay)===0?'':'; then '+Number(expectedQuote.numberOfPayments)+' monthly payments of $'+Number(expectedQuote.paymentPerMonth).toFixed(2));
+        (Number(expectedQuote.leftToPay)===0?'':', '+Number(expectedQuote.numberOfPayments)+' monthly payments of $'+Number(expectedQuote.paymentPerMonth).toFixed(2));
     }
     var num  = Number(d.NumOfPayments);
     document.documentElement.classList.toggle('lla-vip-eligible',
@@ -1049,7 +1059,7 @@ async function initAirwallex(){
       if (notes[0]) notes[0].textContent = 'Single payment. Full refund inside 14 days from registration.';
       if (notes[1]) notes[1].style.display = 'none';
     } else {
-      if (ks[0]) ks[0].firstChild.nodeValue = 'Month 1 ';
+      if (ks[0]) ks[0].firstChild.nodeValue = 'Due today ';
       if (rows[1]) rows[1].style.display = '';
       var monthlyNotes = document.querySelectorAll('.sum-note');
       if (monthlyNotes[0]) monthlyNotes[0].textContent = 'Fully refundable within 14 days from registration.';
@@ -1064,7 +1074,7 @@ async function initAirwallex(){
     var totalNote = document.querySelector('.sum-note');
     if (totalNote) totalNote.textContent += ' Total tuition: $' + Number(expectedQuote.total).toFixed(2) + ' USD.';
     var planLabel=document.querySelector('#planSummary .ps-v');
-    if(planLabel)planLabel.innerHTML=plan==='upfront'?'$'+Number(amount).toFixed(2)+' <small>One payment</small>':'$'+Number(amount).toFixed(2)+' <small>Month 1 · then '+num+' × $'+Number(expectedQuote.paymentPerMonth).toFixed(2)+' · $'+Number(expectedQuote.total).toFixed(2)+' total</small>';
+    if(planLabel)planLabel.innerHTML=plan==='upfront'?'$'+Number(amount).toFixed(2)+' <small>One payment</small>':'$'+Number(amount).toFixed(2)+' <small>today · '+num+' monthly payments of $'+Number(expectedQuote.paymentPerMonth).toFixed(2)+' · $'+Number(expectedQuote.total).toFixed(2)+' total</small>';
 
     // The elements.bundle.min.js from checkout.airwallex.com attaches window.Airwallex directly.
     var awx = window.Airwallex;
