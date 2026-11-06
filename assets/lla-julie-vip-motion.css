@@ -4,6 +4,9 @@ html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4 {
   align-items:start; row-gap:12px; column-gap:36px;
   max-width:1060px; padding:30px;
 }
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-photo {
+  height:auto; min-height:300px; align-self:stretch;
+}
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie h2.jb4-title {
   align-self:start!important; margin:0!important;
   font:500 italic 48px/1.15 'Playfair Display',Georgia,serif!important;
@@ -63,10 +66,11 @@ html.mf body#lpRoot #julie .jb4-motion {
 }
 html.mf body#lpRoot #julie .jb4-motion-track {
   grid-column:1/-1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; min-width:0;
+  width:calc(80% + 5.6px); justify-self:center;
 }
 html.mf body#lpRoot #julie .jb4-motion-hint { display:none; }
 html.mf body#lpRoot #julie .jb4-animation {
-  display:flex; flex-direction:column; min-width:0; margin:0;
+  display:flex; flex-direction:column; width:100%; justify-self:stretch; min-width:0; margin:0;
 }
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-animation-title {
   order:1; margin:18px 0 0!important; min-height:0;
@@ -81,7 +85,7 @@ html.mf body#lpRoot #julie .jb4-motion-track:focus-visible {
   outline:2px solid #9fd6ff; outline-offset:3px;
 }
 html.mf body#lpRoot #julie .jb4-clip {
-  order:0; position:relative; width:80%; align-self:center; flex-shrink:0; aspect-ratio:16/9; overflow:hidden; border-radius:12px;
+  order:0; position:relative; width:100%; align-self:stretch; flex-shrink:0; aspect-ratio:16/9; overflow:hidden; border-radius:12px;
   background:#071323;
 }
 html.mf body#lpRoot #julie .jb4-clip :is(img,video) {
@@ -103,7 +107,7 @@ html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
     column-gap:16px; row-gap:16px; padding:20px;
   }
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-photo {
-    width:144px; height:180px; align-self:start;
+    width:144px; height:auto; min-height:180px; align-self:stretch;
   }
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie h2.jb4-title {
     font-size:34px!important; line-height:1.12!important; align-self:start!important;
@@ -112,7 +116,7 @@ html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
     font-size:34px!important; line-height:1.12!important; margin-top:8px!important;
   }
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-access {
-    font-size:20px!important; line-height:1.35!important; align-self:end;
+    font-size:20px!important; line-height:1.35!important; align-self:start;
   }
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-msg {
     font-size:20px!important; line-height:1.4!important;
@@ -121,7 +125,7 @@ html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
     display:contents;
   }
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-when {
-    grid-area:when; margin:0; align-self:start;
+    grid-area:when; margin:0; align-self:start; justify-self:stretch; text-align:left;
   }
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-when b {
     font-size:20px!important;
@@ -137,10 +141,10 @@ html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
   }
   html.mf body#lpRoot #julie .jb4-motion { width:100%; margin-top:0; }
   html.mf body#lpRoot #julie .jb4-motion-track {
-    display:grid; grid-template-columns:minmax(0,1fr); gap:24px; overflow:visible;
+    display:grid; grid-template-columns:minmax(0,1fr); gap:24px; overflow:visible; width:80%;
   }
-  html.mf body#lpRoot #julie .jb4-motion-track .jb4-animation {
-    min-width:0; width:100%;
+  html.mf body#lpRoot #julie .jb4-motion-track .jb4-animation:nth-child(n) {
+    min-width:0; width:100%; justify-self:stretch;
   }
   html.mf body#lpRoot #julie .jb4-motion-hint {
     display:none;
