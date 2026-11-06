@@ -1,0 +1,29 @@
+/* Original Masterclass clips within the existing Blueprint VIP card only. */
+html.mf body#lpRoot #julie .jb4-motion {
+  grid-area:photo; width:260px; min-width:0; align-self:center;
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;
+}
+html.mf body#lpRoot #julie .jb4-clip {
+  position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:10px;
+  background:#071323;
+}
+html.mf body#lpRoot #julie .jb4-clip-rank { grid-column:1/-1; }
+html.mf body#lpRoot #julie .jb4-clip :is(img,video) {
+  display:block; position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; margin:0; border:0; border-radius:0;
+}
+html.mf body#lpRoot #julie .jb4-motion-toggle {
+  grid-column:1/-1; justify-self:end; padding:4px 0; border:0; border-radius:0;
+  background:none; color:#cfe6ff; font:400 12px/1.3 Inter,sans-serif;
+  cursor:pointer; text-decoration:underline; text-underline-offset:3px;
+}
+html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
+  outline:2px solid #9fd6ff; outline-offset:3px;
+}
+@media(max-width:900px) {
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4 {
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"title" "msg" "photo" "foot";
+  }
+  html.mf body#lpRoot #julie .jb4-motion { width:100%; }
+}
