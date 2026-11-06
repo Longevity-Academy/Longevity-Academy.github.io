@@ -29,7 +29,7 @@ html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) :is(.cgm14-num,.mfp-price
 }
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #cgm.cgm12 .cgm14-num{font-weight:400!important;text-shadow:none!important}
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) .lla-cta-pill .price{font-weight:700!important}
-html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #enrollModal :is(label,.em-lb,.em-cl,.em-cname,.em-cc,.em-cc span,.em-band .b-l,.em-band .b-v,.em-date-meta,.em-sms,.mock-hint){
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #enrollModal :is(label,.em-lb,.em-lbl,.em-cl,.em-cname,.em-cc,.em-cc span,.em-band .b-l,.em-band .b-v,.em-date-meta,.em-sms,.mock-hint){
   font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-style:normal!important;letter-spacing:normal!important;
 }
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) #enrollModal .em-lb{font-weight:600!important}
