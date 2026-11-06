@@ -124,4 +124,5 @@ html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
   html.mf body#lpRoot #julie .jb4-motion-hint {
     display:block; color:#cfe6ff; font:400 15px/1.4 Inter,sans-serif;
   }
+  html.mf body#lpRoot #julie .jb4-motion-toggle { margin-right:56px; }
 }
