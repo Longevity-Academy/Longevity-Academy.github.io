@@ -1125,7 +1125,7 @@ async function initAirwallex(){
       paymentMethods:     ['card','paypal'],
       payment_method_types:['card','paypal'],
       showPayButton: true,
-      appearance: { locale: 'en' }
+      appearance: { locale: 'en', mode: 'light', variables: { colorBrand: '#006EFF' } }
     });
     if (!dropIn) throw new Error('createElement returned null - SDK could not build dropIn');
     var _ld = document.getElementById('awx-loading'); if (_ld) _ld.remove();
@@ -1161,7 +1161,7 @@ async function initAirwallex(){
       if (_paymentConfirmed) return;
       setStatus('We could not confirm the payment status. Please check with your payment provider or support before trying another payment.', '#c33');
     });
-    dropIn.on('ready', function(){ if (!_paymentConfirmed) setStatus(awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : 'Secure payment ready (card or PayPal). This is a live payment of $' + amount.toFixed(2) + ' USD.'); });
+    dropIn.on('ready', function(){ if (!_paymentConfirmed) setStatus(awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : ''); });
 
     // Manual pay button also submits the drop-in
     document.getElementById('proceed').addEventListener('click', function(){
