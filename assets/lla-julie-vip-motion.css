@@ -2,7 +2,7 @@
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4 {
   grid-template-areas:"photo title" "photo access" "photo msg" "photo foot" "motion motion";
   align-items:start; row-gap:18px; column-gap:44px;
-  max-width:1060px; padding:36px;
+  max-width:1060px; padding:30px;
 }
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie h2.jb4-title {
   align-self:start!important; margin:0!important;
@@ -44,27 +44,32 @@ html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-foot {
   padding-top:18px; gap:24px;
 }
 html.mf body#lpRoot #julie .jb4-motion {
-  grid-area:motion; width:100%; min-width:0; align-self:center; margin-top:24px;
+  grid-area:motion; width:100%; min-width:0; align-self:center; margin-top:16px;
   display:grid; grid-template-columns:minmax(0,1fr) auto; gap:16px 20px;
 }
 html.mf body#lpRoot #julie .jb4-motion-track {
-  grid-column:1/-1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; min-width:0;
+  grid-column:1/-1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; min-width:0;
 }
 html.mf body#lpRoot #julie .jb4-motion-hint { display:none; }
-html.mf body#lpRoot #julie .jb4-animation { min-width:0; margin:0; }
+html.mf body#lpRoot #julie .jb4-animation {
+  display:flex; flex-direction:column; min-width:0; margin:0;
+}
 html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-animation-title {
-  margin:0 0 16px!important; min-height:2.8em; font:600 20px/1.4 Inter,sans-serif!important;
+  order:1; margin:18px 0 0!important; min-height:0;
+  font:500 italic 32px/1.25 'Playfair Display',Georgia,serif!important;
   color:#fff!important; -webkit-text-fill-color:#fff!important; text-align:left!important;
   letter-spacing:normal!important; text-shadow:none!important;
+}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-animation-title em {
+  font:inherit!important; color:#9fd6ff!important; -webkit-text-fill-color:#9fd6ff!important;
 }
 html.mf body#lpRoot #julie .jb4-motion-track:focus-visible {
   outline:2px solid #9fd6ff; outline-offset:3px;
 }
 html.mf body#lpRoot #julie .jb4-clip {
-  position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:10px;
+  order:0; position:relative; width:100%; flex-shrink:0; aspect-ratio:16/9; overflow:hidden; border-radius:12px;
   background:#071323;
 }
-html.mf body#lpRoot #julie .jb4-clip-rank { grid-column:auto; }
 html.mf body#lpRoot #julie .jb4-clip :is(img,video) {
   display:block; position:absolute; inset:0; width:100%; height:100%;
   object-fit:contain; margin:0; border:0; border-radius:0;
@@ -111,7 +116,7 @@ html.mf body#lpRoot #julie .jb4-motion-toggle:focus-visible {
     box-sizing:border-box; padding:14px 20px!important; font-size:18px!important; align-self:center;
   }
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts) section#julie .jb4-animation-title {
-    min-height:0;
+    min-height:0; font-size:26px!important; margin-top:16px!important;
   }
   html.mf body#lpRoot #julie .jb4-motion { width:100%; margin-top:20px; }
   html.mf body#lpRoot #julie .jb4-motion-track {
