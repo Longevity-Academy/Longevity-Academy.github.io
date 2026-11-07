@@ -78,13 +78,40 @@
   }
   function ctaLoc() { return get('sessionStorage', 'lla_cta_location'); }
 
-  var pending = [];
-  function post(item) {
-    if (!live()) return;
-    try {
-      root.fetch(RELAY, {method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(item), keepalive: true}).catch(function () {});
-    } catch (_) {}
+  var pending = [], inFlight = {};
+  function post(entry) {
+    var item = entry.item, key = entry.key;
+    if (!live() || inFlight[item.event_id]) return;
+    inFlight[item.event_id] = true;
+    function attempt(n) {
+      if (!live()) { delete inFlight[item.event_id]; return; }
+      var settled = false;
+      // Do not abort an ambiguous keepalive delivery: retries share its event_id.
+      var timer = root.setTimeout(function () { finish(false, true); }, 5000);
+      function finish(ok, retryable) {
+        if (settled) return;
+        settled = true; root.clearTimeout(timer);
+        if (ok) {
+          if (key) set('sessionStorage', key, '1');
+          delete inFlight[item.event_id];
+        } else if (retryable && n < 3 && live()) {
+          root.setTimeout(function () { attempt(n + 1); }, n * 500);
+        } else {
+          // Preserve the original envelope for a later explicit retry, not a new Pixel event.
+          delete inFlight[item.event_id];
+        }
+      }
+      try {
+        root.fetch(RELAY, {method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(item), keepalive: true}).then(function (response) {
+          return response.json().catch(function () { return {}; }).then(function (body) {
+            finish(response.ok && body.ok === true && Number(body.events_received) >= 1,
+              response.status === 429 || response.status >= 500 || response.ok);
+          });
+        }).catch(function () { finish(false, true); });
+      } catch (_) { finish(false, true); }
+    }
+    attempt(1);
   }
   function flush() {
     var batch = pending; pending = [];
@@ -92,11 +119,25 @@
   }
   /* Server copy leaves 1.5 s after the Pixel copy (Meta keeps the first event per event_id and the
      Pixel copy carries the real _fbc cookie). Flushed at once when the page is being left. */
-  function queue(item, now) { pending.push(item); if (now) flush(); else root.setTimeout(flush, 1500); }
+  function queue(item, now, key) {
+    pending.push({item: item, key: key});
+    if (now) flush(); else root.setTimeout(flush, 1500);
+  }
 
   function track(name, key, fields, now) {
     if (!live()) return false;
-    if (key && get('sessionStorage', key)) return false;
+    var saved = key && get('sessionStorage', key);
+    if (saved) {
+      if (saved === '1') return false;
+      try {
+        var retry = JSON.parse(saved);
+        if (retry && retry.event_id && retry.event_name === name) {
+          queue(retry, true, key);
+          return false; // Pixel remains once-only, even when the server copy needs retry.
+        }
+      } catch (_) {}
+      return false;
+    }
     try {
       var i = identity(fields);
       var ud = {external_id: i.external_id};
@@ -110,14 +151,15 @@
         content_ids: [CONTENT_ID], contents: [{id: CONTENT_ID, quantity: 1, item_price: val}]};
       if (loc) data.cta_location = loc;
       try { if (root.fbq) root.fbq('track', name, data, {eventID: id}); } catch (_) {}
-      queue({event_name: name, event_id: id,
+      var item = {event_name: name, event_id: id,
         email: i.email, phone: i.phone, fn: i.fn, ln: i.ln, st: i.st, country: i.country,
         external_id: i.external_id, value: val, currency: 'USD',
         content_name: 'Longevity Blueprint', order_id: '', content_type: 'product',
         content_ids: [CONTENT_ID], contents: data.contents, cta_location: loc,
         event_time: Math.floor(Date.now() / 1000), user_agent: root.navigator.userAgent,
-        url: root.location.href, release: RELEASE, fbp: cookie('_fbp'), fbc: fbc()}, now);
-      if (key) set('sessionStorage', key, '1');
+        url: root.location.href, release: RELEASE, fbp: cookie('_fbp'), fbc: fbc()};
+      if (key) set('sessionStorage', key, JSON.stringify(item));
+      queue(item, now, key);
       return true;
     } catch (_) { return false; }
   }

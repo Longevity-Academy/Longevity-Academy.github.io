@@ -51,7 +51,7 @@ fbq.disablePushState = true; /* 2026-11-05: no automatic un-ID'd PageView on has
   try{ window.fbq('init',PIXEL,userData()); }catch(e){}
 })();</script>
 <script src="/assets/lla-page-meta.js?v=20261104-1"></script>
-<script src="/assets/lla-funnel.js?v=20261104-1"></script>
+<script src="/assets/lla-funnel.js?v=20261107-recovery1"></script>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -15747,6 +15747,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   document.getElementById('emGo2').addEventListener('click',function(){
     var btn=this;
     emErrClear();
+    if(window.__llaLeadNow===1){emErr('Your existing enrollment request is still being confirmed. Please do not submit another enrollment.');return;}
     var _dateSelect=document.getElementById('emDate'),_dateOption=_dateSelect&&_dateSelect.options[_dateSelect.selectedIndex];
     var _sd=(_dateSelect||{}).value||'';
     if(!_sd||!_dateOption||_dateOption.disabled||!window.LLA_ECOMM.classForStart(_dateOption.getAttribute('data-start'))){ emErr('Please choose an available class time.'); return; }
@@ -15788,10 +15789,23 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
       if(window.__llaLeadNow!==2){
         window.__llaLeadNow=1; btn.disabled=true; btn.textContent='Please wait\u2026';
         var _done=false;
+        function pendingOrderMessage(){
+          btn.disabled=true;btn.textContent='Confirmation pending';
+          emErr('We have not received confirmation of your enrollment request. Please do not submit another enrollment. A late confirmation will continue automatically.');
+          var support=document.createElement('a');
+          support.href='https://wa.me/12015023701';support.target='_blank';support.rel='noopener';
+          support.textContent=' Contact admissions for help with this existing request.';
+          curErr().appendChild(support);
+        }
+        var orderWaitTimer=setTimeout(function(){if(!_done)pendingOrderMessage();},45000);
         window.LLA_ECOMM.createStagedOrder().then(function(ids){
           if(!ids||!ids.stid||!ids.orderid)throw new Error('ORDER_NOT_CONFIRMED');
-          if(_done)return;_done=true;window.__llaLeadNow=2;proceed();
-        }).catch(function(){window.__llaLeadNow=0;btn.disabled=false;btn.textContent='Continue';emErr('We could not confirm your enrollment request. Please contact our team before retrying.');});
+          if(_done)return;_done=true;clearTimeout(orderWaitTimer);emErrClear();window.__llaLeadNow=2;proceed();
+        }).catch(function(err){
+          clearTimeout(orderWaitTimer);
+          if(!err || !err.status || err.status>=500 || err.message==='ORDER_NOT_CONFIRMED'){pendingOrderMessage();return;}
+          window.__llaLeadNow=0;btn.disabled=false;btn.textContent='Continue';emErr('We could not confirm your enrollment request. Please contact our team before retrying.');
+        });
         return;
       }
       proceed();

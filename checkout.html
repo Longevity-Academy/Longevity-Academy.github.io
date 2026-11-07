@@ -895,35 +895,48 @@ async function initAirwallex(){
 
     // Must hit the SAME environment the order was created in, else "Order and student did not match".
     var envPrefix = (window.LLA_ECOMM_CONFIG.env === 'staging') ? '/staging' : '';
-    /* The CRM provisions the order asynchronously: fetched too soon it answers
-     * OrderId -1 / PaymentID -1 with no Airwallex intent, and 1-3 s later the
-     * same order returns the full intent (observed live 2026-09-09, order
-     * 8020862). Retry instead of failing the buyer on the first attempt. */
-    var r, raw, d;
+    /* Read only the existing order. Provisioning is not evidence of expiry.
+     * Bound each request (including its body) and the complete read phase. */
+    var r, raw, d, detailsReady = false, detailsDeadline = Date.now() + 30000;
+    var detailsBody = JSON.stringify({ studentId: String(ids.stid), orderId: String(ids.orderid) });
     for (var _try = 1; _try <= 8; _try++) {
-      r = await fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev' + envPrefix + '/api/checkout/details', {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ studentId: String(ids.stid), orderId: String(ids.orderid) })
-      });
-      raw = await r.text();
-      try { d = JSON.parse(raw); }
-      catch (parseErr) { throw new Error('CRM returned non-JSON (HTTP ' + r.status + '): ' + raw.slice(0, 200)); }
-      if (!r.ok) throw new Error('CHECKOUT_DETAILS_REJECTED');
-      if (d && d.Airwallex && d.Airwallex.paymentIntentId) break;
-      if (_try === 5) {
-        /* Still no intent: the CRM no longer honours this order (old link, cancelled
-         * or expired order). Never show raw JSON to a buyer. If the buyer's details
-         * are still staged, open a fresh order once; otherwise restart cleanly. */
-        if (!ids._retried && window.LLA_ECOMM && window.LLA_ECOMM.hasPendingLead && window.LLA_ECOMM.hasPendingLead()) {
-          try { sessionStorage.removeItem('lla_ecomm_ids'); } catch(e){}
-          setStatus('Refreshing your order...');
-          ids = await window.LLA_ECOMM.createStagedOrder(); ids._retried = true; _try = 0; continue;
+      var remaining = detailsDeadline - Date.now();
+      if (remaining <= 0) break;
+      var controller = typeof AbortController === 'function' ? new AbortController() : null;
+      var readTimer;
+      try {
+        var response = await Promise.race([
+          fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev' + envPrefix + '/api/checkout/details', {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: detailsBody, signal: controller ? controller.signal : undefined
+          }).then(function(res){ return res.text().then(function(text){ return { res:res, text:text }; }); }),
+          new Promise(function(resolve, reject){
+            readTimer = setTimeout(function(){
+              if (controller) controller.abort();
+              reject(new Error('CHECKOUT_DETAILS_TIMEOUT'));
+            }, Math.min(8000, remaining));
+          })
+        ]);
+        r = response.res; raw = response.text;
+        if (!r.ok) {
+          var readError = new Error('CHECKOUT_DETAILS_REJECTED');
+          readError.terminal = !(r.status === 429 || r.status >= 500);
+          throw readError;
         }
-        var _err = new Error('ORDER_NOT_ACTIVE'); _err.crm = d; throw _err;
+        try { d = JSON.parse(raw); }
+        catch (parseErr) { var invalidResponse = new Error('CHECKOUT_DETAILS_INVALID_RESPONSE'); invalidResponse.terminal = true; throw invalidResponse; }
+        if (d && d.Airwallex && d.Airwallex.paymentIntentId) { detailsReady = true; break; }
+      } catch (readError) {
+        if (readError.terminal) throw readError;
+      } finally {
+        clearTimeout(readTimer);
       }
-      setStatus('Preparing your secure payment form (' + _try + '/5)...');
-      await new Promise(function(res){ setTimeout(res, 1500); });
+      remaining = detailsDeadline - Date.now();
+      if (_try === 8 || remaining <= 0) break;
+      setStatus('Preparing your existing order (' + _try + '/8). Please wait...');
+      await new Promise(function(res){ setTimeout(res, Math.min(1500, remaining)); });
     }
+    if (!detailsReady) throw new Error('CHECKOUT_DETAILS_NOT_READY');
 
     var intentId = d.Airwallex.paymentIntentId;
     var clientSecret = d.Airwallex.clientSecret;
@@ -1191,6 +1204,22 @@ async function initAirwallex(){
       return;
     }
     try { _orderReadyReject(e); } catch(err){}
+    if (e && e.message === 'CHECKOUT_DETAILS_NOT_READY') {
+      document.getElementById('awx-dropin').innerHTML =
+        '<div role="alert" style="padding:18px 4px;font-size:14px;line-height:1.55">'
+        + 'Your existing order is still being prepared, or the payment service is temporarily unavailable. No payment form has been loaded. Please retry loading this same order; do not start another enrollment.<br><br>'
+        + '<button type="button" id="retry-order-details">Retry loading this order</button></div>';
+      document.getElementById('retry-order-details').addEventListener('click', function(){
+        var retryUrl = new URL(location.href);
+        retryUrl.searchParams.set('stid', String(ids.stid));
+        retryUrl.searchParams.set('orderid', String(ids.orderid));
+        if (window.LLA_ECOMM_CONFIG.env === 'staging') retryUrl.searchParams.set('env', 'staging');
+        location.assign(retryUrl.href);
+      });
+      document.getElementById('proceed').style.display = 'none';
+      setStatus('Payment details are not ready. Retry reads the same order without creating another.', '#9a5200');
+      return;
+    }
     if (e && e.message === 'ORDER_NOT_ACTIVE') {
       try { sessionStorage.removeItem('lla_ecomm_ids'); } catch(err){}
       try { history.replaceState(null, '', location.pathname + (location.search.match(/[?&]plan=(monthly|upfront)/) ? '?plan=' + location.search.match(/[?&]plan=(monthly|upfront)/)[1] : '')); } catch(err){}
