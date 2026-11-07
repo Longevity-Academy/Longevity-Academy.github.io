@@ -33,7 +33,7 @@
         if (playing && playing.catch) playing.catch(function () {});
       } else video.pause();
     });
-    button.textContent = userPaused ? 'Play animations' : 'Pause animations';
+    button.setAttribute('aria-label', userPaused ? 'Play animations' : 'Pause animations');
     button.setAttribute('aria-pressed', String(userPaused));
   }
   button.addEventListener('click', function () { userPaused = !userPaused; sync(); });
@@ -45,7 +45,7 @@
     new IntersectionObserver(function (entries) {
       visible = entries[0].isIntersecting;
       sync();
-    }, { threshold:0.08 }).observe(group);
+    }, { threshold:0.08 }).observe(document.getElementById('julie') || group);
   } else {
     userPaused = true;
     visible = true;
