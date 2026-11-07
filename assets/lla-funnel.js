@@ -79,12 +79,26 @@
   function ctaLoc() { return get('sessionStorage', 'lla_cta_location'); }
 
   var pending = [], inFlight = {};
+  function replayAllowed(item, key) {
+    var stamp = item && item.event_time;
+    var age = Date.now() / 1000 - stamp;
+    if (typeof stamp === 'number' && Number.isFinite(stamp) && stamp > 0 &&
+        age >= 0 && age < 86400) return true;
+    // This is not an accepted receipt. Keep a terminal marker so Pixel stays once-only.
+    if (key) set('sessionStorage', key, JSON.stringify({
+      status: 'expired', event_id: item && item.event_id || '',
+      event_name: item && item.event_name || '', event_time: stamp || null
+    }));
+    return false;
+  }
   function post(entry) {
     var item = entry.item, key = entry.key;
     if (!live() || inFlight[item.event_id]) return;
+    if (!replayAllowed(item, key)) return;
     inFlight[item.event_id] = true;
     function attempt(n) {
       if (!live()) { delete inFlight[item.event_id]; return; }
+      if (!replayAllowed(item, key)) { delete inFlight[item.event_id]; return; }
       var settled = false;
       // Do not abort an ambiguous keepalive delivery: retries share its event_id.
       var timer = root.setTimeout(function () { finish(false, true); }, 5000);
@@ -132,6 +146,7 @@
       try {
         var retry = JSON.parse(saved);
         if (retry && retry.event_id && retry.event_name === name) {
+          if (retry.status === 'expired' || !replayAllowed(retry, key)) return false;
           queue(retry, true, key);
           return false; // Pixel remains once-only, even when the server copy needs retry.
         }
