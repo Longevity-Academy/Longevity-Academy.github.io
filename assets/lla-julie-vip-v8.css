@@ -405,3 +405,44 @@ html.mf body#lpRoot:not(#x1):not(#x2) section#julie h3.jb8-cap span { display:bl
   html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-inc { justify-self:center; }
   html.mf body#lpRoot:not(#x1):not(#x2) section#julie a.jb8-cta { justify-self:end; }
 }
+
+/* v12: desktop fold fits one 900px screen */
+@media (min-width:1181px) {
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie { padding:60px 0 52px; scroll-margin-top:72px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8 { grid-template-columns:minmax(0,1fr) 290px minmax(0,1fr); grid-template-areas:"head head vip" "msg msg msg" "a1 photo a2" "bar bar bar"; column-gap:40px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title { font-size:72px!important; line-height:.96!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title em { font-size:30px!important; margin-top:12px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-vip { margin:6px 0 0; padding-top:16px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-vip-a { font-size:21px!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-vip-b { font-size:38px!important; margin-top:6px!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-vip-c { font-size:19px!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-msg { padding-top:22px; font-size:35px!important; line-height:1.2!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-photo { width:290px; aspect-ratio:290/350; margin-top:26px; border-radius:22px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-anim { margin-top:26px; gap:14px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h3.jb8-cap { font-size:28px!important; line-height:1.1!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-clip { border-radius:18px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-toggle { grid-area:a2; position:relative; justify-self:end; align-self:end; margin:0 0 -46px 0; width:34px; height:34px; z-index:3; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-bar { margin-top:40px; padding:18px 18px 18px 30px; column-gap:24px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-when b { font-size:36px!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-when span { font-size:18px!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-inc { font-size:26px!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-inc svg { width:30px; height:30px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie a.jb8-cta { padding:18px 44px!important; font-size:21px!important; }
+}
+
+@media (min-width:1181px) {
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie { padding:44px 0 40px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title em { margin-top:8px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-msg { padding-top:14px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-photo { width:280px; aspect-ratio:280/330; margin-top:18px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8 { grid-template-columns:minmax(0,1fr) 280px minmax(0,1fr); }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-anim { margin-top:18px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-toggle { grid-area:photo; justify-self:center; align-self:end; margin:0 0 -17px 0; background:rgba(6,20,46,.85); border-color:rgba(207,230,255,.6); }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-bar { margin-top:30px; }
+}
+
+@media (min-width:1181px) {
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie { padding:36px 0 34px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-bar { margin-top:26px; padding:16px 16px 16px 28px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-photo { aspect-ratio:280/320; }
+}
