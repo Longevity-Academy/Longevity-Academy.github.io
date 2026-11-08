@@ -112,6 +112,13 @@ a{color:var(--blue);text-decoration:none}
 .input{width:100%;border:1px solid #D5DCE6;border-radius:7px;padding:12px 13px;font-size:14.5px;font-family:var(--font-body);outline:none}
 .input::placeholder{color:#A9B3C1}
 .input:focus,.cardbox input:focus{border-color:var(--blue)}
+.lla-address{margin-bottom:18px}
+.lla-addr-grid{display:grid;gap:10px}
+.lla-addr-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lla-ship-same{display:flex;align-items:flex-start;gap:9px;margin:12px 0 0;font-size:14.5px;line-height:1.4;color:var(--ink);cursor:pointer}
+.lla-ship-same input{width:18px;height:18px;margin:1px 0 0;flex:none;accent-color:var(--blue)}
+.lla-ship-alt{margin-top:14px}
+.lla-ship-alt[hidden]{display:none}
 .proceed{width:100%;margin-top:16px;background:var(--blue);color:#fff;border:none;border-radius:7px;padding:14px;font-family:var(--font-body);font-weight:700;font-size:15.5px;cursor:pointer;transition:.15s}
 .proceed:hover{background:var(--blue-hover)}
 
@@ -604,6 +611,67 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
         <div class="pay-body">
           <!-- Google Pay: rendered by the Airwallex Drop-In itself (googlepay method), not a site-level button. -->
 
+          <!-- Billing address + CGM sensor shipping. Persisted to sessionStorage/localStorage (lla_address_v1). -->
+          <div class="lla-address" id="llaAddress">
+            <div class="f-lbl">Billing address</div>
+            <div class="lla-addr-grid">
+              <input class="input" type="text" id="billStreet" name="billing_street" autocomplete="billing street-address" placeholder="Street address" aria-label="Billing street address" />
+              <input class="input" type="text" id="billCity" name="billing_city" autocomplete="billing address-level2" placeholder="City" aria-label="Billing city" />
+              <div class="lla-addr-row">
+                <input class="input" type="text" id="billState" name="billing_state" autocomplete="billing address-level1" placeholder="State" aria-label="Billing state" />
+                <input class="input" type="text" id="billZip" name="billing_zip" autocomplete="billing postal-code" inputmode="numeric" placeholder="ZIP" aria-label="Billing ZIP code" />
+              </div>
+            </div>
+            <label class="lla-ship-same"><input type="checkbox" id="shipSame" checked /> <span>Ship CGM sensor to my billing address</span></label>
+            <div class="lla-ship-alt" id="shipAlt" hidden>
+              <div class="f-lbl">Shipping address for your CGM sensor</div>
+              <div class="lla-addr-grid">
+                <input class="input" type="text" id="shipStreet" name="shipping_street" autocomplete="shipping street-address" placeholder="Street address" aria-label="Shipping street address" />
+                <input class="input" type="text" id="shipCity" name="shipping_city" autocomplete="shipping address-level2" placeholder="City" aria-label="Shipping city" />
+                <div class="lla-addr-row">
+                  <input class="input" type="text" id="shipState" name="shipping_state" autocomplete="shipping address-level1" placeholder="State" aria-label="Shipping state" />
+                  <input class="input" type="text" id="shipZip" name="shipping_zip" autocomplete="shipping postal-code" inputmode="numeric" placeholder="ZIP" aria-label="Shipping ZIP code" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+            (function(){
+              var KEY='lla_address_v1';
+              var ids=['billStreet','billCity','billState','billZip','shipStreet','shipCity','shipState','shipZip'];
+              var same=document.getElementById('shipSame'), alt=document.getElementById('shipAlt');
+              function el(id){return document.getElementById(id);}
+              function read(){
+                var o={};
+                ids.forEach(function(id){ var e=el(id); o[id]=e?String(e.value||'').trim():''; });
+                o.shipSame=!!(same&&same.checked);
+                return o;
+              }
+              function save(){
+                var o=read();
+                try{ sessionStorage.setItem(KEY,JSON.stringify(o)); }catch(e){}
+                try{ localStorage.setItem(KEY,JSON.stringify(o)); }catch(e){}
+              }
+              function toggle(){ if(alt&&same){ alt.hidden=same.checked; } }
+              function restore(){
+                var o=null;
+                try{ o=JSON.parse(sessionStorage.getItem(KEY)||'null'); }catch(e){}
+                if(!o){ try{ o=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){} }
+                if(!o) return;
+                ids.forEach(function(id){ var e=el(id); if(e&&o[id]&&!e.value) e.value=o[id]; });
+                if(same&&typeof o.shipSame==='boolean') same.checked=o.shipSame;
+              }
+              restore(); toggle();
+              ids.forEach(function(id){ var e=el(id); if(e){ e.addEventListener('input',save); e.addEventListener('change',save); } });
+              if(same) same.addEventListener('change',function(){ toggle(); save(); });
+              /* Read by the payment flow: billing + resolved shipping address. */
+              window.__llaAddress=function(){
+                var o=read();
+                var ship=o.shipSame?{street:o.billStreet,city:o.billCity,state:o.billState,zip:o.billZip}:{street:o.shipStreet,city:o.shipCity,state:o.shipState,zip:o.shipZip};
+                return { billing:{street:o.billStreet,city:o.billCity,state:o.billState,zip:o.billZip}, shipping:ship, shipSameAsBilling:o.shipSame };
+              };
+            })();
+          </script>
           <div class="f-lbl" id="payLbl">Card or PayPal</div>
           <!-- Airwallex Drop-In mount (real card entry, wired to eTeacher's Airwallex account) -->
           <div id="awx-dropin" style="min-height:220px;border:1px solid #D5DCE6;border-radius:7px;padding:12px;margin-bottom:14px;background:#fff">
@@ -697,15 +765,17 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
       </div>
 
       <section class="lla-review-panel" aria-labelledby="lla-review-title">
-        <h2 id="lla-review-title">eTeacher Group on Trustpilot</h2>
-        <p>Reviews of our education group.</p>
-        <!-- eTeacherGroup.com profile, verified 2026-11-06. These are group reviews, not a Longevity-specific rating. -->
-        <a class="lla-review-link" href="https://www.trustpilot.com/review/eteachergroup.com" target="_blank" rel="noopener" aria-label="Read eTeacher Group reviews on Trustpilot, rated 4.9 out of 5">
-          <img class="lla-tp-logo" src="assets/trust/trustpilot-logo.svg" width="140" height="34" alt="Trustpilot">
-          <img class="lla-tp-stars" src="assets/trust/trustpilot-stars.svg" width="140" height="26" alt="">
-          <span class="lla-review-rating">Excellent · 4.9 / 5</span>
+        <!-- eTeacherGroup.com Trustpilot profile, verified 2026-11-08: TrustScore 4.9, 638 reviews. Group reviews, not a Longevity-specific rating. -->
+        <h2 id="lla-review-title" class="lla-sr-only">eTeacher Group on Trustpilot</h2>
+        <a class="lla-review-link" href="https://www.trustpilot.com/review/eteachergroup.com" target="_blank" rel="noopener" aria-label="eTeacher Group on Trustpilot, rated 4.9 out of 5 from 638 reviews">
+          <span class="lla-tp-wordmark"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00b67a" d="M12 1.5l2.9 8.2H24l-7.1 5.2 2.7 8.6L12 18.3l-7.6 5.2 2.7-8.6L0 9.7h9.1z"/><path fill="#005128" d="M12 18.3l3.6-1 1.4 4.6z"/></svg>Trustpilot</span>
+          <span class="lla-tp-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#00b67a"/><path fill="#fff" d="M12 4.2l2.3 6.1h6.4l-5.1 3.9 1.9 6.3L12 16.6l-5.5 3.9 1.9-6.3-5.1-3.9h6.4z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#00b67a"/><path fill="#fff" d="M12 4.2l2.3 6.1h6.4l-5.1 3.9 1.9 6.3L12 16.6l-5.5 3.9 1.9-6.3-5.1-3.9h6.4z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#00b67a"/><path fill="#fff" d="M12 4.2l2.3 6.1h6.4l-5.1 3.9 1.9 6.3L12 16.6l-5.5 3.9 1.9-6.3-5.1-3.9h6.4z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#00b67a"/><path fill="#fff" d="M12 4.2l2.3 6.1h6.4l-5.1 3.9 1.9 6.3L12 16.6l-5.5 3.9 1.9-6.3-5.1-3.9h6.4z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#00b67a"/><path fill="#fff" d="M12 4.2l2.3 6.1h6.4l-5.1 3.9 1.9 6.3L12 16.6l-5.5 3.9 1.9-6.3-5.1-3.9h6.4z"/></svg></span>
         </a>
-        <a class="lla-review-count" href="https://www.trustpilot.com/review/eteachergroup.com" target="_blank" rel="noopener">Read 638 reviews on Trustpilot</a>
+        <blockquote class="lla-review-quote">
+          <p>“So happy finding eTeacher Group. They are genuinely concerned that you learn what you want to learn.”</p>
+          <footer>Theresa Calvert · Trustpilot review · September 2025</footer>
+        </blockquote>
+        <a class="lla-review-count" href="https://www.trustpilot.com/review/eteachergroup.com" target="_blank" rel="noopener">Rated 4.9 / 5 · Read 638 eTeacher Group reviews on Trustpilot</a>
       </section>
     </div>
   </div>
@@ -730,6 +800,7 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
 <script src="https://checkout.airwallex.com/assets/elements.bundle.min.js?version=1.160.0"></script>
 <script src="nov/lla-promo.js?v=credit79-1"></script>
 <script src="nov/eteacher-ecomm.js?v=20261108-unlock"></script>
+<script src="nov/vip-enroll.js?v=20261108-paid"></script>
 <script>
 document.querySelectorAll('.pay-tab').forEach(function(t){
   t.addEventListener('click',function(){
