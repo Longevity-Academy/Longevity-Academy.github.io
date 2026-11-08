@@ -16103,8 +16103,8 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
  * What pages.dev sends and the .com did not:
  *   Enroll_CTA_Click on every Enroll tap, plus Clicked_on_Enroll_Pricing for the pricing fold:
  *     browser Pixel trackCustom and a server copy with the same event_id (Meta dedupes the pair).
- *   Clicked_on_Enroll and Clicked_on_curriculum: server copy, with the event_id published to dataLayer
- *     (lla_capi_ready) first, so the GTM Pixel tag (same container GTM-PMRKXXJV as pages.dev) shares it.
+ *   Clicked_on_Enroll and Clicked_on_curriculum: site-owned browser/server pair, once per session.
+ *     The existing Pixel filter rejects independent GTM copies of these two events only.
  *   lla_cta_location is stored on the tap, so AddToCart / InitiateCheckout (lla-funnel.js) carry the entry point.
  * PageView, ViewContent, AddToCart, InitiateCheckout, AddPaymentInfo and Purchase are already sent by the .com
  * (lla-page-meta.js, lla-funnel.js, checkout.html) and are not repeated here.
@@ -16117,6 +16117,29 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   var RELAY = 'https://lla-ac-events.vercel.app/api/meta/capi';
   var CONTENT_ID = 'lla-longevity-blueprint';
   var doc = root.document;
+  /* GTM's independent click tags have no shared ID and different firing rules.
+     Own only these two browser events here, alongside their server copy. The
+     permit is synchronous and single-use; all other Pixel events retain their
+     existing filter. Do not wrap or replace fbq or its SDK-owned properties. */
+  var browserPermit = null;
+  var pageMeta = root.LLA_PAGE_META;
+  if (pageMeta && typeof pageMeta.filter === 'function') {
+    var previousFilter = pageMeta.filter;
+    pageMeta.filter = function (args) {
+      var single = args[0] === 'trackSingle' || args[0] === 'trackSingleCustom';
+      var tracking = single || args[0] === 'track' || args[0] === 'trackCustom';
+      var name = args[single ? 2 : 1];
+      var paired = tracking && (name === 'Clicked_on_Enroll' || name === 'Clicked_on_curriculum');
+      if (paired) {
+        var options = args[single ? 4 : 3];
+        if (!browserPermit || browserPermit.used || browserPermit.name !== name ||
+            !options || options.eventID !== browserPermit.id) return false;
+      }
+      var allowed = previousFilter.call(pageMeta, args);
+      if (paired && allowed !== false) browserPermit.used = true;
+      return allowed;
+    };
+  }
   function live() {
     try { return !!(root.LLA_PAGE_META && root.LLA_PAGE_META.mode() === 'live'); } catch (_) { return false; }
   }
@@ -16171,11 +16194,15 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     post(p);
     return true;
   }
-  /* pages.dev fire(): server copy once per session, event_id published to dataLayer first for the GTM Pixel tag. */
+  /* One site-owned browser/server pair per session. The legacy dataLayer
+     notification remains available, but no longer owns the browser event. */
   function fireServer(name, key, extra) {
     if (!live() || staging()) return;
     try { var flag = 'lla_capi_' + key; if (root.sessionStorage.getItem(flag)) return; root.sessionStorage.setItem(flag, '1'); } catch (_) {}
     var id = newId(name);
+    browserPermit = {name: name, id: id, used: false};
+    try { if (root.fbq) root.fbq('track', name, {}, {eventID: id}); } catch (_) {}
+    finally { browserPermit = null; }
     try { root.dataLayer = root.dataLayer || []; root.dataLayer.push({event: 'lla_capi_ready', lla_capi_name: name, lla_capi_event_id: id}); } catch (_) {}
     var p = base(name, id);
     if (extra) for (var k in extra) { if (extra.hasOwnProperty(k)) p[k] = extra[k]; }
@@ -16205,7 +16232,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     }
     if (t.closest('a[href*="#syllabus"], a[href*="#curriculum"]')) fireServer('Clicked_on_curriculum', 'curriculum_v1');
   }, true);
-  root.LLA_CTA_EVENTS = {release: 'lla-cta-events-20261106-1'};
+  root.LLA_CTA_EVENTS = {release: 'lla-cta-events-20261108-pair1'};
 })(window);
 
 </script>
