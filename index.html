@@ -15420,10 +15420,10 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     <!-- DETAILS SCREEN (shown second since 2026-09-19; DOM id kept so nothing downstream changes) -->
     <div class="em-screen on" id="emStep1">
       <label class="em-lb" for="emName">Full Name*</label>
-      <input class="em-in" id="emName" type="text" placeholder="Full Name" autocomplete="name" />
+      <input class="em-in" id="emName" name="name" type="text" placeholder="Full Name" autocomplete="name" />
 
       <label class="em-lb" for="emEmail">Email*</label>
-      <input class="em-in" id="emEmail" type="email" placeholder="Email" autocomplete="email" />
+      <input class="em-in" id="emEmail" name="email" type="email" inputmode="email" placeholder="Email" autocomplete="email" autocapitalize="none" spellcheck="false" />
 
       <label class="em-lb" for="emPhone">Mobile Number*</label>
       <div class="em-phone">
@@ -15432,7 +15432,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
       </div>
       
       <div class="em-row">
-        <input class="em-in" id="emPhone" type="tel" placeholder="Mobile" autocomplete="tel" />
+        <input class="em-in" id="emPhone" name="tel" type="tel" inputmode="tel" placeholder="Mobile number" autocomplete="tel" />
       </div>
 
       <div class="em-err" id="emErr" role="alert"></div>
@@ -15665,7 +15665,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
 
 (function(){
   var m=document.getElementById('enrollModal');
-  function open(){m.classList.add('open');document.body.style.overflow='hidden';document.body.classList.add('lla-em-open');}
+  function open(){restoreContact();m.classList.add('open');document.body.style.overflow='hidden';document.body.classList.add('lla-em-open');}
   function close(){m.classList.remove('open');document.body.style.overflow='';document.body.classList.remove('lla-em-open');}
   /* Screen order (2026-09-19): step 1 = plan & date (#emStep2), step 2 = your
      details (#emStep1). Element ids are unchanged on purpose: the plan painter,
@@ -15748,6 +15748,25 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
       promoCode:(window.LLA_PROMO&&window.LLA_PROMO.active)?window.LLA_PROMO.code:''
     };
   }
+  function restoreContact(){
+    try{
+      var saved=JSON.parse(sessionStorage.getItem('lla_checkout_contact_v1')||'null');
+      if(!saved){
+        var staged=JSON.parse(sessionStorage.getItem('lla_ecomm_pending')||'null');
+        var p=staged&&staged.payload;
+        if(p)saved={fullName:[p.FirstName,p.LastName].filter(Boolean).join(' '),email:p.Email,phone:p.MobilePhone,countryIso:p.CountryIsoCode};
+      }
+      if(!saved)return;
+      [['emName','fullName'],['emEmail','email'],['emPhone','phone']].forEach(function(pair){
+        var el=document.getElementById(pair[0]);if(el&&!el.value&&saved[pair[1]])el.value=saved[pair[1]];
+      });
+      var country=document.getElementById('emCountry');
+      if(country&&saved.countryIso&&!country.dataset.llaContactRestored){
+        country.value=saved.countryIso;country.dataset.llaContactRestored='1';
+        country.dispatchEvent(new Event('change',{bubbles:true}));
+      }
+    }catch(e){}
+  }
   /* Screen 1 (details): validate exactly as before, fire AddToCart, go to plan & date. */
   document.getElementById('emGo1').addEventListener('click',function(){
     emErrClear();
@@ -15761,6 +15780,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
       return; }
     var r=window.LLA_ECOMM.stageLead(f);
     if(!r.ok){ emErr(ERR_MSG[r.error]||'Something went wrong , please try again in a moment.'); return; }
+    try{sessionStorage.setItem('lla_checkout_contact_v1',JSON.stringify({fullName:f.fullName,email:f.email,phone:f.phone,countryIso:f.countryIso}));}catch(e){}
     try{ if(window.LLA_FUNNEL) window.LLA_FUNNEL.addToCart(); }catch(e){}
     step(2);
   });
@@ -15948,7 +15968,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
 </script>
 <script src="assets/mf/pd/r15-sheet.js"></script>
 <script src="assets/mf/pd/guest-mobile.js"></script>
-<script src="assets/mf/pd/attendee-pricing.js"></script>
+<script src="assets/mf/pd/attendee-pricing.js?v=20261108-full-schedule"></script>
 <script>
 /* .com Enroll buttons ([data-checkout-open], set by nov-offer.js) open the pages.dev popup through its own opener,
    with the fold as cta_location, the way pages.dev's data-fn-cta links do. */
