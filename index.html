@@ -15788,6 +15788,8 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
          Meta events unchanged. */
       if(window.__llaLeadNow!==2){
         window.__llaLeadNow=1; btn.disabled=true; btn.textContent='Please wait\u2026';
+        /* 2026-11-08: free media bandwidth BEFORE requesting the CRM order, not only after it returns. */
+        try{ document.querySelectorAll('video').forEach(function(v){ try{ v.pause(); v.removeAttribute('src'); v.querySelectorAll('source').forEach(function(x){x.removeAttribute('src');}); v.load(); }catch(e){} }); }catch(e){}
         var _done=false;
         function pendingOrderMessage(){
           btn.disabled=true;btn.textContent='Confirmation pending';
