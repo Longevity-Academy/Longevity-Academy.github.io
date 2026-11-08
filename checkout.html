@@ -1119,8 +1119,8 @@ async function initAirwallex(){
     if(verifiedBand){
       verifiedBand.setAttribute('data-no-promo','');
       document.getElementById('heroTuitionVal').textContent='$'+Number(amount).toFixed(2)+(Number(expectedQuote.leftToPay)===0?' one payment':' today');
-      document.getElementById('heroTuitionSub').textContent='$'+Number(expectedQuote.total).toFixed(2)+' total'+
-        (Number(expectedQuote.leftToPay)===0?'':', '+Number(expectedQuote.numberOfPayments)+' monthly payments of $'+Number(expectedQuote.paymentPerMonth).toFixed(2));
+      /* Same phrasing as the enrollment popup (approved pages.dev format): "USD today, then 4 × $169.00 a month, $755 total" */
+      document.getElementById('heroTuitionSub').innerHTML=(Number(expectedQuote.leftToPay)===0?'USD one payment':'USD today, then '+Number(expectedQuote.numberOfPayments)+' × <span style="white-space:nowrap">$'+Number(expectedQuote.paymentPerMonth).toFixed(2)+'</span> a month, <span style="white-space:nowrap">$'+Number(expectedQuote.total).toFixed(0)+' total</span>');
     }
     var num  = Number(d.NumOfPayments);
     document.documentElement.classList.toggle('lla-vip-eligible',
@@ -1148,7 +1148,7 @@ async function initAirwallex(){
     var totalNote = document.querySelector('.sum-note');
     if (totalNote) totalNote.textContent += ' Total tuition: $' + Number(expectedQuote.total).toFixed(2) + ' USD.';
     var planLabel=document.querySelector('#planSummary .ps-v');
-    if(planLabel)planLabel.innerHTML=plan==='upfront'?'$'+Number(amount).toFixed(2)+' <small>One payment</small>':'$'+Number(amount).toFixed(2)+' <small>today · '+num+' monthly payments of $'+Number(expectedQuote.paymentPerMonth).toFixed(2)+' · $'+Number(expectedQuote.total).toFixed(2)+' total</small>';
+    if(planLabel)planLabel.innerHTML=plan==='upfront'?'$'+Number(amount).toFixed(2)+' <small>One payment</small>':'$'+Number(amount).toFixed(2)+' <small>USD today, then '+num+' × <span style="white-space:nowrap">$'+Number(expectedQuote.paymentPerMonth).toFixed(2)+'</span> a month, <span style="white-space:nowrap">$'+Number(expectedQuote.total).toFixed(0)+' total</span></small>';
 
     // The elements.bundle.min.js from checkout.airwallex.com attaches window.Airwallex directly.
     var awx = window.Airwallex;
