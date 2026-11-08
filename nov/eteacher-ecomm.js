@@ -349,6 +349,20 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
    * refresh, a back-button or a double click can never create a second order. */
   var PENDING_KEY = 'lla_ecomm_pending';
   var CREATE_ATTEMPT_KEY = 'lla_ecomm_create_attempt_v1';
+  /* 2026-11-08 fix: the attempt marker is only meaningful while a create request
+   * can still be in flight. A finished request (any HTTP response or network
+   * error) clears it; a marker older than 45 s is stale (page unloaded mid-flight)
+   * and must not lock the buyer out of checkout. */
+  var CREATE_ATTEMPT_TTL_MS = 45000;
+  function attemptInFlight(){
+    try {
+      var raw = sessionStorage.getItem(CREATE_ATTEMPT_KEY);
+      if (!raw) return false;
+      var m = JSON.parse(raw);
+      if (!m || !m.ts || (Date.now() - Number(m.ts)) > CREATE_ATTEMPT_TTL_MS) { sessionStorage.removeItem(CREATE_ATTEMPT_KEY); return false; }
+      return true;
+    } catch(e) { try { sessionStorage.removeItem(CREATE_ATTEMPT_KEY); } catch(ignore) {} return false; }
+  }
   var _creating = null;
   function buyerKey(payload){
     return String(payload.Email || payload.EmailAddress || '').trim().toLowerCase() + '|' +
@@ -442,13 +456,13 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
     stageLead: function(fields){
       try {
         // Check before payload construction updates the tracking identity.
-        if (sessionStorage.getItem(CREATE_ATTEMPT_KEY)) return { ok: false, error: 'order_confirmation_pending' };
+        if (attemptInFlight()) return { ok: false, error: 'order_confirmation_pending' };
       } catch(e) { return { ok: false, error: 'storage_unavailable' }; }
       var built = buildLeadPayload(fields);
       if (built.error) return { ok: false, error: built.error, reason: built.reason };
       try {
         // Never replace the evidence needed to reconcile an uncertain request.
-        if (sessionStorage.getItem(CREATE_ATTEMPT_KEY)) return { ok: false, error: 'order_confirmation_pending' };
+        if (attemptInFlight()) return { ok: false, error: 'order_confirmation_pending' };
         // A newly started enrollment uses its displayed price, not IDs cached
         // before this offer changed. Existing explicit checkout URLs stay intact.
         var explicit = new URLSearchParams(location.search);
@@ -479,7 +493,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       var pending = readPending();
       if (!pending) return Promise.reject(new Error('NO_PENDING_LEAD'));
       try {
-        if (sessionStorage.getItem(CREATE_ATTEMPT_KEY)) return Promise.reject(new Error('ORDER_CONFIRMATION_PENDING'));
+        if (attemptInFlight()) return Promise.reject(new Error('ORDER_CONFIRMATION_PENDING'));
         // Persist before sending: a refresh or lost response must not replay it.
         sessionStorage.setItem(CREATE_ATTEMPT_KEY, JSON.stringify({ env: CFG.env, buyerKey: buyerKey(pending.payload), ts: Date.now() }));
       } catch(e) { return Promise.reject(new Error('ORDER_STORAGE_UNAVAILABLE')); }
@@ -522,7 +536,9 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
         err.retryable = !!(r && r.retryable);
         throw err;
       }).catch(function(e){
-        _creating = null;   // persisted attempt blocks blind replay after failure
+        _creating = null;
+        // The request finished (response received or network error): nothing is in flight, so unlock retry.
+        try { sessionStorage.removeItem(CREATE_ATTEMPT_KEY); } catch(ignore) {}
         throw e;
       });
       return _creating;
