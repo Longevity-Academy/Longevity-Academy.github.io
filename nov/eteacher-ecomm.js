@@ -4,7 +4,8 @@
  * (NANP phone -> E.164, 50 states + DC), CountryIsoCode/ByIp always 'US',
  * AdminNotes <=4000 with 'US State: XX' prefix, click-ID + UTM attribution in
  * DynamicParameters (30-day persistence), integer CampaignID only, and the
- * docs section 4 retry policy: 3 attempts, exp backoff from 1s, 5xx/network only.
+ * docs section 4 retry policy for non-order writes only; order creation is never
+ * automatically replayed after an ambiguous response.
  *
  * Flow (Cloudflare ecommerce spec):
  *   Step 1 Continue  -> POST {worker}/api/lead/ecomm  -> { orderid, stid }
@@ -132,6 +133,8 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
   /* ---------- Retry policy per docs section 4 ---------- */
   function postWithRetry(url, payload, attempt){
     attempt = attempt || 1;
+    // Creating a CRM order is not safely replayable after an ambiguous response.
+    var createsOrder = /\/api\/lead\/ecomm$/.test(url);
     return fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -143,13 +146,13 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       // Retrying an accepted response can duplicate downstream reporting.
       if (res.status >= 200 && res.status < 300) return res.json().then(function(b){ return { ok: true, status: res.status, body: b }; }).catch(function(){ return { ok: true, status: res.status, body: null }; });
       if (res.status >= 400 && res.status < 500) return { ok: false, status: res.status, retryable: false };
-      if (attempt < 3) {
+      if (!createsOrder && attempt < 3) {
         var delay = Math.pow(2, attempt - 1) * 1000;
         return new Promise(function(resolve){ setTimeout(function(){ resolve(postWithRetry(url, payload, attempt + 1)); }, delay); });
       }
       return { ok: false, status: res.status, retryable: true };
     }).catch(function(err){
-      if (attempt < 3) {
+      if (!createsOrder && attempt < 3) {
         var delay = Math.pow(2, attempt - 1) * 1000;
         return new Promise(function(resolve){ setTimeout(function(){ resolve(postWithRetry(url, payload, attempt + 1)); }, delay); });
       }
@@ -345,7 +348,12 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
    * CRM for the Airwallex intent. It is single-flight and id-reusing, so a
    * refresh, a back-button or a double click can never create a second order. */
   var PENDING_KEY = 'lla_ecomm_pending';
+  var CREATE_ATTEMPT_KEY = 'lla_ecomm_create_attempt_v1';
   var _creating = null;
+  function buyerKey(payload){
+    return String(payload.Email || payload.EmailAddress || '').trim().toLowerCase() + '|' +
+      String(payload.Phone || payload.PhoneNumber || payload.MobilePhone || '').replace(/\D/g, '');
+  }
   function readPending(){
     try {
       var raw = sessionStorage.getItem(PENDING_KEY);
@@ -356,10 +364,12 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
   }
   function readIds(){
     try {
+      var pending = readPending();
       var q = new URLSearchParams(location.search);
-      if (q.get('stid') && q.get('orderid') && (q.get('env') || 'production') === CFG.env) return { stid: q.get('stid'), orderid: q.get('orderid'), env: CFG.env };
+      if (!pending && q.get('stid') && q.get('orderid') && (q.get('env') || 'production') === CFG.env) return { stid: q.get('stid'), orderid: q.get('orderid'), env: CFG.env };
       var raw = sessionStorage.getItem('lla_ecomm_ids');
       var o = raw ? JSON.parse(raw) : null;
+      if (pending && (!o || o.buyerKey !== buyerKey(pending.payload))) return null;
       return (o && o.stid && o.orderid && (o.env || 'production') === CFG.env) ? o : null;
     } catch(e) { return null; }
   }
@@ -430,23 +440,32 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
         total:first+left, env:CFG.env, scheduleVersion:2, currency:'USD', source:'crm-existing-order' };
     },
     stageLead: function(fields){
+      try {
+        // Check before payload construction updates the tracking identity.
+        if (sessionStorage.getItem(CREATE_ATTEMPT_KEY)) return { ok: false, error: 'order_confirmation_pending' };
+      } catch(e) { return { ok: false, error: 'storage_unavailable' }; }
       var built = buildLeadPayload(fields);
       if (built.error) return { ok: false, error: built.error, reason: built.reason };
       try {
+        // Never replace the evidence needed to reconcile an uncertain request.
+        if (sessionStorage.getItem(CREATE_ATTEMPT_KEY)) return { ok: false, error: 'order_confirmation_pending' };
         // A newly started enrollment uses its displayed price, not IDs cached
         // before this offer changed. Existing explicit checkout URLs stay intact.
         var explicit = new URLSearchParams(location.search);
         var oldQuote = null;
         try { oldQuote = JSON.parse(sessionStorage.getItem('lla_order_quote_v1') || 'null'); } catch(ignore) {}
-        if (!explicit.get('orderid') && oldQuote &&
+        var priorIds = JSON.parse(sessionStorage.getItem('lla_ecomm_ids') || 'null');
+        if ((priorIds && priorIds.buyerKey !== buyerKey(built.payload)) ||
+            (!explicit.get('orderid') && oldQuote &&
             (Number(oldQuote.firstPayment)!==Number(built.payload.FirstPayment) ||
              Number(oldQuote.numberOfPayments)!==Number(built.payload.NumberOfPayments) ||
-             Number(oldQuote.leftToPay)!==Number(built.payload.LeftToPay))) {
+             Number(oldQuote.leftToPay)!==Number(built.payload.LeftToPay)))) {
           sessionStorage.removeItem('lla_ecomm_ids');
           sessionStorage.removeItem('lla_order_quote_v1');
           sessionStorage.removeItem('lla_selected_class_v1');
         }
         sessionStorage.setItem(PENDING_KEY, JSON.stringify({ payload: built.payload, env: CFG.env, ts: Date.now() }));
+        _creating = null;
       } catch(e) {
         return { ok: false, error: 'storage_unavailable' };
       }
@@ -459,6 +478,11 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       if (_creating) return _creating;
       var pending = readPending();
       if (!pending) return Promise.reject(new Error('NO_PENDING_LEAD'));
+      try {
+        if (sessionStorage.getItem(CREATE_ATTEMPT_KEY)) return Promise.reject(new Error('ORDER_CONFIRMATION_PENDING'));
+        // Persist before sending: a refresh or lost response must not replay it.
+        sessionStorage.setItem(CREATE_ATTEMPT_KEY, JSON.stringify({ env: CFG.env, buyerKey: buyerKey(pending.payload), ts: Date.now() }));
+      } catch(e) { return Promise.reject(new Error('ORDER_STORAGE_UNAVAILABLE')); }
       /* PLAN FIX (2026-09-17). The payload is snapshotted on screen 1, BEFORE the
        * buyer picks Monthly/Upfront on screen 2, so it carried the default monthly
        * price (FirstPayment 179 x 5) even when the buyer chose "$799 one payment"
@@ -486,8 +510,11 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
           var out = { stid: String(stid), orderid: String(orderid), env: CFG.env };
           try{sessionStorage.setItem('lla_selected_class_v1',JSON.stringify({orderid:String(orderid),env:CFG.env,courseId:pending.payload.PreferredCourseId,semesterId:pending.payload.SemesterID}))}catch(e){}
           rememberOrderQuote(stid, orderid, pending.payload);
-          try { sessionStorage.setItem('lla_ecomm_ids', JSON.stringify({ stid: out.stid, orderid: out.orderid, env: CFG.env, ts: Date.now() })); } catch(e){}
-          try { sessionStorage.removeItem(PENDING_KEY); } catch(e){}
+          try {
+            sessionStorage.setItem('lla_ecomm_ids', JSON.stringify({ stid: out.stid, orderid: out.orderid, env: CFG.env, buyerKey: buyerKey(pending.payload), ts: Date.now() }));
+            sessionStorage.removeItem(PENDING_KEY);
+            sessionStorage.removeItem(CREATE_ATTEMPT_KEY);
+          } catch(e){}
           return out;
         }
         var err = new Error('LEAD_CREATE_FAILED');
@@ -495,7 +522,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
         err.retryable = !!(r && r.retryable);
         throw err;
       }).catch(function(e){
-        _creating = null;   // allow one clean retry from the payment screen
+        _creating = null;   // persisted attempt blocks blind replay after failure
         throw e;
       });
       return _creating;
@@ -521,13 +548,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       return postWithRetry(base + '/leads/' + CFG.env, built.payload);
     },
     getCheckoutIds: function(){
-      try {
-        var q = new URLSearchParams(location.search);
-        if (q.get('stid') && q.get('orderid') && (q.get('env') || 'production') === CFG.env) return { stid: q.get('stid'), orderid: q.get('orderid'), env: CFG.env };
-        var raw = sessionStorage.getItem('lla_ecomm_ids');
-        var ids = raw ? JSON.parse(raw) : null;
-        return ids && (ids.env || 'production') === CFG.env ? ids : null;
-      } catch(e) { return null; }
+      return readIds();
     },
     fetchCheckoutDetails: function(ids){
       if (!ids || CFG.mode !== 'ecomm' || (ids.env || 'production') !== CFG.env) return Promise.resolve(null);

@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" class="js mf">
 <head>
+<script>
+/* Enroll must never fall through to the application form while deferred assets load. */
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a,button'):null;
+    if(!a)return;
+    var label=(a.textContent||'').replace(/\u00a0/g,' ').trim();
+    if(!a.hasAttribute('data-checkout-open')&&!/^Enroll(?:\s|$)/i.test(label))return;
+    a.setAttribute('data-checkout-open','');
+    if(a.tagName==='A'&&/^#/.test(a.getAttribute('href')||''))a.setAttribute('href','#enrollModal');
+    if(!a.getAttribute('data-fn-cta')){
+      var s=a.closest('section'),f={hero:'hero',syllabus:'learn',julie:'vip',pricing:'offer-monthly',teachers:'teachers'};
+      a.setAttribute('data-fn-cta',a.closest('#llaFloatCta')?'floater':a.closest('nav,.nav,.mobile-nav')?'nav':s&&f[s.id]||'section');
+    }
+    if(typeof window.__llaOpenEnroll!=='function'){
+      e.preventDefault();
+      window.__llaPendingEnroll=a;
+    }
+  },true);
+})();
+</script>
 <!-- Meta identity bootstrap.
      The Pixel on this site is loaded by GTM, which initialises it with no user
      data. Every event GTM fires therefore reaches Meta with no match key, which
@@ -12613,7 +12634,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#faq">FAQ</a>
       <a href="support/">Support</a>
       <a href="#pricing" class="nav-pricing">Pricing</a>
-      <a href="#lead-gen" class="nav-cta">Enroll&nbsp;Now</a>
+      <a href="#enrollModal" data-checkout-open class="nav-cta">Enroll&nbsp;Now</a>
     </div>
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -12633,7 +12654,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#faq" class="mobile-nav-link">FAQ</a>
     <a href="support/" class="mobile-nav-link">Support</a>
     <a href="#pricing" class="mobile-nav-link">Pricing</a>
-    <a href="#lead-gen" class="mobile-nav-link mobile-nav-cta">Enroll&nbsp;Now</a>
+    <a href="#enrollModal" data-checkout-open class="mobile-nav-link mobile-nav-cta">Enroll&nbsp;Now</a>
   </nav>
 </div>
 
@@ -12670,7 +12691,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-cta-row">
       <div class="hero-cta-wrap">
         <div class="hero-cta-glow" aria-hidden="true"></div>
-        <a href="#lead-gen" class="btn-primary btn-primary--lg">
+        <a href="#enrollModal" data-checkout-open class="btn-primary btn-primary--lg">
           Enroll Now
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M13 5l7 7-7 7"/>
@@ -12762,7 +12783,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </div>
     <div class="fold-cta reveal" style="text-align:center; margin-top:64px;">
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -13282,7 +13303,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
     <div class="curriculum-cta reveal" style="text-align:center; margin-top:64px;">
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </section>
 <section class="mfp" id="pricing">
@@ -13299,7 +13320,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="mfp-course"><b>18 live&nbsp;sessions</b><span>18-week&nbsp;course</span></span>
       </div>
       <p class="mfp-after">then $169/month for&nbsp;4&nbsp;months</p>
-      <a class="pk-btn" href="#lead-gen"><span>Enroll&nbsp;Now</span><span class="pk-arr" aria-hidden="true">&rarr;</span></a>
+      <a class="pk-btn" href="#enrollModal" data-checkout-open><span>Enroll&nbsp;Now</span><span class="pk-arr" aria-hidden="true">&rarr;</span></a>
       <p class="pk-foot">14-day try-out refund on the&nbsp;course.</p>
       <div class="mfp-secure"><span class="mfp-lock"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8.2 10.5V7.8a3.8 3.8 0 0 1 7.6 0v2.7"/></svg>Secure&nbsp;checkout</span><span class="mfp-pay"><img src="assets/pay/visa.svg" alt="Visa" width="44" height="28"><img src="assets/pay/mastercard.svg" alt="Mastercard" width="44" height="28"><img src="assets/pay/amex.svg" alt="American Express" width="44" height="28"><img src="assets/pay/paypal.svg" alt="PayPal" width="62" height="28"></span></div>
       <div class="mfp-tiles">
@@ -13437,7 +13458,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- CREDENTIAL BADGES STRIP removed per CEO request - only official logos allowed, awaiting official org artwork -->
     <div class="instructors-cta reveal" style="text-align:center; margin-top: 48px;">
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </section>
 <section class="how-v2" id="how"><span class="lla-neon-top" aria-hidden="true"></span><span class="lla-neon-glow" aria-hidden="true"></span>
@@ -13463,7 +13484,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="how-v2-dots" id="howDots"></div>
   </div>
     <div class="how-v2-cta reveal" style="text-align:center; margin-top:48px;">
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </section>
 <section class="about" id="about">
@@ -13649,7 +13670,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div style="text-align: center; padding-top: 32px;">
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -13700,7 +13721,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="fold-cta reveal" style="text-align:center; margin-top:72px;">
       <p style="font-size:18px; color:rgba(10,22,40,0.7); margin:0 0 20px; max-width:560px; margin-left:auto; margin-right:auto;">Go deeper than your annual physical ever&nbsp;will.</p>
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -13819,7 +13840,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   </div>
     <div class="deepdive-cta reveal" style="text-align:center; margin-top:48px;">
-      <a href="#lead-gen" class="section-cta-btn deepdive-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn deepdive-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </section>
 <section class="value">
@@ -14074,7 +14095,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div style="text-align: center; padding-top: 32px;">
-      <a href="#lead-gen" class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#enrollModal" data-checkout-open class="section-cta-btn">Enroll Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
@@ -14087,7 +14108,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="final-cta-overlay"></div>
       <h2 class="final-cta-title">It's Your <span style="color:#7EC8FF;font-weight:900;">Life</span>.<br>Live It&nbsp;Well.</h2>
       <p class="final-cta-sub">Your personal longevity protocol starts&nbsp;here.</p>
-      <a href="#lead-gen" class="btn-primary">
+      <a href="#enrollModal" data-checkout-open class="btn-primary">
         Enroll Now
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M13 5l7 7-7 7"/>
@@ -14175,7 +14196,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#syllabus">Curriculum</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#lead-gen">Enroll</a></li>
+          <li><a href="#enrollModal" data-checkout-open>Enroll</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -15549,7 +15570,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   /* 2 Nov 2026: prices come from /nov/lla-promo.js ($79 month 1 with JULIE249 / MASTERCLASS-VIP, then 4 x $169; regular $169 x 5). */
 </script>
 <script src="/nov/lla-promo.js?v=credit79-1"></script>
-<script src="/nov/eteacher-ecomm.js?v=credit79-2" defer></script>
+<script src="/nov/eteacher-ecomm.js?v=20261108-once1" defer></script>
 <script>
 
       /* Dial-code badge follows the selected country (was hardcoded "US +1"). */
@@ -15707,6 +15728,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   function emErr(msg){var b=curErr();b.textContent=msg;b.classList.add('on');}
   function emErrClear(){[errBox,errBox2].forEach(function(b){if(b){b.textContent='';b.classList.remove('on');}});}
   var ERR_MSG={
+    order_confirmation_pending:'Your previous enrollment request is awaiting confirmation. Please contact admissions before submitting another order.',
     need_full_name:'Please enter your full name (first and last).',
     invalid_email:'Please enter a valid email address.',
     non_us_phone:'Please enter a valid US mobile number, or pick your country from the list.',
@@ -15786,30 +15808,9 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
          lead in the sales queue even if the buyer never reaches payment. The ids are
          stored in sessionStorage, so the payment page reuses the same order (no duplicate).
          Meta events unchanged. */
-      if(window.__llaLeadNow!==2){
-        window.__llaLeadNow=1; btn.disabled=true; btn.textContent='Please wait\u2026';
-        /* 2026-11-08: free media bandwidth BEFORE requesting the CRM order, not only after it returns. */
-        try{ document.querySelectorAll('video').forEach(function(v){ try{ v.pause(); v.removeAttribute('src'); v.querySelectorAll('source').forEach(function(x){x.removeAttribute('src');}); v.load(); }catch(e){} }); }catch(e){}
-        var _done=false;
-        function pendingOrderMessage(){
-          btn.disabled=true;btn.textContent='Confirmation pending';
-          emErr('We have not received confirmation of your enrollment request. Please do not submit another enrollment. A late confirmation will continue automatically.');
-          var support=document.createElement('a');
-          support.href='https://wa.me/12015023701';support.target='_blank';support.rel='noopener';
-          support.textContent=' Contact admissions for help with this existing request.';
-          curErr().appendChild(support);
-        }
-        var orderWaitTimer=setTimeout(function(){if(!_done)pendingOrderMessage();},45000);
-        window.LLA_ECOMM.createStagedOrder().then(function(ids){
-          if(!ids||!ids.stid||!ids.orderid)throw new Error('ORDER_NOT_CONFIRMED');
-          if(_done)return;_done=true;clearTimeout(orderWaitTimer);emErrClear();window.__llaLeadNow=2;proceed();
-        }).catch(function(err){
-          clearTimeout(orderWaitTimer);
-          if(!err || !err.status || err.status>=500 || err.message==='ORDER_NOT_CONFIRMED'){pendingOrderMessage();return;}
-          window.__llaLeadNow=0;btn.disabled=false;btn.textContent='Continue';emErr('We could not confirm your enrollment request. Please contact our team before retrying.');
-        });
-        return;
-      }
+      /* One creation point: checkout reuses the staged payload and creates the
+         order there. Never hold screen 2 behind CRM latency or create a second
+         homepage order while navigation is pending. */
       proceed();
       return;
       /* 2026-09-21 16:55: proceed() runs the instant the CRM order returns (was: re-click the button, 300 ms timer). Measured 5.4-10.6 s click-to-payment on a clean line; target < 4 s. */
@@ -16249,6 +16250,9 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   if (window.LLA_VIP_ENROLL) return;
   var MC = {main: 283, abroad: 1823, classId: 170142, semester: 2394};
   function send(base, ids) {
+    /* Authorized 2026-11-08: never create a second deal/order for the included VIP.
+       Same-order class assignment requires the verified CRM contract. */
+    return;
     if (!base || !ids || !ids.orderid) return;
     var P = window.LLA_PROMO; if (!P || !P.active) return;            /* VIP comes with the JULIE249 offer only */
     var cfg = window.LLA_ECOMM_CONFIG || {}; if (cfg.mode && cfg.mode !== 'ecomm') return;

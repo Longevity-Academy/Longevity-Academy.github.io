@@ -729,7 +729,7 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
 </script>
 <script src="https://checkout.airwallex.com/assets/elements.bundle.min.js?version=1.160.0"></script>
 <script src="nov/lla-promo.js?v=credit79-1"></script>
-<script src="nov/eteacher-ecomm.js?v=credit79-2"></script>
+<script src="nov/eteacher-ecomm.js?v=20261108-once1"></script>
 <script>
 document.querySelectorAll('.pay-tab').forEach(function(t){
   t.addEventListener('click',function(){
@@ -910,19 +910,13 @@ async function initAirwallex(){
       catch (parseErr) { throw new Error('CRM returned non-JSON (HTTP ' + r.status + '): ' + raw.slice(0, 200)); }
       if (!r.ok) throw new Error('CHECKOUT_DETAILS_REJECTED');
       if (d && d.Airwallex && d.Airwallex.paymentIntentId) break;
-      if (_try === 5) {
-        /* Still no intent: the CRM no longer honours this order (old link, cancelled
-         * or expired order). Never show raw JSON to a buyer. If the buyer's details
-         * are still staged, open a fresh order once; otherwise restart cleanly. */
-        if (!ids._retried && window.LLA_ECOMM && window.LLA_ECOMM.hasPendingLead && window.LLA_ECOMM.hasPendingLead()) {
-          try { sessionStorage.removeItem('lla_ecomm_ids'); } catch(e){}
-          setStatus('Refreshing your order...');
-          ids = await window.LLA_ECOMM.createStagedOrder(); ids._retried = true; _try = 0; continue;
-        }
-        var _err = new Error('ORDER_NOT_ACTIVE'); _err.crm = d; throw _err;
-      }
-      setStatus('Preparing your secure payment form (' + _try + '/5)...');
-      await new Promise(function(res){ setTimeout(res, 1500); });
+      // A missing intent does not establish that this order failed or expired.
+      // Keep the same IDs; never create a replacement order from an ambiguous response.
+      setStatus('Preparing your secure payment form (' + _try + '/8)...');
+      if (_try < 8) await new Promise(function(res){ setTimeout(res, 1500); });
+    }
+    if (!d || !d.Airwallex || !d.Airwallex.paymentIntentId) {
+      throw new Error('CHECKOUT_INTENT_PENDING');
     }
 
     var intentId = d.Airwallex.paymentIntentId;
@@ -1191,17 +1185,15 @@ async function initAirwallex(){
       return;
     }
     try { _orderReadyReject(e); } catch(err){}
-    if (e && e.message === 'ORDER_NOT_ACTIVE') {
-      try { sessionStorage.removeItem('lla_ecomm_ids'); } catch(err){}
-      try { history.replaceState(null, '', location.pathname + (location.search.match(/[?&]plan=(monthly|upfront)/) ? '?plan=' + location.search.match(/[?&]plan=(monthly|upfront)/)[1] : '')); } catch(err){}
+    if (e && e.message === 'CHECKOUT_INTENT_PENDING') {
       document.getElementById('awx-dropin').innerHTML =
-        '<div style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
-        + 'This order is no longer active, so we have not loaded a payment form. Nothing has been charged.<br><br>'
-        + '<a href="index.html?enroll=1" style="font-weight:700">&#8592; Start your enrollment again (takes 1 minute)</a></div>';
+        '<div role="status" style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
+        + 'Your existing order is still being confirmed. We have not loaded a payment form or created another order.<br><br>'
+        + 'Please contact <a href="mailto:advisor@longevitylifeacademy.com" style="font-weight:700">advisor@longevitylifeacademy.com</a> to verify this order before attempting another enrollment or payment.</div>';
       setStatus('');
       document.getElementById('proceed').style.display = 'none';
       var _pp = document.getElementById('paypalBox'); if (_pp) _pp.style.display = 'none';
-      console.warn('ORDER_NOT_ACTIVE', e.crm);
+      console.warn('CHECKOUT_INTENT_PENDING: existing order retained');
       return;
     }
     if (e && e.message === 'LEAD_CREATE_FAILED') {
