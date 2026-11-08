@@ -457,3 +457,21 @@ html.mf body#lpRoot:not(#x1):not(#x2) section#julie h3.jb8-cap span { display:bl
   html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-anim { margin-top:40px; }
   html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-bar { margin-top:30px; padding:14px 14px 14px 26px; }
 }
+
+/* v14: one-line headline, larger subheader */
+@media (min-width:1181px) {
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title span br { display:none; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title span { white-space:nowrap; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title { font-size:64px!important; line-height:1!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title em { font-size:40px!important; margin-top:18px; line-height:1.15!important; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-msg { padding-top:30px; }
+  html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-photo, html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-anim { margin-top:44px; }
+}
+
+@media (min-width:1181px) { html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title { font-size:58px!important; } html.mf body#lpRoot:not(#x1):not(#x2) section#julie .jb8-vip { margin-top:2px; } }
+
+@media (min-width:1181px) { html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title span br { display:inline; content:" "; } html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title span br::after { content:" "; } }
+
+html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title .jb8-br { font-style:inherit; }
+@media (max-width:1180px) { html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title .jb8-br { display:block; height:0; overflow:hidden; } }
+@media (min-width:1181px) { html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title span br { display:none; } html.mf body#lpRoot:not(#x1):not(#x2) section#julie h2.jb8-title span br::after { content:none; } }
