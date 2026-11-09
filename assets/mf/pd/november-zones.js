@@ -22,7 +22,7 @@
     });
     var option=select.options[select.selectedIndex],t=option&&times[option.dataset.start];
     if(t){
-      set(document.getElementById('emTimeVal'),t.et+' EST / '+t.pt+' PST');
+      set(document.getElementById('emTimeVal'),t.day.split(',')[0]+'s · '+t.et+' EST · '+t.pt+' PST');
       var summary=document.getElementById('emSummary');
       if(summary&&/\bCT\b/.test(summary.textContent))set(summary,summary.textContent.replace(/\s*[·|]\s*\d{1,2}:\d{2}\s*[AP]M\s*CT/g,'').replace(/\bET\b/g,'EST').replace(/\bPT\b/g,'PST'));
     }

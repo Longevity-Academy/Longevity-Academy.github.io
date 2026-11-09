@@ -37,9 +37,9 @@
    if(strip){const markup='<span class="t lg">Masterclass credit</span><span class="t sm"><a href="#offer" data-credit-code="JULIE249">JULIE249</a><span>or</span><a href="#offer" data-credit-code="MASTERCLASS-VIP">MASTERCLASS-VIP</a></span><a class="code" href="#offer" data-credit-code="JULIE249">JULIE249</a><a class="code" href="#offer" data-credit-code="MASTERCLASS-VIP">MASTERCLASS-VIP</a>';if(strip.innerHTML!==markup)strip.innerHTML=markup;}
    text('#mockBar .l b','$79 month 1');
    const band=$('#emStep2 .em-band .b-v');
-   if(band){band.setAttribute('data-no-promo','');html('#emStep2 .em-band .b-v',upfront?'<s style="opacity:.5;font-weight:500;margin-right:6px">$1,395.00</s>$799.00 <small>USD one payment</small>':(active?'<s data-no-promo style="opacity:.5;font-weight:500;margin-right:6px">$169.00</s>$79.00 <small>USD today, then 4 × $169.00 a month, $755 total</small>':'$169.00 <small>USD a month, 5 payments, $845 total</small>'));}
+   if(band){band.setAttribute('data-no-promo','');html('#emStep2 .em-band .b-v',upfront?'<s style="opacity:.5;font-weight:500;margin-right:6px">$1,395.00</s>$799.00 <small>one payment</small>':(active?'<s data-no-promo style="opacity:.5;font-weight:500;margin-right:6px">$169.00</s>$79.00 today <small>then 4 × $169 monthly · $755 total</small>':'$169.00 <small>monthly · 5 payments · $845 total</small>'));}
    html('#pp [data-pl="monthly"] .pp-price','$'+first+' <small>today</small>');
-   html('#pp [data-pl="monthly"] .pp-sub','4 monthly payments of $169.00. Total tuition: $'+total+'.00.');
+   html('#pp [data-pl="monthly"] .pp-sub','Then 4 × $169 monthly · $'+total+' total');
    const sum=$('#emSum');
    if(sum){
     sum.classList.add('applied');sum.classList.remove('credit-summary');sum.setAttribute('data-no-promo','');
