@@ -15881,7 +15881,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
          Free every connection first, then navigate. Pixel/relay events were already sent (keepalive). */
       try{ document.querySelectorAll('video').forEach(function(v){ try{ v.pause(); v.removeAttribute('src'); v.querySelectorAll('source').forEach(function(x){x.removeAttribute('src');}); v.load(); }catch(e){} }); }catch(e){} /* 2026-11-06: cancel the downloads, not only pause (checkout request was queued behind ~29 MB of video) */
       var destination=window.__llaDecorateCheckout?window.__llaDecorateCheckout(href):href;
-      if(window.__llaNavigateTracked)window.__llaNavigateTracked(destination);else setTimeout(function(){window.location.href=destination;},250);
+      if(window.__llaNavigateTracked){ try{ window.__llaNavigateTracked(destination); }catch(e){} } /* flushes the queued relay sends (keepalive) */ window.location.href=destination; /* 2026-11-09: leave at once; the relay's own timer-based navigate was observed firing 6-9 s late under timer throttling */
       }
       return;
     }
