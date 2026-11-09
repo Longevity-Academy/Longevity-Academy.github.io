@@ -527,7 +527,7 @@ html.lla-vip-eligible .sum-row.lla-vip-row{display:flex!important}
 html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
 .sum-row.lla-vip-row{border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
 .sum-row.lla-vip-row .v b{color:var(--ink);font-weight:800;margin-left:6px}
-</style><link rel="stylesheet" href="../guest-mobile.css?v=20261027-mobile4"><link rel="stylesheet" href="assets/checkout-trust.css?v=20261108-tp"><link rel="stylesheet" href="assets/lla-type-quality.css?v=20261106-2"></head>
+</style><link rel="stylesheet" href="../guest-mobile.css?v=20261027-mobile4"><link rel="stylesheet" href="assets/checkout-trust.css?v=20261108-tp"><link rel="stylesheet" href="assets/lla-type-quality.css?v=20261106-2"><link rel="stylesheet" href="assets/lla-cta-fa.css?v=20261109-b1"></head>
 <body>
 
 <header class="co-head">
@@ -551,18 +551,15 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
       <div class="card">
         <div class="card-pad">
           <div class="ln"><b>Course:</b> <span class="course-name">The Longevity Blueprint</span></div>
-          <div class="ln"><b>Course Duration:</b> 18 weeks</div>
-          <div class="ln"><b>Schedule:</b> 18 live sessions across 18 weeks, one session every week</div>
-          <div class="ln"><b>Session time:</b> <span id="sessionTimeVal">As selected in Step 2</span></div>
-          <div class="ln"><b>Lesson duration:</b> 50 min</div>
-          <div class="ln"><b>Location:</b> Online</div>
+          <div class="ln"><b>Starts:</b> <span id="sessionTimeVal">As selected</span></div>
+          <div class="ln"><b>Format:</b> 18 weekly live sessions · 50 min · online</div>
         </div>
         <div class="tband" id="heroTuition" data-plan="monthly">
           <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#3DDC97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           <div>
-            <div class="t-lbl" id="heroTuitionLbl">Course tuition fee</div>
+            <div class="t-lbl" id="heroTuitionLbl">Tuition</div>
             <div class="t-val" id="heroTuitionVal">Confirming tuition</div>
-            <div class="t-sub" id="heroTuitionSub">Your order determines the payment schedule.</div>
+            <div class="t-sub" id="heroTuitionSub">Confirming your schedule</div>
           </div>
         </div>
         <script>
@@ -584,13 +581,13 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
             if (!band) return;
             band.setAttribute('data-plan', p);
             if (p === 'upfront'){
-              lbl.textContent = 'Course tuition fee, pay upfront';
+              lbl.textContent = 'Tuition · one payment';
               val.textContent = 'Confirming tuition';
               sub.innerHTML  = 'Save $596 vs list &middot; $96 vs monthly';
             } else {
-              lbl.textContent = 'Course tuition fee, pay monthly';
+              lbl.textContent = 'Tuition · monthly plan';
               val.textContent = 'Confirming tuition';
-              sub.textContent = 'Your order determines the payment schedule.';
+              sub.textContent = 'Confirming your schedule';
             }
           })();
         </script>
@@ -679,7 +676,7 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
             <div id="awx-loading" style="padding:6px 4px 2px">
               <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
                 <span class="awx-spin" style="width:18px;height:18px;border:2.5px solid #D5DCE6;border-top-color:#006EFF;border-radius:50%;display:inline-block;animation:awxspin .8s linear infinite"></span>
-                <span id="awx-loading-txt" style="font-size:14.5px;font-weight:600;color:#2A2F36">Securing your seat and opening the card form...</span>
+                <span id="awx-loading-txt" style="font-size:14.5px;font-weight:600;color:#2A2F36">Opening secure card form...</span>
               </div>
               <div style="height:14px;width:38%;background:#EEF2F7;border-radius:4px;margin-bottom:10px"></div>
               <div style="height:44px;background:#F5F7FA;border:1px solid #E3E7EE;border-radius:6px;margin-bottom:10px"></div>
@@ -1123,9 +1120,9 @@ async function initAirwallex(){
     var verifiedBand=document.getElementById('heroTuition');
     if(verifiedBand){
       verifiedBand.setAttribute('data-no-promo','');
-      document.getElementById('heroTuitionVal').textContent='$'+Number(amount).toFixed(2)+(Number(expectedQuote.leftToPay)===0?' one payment':' today');
+      document.getElementById('heroTuitionVal').textContent='$'+Number(amount).toFixed(2)+' today';
       /* Same phrasing as the enrollment popup (approved pages.dev format): "USD today, then 4 × $169.00 a month, $755 total" */
-      document.getElementById('heroTuitionSub').innerHTML=(Number(expectedQuote.leftToPay)===0?'USD one payment':'USD today, then '+Number(expectedQuote.numberOfPayments)+' × <span style="white-space:nowrap">$'+Number(expectedQuote.paymentPerMonth).toFixed(2)+'</span> a month, <span style="white-space:nowrap">$'+Number(expectedQuote.total).toFixed(0)+' total</span>');
+      document.getElementById('heroTuitionSub').innerHTML=(Number(expectedQuote.leftToPay)===0?'One payment · USD':'Then '+Number(expectedQuote.numberOfPayments)+' × <span style="white-space:nowrap">$'+Number(expectedQuote.paymentPerMonth).toFixed(2)+'</span> monthly · <span style="white-space:nowrap">$'+Number(expectedQuote.total).toFixed(2)+'</span> total');
     }
     var num  = Number(d.NumOfPayments);
     document.documentElement.classList.toggle('lla-vip-eligible',
@@ -1153,7 +1150,8 @@ async function initAirwallex(){
     var totalNote = document.querySelector('.sum-note');
     if (totalNote) totalNote.textContent += ' Total tuition: $' + Number(expectedQuote.total).toFixed(2) + ' USD.';
     var planLabel=document.querySelector('#planSummary .ps-v');
-    if(planLabel)planLabel.innerHTML=plan==='upfront'?'$'+Number(amount).toFixed(2)+' <small>One payment</small>':'$'+Number(amount).toFixed(2)+' <small>USD today, then '+num+' × <span style="white-space:nowrap">$'+Number(expectedQuote.paymentPerMonth).toFixed(2)+'</span> a month, <span style="white-space:nowrap">$'+Number(expectedQuote.total).toFixed(0)+' total</span></small>';
+    window.__llaPlanLabelHTML=plan==='upfront'?'$'+Number(amount).toFixed(2)+' <small>one payment</small>':'$'+Number(amount).toFixed(2)+' today <small>then '+num+' × <span style="white-space:nowrap">$'+Number(expectedQuote.paymentPerMonth).toFixed(2)+'</span> monthly · <span style="white-space:nowrap">$'+Number(expectedQuote.total).toFixed(2)+'</span> total</small>';
+    if(planLabel)planLabel.innerHTML=window.__llaPlanLabelHTML;
 
     // The elements.bundle.min.js from checkout.airwallex.com attaches window.Airwallex directly.
     var awx = window.Airwallex;
@@ -1312,13 +1310,13 @@ if (window.LLA_ECOMM && window.LLA_ECOMM.config && window.LLA_ECOMM.config.mode 
   if(p!=='monthly'&&p!=='upfront'){try{p=sessionStorage.getItem('lla_plan')||localStorage.getItem('lla_plan')}catch(e){}}
   if(p!=='monthly'&&p!=='upfront')p='monthly';
   var w=document.createElement('div');w.id='planSummary';
-  w.innerHTML='<div class="ps-box"><div><div class="ps-k">Your plan</div><div class="ps-v">Confirming your payment schedule</div></div></div>';
+  w.innerHTML='<div class="ps-box"><div><div class="ps-k">Your plan</div><div class="ps-v">'+(window.__llaPlanLabelHTML||(p==='upfront'?'One payment':'Monthly plan'))+'</div></div></div>';
   var anchor=document.getElementById('demoBanner');
   if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(w,anchor.nextSibling);}else{document.body.insertBefore(w,document.body.firstChild);}
 }catch(e){}})();
 </script>
 <script>/* v58: session time mirrors the buyer's Step 2 pick */
-(function(){function apply(){try{var sd=sessionStorage.getItem('lla_start_date')||'';var el=document.getElementById('sessionTimeVal');if(el&&sd){el.textContent=sd.replace(/\s*\(CRM:[^)]*\)/,'');}var hj=document.getElementById('awx-julie-hold');if(hj&&sd){var m=sd.match(/^(\w{3} \w{3} \d{1,2})/);if(m){hj.textContent='Your seat is held for 15 minutes.';}}}catch(e){}}
+(function(){function apply(){try{var sd=sessionStorage.getItem('lla_start_date')||'';var el=document.getElementById('sessionTimeVal');if(el&&sd){el.textContent=sd.replace(/\s*\(CRM:[^)]*\)/,'').replace(/\s*·\s*weekly\s*\([^)]*\)\s*$/,'').replace(/\s*\((\d{4}-\d{2}-\d{2})\)\s*$/,'');}var hj=document.getElementById('awx-julie-hold');if(hj&&sd){var m=sd.match(/^(\w{3} \w{3} \d{1,2})/);if(m){hj.textContent='Your seat is held for 15 minutes.';}}}catch(e){}}
 apply();document.addEventListener('DOMContentLoaded',apply);setTimeout(apply,800);setTimeout(apply,2500);})();</script>
 
 <!-- WhatsApp floater (eTeacher IIBS button look; opens the LLA WhatsApp channel directly) -->

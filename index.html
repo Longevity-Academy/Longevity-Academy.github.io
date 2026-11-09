@@ -8137,6 +8137,7 @@ section.value .value-arrow:hover {
 @media screen and (max-width:768px){#et-bumpyard-widget{padding:0 20px 20px;bottom:var(--et-wa-bottom-m,var(--et-wa-bottom,0px))}#et-bumpyard-widget .widget-trigger-btn{padding:15px;margin:10px 0 0}#et-bumpyard-widget .widget-trigger-btn img{height:28px;width:28px;margin:0}#et-bumpyard-widget .widget-trigger-btn .label{display:none}#et-bumpyard-widget.show .chat-box{width:min(340px,calc(100vw - 28px))}}
 #et-bumpyard-widget{--et-wa-bottom:0px;--et-wa-bottom-m:0px}</style>
 <link rel="stylesheet" href="/nov/nov-offer.css?v=nov14b">
+<link rel="stylesheet" href="/assets/lla-cta-fa.css?v=20261109-b1">
 <!-- Playfair normal and italic are loaded by assets/lla-fonts.css. -->
 <style id="meta-final">
 /* ===== Final website for Meta: additions on top of the longevitylifeacademy.com homepage ===== */
@@ -15477,11 +15478,11 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
         var cur=months.indexOf('October')>=0?'October':months[0];
         var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'],DAYS={Sun:'Sunday',Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday'};
         function endTime(et){var m=/(\d+):(\d+)\s*(AM|PM)/i.exec(et||'');if(!m)return '';var h=+m[1]%12+(m[3].toUpperCase()==='PM'?12:0),mi=+m[2]+50;h+=Math.floor(mi/60);mi%=60;var ap=h>=12?'pm':'am';var hh=h%12||12;return hh+':'+String(mi).padStart(2,'0')+ap;}
-        function fmt(d){return MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();}
+        function fmt(d){return MONTHS[d.getMonth()].slice(0,3)+' '+d.getDate()+', '+d.getFullYear();}
         function syncCard(){var o=sel.options[sel.selectedIndex];tv=tv||document.getElementById('emTimeVal');var sv=document.getElementById('emSchedVal');if(!tv)return;
           if(o&&o.value&&!o.disabled){var q=o.getAttribute('data-start').split('-');var st=new Date(+q[0],+q[1]-1,+q[2]);var en=new Date(+q[0],+q[1]-1,+q[2]+7*17);var et=o.getAttribute('data-et');
-            if(sv) sv.textContent=fmt(st)+' - '+fmt(en)+'; every '+DAYS[o.getAttribute('data-wd')];
-            tv.textContent=et.replace(/\s*(AM|PM)/i,function(_,x){return x.toLowerCase();})+' - '+endTime(et)+' ET';tv.className='on';}
+            if(sv) sv.textContent=fmt(st)+' – '+fmt(en);
+            tv.textContent=DAYS[o.getAttribute('data-wd')]+'s · '+et.replace(/\s*(AM|PM)/i,function(_,x){return x.toLowerCase();})+' – '+endTime(et)+' ET';tv.className='on';}
           else{if(sv) sv.textContent='Select a starting date';tv.textContent='Select a starting date';tv.className='';}}
         /* Dropdown option labels retain the existing time-range format. */
         Array.prototype.slice.call(sel.querySelectorAll('option[data-start]')).forEach(function(o){var et=o.getAttribute('data-et');o.textContent=o.getAttribute('data-mon')+' '+o.getAttribute('data-day')+', '+et.replace(/\s*(AM|PM)/i,function(_,x){return x.toLowerCase();})+' - '+endTime(et)+' | ET'+(o.hasAttribute('data-soldout')?' · SOLD OUT':'');});
@@ -15526,7 +15527,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
         var wrap=document.getElementById('pp'); if(!wrap) return;
         function cur(){var p='';try{p=sessionStorage.getItem('lla_plan')||localStorage.getItem('lla_plan')||''}catch(e){} return (p==='upfront')?'upfront':'monthly';}
         function paint(){var p=cur();wrap.querySelectorAll('.pp-card').forEach(function(c){var on=c.getAttribute('data-pl')===p;c.classList.toggle('on',on);c.setAttribute('aria-checked',on?'true':'false');});
-          var bv=document.querySelector('#emStep2 .em-band .b-v'); if(bv){var promoOn=false;try{promoOn=!!(window.LLA_PROMO&&window.LLA_PROMO.active);}catch(e){} /* 2026-09-24 audit: the band must match the applied promo ($149 x 5, $745), not always the list price. */ bv.innerHTML=(p==='upfront')?'<s style="opacity:.5;font-weight:500;margin-right:6px">$1,395.00</s>$799.00 <small>USD one payment</small>':(promoOn?'<s data-no-promo style="opacity:.5;font-weight:500;margin-right:6px">$169.00</s>$79.00 <small>USD today, then 4 × $169.00 a month, $755 total</small>':'$169.00 <small>USD a month, 5 payments, $845 total</small>');}}
+          var bv=document.querySelector('#emStep2 .em-band .b-v'); if(bv){var promoOn=false;try{promoOn=!!(window.LLA_PROMO&&window.LLA_PROMO.active);}catch(e){} /* 2026-09-24 audit: the band must match the applied promo ($149 x 5, $745), not always the list price. */ bv.innerHTML=(p==='upfront')?'<s style="opacity:.5;font-weight:500;margin-right:6px">$1,395.00</s>$799.00 <small>one payment</small>':(promoOn?'<s data-no-promo style="opacity:.5;font-weight:500;margin-right:6px">$169.00</s>$79.00 today <small>then 4 × $169 monthly · $755 total</small>':'$169.00 <small>monthly · 5 payments · $845 total</small>');}}
         wrap.querySelectorAll('.pp-card').forEach(function(c){c.addEventListener('click',function(){var p=c.getAttribute('data-pl');try{sessionStorage.setItem('lla_plan',p);localStorage.setItem('lla_plan',p)}catch(e){}paint();});});
         /* 2026-09-21 audit fix #1/#2: expose the painter so the popup opener can sync the card with the CTA's plan, and tell the promo script which plan is on. */
         var _paint0=paint; paint=function(){ _paint0(); var p=cur(); try{ var mm=document.getElementById('enrollModal'); if(mm) mm.classList.toggle('lla-pl-upfront',p==='upfront'); }catch(e){} try{ document.dispatchEvent(new CustomEvent('lla:plan',{detail:{plan:p}})); }catch(e){} };
@@ -15537,15 +15538,14 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
       <div class="em-card">
         <div class="em-card-b">
           <div class="em-cname">The Longevity Blueprint</div>
-          <div class="em-cl"><b>Schedule:</b> <span id="emSchedVal">Select a starting date</span></div>
-          <div class="em-cl"><b>Time:</b> <span id="emTimeVal">Select a starting date</span></div>
-          <div class="em-cl"><b>Lesson duration:</b> 50 min</div>
-          <div class="em-cl gap"><b>Period:</b> 18 weeks</div>
+          <div class="em-cl"><b>When:</b> <span id="emTimeVal">Select a starting date</span></div>
+          <div class="em-cl"><b>Dates:</b> <span id="emSchedVal">Select a starting date</span></div>
+          <div class="em-cl gap"><b>Format:</b> 18 weekly live sessions · 50 min · online</div>
         </div>
         <div class="em-band">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8FC1FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           <div>
-            <div class="b-l">Course tuition</div>
+            <div class="b-l">Tuition</div>
             <div class="b-v"><s style="opacity:.5;font-weight:500;margin-right:6px">$279.00</s>$179.00 <small>USD monthly for 5 months</small></div>
           </div>
         </div>
@@ -15623,11 +15623,11 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
         var cur=months.indexOf('October')>=0?'October':months[0];
         var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'],DAYS={Sun:'Sunday',Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday'};
         function endTime(et){var m=/(\d+):(\d+)\s*(AM|PM)/i.exec(et||'');if(!m)return '';var h=+m[1]%12+(m[3].toUpperCase()==='PM'?12:0),mi=+m[2]+50;h+=Math.floor(mi/60);mi%=60;var ap=h>=12?'pm':'am';var hh=h%12||12;return hh+':'+String(mi).padStart(2,'0')+ap;}
-        function fmt(d){return MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();}
+        function fmt(d){return MONTHS[d.getMonth()].slice(0,3)+' '+d.getDate()+', '+d.getFullYear();}
         function syncCard(){var o=sel.options[sel.selectedIndex];tv=tv||document.getElementById('emTimeVal');var sv=document.getElementById('emSchedVal');if(!tv)return;
           if(o&&o.value&&!o.disabled){var q=o.getAttribute('data-start').split('-');var st=new Date(+q[0],+q[1]-1,+q[2]);var en=new Date(+q[0],+q[1]-1,+q[2]+7*17);var et=o.getAttribute('data-et');
-            if(sv) sv.textContent=fmt(st)+' - '+fmt(en)+'; every '+DAYS[o.getAttribute('data-wd')];
-            tv.textContent=et.replace(/\s*(AM|PM)/i,function(_,x){return x.toLowerCase();})+' - '+endTime(et)+' ET';tv.className='on';}
+            if(sv) sv.textContent=fmt(st)+' – '+fmt(en);
+            tv.textContent=DAYS[o.getAttribute('data-wd')]+'s · '+et.replace(/\s*(AM|PM)/i,function(_,x){return x.toLowerCase();})+' – '+endTime(et)+' ET';tv.className='on';}
           else{if(sv) sv.textContent='Select a starting date';tv.textContent='Select a starting date';tv.className='';}}
         /* Dropdown option labels retain the existing time-range format. */
         Array.prototype.slice.call(sel.querySelectorAll('option[data-start]')).forEach(function(o){var et=o.getAttribute('data-et');o.textContent=o.getAttribute('data-mon')+' '+o.getAttribute('data-day')+', '+et.replace(/\s*(AM|PM)/i,function(_,x){return x.toLowerCase();})+' - '+endTime(et)+' | ET'+(o.hasAttribute('data-soldout')?' · SOLD OUT':'');});
@@ -15658,7 +15658,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
         var wrap=document.getElementById('pp'); if(!wrap) return;
         function cur(){var p='';try{p=sessionStorage.getItem('lla_plan')||localStorage.getItem('lla_plan')||''}catch(e){} return (p==='upfront')?'upfront':'monthly';}
         function paint(){var p=cur();wrap.querySelectorAll('.pp-card').forEach(function(c){var on=c.getAttribute('data-pl')===p;c.classList.toggle('on',on);c.setAttribute('aria-checked',on?'true':'false');});
-          var bv=document.querySelector('#emStep2 .em-band .b-v'); if(bv){var promoOn=false;try{promoOn=!!(window.LLA_PROMO&&window.LLA_PROMO.active);}catch(e){} /* 2026-09-24 audit: the band must match the applied promo ($149 x 5, $745), not always the list price. */ bv.innerHTML=(p==='upfront')?'<s style="opacity:.5;font-weight:500;margin-right:6px">$1,395.00</s>$799.00 <small>USD one payment</small>':(promoOn?'<s data-no-promo style="opacity:.5;font-weight:500;margin-right:6px">$169.00</s>$79.00 <small>USD today, then 4 × $169.00 a month, $755 total</small>':'$169.00 <small>USD a month, 5 payments, $845 total</small>');}}
+          var bv=document.querySelector('#emStep2 .em-band .b-v'); if(bv){var promoOn=false;try{promoOn=!!(window.LLA_PROMO&&window.LLA_PROMO.active);}catch(e){} /* 2026-09-24 audit: the band must match the applied promo ($149 x 5, $745), not always the list price. */ bv.innerHTML=(p==='upfront')?'<s style="opacity:.5;font-weight:500;margin-right:6px">$1,395.00</s>$799.00 <small>one payment</small>':(promoOn?'<s data-no-promo style="opacity:.5;font-weight:500;margin-right:6px">$169.00</s>$79.00 today <small>then 4 × $169 monthly · $755 total</small>':'$169.00 <small>monthly · 5 payments · $845 total</small>');}}
         wrap.querySelectorAll('.pp-card').forEach(function(c){c.addEventListener('click',function(){var p=c.getAttribute('data-pl');try{sessionStorage.setItem('lla_plan',p);localStorage.setItem('lla_plan',p)}catch(e){}paint();});});
         /* 2026-09-21 audit fix #1/#2: expose the painter so the popup opener can sync the card with the CTA's plan, and tell the promo script which plan is on. */
         var _paint0=paint; paint=function(){ _paint0(); var p=cur(); try{ var mm=document.getElementById('enrollModal'); if(mm) mm.classList.toggle('lla-pl-upfront',p==='upfront'); }catch(e){} try{ document.dispatchEvent(new CustomEvent('lla:plan',{detail:{plan:p}})); }catch(e){} };
