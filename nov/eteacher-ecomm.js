@@ -415,7 +415,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
             ((Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === Number(q.firstPayment) * 4 &&
               (Number(q.firstPayment) === 149 || Number(q.firstPayment) === 179)) ||
              (Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === 676 &&
-              (Number(q.firstPayment) === 79 || Number(q.firstPayment) === 169 || Number(q.firstPayment) === 1)) ||
+              (Number(q.firstPayment) === 79 || Number(q.firstPayment) === 169)) ||
              (Number(q.numberOfPayments) <= 1 && Number(q.firstPayment) === 799 && Number(q.leftToPay) === 0))) {
           q.paymentPerMonth = Number(q.numberOfPayments) ? Number(q.leftToPay) / Number(q.numberOfPayments) : 0;
           q.total = Number(q.firstPayment) + Number(q.leftToPay);
@@ -439,7 +439,6 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       var promo = window.LLA_PROMO || {};
       var allowed = [
         { firstPayment: 79, numberOfPayments: 4, leftToPay: 676 },
-        { firstPayment: 1, numberOfPayments: 4, leftToPay: 676 },
         { firstPayment: 169, numberOfPayments: 4, leftToPay: 676 },
         { firstPayment: 179, numberOfPayments: 4, leftToPay: 716 },
         { firstPayment: 799, numberOfPayments: 0, leftToPay: 0 },
