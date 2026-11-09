@@ -971,7 +971,12 @@ async function initAirwallex(){
      * same order returns the full intent (observed live 2026-09-09, order
      * 8020862). Retry instead of failing the buyer on the first attempt. */
     var r, raw, d;
-    for (var _try = 1; _try <= 8; _try++) {
+    /* 2026-11-09 speed: the plan & date screen may already have fetched this order's intent. */
+    try { var _pre = JSON.parse(sessionStorage.getItem('lla_details_prefetch_v1') || 'null');
+      if (_pre && String(_pre.orderid) === String(ids.orderid) && String(_pre.stid) === String(ids.stid) &&
+          Date.now() - Number(_pre.ts) < 15*60*1000 && _pre.body && _pre.body.Airwallex && _pre.body.Airwallex.paymentIntentId) { d = _pre.body; }
+    } catch(e) { d = null; }
+    for (var _try = 1; _try <= 8 && !(d && d.Airwallex && d.Airwallex.paymentIntentId); _try++) {
       r = await fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev' + envPrefix + '/api/checkout/details', {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ studentId: String(ids.stid), orderId: String(ids.orderid) })
