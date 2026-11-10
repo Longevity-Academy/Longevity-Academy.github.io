@@ -15789,30 +15789,20 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     try{sessionStorage.setItem('lla_checkout_contact_v1',JSON.stringify({fullName:f.fullName,email:f.email,phone:f.phone,countryIso:f.countryIso}));}catch(e){}
     try{ if(window.LLA_FUNNEL) window.LLA_FUNNEL.addToCart(); }catch(e){}
     step(2);
-    /* 2026-11-09 speed: start the CRM order and the payment-intent lookup now, while the buyer
-       chooses plan and date, so the payment page finds them ready. Same createStagedOrder /
-       fetchCheckoutDetails calls the payment page uses; identical CRM payload; nothing new is sent. */
+    /* Prepare only the CRM order while the buyer chooses plan and date.
+       checkout.html owns the first payment-details request: navigation must never
+       discard a payment intent returned to this document. CRM payload unchanged. */
     try{ window.__llaPrecreate && window.__llaPrecreate.start(); }catch(e){}
   });
   window.__llaPrecreate=(function(){
     var inflight=null, idsInflight=null;
-    function cache(ids,body){ try{ sessionStorage.setItem('lla_details_prefetch_v1',JSON.stringify({stid:String(ids.stid),orderid:String(ids.orderid),ts:Date.now(),body:body})); }catch(e){} }
-    function details(ids,n){
-      return window.LLA_ECOMM.fetchCheckoutDetails(ids).then(function(d){
-        if(d&&d.Airwallex&&d.Airwallex.paymentIntentId&&String(d.OrderId)===String(ids.orderid)){ cache(ids,d); return d; }
-        if(n<4) return new Promise(function(res){ setTimeout(res,1500); }).then(function(){ return details(ids,n+1); });
-        return null;
-      });
-    }
     function start(){
       if(inflight) return inflight;
       if(!window.LLA_ECOMM||!window.LLA_ECOMM.createStagedOrder||(window.LLA_ECOMM.config||{}).mode!=='ecomm') return null;
-      /* 2026-11-09 (speed): screen 2 waits only for the CRM order ids. The payment-intent details continue in the
-         background and are cached if they land in time; otherwise the payment page requests them itself while it loads. */
+      /* Wait only for order IDs here. Do not start a details request in a document
+         that is about to navigate; checkout.html requests and consumes the intent. */
       idsInflight=window.LLA_ECOMM.createStagedOrder().catch(function(){ return null; }).then(function(ids){ idsInflight=null; return ids; });
-      inflight=idsInflight.then(function(ids){ return ids ? details(ids,1) : null; })
-        .catch(function(){ return null; })
-        .then(function(r){ inflight=null; return r; });
+      inflight=idsInflight.then(function(r){ inflight=null; return r; });
       return inflight;
     }
     return { start:start, busy:function(){ return idsInflight; }, detailsBusy:function(){ return inflight; } };
