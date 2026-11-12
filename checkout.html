@@ -817,8 +817,9 @@ function setStatus(msg, color){ statusEl.textContent = msg; statusEl.style.color
 
 function showDone(info){
   try{
+    sessionStorage.removeItem('lla_details_prefetch_v1');
     var r=document.getElementById('done-receipt');
-    if(r&&info){ r.textContent='Order #'+info.orderid+' · Payment of $'+Number(info.amount).toFixed(2)+' '+(info.currency||'USD')+' received. Keep this order number for any support request.'; }
+    if(r&&info){ r.textContent='Order #'+info.orderid+' · '+(info.amount != null && isFinite(Number(info.amount)) ? 'Payment of $'+Number(info.amount).toFixed(2)+' '+(info.currency||'USD')+' received.' : 'First payment already received.')+' Keep this order number for any support request.'; }
   }catch(e){}
   document.getElementById('screen-order').style.display='none';
   document.getElementById('screen-done').style.display='block';
@@ -971,12 +972,19 @@ async function fetchLiveCheckoutDetails(ids, envPrefix){
       if (attempt === 8) throw new Error('CHECKOUT_DETAILS_UNAVAILABLE');
     }
     if (response) {
+      var responseText = await response.text();
+      // CRM returns its paid-order business state inside a 500 parsing wrapper.
+      // Recognize only the observed response; never interpret a generic 500 as paid.
+      if (response.status === 500 &&
+          /Content:\s*Order first payment has been paid!\.\s*$/.test(responseText)) {
+        return { __llaFirstPaymentAlreadyPaid: true };
+      }
       if (response.status === 429 || response.status >= 500) {
         if (attempt === 8) throw new Error('CHECKOUT_DETAILS_UNAVAILABLE');
       } else {
         if (!response.ok) throw new Error('CHECKOUT_DETAILS_REJECTED');
         var details;
-        try { details = JSON.parse(await response.text()); }
+        try { details = JSON.parse(responseText); }
         catch (parseError) { throw new Error('CHECKOUT_DETAILS_INVALID_RESPONSE'); }
         if (details && details.Airwallex && details.Airwallex.paymentIntentId) return details;
         if (attempt === 8) throw new Error('CHECKOUT_INTENT_PENDING');
@@ -1006,6 +1014,14 @@ async function initAirwallex(){
           Date.now() - Number(_pre.ts) < 15*60*1000 && _pre.body && _pre.body.Airwallex && _pre.body.Airwallex.paymentIntentId) { d = _pre.body; }
     } catch(e) { d = null; }
     if (!(d && d.Airwallex && d.Airwallex.paymentIntentId)) d = await fetchLiveCheckoutDetails(ids, envPrefix);
+    if (d && d.__llaFirstPaymentAlreadyPaid === true) {
+      _paymentConfirmed = true;
+      _orderReadyReject(new Error('PAYMENT_ALREADY_RECEIVED'));
+      var paidState = document.getElementById('done-state');
+      if (paidState) paidState.textContent = 'The first payment for this order has already been received. Please do not submit another payment.';
+      showDone({ orderid: ids.orderid });
+      return;
+    }
     if (!d || !d.Airwallex || !d.Airwallex.paymentIntentId) {
       throw new Error('CHECKOUT_INTENT_PENDING');
     }
