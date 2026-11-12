@@ -25,7 +25,7 @@ if(/[?&](qa|llatest)=1(&|$)/.test(s) && method!=='GET' && method!=='HEAD' &&
 return of.apply(this,arguments);};}
 })();</script>
 
-<script src="https://longevitylifeacademy.pages.dev/assets/lla-relay-receipts.js?v=20261104-retry"></script>
+<script src="nov/lla-relay-receipts.js?v=20261112-delivery"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Place your order — The Longevity Blueprint | Longevity Life Academy</title>
@@ -950,10 +950,42 @@ function startAwxInit(){
   var awx = window.Airwallex;
   if (!awx || !awx.init) return Promise.reject(new Error('Airwallex SDK not loaded. window.Airwallex=' + typeof window.Airwallex));
   var env = (window.LLA_ECOMM_CONFIG && window.LLA_ECOMM_CONFIG.env === 'staging') ? 'demo' : 'prod';
-  _awxInitPromise = awx.init({ env: env, origin: window.location.origin, locale: 'en' });
+  _awxInitPromise = Promise.resolve(awx.init({ env: env, origin: window.location.origin, locale: 'en' }))
+    .catch(function(error){ _awxInitPromise = null; throw error; });
   return _awxInitPromise;
 }
 try { if (window.LLA_ECOMM && window.LLA_ECOMM.config && window.LLA_ECOMM.config.mode === 'ecomm') startAwxInit().catch(function(){}); } catch(e){}
+
+/* Retry only checkout-details reads for these exact IDs. Never replay order
+ * creation, a card confirmation, or a payment report here. Keep the existing
+ * eight-attempt provisioning bound, including transient transport failures. */
+async function fetchLiveCheckoutDetails(ids, envPrefix){
+  for (var attempt = 1; attempt <= 8; attempt++) {
+    var response = null;
+    try {
+      response = await fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev' + envPrefix + '/api/checkout/details', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ studentId: String(ids.stid), orderId: String(ids.orderid) })
+      });
+    } catch (networkError) {
+      if (attempt === 8) throw new Error('CHECKOUT_DETAILS_UNAVAILABLE');
+    }
+    if (response) {
+      if (response.status === 429 || response.status >= 500) {
+        if (attempt === 8) throw new Error('CHECKOUT_DETAILS_UNAVAILABLE');
+      } else {
+        if (!response.ok) throw new Error('CHECKOUT_DETAILS_REJECTED');
+        var details;
+        try { details = JSON.parse(await response.text()); }
+        catch (parseError) { throw new Error('CHECKOUT_DETAILS_INVALID_RESPONSE'); }
+        if (details && details.Airwallex && details.Airwallex.paymentIntentId) return details;
+        if (attempt === 8) throw new Error('CHECKOUT_INTENT_PENDING');
+      }
+    }
+    setStatus('Preparing your secure payment form (' + attempt + '/8)...');
+    await new Promise(function(resolve){ setTimeout(resolve, 1500); });
+  }
+}
 
 async function initAirwallex(){
   try {
@@ -967,27 +999,13 @@ async function initAirwallex(){
      * OrderId -1 / PaymentID -1 with no Airwallex intent, and 1-3 s later the
      * same order returns the full intent (observed live 2026-09-09, order
      * 8020862). Retry instead of failing the buyer on the first attempt. */
-    var r, raw, d;
+    var d;
     /* 2026-11-09 speed: the plan & date screen may already have fetched this order's intent. */
     try { var _pre = JSON.parse(sessionStorage.getItem('lla_details_prefetch_v1') || 'null');
       if (_pre && String(_pre.orderid) === String(ids.orderid) && String(_pre.stid) === String(ids.stid) &&
           Date.now() - Number(_pre.ts) < 15*60*1000 && _pre.body && _pre.body.Airwallex && _pre.body.Airwallex.paymentIntentId) { d = _pre.body; }
     } catch(e) { d = null; }
-    for (var _try = 1; _try <= 8 && !(d && d.Airwallex && d.Airwallex.paymentIntentId); _try++) {
-      r = await fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev' + envPrefix + '/api/checkout/details', {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ studentId: String(ids.stid), orderId: String(ids.orderid) })
-      });
-      raw = await r.text();
-      try { d = JSON.parse(raw); }
-      catch (parseErr) { throw new Error('CRM returned non-JSON (HTTP ' + r.status + '): ' + raw.slice(0, 200)); }
-      if (!r.ok) throw new Error('CHECKOUT_DETAILS_REJECTED');
-      if (d && d.Airwallex && d.Airwallex.paymentIntentId) break;
-      // A missing intent does not establish that this order failed or expired.
-      // Keep the same IDs; never create a replacement order from an ambiguous response.
-      setStatus('Preparing your secure payment form (' + _try + '/8)...');
-      if (_try < 8) await new Promise(function(res){ setTimeout(res, 1500); });
-    }
+    if (!(d && d.Airwallex && d.Airwallex.paymentIntentId)) d = await fetchLiveCheckoutDetails(ids, envPrefix);
     if (!d || !d.Airwallex || !d.Airwallex.paymentIntentId) {
       throw new Error('CHECKOUT_INTENT_PENDING');
     }
