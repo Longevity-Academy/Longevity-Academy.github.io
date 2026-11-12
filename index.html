@@ -15790,31 +15790,15 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     try{sessionStorage.setItem('lla_checkout_contact_v1',JSON.stringify({fullName:f.fullName,email:f.email,phone:f.phone,countryIso:f.countryIso}));}catch(e){}
     try{ if(window.LLA_FUNNEL) window.LLA_FUNNEL.addToCart(); }catch(e){}
     step(2);
-    /* Prepare only the CRM order while the buyer chooses plan and date.
-       checkout.html owns the first payment-details request: navigation must never
-       discard a payment intent returned to this document. CRM payload unchanged. */
-    try{ window.__llaPrecreate && window.__llaPrecreate.start(); }catch(e){}
+    /* October 30 sequence: validate contact first; create no order until the
+       buyer confirms the final plan, coupon and class on screen 2. */
   });
-  window.__llaPrecreate=(function(){
-    var inflight=null, idsInflight=null;
-    function start(){
-      if(inflight) return inflight;
-      if(!window.LLA_ECOMM||!window.LLA_ECOMM.createStagedOrder||(window.LLA_ECOMM.config||{}).mode!=='ecomm') return null;
-      /* Wait only for order IDs here. Do not start a details request in a document
-         that is about to navigate; checkout.html requests and consumes the intent. */
-      idsInflight=window.LLA_ECOMM.createStagedOrder().catch(function(){ return null; }).then(function(ids){ idsInflight=null; return ids; });
-      inflight=idsInflight.then(function(r){ inflight=null; return r; });
-      return inflight;
-    }
-    return { start:start, busy:function(){ return idsInflight; }, detailsBusy:function(){ return inflight; } };
-  })();
   /* Screen 2 (plan & date): require a class time, re-stage the lead with the date,
      create the CRM order, fire InitiateCheckout, open payment. Same r8 flow as before. */
   document.getElementById('emGo2').addEventListener('click',function(){
     var btn=this;
     emErrClear();
     if(window.__llaLeadNow===1){emErr('Your existing enrollment request is still being confirmed. Please do not submit another enrollment.');return;}
-    try{ var _pre=window.__llaPrecreate&&window.__llaPrecreate.busy(); if(_pre){ btn.disabled=true; btn.textContent='Please wait\u2026'; _pre.then(function(){ btn.disabled=false; btn.textContent='Continue'; btn.click(); }); return; } }catch(e){}
     var _dateSelect=document.getElementById('emDate'),_dateOption=_dateSelect&&_dateSelect.options[_dateSelect.selectedIndex];
     var _sd=(_dateSelect||{}).value||'';
     if(!_sd||!_dateOption||_dateOption.disabled||!window.LLA_ECOMM.classForStart(_dateOption.getAttribute('data-start'))){ emErr('Please choose an available class time.'); return; }
@@ -15853,10 +15837,17 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
          lead in the sales queue even if the buyer never reaches payment. The ids are
          stored in sessionStorage, so the payment page reuses the same order (no duplicate).
          Meta events unchanged. */
-      /* One creation point: checkout reuses the staged payload and creates the
-         order there. Never hold screen 2 behind CRM latency or create a second
-         homepage order while navigation is pending. */
-      proceed();
+      /* Restore the October 30 create-after-final-selection contract. The
+         current engine retains buyer/price binding and single-flight protection.
+         Keep November's media cancellation before starting this network call,
+         so video downloads do not compete with the confirmed enrollment. */
+      window.__llaLeadNow=1; btn.disabled=true; btn.textContent='Please wait\u2026';
+      try{ document.querySelectorAll('video').forEach(function(v){ try{ v.pause(); v.removeAttribute('src'); v.querySelectorAll('source').forEach(function(x){x.removeAttribute('src');}); v.load(); }catch(e){} }); }catch(e){}
+      var _done=false;
+      window.LLA_ECOMM.createStagedOrder().then(function(ids){
+        if(!ids||!ids.stid||!ids.orderid)throw new Error('ORDER_NOT_CONFIRMED');
+        if(_done)return;_done=true;window.__llaLeadNow=2;proceed();
+      }).catch(function(){window.__llaLeadNow=0;btn.disabled=false;btn.textContent='Continue';emErr('We could not confirm your enrollment request. Please contact our team before retrying.');});
       return;
       /* 2026-09-21 16:55: proceed() runs the instant the CRM order returns (was: re-click the button, 300 ms timer). Measured 5.4-10.6 s click-to-payment on a clean line; target < 4 s. */
       function proceed(){
