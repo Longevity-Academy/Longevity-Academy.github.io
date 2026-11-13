@@ -12612,7 +12612,7 @@ html body#lpRoot #enrollModal .em-band .b-v .lla-tu-vip{border-top:1px solid rgb
 
 </style>
 <script src="assets/mf/pd/lla-clickid-v20260922.js"></script>
-<script src="nov/lla-relay-receipts.js?v=20261112-delivery"></script>
+<script src="assets/mf/pd/lla-relay-receipts.js"></script>
 <link rel="stylesheet" href="assets/checkout-trust.css?v=20261106-wa2">
 <link rel="stylesheet" href="assets/lla-ui-refinements.css?v=20261106-about4">
 <link rel="stylesheet" href="assets/lla-type-quality.css?v=20261106-2">
@@ -12714,9 +12714,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 <div class="mf-hero-film"><figure class="lla-film">
         <video id="julie-approved-film" preload="metadata" poster="https://longevitylifeacademy.pages.dev/assets/julie-approved-4k-poster.jpg" muted="" loop="" playsinline="" aria-label="Julie Gibson Clark, approved original 4K film" data-delivery="mp4-fallback" src="https://longevitylifeacademy.pages.dev/assets/julie-film-v20260927/full-film-720p.mp4" data-playback="retry-required"></video><button type="button" class="film-sound" aria-label="Sound on or off" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path class="fs-on" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"></path><path class="fs-off" d="M23 9l-6 6M17 9l6 6"></path></svg></button>
-        <script>/* The approved player uses native MP4. Preserve media flags without
-          blocking enrollment parsing on an unused HLS library. */
-(function(){window.__llaHlsSrc='https://longevitylifeacademy.pages.dev/assets/hls-1.6.13.min.js';var m=(window.innerWidth<900)||/FBAN|FBAV|FB_IAB|Instagram|iPhone|Android/.test(navigator.userAgent);window.__llaPhoneMedia=m;})();</script>
+        <script>/* 2026-09-25 B5: phones and in-app browsers get hls.js (541 KB) only when the film is about to play (julie-approved-player.js); iOS Safari plays HLS natively and never needs it. Desktop keeps the synchronous load exactly as before. */
+(function(){window.__llaHlsSrc='https://longevitylifeacademy.pages.dev/assets/hls-1.6.13.min.js';var m=(window.innerWidth<900)||/FBAN|FBAV|FB_IAB|Instagram|iPhone|Android/.test(navigator.userAgent);window.__llaPhoneMedia=m;if(!m){document.write('<script src="https://longevitylifeacademy.pages.dev/assets/hls-1.6.13.min.js"><\/script>');}})();</script><script src="https://longevitylifeacademy.pages.dev/assets/hls-1.6.13.min.js"></script>
         <script src="https://longevitylifeacademy.pages.dev/assets/julie-approved-player.js?v=native-film-20261028"></script>
         <figcaption><b>Julie Gibson&nbsp;Clark</b><span>Founding Faculty, 2nd Slowest-Aging Woman on&nbsp;Earth</span></figcaption>
       </figure></div>
@@ -15790,15 +15789,31 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     try{sessionStorage.setItem('lla_checkout_contact_v1',JSON.stringify({fullName:f.fullName,email:f.email,phone:f.phone,countryIso:f.countryIso}));}catch(e){}
     try{ if(window.LLA_FUNNEL) window.LLA_FUNNEL.addToCart(); }catch(e){}
     step(2);
-    /* October 30 sequence: validate contact first; create no order until the
-       buyer confirms the final plan, coupon and class on screen 2. */
+    /* Prepare only the CRM order while the buyer chooses plan and date.
+       checkout.html owns the first payment-details request: navigation must never
+       discard a payment intent returned to this document. CRM payload unchanged. */
+    try{ window.__llaPrecreate && window.__llaPrecreate.start(); }catch(e){}
   });
+  window.__llaPrecreate=(function(){
+    var inflight=null, idsInflight=null;
+    function start(){
+      if(inflight) return inflight;
+      if(!window.LLA_ECOMM||!window.LLA_ECOMM.createStagedOrder||(window.LLA_ECOMM.config||{}).mode!=='ecomm') return null;
+      /* Wait only for order IDs here. Do not start a details request in a document
+         that is about to navigate; checkout.html requests and consumes the intent. */
+      idsInflight=window.LLA_ECOMM.createStagedOrder().catch(function(){ return null; }).then(function(ids){ idsInflight=null; return ids; });
+      inflight=idsInflight.then(function(r){ inflight=null; return r; });
+      return inflight;
+    }
+    return { start:start, busy:function(){ return idsInflight; }, detailsBusy:function(){ return inflight; } };
+  })();
   /* Screen 2 (plan & date): require a class time, re-stage the lead with the date,
      create the CRM order, fire InitiateCheckout, open payment. Same r8 flow as before. */
   document.getElementById('emGo2').addEventListener('click',function(){
     var btn=this;
     emErrClear();
     if(window.__llaLeadNow===1){emErr('Your existing enrollment request is still being confirmed. Please do not submit another enrollment.');return;}
+    try{ var _pre=window.__llaPrecreate&&window.__llaPrecreate.busy(); if(_pre){ btn.disabled=true; btn.textContent='Please wait\u2026'; _pre.then(function(){ btn.disabled=false; btn.textContent='Continue'; btn.click(); }); return; } }catch(e){}
     var _dateSelect=document.getElementById('emDate'),_dateOption=_dateSelect&&_dateSelect.options[_dateSelect.selectedIndex];
     var _sd=(_dateSelect||{}).value||'';
     if(!_sd||!_dateOption||_dateOption.disabled||!window.LLA_ECOMM.classForStart(_dateOption.getAttribute('data-start'))){ emErr('Please choose an available class time.'); return; }
@@ -15837,17 +15852,10 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
          lead in the sales queue even if the buyer never reaches payment. The ids are
          stored in sessionStorage, so the payment page reuses the same order (no duplicate).
          Meta events unchanged. */
-      /* Restore the October 30 create-after-final-selection contract. The
-         current engine retains buyer/price binding and single-flight protection.
-         Keep November's media cancellation before starting this network call,
-         so video downloads do not compete with the confirmed enrollment. */
-      window.__llaLeadNow=1; btn.disabled=true; btn.textContent='Please wait\u2026';
-      try{ document.querySelectorAll('video').forEach(function(v){ try{ v.pause(); v.removeAttribute('src'); v.querySelectorAll('source').forEach(function(x){x.removeAttribute('src');}); v.load(); }catch(e){} }); }catch(e){}
-      var _done=false;
-      window.LLA_ECOMM.createStagedOrder().then(function(ids){
-        if(!ids||!ids.stid||!ids.orderid)throw new Error('ORDER_NOT_CONFIRMED');
-        if(_done)return;_done=true;window.__llaLeadNow=2;proceed();
-      }).catch(function(){window.__llaLeadNow=0;btn.disabled=false;btn.textContent='Continue';emErr('We could not confirm your enrollment request. Please contact our team before retrying.');});
+      /* One creation point: checkout reuses the staged payload and creates the
+         order there. Never hold screen 2 behind CRM latency or create a second
+         homepage order while navigation is pending. */
+      proceed();
       return;
       /* 2026-09-21 16:55: proceed() runs the instant the CRM order returns (was: re-click the button, 300 ms timer). Measured 5.4-10.6 s click-to-payment on a clean line; target < 4 s. */
       function proceed(){
