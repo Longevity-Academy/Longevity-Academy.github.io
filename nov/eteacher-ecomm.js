@@ -112,9 +112,13 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
         if (v) { found[k] = v; hasAny = true; }
       });
       if (hasAny) {
-        found.ts = Date.now();
-        found.first_landing = window.location.href;
-        found.first_referrer = document.referrer || '';
+        var previous = readAttributionStorage();
+        var continuing = /\/checkout\.html$/.test(window.location.pathname) && previous &&
+          Object.keys(found).every(function(k){ return previous[k] === found[k]; });
+        if (continuing) found = Object.assign({}, previous, found);
+        found.ts = continuing ? previous.ts : Date.now();
+        found.first_landing = continuing ? previous.first_landing : window.location.href;
+        found.first_referrer = continuing ? previous.first_referrer : (document.referrer || '');
         try { localStorage.setItem(ATTR_STORAGE_KEY, JSON.stringify(found)); } catch(e){}
         return found;
       }
@@ -393,6 +397,10 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
     // Local consistency evidence, not an authorization or server-side discount.
     // Bind it to the created order rather than today's mutable promo state.
     try {
+      sessionStorage.setItem('lla_vip_base_v2', JSON.stringify({
+        studentId: String(stid), orderId: String(orderid), env: CFG.env,
+        payload: JSON.parse(JSON.stringify(payload))
+      }));
       sessionStorage.setItem('lla_order_quote_v1', JSON.stringify({
         stid: String(stid), orderid: String(orderid),
         firstPayment: Number(payload.FirstPayment),

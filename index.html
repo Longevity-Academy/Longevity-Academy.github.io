@@ -12618,6 +12618,19 @@ html body#lpRoot #enrollModal .em-band .b-v .lla-tu-vip{border-top:1px solid rgb
 <link rel="stylesheet" href="assets/lla-type-quality.css?v=20261106-2">
 <link rel="stylesheet" href="assets/lla-julie-vip-v8.css?v=20261108-1">
 <script src="assets/lla-julie-vip-motion.js?v=20261107-2" defer></script>
+<style>
+html body#lpRoot #enrollModal #emPromoMsg.err { display: block !important; }
+@media (max-width:767px) {
+  html body#lpRoot #hero .hero-inner {
+    min-width: 0 !important; width: 100% !important; max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  html body#lpRoot #hero h1 { font-size: clamp(32px, 11.1vw, 46px) !important; }
+}
+@media (max-width:360px) {
+  html.mf body#lpRoot .nav .nav-cta { padding-left:10px !important; padding-right:10px !important; }
+}
+</style>
 </head>
 <body id="lpRoot">
 <!-- Google Tag Manager (noscript) -->
@@ -15576,7 +15589,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   /* 2 Nov 2026: prices come from /nov/lla-promo.js ($79 month 1 with JULIE249 / MASTERCLASS-VIP, then 4 x $169; regular $169 x 5). */
 </script>
 <script src="/nov/lla-promo.js?v=20261109-x2"></script>
-<script src="/nov/eteacher-ecomm.js?v=20261109-x2" defer></script>
+<script src="/nov/eteacher-ecomm.js?v=20261114-event1" defer></script>
 <script>
 
       /* Dial-code badge follows the selected country (was hardcoded "US +1"). */
@@ -15789,10 +15802,8 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     try{sessionStorage.setItem('lla_checkout_contact_v1',JSON.stringify({fullName:f.fullName,email:f.email,phone:f.phone,countryIso:f.countryIso}));}catch(e){}
     try{ if(window.LLA_FUNNEL) window.LLA_FUNNEL.addToCart(); }catch(e){}
     step(2);
-    /* Prepare only the CRM order while the buyer chooses plan and date.
-       checkout.html owns the first payment-details request: navigation must never
-       discard a payment intent returned to this document. CRM payload unchanged. */
-    try{ window.__llaPrecreate && window.__llaPrecreate.start(); }catch(e){}
+    /* Create only after the final coupon/date step. Early preparation can
+       otherwise create a second order when the final coupon changes. */
   });
   window.__llaPrecreate=(function(){
     var inflight=null, idsInflight=null;
@@ -15867,7 +15878,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
          cancelled by the page unload. */
       try{ if(window.LLA_FUNNEL) window.LLA_FUNNEL.initiateCheckout(); }catch(e){}
       var ids=(window.LLA_ECOMM&&window.LLA_ECOMM.getCheckoutIds())||null;
-      var _pln=''; try{_pln=sessionStorage.getItem('lla_plan')||localStorage.getItem('lla_plan')||''}catch(e){}if(_pln!=='monthly'&&_pln!=='upfront')_pln='monthly';var _q=(ids&&ids.stid)?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)+'&plan='+_pln):('?plan='+_pln);var _pa=false;try{_pa=!!(window.LLA_PROMO&&window.LLA_PROMO.active&&sessionStorage.getItem('lla_promo_code'))}catch(e){}var href='checkout.html'+_q+(_pa?'&promo=on':'&promo=off'); /* 2026-09-21: payment page shows the promo only when it was applied in THIS flow (order priced with it) */
+      var _pln=''; try{_pln=window.LLA_ECOMM_PLANS&&window.LLA_ECOMM_PLANS.resolvePlan?window.LLA_ECOMM_PLANS.resolvePlan():(sessionStorage.getItem('lla_plan')||localStorage.getItem('lla_plan')||'')}catch(e){}if(_pln!=='monthly'&&_pln!=='upfront')_pln='monthly';var _q=(ids&&ids.stid)?('?stid='+encodeURIComponent(ids.stid)+'&orderid='+encodeURIComponent(ids.orderid)+'&plan='+_pln):('?plan='+_pln);var _pa=false;try{_pa=!!(window.LLA_PROMO&&window.LLA_PROMO.active&&sessionStorage.getItem('lla_promo_code'))}catch(e){}var href='checkout.html'+_q+(_pa?'&promo=on':'&promo=off'); /* The navigation carries the same resolved plan as the finalized order payload. */
       if(window.LLA_ECOMM_CONFIG.env==='staging') href+='&env=staging';
       btn.disabled=true;btn.textContent='Opening secure payment\u2026';
       /* 2026-09-21 15:50: the redirect sat behind in-flight video/image downloads (measured 34 s on a saturated line, 13 s on Omri's desktop).
