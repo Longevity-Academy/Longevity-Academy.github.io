@@ -39,8 +39,8 @@
     var tuition=$('#novTuition');
     if(tuition){
       tuition.innerHTML=(P&&P.active)
-        ? '$79 for month 1, then $169 a month for 4 months. $755 total. <small>Masterclass credit '+code+' applied.</small>'
-        : '$169 a month for 5 months. $845 total. <small>Have a masterclass code? Enter it below for $79 on month 1.</small>';
+        ? '$79 for month 1, then $169 a month for 4 months. $755 total.'
+        : '$169 a month for 5 months. $845 total.';
     }
   }
   function syncPage(){
@@ -50,7 +50,7 @@
     var big=$('#novPrice');
     if(big){big.innerHTML=on?'<s aria-label="Regular first payment">$169</s><strong>$79</strong><span>Month 1</span>':'<strong>$169</strong><span>Month 1</span>';}
     var tot=$('#novTotal');
-    if(tot){tot.innerHTML=on?'<b>$755 total</b>$90 masterclass credit applied to month 1.':'<b>$845 total</b>Enter JULIE249 or MASTERCLASS-VIP for $79 on month 1.';}
+    if(tot){tot.innerHTML=on?'<b>$755 total</b>$90 off month 1.':'<b>$845 total</b>';}
     var pill=$('#llaFloatCta .lla-cta-pill');
     if(pill){pill.innerHTML='<span class="price">'+(on?'$79':'$169')+'</span><span class="mo">MONTH 1</span>';}
     var fc=$('#llaFloatCta'); if(fc){fc.setAttribute('aria-label','Enroll now in The Longevity Blueprint, '+(on?'$79':'$169')+' for month 1');}
