@@ -50,7 +50,7 @@
     var big=$('#novPrice');
     if(big){big.innerHTML=on?'<s aria-label="Regular first payment">$169</s><strong>$79</strong><span>Month 1</span>':'<strong>$169</strong><span>Month 1</span>';}
     var tot=$('#novTotal');
-    if(tot){tot.innerHTML=on?'<b>$755 total</b>$90 off month 1.':'<b>$845 total</b>';}
+    if(tot){tot.innerHTML=on?'<b>$755 total</b>55% off promo trial.':'<b>$845 total</b>';}
     var pill=$('#llaFloatCta .lla-cta-pill');
     if(pill){pill.innerHTML='<span class="price">'+(on?'$79':'$169')+'</span><span class="mo">MONTH 1</span>';}
     var fc=$('#llaFloatCta'); if(fc){fc.setAttribute('aria-label','Enroll now in The Longevity Blueprint, '+(on?'$79':'$169')+' for month 1');}
