@@ -958,7 +958,7 @@ async function initAirwallex(){
   try {
     try{ LLA_META.buyer(); }catch(e){}   // snapshot buyer email before the staged lead is consumed
     var ids = await ensureLiveOrder();
-    setStatus('Fetching Airwallex intent for order ' + ids.orderid + '...');
+    setStatus('Opening secure card form...');
 
     // Must hit the SAME environment the order was created in, else "Order and student did not match".
     var envPrefix = (window.LLA_ECOMM_CONFIG.env === 'staging') ? '/staging' : '';
@@ -1000,7 +1000,7 @@ async function initAirwallex(){
       if (d && d.Airwallex && d.Airwallex.paymentIntentId) break;
       // A missing intent does not establish that this order failed or expired.
       // Keep the same IDs; never create a replacement order from an ambiguous response.
-      setStatus('Preparing your secure payment form (' + _try + '/8)...');
+      setStatus('Opening secure card form...');
       if (_try < 8) await new Promise(function(res){ setTimeout(res, 1500); });
     }
     if (!d || !d.Airwallex || !d.Airwallex.paymentIntentId) {
@@ -1175,7 +1175,7 @@ async function initAirwallex(){
     // Airwallex env must match the account the intent belongs to:
     // staging CRM -> "eTeacher Demo PA" (demo), production CRM -> "ETEACHER EU LIMITED" (prod).
     var awxEnv = (window.LLA_ECOMM_CONFIG.env === 'staging') ? 'demo' : 'prod';
-    setStatus('Initializing Airwallex (' + awxEnv + ')...');
+    setStatus('Opening secure card form...');
     /* Force English locale on Airwallex init. Without this the Drop-In renders
      * its Pay button and inline strings in the buyer's browser language, and
      * localised currency ("\u05e9\u05dc\u05dd ILS 179.00" on a Hebrew browser).
@@ -1222,6 +1222,7 @@ async function initAirwallex(){
     if (!dropIn) throw new Error('createElement returned null - SDK could not build dropIn');
     var _ld = document.getElementById('awx-loading'); if (_ld) _ld.remove();
     dropIn.mount(mountEl);
+    if (awxEnv !== 'demo') setStatus('');
 
     _orderReadyResolve({ ids: ids, amount: amount, paymentId: paymentId });
 
