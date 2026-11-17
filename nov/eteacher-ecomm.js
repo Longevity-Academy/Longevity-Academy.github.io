@@ -16,7 +16,7 @@
  *   POST {worker}/leads/{env} -> {CRM}/Students/AddNewLead
  */
 (function(){
-var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-23","sourceTimestamp":"2026-11-23T21:00:00","sourceOffset":-4,"day":"23","mon":"Nov","month":"November","wd":"Mon","et":"8:00 PM","ct":"7:00 PM","pt":"5:00 PM"},{"courseId":170277,"semesterId":2395,"start":"2026-11-25","sourceTimestamp":"2026-11-25T13:00:00","sourceOffset":-4,"day":"25","mon":"Nov","month":"November","wd":"Wed","et":"12:00 PM","ct":"11:00 AM","pt":"9:00 AM"}];
+var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-23","sourceTimestamp":"2026-11-23T21:00:00","sourceOffset":-4,"day":"23","mon":"Nov","month":"November","wd":"Mon","et":"8:00 PM","ct":"7:00 PM","pt":"5:00 PM"},{"courseId":170277,"semesterId":2395,"start":"2026-11-25","sourceTimestamp":"2026-11-25T13:00:00","sourceOffset":-4,"day":"25","mon":"Nov","month":"November","wd":"Wed","et":"12:00 PM","ct":"11:00 AM","pt":"9:00 AM"},{"courseId":170773,"semesterId":2397,"start":"2026-12-09","sourceTimestamp":"2026-12-09T13:00:00","sourceOffset":-5,"day":"9","mon":"Dec","month":"December","wd":"Wed","et":"1:00 PM","ct":"12:00 PM","pt":"10:00 AM"},{"courseId":170774,"semesterId":2397,"start":"2026-12-10","sourceTimestamp":"2026-12-10T20:00:00","sourceOffset":-5,"day":"10","mon":"Dec","month":"December","wd":"Thu","et":"8:00 PM","ct":"7:00 PM","pt":"5:00 PM"}];
   function selectedBlueprintClass(text){text=String(text||'');return BLUEPRINT_CLASSES.find(function(c){return text.indexOf(c.start)!==-1||new RegExp(c.mon+'[ ]*'+c.day,'i').test(text)})||null;}
 
   var CFG = window.LLA_ECOMM_CONFIG = window.LLA_ECOMM_CONFIG || {};
