@@ -247,13 +247,14 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
         fn: String(payload.FirstName || '').toLowerCase().replace(/[^a-z]/g, ''),
         ln: String(payload.LastName || '').toLowerCase().replace(/[^a-z]/g, ''),
         st: String(payload.State || '').trim().toLowerCase(),
-        country: 'us',
+        country: String(countryIso || 'US').toLowerCase(), /* 17 Nov 2026: buyer's real country (was hard-coded 'us') */
         external_id: _xid
       };
+      try { sessionStorage.setItem('lla_buyer_country', String(countryIso || 'US').toUpperCase()); } catch (e) {}
       localStorage.setItem('lla_identity_v1', JSON.stringify(_ident));
       try { sessionStorage.setItem('lla_buyer_v1', JSON.stringify(_ident)); } catch (e) {}
-      if (window.dataLayer) window.dataLayer.push({ event: 'lla_identity_ready', lla_em: _ident.email, lla_ph: _ident.phone, lla_fn: _ident.fn, lla_ln: _ident.ln, lla_st: _ident.st, lla_country: 'us', lla_external_id: _xid });
-      if (window.fbq) window.fbq('init', '1440305917310328', { em: _ident.email, ph: _ident.phone.replace(/[^0-9]/g, ''), fn: _ident.fn, ln: _ident.ln, st: _ident.st, country: 'us', external_id: _xid });
+      if (window.dataLayer) window.dataLayer.push({ event: 'lla_identity_ready', lla_em: _ident.email, lla_ph: _ident.phone, lla_fn: _ident.fn, lla_ln: _ident.ln, lla_st: _ident.st, lla_country: _ident.country, lla_external_id: _xid });
+      if (window.fbq) window.fbq('init', '1440305917310328', { em: _ident.email, ph: _ident.phone.replace(/[^0-9]/g, ''), fn: _ident.fn, ln: _ident.ln, st: _ident.st, country: _ident.country, external_id: _xid });
     } catch (e) {}
 
     var notes = 'Buyer country: ' + countryIso + ' | US State: ' + (stateCode || '-') + ' | SELF-SERVICE ECOMM CHECKOUT: The Longevity Blueprint';

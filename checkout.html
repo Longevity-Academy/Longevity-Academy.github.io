@@ -679,6 +679,10 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
                 if(same&&typeof o.shipSame==='boolean') same.checked=o.shipSame;
               }
               restore(); toggle();
+              /* 17 Nov 2026: non-US postcodes contain letters (UK, CA, NL...). Numeric keyboard only for US buyers. */
+              (function(){ var c='US'; try{ c=(sessionStorage.getItem('lla_buyer_country')||'US').toUpperCase(); }catch(_e){}
+                if(c!=='US'){ ['billZip','shipZip'].forEach(function(id){ var e=el(id); if(e){ e.setAttribute('inputmode','text'); e.setAttribute('placeholder','Postcode'); e.setAttribute('aria-label',e.getAttribute('aria-label').replace('ZIP code','postcode')); } });
+                  ['billState','shipState'].forEach(function(id){ var e=el(id); if(e){ e.setAttribute('placeholder','State / Region'); } }); } })();
               ids.forEach(function(id){ var e=el(id); if(e){ e.addEventListener('input',save); e.addEventListener('change',save); } });
               if(same) same.addEventListener('change',function(){ toggle(); save(); });
               /* Read by the payment flow: billing + resolved shipping address. */
@@ -805,7 +809,7 @@ window.__llaAwxSdkReady.catch(function(){});
 </script>
 <script async fetchpriority="high" src="https://static.airwallex.com/components/sdk/v1/index.js" onload="window.__llaAwxSdkResolve()" onerror="window.__llaAwxSdkReject(new Error('AIRWALLEX_SDK_UNAVAILABLE'))"></script>
 <script src="nov/lla-promo.js?v=20261109-x2"></script>
-<script src="nov/eteacher-ecomm.js?v=20261117-dec"></script>
+<script src="nov/eteacher-ecomm.js?v=20261117-cty"></script>
 <script>
 document.querySelectorAll('.pay-tab').forEach(function(t){
   t.addEventListener('click',function(){
