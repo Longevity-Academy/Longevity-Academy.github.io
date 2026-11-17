@@ -1191,6 +1191,8 @@ async function initAirwallex(){
      * on top of the pre-mount currency guard above. The intent itself is what actually
      * gets charged, and we already refused to mount unless the intent was minted in USD.
      * appearance.locale is 'en' so the Pay button label is English. */
+    /* 17 Nov 2026: 3DS skip on the recurring card flow, test link only (?skip3ds=1). Off for all buyers until proven. */
+    var _llaSkip3ds = /[?&]skip3ds=1(&|$)/.test(location.search);
     var dropIn = awx.createElement('dropIn', {
       intent_id: intentId,
       client_secret: clientSecret,
@@ -1202,7 +1204,8 @@ async function initAirwallex(){
       recurringOptions: plan === 'upfront' || num <= 1 ? undefined : {
         next_triggered_by: 'merchant',
         currency: 'USD',
-        merchant_trigger_reason: 'unscheduled'
+        merchant_trigger_reason: 'unscheduled',
+        three_ds_action: _llaSkip3ds ? 'SKIP_3DS' : undefined
       },
       payment_consent: plan === 'upfront' || num <= 1 ? undefined : {
         next_triggered_by: 'merchant',
@@ -1216,6 +1219,7 @@ async function initAirwallex(){
       payment_methods:    ['card','paypal'],
       paymentMethods:     ['card','paypal'],
       payment_method_types:['card','paypal'],
+      three_ds_action: (_llaSkip3ds && !(plan === 'upfront' || num <= 1)) ? 'SKIP_3DS' : undefined,
       showPayButton: true,
       appearance: { locale: 'en', mode: 'light', variables: { colorBrand: '#006EFF' } }
     });
