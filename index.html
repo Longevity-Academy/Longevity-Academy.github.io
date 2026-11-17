@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="js mf">
 <head>
+<!-- Checkout validation must not wait behind decorative deferred scripts.
+     defer preserves execution after the document and existing configuration. -->
+<script src="assets/nanp-state-autofill.js" defer fetchpriority="high"></script>
+<script src="assets/lla-country.js" defer fetchpriority="high"></script>
+<script src="/nov/eteacher-ecomm.js?v=20261117-dec" defer fetchpriority="high"></script>
 <script>
 /* Enroll must never fall through to the application form while deferred assets load. */
 (function(){
@@ -12632,6 +12637,7 @@ html body#lpRoot #enrollModal #emPromoMsg.err { display: block !important; }
 }
 </style>
 <style id="lla-no-promo-20261115">#enrollModal label[for="emPromo"],#enrollModal .em-promo,#enrollModal #emPromoMsg,#enrollModal .mock-promo-lb,#enrollModal .lla-tu-vip{display:none!important}</style>
+<style id="lla-checkout-label-step2">#enrollModal:has(#emStep1.on) .mock-footer .lla-lockline{display:none!important}</style>
 </head>
 <body id="lpRoot">
 <!-- Google Tag Manager (noscript) -->
@@ -15362,7 +15368,6 @@ window.LLA_GOOGLE_CAMPAIGN_IDS = window.LLA_GOOGLE_CAMPAIGN_IDS || {
     })();
   </script>
 
-<script src="assets/nanp-state-autofill.js" defer></script>
 <style id="nav-fix-v10">
 /* ---- NAV FIX v10: crisp logo lockup + balanced menu spacing ---- */
 .nav-inner{ justify-content:space-between !important; gap:0 !important; }
@@ -15767,7 +15772,6 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   /* 2 Nov 2026: prices come from /nov/lla-promo.js ($79 month 1 with JULIE249 / MASTERCLASS-VIP, then 4 x $169; regular $169 x 5). */
 </script>
 <script src="/nov/lla-promo.js?v=20261109-x2"></script>
-<script src="/nov/eteacher-ecomm.js?v=20261117-dec" defer></script>
 <script>
 
       /* Dial-code badge follows the selected country (was hardcoded "US +1"). */
@@ -16220,7 +16224,6 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
 })();
 
 </script>
-  <script src="assets/lla-country.js" defer></script>
 
 <!-- WhatsApp floater (eTeacher IIBS button look; opens the LLA WhatsApp channel directly) -->
 <div id="et-bumpyard-widget" class="active"><div class="et-bump-btn-holder"><a class="widget-trigger-btn" href="https://wa.me/12015023701" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><img src="assets/wa/whatsapp.svg" alt=""> <span class="label">Available on&nbsp;WhatsApp</span></a></div></div>
