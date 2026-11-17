@@ -1191,9 +1191,12 @@ async function initAirwallex(){
      * on top of the pre-mount currency guard above. The intent itself is what actually
      * gets charged, and we already refused to mount unless the intent was minted in USD.
      * appearance.locale is 'en' so the Pay button label is English. */
-    /* 17 Nov 2026: 3DS skip on the recurring card flow, test link only (?skip3ds=1). Off for all buyers until proven. */
-    var _llaSkip3ds = /[?&]skip3ds=1(&|$)/.test(location.search);
-    var dropIn = awx.createElement('dropIn', {
+    /* 17 Nov 2026: 3DS skip on the recurring (installment) card flow for all buyers (Omri).
+     * Safety net: if Airwallex returns an error on an attempt that carried SKIP_3DS, the card form
+     * is rebuilt once without it, on the same intent, so the buyer can still pay. ?skip3ds=0 turns it off. */
+    var _llaSkip3ds = !/[?&]skip3ds=0(&|$)/.test(location.search) && !(function(){try{return sessionStorage.getItem('lla_noskip_'+ids.orderid)==='1';}catch(_e){return false;}})();
+    var _llaRecurring = !(plan === 'upfront' || num <= 1);
+    function _llaBuildDropIn(skip){ return awx.createElement('dropIn', {
       intent_id: intentId,
       client_secret: clientSecret,
       currency: 'USD',
@@ -1205,7 +1208,7 @@ async function initAirwallex(){
         next_triggered_by: 'merchant',
         currency: 'USD',
         merchant_trigger_reason: 'unscheduled',
-        three_ds_action: _llaSkip3ds ? 'SKIP_3DS' : undefined
+        three_ds_action: skip ? 'SKIP_3DS' : undefined
       },
       payment_consent: plan === 'upfront' || num <= 1 ? undefined : {
         next_triggered_by: 'merchant',
@@ -1219,10 +1222,12 @@ async function initAirwallex(){
       payment_methods:    ['card','paypal'],
       paymentMethods:     ['card','paypal'],
       payment_method_types:['card','paypal'],
-      three_ds_action: (_llaSkip3ds && !(plan === 'upfront' || num <= 1)) ? 'SKIP_3DS' : undefined,
+      three_ds_action: (skip && _llaRecurring) ? 'SKIP_3DS' : undefined,
       showPayButton: true,
       appearance: { locale: 'en', mode: 'light', variables: { colorBrand: '#006EFF' } }
-    });
+    }); }
+    var _llaSkipActive = _llaSkip3ds && _llaRecurring;
+    var dropIn = _llaBuildDropIn(_llaSkipActive);
     if (!dropIn) throw new Error('createElement returned null - SDK could not build dropIn');
     var _ld = document.getElementById('awx-loading'); if (_ld) _ld.remove();
     dropIn.mount(mountEl);
@@ -1231,7 +1236,8 @@ async function initAirwallex(){
     _orderReadyResolve({ ids: ids, amount: amount, paymentId: paymentId });
 
 
-    dropIn.on('success', function(evt){
+    function _llaWire(el){
+    el.on('success', function(evt){
       if (_paymentConfirmed) return;
       var returnedIntent = evt && evt.detail && evt.detail.intent;
       if (returnedIntent && returnedIntent.id && returnedIntent.id !== intentId) {
@@ -1254,11 +1260,21 @@ async function initAirwallex(){
       }).then(function(report){ finishPaymentReport({orderid:ids.orderid,amount:amount,currency:currency}, report); })
         .catch(function(){ finishPaymentReport({orderid:ids.orderid,amount:amount,currency:currency}, null); });
     });
-    dropIn.on('error', function(evt){
+    el.on('error', function(evt){
       if (_paymentConfirmed) return;
+      if (_llaSkipActive) {
+        /* Safety net: retry once on a fresh page without SKIP_3DS (same order, same intent). */
+        _llaSkipActive = false;
+        try { sessionStorage.setItem('lla_noskip_'+ids.orderid,'1'); sessionStorage.setItem('lla_noskip_notice','1'); } catch(_e){}
+        setStatus('Please enter your card details again to complete your payment.', '#c33');
+        setTimeout(function(){ location.reload(); }, 600);
+        return;
+      }
       setStatus('We could not confirm the payment status. Please check with your payment provider or support before trying another payment.', '#c33');
     });
-    dropIn.on('ready', function(){ if (!_paymentConfirmed) setStatus(awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : ''); });
+    }
+    _llaWire(dropIn);
+    dropIn.on('ready', function(){ if (_paymentConfirmed) return; var _n=false; try{_n=sessionStorage.getItem('lla_noskip_notice')==='1'; sessionStorage.removeItem('lla_noskip_notice');}catch(_e){} setStatus(_n ? 'Please enter your card details again to complete your payment.' : (awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : ''), _n ? '#c33' : undefined); });
 
     // Manual pay button also submits the drop-in
     document.getElementById('proceed').addEventListener('click', function(){
