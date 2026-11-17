@@ -35,7 +35,7 @@ return of.apply(this,arguments);};}
 <link rel="preload" href="assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link href="assets/lla-fonts.css?v=20261106-1" rel="stylesheet" />
 <!-- PayPal Smart Buttons: identical SDK + client-id to eTeacher's other schools (israelbiblicalstudies.com checkout), currency USD. -->
-<link rel="preconnect" href="https://checkout.airwallex.com" /><link rel="preconnect" href="https://eteacher-leads-proxy.gitter-omri.workers.dev" /><link rel="preconnect" href="https://www.paypal.com" />
+<link rel="preconnect" href="https://checkout.airwallex.com" /><link rel="preconnect" href="https://static.airwallex.com" /><link rel="preconnect" href="https://eteacher-leads-proxy.gitter-omri.workers.dev" /><link rel="preconnect" href="https://www.paypal.com" />
 <script async src="https://www.paypal.com/sdk/js?client-id=AXL1tqJTVoHQ2RltFz9SUVu8EM5ZTKDLCviVev-lOPQEEX1ScBii9d5MSo3_dxGjemVjTQJr7hpztwkQ&currency=USD&disable-funding=credit,card" onload="window.LLA_PAYPAL_SDK_READY=true;if(window.LLA_RENDER_PAYPAL_PENDING&&window.LLA_RENDER_PAYPAL)window.LLA_RENDER_PAYPAL();"></script>
 <style>
 :root{
@@ -803,7 +803,7 @@ window.__llaAwxSdkReady = new Promise(function(resolve, reject){
 });
 window.__llaAwxSdkReady.catch(function(){});
 </script>
-<script async fetchpriority="high" src="https://checkout.airwallex.com/assets/elements.bundle.min.js?version=1.160.0" onload="window.__llaAwxSdkResolve()" onerror="window.__llaAwxSdkReject(new Error('AIRWALLEX_SDK_UNAVAILABLE'))"></script>
+<script async fetchpriority="high" src="https://static.airwallex.com/components/sdk/v1/index.js" onload="window.__llaAwxSdkResolve()" onerror="window.__llaAwxSdkReject(new Error('AIRWALLEX_SDK_UNAVAILABLE'))"></script>
 <script src="nov/lla-promo.js?v=20261109-x2"></script>
 <script src="nov/eteacher-ecomm.js?v=20261117-dec"></script>
 <script>
@@ -956,10 +956,11 @@ var _awxInitPromise = null;
 function startAwxInit(){
   if (_awxInitPromise) return _awxInitPromise;
   _awxInitPromise = window.__llaAwxSdkReady.then(function(){
-    var awx = window.Airwallex;
-    if (!awx || !awx.init) throw new Error('Airwallex SDK not loaded. window.Airwallex=' + typeof window.Airwallex);
+    /* 17 Nov 2026: eTeacher FE guide (DEV-9922/9915) - Components SDK v1, enabledElements payments. */
+    var awx = window.AirwallexComponentsSDK;
+    if (!awx || !awx.init) throw new Error('Airwallex SDK not loaded. window.AirwallexComponentsSDK=' + typeof window.AirwallexComponentsSDK);
     var env = (window.LLA_ECOMM_CONFIG && window.LLA_ECOMM_CONFIG.env === 'staging') ? 'demo' : 'prod';
-    return awx.init({ env: env, origin: window.location.origin, locale: 'en' });
+    return awx.init({ env: env, enabledElements: ['payments'], locale: 'en' });
   });
   return _awxInitPromise;
 }
@@ -1181,9 +1182,9 @@ async function initAirwallex(){
 
     // CRM preparation and SDK download run in parallel; await the SDK before use.
     await startAwxInit();
-    // The elements.bundle.min.js from checkout.airwallex.com attaches window.Airwallex directly.
-    var awx = window.Airwallex;
-    if (!awx || !awx.init) throw new Error('Airwallex SDK not loaded. window.Airwallex=' + typeof window.Airwallex);
+    // Components SDK v1 (static.airwallex.com) attaches window.AirwallexComponentsSDK.
+    var awx = window.AirwallexComponentsSDK;
+    if (!awx || !awx.createElement) throw new Error('Airwallex SDK not loaded. window.AirwallexComponentsSDK=' + typeof window.AirwallexComponentsSDK);
 
     // Airwallex env must match the account the intent belongs to:
     // staging CRM -> "eTeacher Demo PA" (demo), production CRM -> "ETEACHER EU LIMITED" (prod).
@@ -1207,38 +1208,31 @@ async function initAirwallex(){
      * is rebuilt once without it, on the same intent, so the buyer can still pay. ?skip3ds=0 turns it off. */
     var _llaSkip3ds = !/[?&]skip3ds=0(&|$)/.test(location.search) && !(function(){try{return sessionStorage.getItem('lla_noskip_'+ids.orderid)==='1';}catch(_e){return false;}})();
     var _llaRecurring = !(plan === 'upfront' || num <= 1);
-    function _llaBuildDropIn(skip){ return awx.createElement('dropIn', {
-      intent_id: intentId,
-      client_secret: clientSecret,
-      currency: 'USD',
-      mode: plan === 'upfront' || num <= 1 ? 'payment' : 'recurring',
-      customer_id: plan === 'upfront' || num <= 1 ? undefined : (customerId || undefined),
-      /* CRM AirwallexOptions prescribe payment_consent {next_triggered_by:'merchant', merchant_trigger_reason:'unscheduled'}.
-       * recurringOptions is the legacy-bundle key, payment_consent the current one; both carry the same values. */
-      recurringOptions: plan === 'upfront' || num <= 1 ? undefined : {
-        next_triggered_by: 'merchant',
-        currency: 'USD',
-        merchant_trigger_reason: 'unscheduled',
-        three_ds_action: skip ? 'SKIP_3DS' : undefined
-      },
-      payment_consent: plan === 'upfront' || num <= 1 ? undefined : {
-        next_triggered_by: 'merchant',
-        merchant_trigger_reason: 'unscheduled'
-      },
-      /* Airwallex filters Drop-in methods by currency + country_code and lists
-       * country_code as REQUIRED for paypal. Without it PayPal never renders. */
-      country_code: (function(){try{var c=sessionStorage.getItem('lla_buyer_country')||'US';return /^[A-Z]{2}$/.test(c)?c:'US';}catch(e){return 'US';}})(),
-      /* Same payment-method configuration as the working pages.dev checkout. */
-      methods:            ['card','paypal'],
-      payment_methods:    ['card','paypal'],
-      paymentMethods:     ['card','paypal'],
-      payment_method_types:['card','paypal'],
-      three_ds_action: (skip && _llaRecurring) ? 'SKIP_3DS' : undefined,
-      showPayButton: true,
-      appearance: { locale: 'en', mode: 'light', variables: { colorBrand: '#006EFF' } }
-    }); }
+    /* 17 Nov 2026: eTeacher FE guide - pass the CRM AirwallexOptions object as it is.
+     * The backend decides methods (card/applepay/googlepay), mode, payment_consent, customer_id
+     * and wallet countryCode. We add display options only. PayPal stays on its own tab (not Airwallex).
+     * three_ds_action is the existing 17 Nov card setting (installments only), unchanged. */
+    var _awxOpts = d.AirwallexOptions;
+    if (!_awxOpts) {
+      var _nl = document.getElementById('awx-loading'); if (_nl) _nl.remove();
+      mountEl.innerHTML = '<div role="status" style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
+        + 'Card payment is temporarily unavailable for this order. You can pay with PayPal above, or contact '
+        + '<a href="mailto:advisor@longevitylifeacademy.com" style="font-weight:700">advisor@longevitylifeacademy.com</a>. Nothing has been charged.</div>';
+      setStatus('');
+      console.warn('AIRWALLEX_OPTIONS_NULL: card form not shown, PayPal remains available');
+      _orderReadyResolve({ ids: ids, amount: amount, paymentId: paymentId });
+      return;
+    }
+    function _llaBuildDropIn(skip){
+      var o = Object.assign({}, _awxOpts, {
+        showPayButton: true,
+        appearance: { locale: 'en', mode: 'light', variables: { colorBrand: '#006EFF' } }
+      });
+      if (skip && _llaRecurring) o.three_ds_action = 'SKIP_3DS';
+      return awx.createElement('dropIn', o);
+    }
     var _llaSkipActive = _llaSkip3ds && _llaRecurring;
-    var dropIn = _llaBuildDropIn(_llaSkipActive);
+    var dropIn = await _llaBuildDropIn(_llaSkipActive);
     if (!dropIn) throw new Error('createElement returned null - SDK could not build dropIn');
     var _ld = document.getElementById('awx-loading'); if (_ld) _ld.remove();
     dropIn.mount(mountEl);
