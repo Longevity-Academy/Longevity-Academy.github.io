@@ -988,7 +988,9 @@ async function initAirwallex(){
       if (_pre && String(_pre.orderid) === String(ids.orderid) && String(_pre.stid) === String(ids.stid) &&
           Date.now() - Number(_pre.ts) < 15*60*1000 && _pre.body && _pre.body.Airwallex && _pre.body.Airwallex.paymentIntentId) { d = _pre.body; }
     } catch(e) { d = null; }
-    for (var _try = 1; _try <= 8 && !(d && d.Airwallex && d.Airwallex.paymentIntentId); _try++) {
+    /* 17 Nov 2026 speed: poll the async intent quickly at first (0.3-1 s), then every 1.5 s. Same ~12 s window as before. */
+    var _llaPoll = [300, 400, 500, 700, 1000, 1500, 1500, 1500, 1500, 1500, 1500];
+    for (var _try = 1; _try <= 12 && !(d && d.Airwallex && d.Airwallex.paymentIntentId); _try++) {
       try {
         r = await fetch('https://eteacher-leads-proxy.gitter-omri.workers.dev' + envPrefix + '/api/checkout/details', {
           method:'POST', headers:{'Content-Type':'application/json'},
@@ -1017,7 +1019,7 @@ async function initAirwallex(){
       // A missing intent does not establish that this order failed or expired.
       // Keep the same IDs; never create a replacement order from an ambiguous response.
       setStatus('Opening secure card form...');
-      if (_try < 8) await new Promise(function(res){ setTimeout(res, 1500); });
+      if (_try < 12) await new Promise(function(res){ setTimeout(res, _llaPoll[_try - 1] || 1500); });
     }
     if (!d || !d.Airwallex || !d.Airwallex.paymentIntentId) {
       throw new Error('CHECKOUT_INTENT_PENDING');
