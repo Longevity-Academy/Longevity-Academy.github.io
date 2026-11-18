@@ -1212,7 +1212,8 @@ async function initAirwallex(){
     /* 17 Nov 2026: 3DS skip on the recurring (installment) card flow for all buyers (Omri).
      * Safety net: if Airwallex returns an error on an attempt that carried SKIP_3DS, the card form
      * is rebuilt once without it, on the same intent, so the buyer can still pay. ?skip3ds=0 turns it off. */
-    var _llaSkip3ds = !/[?&]skip3ds=0(&|$)/.test(location.search) && !(function(){try{return sessionStorage.getItem('lla_noskip_'+ids.orderid)==='1';}catch(_e){return false;}})();
+    /* 18 Nov 2026: off by default. The Components SDK does not send it on confirm (live request checked), and Airwallex only accepts SKIP_3DS once enabled on the merchant account. ?skip3ds=1 keeps the test path. */
+    var _llaSkip3ds = /[?&]skip3ds=1(&|$)/.test(location.search) && !(function(){try{return sessionStorage.getItem('lla_noskip_'+ids.orderid)==='1';}catch(_e){return false;}})();
     var _llaRecurring = !(plan === 'upfront' || num <= 1);
     /* 17 Nov 2026: eTeacher FE guide - pass the CRM AirwallexOptions object as it is.
      * The backend decides methods (card/applepay/googlepay), mode, payment_consent, customer_id
@@ -1273,6 +1274,14 @@ async function initAirwallex(){
     });
     el.on('error', function(evt){
       if (_paymentConfirmed) return;
+      /* 18 Nov 2026: show Airwallex's own reason and keep the card fields. No page reload on the normal path. */
+      var _er = (evt && evt.detail && (evt.detail.error || evt.detail)) || {};
+      var _msg = String(_er.message || '').slice(0, 200);
+      try { console.warn('AWX_CARD_ERROR', _er.code || '', _msg); } catch(_e){}
+      if (!_llaSkipActive && _msg) {
+        setStatus(_msg + ' You can correct the details or use another card.', '#c33');
+        return;
+      }
       if (_llaSkipActive) {
         /* Safety net: retry once on a fresh page without SKIP_3DS (same order, same intent). */
         _llaSkipActive = false;
