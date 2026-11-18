@@ -20,6 +20,18 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
   function selectedBlueprintClass(text){text=String(text||'');return BLUEPRINT_CLASSES.find(function(c){return text.indexOf(c.start)!==-1||new RegExp(c.mon+'[ ]*'+c.day,'i').test(text)})||null;}
 
   var CFG = window.LLA_ECOMM_CONFIG = window.LLA_ECOMM_CONFIG || {};
+  /* 2026-11-18 (Omri): $1 live payment test. Only when ?paytest=LLATEST1 was opened in this tab AND the
+     buyer email is Omri's QA address. Then the CRM order is $1 today + 4 x $1 (same recurring path as real buyers).
+     Everyone else is untouched. Remove after the test. */
+  function llaPayTest(email){
+    try {
+      var q = new URLSearchParams(location.search).get('paytest');
+      if (q) sessionStorage.setItem('lla_paytest', String(q).trim().toUpperCase());
+      if (sessionStorage.getItem('lla_paytest') !== 'LLATEST1') return false;
+      return /^gitter\.omri(\+[a-z0-9._-]+)?@(gmail\.com|gita-agency\.com)$/i.test(String(email || '').trim());
+    } catch(e) { return false; }
+  }
+  try { llaPayTest(''); } catch(e) {}
   CFG.workerBase = CFG.workerBase || 'https://eteacher-leads-proxy.gitter-omri.workers.dev';
   CFG.env = CFG.env || 'production';          // 'staging' | 'production'
   CFG.mode = CFG.mode || 'lead';              // 'lead' (proven AddNewLead path) | 'ecomm' (3-route spec)
@@ -311,6 +323,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       // UI configuration counts all payments; CRM counts installments AFTER today.
       payload.NumberOfPayments = pr.plan === 'upfront' ? 1 : Math.max(0, Number(pr.numberOfPayments) - 1);
       payload.LeftToPay        = Number(pr.leftToPay);
+      if (pr.plan !== 'upfront' && llaPayTest(fields.email)) { payload.FirstPayment = 1; payload.NumberOfPayments = 4; payload.LeftToPay = 4; }
       /* stamp the chosen plan on the CRM lead (allowed chars only) */
       var _planExtra = 'plan=' + pr.plan;
       payload.DynamicParameters = ((payload.DynamicParameters ? payload.DynamicParameters + '&' : '') + _planExtra);
@@ -423,6 +436,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
             (!q.env || q.env === CFG.env) && q.currency === 'USD' &&
             ((Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === Number(q.firstPayment) * 4 &&
               (Number(q.firstPayment) === 149 || Number(q.firstPayment) === 179)) ||
+             (Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === 4 && Number(q.firstPayment) === 1) ||
              (Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === 676 &&
               (Number(q.firstPayment) === 79 || Number(q.firstPayment) === 169)) ||
              (Number(q.numberOfPayments) <= 1 && Number(q.firstPayment) === 799 && Number(q.leftToPay) === 0))) {
@@ -448,6 +462,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       var promo = window.LLA_PROMO || {};
       var allowed = [
         { firstPayment: 79, numberOfPayments: 4, leftToPay: 676 },
+        { firstPayment: 1, numberOfPayments: 4, leftToPay: 4 },
         { firstPayment: 169, numberOfPayments: 4, leftToPay: 676 },
         { firstPayment: 179, numberOfPayments: 4, leftToPay: 716 },
         { firstPayment: 799, numberOfPayments: 0, leftToPay: 0 },
@@ -517,6 +532,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
         _pl.FirstPayment     = Number(_pr.firstPayment);
         _pl.NumberOfPayments = _pr.plan === 'upfront' ? 1 : Math.max(0, Number(_pr.numberOfPayments) - 1);
         _pl.LeftToPay        = Number(_pr.leftToPay);
+        if (_pr.plan !== 'upfront' && llaPayTest(_pl.Email)) { _pl.FirstPayment = 1; _pl.NumberOfPayments = 4; _pl.LeftToPay = 4; }
         if (typeof _pl.DynamicParameters === 'string') {
           _pl.DynamicParameters = /(^|&)plan=(monthly|upfront)/.test(_pl.DynamicParameters)
             ? _pl.DynamicParameters.replace(/(^|&)plan=(monthly|upfront)/, '$1plan=' + _pr.plan)
