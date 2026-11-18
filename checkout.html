@@ -1213,7 +1213,8 @@ async function initAirwallex(){
      * Safety net: if Airwallex returns an error on an attempt that carried SKIP_3DS, the card form
      * is rebuilt once without it, on the same intent, so the buyer can still pay. ?skip3ds=0 turns it off. */
     /* 18 Nov 2026: off by default. The Components SDK does not send it on confirm (live request checked), and Airwallex only accepts SKIP_3DS once enabled on the merchant account. ?skip3ds=1 keeps the test path. */
-    var _llaSkip3ds = /[?&]skip3ds=1(&|$)/.test(location.search) && !(function(){try{return sessionStorage.getItem('lla_noskip_'+ids.orderid)==='1';}catch(_e){return false;}})();
+    /* 19 Nov 2026: on again for monthly plans (Omri: no bank-code step). Sent via recurringOptions, the only route the Components SDK forwards (payment_consents/create). ?skip3ds=0 turns it off. */
+    var _llaSkip3ds = !/[?&]skip3ds=0(&|$)/.test(location.search) && !(function(){try{return sessionStorage.getItem('lla_noskip_'+ids.orderid)==='1';}catch(_e){return false;}})();
     var _llaRecurring = !(plan === 'upfront' || num <= 1);
     /* 17 Nov 2026: eTeacher FE guide - pass the CRM AirwallexOptions object as it is.
      * The backend decides methods (card/applepay/googlepay), mode, payment_consent, customer_id
@@ -1235,7 +1236,12 @@ async function initAirwallex(){
         showPayButton: true,
         appearance: { locale: 'en', mode: 'light', variables: { colorBrand: '#006EFF' } }
       });
-      if (skip && _llaRecurring) o.three_ds_action = 'SKIP_3DS';
+      if (skip && _llaRecurring) {
+        /* Same consent values the CRM prescribes (merchant / unscheduled), plus the skip request. */
+        var _pc = o.payment_consent || {};
+        o.recurringOptions = { next_triggered_by: _pc.next_triggered_by || 'merchant', merchant_trigger_reason: _pc.merchant_trigger_reason || 'unscheduled', currency: o.currency || 'USD', three_ds_action: 'SKIP_3DS' };
+        delete o.payment_consent;
+      }
       return awx.createElement('dropIn', o);
     }
     var _llaSkipActive = _llaSkip3ds && _llaRecurring;
@@ -1278,22 +1284,22 @@ async function initAirwallex(){
       var _er = (evt && evt.detail && (evt.detail.error || evt.detail)) || {};
       var _msg = String(_er.message || '').slice(0, 200);
       try { console.warn('AWX_CARD_ERROR', _er.code || '', _msg); } catch(_e){}
-      if (!_llaSkipActive && _msg) {
-        setStatus(_msg + ' You can correct the details or use another card.', '#c33');
-        return;
-      }
+      try { window.LLA_META.track('PayErr_' + (String(_er.code || 'unknown').replace(/[^a-zA-Z0-9_]/g, '_').slice(0, 40)), { order_id: String(ids.orderid) }); } catch(_e){}
       if (_llaSkipActive) {
-        /* Safety net: retry once on a fresh page without SKIP_3DS (same order, same intent). */
+        /* Any error on an attempt that asked for the skip: later attempts on this order go without it. Card fields stay; no reload. */
         _llaSkipActive = false;
-        try { sessionStorage.setItem('lla_noskip_'+ids.orderid,'1'); sessionStorage.setItem('lla_noskip_notice','1'); } catch(_e){}
-        setStatus('Please enter your card details again to complete your payment.', '#c33');
-        setTimeout(function(){ location.reload(); }, 600);
+        try { sessionStorage.setItem('lla_noskip_'+ids.orderid,'1'); } catch(_e){}
+        try { var _pc2 = _awxOpts.payment_consent || {}; el.update({ recurringOptions: { next_triggered_by: _pc2.next_triggered_by || 'merchant', merchant_trigger_reason: _pc2.merchant_trigger_reason || 'unscheduled', currency: _awxOpts.currency || 'USD' } }); } catch(_e){ try { console.warn('AWX_UPDATE_FAILED', String(_e && _e.message)); } catch(_e2){} }
+      }
+      if (_msg) {
+        setStatus(_msg + ' You can correct the details or use another card.', '#c33');
         return;
       }
       setStatus('We could not confirm the payment status. Please check with your payment provider or support before trying another payment.', '#c33');
     });
     }
     _llaWire(dropIn);
+    try { dropIn.on('clickConfirmButton', function(){ try { window.LLA_META.track('Pay_Click', { order_id: String(ids.orderid) }); } catch(_e){} }); } catch(_e){}
     dropIn.on('ready', function(){ if (_paymentConfirmed) return; var _n=false; try{_n=sessionStorage.getItem('lla_noskip_notice')==='1'; sessionStorage.removeItem('lla_noskip_notice');}catch(_e){} setStatus(_n ? 'Please enter your card details again to complete your payment.' : (awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : ''), _n ? '#c33' : undefined); });
 
     // Manual pay button also submits the drop-in
