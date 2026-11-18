@@ -12638,6 +12638,46 @@ html body#lpRoot #enrollModal #emPromoMsg.err { display: block !important; }
 </style>
 <style id="lla-no-promo-20261115">#enrollModal label[for="emPromo"],#enrollModal .em-promo,#enrollModal #emPromoMsg,#enrollModal .mock-promo-lb,#enrollModal .lla-tu-vip{display:none!important}</style>
 <style id="lla-checkout-label-step2">#enrollModal:has(#emStep1.on) .mock-footer .lla-lockline{display:none!important}</style>
+<style id="lla-mobile-polish-20261117">
+/* 2026-11-17 (Omri): mobile polish, presentation only. Button gloss under text, nav label centred,
+   lead-gen "Enroll Online Now" single button, larger trust logos, compact pricing fold on phones,
+   floater stays tappable while it fades. No markup, script, price or tracking change. */
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) :is(.section-cta-btn,.nav-cta,.mobile-nav-cta,.pk-btn,#emGo1,#emGo2){isolation:isolate!important;text-align:center!important}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) :is(.section-cta-btn,#emGo1,#emGo2)::before{z-index:-1!important}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) .nav-cta{padding-top:0!important;padding-bottom:0!important;line-height:1!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #lead-gen a.lg-buy .lg-buy-main{background:none!important;box-shadow:none!important;padding:0!important;min-height:0!important;border-radius:0!important;display:inline!important;overflow:visible!important;line-height:1.2!important;transform:none!important;filter:none!important}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #lead-gen a.lg-buy{min-height:58px!important;padding:14px 20px!important;align-items:center!important;justify-content:center!important;text-align:center!important}
+/* trust strip logos */
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) section.trust-strip .trust-logo{width:200px!important;min-width:200px!important;height:72px!important;padding:8px 14px!important}
+html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) section.trust-strip .trust-logo-img{height:52px!important;max-height:52px!important;max-width:176px!important;width:auto!important;object-fit:contain!important}
+/* floater: keep it tappable during the fade-out, then take it out of hit-testing */
+html.mf body#lpRoot:not(#lla-p1) .lla-float-cta.is-visible.mf-hide{pointer-events:auto!important;visibility:hidden!important;transition:opacity .25s ease,visibility 0s linear .25s!important}
+html.mf body#lpRoot:not(#lla-p1) .lla-float-cta.is-visible:not(.mf-hide){visibility:visible!important}
+@media (max-width:720px){
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) section.trust-strip .trust-logo{width:168px!important;min-width:168px!important;height:62px!important;padding:6px 10px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) section.trust-strip .trust-logo-img{height:44px!important;max-height:44px!important;max-width:150px!important}
+  /* compact pricing fold */
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-head{margin-bottom:14px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-head .section-title{font-size:28px!important;line-height:1.15!important;margin-bottom:6px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-head .section-title *{font-size:inherit!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-tag{font-size:14px!important;margin-bottom:6px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-title{font-size:27px!important;line-height:1.1!important;margin-bottom:10px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-title *{font-size:inherit!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-price{gap:12px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-now{font-size:62px!important;line-height:1!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-now sup{font-size:26px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-side :is(s,b){font-size:17px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-after{font-size:15px!important;padding:10px 2px!important;margin-bottom:12px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .pk-btn{min-height:56px!important;height:56px!important;font-size:19px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .pk-btn *{font-size:19px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .pk-foot{font-size:14px!important;margin-top:8px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-secure{padding-top:10px!important;margin-bottom:12px!important;gap:6px!important;font-size:14px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-tiles{gap:8px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-t{min-height:0!important;height:auto!important;padding:11px 14px!important;border-radius:14px!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-t b{font-size:17px!important;line-height:1.2!important}
+  html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-t span{font-size:14px!important;line-height:1.3!important;min-height:0!important}
+}
+</style>
 </head>
 <body id="lpRoot">
 <!-- Google Tag Manager (noscript) -->
