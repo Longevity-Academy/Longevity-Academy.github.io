@@ -34,6 +34,8 @@ return of.apply(this,arguments);};}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preload" href="assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link href="assets/lla-fonts.css?v=20261106-1" rel="stylesheet" />
+<!-- 2026-11-23 (Omri): the PayPal tab is offered only on the one-payment plan. PayPal on this page is a single charge (no recurring), so on the monthly plan it would collect month 1 only. Hidden unless the link says plan=upfront; the verified CRM order makes the final call below (__llaPayPalGate). Card, Apple Pay, Google Pay, order creation and all tracking are untouched. -->
+<script>try{if(!/[?&]plan=upfront(&|$)/.test(location.search))document.documentElement.classList.add('lla-no-paypal');}catch(e){}</script>
 <!-- PayPal Smart Buttons: identical SDK + client-id to eTeacher's other schools (israelbiblicalstudies.com checkout), currency USD. -->
 <link rel="preconnect" href="https://checkout.airwallex.com" /><link rel="preconnect" href="https://static.airwallex.com" /><link rel="preconnect" href="https://eteacher-leads-proxy.gitter-omri.workers.dev" /><link rel="preconnect" href="https://www.paypal.com" />
 <script async src="https://www.paypal.com/sdk/js?client-id=AXL1tqJTVoHQ2RltFz9SUVu8EM5ZTKDLCviVev-lOPQEEX1ScBii9d5MSo3_dxGjemVjTQJr7hpztwkQ&currency=USD&disable-funding=credit,card" onload="window.LLA_PAYPAL_SDK_READY=true;if(window.LLA_RENDER_PAYPAL_PENDING&&window.LLA_RENDER_PAYPAL)window.LLA_RENDER_PAYPAL();"></script>
@@ -94,6 +96,8 @@ a{color:var(--blue);text-decoration:none}
 .pay-tab.active{background:#fff;border-bottom:1px solid #fff}
 .pay-tab img{height:25px;display:block}
 .pay-tab .pp{height:30px}
+html.lla-no-paypal .pay-tabs{grid-template-columns:1fr}
+html.lla-no-paypal .pay-tab[data-tab="paypal"],html.lla-no-paypal #paypalBox{display:none!important}
 .pay-body{padding:19px}
 .gpay{width:100%;background:#000;color:#fff;border:none;border-radius:6px;padding:14px;font-family:var(--font-body);font-weight:600;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}
 .gpay img{height:19px;display:block}
@@ -608,7 +612,7 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
         <div class="pay-body">
           <!-- Google Pay: rendered by the Airwallex Drop-In itself (googlepay method), not a site-level button. -->
 
-          <div class="f-lbl" id="payLbl">Card or PayPal</div>
+          <div class="f-lbl" id="payLbl">Card or PayPal</div><script>try{if(document.documentElement.classList.contains('lla-no-paypal'))document.getElementById('payLbl').textContent='Card';}catch(e){}</script>
           <!-- Airwallex Drop-In mount (real card entry, wired to eTeacher's Airwallex account) -->
           <div id="awx-dropin" style="min-height:220px;border:1px solid #D5DCE6;border-radius:7px;padding:12px;margin-bottom:14px;background:#fff">
             <!-- Visible loading state while the CRM reserves the seat and issues the payment intent (2-8 s). Replaced by the Drop-In on mount. -->
@@ -822,6 +826,18 @@ document.querySelectorAll('.pay-tab').forEach(function(t){
     if (pp && window.LLA_RENDER_PAYPAL) window.LLA_RENDER_PAYPAL();
   });
 });
+
+/* 2026-11-23: final PayPal-tab decision from the verified order (true = one-payment plan). */
+window.__llaPayPalGate = function(show){
+  var h = document.documentElement, lbl = document.getElementById('payLbl');
+  var card = document.querySelector('.pay-tab[data-tab="card"]'), pp = document.querySelector('.pay-tab[data-tab="paypal"]');
+  if (show) {
+    if (h.classList.contains('lla-no-paypal')) { h.classList.remove('lla-no-paypal'); if (lbl && card && card.classList.contains('active')) lbl.textContent = 'Card or PayPal'; }
+    return;
+  }
+  if (pp && pp.classList.contains('active') && card) card.click();
+  h.classList.add('lla-no-paypal'); if (lbl) lbl.textContent = 'Card';
+};
 
 var statusEl = document.getElementById('awx-status');
 function setStatus(msg, color){ statusEl.textContent = msg; statusEl.style.color = color || 'var(--ink-3)';
@@ -1146,6 +1162,7 @@ async function initAirwallex(){
     // The verified order, not a stale plan in this browser, controls payment
     // mode and summary. Particularly important for emailed/cross-device orders.
     var plan = Number(expectedQuote.leftToPay) === 0 ? 'upfront' : 'monthly';
+    try { window.__llaPayPalGate(plan === 'upfront'); } catch(e){}
     var rows = document.querySelectorAll('.sum-row');
     var vs   = document.querySelectorAll('.sum-row .v');
     var ks   = document.querySelectorAll('.sum-row .k');
@@ -1224,7 +1241,7 @@ async function initAirwallex(){
     if (!_awxOpts) {
       var _nl = document.getElementById('awx-loading'); if (_nl) _nl.remove();
       mountEl.innerHTML = '<div role="status" style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
-        + 'Card payment is temporarily unavailable for this order. You can pay with PayPal above, or contact '
+        + 'Card payment is temporarily unavailable for this order. ' + (plan === 'upfront' ? 'You can pay with PayPal above, or contact ' : 'Please contact ')
         + '<a href="mailto:advisor@longevitylifeacademy.com" style="font-weight:700">advisor@longevitylifeacademy.com</a>. Nothing has been charged.</div>';
       setStatus('');
       console.warn('AIRWALLEX_OPTIONS_NULL: card form not shown, PayPal remains available');
