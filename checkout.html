@@ -99,6 +99,7 @@ a{color:var(--blue);text-decoration:none}
 html.lla-no-paypal .pay-tabs{grid-template-columns:1fr}
 html.lla-no-paypal .pay-tab[data-tab="paypal"],html.lla-no-paypal #paypalBox{display:none!important}
 .pay-body{padding:19px}
+@keyframes awxspin{to{transform:rotate(360deg)}}
 .gpay{width:100%;background:#000;color:#fff;border:none;border-radius:6px;padding:14px;font-family:var(--font-body);font-weight:600;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}
 .gpay img{height:19px;display:block}
 .orpay{text-align:center;font-size:13.5px;color:var(--ink-3);margin:17px 0 14px}
@@ -614,6 +615,7 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
 
           <div class="f-lbl" id="payLbl">Card or PayPal</div><script>try{if(document.documentElement.classList.contains('lla-no-paypal'))document.getElementById('payLbl').textContent='Card';}catch(e){}</script>
           <!-- Airwallex Drop-In mount (real card entry, wired to eTeacher's Airwallex account) -->
+          <div id="awx-wrap" style="position:relative"><!-- 23 Nov 2026: site-owned wrapper; holds the loading block over the box while Airwallex draws the form -->
           <div id="awx-dropin" style="min-height:220px;border:1px solid #D5DCE6;border-radius:7px;padding:12px;margin-bottom:14px;background:#fff">
             <!-- Visible loading state while the CRM reserves the seat and issues the payment intent (2-8 s). Replaced by the Drop-In on mount. -->
             <div id="awx-loading" style="padding:6px 4px 2px">
@@ -621,6 +623,8 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
                 <span class="awx-spin" style="width:18px;height:18px;border:2.5px solid #D5DCE6;border-top-color:#006EFF;border-radius:50%;display:inline-block;animation:awxspin .8s linear infinite"></span>
                 <span id="awx-loading-txt" style="font-size:14.5px;font-weight:600;color:#2A2F36">Opening secure card form...</span>
               </div>
+              <!-- 23 Nov 2026: three real steps (seat reserved, payment prepared, card form opening). Display only. -->
+              <div id="awx-steps" aria-hidden="true" style="display:flex;gap:6px;margin:-4px 0 14px"><i style="flex:1;height:4px;border-radius:2px;background:#006EFF;transition:background .3s"></i><i style="flex:1;height:4px;border-radius:2px;background:#E3E7EE;transition:background .3s"></i><i style="flex:1;height:4px;border-radius:2px;background:#E3E7EE;transition:background .3s"></i></div>
               <div style="height:14px;width:38%;background:#EEF2F7;border-radius:4px;margin-bottom:10px"></div>
               <div style="height:44px;background:#F5F7FA;border:1px solid #E3E7EE;border-radius:6px;margin-bottom:10px"></div>
               <div style="display:flex;gap:10px;margin-bottom:14px"><div style="flex:1;height:44px;background:#F5F7FA;border:1px solid #E3E7EE;border-radius:6px"></div><div style="flex:1;height:44px;background:#F5F7FA;border:1px solid #E3E7EE;border-radius:6px"></div></div>
@@ -630,6 +634,7 @@ html.lla-vip-eligible .sum-note.lla-vip-row{display:block!important}
               <div style="font-size:12.5px;color:#8892A0;margin-top:12px">Secure checkout by Airwallex. Usually ready in a few seconds.</div>
             </div>
             <style>@keyframes awxspin{to{transform:rotate(360deg)}}</style>
+          </div>
           </div>
           <div id="awx-status" style="font-size:13px;color:var(--ink-3);margin:6px 0 8px"></div>
           <!-- Billing address + CGM sensor shipping. Persisted to sessionStorage/localStorage (lla_address_v1). -->
@@ -820,7 +825,7 @@ document.querySelectorAll('.pay-tab').forEach(function(t){
     document.querySelectorAll('.pay-tab').forEach(function(x){x.classList.remove('active')});
     t.classList.add('active');
     var pp = t.getAttribute('data-tab') === 'paypal';
-    [document.getElementById('awx-dropin'), document.getElementById('awx-status')].forEach(function(el){ if(el) el.style.display = pp ? 'none' : ''; });
+    [document.getElementById('awx-wrap'), document.getElementById('awx-dropin'), document.getElementById('awx-status')].forEach(function(el){ if(el) el.style.display = pp ? 'none' : ''; });
     var box = document.getElementById('paypalBox'); if (box) box.style.display = pp ? '' : 'none';
     var lbl = document.getElementById('payLbl'); if (lbl) lbl.textContent = pp ? 'PayPal' : 'Card';
     if (pp && window.LLA_RENDER_PAYPAL) window.LLA_RENDER_PAYPAL();
@@ -842,6 +847,9 @@ window.__llaPayPalGate = function(show){
 var statusEl = document.getElementById('awx-status');
 function setStatus(msg, color){ statusEl.textContent = msg; statusEl.style.color = color || 'var(--ink-3)';
   var lt = document.getElementById('awx-loading-txt'); if (lt && msg) lt.textContent = msg.replace(/\.\.\.$/, '') + '...'; }
+/* 23 Nov 2026 loading state: fills the step bar inside the loading block. Display only. */
+function llaLoadStep(n){ try { var b = document.getElementById('awx-steps'); if (!b) return; var k = b.children;
+  for (var i = 0; i < k.length; i++) k[i].style.background = (i < n) ? '#006EFF' : '#E3E7EE'; } catch(_e){} }
 
 function showDone(info){
   try{
@@ -990,7 +998,7 @@ async function initAirwallex(){
   try {
     try{ LLA_META.buyer(); }catch(e){}   // snapshot buyer email before the staged lead is consumed
     var ids = await ensureLiveOrder();
-    setStatus('Opening secure card form...');
+    setStatus('Preparing your secure payment...'); llaLoadStep(2);
 
     // Must hit the SAME environment the order was created in, else "Order and student did not match".
     var envPrefix = (window.LLA_ECOMM_CONFIG.env === 'staging') ? '/staging' : '';
@@ -1034,7 +1042,7 @@ async function initAirwallex(){
       if (d && d.Airwallex && d.Airwallex.paymentIntentId) break;
       // A missing intent does not establish that this order failed or expired.
       // Keep the same IDs; never create a replacement order from an ambiguous response.
-      setStatus('Opening secure card form...');
+      setStatus('Preparing your secure payment...');
       if (_try < 12) await new Promise(function(res){ setTimeout(res, _llaPoll[_try - 1] || 1500); });
     }
     if (!d || !d.Airwallex || !d.Airwallex.paymentIntentId) {
@@ -1212,13 +1220,42 @@ async function initAirwallex(){
     // Airwallex env must match the account the intent belongs to:
     // staging CRM -> "eTeacher Demo PA" (demo), production CRM -> "ETEACHER EU LIMITED" (prod).
     var awxEnv = (window.LLA_ECOMM_CONFIG.env === 'staging') ? 'demo' : 'prod';
-    setStatus('Opening secure card form...');
+    setStatus('Opening secure card form...'); llaLoadStep(3);
     /* Force English locale on Airwallex init. Without this the Drop-In renders
      * its Pay button and inline strings in the buyer's browser language, and
      * localised currency ("\u05e9\u05dc\u05dd ILS 179.00" on a Hebrew browser).
      * Locking to en makes the whole Drop-In render in English regardless of
      * navigator.language. The intent's currency stays as CRM returned it (USD). */
     var mountEl = document.getElementById('awx-dropin');
+    /* 23 Nov 2026 loading state. Before: the loading block was wiped here, so for the seconds Airwallex
+     * needs to draw the card form the buyer saw only Airwallex's unlabelled grey placeholder. Now the
+     * block is moved out of the Airwallex box into the site-owned wrapper and painted over the box until
+     * the form is ready. Display only: the Airwallex box keeps its size, styles and content; options,
+     * order, payment and tracking events are unchanged. The block cannot receive clicks. It leaves on
+     * 'ready' or on an Airwallex error; as a fail-open it also leaves once the Airwallex iframe has
+     * drawn itself, or about 10 s after it was placed, whichever comes first. */
+    var _llaLd = null, _llaLdIv = 0;
+    var _llaLdOff = function(){
+      try { clearInterval(_llaLdIv); } catch(_e){}
+      if (_llaLd) { try { _llaLd.remove(); } catch(_e){} _llaLd = null; }
+    };
+    try {
+      var _llaLd0 = document.getElementById('awx-loading'), _llaWrap = document.getElementById('awx-wrap');
+      if (_llaLd0 && _llaWrap && _llaLd0.parentNode === mountEl && _llaLd0.style.display !== 'none') {
+        /* the box falls back to its 220px minimum once emptied (as today); show the rows that fit it */
+        for (var _i = 5; _i <= 8; _i++) { if (_llaLd0.children[_i]) _llaLd0.children[_i].style.display = 'none'; }
+        _llaLd0.style.cssText = 'position:absolute;left:0;top:0;right:0;bottom:0;box-sizing:border-box;padding:18px 16px 0;background:#fff;border:1px solid #D5DCE6;border-radius:7px;z-index:2;overflow:hidden;pointer-events:none';
+        _llaLd0.setAttribute('aria-hidden', 'true');
+        _llaWrap.appendChild(_llaLd0);
+        _llaLd = _llaLd0;
+        var _llaLdT0 = Date.now();
+        _llaLdIv = setInterval(function(){
+          try { var _f = mountEl.querySelector('iframe');
+            if (!_llaLd || Date.now() - _llaLdT0 > 10000 || (_f && _f.offsetHeight > 150)) _llaLdOff();
+          } catch(_e){ _llaLdOff(); }
+        }, 250);
+      }
+    } catch(_e){ _llaLdOff(); }
     mountEl.innerHTML = '';
 
     /* Installments require merchant-triggered recurring consent; pay-in-full is one payment.
@@ -1239,7 +1276,7 @@ async function initAirwallex(){
      * three_ds_action is the existing 17 Nov card setting (installments only), unchanged. */
     var _awxOpts = d.AirwallexOptions;
     if (!_awxOpts) {
-      var _nl = document.getElementById('awx-loading'); if (_nl) _nl.remove();
+      _llaLdOff();
       mountEl.innerHTML = '<div role="status" style="padding:18px 4px;font-size:14px;color:#5A6472;line-height:1.55">'
         + 'Card payment is temporarily unavailable for this order. ' + (plan === 'upfront' ? 'You can pay with PayPal above, or contact ' : 'Please contact ')
         + '<a href="mailto:advisor@longevitylifeacademy.com" style="font-weight:700">advisor@longevitylifeacademy.com</a>. Nothing has been charged.</div>';
@@ -1264,7 +1301,6 @@ async function initAirwallex(){
     var _llaSkipActive = _llaSkip3ds && _llaRecurring;
     var dropIn = await _llaBuildDropIn(_llaSkipActive);
     if (!dropIn) throw new Error('createElement returned null - SDK could not build dropIn');
-    var _ld = document.getElementById('awx-loading'); if (_ld) _ld.remove();
     dropIn.mount(mountEl);
     if (awxEnv !== 'demo') setStatus('');
 
@@ -1273,6 +1309,7 @@ async function initAirwallex(){
 
     function _llaWire(el){
     el.on('success', function(evt){
+      try { _llaLdOff(); } catch(_e){}
       if (_paymentConfirmed) return;
       var returnedIntent = evt && evt.detail && evt.detail.intent;
       if (returnedIntent && returnedIntent.id && returnedIntent.id !== intentId) {
@@ -1296,6 +1333,7 @@ async function initAirwallex(){
         .catch(function(){ finishPaymentReport({orderid:ids.orderid,amount:amount,currency:currency}, null); });
     });
     el.on('error', function(evt){
+      try { _llaLdOff(); } catch(_e){}
       if (_paymentConfirmed) return;
       /* 18 Nov 2026: show Airwallex's own reason and keep the card fields. No page reload on the normal path. */
       var _er = (evt && evt.detail && (evt.detail.error || evt.detail)) || {};
@@ -1317,7 +1355,7 @@ async function initAirwallex(){
     }
     _llaWire(dropIn);
     try { dropIn.on('clickConfirmButton', function(){ try { window.LLA_META.track('Pay_Click', { order_id: String(ids.orderid) }); } catch(_e){} }); } catch(_e){}
-    dropIn.on('ready', function(){ if (_paymentConfirmed) return; var _n=false; try{_n=sessionStorage.getItem('lla_noskip_notice')==='1'; sessionStorage.removeItem('lla_noskip_notice');}catch(_e){} setStatus(_n ? 'Please enter your card details again to complete your payment.' : (awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : ''), _n ? '#c33' : undefined); });
+    dropIn.on('ready', function(){ try { _llaLdOff(); } catch(_e){} if (_paymentConfirmed) return; var _n=false; try{_n=sessionStorage.getItem('lla_noskip_notice')==='1'; sessionStorage.removeItem('lla_noskip_notice');}catch(_e){} setStatus(_n ? 'Please enter your card details again to complete your payment.' : (awxEnv === 'demo' ? 'Sandbox ready — test card 4035 5010 0000 0008, any future date, any CVC.' : ''), _n ? '#c33' : undefined); });
 
     // Manual pay button also submits the drop-in
     document.getElementById('proceed').addEventListener('click', function(){
@@ -1325,6 +1363,7 @@ async function initAirwallex(){
       try { dropIn.confirm(); } catch(e){ setStatus('Submit error: ' + e.message, '#c33'); }
     });
   } catch (e) {
+    try { if (typeof _llaLdOff === 'function') _llaLdOff(); } catch(_e){}
     if (e && e.message === 'NO_ORDER_IN_SESSION') {
       // Nothing written to the CRM. Show the demo state and send the visitor back to enroll.
       document.getElementById('demoBanner').style.display = 'flex';
