@@ -1,6 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/* lla-match-keys-20261126: keeps Meta's browser ID (_fbp), click ID (_fbc) and the site visitor ID available on every page, so every event carries them. Stores only values this browser already holds. Fires no event. */
+(function(){try{
+var d=document,dom=/(^|\.)longevitylifeacademy\.com$/.test(location.hostname)?'; domain=.longevitylifeacademy.com':'',sec=location.protocol==='https:'?'; Secure':'';
+function ck(n){var m=d.cookie.match(new RegExp('(?:^|;\\s*)'+n+'=([^;]+)'));return m?m[1]:'';}
+function sc(n,v){try{d.cookie=n+'='+v+dom+'; path=/; max-age=7776000; SameSite=Lax'+sec;}catch(e){}}
+function lg(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}}
+function lp(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+/* Browser ID: reuse the Pixel's cookie; restore it if the cookie was cleared; create it in Meta's format if the Pixel has not run yet. The Pixel adopts an existing _fbp. */
+var P=/^fb\.\d\.\d{13}\.\d{5,}$/,p=ck('_fbp'),sp=lg('lla_fbp_v1');
+if(P.test(p)){if(sp!==p)lp('lla_fbp_v1',p);}
+else{p=P.test(sp)?sp:'fb.1.'+Date.now()+'.'+Math.floor(1e9+Math.random()*9e9);sc('_fbp',p);lp('lla_fbp_v1',p);}
+/* Click ID: only a real ad click this browser received, kept for Meta's 90 days. Never invented. */
+var q=(location.search.match(/[?&]fbclid=([^&#]+)/)||[])[1]||'';try{q=decodeURIComponent(q);}catch(e){}
+if(!/^[A-Za-z0-9_-]+$/.test(q))q='';
+var R=/^fb\.\d\.(\d{13})\.([A-Za-z0-9_-]+)$/;
+function ok(v){var m=R.exec(v||'');return m&&Number(m[1])<=Date.now()+300000&&Date.now()-Number(m[1])<7776000000?m:null;}
+var c=ck('_fbc'),cm=ok(c),s=null;try{s=JSON.parse(lg('lla_fbc_v1')||'null');}catch(e){}
+var sm=s&&ok(s.v);
+if(cm&&(!q||cm[2]===q)){if(!sm||s.v!==c)lp('lla_fbc_v1',JSON.stringify({v:c,raw:cm[2],ts:Number(cm[1])}));}
+else if(!cm&&sm&&(!q||sm[2]===q)){sc('_fbc',s.v);}
+/* Visitor ID: cookie copy so it survives a storage purge. */
+var x=lg('lla_xid_v1'),xc=ck('lla_xid');
+if(!/^lla[a-z0-9]{8,40}$/.test(xc))xc='';
+if(!x&&xc){x=xc;lp('lla_xid_v1',x);}
+if(!x){x='lla'+Date.now().toString(36)+Math.random().toString(36).slice(2,12);lp('lla_xid_v1',x);}
+if(xc!==x)sc('lla_xid',x);
+window.__llaXid=x;
+}catch(e){}})();</script>
+
 <!-- Meta identity bootstrap.
      The Pixel on this site is loaded by GTM, which initialises it with no user
      data. Every event GTM fires therefore reaches Meta with no match key, which

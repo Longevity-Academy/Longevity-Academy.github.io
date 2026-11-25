@@ -8,7 +8,7 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1440305917310328');
+fbq('init','1440305917310328',(function(){var u={};try{var x=window.__llaXid||localStorage.getItem('lla_xid_v1');if(!x){x='lla'+Date.now().toString(36)+Math.random().toString(36).slice(2,12);localStorage.setItem('lla_xid_v1',x);}u.external_id=x;var i=null;try{i=JSON.parse(sessionStorage.getItem('lla_buyer_v1')||'null');}catch(e){}if(!i||!i.email){try{i=JSON.parse(localStorage.getItem('lla_identity_v1')||'null');}catch(e){}}if(i){var l=function(s){return String(s||'').toLowerCase().replace(/[^a-z]/g,'');};if(i.email)u.em=String(i.email).trim().toLowerCase();if(i.phone)u.ph=String(i.phone).replace(/[^0-9]/g,'');if(i.fn)u.fn=l(i.fn);if(i.ln)u.ln=l(i.ln);if(i.st)u.st=String(i.st).trim().toLowerCase();if(i.country)u.country=String(i.country).trim().toLowerCase();}}catch(e){}return u;})());
 fbq('trackCustom','OrganicClick',{group:'aging-gracefully-llyy'});
 fbq('trackCustom','OC_aging_gracefully_llyy');
 setTimeout(function(){location.replace('https://longevitylifeacademy.pages.dev/?utm_source=facebook&utm_medium=group&utm_campaign=blueprint_organic&utm_content=aging-gracefully-llyy')},700);
