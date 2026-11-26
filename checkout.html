@@ -1081,6 +1081,8 @@ function _llaFastPay(){
   }, function(err){
     st.paying = false; if (btn) { btn.disabled = false; btn.textContent = st.label; }
     o.h.error({ detail: { error: err || {} } });
+    /* Any failed attempt in the fast field: bring back the standard form for this same order, so the buyer can always pay the way buyers pay today. */
+    try { if (!_paymentConfirmed && o.fallback) o.fallback(); } catch(_e){}
   });
 }
 function _llaFastOrderReady(o){
@@ -1439,7 +1441,13 @@ async function initAirwallex(){
       var _fh = {};
       _llaWire({ on: function(n, fn){ _fh[n] = fn; }, update: function(){} });
       _llaFastOrderReady({ intentId: intentId, clientSecret: clientSecret, customerId: customerId, recurring: _llaRecurring,
-        pc: (_awxOpts.payment_consent || {}), skip: function(){ return _llaSkipActive; }, h: _fh, orderid: String(ids.orderid), amount: amount });
+        pc: (_awxOpts.payment_consent || {}), skip: function(){ return _llaSkipActive; }, h: _fh, orderid: String(ids.orderid), amount: amount,
+        fallback: function(){
+          if (_llaFastState.dead) return;
+          _llaFastKill();
+          mountEl.innerHTML = ''; mountEl.style.cssText = 'min-height:220px;border:1px solid #D5DCE6;border-radius:7px;padding:12px;margin-bottom:14px;background:#fff';
+          Promise.resolve(_llaBuildDropIn(_llaSkipActive)).then(function(el){ el.mount(mountEl); _llaWire(el); try { el.on('clickConfirmButton', function(){ try { window.LLA_META.track('Pay_Click', { order_id: String(ids.orderid) }); } catch(_e){} }); } catch(_e){} }).catch(function(){});
+        } });
       /* Wallets (Apple Pay / Google Pay) stay available: the same CRM options, wallet methods only, drawn
          under the card field in the background. It never blocks the card field. Card stays in the fast field. */
       try {
