@@ -1041,9 +1041,9 @@ try { if (window.LLA_ECOMM && window.LLA_ECOMM.config && window.LLA_ECOMM.config
  * the first time the buyer is in the card field and the order exists (same sender, same event id). */
 var _llaFast = (function(){
   try { var m = /[?&]fast=([01])(&|$)/.exec(location.search);
-    if (m) { if (m[1] === '1') localStorage.setItem('lla_fast','1'); else localStorage.removeItem('lla_fast'); }
-    return localStorage.getItem('lla_fast') === '1';
-  } catch(e){ return /[?&]fast=1(&|$)/.test(location.search); }
+    if (m) localStorage.setItem('lla_fast', m[1]);
+    return localStorage.getItem('lla_fast') !== '0';
+  } catch(e){ return !/[?&]fast=0(&|$)/.test(location.search); }
 })();
 var _llaFastCard = null, _llaFastState = { ready:false, dead:false, order:null, used:false, completed:false, wantPay:false, paying:false, label:'Pay securely' };
 function _llaFastKill(){
