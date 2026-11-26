@@ -28,6 +28,13 @@ if(!x&&xc){x=xc;lp('lla_xid_v1',x);}
 if(!x){x='lla'+Date.now().toString(36)+Math.random().toString(36).slice(2,12);lp('lla_xid_v1',x);}
 if(xc!==x)sc('lla_xid',x);
 window.__llaXid=x;
+/* One shared reader for every sender (20261126b). Browser ID: cookie, then the copy stored on landing. */
+window.__llaFbp=function(){var v=ck('_fbp');if(P.test(v))return v;v=lg('lla_fbp_v1');return P.test(v)?v:'';};
+/* Click ID: cookie first, then stored lla_fbc_v1, then the fbclid in the URL. A stored or cookie value from an older click never replaces a new click in the URL. */
+window.__llaFbc=function(){var k=(location.search.match(/[?&]fbclid=([^&#]+)/)||[])[1]||'';try{k=decodeURIComponent(k);}catch(e){}if(!/^[A-Za-z0-9_-]+$/.test(k))k='';
+var c1=ck('_fbc'),m1=ok(c1);if(m1&&(!k||m1[2]===k))return c1;
+var s1=null;try{s1=JSON.parse(lg('lla_fbc_v1')||'null');}catch(e){}var m2=s1&&ok(s1.v);if(m2&&(!k||m2[2]===k))return s1.v;
+if(!k)return '';var v='fb.1.'+Date.now()+'.'+k;lp('lla_fbc_v1',JSON.stringify({v:v,raw:k,ts:Date.now()}));sc('_fbc',v);return v;};
 }catch(e){}})();</script>
 
 <!-- Checkout validation must not wait behind decorative deferred scripts.
@@ -105,8 +112,8 @@ window.__llaXid=x;
 fbq.disablePushState = true; /* 2026-11-05: no automatic un-ID'd PageView on hash/pushState navigation (Meta SPA util); keeps PageView paired with the server copy */
   try{ window.fbq('init',PIXEL,userData()); }catch(e){}
 })();</script>
-<script src="/assets/lla-page-meta.js?v=20261104-1"></script>
-<script src="/assets/lla-funnel.js?v=20261107-recovery2"></script>
+<script src="/assets/lla-page-meta.js?v=20261126-keys"></script>
+<script src="/assets/lla-funnel.js?v=20261126-keys"></script>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -12707,6 +12714,7 @@ html.mf body#lpRoot:not(#lla-p1) .lla-float-cta.is-visible:not(.mf-hide){visibil
   html.mf body#lpRoot:not(#legacy-ui):not(#legacy-fonts):not(#lla-p1) #pricing .mfp-t span{font-size:14px!important;line-height:1.3!important;min-height:0!important}
 }
 </style>
+<style id="lla-s2-short-20261126">/* 20261126: on short phone screens keep the step 2 Continue button fully on screen */@media (max-width:520px) and (max-height:700px){html body#lpRoot #enrollModal #emStep2.on{padding-bottom:0!important}html body#lpRoot #enrollModal #emStep2.on .em-card{margin-bottom:6px!important}html body#lpRoot #enrollModal #emStep2.on .dp{margin-bottom:12px!important}html body#lpRoot #enrollModal:has(#emStep2.on) .em-dialog .mock-footer,html body#lpRoot #enrollModal.lla-s2 .em-dialog .mock-footer{margin-top:16px!important}}</style>
 </head>
 <body id="lpRoot">
 <!-- Google Tag Manager (noscript) -->
@@ -15740,7 +15748,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
         Array.prototype.slice.call(sel.querySelectorAll('option[data-start]')).forEach(function(o){if(o.hasAttribute('data-soldout'))return;var p=o.getAttribute('data-start').split('-');var last=new Date(+p[0],+p[1]-1,+p[2]+6);o.setAttribute('data-lastlabel',MN[last.getMonth()]+' '+last.getDate());if(today>iso(last))o.remove();});
         var opts=Array.prototype.slice.call(sel.querySelectorAll('option[data-start]'));
         var months=[];opts.forEach(function(o){var m=o.getAttribute('data-month');if(months.indexOf(m)<0)months.push(m);});
-        var cur=months.indexOf('October')>=0?'October':months[0];
+        var cur=months.indexOf('October')>=0?'October':months[0];/* 20261126: open on the first month that still has a class that has not started, so a start date is always pre-selected */try{var _up=opts.filter(function(o){return !o.disabled&&!o.hasAttribute('data-soldout')&&o.getAttribute('data-start')>=today;})[0];if(_up)cur=_up.getAttribute('data-month');}catch(e){}
         var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'],DAYS={Sun:'Sunday',Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday'};
         function endTime(et){var m=/(\d+):(\d+)\s*(AM|PM)/i.exec(et||'');if(!m)return '';var h=+m[1]%12+(m[3].toUpperCase()==='PM'?12:0),mi=+m[2]+50;h+=Math.floor(mi/60);mi%=60;var ap=h>=12?'pm':'am';var hh=h%12||12;return hh+':'+String(mi).padStart(2,'0')+ap;}
         function fmt(d){return MONTHS[d.getMonth()].slice(0,3)+' '+d.getDate()+', '+d.getFullYear();}
@@ -15884,7 +15892,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
         Array.prototype.slice.call(sel.querySelectorAll('option[data-start]')).forEach(function(o){if(o.hasAttribute('data-soldout'))return;var p=o.getAttribute('data-start').split('-');var last=new Date(+p[0],+p[1]-1,+p[2]+6);o.setAttribute('data-lastlabel',MN[last.getMonth()]+' '+last.getDate());if(today>iso(last))o.remove();});
         var opts=Array.prototype.slice.call(sel.querySelectorAll('option[data-start]'));
         var months=[];opts.forEach(function(o){var m=o.getAttribute('data-month');if(months.indexOf(m)<0)months.push(m);});
-        var cur=months.indexOf('October')>=0?'October':months[0];
+        var cur=months.indexOf('October')>=0?'October':months[0];/* 20261126: open on the first month that still has a class that has not started, so a start date is always pre-selected */try{var _up=opts.filter(function(o){return !o.disabled&&!o.hasAttribute('data-soldout')&&o.getAttribute('data-start')>=today;})[0];if(_up)cur=_up.getAttribute('data-month');}catch(e){}
         var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'],DAYS={Sun:'Sunday',Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday'};
         function endTime(et){var m=/(\d+):(\d+)\s*(AM|PM)/i.exec(et||'');if(!m)return '';var h=+m[1]%12+(m[3].toUpperCase()==='PM'?12:0),mi=+m[2]+50;h+=Math.floor(mi/60);mi%=60;var ap=h>=12?'pm':'am';var hh=h%12||12;return hh+':'+String(mi).padStart(2,'0')+ap;}
         function fmt(d){return MONTHS[d.getMonth()].slice(0,3)+' '+d.getDate()+', '+d.getFullYear();}
@@ -16454,6 +16462,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
   function staging() { return !!(root.LLA_ECOMM_CONFIG && root.LLA_ECOMM_CONFIG.env === 'staging'); }
   function ck(n) { var m = doc.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]+)')); return m ? m[1] : ''; }
   function fbc() {
+    if (typeof root.__llaFbc === 'function') { try { return root.__llaFbc(); } catch (_) {} } /* 20261126: shared reader in the page head */
     var c = ck('_fbc'); if (c) return c;
     var q = (root.location.search.match(/[?&]fbclid=([^&#]+)/) || [])[1] || '';
     if (!/^[A-Za-z0-9_-]+$/.test(q)) q = '';
@@ -16483,7 +16492,7 @@ a.lg-buy:hover{transform:translateY(-2px);box-shadow:0 18px 46px rgba(16,185,129
     var i = identity();
     return {event_name: name, event_id: id, email: i.email, phone: i.phone, fn: i.fn, ln: i.ln, st: i.st, country: i.country,
       external_id: i.external_id, event_time: Math.floor(Date.now() / 1000), user_agent: navigator.userAgent, url: root.location.href,
-      fbp: ck('_fbp'), fbc: fbc()};
+      fbp: (typeof root.__llaFbp === 'function' ? root.__llaFbp() : ck('_fbp')), fbc: fbc()};
   }
   function post(payload) {
     try { root.fetch(RELAY, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload), keepalive: true}).catch(function () {}); } catch (_) {}

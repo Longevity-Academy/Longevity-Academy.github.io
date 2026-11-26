@@ -48,6 +48,7 @@
       Date.now() - Number(m[1]) < 90 * 86400000 ? m : null;
   }
   function fbc() {
+    if (typeof root.__llaFbc === 'function') { try { return root.__llaFbc(); } catch (_) {} } /* 20261126: shared reader in the page head */
     var click = clickId(), current = cookie('_fbc'), c = validFbc(current);
     if (c && (!click || c[2] === click)) return current;
     var saved = parse(get('localStorage', 'lla_fbc_v1')), s = validFbc(saved.v);
@@ -76,7 +77,7 @@
   }
   function send(item, attempt) {
     if (mode() === 'off') return;
-    item.fbp = cookie('_fbp'); item.fbc = fbc(); item.fbclid = clickId();
+    item.fbp = (typeof root.__llaFbp === 'function' ? root.__llaFbp() : cookie('_fbp')); item.fbc = fbc(); item.fbclid = clickId();
     root.fetch(RELAY, {method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(item), keepalive: true}).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (body) {

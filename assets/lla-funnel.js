@@ -57,6 +57,7 @@
 
   /* Click id: _fbc cookie byte for byte -> stored first-landing click -> exact fbclid in the URL. */
   function fbc() {
+    if (typeof root.__llaFbc === 'function') { try { return root.__llaFbc(); } catch (_) {} } /* 20261126: shared reader in the page head */
     var c = cookie('_fbc'); if (c) return c;
     var q = (root.location.search.match(/[?&]fbclid=([^&#]+)/) || [])[1] || '';
     if (!/^[A-Za-z0-9_-]+$/.test(q)) q = '';
@@ -172,7 +173,7 @@
         content_name: 'Longevity Blueprint', order_id: '', content_type: 'product',
         content_ids: [CONTENT_ID], contents: data.contents, cta_location: loc,
         event_time: Math.floor(Date.now() / 1000), user_agent: root.navigator.userAgent,
-        url: root.location.href, release: RELEASE, fbp: cookie('_fbp'), fbc: fbc()};
+        url: root.location.href, release: RELEASE, fbp: (typeof root.__llaFbp === 'function' ? root.__llaFbp() : cookie('_fbp')), fbc: fbc()};
       if (key) set('sessionStorage', key, JSON.stringify(item));
       queue(item, now, key);
       return true;

@@ -28,6 +28,13 @@ if(!x&&xc){x=xc;lp('lla_xid_v1',x);}
 if(!x){x='lla'+Date.now().toString(36)+Math.random().toString(36).slice(2,12);lp('lla_xid_v1',x);}
 if(xc!==x)sc('lla_xid',x);
 window.__llaXid=x;
+/* One shared reader for every sender (20261126b). Browser ID: cookie, then the copy stored on landing. */
+window.__llaFbp=function(){var v=ck('_fbp');if(P.test(v))return v;v=lg('lla_fbp_v1');return P.test(v)?v:'';};
+/* Click ID: cookie first, then stored lla_fbc_v1, then the fbclid in the URL. A stored or cookie value from an older click never replaces a new click in the URL. */
+window.__llaFbc=function(){var k=(location.search.match(/[?&]fbclid=([^&#]+)/)||[])[1]||'';try{k=decodeURIComponent(k);}catch(e){}if(!/^[A-Za-z0-9_-]+$/.test(k))k='';
+var c1=ck('_fbc'),m1=ok(c1);if(m1&&(!k||m1[2]===k))return c1;
+var s1=null;try{s1=JSON.parse(lg('lla_fbc_v1')||'null');}catch(e){}var m2=s1&&ok(s1.v);if(m2&&(!k||m2[2]===k))return s1.v;
+if(!k)return '';var v='fb.1.'+Date.now()+'.'+k;lp('lla_fbc_v1',JSON.stringify({v:v,raw:k,ts:Date.now()}));sc('_fbc',v);return v;};
 }catch(e){}})();</script>
 
 <script>
