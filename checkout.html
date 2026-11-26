@@ -1030,6 +1030,99 @@ function startAwxInit(){
 }
 try { if (window.LLA_ECOMM && window.LLA_ECOMM.config && window.LLA_ECOMM.config.mode === 'ecomm') startAwxInit().catch(function(){}); } catch(e){}
 
+/* 26 Nov 2026 CARD-FIRST (test flag, OFF for everyone by default; ?fast=1 turns it on in this browser, ?fast=0 off).
+ * The Airwallex card field does not need an order: it is drawn the moment the page opens, while the
+ * two CRM round-trips (create order, get payment intent) run behind it. The buyer types the card while
+ * the order is prepared. Pay uses the same CRM intent, customer and consent values as the Drop-In
+ * (Airwallex card element: createPaymentConsent for monthly plans, confirm for one payment), and the
+ * same success / error handlers, Purchase event and CRM report as the Drop-In path. All order, amount,
+ * currency and schedule guards still run before any payment can be sent. If anything in this path
+ * fails, the page falls back to the existing Drop-In. AddPaymentInfo keeps its rule: once per order,
+ * the first time the buyer is in the card field and the order exists (same sender, same event id). */
+var _llaFast = (function(){
+  try { var m = /[?&]fast=([01])(&|$)/.exec(location.search);
+    if (m) { if (m[1] === '1') localStorage.setItem('lla_fast','1'); else localStorage.removeItem('lla_fast'); }
+    return localStorage.getItem('lla_fast') === '1';
+  } catch(e){ return /[?&]fast=1(&|$)/.test(location.search); }
+})();
+var _llaFastCard = null, _llaFastState = { ready:false, dead:false, order:null, used:false, completed:false, wantPay:false, paying:false, label:'Pay securely' };
+function _llaFastKill(){
+  if (_llaFastState.dead) return; _llaFastState.dead = true;
+  try { if (_llaFastCard && _llaFastCard.unmount) _llaFastCard.unmount(); } catch(_e){}
+  try { if (_llaFastCard && _llaFastCard.destroy) _llaFastCard.destroy(); } catch(_e){}
+  try { var f = document.getElementById('awx-fast'); if (f) f.remove(); } catch(_e){}
+  try { var b = document.getElementById('awx-dropin'); if (b) b.style.display = ''; } catch(_e){}
+}
+function _llaFastApi(){ try { if (_llaFastState.order && _llaFastState.used && window.LLA_ADD_PAYMENT_INFO) window.LLA_ADD_PAYMENT_INFO.fire('card'); } catch(_e){} }
+function _llaFastPay(){
+  var st = _llaFastState, btn = document.getElementById('awx-fast-pay');
+  if (st.dead || st.paying || _paymentConfirmed || !_llaFastCard) return;
+  if (!st.completed) { setStatus('Please complete your card details.', '#c33'); return; }
+  if (!st.order) { st.wantPay = true; if (btn) { btn.disabled = true; btn.textContent = 'Finishing your reservation\u2026'; } return; }
+  var o = st.order; st.paying = true; st.wantPay = false;
+  if (btn) { btn.disabled = true; btn.textContent = 'Processing\u2026'; }
+  setStatus('');
+  try { window.LLA_META.track('Pay_Click', { order_id: o.orderid }); } catch(_e){}
+  var pr;
+  try {
+    if (o.recurring) {
+      var rq = { client_secret: o.clientSecret, customer_id: o.customerId, intent_id: o.intentId, currency: 'USD',
+                 next_triggered_by: o.pc.next_triggered_by || 'merchant', merchant_trigger_reason: o.pc.merchant_trigger_reason || 'unscheduled' };
+      if (o.skip()) rq.three_ds_action = 'SKIP_3DS';
+      pr = _llaFastCard.createPaymentConsent(rq);
+    } else {
+      pr = _llaFastCard.confirm({ client_secret: o.clientSecret, intent_id: o.intentId });
+    }
+  } catch (e) { pr = Promise.reject(e); }
+  Promise.resolve(pr).then(function(res){
+    try { window.__llaFastResult = res; } catch(_e){}
+    o.h.success({ detail: { intent: { id: (res && (res.intent_id || res.id)) || o.intentId } } });
+    if (btn) btn.style.display = 'none';
+  }, function(err){
+    st.paying = false; if (btn) { btn.disabled = false; btn.textContent = st.label; }
+    o.h.error({ detail: { error: err || {} } });
+  });
+}
+function _llaFastOrderReady(o){
+  var st = _llaFastState; st.order = o; st.label = 'Pay $' + Number(o.amount).toFixed(2);
+  var btn = document.getElementById('awx-fast-pay'); if (btn && !st.paying) { btn.disabled = false; btn.textContent = st.label; }
+  _llaFastApi();
+  if (st.wantPay) _llaFastPay();
+}
+function _llaFastStart(){
+  try {
+    if (!_llaFast || !window.LLA_ECOMM) return;
+    var has = false; try { var i0 = window.LLA_ECOMM.getCheckoutIds(); has = !!(i0 && i0.stid && i0.orderid) || !!(window.LLA_ECOMM.hasPendingLead && window.LLA_ECOMM.hasPendingLead()); } catch(_e){}
+    if (!has) return;
+    var wrap = document.getElementById('awx-wrap'), box = document.getElementById('awx-dropin'); if (!wrap || !box) return;
+    var f = document.createElement('div'); f.id = 'awx-fast';
+    f.style.cssText = 'display:none;margin-bottom:14px;background:#fff';
+    f.innerHTML = '<div id="awx-fast-card" style="min-height:24px;border:1px solid #C9D2DE;border-radius:6px;padding:13px 12px;background:#fff"></div>'
+      + '<button type="button" id="awx-fast-pay" style="display:block;width:100%;margin-top:14px;min-height:52px;border:0;border-radius:8px;background:#006EFF;color:#fff;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer">Pay securely</button>';
+    wrap.insertBefore(f, box);
+    document.getElementById('awx-fast-pay').addEventListener('click', _llaFastPay);
+    window.addEventListener('blur', function(){
+      try { var a = document.activeElement; if (a && a.tagName === 'IFRAME' && f.contains(a)) { _llaFastState.used = true; _llaFastApi(); } } catch(_e){}
+    });
+    startAwxInit().then(function(){ return window.AirwallexComponentsSDK.createElement('card', {}); }).then(function(el){
+      if (!el || !el.mount) throw new Error('no card element');
+      if (_llaFastState.dead) { try { el.destroy && el.destroy(); } catch(_e){} return; }
+      _llaFastCard = el;
+      /* drawn off-screen until Airwallex reports it ready (a display:none frame never becomes ready) */
+      f.style.display = 'block'; f.style.position = 'absolute'; f.style.left = '-9999px'; f.style.width = (box.offsetWidth || 320) + 'px';
+      el.mount('awx-fast-card');
+      /* handlers are attached after mount: this element binds them to its mounted DOM node */
+      el.on('ready', function(){
+        if (_llaFastState.dead) return; _llaFastState.ready = true;
+        try { var l = document.getElementById('awx-loading'); if (l) l.style.display = 'none'; } catch(_e){}
+        box.style.display = 'none'; f.style.position = ''; f.style.left = ''; f.style.width = ''; f.style.display = 'block';
+        try { window.__llaFastReadyAt = Date.now(); } catch(_e){}
+      });
+      el.on('change', function(e){ try { _llaFastState.completed = !!(e && e.detail && (e.detail.complete || e.detail.completed)); } catch(_e){} });
+    }).catch(function(){ _llaFastKill(); });
+  } catch(e){ try { _llaFastKill(); } catch(_e){} }
+}
+
 async function initAirwallex(){
   try {
     try{ LLA_META.buyer(); }catch(e){}   // snapshot buyer email before the staged lead is consumed
@@ -1337,6 +1430,35 @@ async function initAirwallex(){
       return awx.createElement('dropIn', o);
     }
     var _llaSkipActive = _llaSkip3ds && _llaRecurring;
+    if (_llaFast && !_llaFastState.dead && !_llaFastState.ready) {
+      /* The card field is still drawing: give it up to 10 s (the Drop-In needs longer than that to draw). */
+      for (var _fw = 0; _fw < 40 && !_llaFastState.ready && !_llaFastState.dead; _fw++) { await new Promise(function(r){ setTimeout(r, 250); }); }
+    }
+    if (_llaFast && _llaFastCard && _llaFastState.ready && !_llaFastState.dead) {
+      /* CARD-FIRST: the card field is already on screen. Attach this verified order to it; no Drop-In is built. */
+      var _fh = {};
+      _llaWire({ on: function(n, fn){ _fh[n] = fn; }, update: function(){} });
+      _llaFastOrderReady({ intentId: intentId, clientSecret: clientSecret, customerId: customerId, recurring: _llaRecurring,
+        pc: (_awxOpts.payment_consent || {}), skip: function(){ return _llaSkipActive; }, h: _fh, orderid: String(ids.orderid), amount: amount });
+      /* Wallets (Apple Pay / Google Pay) stay available: the same CRM options, wallet methods only, drawn
+         under the card field in the background. It never blocks the card field. Card stays in the fast field. */
+      try {
+        var _wm = (_awxOpts.methods || []).filter(function(m){ return m !== 'card'; });
+        if (_wm.length) {
+          var _wo = Object.assign({}, _awxOpts, { methods: _wm, showPayButton: true, appearance: { locale: 'en', mode: 'light', variables: { colorBrand: '#006EFF' } } });
+          Promise.resolve(awx.createElement('dropIn', _wo)).then(function(_wEl){
+            if (_paymentConfirmed || !_wEl || !_wEl.mount) return;
+            mountEl.innerHTML = ''; mountEl.style.minHeight = '0'; mountEl.style.border = '0'; mountEl.style.padding = '0'; mountEl.style.display = '';
+            _wEl.mount(mountEl);
+            _llaWire(_wEl);
+          }).catch(function(){ try { mountEl.style.display = 'none'; } catch(_e2){} });
+        }
+      } catch(_e){ try { mountEl.style.display = 'none'; } catch(_e2){} }
+      setStatus(awxEnv === 'demo' ? 'Sandbox ready \u2014 test card 4035 5010 0000 0008, any future date, any CVC.' : '');
+      _orderReadyResolve({ ids: ids, amount: amount, paymentId: paymentId });
+      return;
+    }
+    if (_llaFast) { try { _llaFastKill(); } catch(_e){} }
     var dropIn = await _llaBuildDropIn(_llaSkipActive);
     if (!dropIn) throw new Error('createElement returned null - SDK could not build dropIn');
     dropIn.mount(mountEl);
@@ -1446,7 +1568,9 @@ async function initAirwallex(){
 }
 
 if (window.LLA_ECOMM && window.LLA_ECOMM.config && window.LLA_ECOMM.config.mode === 'ecomm') {
-  initAirwallex();
+  try { _llaFastStart(); } catch(_e){}
+  var _llaInitP = initAirwallex();
+  if (_llaFast && _llaInitP && _llaInitP.then) { var _llaFastChk = function(){ try { if (!_llaFastState.order) _llaFastKill(); } catch(_e){} }; _llaInitP.then(_llaFastChk, _llaFastChk); }
 } else {
   document.getElementById('demoBanner').style.display = 'flex';
   document.getElementById('proceed').addEventListener('click', showDone);
