@@ -20,6 +20,8 @@
   deadline:DEADLINE,first:79,n:5,left:676,total:755,regular:169,regularTotal:845,list:845,monthly:169,credit:90,
   isValid:valid,remaining(){let d=Math.max(0,Date.parse(DEADLINE)-Date.now());return{d:Math.floor(d/864e5),h:Math.floor(d%864e5/36e5),m:Math.floor(d%36e5/6e4)}},
   activate(v){
+   /* Black Friday: the page's automatic JULIE249 activation (nov-offer.js) becomes BFRIDAY; a JULIE249 link (?code=JULIE249) is kept. */
+   if(bfOn()&&normalize(v)==='JULIE249'&&normalize(q.get('code'))!=='JULIE249')v='BFRIDAY';
    if(v!==undefined&&!valid(v))return false;
    if(valid(v))P.code=normalize(v);else if(valid(stored()))P.code=normalize(stored());
    P.active=true;remember(P.code);configure();notify();return true;
