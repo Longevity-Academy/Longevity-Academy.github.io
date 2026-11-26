@@ -76,8 +76,21 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
     if (pl !== 'monthly' && pl !== 'upfront') pl = 'monthly';
     return pl;
   }
+  /* Black Friday partner add-on (26 Nov 2026): one order, two seats.
+   * $158 today ($79 each), then 4 x $288 ($144 each). Only while the sale is on,
+   * the promo is active, and the buyer switched the partner add-on on in the popup. */
+  function bfDuoPartner(){
+    try {
+      var P = window.LLA_PROMO;
+      if (Date.now() > Date.parse('2026-11-27T23:59:59-05:00') || !(P && P.active)) return null;
+      if (sessionStorage.getItem('lla_bf_duo') !== '1') return null;
+      var pt = JSON.parse(sessionStorage.getItem('lla_bf_partner') || 'null');
+      return (pt && pt.name && pt.email && pt.phone) ? pt : null;
+    } catch(e) { return null; }
+  }
   function activePrice(){
     var pl = resolvePlan();
+    if (pl === 'monthly' && bfDuoPartner()) return { plan: 'monthly', firstPayment: 158, numberOfPayments: 5, leftToPay: 1152 };
     var chosen = CFG.crmPlans[pl] || CFG.crmPlans.monthly;
     return {
       plan: pl,
@@ -344,6 +357,11 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       if (fields.startDate)  noteWords = noteWords.concat(['Start', String(fields.startDate)]);
       if (fields.smsConsent !== undefined) noteWords = noteWords.concat(['SMS', 'consent', fields.smsConsent ? 'yes' : 'no']);
       if (fields.promoCode)  noteWords = noteWords.concat(['Promo', String(fields.promoCode)]);
+      var _duo = (activePrice().plan === 'monthly') ? bfDuoPartner() : null;
+      if (_duo) {
+        var _enc = function(v){ return String(v||'').trim().replace(/@/g,'-at-').replace(/\./g,'-dot-').replace(/\+/g,'plus').replace(/\s+/g,'_'); };
+        noteWords = noteWords.concat(['BFRIDAYDUO', 'DUO', '2', 'SEATS', 'PARTNER', 'Name', _enc(_duo.name), 'Email', _enc(_duo.email), 'Phone', _enc(_duo.phone), 'Same', 'class']);
+      }
       var message = noteWords.map(function(w){ return String(w).replace(/[^A-Za-z0-9_\-]/g, ''); })
                              .filter(function(w){ return w.length; }).join('%20');
       /* stateisocodebyip carries a US STATE ISO code, which the CRM resolves
@@ -437,6 +455,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
             ((Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === Number(q.firstPayment) * 4 &&
               (Number(q.firstPayment) === 149 || Number(q.firstPayment) === 179)) ||
              (Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === 4 && Number(q.firstPayment) === 1) ||
+             (Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === 1152 && Number(q.firstPayment) === 158) ||
              (Number(q.numberOfPayments) === 4 && Number(q.leftToPay) === 676 &&
               (Number(q.firstPayment) === 79 || Number(q.firstPayment) === 169)) ||
              (Number(q.numberOfPayments) <= 1 && Number(q.firstPayment) === 799 && Number(q.leftToPay) === 0))) {
@@ -463,6 +482,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
       var allowed = [
         { firstPayment: 79, numberOfPayments: 4, leftToPay: 676 },
         { firstPayment: 1, numberOfPayments: 4, leftToPay: 4 },
+        { firstPayment: 158, numberOfPayments: 4, leftToPay: 1152 },
         { firstPayment: 169, numberOfPayments: 4, leftToPay: 676 },
         { firstPayment: 179, numberOfPayments: 4, leftToPay: 716 },
         { firstPayment: 799, numberOfPayments: 0, leftToPay: 0 },

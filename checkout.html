@@ -854,7 +854,7 @@ window.__llaAwxSdkReady.catch(function(){});
 </script>
 <script async fetchpriority="high" src="https://static.airwallex.com/components/sdk/v1/index.js" onload="window.__llaAwxSdkResolve()" onerror="window.__llaAwxSdkReject(new Error('AIRWALLEX_SDK_UNAVAILABLE'))"></script>
 <script src="nov/lla-promo.js?v=20261109-x2"></script>
-<script src="nov/eteacher-ecomm.js?v=20261118-pt1"></script>
+<script src="nov/eteacher-ecomm.js?v=20261126-duo1"></script>
 <script>
 document.querySelectorAll('.pay-tab').forEach(function(t){
   t.addEventListener('click',function(){
@@ -1200,7 +1200,8 @@ async function initAirwallex(){
      * after the gateway confirms the payment. */
 
     /* CRM NumOfPayments counts REMAINING installments after today's payment. */
-    var LIST_PER_MONTH = [79,169,799].includes(Number(amount)) ? 169 : 179;
+    var BF_DUO = Number(d.NumOfPayments) === 4 && Number(amount) === 158 && Number(expectedQuote.leftToPay) === 1152;
+    var LIST_PER_MONTH = BF_DUO ? 338 : ([79,169,799].includes(Number(amount)) ? 169 : 179);
     var LIST_TOTAL     = LIST_PER_MONTH * 5;
     var strike = function(txt){ return '<s style="opacity:.5;font-weight:500;margin-right:6px">' + txt + '</s>'; };
     // The verified order, not a stale plan in this browser, controls payment
@@ -1229,7 +1230,8 @@ async function initAirwallex(){
       if (notes[0]) notes[0].textContent = 'Single payment. Full refund inside 14 days from registration.';
       if (notes[1]) notes[1].style.display = 'none';
     } else {
-      if (ks[0]) ks[0].firstChild.nodeValue = 'Due today ';
+      if (ks[0]) ks[0].firstChild.nodeValue = BF_DUO ? 'Due today, 2 seats ($79 each) ' : 'Due today ';
+      if (BF_DUO && ks[1] && ks[1].firstChild) ks[1].firstChild.nodeValue = 'Then monthly, 2 seats ($144 each) ';
       if (rows[1]) rows[1].style.display = '';
       var monthlyNotes = document.querySelectorAll('.sum-note');
       if (monthlyNotes[0]) monthlyNotes[0].textContent = 'Fully refundable within 14 days from registration.';

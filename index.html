@@ -41,7 +41,7 @@ if(!k)return '';var v='fb.1.'+Date.now()+'.'+k;lp('lla_fbc_v1',JSON.stringify({v
      defer preserves execution after the document and existing configuration. -->
 <script src="assets/nanp-state-autofill.js" defer fetchpriority="high"></script>
 <script src="assets/lla-country.js" defer fetchpriority="high"></script>
-<script src="/nov/eteacher-ecomm.js?v=20261118-pt1" defer fetchpriority="high"></script>
+<script src="/nov/eteacher-ecomm.js?v=20261126-duo1" defer fetchpriority="high"></script>
 <script>
 /* Enroll must never fall through to the application form while deferred assets load. */
 (function(){
@@ -12758,7 +12758,23 @@ html.mf body#lpRoot:not(#lla-p1) .lla-float-cta.is-visible:not(.mf-hide){visibil
 #bf-vip .val{flex-wrap:wrap}#bf-vip .val s{color:#8892A0;font-size:20px;white-space:nowrap}#bf-vip .val span{white-space:nowrap}#bf-vip .val b{font-size:30px;color:#fff}#bf-vip .val span{font-size:13px;color:var(--bf-gold);font-weight:800;letter-spacing:.14em}
 #bf-vip .cta{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#0b1f45;font:800 16px "Codec Pro",Inter,sans-serif;padding:16px 26px;border-radius:999px;text-decoration:none;box-shadow:0 16px 40px -12px rgba(139,182,238,.55)}
 @media(max-width:860px){#bf-vip{padding:64px 18px}#bf-vip .w{grid-template-columns:1fr;gap:30px}#bf-vip p.l{font-size:16px}#bf-vip .cta{width:100%;justify-content:center}}
-#hero{margin-top:48px!important}@media(max-width:720px){#hero{margin-top:36px!important}}</style>
+#hero{margin-top:48px!important}@media(max-width:720px){#hero{margin-top:36px!important}}#enrollModal .bf-duo{margin:0 0 16px;border:1px solid #d5deea;border-radius:12px;background:#f7f9fc;padding:12px 14px;font-family:"Codec Pro",Inter,sans-serif;text-align:left}
+#enrollModal .bf-duo[hidden],#enrollModal #bfDuoF[hidden]{display:none!important}
+#enrollModal .bf-duo-t{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;cursor:pointer;min-height:44px}
+#enrollModal .bf-duo-t:focus-visible{outline:2px solid #3D6394;outline-offset:3px;border-radius:8px}
+#enrollModal .bf-duo-t .sw{flex:none;position:relative;width:44px;height:26px;border-radius:999px;background:#c3ccd9;transition:background .15s}
+#enrollModal .bf-duo-t .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .15s}
+#enrollModal .bf-duo-t.on .sw{background:#19B56F}
+#enrollModal .bf-duo-t.on .sw::after{transform:translateX(18px)}
+#enrollModal .bf-duo-t .tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+#enrollModal .bf-duo-t .tx b{font-size:15px;font-weight:800;color:#111;font-style:normal}
+#enrollModal .bf-duo-t .tx small{font-size:12.5px;font-weight:500;color:#5A6472;line-height:1.35}
+#enrollModal #bfDuoF{margin-top:12px}
+#enrollModal #bfDuoF .em-in{margin-bottom:10px;background:#fff}
+#enrollModal #bfDuoF .em-in.em-in-err{border-color:#d93025}
+#enrollModal .bf-duo-n{margin:2px 0 0;font-size:12.5px;line-height:1.45;color:#5A6472}
+#enrollModal .bf-duo-n b{color:#111}
+</style>
 </head>
 <body id="lpRoot">
 <!-- Google Tag Manager (noscript) -->
@@ -16670,6 +16686,56 @@ function run(){bar();card();tick()}
 var n=0,iv=setInterval(function(){run();if(++n>40||(document.getElementById('bfBar')&&document.querySelector('#pricing .mfp-card[data-bf]')))clearInterval(iv)},250);
 document.addEventListener('DOMContentLoaded',run);
 try{run()}catch(e){}
+})();
+</script>
+<script id="bf-duo-js">
+/* Black Friday partner add-on (26 Nov 2026). Small line on the price card + switch on popup screen 2.
+   Price and order notes are applied by /nov/eteacher-ecomm.js from sessionStorage lla_bf_duo / lla_bf_partner. */
+(function(){
+var END=Date.UTC(2026,10,28,4,59,0);if(Date.now()>END)return;
+function $(i){return document.getElementById(i)}
+function ss(k,v){try{if(v===undefined)return sessionStorage.getItem(k);if(v===null)sessionStorage.removeItem(k);else sessionStorage.setItem(k,v)}catch(e){return null}}
+function promoOn(){try{return !!(window.LLA_PROMO&&window.LLA_PROMO.active)}catch(e){return false}}
+function plan(){var p='';try{p=sessionStorage.getItem('lla_plan')||localStorage.getItem('lla_plan')||''}catch(e){}return p==='upfront'?'upfront':'monthly'}
+function on(){return ss('lla_bf_duo')==='1'&&promoOn()&&plan()==='monthly'}
+function line(){var c=document.querySelector('#pricing .mfp-card');if(!c||c.querySelector('.bf-partner'))return;
+ var a=c.querySelector('.mfp-tiles')||c.querySelector('.bf-bonus')||c.querySelector('.mfp-secure');if(!a)return;
+ var pa=document.createElement('div');pa.className='bf-partner';pa.innerHTML='<div><b>Bringing a partner?</b> They get 50% off: $79 today, then $144/month each, plus $250 credit each toward a 2027 course.</div><a href="#enrollModal" data-checkout-open="" data-bf-partner="1">Add partner</a>';
+ a.parentNode.insertBefore(pa,a.nextSibling)}
+function box(){var s2=$('emStep2');if(!s2||$('bfDuo'))return;var lb=s2.querySelector('label[for="emPromo"]');if(!lb)return;
+ var d=document.createElement('div');d.id='bfDuo';d.className='bf-duo';
+ d.innerHTML='<button type="button" id="bfDuoT" class="bf-duo-t" role="switch" aria-checked="false"><span class="sw" aria-hidden="true"></span><span class="tx"><b>Add a partner</b><small>2 seats · $79 each today, then $144/month each</small></span></button>'
+ +'<div id="bfDuoF" hidden><input class="em-in" id="bfPName" type="text" placeholder="Partner\u2019s full name" autocomplete="off" />'
+ +'<input class="em-in" id="bfPEmail" type="email" inputmode="email" placeholder="Partner\u2019s email" autocomplete="off" autocapitalize="none" spellcheck="false" />'
+ +'<input class="em-in" id="bfPPhone" type="tel" inputmode="tel" placeholder="Partner\u2019s mobile number" autocomplete="off" />'
+ +'<p class="bf-duo-n">One payment for both of you: <b>$158 today, then 4 × $288 monthly</b> ($1,310 total). Your partner joins the same class.</p></div>';
+ lb.parentNode.insertBefore(d,lb);
+ try{var pt=JSON.parse(ss('lla_bf_partner')||'null');if(pt){$('bfPName').value=pt.name||'';$('bfPEmail').value=pt.email||'';$('bfPPhone').value=pt.phone||''}}catch(e){}
+ $('bfDuoT').addEventListener('click',function(){if(ss('lla_bf_duo')==='1'){ss('lla_bf_duo',null);ss('lla_bf_partner',null)}else ss('lla_bf_duo','1');paint(true)});
+ d.addEventListener('input',function(e){if(e.target&&e.target.classList)e.target.classList.remove('em-in-err');var b=$('emErr2');if(b&&b.classList.contains('on')){b.textContent='';b.classList.remove('on')}})}
+function paint(repaintBase){var d=$('bfDuo');if(!d)return;var show=promoOn()&&plan()==='monthly',o=on();
+ d.hidden=!show;var t=$('bfDuoT');t.setAttribute('aria-checked',o?'true':'false');t.classList.toggle('on',o);$('bfDuoF').hidden=!o;
+ if(repaintBase&&!o&&typeof window.__llaPaintPlan==='function'){try{window.__llaPaintPlan()}catch(e){}return}
+ var bv=document.querySelector('#emStep2 .em-band .b-v');
+ if(o&&bv)bv.innerHTML='<s data-no-promo style="opacity:.5;font-weight:500;margin-right:6px">$338.00</s>$158.00 today <small>2 seats · then 4 × $288 monthly · $1,310 total</small>'}
+function partner(){return{name:($('bfPName').value||'').trim().replace(/\s+/g,' '),email:($('bfPEmail').value||'').trim(),phone:($('bfPPhone').value||'').trim()}}
+function err(){var p=partner(),be=(($('emEmail')||{}).value||'').trim().toLowerCase();
+ function m(id,bad){var e=$(id);if(e)e.classList.toggle('em-in-err',!!bad);return bad}
+ var e1=m('bfPName',p.name.split(' ').length<2||p.name.length<3),em=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email),same=em&&p.email.toLowerCase()===be,e2=m('bfPEmail',!em||same),e3=m('bfPPhone',p.phone.replace(/\D/g,'').length<7);
+ if(e1)return 'Please enter your partner\u2019s full name (first and last).';
+ if(e2)return same?'Your partner needs their own email address, different from yours.':'Please enter a valid email address for your partner.';
+ if(e3)return 'Please enter your partner\u2019s mobile number.';return ''}
+document.addEventListener('click',function(e){var t=e.target&&e.target.closest?e.target:null;if(!t)return;
+ if(t.closest('[data-bf-partner]')){ss('lla_bf_duo','1');box();paint();return}
+ if(t.closest('#emGo2')){box();if(!on()){if(ss('lla_bf_duo')!=='1')ss('lla_bf_partner',null);return}
+  var msg=err();if(msg){e.preventDefault();e.stopImmediatePropagation();var b=$('emErr2');if(b){b.textContent=msg;b.classList.add('on')}
+   var bad=document.querySelector('#bfDuo .em-in-err');if(bad){try{bad.focus({preventScroll:true});bad.scrollIntoView({behavior:'smooth',block:'center'})}catch(x){}}return}
+  ss('lla_bf_partner',JSON.stringify(partner()))}},true);
+function run(){try{line();box();watch();paint()}catch(e){}}
+function watch(){var bv=document.querySelector('#emStep2 .em-band .b-v');if(!bv||bv.__bfDuo||!window.MutationObserver)return;bv.__bfDuo=1;new MutationObserver(function(){if(on()&&bv.textContent.indexOf('$158')<0)paint()}).observe(bv,{childList:true,subtree:true,characterData:true})}
+document.addEventListener('lla:plan',function(){setTimeout(run,0)});window.addEventListener('lla:pricing',function(){setTimeout(run,0)});
+var n=0,iv=setInterval(function(){run();if(++n>40||(document.querySelector('#pricing .bf-partner')&&$('bfDuo')))clearInterval(iv)},250);
+document.addEventListener('DOMContentLoaded',run);run();
 })();
 </script>
 </body>
