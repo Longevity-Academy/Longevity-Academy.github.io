@@ -5,7 +5,7 @@
  'use strict';
  const CODES=['JULIE249','MASTERCLASS-VIP','BFRIDAY'],KEY='lla_promo_code';
  /* 26 Nov 2026: Black Friday. BFRIDAY is the auto-applied code until Nov 27 11:59 PM US Eastern. Same prices ($79, then 4 x $169). */
- const BF_END='2026-11-27T23:59:59-05:00';
+ const BF_END='2026-11-28T00:00:00-08:00';
  function bfOn(){return Date.now()<=Date.parse(BF_END);}
  const DEADLINE='2026-12-31T23:59:59-05:00';
  const q=new URLSearchParams(location.search);

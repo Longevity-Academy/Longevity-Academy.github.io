@@ -82,7 +82,7 @@ var BLUEPRINT_CLASSES = [{"courseId":170275,"semesterId":2395,"start":"2026-11-2
   function bfDuoPartner(){
     try {
       var P = window.LLA_PROMO;
-      if (Date.now() > Date.parse('2026-11-27T23:59:59-05:00') || !(P && P.active)) return null;
+      if (Date.now() > Date.parse('2026-11-28T00:00:00-08:00') || !(P && P.active)) return null;
       if (sessionStorage.getItem('lla_bf_duo') !== '1') return null;
       var pt = JSON.parse(sessionStorage.getItem('lla_bf_partner') || 'null');
       return (pt && pt.name && pt.email && pt.phone) ? pt : null;
